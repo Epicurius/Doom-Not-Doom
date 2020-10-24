@@ -1,0 +1,240 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
+/*   Updated: 2020/10/24 16:09:17 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "doom.h"
+
+void	horz_surf_to_vert(t_doom *doom, float mapY, int screenX, int screenY, t_xyz *map)
+{
+	map->z = mapY * H * VERT_FOV / (( H / 2 - screenY) - PLAYER.yaw * H * VERT_FOV);
+	map->x = map->z * (W / 2 - screenX) / (W * HORI_FOV);
+	float rtx = map->z * PLAYER.anglecos + map->x * PLAYER.anglesin;
+	float rtz = map->z * PLAYER.anglesin - map->x * PLAYER.anglecos;
+	map->x = rtx + PLAYER.where.x;
+	map->z = rtz + PLAYER.where.y;
+}
+
+void				floor_and_ceiling_texture(t_doom *doom, int x, t_ab y, t_ab cy)
+{
+	int tx;
+	int ty;
+	t_xyz map;
+	SDL_Surface *texture;
+
+	for (int y = doom->ytop[x]; y <= doom->ybottom[x]; ++y)
+	{
+		if (y >= cy.a1 && y <= cy.b1)
+		{
+			y = cy.b1;
+			continue;
+		}
+		float hei = y < cy.a1 ? HEIGHT_INFO.yceil : HEIGHT_INFO.yfloor;
+		horz_surf_to_vert(doom, hei, x, y, &map);
+		tx = (map.x * (IMG_RES / 4));
+		ty = (map.z * (IMG_RES / 4));
+
+		texture = y < cy.a1 ? doom->txtx2 : doom->txtx1;
+		((int*)doom->surface->pixels)[y * doom->surface->w + x] = ((int*)texture->pixels)[(ty % IMG_RES) * IMG_RES + (tx % IMG_RES)];
+	}
+}
+
+
+
+
+void		DrawScreen(t_doom *doom)
+{
+	int			renderedsectors[SECTORNUM];
+	t_item		queue[MAXQUEUE];
+	t_item		*head = queue;
+	t_item		*tail = queue;
+	t_item		curr;
+
+	//bzero(renderedsectors, (sizeof(int*) * SECTORNUM));
+	//bzero(doom->ytop, (sizeof(int*) * W));
+    for (unsigned x = 0; x < SECTORNUM; ++x)
+		renderedsectors[x] = 0;
+    for (unsigned x = 0; x < W; ++x)
+		doom->ytop[x] = 0;
+    for (unsigned x = 0; x < W; ++x)
+		doom->ybottom[x] = H - 1;
+
+	*head = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W - 1};
+    if (++head == queue + MAXQUEUE)
+		head = queue;
+	while (head != tail) // render any other queued sectors
+	{
+		//ft_timer_start();
+    	curr = *tail;
+    	if (++tail == queue + MAXQUEUE)
+			tail = queue;
+		if (renderedsectors[curr.sectorno] & 0x21)
+			continue ;
+		++renderedsectors[curr.sectorno];
+		draw_sector(doom, queue, &head, tail, curr);
+		++renderedsectors[curr.sectorno];
+		//printf("Time: %f\n", ft_timer_end());
+	}
+}
+
+/*
+** Render each wall of this sector that is facing towards PLAYER.
+*/
+void		draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_item curr)
+{
+	int			s;
+	t_sector	*sect;
+
+	s = -1;
+   	sect = &doom->sectors[curr.sectorno];
+	while (++s < sect->npoints)
+	{
+		rotate_wall_sector(sect, s, &doom->player, SECTORS->viewed_sectors);
+		if (SECTORS->viewed_sectors[0].z <= 0 && SECTORS->viewed_sectors[1].z <= 0)
+			continue;
+		doom->u0 = 0;
+		doom->u1 = 1024;
+		if (SECTORS->viewed_sectors[0].z <= 0 || SECTORS->viewed_sectors[1].z <= 0)
+			player_view_fustrum(doom, SECTORS->viewed_sectors);
+		player_perspective_tranformation(&SECTORS->viewpoint, SECTORS->viewed_sectors);
+		if (SECTORS->viewpoint.x1 >= SECTORS->viewpoint.x2 ||
+				SECTORS->viewpoint.x2 < curr.sx1 ||
+				SECTORS->viewpoint.x1 > curr.sx2) // Only render if it's visible
+			continue;
+		floor_ceiling_heights(doom, sect->neighbors[s], sect);
+		render_wall(doom, curr, sect->neighbors[s]);
+		if (sect->neighbors[s] >= 0 && doom->end_x >= doom->start_x && (*head + MAXQUEUE + 1 - tail) % MAXQUEUE)
+		{
+			*(*head) = (t_item){.sectorno = sect->neighbors[s], .sx1 = doom->start_x, .sx2 = doom->end_x};
+			if (++(*head) == queue + MAXQUEUE)
+				(*head) = queue;
+		}
+	}
+}
+
+void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect)
+{
+	HEIGHT_INFO.nyceil	= 0;
+	HEIGHT_INFO.nyfloor	= 0;
+	HEIGHT_INFO.yceil	= sect->ceil - PLAYER.where.z;
+	HEIGHT_INFO.yfloor	= sect->floor - PLAYER.where.z;
+   	if (neighbor >= 0)
+  	{
+		HEIGHT_INFO.nyceil  = doom->sectors[neighbor].ceil  - PLAYER.where.z;
+		HEIGHT_INFO.nyfloor = doom->sectors[neighbor].floor - PLAYER.where.z;
+   	}
+   	HEIGHT_INFO.y.a1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, SECTORS->viewed_sectors[0].z) * SECTORS->viewpoint.yscale1);
+	HEIGHT_INFO.y.b1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, SECTORS->viewed_sectors[0].z) * SECTORS->viewpoint.yscale1);
+   	HEIGHT_INFO.y.a2 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, SECTORS->viewed_sectors[1].z) * SECTORS->viewpoint.yscale2);
+	HEIGHT_INFO.y.b2 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, SECTORS->viewed_sectors[1].z) * SECTORS->viewpoint.yscale2);
+   	HEIGHT_INFO.ny.a1 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyceil, SECTORS->viewed_sectors[0].z) * SECTORS->viewpoint.yscale1);
+	HEIGHT_INFO.ny.b1 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyfloor, SECTORS->viewed_sectors[0].z) * SECTORS->viewpoint.yscale1);
+   	HEIGHT_INFO.ny.a2 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyceil, SECTORS->viewed_sectors[1].z) * SECTORS->viewpoint.yscale2);
+	HEIGHT_INFO.ny.b2 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyfloor, SECTORS->viewed_sectors[1].z) * SECTORS->viewpoint.yscale2);
+}
+
+static inline void	affine_tranformation_of_texture(t_doom *doom, int x)
+{
+	float a = ((SECTORS->viewpoint.x2 - x) * SECTORS->viewed_sectors[1].z);
+	float b = ((x - SECTORS->viewpoint.x1) * SECTORS->viewed_sectors[0].z);
+	doom->affine_x = (doom->u0 * a + doom->u1 * b) / (a + b);
+}
+/*
+t_wall_scale	wall_scale_init(int a, int b, int c, int d, int f)
+{
+	t_wall_scale s;
+
+	s = (t_wall_scale)
+	{
+		.result = d + (b - a) * (f - d) / (c - a),
+		.bop = ((f < d) ^ (c < a)) ? -1 : 1,
+		.fd = abs(f - d),
+		.ca = abs(c - a),
+		.cache = (int)((b - a) * abs(f - d)) % abs(c - a)
+	};
+	return (s);
+}
+
+int scale_next(t_wall_scale* s)
+{
+    for (s->cache += s->fd; s->cache >= s->ca; s->cache -= s->ca)
+		s->result += s->bop;
+    return (s->result);
+}*/
+
+void				floor_and_ceiling_color(t_doom *doom, int x, t_ab y, t_ab cy)
+{
+	vline(doom, x, doom->ytop[x], cy.a1 - 1);
+	vline(doom, x, cy.b1 + 1, doom->ybottom[x]);
+}
+
+void			draw_portal(t_doom *doom, int x, t_ab y, t_ab cy)
+{
+	if (doom->key.t)
+	{
+		vline(doom, x, cy.b2 + 1, cy.b1);
+		vline(doom, x, cy.a1, cy.a2 - 1);
+	}
+	else
+	{
+		t_vline1(doom, x,	(t_ab){.a1 = y.a1,		.b1 = y.b1},
+							(t_ab){.a1 = cy.a1, 	.b1 = y.a1 - 1});
+		t_vline1(doom, x,	(t_ab){.a1 = y.a1,		.b1 = y.b1},
+							(t_ab){.a1 = cy.b2 + 1,	.b1 = cy.b1});
+		//t_vline(doom, x, cy.a1, y.a2 - 1, (t_wall_scale)wall_scale_init(y.a1, cy.a1, y.b1, 0, IMG_RES));
+		//t_vline(doom, x, cy.b2 + 1, cy.b1, (t_wall_scale)wall_scale_init(y.a1, cy.b2 + 1, y.b1, 0, IMG_RES));
+	}
+	doom->ytop[x] = clamp(max(cy.a1, cy.a2), doom->ytop[x], H - 1);
+	doom->ybottom[x] = clamp(min(cy.b1, cy.b2), 0, doom->ybottom[x]);
+}
+
+
+void		render_wall(t_doom *doom, t_item curr, int neighbor)
+{
+	int		x;
+	t_ab	y;	//un clmaped
+	t_ab	cy;	//clamped
+
+   	doom->start_x = max(SECTORS->viewpoint.x1, curr.sx1);	//screen fist wall pixel
+	doom->end_x = min(SECTORS->viewpoint.x2, curr.sx2);		//screen last wall pixel
+	x = doom->start_x;
+	while (x <= doom->end_x)
+	{
+		affine_tranformation_of_texture(doom, x);
+
+    	y.a1 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.y.a2 - HEIGHT_INFO.y.a1) /
+			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.y.a1;
+		y.b1 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.y.b2 - HEIGHT_INFO.y.b1) /
+			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.y.b1;
+    	y.a2 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.ny.a2 - HEIGHT_INFO.ny.a1) /
+			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.ny.a1;
+		y.b2 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.ny.b2 - HEIGHT_INFO.ny.b1) /
+			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.ny.b1;
+		cy.a1 = clamp(y.a1, doom->ytop[x], doom->ybottom[x]); //move the 2 to neighbour
+		cy.b1 = clamp(y.b1, doom->ytop[x], doom->ybottom[x]);
+		cy.a2 = clamp(y.a2, doom->ytop[x], doom->ybottom[x]);
+		cy.b2 = clamp(y.b2, doom->ytop[x], doom->ybottom[x]);
+		if (doom->key.t)
+			floor_and_ceiling_color(doom, x, y, cy);
+		else
+			floor_and_ceiling_texture(doom, x, y, cy);
+
+		if (neighbor >= 0)
+		{
+			draw_portal(doom, x, y, cy);
+		}
+		else if (doom->key.t)
+			vline(doom, x, cy.a1, cy.b1);
+		else
+			t_vline1(doom, x, y, cy);
+			//t_vline(doom, x, cy.a1, cy.b1, (t_wall_scale)wall_scale_init(y.a1, cy.a1, y.b1, 0, IMG_RES));
+		x += 1;
+	}
+}
