@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/24 16:05:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 17:35:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,18 @@ void	vline(t_doom *doom, int x, int y1, int y2)
         pix[y2 * W + x] = 0x0000FFFF;
     }
 }
-/*
-void	t_vline(t_doom *doom, int x, int y1, int y2, t_wall_scale ty)
-{
-    int *pix;
-   
-	pix	= (int*)doom->surface->pixels;
-    y1 = clamp(y1, 0, H - 1);
-    y2 = clamp(y2, 0, H - 1);
-	while (y1++ <= y2)
-    {
-        unsigned txty = scale_next(&ty);
-		pix[y1 * W + x] = ((int*)doom->txtx->pixels)[(txty % IMG_RES) * IMG_RES + (doom->affine_x % IMG_RES)];
-    }
-}
-*/
+
 void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy)
 {
-	int	res		= (cy.a1 - y.a1) * 1024 / (y.b1 - y.a1);
+	int	res		= (cy.a1 - y.a1) * WALL_TEXTURE_H / (y.b1 - y.a1);
 	int	ca		= abs(y.b1 - y.a1);
-	int	cache	= (int)((cy.a1 - y.a1) * 1024) % abs(y.b1 - y.a1);
+	int	cache	= (int)((cy.a1 - y.a1) * WALL_TEXTURE_H) % abs(y.b1 - y.a1);
 	int y1		= clamp(cy.a1, 0, H - 1);
 	int y2		= clamp(cy.b1, 0, H - 1);
 
 	while (y1++ <= y2)
     {
-		cache += 1024;
+		cache += WALL_TEXTURE_H;
 		while (cache >= ca)
 		{
 			res += 1;

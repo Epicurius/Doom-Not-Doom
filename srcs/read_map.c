@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/22 17:20:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 14:54:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ void	read_vertex(t_doom *doom, int fd)
 		doom->vert[vertices].y = atof(arr[2]);
 		doom->vert[vertices].z = atof(arr[3]);
 		free_array(arr);
-		printf("Vert:%d, ID: %d, x:%.2f, y:%.2f, z:%.2f\n", vertices, vertices,
-						doom->vert[vertices].x,
-						doom->vert[vertices].y,
-						doom->vert[vertices].z);
+		//printf("Vert:%d, ID: %d, x:%.2f, y:%.2f, z:%.2f\n", vertices, vertices,
+		//				doom->vert[vertices].x,
+		//				doom->vert[vertices].y,
+		//				doom->vert[vertices].z);
 		vertices += 1;
 		ft_strdel(&line);
 	}

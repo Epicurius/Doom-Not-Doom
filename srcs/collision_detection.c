@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:10:37 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/22 12:41:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 16:40:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	horizontal_collision(t_doom *doom)
 		s = -1;
 		p = (t_xyz){.x = PLAYER.where.x, .y = PLAYER.where.y, .z = 0};
 		d = (t_xyz){.x = PLAYER.velocity.x, .y = PLAYER.velocity.y, .z = 0};
+		p.x += PLAYER.velocity.x > 0 ? 1 : -1;	//
+		p.y += PLAYER.velocity.y > 0 ? 1 : -1;	//Temp fix, so not to clip in wall dont let player reach wall
 		sect = &doom->sectors[PLAYER.sector];
 		vert = sect->vertex;
 		while (++s < sect->npoints)

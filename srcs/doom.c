@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/24 16:15:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 18:18:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ void	init_doom(t_doom *doom)
 				SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->txtx = IMG_Load("./bmp/stone.bmp");
-	doom->txtx1 = IMG_Load("./bmp/grass.bmp");
-	doom->txtx2 = IMG_Load("./bmp/alloy.bmp");
+	//doom->txtx = IMG_Load("./bmp/ceiling.bmp");
+	doom->txtx1 = IMG_Load("./bmp/ceiling.bmp");
+	//doom->txtx2 = IMG_Load("./bmp/alloy.bmp");
 	doom->key.t = 1;
 }
 
@@ -60,7 +61,8 @@ int main()
 		//ft_timer_start();
         DrawScreen(doom);
 		//printf("Time: %f\n", ft_timer_end());
-		DrawMap(doom);
+		if (doom->key.tab)
+			DrawMap(doom);
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
 		vertical_collision(doom);

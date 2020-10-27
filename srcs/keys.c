@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/22 12:08:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 16:27:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		keys(t_doom *doom, SDL_Event *event)
 		doom->key.l_ctrl = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_LSHIFT)
 		doom->key.l_shift = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym == SDLK_TAB)
+		doom->key.tab = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == 'q')
 		doom->quit = 1;
 	else if (event->type == SDL_KEYUP)

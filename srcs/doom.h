@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/24 14:22:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 16:28:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef	struct		s_keys
 	int 			t;
 	int				l_ctrl;
 	int				l_shift;
+	int				tab;
 }					t_keys;
 
 typedef	struct		s_fps

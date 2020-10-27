@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:22:47 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/24 12:26:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/27 15:35:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,38 @@ t_xyz		intersect(t_xyz s[2], float x3, float y3, float x4, float y4)
 }
 
 /* If it's partially behind the player, clip it against player's view frustrum */
-void	player_view_fustrum(t_doom *doom, t_xyz sect_xz[2])
+void	player_view_fustrum(t_doom *doom, t_xyz viewed_sectors[2])
 {
 	t_xyz i1;
 	t_xyz i2;
 
-	i1 = intersect(sect_xz, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
-	i2 = intersect(sect_xz, NEARSIDE, NEARZ, FARSIDE, FARZ);
-	t_xyz org1 = (t_xyz){.x = sect_xz[0].x, .y = 0, .z = sect_xz[0].z};
-	t_xyz org2 = (t_xyz){.x = sect_xz[1].x, .y = 0, .z = sect_xz[1].z};
-	if (sect_xz[0].z < NEARZ)
+	t_xyz org1 = (t_xyz){.x = viewed_sectors[0].x, .y = 0, .z = viewed_sectors[0].z};
+	t_xyz org2 = (t_xyz){.x = viewed_sectors[1].x, .y = 0, .z = viewed_sectors[1].z};
+	i1 = intersect(viewed_sectors, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
+	i2 = intersect(viewed_sectors, NEARSIDE, NEARZ, FARSIDE, FARZ);
+	if (viewed_sectors[0].z < NEARZ)
 	{
 		if (i1.y > 0)
-		{
-			sect_xz[0].x = i1.x;
-			sect_xz[0].z = i1.y;
-		}
+			viewed_sectors[0] = (t_xyz){.x = i1.x, .z = i1.y};
 		else
-		{
-			sect_xz[0].x = i2.x;
-			sect_xz[0].z = i2.y;
-		}
+			viewed_sectors[0] = (t_xyz){.x = i2.x, .z = i2.y};
 	}
-	if (sect_xz[1].z < NEARZ)
+	if (viewed_sectors[1].z < NEARZ)
 	{
 		if (i1.y > 0)
-		{
-			sect_xz[1].x = i1.x;
-			sect_xz[1].z = i1.y;
-		}
+			viewed_sectors[1] = (t_xyz){.x = i1.x, .z = i1.y};
 		else
-		{
-			sect_xz[1].x = i2.x;
-			sect_xz[1].z = i2.y;
-		}
+			viewed_sectors[1] = (t_xyz){.x = i2.x, .z = i2.y};
 	}
-	if (fabsf(sect_xz[1].x - sect_xz[0].x) > fabsf(sect_xz[1].z - sect_xz[0].z))
+	//Cut the texture if smaller wall smaller than texture
+	if (fabsf(viewed_sectors[1].x - viewed_sectors[0].x) > fabsf(viewed_sectors[1].z - viewed_sectors[0].z))
 	{
-		doom->u0 = (sect_xz[0].x - org1.x) * IMG_RES / (org2.x - org1.x);
-		doom->u1 = (sect_xz[1].x - org1.x) * IMG_RES / (org2.x - org1.x);
+		doom->u0 = (viewed_sectors[0].x - org1.x) * doom->u1 / (org2.x - org1.x);
+		doom->u1 = (viewed_sectors[1].x - org1.x) * doom->u1 / (org2.x - org1.x);
 	}
 	else
 	{
-		doom->u0 = (sect_xz[0].z - org1.z) * IMG_RES / (org2.z - org1.z);
-		doom->u1 = (sect_xz[1].z - org1.z) * IMG_RES / (org2.z - org1.z);
+		doom->u0 = (viewed_sectors[0].z - org1.z) * doom->u1 / (org2.z - org1.z);
+		doom->u1 = (viewed_sectors[1].z - org1.z) * doom->u1 / (org2.z - org1.z);
 	}
 }
