@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/27 18:18:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/31 13:20:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_doom(t_doom *doom)
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
-	doom->txtx = IMG_Load("./bmp/stone.bmp");
-	//doom->txtx = IMG_Load("./bmp/ceiling.bmp");
+	//doom->txtx = IMG_Load("./bmp/stone.bmp");
+	doom->txtx = IMG_Load("./bmp/ceiling.bmp");
 	doom->txtx1 = IMG_Load("./bmp/ceiling.bmp");
 	//doom->txtx2 = IMG_Load("./bmp/alloy.bmp");
 	doom->key.t = 1;
@@ -54,7 +54,7 @@ int main()
 	if (!(doom = (t_doom *)malloc(sizeof(t_doom))))
 		return (0);
 	init_doom(doom);
-	read_file(doom, "./idea.txt");
+	read_file(doom, "./new.txt");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)
     {

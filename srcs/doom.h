@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/27 16:28:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/31 14:32:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,31 +121,45 @@ typedef	struct		s_fps
 	TTF_Font	*font;
 }					t_fps;
 
+typedef struct		s_wall
+{
+	t_xyz			v1;
+	t_xyz			v2;
+	int				texture;
+}					t_wall;
+
 typedef struct		s_doom
 {
+	//window_init
 	int					quit;
 	char				*file;
 	SDL_Window			*win;
 	SDL_Surface			*surface;
 	SDL_Event			event;
 
+	//read_map
 	t_xyz				*vert;//is redundant after secotors are created
-	unsigned			num_sector;
+	t_wall				*walls; //temp
 	t_sector			*sectors;
+	unsigned			num_sector;
 	unsigned			num_sectors;
 	t_player			player;
+
+	//random
 	t_height_info		height_info;
 	int					start_x;
 	int					end_x;
 	t_keys				key;
 	float				yaw;
 	t_fps				fps;
+	short				ytop[W];
+	short				ybottom[W];
+
+	//Textures
 	SDL_Surface			*txtx;
 	SDL_Surface			*txtx1;
 	SDL_Surface			*txtx2;
 	int					affine_x;
-	short				ytop[W];
-	short				ybottom[W];
 	int					u0;
 	int					u1;
 
@@ -181,6 +195,7 @@ void	mouse_and_keys(t_doom *doom);
 int		keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 int		scale_next(t_wall_scale *s);
+int		shade_hex_color(int hex, float shade_factor);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);

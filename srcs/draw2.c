@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/27 18:21:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/31 16:44:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void				floor_and_ceiling_texture(t_doom *doom, int x, t_ab y, t_ab cy)
 		ty = (map.z * (64 / 4));
 
 		texture = y < cy.a1 ? doom->txtx1 : doom->txtx1;
+		//((int*)doom->surface->pixels)[y * doom->surface->w + x] =
+		//	shade_hex_color(((int*)texture->pixels)[(ty % 64) * 64 + (tx % 64)], 0.5);
 		((int*)doom->surface->pixels)[y * doom->surface->w + x] = ((int*)texture->pixels)[(ty % 64) * 64 + (tx % 64)];
 	}
 }
@@ -97,10 +99,10 @@ void		draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_it
 		if (SECTORS->viewed_sectors[0].z <= 0 && SECTORS->viewed_sectors[1].z <= 0)
 			continue;
 		doom->u0 = 0; //start_x of text
-		doom->u1 = IMG_RES; //end_x of text (technecally wall width)
-		//doom->u1 = ft_pythagoras(	fabs(sect->vertex[s].x - sect->vertex[s + 1].x),
-		//							fabs(sect->vertex[s].y - sect->vertex[s + 1].y));
-		//doom->u1 *= 64;
+		//doom->u1 = IMG_RES; //end_x of text (technecally wall width)
+		doom->u1 = ft_pythagoras(	fabs(sect->vertex[s].x - sect->vertex[s + 1].x),
+									fabs(sect->vertex[s].y - sect->vertex[s + 1].y));
+		doom->u1 *= (IMG_RES / 6.4);// / 2;
 		if (SECTORS->viewed_sectors[0].z <= 0 || SECTORS->viewed_sectors[1].z <= 0)
 			player_view_fustrum(doom, SECTORS->viewed_sectors);
 		player_perspective_tranformation(&SECTORS->viewpoint, SECTORS->viewed_sectors);
@@ -164,6 +166,15 @@ void			draw_portal(t_doom *doom, int x, t_ab y, t_ab cy)
 	doom->ybottom[x] = clamp(min(cy.b1, cy.b2), 0, doom->ybottom[x]);
 }
 
+static inline int	y_cordinate_for_floor_and_ceiling(t_doom *doom, int x, int a, int b)
+{
+	int y;
+
+   	y = (x - SECTORS->viewpoint.x1) * (b - a) / (SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + a;
+	//y = clamp(y, SECTORS->ytop[x], SECTORS->ybottom[x]);
+	return (y);
+}
+
 static inline void	affine_tranformation_of_texture(t_doom *doom, int x)
 {
 	float a = (SECTORS->viewpoint.x2 - x) * SECTORS->viewed_sectors[1].z;
@@ -183,15 +194,10 @@ void		render_wall(t_doom *doom, t_item curr, int neighbor)
 	while (x <= doom->end_x)
 	{
 		affine_tranformation_of_texture(doom, x);
-
-    	y.a1 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.y.a2 - HEIGHT_INFO.y.a1) /
-			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.y.a1;
-		y.b1 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.y.b2 - HEIGHT_INFO.y.b1) /
-			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.y.b1;
-    	y.a2 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.ny.a2 - HEIGHT_INFO.ny.a1) /
-			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.ny.a1;
-		y.b2 = (x - SECTORS->viewpoint.x1) * (HEIGHT_INFO.ny.b2 - HEIGHT_INFO.ny.b1) /
-			(SECTORS->viewpoint.x2 - SECTORS->viewpoint.x1) + HEIGHT_INFO.ny.b1;
+    	y.a1 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.y.a1, HEIGHT_INFO.y.a2);
+    	y.b1 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.y.b1, HEIGHT_INFO.y.b2);
+    	y.a2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.a1, HEIGHT_INFO.ny.a2);
+    	y.b2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.b1, HEIGHT_INFO.ny.b2);
 		cy.a1 = clamp(y.a1, doom->ytop[x], doom->ybottom[x]); //move the 2 to neighbour
 		cy.b1 = clamp(y.b1, doom->ytop[x], doom->ybottom[x]);
 		cy.a2 = clamp(y.a2, doom->ytop[x], doom->ybottom[x]);

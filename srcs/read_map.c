@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/27 14:54:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/10/31 14:55:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_array(char **arr)
 		ft_strdel(&arr[i++]);
 	free(arr);
 }
-void	read_map(int fd)
+void	read_map(t_doom *doom, int fd)
 {
 	char *line;
 	char **arr;
@@ -40,6 +40,9 @@ void	read_map(int fd)
 		w = ft_atoi(arr[0]);
 		h = ft_atoi(arr[1]);
 		name = ft_strdup(arr[2]);
+		//doom->vert = (t_xyz *)malloc(sizeof(t_xyz) * ft_atoi(arr[3]));
+		doom->walls = (t_wall *)malloc(sizeof(t_wall) * ft_atoi(arr[4]));
+		//doom->sectors = (t_sector *)malloc(sizeof(t_sector) * ft_atoi(arr[5]));
 		//printf("W:%d, H:%d, Name:%s\n", w, h, name);
 		free(name);
 		free_array(arr);
@@ -47,22 +50,23 @@ void	read_map(int fd)
 	}
 	ft_strdel(&line);
 }
-void	read_wall(int fd)
+void	read_wall(t_doom *doom, int fd)
 {
+	int id;
 	char *line;
 	char **arr;
-	int id, v1, v2, texture;
-
+	
 	while (get_next_line(fd, &line))
 	{
 		if (line[0] == '-')
 			break ;
 		arr = ft_strsplit(line, '\t');
 		id = ft_atoi(arr[0]);
-		v1 = ft_atoi(arr[1]);
-		v2 = ft_atoi(arr[2]);
-		texture = ft_atoi(arr[3]);
-		//printf("ID:%d, v1:%d, v2:%d, t:%d\n", id, v1, v2, texture);
+		doom->walls[id].v1 = doom->vert[ft_atoi(arr[1])];
+		doom->walls[id].v2 = doom->vert[ft_atoi(arr[2])];
+		doom->walls[id].texture = ft_atoi(arr[3]);
+		//printf("ID:%d, v1:%f %f %f, v2:%f %f %f, t:%d\n", id, walls[id].v1.x, walls[id].v1.y, walls[id].v1.z,	
+		//	walls[id].v2.x,	walls[id].v2.y,	walls[id].v2.z,	walls[id].texture);
 		free_array(arr);
 		ft_strdel(&line);
 	}
@@ -148,9 +152,14 @@ void	read_sectors(t_doom *doom, int fd)
 		sect->npoints   = m;
 		sect->neighbors = (signed char *)malloc(sizeof(signed char) * (m));
 		sect->vertex    = (t_xyz *)malloc(sizeof(t_xyz) * (m + 1));
-        for (int l = 0; l < m; ++l)
-			sect->vertex[l + 1] = doom->vert[atoi(walls[l])];
+        //for (int l = 0; l < m; ++l)
+		//	sect->vertex[l + 1] = doom->vert[atoi(walls[l])];
+		//sect->vertex[0] = sect->vertex[m]; // Ensure the vertexes form a loop
+		
+		for (int l = 0; l < m; ++l)
+			sect->vertex[l + 1] = doom->walls[atoi(walls[l])].v1;
 		sect->vertex[0] = sect->vertex[m]; // Ensure the vertexes form a loop
+
 		neighbour = ft_strsplit(arr[3], ' ');
         for (int l = 0; l < m; ++l)
 			sect->neighbors[l] = atoi(neighbour[l]);
@@ -172,11 +181,11 @@ int			read_file(t_doom *doom, char *file_name)
 	while (get_next_line(fd, &line))
 	{
 		if (!(ft_strncmp(line, "type:map", 7)))
-			read_map(fd);
+			read_map(doom, fd);
 		else if (!(ft_strncmp(line, "type:vertex", 7)))
 			read_vertex(doom, fd);
 		else if (!(ft_strncmp(line, "type:wall", 7)))
-			read_wall(fd);
+			read_wall(doom, fd);
 		else if (!(ft_strncmp(line, "type:player", 7)))
 			read_player(doom, fd);
 		else if (!(ft_strncmp(line, "type:sectors", 7)))
