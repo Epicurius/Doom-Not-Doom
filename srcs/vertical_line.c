@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 16:55:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 12:07:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,25 @@ void	vline(t_doom *doom, int x, int y1, int y2)
     }
 }
 
-int		shade_hex_color(int color, float shade_factor) //read how bitwise works
+int		shade_hex_color(int color, float shade_factor)
 {
 	int hex;
 	SDL_Color c;
-	
-	c.a = (color >> 24) & 0xFF;
+
+	//if (!(shade_factor < 1.0))
+	//	return (color);	
+	//c.a = (color >> 24) & 0xFF;
 	c.r = (color >> 16) & 0xFF;
 	c.g = (color >> 8) & 0xFF;
 	c.b = (color) & 0xFF;
 	c.r = c.r * (1 - shade_factor);
 	c.g = c.g * (1 - shade_factor);
-	c.b = c.b * (1 - shade_factor);	
-	return ((c.r & 0xFF) << 16 | (c.g & 0xFF) << 8 | (c.b & 0xFF) | (c.a & 0xFF) << 24);
-
+	c.b = c.b * (1 - shade_factor);
+	return ((c.r * 65536) + (c.g * 256) + c.b);	
+	//return ((c.r & 0xFF) << 16 | (c.g & 0xFF) << 8 | (c.b & 0xFF) | (c.a & 0xFF) << 24);
 }
 
-
-void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy)
+void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light)
 {
 	int hh		= (HEIGHT_INFO.yceil - HEIGHT_INFO.yfloor) * (IMG_RES / 12.8);// / 2;
 	int	res		= (cy.a1 - y.a1) * hh / (y.b1 - y.a1);
@@ -89,11 +90,13 @@ void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy)
 			res += 1;
 			cache -= ca;
 		}
-		((int*)doom->surface->pixels)[y1 * W + x] = 
-			shade_hex_color(((int*)doom->txtx->pixels)[
-					(res % IMG_RES) * IMG_RES + (doom->affine_x % IMG_RES)], 0.5);
-		//((int*)doom->surface->pixels)[y1 * W + x] = ((int*)doom->txtx->pixels)[
-		//			(res % IMG_RES) * IMG_RES + (doom->affine_x % IMG_RES)];
+		if (doom->light < 1.0)
+			((int*)doom->surface->pixels)[y1 * W + x] = 
+				shade_hex_color(((int*)doom->txtx->pixels)[
+					(res % IMG_RES) * IMG_RES + (doom->affine_x % IMG_RES)], light);
+		else
+			((int*)doom->surface->pixels)[y1 * W + x] = ((int*)doom->txtx->pixels)[
+					(res % IMG_RES) * IMG_RES + (doom->affine_x % IMG_RES)];
     }
 
 }

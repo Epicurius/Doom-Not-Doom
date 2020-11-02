@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 14:55:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:51:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_array(char **arr)
 		ft_strdel(&arr[i++]);
 	free(arr);
 }
+
 void	read_map(t_doom *doom, int fd)
 {
 	char *line;
@@ -163,6 +164,8 @@ void	read_sectors(t_doom *doom, int fd)
 		neighbour = ft_strsplit(arr[3], ' ');
         for (int l = 0; l < m; ++l)
 			sect->neighbors[l] = atoi(neighbour[l]);
+		sect->gravity = atof(arr[6]);
+		sect->light = atof(arr[7]);
 		free_array(arr);
 		free_array(walls);
 		free_array(neighbour);
@@ -186,7 +189,7 @@ int			read_file(t_doom *doom, char *file_name)
 			read_vertex(doom, fd);
 		else if (!(ft_strncmp(line, "type:wall", 7)))
 			read_wall(doom, fd);
-		else if (!(ft_strncmp(line, "type:player", 7)))
+		else if (!(ft_strncmp(line, "type:spawn", 10)))
 			read_player(doom, fd);
 		else if (!(ft_strncmp(line, "type:sectors", 7)))
 			read_sectors(doom, fd);

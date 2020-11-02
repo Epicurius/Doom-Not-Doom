@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2020/10/31 13:20:19 by nneronin         ###   ########.fr        #
+#    Updated: 2020/11/02 14:22:03 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC = ./doom.c\
 	  ./fps.c\
 	  ./map.c\
 	  ./draw2.c\
-	  ./intersect_box.c
+	  ./intersect_box.c\
+	  ./floor.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

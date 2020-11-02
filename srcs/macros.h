@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 13:32:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 14:34:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
 ** Screen info
 */
-# define W				1900
-# define H				900
+# define W				1920
+# define H				1280
 
 /*
 **	Vision

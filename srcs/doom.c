@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 13:20:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:57:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ int main()
 		return (0);
 	init_doom(doom);
 	read_file(doom, "./new.txt");
+	//read_file(doom, "./test.doom");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)
     {
 		//ft_timer_start();
         DrawScreen(doom);
-		//printf("Time: %f\n", ft_timer_end());
 		if (doom->key.tab)
 			DrawMap(doom);
+		//ft_timer_start();
 		fps_func(doom);
+		//printf("Time: %f\n", ft_timer_end());
 		SDL_UpdateWindowSurface(doom->win);
 		vertical_collision(doom);
 		horizontal_collision(doom);
@@ -78,6 +80,7 @@ int main()
 				exit (1);
 		}
 		mouse_and_keys(doom);
+		//printf("Time: %f\n", ft_timer_end());
         //SDL_Delay(10);
     }
     unload_data(doom);

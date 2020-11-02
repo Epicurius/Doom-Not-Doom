@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 14:32:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:42:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct	s_sector
     signed char *neighbors;//
     unsigned	npoints;//
     t_xyz		*vertex;//
+	float		light;
+	float		gravity;
 	t_xyz		viewed_sectors[2];
 	t_scale		viewpoint;
 } 				t_sector;
@@ -162,6 +164,7 @@ typedef struct		s_doom
 	int					affine_x;
 	int					u0;
 	int					u1;
+	float				light;
 
 }						t_doom;
 
@@ -178,7 +181,7 @@ typedef	struct			s_wall_scale
 void	player_view_fustrum(t_doom *doom, t_xyz sect_xz[2]);
 void	vline(t_doom *doom, int x, int y1, int y2);
 void	t_vline(t_doom *doom, int x, int y1, int y2, t_wall_scale ty);
-void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy);
+void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light);
 void	rotate_wall_sector(t_sector *sect, int s, t_player *player, t_xyz t[2]);
 void	player_perspective_tranformation(t_scale *persp, t_xyz t[2]);
 void	DrawScreen(t_doom *doom);
@@ -196,6 +199,7 @@ int		keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 int		scale_next(t_wall_scale *s);
 int		shade_hex_color(int hex, float shade_factor);
+void	floor_text(t_doom *doom, int x, int sy, int sx);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);

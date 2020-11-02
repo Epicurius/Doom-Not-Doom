@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 16:44:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 17:41:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ void		DrawScreen(t_doom *doom)
     for (unsigned x = 0; x < SECTORNUM; ++x)
 		renderedsectors[x] = 0;
     for (unsigned x = 0; x < W; ++x)
+	{
 		doom->ytop[x] = 0;
-    for (unsigned x = 0; x < W; ++x)
 		doom->ybottom[x] = H - 1;
+	}
 
 	*head = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W - 1};
-    if (++head == queue + MAXQUEUE)
+    if (++head == queue + MAXQUEUE) //iterate head and check if queue is max
 		head = queue;
 	while (head != tail) // render any other queued sectors
 	{
-		//ft_timer_start();
     	curr = *tail;
     	if (++tail == queue + MAXQUEUE)
 			tail = queue;
@@ -78,8 +78,9 @@ void		DrawScreen(t_doom *doom)
 			continue ;
 		++renderedsectors[curr.sectorno];
 		draw_sector(doom, queue, &head, tail, curr);
+		//SDL_UpdateWindowSurface(doom->win);
+		//SDL_Delay(1000);
 		++renderedsectors[curr.sectorno];
-		//printf("Time: %f\n", ft_timer_end());
 	}
 }
 
@@ -93,6 +94,7 @@ void		draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_it
 
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
+	doom->light = sect->light;
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, SECTORS->viewed_sectors);
@@ -118,6 +120,8 @@ void		draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_it
 			if (++(*head) == queue + MAXQUEUE)
 				(*head) = queue;
 		}
+		//SDL_UpdateWindowSurface(doom->win);
+		//SDL_Delay(1000);
 	}
 }
 
@@ -144,8 +148,8 @@ void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect)
 
 void				floor_and_ceiling_color(t_doom *doom, int x, t_ab y, t_ab cy)
 {
-	vline(doom, x, doom->ytop[x], cy.a1 - 1);
-	vline(doom, x, cy.b1 + 1, doom->ybottom[x]);
+	vline(doom, x, doom->ytop[x], cy.a1 - 1);		//ceil
+	vline(doom, x, cy.b1 + 1, doom->ybottom[x]);	//floor
 }
 
 void			draw_portal(t_doom *doom, int x, t_ab y, t_ab cy)
@@ -158,9 +162,9 @@ void			draw_portal(t_doom *doom, int x, t_ab y, t_ab cy)
 	else
 	{
 		t_vline1(doom, x,	(t_ab){.a1 = y.a1,		.b1 = y.b1},
-							(t_ab){.a1 = cy.a1, 	.b1 = y.a2 - 1});
+							(t_ab){.a1 = cy.a1, 	.b1 = y.a2 - 1}, doom->light);
 		t_vline1(doom, x,	(t_ab){.a1 = y.a1,		.b1 = y.b1},
-							(t_ab){.a1 = cy.b2 + 1,	.b1 = cy.b1});
+							(t_ab){.a1 = cy.b2 + 1,	.b1 = cy.b1}, doom->light);
 	}
 	doom->ytop[x] = clamp(max(cy.a1, cy.a2), doom->ytop[x], H - 1);
 	doom->ybottom[x] = clamp(min(cy.b1, cy.b2), 0, doom->ybottom[x]);
@@ -188,31 +192,36 @@ void		render_wall(t_doom *doom, t_item curr, int neighbor)
 	t_ab	y;	//un clmaped
 	t_ab	cy;	//clamped
 
-   	doom->start_x = max(SECTORS->viewpoint.x1, curr.sx1);	//screen fist wall pixel
-	doom->end_x = min(SECTORS->viewpoint.x2, curr.sx2);		//screen last wall pixel
+   	doom->start_x	= max(SECTORS->viewpoint.x1, curr.sx1);	//screen fist wall pixel
+	doom->end_x		= min(SECTORS->viewpoint.x2, curr.sx2);		//screen last wall pixel
 	x = doom->start_x;
 	while (x <= doom->end_x)
 	{
 		affine_tranformation_of_texture(doom, x);
     	y.a1 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.y.a1, HEIGHT_INFO.y.a2);
     	y.b1 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.y.b1, HEIGHT_INFO.y.b2);
-    	y.a2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.a1, HEIGHT_INFO.ny.a2);
-    	y.b2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.b1, HEIGHT_INFO.ny.b2);
 		cy.a1 = clamp(y.a1, doom->ytop[x], doom->ybottom[x]); //move the 2 to neighbour
 		cy.b1 = clamp(y.b1, doom->ytop[x], doom->ybottom[x]);
-		cy.a2 = clamp(y.a2, doom->ytop[x], doom->ybottom[x]);
-		cy.b2 = clamp(y.b2, doom->ytop[x], doom->ybottom[x]);
 		if (1 || doom->key.t)
 			floor_and_ceiling_color(doom, x, y, cy);
 		else
 			floor_and_ceiling_texture(doom, x, y, cy);
+			//floor_text(doom, x, cy.b1 + 1, doom->ybottom[x]);	//floor
 
 		if (neighbor >= 0)
+		{
+    		y.a2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.a1, HEIGHT_INFO.ny.a2);
+    		y.b2 = y_cordinate_for_floor_and_ceiling(doom, x, HEIGHT_INFO.ny.b1, HEIGHT_INFO.ny.b2);
+			cy.a2 = clamp(y.a2, doom->ytop[x], doom->ybottom[x]);
+			cy.b2 = clamp(y.b2, doom->ytop[x], doom->ybottom[x]);
 			draw_portal(doom, x, y, cy);
+		}
 		else if (doom->key.t)
 			vline(doom, x, cy.a1, cy.b1);
 		else
-			t_vline1(doom, x, y, cy);
+			t_vline1(doom, x, y, cy, doom->light);
 		x += 1;
+		//SDL_UpdateWindowSurface(doom->win);
+		//SDL_Delay(5);
 	}
 }

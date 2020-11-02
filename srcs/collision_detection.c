@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:10:37 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/31 13:06:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/02 12:03:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	vertical_collision(t_doom *doom)
         if (PLAYER.falling)
         {
 	   		eye_height = PLAYER.ducking ? DUCK_HEIGHT : EYE_HEIGHT;
-            PLAYER.velocity.z -= GRAVITY;
+            PLAYER.velocity.z -= doom->sectors[PLAYER.sector].gravity;
             new_z = PLAYER.where.z + PLAYER.velocity.z;
             if (PLAYER.velocity.z < 0 && new_z < doom->sectors[PLAYER.sector].floor + eye_height) // down
             {
