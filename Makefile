@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2020/11/02 14:22:03 by nneronin         ###   ########.fr        #
+#    Updated: 2020/11/09 13:31:18 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,14 @@ SRC = ./doom.c\
 	  ./fps.c\
 	  ./map.c\
 	  ./draw2.c\
-	  ./intersect_box.c\
-	  ./floor.c
+	  ./intersect_box.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o
 INCLUDES = ./lib/libft/libft.a\
-		   ./lib/libpf/libpf.a
+		   ./lib/libpf/libpf.a\
+		   ./lib/tpool/t_pool.a
+
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)

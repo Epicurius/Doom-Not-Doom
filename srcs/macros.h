@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/02 14:34:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:41:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 #define WALK_SPEED		0.2f
 #define SPRINT_SPEED	0.5f
 #define	GRAVITY			0.05f
+#define MOUSE_X			0.008f
+#define MOUSE_Y			0.008f
 
 /*
 ** Map Rendering
@@ -58,6 +60,7 @@
 ** Texture
 */
 #define IMG_RES			doom->txtx->w
+#define G				0xAAAAAA
 
 #define WALL_TEXTURE_H	doom->txtx->w
 

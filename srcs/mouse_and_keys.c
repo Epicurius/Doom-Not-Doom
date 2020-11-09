@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:55:17 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/22 12:29:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:40:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	mouse_and_keys(t_doom *doom)
 		PLAYER.falling = 1;
 	}
 	SDL_GetRelativeMouseState(&x, &y);
-	PLAYER.angle += x * 0.03f;
-	doom->yaw = clamp(doom->yaw - y * 0.05f, -5, 5);
+	PLAYER.angle += x * MOUSE_X;
+	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5);
 	PLAYER.yaw = doom->yaw - PLAYER.velocity.z * 0.5f;
 	move_player(doom, 0, 0);
  	move = (t_xyz){0.f, 0.f};

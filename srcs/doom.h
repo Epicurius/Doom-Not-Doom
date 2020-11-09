@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/09 13:17:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/09 17:05:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../lib/libft/libft.h"
 # include "../lib/libpf/ft_printf.h"
+# include "../lib/tpool/tpool.h"
 # include "../SDL2/includes/SDL.h"
 # include "../SDL2/includes/SDL_ttf.h"
 # include "../SDL2/includes/SDL_image.h"
@@ -131,6 +132,24 @@ typedef struct		s_wall
 	int				texture;
 }					t_wall;
 
+typedef struct		s_render
+{
+	int				x;
+	int 			neighbor;
+	int				texture;
+	SDL_Surface		*surface;
+	SDL_Surface		*txtx;
+	short			*ytop;
+	short			*ybottom;
+	int				img_res;
+	float			light;
+	int				affine_x;
+	t_player		player;
+	t_height_info	height_info;
+	int				x1;
+	int				x2;
+}					t_render;
+
 typedef struct		s_doom
 {
 	//window_init
@@ -139,6 +158,7 @@ typedef struct		s_doom
 	SDL_Window			*win;
 	SDL_Surface			*surface;
 	SDL_Event			event;
+	t_tpool				tpool;
 
 	//read_map
 	t_xyz				*vert;//is redundant after secotors are created
@@ -165,8 +185,6 @@ typedef struct		s_doom
 	int					affine_x;
 	int					u0;
 	int					u1;
-	float				light;
-
 }						t_doom;
 
 typedef	struct			s_wall_scale
@@ -179,16 +197,21 @@ typedef	struct			s_wall_scale
 }						t_wall_scale;
 
 
+
+
 void	player_view_fustrum(t_doom *doom, t_xyz sect_xz[2]);
 void	vline(t_doom *doom, int x, int y1, int y2);
+void	vline1(t_render *render, int y1, int y2, int color);
 void	t_vline(t_doom *doom, int x, int y1, int y2, t_wall_scale ty);
 void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light);
+int		t_vline2(void *arg);
+int		t_vline3(t_render *render, t_ab y, t_ab cy);
 void	rotate_wall_sector(t_sector *sect, int s, t_player *player, t_xyz t[2]);
 void	player_perspective_tranformation(t_scale *persp, t_xyz t[2]);
 void	DrawScreen(t_doom *doom);
 void	DrawMap(t_doom *doom);
 void	sector_behind_edge(t_doom *doom, int x, int neighbor, int z);
-void	render_wall(t_doom *doom, t_item now, int neighbor);
+void	render_wall(t_doom *doom, t_item now, int neighbor, t_render *render);
 void	floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect);
 void	draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_item curr);
 int		read_file(t_doom *doom, char *file_name);
