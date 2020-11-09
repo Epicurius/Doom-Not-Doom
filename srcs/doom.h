@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/02 16:42:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:17:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct	s_sector
     signed char *neighbors;//
     unsigned	npoints;//
     t_xyz		*vertex;//
+	int			rendered;
 	float		light;
 	float		gravity;
 	t_xyz		viewed_sectors[2];

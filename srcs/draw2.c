@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/02 17:41:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/07 16:12:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,13 @@ void				floor_and_ceiling_texture(t_doom *doom, int x, t_ab y, t_ab cy)
 
 void		DrawScreen(t_doom *doom)
 {
-	int			renderedsectors[SECTORNUM];
+	char		rendered[SECTORNUM];
 	t_item		queue[MAXQUEUE];
 	t_item		*head = queue;
 	t_item		*tail = queue;
 	t_item		curr;
 
-	//bzero(renderedsectors, (sizeof(int*) * SECTORNUM));
-	//bzero(doom->ytop, (sizeof(int*) * W));
-    for (unsigned x = 0; x < SECTORNUM; ++x)
-		renderedsectors[x] = 0;
+	bzero(rendered, (sizeof(char*) * SECTORNUM));
     for (unsigned x = 0; x < W; ++x)
 	{
 		doom->ytop[x] = 0;
@@ -74,13 +71,12 @@ void		DrawScreen(t_doom *doom)
     	curr = *tail;
     	if (++tail == queue + MAXQUEUE)
 			tail = queue;
-		if (renderedsectors[curr.sectorno] & 0x21)
+		if (rendered[curr.sectorno] > 1)
 			continue ;
-		++renderedsectors[curr.sectorno];
 		draw_sector(doom, queue, &head, tail, curr);
 		//SDL_UpdateWindowSurface(doom->win);
 		//SDL_Delay(1000);
-		++renderedsectors[curr.sectorno];
+		rendered[curr.sectorno] += 1;
 	}
 }
 
