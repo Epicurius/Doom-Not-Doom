@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/09 18:41:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:52:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 #define	GRAVITY			0.05f
 #define MOUSE_X			0.008f
 #define MOUSE_Y			0.008f
+#define	ACCELERATION	0.1
 
 /*
 ** Map Rendering

@@ -6,16 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:22:10 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/14 15:32:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 10:45:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-/*
-** MovePlayer(dx,dy): Moves the PLAYER by (dx,dy) in the map, and
-** also updates their anglesin/anglecos/sector properties properly.
-*/
 void move_player(t_doom *doom, float dx, float dy)
 {
 	int s;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/09 19:26:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:47:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_doom(t_doom *doom)
 	doom->key.t = 1;
 }
 
+
 int main()
 {
 	t_doom		*doom;
@@ -55,7 +56,7 @@ int main()
 		return (0);
 	init_doom(doom);
 	init_tpool(&doom->tpool, 8);
-	read_file(doom, "./new.txt");
+	read_file(doom, "./large.txt");
 	//read_file(doom, "./test.doom");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)

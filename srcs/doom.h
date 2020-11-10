@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/09 17:05:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:06:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,8 @@ typedef struct		s_doom
 	t_height_info		height_info;
 	int					start_x;
 	int					end_x;
-	t_keys				key;
 	float				yaw;
+	t_keys				key;
 	t_fps				fps;
 	short				ytop[W];
 	short				ybottom[W];
@@ -182,27 +182,13 @@ typedef struct		s_doom
 	SDL_Surface			*txtx;
 	SDL_Surface			*txtx1;
 	SDL_Surface			*txtx2;
-	int					affine_x;
 	int					u0;
 	int					u1;
 }						t_doom;
 
-typedef	struct			s_wall_scale
-{
-	int					result;
-	int					bop;
-	int					fd;
-	int					ca;
-	int					cache;
-}						t_wall_scale;
-
-
-
-
 void	player_view_fustrum(t_doom *doom, t_xyz sect_xz[2]);
 void	vline(t_doom *doom, int x, int y1, int y2);
 void	vline1(t_render *render, int y1, int y2, int color);
-void	t_vline(t_doom *doom, int x, int y1, int y2, t_wall_scale ty);
 void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light);
 int		t_vline2(void *arg);
 int		t_vline3(t_render *render, t_ab y, t_ab cy);
@@ -213,7 +199,7 @@ void	DrawMap(t_doom *doom);
 void	sector_behind_edge(t_doom *doom, int x, int neighbor, int z);
 void	render_wall(t_doom *doom, t_item now, int neighbor, t_render *render);
 void	floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect);
-void	draw_sector(t_doom *doom, t_item *queue, t_item **head, t_item *tail, t_item curr);
+void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int		read_file(t_doom *doom, char *file_name);
 void	vertical_collision(t_doom *doom);
 void	horizontal_collision(t_doom *doom);
@@ -221,7 +207,6 @@ void	move_player(t_doom *doom, float dx, float py);
 void	mouse_and_keys(t_doom *doom);
 int		keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
-int		scale_next(t_wall_scale *s);
 int		shade_hex_color(int hex, float shade_factor);
 void	floor_text(t_doom *doom, int x, int sy, int sx);
 

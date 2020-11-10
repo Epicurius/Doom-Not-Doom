@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:55:17 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/09 18:40:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:54:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	wasd(t_doom *doom, t_xyz *move)
 {
 	float speed;
 
-	speed = doom->key.l_shift == 1 ? SPRINT_SPEED : WALK_SPEED;
+	speed = doom->key.l_shift == 1 ? SPRINT_SPEED : WALK_SPEED; 
 	if (doom->key.w)
 	{
 		move->x += PLAYER.anglecos * speed;
@@ -47,7 +47,7 @@ void	mouse_and_keys(t_doom *doom)
 
 	if (doom->key.space && PLAYER.ground)
 	{
-		PLAYER.velocity.z += 0.5;
+		PLAYER.velocity.z += 0.5; //mirror gravity
 		PLAYER.falling = 1;
 		doom->key.space = 0;
 	}
@@ -61,10 +61,10 @@ void	mouse_and_keys(t_doom *doom)
 	PLAYER.angle += x * MOUSE_X;
 	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5);
 	PLAYER.yaw = doom->yaw - PLAYER.velocity.z * 0.5f;
-	move_player(doom, 0, 0);
- 	move = (t_xyz){0.f, 0.f};
+	//move_player(doom, 0, 0);
+	move = (t_xyz){0.f, 0.f};
 	wasd(doom, &move);
-	PLAYER.velocity.x = PLAYER.velocity.x * (1 - 0.4) + move.x * 0.4; //0.4 acceleration gain
-	PLAYER.velocity.y = PLAYER.velocity.y * (1 - 0.4) + move.y * 0.4;
+	PLAYER.velocity.x = PLAYER.velocity.x * (1 - ACCELERATION) + move.x * ACCELERATION;
+	PLAYER.velocity.y = PLAYER.velocity.y * (1 - ACCELERATION) + move.y * ACCELERATION;
 	PLAYER.moving = 1;
 }
