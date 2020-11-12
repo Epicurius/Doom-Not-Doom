@@ -6,19 +6,19 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/27 17:20:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:57:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void		player_perspective_tranformation(t_scale *persp, t_xyz t[2])
+void		player_perspective_tranformation(t_scale *viewpoint)
 {
     /* Do perspective transformation */
-	persp->xscale1 = (HORI_FOV) / t[0].z;
-	persp->yscale1 = (VERT_FOV) / t[0].z;
-	persp->xscale2 = (HORI_FOV) / t[1].z;
-	persp->yscale2 = (VERT_FOV) / t[1].z;
-	persp->x1 = W / 2 - (int)(t[0].x * persp->xscale1);
-	persp->x2 = W / 2 - (int)(t[1].x * persp->xscale2);
+	viewpoint->xscale1 = (HORI_FOV) / viewpoint->edges[0].y;
+	viewpoint->yscale1 = (VERT_FOV) / viewpoint->edges[0].y;
+	viewpoint->xscale2 = (HORI_FOV) / viewpoint->edges[1].y;
+	viewpoint->yscale2 = (VERT_FOV) / viewpoint->edges[1].y;
+	viewpoint->x1 = W / 2 - (int)(viewpoint->edges[0].x * viewpoint->xscale1);
+	viewpoint->x2 = W / 2 - (int)(viewpoint->edges[1].x * viewpoint->xscale2);
 }

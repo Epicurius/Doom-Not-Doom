@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/10 17:06:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/12 11:15:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@
 # include <pthread.h>
 # include <fcntl.h>
 
-
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0') 
 
 #define min(a,b)			(((a) < (b)) ? (a) : (b)) // min: Choose smaller of two scalars.
 #define max(a,b)			(((a) > (b)) ? (a) : (b)) // max: Choose greater of two scalars.
@@ -56,6 +65,7 @@ typedef struct	s_ab
 
 typedef struct	s_scale
 {
+	t_xyz		edges[2];
 	float		xscale1;
 	float		yscale1;
 	float		xscale2;
@@ -64,7 +74,7 @@ typedef struct	s_scale
 	int			x2;
 }				t_scale;
 
-typedef struct	s_height_info
+typedef struct	s_height_info //yinfo
 {
 	float		yceil;
 	float		yfloor;
@@ -76,16 +86,14 @@ typedef struct	s_height_info
 
 typedef struct	s_sector
 {
-    float		floor;//
-	float		ceil;//
-    signed char *neighbors;//
-    unsigned	npoints;//
-    t_xyz		*vertex;//
-	int			rendered;
+    float		floor;
+	float		ceil;
+    signed char *neighbors;
+    signed char *textures;
+    unsigned	npoints;
+    t_xyz		*vertex;
 	float		light;
 	float		gravity;
-	t_xyz		viewed_sectors[2];
-	t_scale		viewpoint;
 } 				t_sector;
 
 typedef struct	s_player
@@ -96,22 +104,24 @@ typedef struct	s_player
 	float		anglesin;
 	float		anglecos;
 	float 		yaw;
-    unsigned	sector;
 	int 		moving;
 	int			falling;
 	int			ground;
 	int			ducking;
+    unsigned	sector;
 }				t_player;
 
 typedef	struct		s_keys
 {
+	int				chr;
+	short			num;
+	int				fnc;
 	int				w;
 	int				a;
 	int				s;
 	int				d;
+	int				t;
 	int				space;
-	int				c;
-	int 			t;
 	int				l_ctrl;
 	int				l_shift;
 	int				tab;
@@ -138,7 +148,9 @@ typedef struct		s_render
 	int 			neighbor;
 	int				texture;
 	SDL_Surface		*surface;
-	SDL_Surface		*txtx;
+	SDL_Surface		*ctx;
+	SDL_Surface		*wtx;
+	SDL_Surface		*ftx;
 	short			*ytop;
 	short			*ybottom;
 	int				img_res;
@@ -157,48 +169,48 @@ typedef struct		s_doom
 	char				*file;
 	SDL_Window			*win;
 	SDL_Surface			*surface;
-	SDL_Event			event;
 	t_tpool				tpool;
 
 	//read_map
 	t_xyz				*vert;//is redundant after secotors are created
 	t_wall				*walls; //temp
 	t_sector			*sectors;
+	t_player			player;
 	unsigned			num_sector;
 	unsigned			num_sectors;
-	t_player			player;
+
+	//Input
+	t_keys				key;
 
 	//random
-	t_height_info		height_info;
 	int					start_x;
 	int					end_x;
 	float				yaw;
-	t_keys				key;
 	t_fps				fps;
 	short				ytop[W];
 	short				ybottom[W];
+	t_height_info		height_info;
 
 	//Textures
-	SDL_Surface			*txtx;
-	SDL_Surface			*txtx1;
-	SDL_Surface			*txtx2;
+	SDL_Surface			*texture[5];
 	int					u0;
 	int					u1;
+	int 				testt;
 }						t_doom;
 
-void	player_view_fustrum(t_doom *doom, t_xyz sect_xz[2]);
+void	player_view_fustrum(t_doom *doom, t_scale *viewpoint);
 void	vline(t_doom *doom, int x, int y1, int y2);
 void	vline1(t_render *render, int y1, int y2, int color);
 void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light);
 int		t_vline2(void *arg);
 int		t_vline3(t_render *render, t_ab y, t_ab cy);
-void	rotate_wall_sector(t_sector *sect, int s, t_player *player, t_xyz t[2]);
-void	player_perspective_tranformation(t_scale *persp, t_xyz t[2]);
+void	rotate_wall_sector(t_sector *sect, int s, t_player *player, t_scale *vewpoint);
+void	player_perspective_tranformation(t_scale *viewpoint);
 void	DrawScreen(t_doom *doom);
 void	DrawMap(t_doom *doom);
 void	sector_behind_edge(t_doom *doom, int x, int neighbor, int z);
-void	render_wall(t_doom *doom, t_item now, int neighbor, t_render *render);
-void	floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect);
+void	render_wall(t_doom *doom, t_item now, int s, t_render *render, t_scale viewpoint);
+void	floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint);
 void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int		read_file(t_doom *doom, char *file_name);
 void	vertical_collision(t_doom *doom);

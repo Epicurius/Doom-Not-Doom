@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:55:17 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/10 16:54:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:03:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	mouse_and_keys(t_doom *doom)
 	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5);
 	PLAYER.yaw = doom->yaw - PLAYER.velocity.z * 0.5f;
 	//move_player(doom, 0, 0);
-	move = (t_xyz){0.f, 0.f};
+	move = (t_xyz){0.f, 0.f}; //add this to slow down
+	//if (PLAYER.velocity.z > 0.0)
+	//	move = (t_xyz){0.1f, 0.1f}; //add this to slow down
 	wasd(doom, &move);
-	PLAYER.velocity.x = PLAYER.velocity.x * (1 - ACCELERATION) + move.x * ACCELERATION;
-	PLAYER.velocity.y = PLAYER.velocity.y * (1 - ACCELERATION) + move.y * ACCELERATION;
+	PLAYER.velocity.x = (PLAYER.velocity.x + move.x) * ACCELERATION;
+	PLAYER.velocity.y = (PLAYER.velocity.y + move.y) * ACCELERATION;
 	PLAYER.moving = 1;
 }

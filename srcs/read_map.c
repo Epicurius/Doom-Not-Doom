@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/02 17:51:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/12 10:54:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	read_player(t_doom *doom, int fd)
 		PLAYER.where.x = atof(arr[0]);
 		PLAYER.where.y = atof(arr[1]);
 		PLAYER.velocity = (t_xyz){0, 0, 0};
-		PLAYER.angle = 0;
+		PLAYER.angle = 0; //maybe remove
 		PLAYER.anglesin = 0;
 		PLAYER.anglecos = 0;
 		PLAYER.yaw = 0;
@@ -152,18 +152,17 @@ void	read_sectors(t_doom *doom, int fd)
 			m++;
 		sect->npoints   = m;
 		sect->neighbors = (signed char *)malloc(sizeof(signed char) * (m));
+		sect->textures = (signed char *)malloc(sizeof(signed char) * (m));
 		sect->vertex    = (t_xyz *)malloc(sizeof(t_xyz) * (m + 1));
-        //for (int l = 0; l < m; ++l)
-		//	sect->vertex[l + 1] = doom->vert[atoi(walls[l])];
-		//sect->vertex[0] = sect->vertex[m]; // Ensure the vertexes form a loop
-		
-		for (int l = 0; l < m; ++l)
-			sect->vertex[l + 1] = doom->walls[atoi(walls[l])].v1;
-		sect->vertex[0] = sect->vertex[m]; // Ensure the vertexes form a loop
 
 		neighbour = ft_strsplit(arr[3], ' ');
-        for (int l = 0; l < m; ++l)
+		for (int l = 0; l < m; ++l)
+		{
+			sect->vertex[l] = doom->walls[atoi(walls[l])].v1;
+			sect->textures[l] = doom->walls[atoi(walls[l])].texture;
 			sect->neighbors[l] = atoi(neighbour[l]);
+		}
+		sect->vertex[m] = sect->vertex[0]; // Ensure the vertexes form a loop
 		sect->gravity = atof(arr[6]);
 		sect->light = atof(arr[7]);
 		free_array(arr);

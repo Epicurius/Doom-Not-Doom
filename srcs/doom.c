@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/10 16:47:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/12 11:34:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	init_doom(t_doom *doom)
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
-	//doom->txtx = IMG_Load("./bmp/stone.bmp");
-	doom->txtx = IMG_Load("./bmp/ceiling.bmp");
-	doom->txtx1 = IMG_Load("./bmp/ceiling.bmp");
-	//doom->txtx2 = IMG_Load("./bmp/alloy.bmp");
+	doom->texture[0] = IMG_Load("./bmp/alloy.bmp");
+	doom->texture[1] = IMG_Load("./bmp/grass.bmp");
+	doom->texture[2] = IMG_Load("./bmp/ceiling.bmp");
+	doom->texture[3] = IMG_Load("./bmp/stone.bmp");
+	//doom->key.chr = KEY_T(0);
 	doom->key.t = 1;
 }
 
@@ -56,12 +57,13 @@ int main()
 		return (0);
 	init_doom(doom);
 	init_tpool(&doom->tpool, 8);
-	read_file(doom, "./large.txt");
-	//read_file(doom, "./test.doom");
+	//read_file(doom, "./large.txt");
+	read_file(doom, "./new.txt");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)
     {
         DrawScreen(doom);
+		//if (doom->key.fnc & TAB(1))
 		if (doom->key.tab)
 			DrawMap(doom);
 		fps_func(doom);
