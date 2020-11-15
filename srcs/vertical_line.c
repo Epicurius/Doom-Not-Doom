@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/12 17:05:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/15 17:44:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void	vline1(t_render *render, int y1, int y2, int c)
 	pix = (int*)render->surface->pixels;
     y1 = clamp(y1, 0, H - 1);
     y2 = clamp(y2, 0, H - 1);
-	if (y2 > y1)
+	if (y2 == y1)
+        pix[y1 * W + x] = 0xFFFFFFFF;
+	else if (y2 > y1)
     {
         pix[y1 * W + x] = color;
 		y = y1 + 1;

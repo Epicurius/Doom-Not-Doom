@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/12 11:20:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/15 11:15:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Screen info
 */
 # define W				1920
-# define H				1280
+# define H				1080
 
 /*
 **	Vision

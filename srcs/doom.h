@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/12 11:15:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/15 16:56:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct	s_xyz
 	float	y;
 	float	z;
 }				t_xyz;
+
+typedef struct	s_trigon
+{
+	t_xyz		a;
+	t_xyz		b;
+	t_xyz		c;
+}				t_trigon;
 
 typedef struct	s_ab
 {
@@ -195,7 +202,7 @@ typedef struct		s_doom
 	SDL_Surface			*texture[5];
 	int					u0;
 	int					u1;
-	int 				testt;
+	t_xyz				corners[16];
 }						t_doom;
 
 void	player_view_fustrum(t_doom *doom, t_scale *viewpoint);
@@ -221,6 +228,8 @@ int		keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 int		shade_hex_color(int hex, float shade_factor);
 void	floor_text(t_doom *doom, int x, int sy, int sx);
+void	trigon_rasterizer(SDL_Surface *surface, t_xyz a, t_xyz b, t_xyz c);
+void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);
