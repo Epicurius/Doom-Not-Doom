@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:55:17 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/15 11:22:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:01:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ void	wasd(t_doom *doom, t_xyz *move)
 {
 	float speed;
 
-	speed = doom->key.l_shift == 1 ? SPRINT_SPEED : WALK_SPEED; 
+	if (PLAYER.ducking)
+		speed = CROUCH_SPEED;
+	else if (doom->key.l_shift)
+		speed = SPRINT_SPEED;
+	else
+		speed = WALK_SPEED; 
 	if (doom->key.w)
 	{
 		move->x += PLAYER.anglecos * speed;
@@ -59,7 +64,7 @@ void	mouse_and_keys(t_doom *doom)
 	}
 	SDL_GetRelativeMouseState(&x, &y);
 	PLAYER.angle += x * MOUSE_X;
-	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5);
+	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5); //max y top and bot(-5, 5)
 	PLAYER.yaw = doom->yaw - PLAYER.velocity.z * 0.5f;
 	//move_player(doom, 0, 0);
 	move = (t_xyz){0.f, 0.f}; //add this to slow down

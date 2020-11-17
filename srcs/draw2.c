@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/15 18:23:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:26:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,50 +48,65 @@ void				ft_circle(SDL_Surface *surf, int xc, int yc, int r)
 	}
 }
 
-static inline void	horz_surf_to_vert(t_render *render, float mapY, int screenX, int screenY, t_xyz *map)
+
+static inline void	horz_surf_to_vert(t_render *render, float Hight, int screenX, int screenY, t_xyz *t)
 {
-	t_player player;
+	float		x;
+	float		y;
+	t_player	player;
 
 	player = render->player;
-	map->y = mapY * VERT_FOV / (( H / 2 - screenY) - player.yaw * VERT_FOV);
-	map->x = map->y * (W / 2 - screenX) / HORI_FOV;
-	float rtx = map->y * player.anglecos + map->x * player.anglesin;
-	float rtz = map->y * player.anglesin - map->x * player.anglecos;
-	map->x = rtx + player.where.x;
-	map->y = rtz + player.where.y;
+	// (Sector Height) / ((distance from player) - (player Y view))
+	// H / Dist = one pixel iteration
+	y = (Hight * VERT_FOV) / ((540 - screenY) - (player.yaw * VERT_FOV));	// H/2
+	x = y * ((960 - screenX) / HORI_FOV);									// W/2
+	//x = y * screen_x[screenX];
+
+	t->x = (y * player.anglecos + x * player.anglesin) + player.where.x;
+	t->y = (y * player.anglesin - x * player.anglecos) + player.where.y;
+	t->x = ((int)(t->x * 256) % CTX_W);
+	t->y = ((int)(t->y * 256) % CTX_W); 										// T/4
 }
 
 void				floor_and_ceiling_texture(t_render *render, t_ab y, t_ab cy)
 {
-	int tx;
-	int ty;
-	t_xyz map;
-	float mapY;
+	t_xyz		t;
+	float		sect_y;
 	t_player	player;
-	player = render->player;
 	SDL_Surface *curr;
 
-	for (int y = render->ytop[render->x]; y <= render->ybottom[render->x]; ++y)
-	{
-		if (y >= cy.a1 && y <= cy.b1) //jump to draw floor
-		{
-			y = cy.b1;
-			continue;
-		}
-		mapY = y < cy.a1 ? render->height_info.yceil : render->height_info.yfloor;
-		horz_surf_to_vert(render, mapY, render->x, y, &map);
-		//map.x = render->x;
-		//map.y = y;
-		tx = ((int)(map.x * (CTX_W/ 4)) % CTX_W);
-		ty = ((int)(map.y * (CTX_W/ 4)) % CTX_W);
+	curr = render->ctx;
+	sect_y = render->height_info.yceil;
+	player = render->player;
 
-		curr = y > cy.a1 ? render->ftx : render->ctx; // redundant if here
+	//for (int y1 = render->ytop[render->x]; y1 < render->ybottom[render->x]; y1++)
+	int y1 = render->ytop[render->x];
+	while (y1 < render->ybottom[render->x])
+	{
+		if (y1 >= cy.a1 && y1 <= cy.b1) //jump to floor start_y
+		{
+			y1 = cy.b1;
+			if (y1 >= render->ybottom[render->x])
+				return ;
+			sect_y = render->height_info.yfloor;
+			curr = render->ftx;
+			//continue;
+		}
+		horz_surf_to_vert(render, sect_y, render->x, y1, &t); //x is reduntant
+		if (((int*)render->surface->pixels)[y1 * W + render->x] != 0xFFFFFFFF)
+		{
+			//printf("Double pixels(floorNceiling) %d %d\n", render->x, y1);
+			//((int*)render->surface->pixels)[y1 * W + render->x] = 0xFFFF0000;
+			//y1 += 1;
+			//continue ;
+		}
 		if (render->light < 1.0)
-			((int*)render->surface->pixels)[y * W + render->x] =
-				shade_hex_color(((int*)curr->pixels)[ty * CTX_W + tx], render->light);
+			((int*)render->surface->pixels)[y1 * W + render->x] =
+				shade_hex_color(((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x], render->light);
 		else
-			((int*)render->surface->pixels)[y * W + render->x] =
-				((int*)curr->pixels)[(ty % CTX_W) * CTX_W + (tx % CTX_W)];
+			((int*)render->surface->pixels)[y1 * W + render->x] =
+				((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x];
+		y1 += 1;
 	}
 }
 
@@ -106,12 +121,14 @@ void		DrawScreen(t_doom *doom)
 	qcurr = 0;
 	qtotal = qcurr;
 
+	for (int i = 0; i < (W * H); i++)
+		((int*)doom->surface->pixels)[i] = 0xFFFFFFFF;
 	bzero(rendered, (sizeof(char*) * SECTORNUM));
 	bzero(doom->ytop, (sizeof(short) * W));
     for (unsigned x = 0; x < W; ++x)
-		doom->ybottom[x] = H - 1;
+		doom->ybottom[x] = H;
 
-	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W - 1};
+	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W}; // -1 not needed cos < not <= in render_wall
 	while (qcurr < qtotal) // render any other queued sectors
 	{
 		curr = queue[qcurr++];
@@ -120,7 +137,6 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
-	//exit(1);
 }
 
 static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
@@ -135,38 +151,12 @@ static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
 /*
 ** Render each wall of this sector that is facing towards PLAYER.
 */
-
-static inline int	xd(t_scale viewpoint, int a, int b, int start)
-{
-   	if (viewpoint.x2 == viewpoint.x1)
-		return (a);
-	return ((((start - viewpoint.x1) * (b - a)) / (viewpoint.x2 - viewpoint.x1)) + a);
-}
-
-void		init_floor_trigon(t_doom *doom, t_scale viewpoint, t_trigon *floor, int *f)
-{
-	t_xyz a;
-	t_xyz b;
-	t_xyz c;
-
-	a.x = doom->start_x;
-	a.y = xd(viewpoint, HEIGHT_INFO.y.b1, HEIGHT_INFO.y.b2, doom->start_x);
-	b.x = doom->end_x;
-	b.y = xd(viewpoint, HEIGHT_INFO.y.b1, HEIGHT_INFO.y.b2, doom->end_x);
-	c.x = W / 2;
-	c.y = H;
-	floor[*f] = (t_trigon){.a = a, .b = b, .c = c};
-	*f += 1;
-}
-
 void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 {
 	int			s;
 	t_sector	*sect;
 	t_scale		viewpoint;
 	t_render	render[W];
-	t_trigon	floor[16];
-	int			f = 0;
 
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
@@ -180,13 +170,10 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 			player_view_fustrum(doom, &viewpoint);
 		player_perspective_tranformation(&viewpoint);
 		if (viewpoint.x1 >= viewpoint.x2 || viewpoint.x2 < curr.sx1 ||
-				viewpoint.x1 > curr.sx2) // Only render if it's visible
+			viewpoint.x1 > curr.sx2) // Only render if it's visible
 			continue;
 		floor_ceiling_heights(doom, sect->neighbors[s], sect, viewpoint);
 		render_wall(doom, curr, s, render, viewpoint);
-
-		init_floor_trigon(doom, viewpoint, floor, &f);
-
 		if (sect->neighbors[s] >= 0 && doom->end_x >= doom->start_x)
 		{
 			queue[*qtotal] = (t_item){.sectorno = sect->neighbors[s],
@@ -194,11 +181,7 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 			*qtotal += 1;
 		}
 	}
-	printf("%d\n", f);
-	while (f--)
-		trigon_rasterizer(doom->surface, floor[f].a, floor[f].b, floor[f].c);
 	tpool_wait(&doom->tpool);
-
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -226,20 +209,21 @@ void			draw_portal(t_render *render, t_ab y, t_ab cy)
 {
 	if (render->texture)
 	{
-		vline1(render, cy.b2 + 1, cy.b1, G);
-		vline1(render, cy.a1, cy.a2 - 1, G);
+		vline1(render, cy.a1, cy.a2, G);
+		vline1(render, cy.b2, cy.b1, G);
 	}
 	else
 	{
-		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1},
-						 (t_ab){.a1 = cy.a1, .b1 = y.a2 - 1});
-		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1},
-						 (t_ab){.a1 = cy.b2 + 1, .b1 = cy.b1});
+		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1}, (t_ab){.a1 = cy.a1, .b1 = y.a2});
+		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1}, (t_ab){.a1 = cy.b2, .b1 = cy.b1});
 	}
-	render->ytop[render->x] = clamp(max(cy.a1, cy.a2), render->ytop[render->x], H - 1);
+	render->ytop[render->x] = clamp(max(cy.a1, cy.a2), render->ytop[render->x], H);
 	render->ybottom[render->x] = clamp(min(cy.b1, cy.b2), 0, render->ybottom[render->x]);
 }
 
+/*
+** Inerpolate line
+*/
 static inline int	line_h(t_render *render, int a, int b)
 {
    	if (render->x2 == render->x1)
@@ -285,11 +269,10 @@ int				thread_render(void *arg)
    	y.b1 = line_h(render, render->height_info.y.b1, render->height_info.y.b2);
 	cy.a1 = clamp(y.a1, render->ytop[render->x], render->ybottom[render->x]);
 	cy.b1 = clamp(y.b1, render->ytop[render->x], render->ybottom[render->x]);
-	//ft_circle(render->surface, render->x, y.a1, 10);
 	if (render->texture) // || render->ftc == NULL
 	{
-		vline1(render, render->ytop[render->x], cy.a1 - 1, G);		//ceil
-		//vline1(render, cy.b1 + 1, render->ybottom[render->x], 0xb47044);	//floor
+		vline1(render, render->ytop[render->x], cy.a1, G);		//ceil
+		vline1(render, cy.b1, render->ybottom[render->x], 0xb47044);	//floor
 	}
 	else
 		floor_and_ceiling_texture(render, y, cy);
@@ -302,7 +285,7 @@ int				thread_render(void *arg)
 		draw_portal(render, y, cy);
 	}
 	else if (render->texture)
-		vline1(render, cy.a1, cy.b1, 0xFFFF00FF);
+		vline1(render, cy.a1, cy.b1, 0xFF888888);
 	else
 		t_vline3(render, y, cy);
 	return (0);
@@ -325,7 +308,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].ctx = doom->texture[0];
 		render[x].ftx = doom->texture[1];
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
-		tpool_add(&doom->tpool, thread_render, &render[x]);	
+		//thread_render(&render[x]);
+		tpool_add(&doom->tpool, thread_render, &render[x]);
 		x += 1;
 	}
 }

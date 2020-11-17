@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:10:37 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/10 16:54:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:25:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	horizontal_collision(t_doom *doom)
 		{
 			if (intersect_box(p, d, vert[s], vert[s + 1]) &&
 				intersect_box(p, d, vert[s + 1], vert[s]) &&
-				point_side(p, d, vert[s], vert[s + 1]) < 0.00)
+				point_side(p, d, vert[s], vert[s + 1]) < 0)
 			{
 				//Check where the hole is.
 				float hole_low  = sect->neighbors[s] < 0 ?  9e9 : max(sect->floor, doom->sectors[sect->neighbors[s]].floor);
@@ -75,7 +75,7 @@ void	horizontal_collision(t_doom *doom)
 				if (hole_high < PLAYER.where.z + OVER_HEAD_SPACE || hole_low  > PLAYER.where.z - eye_height + STEP_HEIGHT)
 				{
 					PLAYER.moving = 0;
-					d = (t_xyz){.x = 0.00, .y = 0.00};
+					d = (t_xyz){.x = 0, .y = 0};
 				}
 
 			}

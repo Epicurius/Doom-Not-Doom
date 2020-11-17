@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/15 16:56:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/17 12:29:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ typedef struct	s_xyz
 	float	z;
 }				t_xyz;
 
-typedef struct	s_trigon
+typedef struct	s_tetragon
 {
 	t_xyz		a;
 	t_xyz		b;
 	t_xyz		c;
-}				t_trigon;
+	t_xyz		d;
+}				t_tetragon;
 
 typedef struct	s_ab
 {

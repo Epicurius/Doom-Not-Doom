@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:22:10 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/10 10:45:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:13:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ void move_player(t_doom *doom, float dx, float dy)
 			intersect_box(p, d, vert[s], vert[s + 1]) &&
 			point_side(p, d, vert[s], vert[s + 1]) < 0)
         {
-            PLAYER.sector = sect->neighbors[s];
+			PLAYER.sector = sect->neighbors[s];
             break;
         }
+
 	}
+
     PLAYER.where.x += dx;
     PLAYER.where.y += dy;
     PLAYER.anglesin = sinf(PLAYER.angle);
