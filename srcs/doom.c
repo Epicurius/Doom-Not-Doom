@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 15:35:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:27:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ void	init_doom(t_doom *doom)
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
 				SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
-	//doom->texture[0] = IMG_Load("./bmp/alloy.bmp");
-	//doom->texture[1] = IMG_Load("./bmp/grass.bmp");
-	doom->texture[0] = IMG_Load("./bmp/hardwood.bmp");
-	doom->texture[1] = IMG_Load("./bmp/hardwood.bmp");
+	doom->texture[0] = IMG_Load("./bmp/alloy.bmp");
+	doom->texture[1] = IMG_Load("./bmp/grass.bmp");
 	doom->texture[2] = IMG_Load("./bmp/ceiling.bmp");
 	doom->texture[3] = IMG_Load("./bmp/stone.bmp");
 	doom->key.t = 1;
@@ -55,7 +53,7 @@ void	test()
 }
 */
 
-int main()
+int main(int ac, char **av)
 {
 	t_doom		*doom;
     SDL_Event	event;
@@ -64,9 +62,9 @@ int main()
 		return (0);
 	init_doom(doom);
 	init_tpool(&doom->tpool, 8);
+	//read_file(doom, "./corupted_walk.txt");
 	//read_file(doom, "./large.txt");
 	read_file(doom, "./new.txt");
-	//read_file(doom, "./corupted_walk.txt");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)
     {
@@ -86,9 +84,10 @@ int main()
 				exit (1);
 		}
 		mouse_and_keys(doom);
-		//fps_func(doom);
+		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
     	//printf("Time measured: %.3f seconds.\n", FPS.avg);
+		//printf("Where %f, %f\n", PLAYER.where.x, PLAYER.where.y);
     }
 	free_tpool(&doom->tpool);
     unload_data(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:10:37 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 16:25:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:03:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	horizontal_collision(t_doom *doom)
 	t_xyz		d;
 	t_xyz*		vert;
 	t_sector*	sect;
+	float hole_low = 9e9;
+	float hole_high = -9e9;
 
 	float eye_height = PLAYER.ducking ? DUCK_HEIGHT : EYE_HEIGHT;
 	if (PLAYER.moving)
@@ -65,13 +67,16 @@ void	horizontal_collision(t_doom *doom)
 		vert = sect->vertex;
 		while (++s < sect->npoints)
 		{
+			//intersect_box(p, d, vert[s + 1], vert[s]) &&
 			if (intersect_box(p, d, vert[s], vert[s + 1]) &&
-				intersect_box(p, d, vert[s + 1], vert[s]) &&
 				point_side(p, d, vert[s], vert[s + 1]) < 0)
 			{
 				//Check where the hole is.
-				float hole_low  = sect->neighbors[s] < 0 ?  9e9 : max(sect->floor, doom->sectors[sect->neighbors[s]].floor);
-				float hole_high = sect->neighbors[s] < 0 ? -9e9 : min(sect->ceil,  doom->sectors[sect->neighbors[s]].ceil );
+				if (sect->neighbors[s] >= 0)
+				{
+					hole_low  = max(sect->floor, doom->sectors[sect->neighbors[s]].floor);
+					hole_high = min(sect->ceil,  doom->sectors[sect->neighbors[s]].ceil );
+				}
 				if (hole_high < PLAYER.where.z + OVER_HEAD_SPACE || hole_low  > PLAYER.where.z - eye_height + STEP_HEIGHT)
 				{
 					PLAYER.moving = 0;

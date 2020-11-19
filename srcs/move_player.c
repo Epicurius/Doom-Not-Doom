@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:22:10 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 16:13:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 10:19:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void move_player(t_doom *doom, float dx, float dy)
     PLAYER.where.y += dy;
     PLAYER.anglesin = sinf(PLAYER.angle);
     PLAYER.anglecos = cosf(PLAYER.angle);
+	//printf("%f, %f\n", PLAYER.where.x, PLAYER.where.y);
 }

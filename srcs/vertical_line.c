@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 16:26:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:56:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	vline1(t_render *render, int y1, int y2, int c)
     {
 		//if (pix[y1 * W + x] == 0xFFFFFFFF)
 		//	printf("Double pixel(vline1.1) %d %d\n", render->x, y1);
-        //pix[y1 * W + x] = 0xFF000000;
+        pix[y1 * W + x] = 0xFF000000;
 		y = y1 + 1;
 		while (y < y2)
 		{
@@ -54,7 +54,7 @@ void	vline1(t_render *render, int y1, int y2, int c)
 		}
 		//if (pix[y2 * W + x] == 0xFFFFFFFF)
 		//	printf("Double pixel(vline1.3) %d %d\n", render->x, y1);
-		//pix[y2 * W + x] = 0xFF000000;
+		pix[y2 * W + x] = 0xFF000000;
     }
 }
 
@@ -69,14 +69,12 @@ int		t_vline3(t_render *render, t_ab y, t_ab cy)
 	int	dist_y		= abs(y.b1 - y.a1);									//Hight of strip
 	int	total_y		= (int)((cy.a1 - y.a1) * t_hight) % abs(y.b1 - y.a1);//
 
-
 	while (y1 < y2)
     {
 		total_y += t_hight;
 		int n = (total_y / dist_y);
 		total_y -= dist_y * n;
 		curr_y += n;
-
 		if (((int*)render->surface->pixels)[y1 * W + render->x] != 0xFFFFFFFF)
 		{
 			//printf("Double pixel(t_vline3) %d %d\n", render->x, y1);

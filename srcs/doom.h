@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 12:29:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 16:55:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,15 @@ typedef struct		s_wall
 	int				texture;
 }					t_wall;
 
+typedef struct	s_scaler
+{
+	int result;
+	int	bop;
+	int	fd;
+	int	ca;
+	int	cache;
+}				t_scaler;
+
 typedef struct		s_render
 {
 	int				x;
@@ -169,6 +178,7 @@ typedef struct		s_render
 	int				x1;
 	int				x2;
 }					t_render;
+
 
 typedef struct		s_doom
 {

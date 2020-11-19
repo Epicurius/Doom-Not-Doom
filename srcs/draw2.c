@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 16:26:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:48:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void		DrawScreen(t_doom *doom)
 	qcurr = 0;
 	qtotal = qcurr;
 
-	for (int i = 0; i < (W * H); i++)
-		((int*)doom->surface->pixels)[i] = 0xFFFFFFFF;
+	//for (int i = 0; i < (W * H); i++)
+	//	((int*)doom->surface->pixels)[i] = 0xFFFFFFFF;
 	bzero(rendered, (sizeof(char*) * SECTORNUM));
 	bzero(doom->ytop, (sizeof(short) * W));
     for (unsigned x = 0; x < W; ++x)
@@ -151,17 +151,18 @@ static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
 /*
 ** Render each wall of this sector that is facing towards PLAYER.
 */
+int			fail_safe;
 void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 {
 	int			s;
 	t_sector	*sect;
 	t_scale		viewpoint;
 	t_render	render[W];
-
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
 	while (++s < sect->npoints)
 	{
+		{fail_safe = -1;}
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
 		if (viewpoint.edges[0].y <= 0 && viewpoint.edges[1].y <= 0)
 			continue;
@@ -195,6 +196,7 @@ void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale 
 		HEIGHT_INFO.nyceil  = doom->sectors[neighbor].ceil  - PLAYER.where.z;
 		HEIGHT_INFO.nyfloor = doom->sectors[neighbor].floor - PLAYER.where.z;
    	}
+	//jony fix * 0.h
    	HEIGHT_INFO.y.a1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[0].y) * viewpoint.yscale1);
 	HEIGHT_INFO.y.b1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, viewpoint.edges[0].y) * viewpoint.yscale1);
    	HEIGHT_INFO.y.a2 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[1].y) * viewpoint.yscale2);
@@ -214,6 +216,7 @@ void			draw_portal(t_render *render, t_ab y, t_ab cy)
 	}
 	else
 	{
+		//make separate func for these
 		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1}, (t_ab){.a1 = cy.a1, .b1 = y.a2});
 		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1}, (t_ab){.a1 = cy.b2, .b1 = cy.b1});
 	}
@@ -302,6 +305,11 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 	x = doom->start_x;
 	while (x < doom->end_x)
 	{
+		{
+			if (fail_safe >= x)
+				printf("ERROR [%d]>=[%d] @ %f %f \n", fail_safe, x, PLAYER.where.x, PLAYER.where.y);
+			fail_safe = x;
+		}
 		init_thread(&render[x], x, doom, viewpoint);
    		render[x].light = doom->sectors[curr.sectorno].light;
 		render[x].wtx = doom->texture[t];

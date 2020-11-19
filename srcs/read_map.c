@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/12 10:54:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:20:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	read_player(t_doom *doom, int fd)
 		PLAYER.anglesin = 0;
 		PLAYER.anglecos = 0;
 		PLAYER.yaw = 0;
-		PLAYER.sector = 0;
+		PLAYER.sector = 1;  //fi  //fixx
 		PLAYER.where.z = 0 + EYE_HEIGHT; //;doom->sectors[PLAYER.sector].floor + EYE_HEIGHT;
 		free_array(arr);
 		ft_strdel(&line);
