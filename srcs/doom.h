@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/19 16:55:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:34:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,6 @@ typedef struct		s_wall
 	int				texture;
 }					t_wall;
 
-typedef struct	s_scaler
-{
-	int result;
-	int	bop;
-	int	fd;
-	int	ca;
-	int	cache;
-}				t_scaler;
 
 typedef struct		s_render
 {
@@ -185,6 +177,7 @@ typedef struct		s_doom
 	//window_init
 	int					quit;
 	char				*file;
+	char				*name;
 	SDL_Window			*win;
 	SDL_Surface			*surface;
 	t_tpool				tpool;
@@ -213,11 +206,11 @@ typedef struct		s_doom
 	SDL_Surface			*texture[5];
 	int					u0;
 	int					u1;
-	t_xyz				corners[16];
+	SDL_Surface			*imp;
+
 }						t_doom;
 
 void	player_view_fustrum(t_doom *doom, t_scale *viewpoint);
-void	vline(t_doom *doom, int x, int y1, int y2);
 void	vline1(t_render *render, int y1, int y2, int color);
 void	t_vline1(t_doom *doom, int x, t_ab y, t_ab cy, float light);
 int		t_vline2(void *arg);

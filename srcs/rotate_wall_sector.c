@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 14:31:33 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/12 14:27:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/22 12:44:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	rotate_wall_sector(t_sector *sect, int s, t_player *player, t_scale *viewpo
 	v2.y = sect->vertex[s + 1].y - player->where.y;
 	//edge0 start x,y -> edge1 end x,y
 	viewpoint->edges[0].x = v1.x * player->anglesin - v1.y * player->anglecos;
-	viewpoint->edges[0].y = v1.x * player->anglecos + v1.y * player->anglesin;
 	viewpoint->edges[1].x = v2.x * player->anglesin - v2.y * player->anglecos;
+	viewpoint->edges[0].y = v1.x * player->anglecos + v1.y * player->anglesin;
 	viewpoint->edges[1].y = v2.x * player->anglecos + v2.y * player->anglesin;
+
 }

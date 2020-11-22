@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/19 17:27:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:02:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	init_doom(t_doom *doom)
 	doom->texture[1] = IMG_Load("./bmp/grass.bmp");
 	doom->texture[2] = IMG_Load("./bmp/ceiling.bmp");
 	doom->texture[3] = IMG_Load("./bmp/stone.bmp");
-	doom->key.t = 1;
+	doom->imp = IMG_Load("./bmp/doom_imp.bmp");
+	doom->key.t = 0;
 }
 /*
 void	test()
@@ -62,12 +63,14 @@ int main(int ac, char **av)
 		return (0);
 	init_doom(doom);
 	init_tpool(&doom->tpool, 8);
-	//read_file(doom, "./corupted_walk.txt");
-	//read_file(doom, "./large.txt");
-	read_file(doom, "./new.txt");
+	if (!read_file(doom, "./sprite.txt"))
+		return (0);
+
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//PLAYER.angle = -1.570796;
     while (!doom->quit)
     {
+		//printf("%f\n", PLAYER.angle);
 		DrawScreen(doom);
 		if (doom->key.tab)
 			DrawMap(doom);
@@ -90,7 +93,7 @@ int main(int ac, char **av)
 		//printf("Where %f, %f\n", PLAYER.where.x, PLAYER.where.y);
     }
 	free_tpool(&doom->tpool);
-    unload_data(doom);
+    //unload_data(doom);
     SDL_Quit();
 	TTF_Quit();
 	IMG_Quit();

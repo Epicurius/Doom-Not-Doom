@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/19 17:48:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:08:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,12 @@ void		DrawScreen(t_doom *doom)
 
 	qcurr = 0;
 	qtotal = qcurr;
-
-	//for (int i = 0; i < (W * H); i++)
-	//	((int*)doom->surface->pixels)[i] = 0xFFFFFFFF;
 	bzero(rendered, (sizeof(char*) * SECTORNUM));
 	bzero(doom->ytop, (sizeof(short) * W));
     for (unsigned x = 0; x < W; ++x)
 		doom->ybottom[x] = H;
 
-	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W}; // -1 not needed cos < not <= in render_wall
+	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W};
 	while (qcurr < qtotal) // render any other queued sectors
 	{
 		curr = queue[qcurr++];
@@ -137,6 +134,8 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
+	//SDL_Rect r = {.x = 0, .y = 0, .w = doom->imp->w * 0.3, .h = doom->imp->h * 0.3};
+	//SDL_BlitScaled(doom->imp, NULL, doom->surface, &r);
 }
 
 static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
@@ -151,30 +150,40 @@ static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
 /*
 ** Render each wall of this sector that is facing towards PLAYER.
 */
-int			fail_safe;
+t_xyz		e = (t_xyz){.x = 5, .y = 5, .z = 0};
 void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 {
 	int			s;
 	t_sector	*sect;
 	t_scale		viewpoint;
 	t_render	render[W];
+	
+	t_xyz v1;
+	t_xyz v2;
+
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
 	while (++s < sect->npoints)
 	{
-		{fail_safe = -1;}
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
+		//printf("J: %f, %f\n", PLAYER.where.x - viewpoint.edges[0].x, PLAYER.where.y + viewpoint.edges[0].y);
+		//printf("K: %f, %f\n", PLAYER.where.x - viewpoint.edges[1].x, PLAYER.where.y + viewpoint.edges[1].y);
+
 		if (viewpoint.edges[0].y <= 0 && viewpoint.edges[1].y <= 0)
-			continue;
+			continue ;
 		texture_mapping_init(doom, sect, s);
 		if (viewpoint.edges[0].y <= 0 || viewpoint.edges[1].y <= 0)
-			player_view_fustrum(doom, &viewpoint);
+			player_view_fustrum(doom, &viewpoint); //clip
 		player_perspective_tranformation(&viewpoint);
 		if (viewpoint.x1 >= viewpoint.x2 || viewpoint.x2 < curr.sx1 ||
 			viewpoint.x1 > curr.sx2) // Only render if it's visible
-			continue;
+			continue ;
+	
+		//printf("J: %f, %f\n", PLAYER.where.x - viewpoint.edges[0].x, PLAYER.where.y - viewpoint.edges[0].y);
+		//printf("K: %f, %f\n", PLAYER.where.x - viewpoint.edges[1].x, PLAYER.where.y - viewpoint.edges[1].y);
 		floor_ceiling_heights(doom, sect->neighbors[s], sect, viewpoint);
 		render_wall(doom, curr, s, render, viewpoint);
+		//entety func
 		if (sect->neighbors[s] >= 0 && doom->end_x >= doom->start_x)
 		{
 			queue[*qtotal] = (t_item){.sectorno = sect->neighbors[s],
@@ -183,6 +192,29 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 		}
 	}
 	tpool_wait(&doom->tpool);
+
+	v1.x = e.x - PLAYER.where.x;
+	v1.y = e.y - PLAYER.where.y;
+	v2.x = v1.x * PLAYER.anglesin - v1.y * PLAYER.anglecos;
+	v2.y = v1.x * PLAYER.anglecos + v1.y * PLAYER.anglesin;
+	if (v2.y <= 0)
+		return ;
+	int x = W / 2 - (int)(v2.x * (float)(HORI_FOV / v2.y));
+  	int a =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil,	v2.y) * (float)(HORI_FOV / v2.y));
+	int b =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor,	v2.y) * (float)(HORI_FOV / v2.y));
+	printf("%d %d %f %f\n", a, b, v2.y, (HORI_FOV / v2.y));
+	int w = doom->imp->w * ((float)(HORI_FOV / v2.y) / 100);
+	int h = doom->imp->h * ((float)(HORI_FOV / v2.y) / 100);
+	int y = H / 2;
+		x = x - (w / 2);
+	SDL_Rect r = {.x = x, .y = y, .w = w, .h = h};
+	SDL_BlitScaled(doom->imp, NULL, doom->surface, &r);
+
+
+
+	//printf("B %f %f \t %f %f\n", f[0].x, f[0].y, f[1].x, f[1].y);
+	//printf("B %f %f \n", f[0].y, f[1].y);
+	printf("\n");
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -305,11 +337,6 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 	x = doom->start_x;
 	while (x < doom->end_x)
 	{
-		{
-			if (fail_safe >= x)
-				printf("ERROR [%d]>=[%d] @ %f %f \n", fail_safe, x, PLAYER.where.x, PLAYER.where.y);
-			fail_safe = x;
-		}
 		init_thread(&render[x], x, doom, viewpoint);
    		render[x].light = doom->sectors[curr.sectorno].light;
 		render[x].wtx = doom->texture[t];
@@ -318,6 +345,7 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
 		//thread_render(&render[x]);
 		tpool_add(&doom->tpool, thread_render, &render[x]);
+		//SDL_UpdateWindowSurface(doom->win);
 		x += 1;
 	}
 }

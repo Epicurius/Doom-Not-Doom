@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:22:47 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/19 10:47:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:09:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ void	player_view_fustrum(t_doom *doom, t_scale *viewpoint)
 		else
 			viewpoint->edges[1] = (t_xyz){.x = i2.x, .y = i2.y};
 	}
+
+
+
+
+
+
+
+
+
+
+
 	//Cut the texture if smaller wall smaller than texture
 	if (fabsf(viewpoint->edges[1].x - viewpoint->edges[0].x) > fabsf(viewpoint->edges[1].y - viewpoint->edges[0].y))
 	{

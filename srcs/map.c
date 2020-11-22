@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 16:04:51 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/21 18:11:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:07:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void DrawMap(t_doom *doom)
 
 	b.x = b.x - PLAYER.where.x * a.x;
 	b.y = b.y - PLAYER.where.y * a.y;
-	for (unsigned c = 0; c < SECTORNUM; c++)
+	for (unsigned c = 0; c < SECTORNUM - 1; c++)
 	{
 		sect = &doom->sectors[c];
         vert = sect->vertex;
@@ -124,6 +124,7 @@ void DrawMap(t_doom *doom)
 					.b1 = b.y + vert[j].y * a.y,
 					.a2 = b.x + vert[j + 1].x * a.x,
 					.b2 = b.y + vert[j + 1].y * a.y});
+
         }
 	}
 }
