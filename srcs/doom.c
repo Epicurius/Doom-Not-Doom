@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/22 13:02:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/24 18:01:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ int main(int ac, char **av)
 		return (0);
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	//PLAYER.angle = -1.570796;
     while (!doom->quit)
     {
-		//printf("%f\n", PLAYER.angle);
 		DrawScreen(doom);
 		if (doom->key.tab)
 			DrawMap(doom);
@@ -89,6 +87,7 @@ int main(int ac, char **av)
 		mouse_and_keys(doom);
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
+
     	//printf("Time measured: %.3f seconds.\n", FPS.avg);
 		//printf("Where %f, %f\n", PLAYER.where.x, PLAYER.where.y);
     }

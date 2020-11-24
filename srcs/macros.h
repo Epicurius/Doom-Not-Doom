@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/22 12:15:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/24 17:03:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@
 #define DUCK_HEIGHT		2.5
 #define OVER_HEAD_SPACE	1
 #define STEP_HEIGHT		2
-#define HORI_FOV		(1.0 * 0.50f * W)
-#define VERT_FOV		(1.0 * 0.25f * W)
+#define HORI_FOV		(0.73f * H)
+#define VERT_FOV		(0.20f * H)
+
+//* W
+
+
 
 /*
 **	Movement

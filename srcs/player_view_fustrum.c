@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:22:47 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/22 13:09:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/24 17:06:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	player_view_fustrum(t_doom *doom, t_scale *viewpoint)
 
 	t_xyz org1 = (t_xyz){.x = viewpoint->edges[0].x, .y = viewpoint->edges[0].y, .z = 0};
 	t_xyz org2 = (t_xyz){.x = viewpoint->edges[1].x, .y = viewpoint->edges[1].y, .z = 0};
-	i1 = intersect(viewpoint->edges, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
-	i2 = intersect(viewpoint->edges, NEARSIDE, NEARZ, FARSIDE, FARZ);
-	//i1 = IntersectT(org1.x, org1.y, org2.x, org2.y, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
-	//i2 = IntersectT(org1.x, org1.y, org2.x, org2.y, NEARSIDE, NEARZ, FARSIDE, FARZ);
+	//i1 = intersect(viewpoint->edges, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
+	//i2 = intersect(viewpoint->edges, NEARSIDE, NEARZ, FARSIDE, FARZ);
+	i1 = IntersectT(org1.x, org1.y, org2.x, org2.y, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
+	i2 = IntersectT(org1.x, org1.y, org2.x, org2.y, NEARSIDE, NEARZ, FARSIDE, FARZ);
 
 	if (viewpoint->edges[0].y < NEARZ)
 	{
@@ -58,11 +58,6 @@ void	player_view_fustrum(t_doom *doom, t_scale *viewpoint)
 		else
 			viewpoint->edges[1] = (t_xyz){.x = i2.x, .y = i2.y};
 	}
-
-
-
-
-
 
 
 

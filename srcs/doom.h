@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/22 14:34:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/24 17:07:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,11 @@
 # include <pthread.h>
 # include <fcntl.h>
 
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
-#define BYTE_TO_BINARY(byte)  \
-  (byte & 0x80 ? '1' : '0'), \
-  (byte & 0x40 ? '1' : '0'), \
-  (byte & 0x20 ? '1' : '0'), \
-  (byte & 0x10 ? '1' : '0'), \
-  (byte & 0x08 ? '1' : '0'), \
-  (byte & 0x04 ? '1' : '0'), \
-  (byte & 0x02 ? '1' : '0'), \
-  (byte & 0x01 ? '1' : '0') 
-
 #define min(a,b)			(((a) < (b)) ? (a) : (b)) // min: Choose smaller of two scalars.
 #define max(a,b)			(((a) > (b)) ? (a) : (b)) // max: Choose greater of two scalars.
 #define clamp(a, mi,ma)		min(max(a,mi),ma)         // clamp: Clamp value into set range.
 #define vxs(x0,y0, x1,y1)	((x0)*(y1) - (x1)*(y0))   // vxs: Vector cross product
-#define Yaw(y,z)			(y + z * doom->player.yaw)		//Project our ceiling & floor heights into screen coordinates (Y coordinate)
+#define Yaw(y,z)			(y + z*doom->player.yaw)
 
 typedef struct s_item
 {
@@ -92,6 +81,12 @@ typedef struct	s_height_info //yinfo
 	t_ab		ny;
 }				t_height_info;
 
+typedef struct		s_entity
+{
+	t_xyz			where;
+	float			dist;
+}					t_entity;
+
 typedef struct	s_sector
 {
     float		floor;
@@ -102,6 +97,8 @@ typedef struct	s_sector
     t_xyz		*vertex;
 	float		light;
 	float		gravity;
+	short		entity_nb;
+	t_entity	entity[10];
 } 				t_sector;
 
 typedef struct	s_player
@@ -150,7 +147,6 @@ typedef struct		s_wall
 	int				texture;
 }					t_wall;
 
-
 typedef struct		s_render
 {
 	int				x;
@@ -186,6 +182,7 @@ typedef struct		s_doom
 	t_xyz				*vert;//is redundant after secotors are created
 	t_wall				*walls; //temp
 	t_sector			*sectors;
+	t_entity			*entity;
 	t_player			player;
 	unsigned			num_sector;
 	unsigned			num_sectors;
@@ -234,6 +231,7 @@ int		shade_hex_color(int hex, float shade_factor);
 void	floor_text(t_doom *doom, int x, int sy, int sx);
 void	trigon_rasterizer(SDL_Surface *surface, t_xyz a, t_xyz b, t_xyz c);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
+void	render_entity(t_doom *doom, t_sector *sect);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);
