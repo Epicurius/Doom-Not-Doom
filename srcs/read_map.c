@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 18:04:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/25 15:58:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,15 +125,20 @@ void	add_sector_points(t_sector *sect, t_wall *walls, char **wall, char **neighb
 	int l;
 
 	l = -1;
-	printf("%d\n", sect->npoints);
 	while (++l < sect->npoints)
 	{
-		sect->vertex[l]			= walls[atoi(wall[l])].v1;
-		sect->textures[l]		= walls[atoi(wall[l])].texture;
-		sect->neighbors[l]		= atoi(neighbour[l]);
+		sect->vertex[l + 1]			= walls[atoi(wall[l])].v1;
+		sect->textures[l + 1]		= walls[atoi(wall[l])].texture;
+		sect->neighbors[l + 1]		= atoi(neighbour[l]);
 	}
-	//sect->vertex[0] = sect->vertex[sect->npoints]; // Ensure the vertexes form a loop
-	sect->vertex[sect->npoints] = sect->vertex[0]; // Ensure the vertexes form a loop
+	sect->vertex[0] = sect->vertex[sect->npoints]; // Ensure the vertexes form a loop
+	sect->textures[0] = sect->textures[sect->npoints]; // Ensure the vertexes form a loop
+	sect->neighbors[0] = sect->neighbors[sect->npoints]; // Ensure the vertexes form a loop
+	//sect->vertex[sect->npoints] = sect->vertex[0]; // Ensure the vertexes form a loop
+	l = -1;
+	while (++l <= sect->npoints)
+		printf("%f %f\n", sect->vertex[l].x, sect->vertex[l].y);
+	printf("\n");
 }
 
 void	read_sectors(t_doom *doom, int fd)

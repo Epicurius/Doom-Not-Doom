@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 18:01:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/25 15:58:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int main(int ac, char **av)
 		return (0);
 	init_doom(doom);
 	init_tpool(&doom->tpool, 8);
-	if (!read_file(doom, "./sprite.txt"))
+	if (!read_file(doom, "./new.txt"))
 		return (0);
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/25 12:24:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/25 16:50:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
+	printf("\n");
 	//needs a lot of optimisation
 	/*bzero(rendered, (sizeof(char*) * SECTORNUM));
 	while (--qcurr > -1)
@@ -160,6 +161,7 @@ static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
 /*
 ** Render each wall of this sector that is facing towards PLAYER.
 */
+int asd;
 void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 {
 	int			s;
@@ -169,6 +171,8 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 	
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
+	asd = curr.sx1;
+	printf("(");
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
@@ -191,6 +195,7 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 		}
 	}
 	tpool_wait(&doom->tpool);
+	printf(")\n");
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -307,10 +312,18 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 	int		t;
 
 	t = doom->sectors[curr.sectorno].textures[s];
+	printf("[%d][%d] ", viewpoint.x1, viewpoint.x2);
    	doom->start_x	= max(viewpoint.x1, curr.sx1);		//screen fist wall pixel
 	doom->end_x		= min(viewpoint.x2, curr.sx2);		//screen last wall pixel
+	//printf("[%d][%d] ", doom->start_x, doom->end_x);
+	if (asd <= doom->start_x)
+		asd = doom->end_x;
+	else if (doom->start_x != 0)
+	{
+		printf("PROBLEM %d [%d][%d]\n", asd, doom->start_x, doom->end_x);
+		asd = doom->end_x;
+	}
 	x = doom->start_x;
-	printf("[%d %d]", doom->start_x, doom->end_x);
 	while (x < doom->end_x)
 	{
 		init_thread(&render[x], x, doom, viewpoint);
@@ -319,8 +332,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].ctx = doom->texture[0];
 		render[x].ftx = doom->texture[1];
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
-		thread_render(&render[x]);
-		//tpool_add(&doom->tpool, thread_render, &render[x]);
+		//thread_render(&render[x]);
+		tpool_add(&doom->tpool, thread_render, &render[x]);
 		x += 1;
 	}
 	//SDL_UpdateWindowSurface(doom->win);
