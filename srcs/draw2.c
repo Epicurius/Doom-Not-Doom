@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 17:43:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:24:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
-	printf("\n");
 	//needs a lot of optimisation
 	/*bzero(rendered, (sizeof(char*) * SECTORNUM));
 	while (--qcurr > -1)
@@ -170,7 +169,6 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 	
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
-	printf("(");
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
@@ -193,7 +191,6 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 		}
 	}
 	tpool_wait(&doom->tpool);
-	printf(")\n");
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -322,8 +319,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].ctx = doom->texture[0];
 		render[x].ftx = doom->texture[1];
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
-		//thread_render(&render[x]);
-		tpool_add(&doom->tpool, thread_render, &render[x]);
+		thread_render(&render[x]);
+		//tpool_add(&doom->tpool, thread_render, &render[x]);
 		x += 1;
 	}
 	//SDL_UpdateWindowSurface(doom->win);
