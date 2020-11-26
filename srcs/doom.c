@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/25 15:58:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:58:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	init_doom(t_doom *doom)
 
 	FPS.curr = SDL_GetTicks();
 	FPS.font = TTF_OpenFont("./bmp/Minecraft.ttf", 20);
-	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-				SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
+	//doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
+	//			SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
+	doom->win = SDL_CreateWindow("DOOM", 0,
+				0, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->texture[0] = IMG_Load("./bmp/alloy.bmp");
 	doom->texture[1] = IMG_Load("./bmp/grass.bmp");
@@ -69,7 +71,8 @@ int main(int ac, char **av)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     while (!doom->quit)
     {
-		DrawScreen(doom);
+		if (doom->key.t == 0)
+			DrawScreen(doom);
 		if (doom->key.tab)
 			DrawMap(doom);
 		vertical_collision(doom);

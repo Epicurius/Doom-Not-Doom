@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:10:37 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/19 12:03:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 15:38:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	horizontal_collision(t_doom *doom)
 	t_xyz		d;
 	t_xyz*		vert;
 	t_sector*	sect;
-	float hole_low = 9e9;
-	float hole_high = -9e9;
+	float		hole_low;
+	float		hole_high;
 
 	float eye_height = PLAYER.ducking ? DUCK_HEIGHT : EYE_HEIGHT;
 	if (PLAYER.moving)
@@ -61,15 +61,13 @@ void	horizontal_collision(t_doom *doom)
 		s = -1;
 		p = (t_xyz){.x = PLAYER.where.x, .y = PLAYER.where.y, .z = 0};
 		d = (t_xyz){.x = PLAYER.velocity.x, .y = PLAYER.velocity.y, .z = 0};
-		p.x += PLAYER.velocity.x > 0 ? 1 : -1;	//
-		p.y += PLAYER.velocity.y > 0 ? 1 : -1;	//Temp fix, so not to clip in wall dont let player reach wall
+		p.x += PLAYER.velocity.x > 0 ? 0.5 : -0.5;	//
+		p.y += PLAYER.velocity.y > 0 ? 0.5 : -0.5;	//Temp fix, so not to clip in wall dont let player reach wall
 		sect = &doom->sectors[PLAYER.sector];
 		vert = sect->vertex;
 		while (++s < sect->npoints)
 		{
-			//intersect_box(p, d, vert[s + 1], vert[s]) &&
-			if (intersect_box(p, d, vert[s], vert[s + 1]) &&
-				point_side(p, d, vert[s], vert[s + 1]) < 0)
+			if (intersect_box(p, d, vert[s], vert[s + 1]) && point_side(p, d, vert[s], vert[s + 1]) < 0)
 			{
 				//Check where the hole is.
 				if (sect->neighbors[s] >= 0)
@@ -77,14 +75,21 @@ void	horizontal_collision(t_doom *doom)
 					hole_low  = max(sect->floor, doom->sectors[sect->neighbors[s]].floor);
 					hole_high = min(sect->ceil,  doom->sectors[sect->neighbors[s]].ceil );
 				}
-				if (hole_high < PLAYER.where.z + OVER_HEAD_SPACE || hole_low  > PLAYER.where.z - eye_height + STEP_HEIGHT)
+				if (sect->neighbors[s] == -1 || hole_high < PLAYER.where.z + OVER_HEAD_SPACE ||
+						hole_low  > PLAYER.where.z - eye_height + STEP_HEIGHT)
 				{
+					float xd = sect->vertex[s+1].x - sect->vertex[s+0].x;
+					float yd = sect->vertex[s+1].y - sect->vertex[s+0].y;
+					d.x = xd * (d.x * xd + d.y * yd) / (xd * xd + yd * yd);
+					d.y = yd * (d.x * xd + d.y * yd) / (xd * xd + yd * yd);
 					PLAYER.moving = 0;
-					d = (t_xyz){.x = 0, .y = 0};
+					//d = (t_xyz){.x = 0.f, .y = 0.f};
+
 				}
 
 			}
 		}
+		//printf("%f %f\n", d.x, d.y)
 		move_player(doom, d.x, d.y);
 		PLAYER.falling = 1;
 	}

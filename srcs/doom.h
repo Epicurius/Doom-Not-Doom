@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 17:07:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:47:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_height_info //yinfo
 typedef struct		s_entity
 {
 	t_xyz			where;
+	short			sect;
 	float			dist;
 }					t_entity;
 
@@ -97,8 +98,6 @@ typedef struct	s_sector
     t_xyz		*vertex;
 	float		light;
 	float		gravity;
-	short		entity_nb;
-	t_entity	entity[10];
 } 				t_sector;
 
 typedef struct	s_player
@@ -126,6 +125,7 @@ typedef	struct		s_keys
 	int				s;
 	int				d;
 	int				t;
+	int				p;
 	int				space;
 	int				l_ctrl;
 	int				l_shift;
@@ -186,6 +186,7 @@ typedef struct		s_doom
 	t_player			player;
 	unsigned			num_sector;
 	unsigned			num_sectors;
+	unsigned			num_entity;
 
 	//Input
 	t_keys				key;
@@ -231,7 +232,7 @@ int		shade_hex_color(int hex, float shade_factor);
 void	floor_text(t_doom *doom, int x, int sy, int sx);
 void	trigon_rasterizer(SDL_Surface *surface, t_xyz a, t_xyz b, t_xyz c);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
-void	render_entity(t_doom *doom, t_sector *sect);
+void	render_entity(t_doom *doom, t_sector *sect, int sect_num);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);

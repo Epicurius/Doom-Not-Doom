@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 13:47:53 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 14:14:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:08:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,23 @@ void		z_order(t_player p, t_entity *e, short e_nb)
 	}
 }
 
-void		render_entity(t_doom *doom, t_sector *sect)
+void		render_entity(t_doom *doom, t_sector *sect, int sect_num)
 {
 	int			i;
 	t_xyz		v2;
-	t_entity	*e;
+	t_entity	e[10]; //change if more 
 
-	e = sect->entity;
-	z_order(doom->player, e, sect->entity_nb);
+	int a = 0;
+	for (int i = 0; i < ENTITYNUM; i++)
+	{
+		if (doom->entity[i].sect == sect_num)
+			e[a++] = doom->entity[i];
+	}
+	if (a == 0)
+		return ;
+	z_order(doom->player, e, a);
 	i = -1;
-	while (++i < sect->entity_nb)
+	while (++i < a)
 	{
 		v2.x = 	(e[i].where.x - PLAYER.where.x) * PLAYER.anglesin -
 				(e[i].where.y - PLAYER.where.y) * PLAYER.anglecos;

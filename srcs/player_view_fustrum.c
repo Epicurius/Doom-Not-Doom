@@ -6,15 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:22:47 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 17:06:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 12:09:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-#define IntersectT(x1,y1, x2,y2, x3,y3, x4,y4) ((t_xyz) { \
-    vxs(vxs(x1,y1, x2,y2), (x1)-(x2), vxs(x3,y3, x4,y4), (x3)-(x4)) / vxs((x1)-(x2), (y1)-(y2), (x3)-(x4), (y3)-(y4)), \
-    vxs(vxs(x1,y1, x2,y2), (y1)-(y2), vxs(x3,y3, x4,y4), (y3)-(y4)) / vxs((x1)-(x2), (y1)-(y2), (x3)-(x4), (y3)-(y4)) })
 
 t_xyz		intersect(t_xyz s[2], float x3, float y3, float x4, float y4)
 {
@@ -39,11 +35,8 @@ void	player_view_fustrum(t_doom *doom, t_scale *viewpoint)
 
 	t_xyz org1 = (t_xyz){.x = viewpoint->edges[0].x, .y = viewpoint->edges[0].y, .z = 0};
 	t_xyz org2 = (t_xyz){.x = viewpoint->edges[1].x, .y = viewpoint->edges[1].y, .z = 0};
-	//i1 = intersect(viewpoint->edges, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
-	//i2 = intersect(viewpoint->edges, NEARSIDE, NEARZ, FARSIDE, FARZ);
-	i1 = IntersectT(org1.x, org1.y, org2.x, org2.y, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
-	i2 = IntersectT(org1.x, org1.y, org2.x, org2.y, NEARSIDE, NEARZ, FARSIDE, FARZ);
-
+	i1 = intersect(viewpoint->edges, -NEARSIDE, NEARZ, -FARSIDE, FARZ);
+	i2 = intersect(viewpoint->edges, NEARSIDE, NEARZ, FARSIDE, FARZ);
 	if (viewpoint->edges[0].y < NEARZ)
 	{
 		if (i1.y > 0)
@@ -58,12 +51,6 @@ void	player_view_fustrum(t_doom *doom, t_scale *viewpoint)
 		else
 			viewpoint->edges[1] = (t_xyz){.x = i2.x, .y = i2.y};
 	}
-
-
-
-
-
-
 	//Cut the texture if smaller wall smaller than texture
 	if (fabsf(viewpoint->edges[1].x - viewpoint->edges[0].x) > fabsf(viewpoint->edges[1].y - viewpoint->edges[0].y))
 	{

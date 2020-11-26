@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/11 15:48:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:54:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	toggle_keys(t_doom *doom, SDL_Event *event)
 {
 	if (event->key.keysym.sym == 't')
 		doom->key.t = doom->key.t == 0;
+	else if (event->key.keysym.sym == 'p')
+		doom->key.p = doom->key.t == 1;
+
 }
 
 int		keys(t_doom *doom, SDL_Event *event)

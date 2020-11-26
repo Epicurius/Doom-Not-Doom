@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/24 17:03:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 13:59:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define SECTORS		doom->sectors
 # define HEIGHT_INFO	doom->height_info
 # define SECTORNUM		doom->num_sectors
+# define ENTITYNUM		doom->num_entity
 # define FPS			doom->fps
 
 /*

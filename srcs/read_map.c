@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/25 15:58:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:16:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	read_map(t_doom *doom, int fd)
 		doom->sectors 	= (t_sector	*)malloc(sizeof(t_sector) * ft_atoi(arr[5]));
 		doom->entity 	= (t_entity	*)malloc(sizeof(t_entity) * ft_atoi(arr[6]));
 		SECTORNUM		= ft_atoi(arr[5]);
+		ENTITYNUM		= ft_atoi(arr[6]);
 		free_array(arr);
 		ft_strdel(&line);
 	}
@@ -165,7 +166,6 @@ void	read_sectors(t_doom *doom, int fd)
 		neighbour		= ft_strsplit(arr[4], ' ');
 		sect->gravity	= atof(arr[7]);
 		sect->light		= atof(arr[8]);
-		sect->entity_nb	= 0;
 		add_sector_points(sect, doom->walls, walls, neighbour);
 		free_array(arr);
 		free_array(walls);
@@ -232,28 +232,34 @@ int		find_entity_sector(t_doom *doom, t_xyz e)
 }
 void	read_entity(t_doom *doom, int fd)
 {
+	int			id;
 	char		*line;
 	char		**arr;
-	t_entity	entity;
+	t_entity	*entity;
 	t_sector	*sect;
 	
+	entity = doom->entity;
 	while (get_next_line(fd, &line))
 	{
 		if (line[0] == '-')
 			break ;
 		arr					= ft_strsplit(line, '\t');
-
-		entity.where.x		= atof(arr[1]);
-		entity.where.y		= atof(arr[2]);
-		entity.where.z		= atof(arr[3]);
-		sect				= &doom->sectors[find_entity_sector(doom, entity.where)];
-		sect->entity[sect->entity_nb] = entity;
-		sect->entity_nb		+= 1;
+		entity->where.x		= atof(arr[1]);
+		entity->where.y		= atof(arr[2]);
+		entity->where.z		= atof(arr[3]);
+		entity->sect		= find_entity_sector(doom, entity->where);
+		entity->dist		= 0;
+		entity++;
+		//sect				= &doom->sectors[find_entity_sector(doom, entity.where)];
+		//sect->entity[sect->entity_nb] = entity;
+		//sect->entity_nb		+= 1;
 
 		free_array(arr);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
+	//for (int i = 0; i < ENTITYNUM; i++)
+	//	printf("[%f %f]\n", doom->entity[i].where.x, doom->entity[i].where.y);
 }
 
 int			read_file(t_doom *doom, char *file_name)
