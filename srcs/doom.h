@@ -28,7 +28,7 @@
 #define max(a,b)			(((a) > (b)) ? (a) : (b)) // max: Choose greater of two scalars.
 #define clamp(a, mi,ma)		min(max(a,mi),ma)         // clamp: Clamp value into set range.
 #define vxs(x0,y0, x1,y1)	((x0)*(y1) - (x1)*(y0))   // vxs: Vector cross product
-#define Yaw(y,z)			(y + z*doom->player.yaw)
+#define Yaw(y,z)			(y + z*doom->player.pitch)
 
 typedef struct s_item
 {
@@ -102,12 +102,12 @@ typedef struct	s_sector
 
 typedef struct	s_player
 {
-    t_xyz		where;
+	t_xyz		where;
     t_xyz		velocity;
-    float		angle;
+	float 		pitch;
+    float		yaw;
 	float		anglesin;
 	float		anglecos;
-	float 		yaw;
 	int 		moving;
 	int			falling;
 	int			ground;
@@ -194,7 +194,7 @@ typedef struct		s_doom
 	//random
 	int					start_x;
 	int					end_x;
-	float				yaw;
+	float				pitch;
 	t_fps				fps;
 	short				ytop[W];
 	short				ybottom[W];

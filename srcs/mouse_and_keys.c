@@ -63,9 +63,12 @@ void	mouse_and_keys(t_doom *doom)
 		PLAYER.falling = 1;
 	}
 	SDL_GetRelativeMouseState(&x, &y);
-	PLAYER.angle += x * MOUSE_X;
-	doom->yaw = clamp(doom->yaw + y * MOUSE_Y, -5, 5); //max y top and bot(-5, 5)
-	PLAYER.yaw = doom->yaw - PLAYER.velocity.z * 0.5f;
+	PLAYER.yaw += x * MOUSE_X;
+	doom->pitch = clamp(doom->pitch + y * MOUSE_Y, -5, 5); //max y top and bot(-5, 5)
+	PLAYER.pitch = doom->pitch - PLAYER.velocity.z * 0.5f;
+
+	//ft_circle(doom->surface, W/2, H/2, 10);
+
 	move_player(doom, 0, 0);
 	move = (t_xyz){0.f, 0.f}; //add this to slow down
 	wasd(doom, &move);

@@ -59,25 +59,24 @@ void	test()
 int main(int ac, char **av)
 {
 	t_doom		*doom;
-    SDL_Event	event;
+    	SDL_Event	event;
 	
 	if (!(doom = (t_doom *)malloc(sizeof(t_doom))))
 		return (0);
 	init_doom(doom);
-	init_tpool(&doom->tpool, 8);
+	init_tpool(&doom->tpool, 4);
 	if (!read_file(doom, "./new.txt"))
 		return (0);
-
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-    while (!doom->quit)
-    {
+    	while (!doom->quit)
+    	{
 		if (doom->key.t == 0)
 			DrawScreen(doom);
 		if (doom->key.tab)
 			DrawMap(doom);
 		vertical_collision(doom);
 		horizontal_collision(doom);
-        while (SDL_PollEvent(&event))
+        	while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_KEYUP || event.type == SDL_KEYDOWN)
 			{
@@ -90,14 +89,11 @@ int main(int ac, char **av)
 		mouse_and_keys(doom);
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
-
-    	//printf("Time measured: %.3f seconds.\n", FPS.avg);
-		//printf("Where %f, %f\n", PLAYER.where.x, PLAYER.where.y);
-    }
+	}	
 	free_tpool(&doom->tpool);
-    //unload_data(doom);
-    SDL_Quit();
+    	//unload_data(doom);
+    	SDL_Quit();
 	TTF_Quit();
 	IMG_Quit();
-    return (0);
+	return (0);
 }

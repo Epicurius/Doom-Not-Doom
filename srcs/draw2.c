@@ -48,38 +48,37 @@ void				ft_circle(SDL_Surface *surf, int xc, int yc, int r)
 	}
 }
 
-
-static inline void	horz_surf_to_vert(t_render *render, float Hight, int screenX, int screenY, t_xyz *t)
+static inline void	horz_surf_to_vert(t_render *render, float Hight, float screenX, int screenY,
+					float pitch, t_xyz *t)
 {
 	float		x;
-	float		y;
+	float		z;
 	t_player	player;
 
 	player = render->player;
-	// (Sector Height) / ((distance from player) - (player Y view))
-	// H / Dist = one pixel iteration
-	y = (Hight * VERT_FOV) / ((540 - screenY) - (player.yaw * VERT_FOV));	// H/2
-	x = y * ((960 - screenX) / HORI_FOV);									// W/2
-	//x = y * screen_x[screenX];
-
-	t->x = (y * player.anglecos + x * player.anglesin) + player.where.x;
-	t->y = (y * player.anglesin - x * player.anglecos) + player.where.y;
+	// (Sector Height) / ((distance from player (z)) - (player Y view))
+	// Height / ((H/2 - screenX) - pitch)
+	z = Hight / (-screenY + pitch);
+	x = z * screenX;
+	//3D map cordinates to 2D
+	t->x = (z * player.anglesin - x * player.anglecos) + player.where.y;
+	t->y = (z * player.anglecos + x * player.anglesin) + player.where.x;
+	//Map cordinates adjusted to texture
 	t->x = ((int)(t->x * 256) % CTX_W);
-	t->y = ((int)(t->y * 256) % CTX_W); 										// T/4
+	t->y = ((int)(t->y * 256) % CTX_W); // T/4
 }
 
 void				floor_and_ceiling_texture(t_render *render, t_ab y, t_ab cy)
 {
 	t_xyz		t;
 	float		sect_y;
-	t_player	player;
-	SDL_Surface *curr;
+	float		pitch = H/2 - (render->player.pitch * VERT_FOV);
+	float 		screenX = ((W/2 - render->x) / HORI_FOV);
+	SDL_Surface	*curr;
 
 	curr = render->ctx;
-	sect_y = render->height_info.yceil;
-	player = render->player;
+	sect_y = render->height_info.yceil * VERT_FOV;
 
-	//for (int y1 = render->ytop[render->x]; y1 < render->ybottom[render->x]; y1++)
 	int y1 = render->ytop[render->x];
 	while (y1 < render->ybottom[render->x])
 	{
@@ -88,24 +87,22 @@ void				floor_and_ceiling_texture(t_render *render, t_ab y, t_ab cy)
 			y1 = cy.b1;
 			if (y1 >= render->ybottom[render->x])
 				return ;
-			sect_y = render->height_info.yfloor;
+			sect_y = render->height_info.yfloor * VERT_FOV;
 			curr = render->ftx;
-			//continue;
+			break ;
 		}
-		horz_surf_to_vert(render, sect_y, render->x, y1, &t); //x is reduntant
-		if (((int*)render->surface->pixels)[y1 * W + render->x] != 0xFFFFFFFF)
+		//horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
+		((int*)render->surface->pixels)[y1 * W + render->x] =
+			((int*)curr->pixels)[(y1 % CTX_W) * CTX_W + (render->x % CTX_W)];
+		y1 += 1;
+	}
+	while (y1 < render->ybottom[render->x])
+	{
+		horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
 		{
-			//printf("Double pixels(floorNceiling) %d %d\n", render->x, y1);
-			//((int*)render->surface->pixels)[y1 * W + render->x] = 0xFFFF0000;
-			//y1 += 1;
-			//continue ;
-		}
-		if (render->light < 1.0)
-			((int*)render->surface->pixels)[y1 * W + render->x] =
-				shade_hex_color(((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x], render->light);
-		else
 			((int*)render->surface->pixels)[y1 * W + render->x] =
 				((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x];
+		}
 		y1 += 1;
 	}
 }
@@ -121,12 +118,15 @@ void		DrawScreen(t_doom *doom)
 	qcurr = 0;
 	qtotal = qcurr;
 	bzero(doom->ytop, (sizeof(short) * W));
-    for (unsigned x = 0; x < W; ++x)
+    	for (unsigned x = 0; x < W; ++x)
 		doom->ybottom[x] = H;
 
 	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W};
-	printf("Player is in sector %d\n", PLAYER.sector);
-	bzero(rendered, (sizeof(char*) * SECTORNUM));
+
+	//printf("Player is in sector %d\n", PLAYER.sector);
+	//printf("%f %f\n", PLAYER.yaw, PLAYER.pitch);
+    	for (unsigned x = 0; x < SECTORNUM; ++x)
+		rendered[x] = 0;
 	while (qcurr < qtotal)
 	{
 		curr = queue[qcurr++];
@@ -135,8 +135,8 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
-	printf("qtotal == %d\n\n", qtotal);
-	/*bzero(rendered, (sizeof(char*) * SECTORNUM));
+    	for (unsigned x = 0; x < SECTORNUM; ++x)
+		rendered[x] = 0;
 	while (--qcurr > -1)
 	{
 		curr = queue[qcurr];
@@ -145,7 +145,7 @@ void		DrawScreen(t_doom *doom)
 		//if (doom->sectors[curr.sectorno].entity_nb > 0)
 		render_entity(doom, &doom->sectors[curr.sectorno], curr.sectorno);
 		rendered[curr.sectorno] += 1;
-	}*/
+	}
 }
 
 static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
@@ -169,7 +169,7 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 	
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
-	printf("(Sect: %d", curr.sectorno);
+	//printf("(Sect: %d", curr.sectorno);
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
@@ -186,13 +186,14 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 		render_wall(doom, curr, s, render, viewpoint);
 		if (sect->neighbors[s] >= 0 && sect->neighbors[s] != PLAYER.sector && doom->end_x > doom->start_x) //>=
 		{
-			printf("added: %d\t", sect->neighbors[s]);
+			//printf("added: %d\t", sect->neighbors[s]);
 			queue[*qtotal] = (t_item){sect->neighbors[s], doom->start_x, doom->end_x};
 			*qtotal += 1;
 		}
 	}
 	tpool_wait(&doom->tpool);
-	printf(")\n");
+	//printf(")\n");
+	//printf("PLAYER YAW %f\n", PLAYER.yaw);
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -322,8 +323,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].ctx = doom->texture[0];
 		render[x].ftx = doom->texture[1];
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
-		//thread_render(&render[x]);
-		tpool_add(&doom->tpool, thread_render, &render[x]);
+		thread_render(&render[x]);
+		//tpool_add(&doom->tpool, thread_render, &render[x]);
 		x += 1;
 	}
 	//SDL_UpdateWindowSurface(doom->win);

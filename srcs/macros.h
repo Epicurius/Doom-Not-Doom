@@ -16,9 +16,9 @@
 /*
 ** Screen info
 */
-# define W				1920
-# define H				1080
-# define THREADS_NB		8
+# define W				720
+# define H				480
+# define THREADS_NB		2
 
 /*
 **	Vision
@@ -27,8 +27,8 @@
 #define DUCK_HEIGHT		2.5
 #define OVER_HEAD_SPACE	1
 #define STEP_HEIGHT		2
-#define HORI_FOV		(0.73f * H)
-#define VERT_FOV		(0.20f * H)
+#define HORI_FOV		(0.32f * W)
+#define VERT_FOV		(0.18f * H)
 
 //* W
 
