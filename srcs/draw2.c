@@ -80,29 +80,39 @@ void				floor_and_ceiling_texture(t_render *render, t_ab y, t_ab cy)
 	sect_y = render->height_info.yceil * VERT_FOV;
 
 	int y1 = render->ytop[render->x];
-	while (y1 < render->ybottom[render->x])
+	while (y1 < render->ybot[render->x])
 	{
 		if (y1 >= cy.a1 && y1 <= cy.b1) //jump to floor start_y
 		{
 			y1 = cy.b1;
-			if (y1 >= render->ybottom[render->x])
+			if (y1 >= render->ybot[render->x])
 				return ;
 			sect_y = render->height_info.yfloor * VERT_FOV;
 			curr = render->ftx;
 			break ;
 		}
 		//horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
-		((int*)render->surface->pixels)[y1 * W + render->x] =
-			((int*)curr->pixels)[(y1 % CTX_W) * CTX_W + (render->x % CTX_W)];
+		int y = abs((int)(y1 + render->player.pitch * VERT_FOV)) % CTX_W;
+		int x = abs((int)(render->x + render->player.yaw * HORI_FOV)) % CTX_W;
+		//if (render->light < 1.0)
+		//	((int*)render->surface->pixels)[y1 * W + render->x] = 
+		//		shade_hex_color(((int*)curr->pixels)[y * CTX_W + x],
+		//			render->light);	
+		//else
+			((int*)render->surface->pixels)[y1 * W + render->x] = 
+				((int*)curr->pixels)[y * CTX_W + x];
 		y1 += 1;
 	}
-	while (y1 < render->ybottom[render->x])
+	while (y1 < render->ybot[render->x])
 	{
 		horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
-		{
+		//if (render->light < 1.0)
+		//	((int*)render->surface->pixels)[y1 * W + render->x] = 
+		//		shade_hex_color(((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x],
+		//			render->light);
+		//else
 			((int*)render->surface->pixels)[y1 * W + render->x] =
 				((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x];
-		}
 		y1 += 1;
 	}
 }
@@ -117,9 +127,8 @@ void		DrawScreen(t_doom *doom)
 
 	qcurr = 0;
 	qtotal = qcurr;
-	bzero(doom->ytop, (sizeof(short) * W));
     	for (unsigned x = 0; x < W; ++x)
-		doom->ybottom[x] = H;
+		doom->ybot[x] = H, doom->ytop[x] = 0;
 
 	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W};
 
@@ -169,7 +178,6 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 	
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
-	//printf("(Sect: %d", curr.sectorno);
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
@@ -186,14 +194,11 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 		render_wall(doom, curr, s, render, viewpoint);
 		if (sect->neighbors[s] >= 0 && sect->neighbors[s] != PLAYER.sector && doom->end_x > doom->start_x) //>=
 		{
-			//printf("added: %d\t", sect->neighbors[s]);
 			queue[*qtotal] = (t_item){sect->neighbors[s], doom->start_x, doom->end_x};
 			*qtotal += 1;
 		}
 	}
 	tpool_wait(&doom->tpool);
-	//printf(")\n");
-	//printf("PLAYER YAW %f\n", PLAYER.yaw);
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -231,7 +236,7 @@ void			draw_portal(t_render *render, t_ab y, t_ab cy)
 		t_vline3(render, (t_ab){.a1 = y.a1,	.b1 = y.b1}, (t_ab){.a1 = cy.b2, .b1 = cy.b1});
 	}
 	render->ytop[render->x] = clamp(max(cy.a1, cy.a2), render->ytop[render->x], H);
-	render->ybottom[render->x] = clamp(min(cy.b1, cy.b2), 0, render->ybottom[render->x]);
+	render->ybot[render->x] = clamp(min(cy.b1, cy.b2), 0, render->ybot[render->x]);
 }
 
 /*
@@ -263,7 +268,7 @@ void		init_thread(t_render *render, int x, t_doom *doom, t_scale viewpoint)
 	render->surface =		doom->surface;
 	render->texture =		doom->key.t;
 	render->ytop =			doom->ytop;
-	render->ybottom =		doom->ybottom;
+	render->ybot =			doom->ybot;
 	render->player =		doom->player;
 	render->height_info =	doom->height_info;
 	render->x1 = 			viewpoint.x1;
@@ -280,12 +285,12 @@ int				thread_render(void *arg)
 	render = arg;
    	y.a1 = line_h(render, render->height_info.y.a1, render->height_info.y.a2);
    	y.b1 = line_h(render, render->height_info.y.b1, render->height_info.y.b2);
-	cy.a1 = clamp(y.a1, render->ytop[render->x], render->ybottom[render->x]);
-	cy.b1 = clamp(y.b1, render->ytop[render->x], render->ybottom[render->x]);
+	cy.a1 = clamp(y.a1, render->ytop[render->x], render->ybot[render->x]);
+	cy.b1 = clamp(y.b1, render->ytop[render->x], render->ybot[render->x]);
 	if (render->texture) // || render->ftc == NULL
 	{
 		vline1(render, render->ytop[render->x], cy.a1, G);		//ceil
-		vline1(render, cy.b1, render->ybottom[render->x], 0xb47044);	//floor
+		vline1(render, cy.b1, render->ybot[render->x], 0xb47044);	//floor
 	}
 	else
 		floor_and_ceiling_texture(render, y, cy);
@@ -293,8 +298,8 @@ int				thread_render(void *arg)
 	{
    		y.a2 = line_h(render, render->height_info.ny.a1, render->height_info.ny.a2);
    		y.b2 = line_h(render, render->height_info.ny.b1, render->height_info.ny.b2);
-		cy.a2 = clamp(y.a2, render->ytop[render->x], render->ybottom[render->x]);
-		cy.b2 = clamp(y.b2, render->ytop[render->x], render->ybottom[render->x]);
+		cy.a2 = clamp(y.a2, render->ytop[render->x], render->ybot[render->x]);
+		cy.b2 = clamp(y.b2, render->ytop[render->x], render->ybot[render->x]);
 		draw_portal(render, y, cy);
 	}
 	else if (render->texture)
@@ -312,7 +317,7 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 	t = doom->sectors[curr.sectorno].textures[s];
 	//printf("{[%d][%d]->", viewpoint.x1, viewpoint.x2);
    	doom->start_x	= max(viewpoint.x1, curr.sx1);		//screen fist wall pixel
-	doom->end_x		= min(viewpoint.x2, curr.sx2);		//screen last wall pixel
+	doom->end_x	= min(viewpoint.x2, curr.sx2);		//screen last wall pixel
 	//printf("[%d][%d] ", doom->start_x, doom->end_x);
 	x = doom->start_x;
 	while (x < doom->end_x)
@@ -323,8 +328,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 		render[x].ctx = doom->texture[0];
 		render[x].ftx = doom->texture[1];
 		render[x].neighbor = doom->sectors[curr.sectorno].neighbors[s];
-		thread_render(&render[x]);
-		//tpool_add(&doom->tpool, thread_render, &render[x]);
+		//thread_render(&render[x]);
+		tpool_add(&doom->tpool, thread_render, &render[x]);
 		x += 1;
 	}
 	//SDL_UpdateWindowSurface(doom->win);

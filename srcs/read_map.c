@@ -137,9 +137,9 @@ void	add_sector_points(t_sector *sect, t_wall *walls, char **wall, char **neighb
 	sect->neighbors[0] = sect->neighbors[sect->npoints]; // Ensure the vertexes form a loop
 	//sect->vertex[sect->npoints] = sect->vertex[0]; // Ensure the vertexes form a loop
 	l = -1;
-	while (++l <= sect->npoints)
-		printf("%f %f\n", sect->vertex[l].x, sect->vertex[l].y);
-	printf("\n");
+	//while (++l <= sect->npoints)
+	//	printf("%f %f\n", sect->vertex[l].x, sect->vertex[l].y);
+	//printf("\n");
 }
 
 void	read_sectors(t_doom *doom, int fd)

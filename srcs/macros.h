@@ -18,7 +18,7 @@
 */
 # define W				720
 # define H				480
-# define THREADS_NB		2
+# define THREADS_NB		4
 
 /*
 **	Vision

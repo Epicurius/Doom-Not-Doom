@@ -64,7 +64,7 @@ int main(int ac, char **av)
 	if (!(doom = (t_doom *)malloc(sizeof(t_doom))))
 		return (0);
 	init_doom(doom);
-	init_tpool(&doom->tpool, 4);
+	init_tpool(&doom->tpool, THREADS_NB);
 	if (!read_file(doom, "./new.txt"))
 		return (0);
 	SDL_SetRelativeMouseMode(SDL_TRUE);

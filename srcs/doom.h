@@ -24,10 +24,10 @@
 # include <pthread.h>
 # include <fcntl.h>
 
-#define min(a,b)			(((a) < (b)) ? (a) : (b)) // min: Choose smaller of two scalars.
-#define max(a,b)			(((a) > (b)) ? (a) : (b)) // max: Choose greater of two scalars.
-#define clamp(a, mi,ma)		min(max(a,mi),ma)         // clamp: Clamp value into set range.
-#define vxs(x0,y0, x1,y1)	((x0)*(y1) - (x1)*(y0))   // vxs: Vector cross product
+#define min(a,b)			(((a) < (b)) ? (a) : (b))
+#define max(a,b)			(((a) > (b)) ? (a) : (b))
+#define clamp(a, mi,ma)			min(max(a,mi),ma)
+#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
 #define Yaw(y,z)			(y + z*doom->player.pitch)
 
 typedef struct s_item
@@ -157,7 +157,7 @@ typedef struct		s_render
 	SDL_Surface		*wtx;
 	SDL_Surface		*ftx;
 	short			*ytop;
-	short			*ybottom;
+	short			*ybot;
 	int				img_res;
 	float			light;
 	int				affine_x;
@@ -197,7 +197,7 @@ typedef struct		s_doom
 	float				pitch;
 	t_fps				fps;
 	short				ytop[W];
-	short				ybottom[W];
+	short				ybot[W]; //W must be >= H
 	t_height_info		height_info;
 
 	//Textures
