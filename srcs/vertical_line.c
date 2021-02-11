@@ -29,33 +29,41 @@ int		shade_hex_color(int color, float shade_factor)
 
 void	vline1(t_render *render, int y1, int y2, int c)
 {
-	int x;
+	int	x;
 	int	y;
-    int	*pix;
+	int	*pix;
 	int	color;
 
 	x = render->x;
 	color = shade_hex_color(c, render->light); 
 	pix = (int*)render->surface->pixels;
-    y1 = clamp(y1, 0, H);
-    y2 = clamp(y2, 0, H);
+	y1 = clamp(y1, 0, H);
+	y2 = clamp(y2, 0, H);
 	if (y1 < y2)
-    {
-		//if (pix[y1 * W + x] == 0xFFFFFFFF)
-		//	printf("Double pixel(vline1.1) %d %d\n", render->x, y1);
-        pix[y1 * W + x] = 0xFF000000;
+	{
+        	pix[y1 * W + x] = 0xFF000000;
 		y = y1 + 1;
 		while (y < y2)
 		{
-			//if (pix[y * W + x] != 0xFFFFFFFF)
-			//	printf("Double pixel(vline1.2) %d %d\n", x, y);
 			pix[y * W + x] = color;
 			y++;
 		}
-		//if (pix[y2 * W + x] == 0xFFFFFFFF)
-		//	printf("Double pixel(vline1.3) %d %d\n", render->x, y1);
 		pix[y2 * W + x] = 0xFF000000;
-    }
+	}
+}
+
+int		doom_pixel_copy(t_render *render, int pixel, int dst_add)
+{
+	if (((char*)render->surface->userdata)[dst_add] > 0)
+		return (1);
+	if (render->light < 1.0)
+		((int*)render->surface->pixels)[dst_add] = 
+			shade_hex_color(pixel, render->light);
+	else
+		((int*)render->surface->pixels)[dst_add] =
+			pixel;
+	((char*)render->surface->userdata)[dst_add] = 1;
+	return (0);
 }
 
 int		t_vline3(t_render *render, t_ab y, t_ab cy)
@@ -65,30 +73,27 @@ int		t_vline3(t_render *render, t_ab y, t_ab cy)
 	if (y1 >= y2)
 		return (0);
 	int t_hight		= (render->height_info.yceil - render->height_info.yfloor) * (WTX_W / 12.8); //4
-	int	curr_y		= (cy.a1 - y.a1) * t_hight / (y.b1 - y.a1);			//texture y
-	int	dist_y		= abs(y.b1 - y.a1);									//Hight of strip
+	int curr_y		= (cy.a1 - y.a1) * t_hight / (y.b1 - y.a1);	//texture y
+	int dist_y		= abs(y.b1 - y.a1);	//Hight of strip
 	int	total_y		= (int)((cy.a1 - y.a1) * t_hight) % abs(y.b1 - y.a1);//
 
 	while (y1 < y2)
-    {
+	{
 		total_y += t_hight;
 		int n = (total_y / dist_y);
 		total_y -= dist_y * n;
 		curr_y += n;
-		if (((int*)render->surface->pixels)[y1 * W + render->x] != 0xFFFFFFFF)
-		{
-			//printf("Double pixel(t_vline3) %d %d\n", render->x, y1);
-			//((int*)render->surface->pixels)[y1 * W + render->x] = 0xFFFF0000;
-			//y1 += 1;
-			//continue ;
-		}
-		if (render->light < 1.0)
+		doom_pixel_copy(render,
+			((int*)render->wtx->pixels)[(curr_y % WTX_W) * WTX_W + (render->affine_x % WTX_W)],
+			y1 * W + render->x);
+		/*if (render->light < 1.0)
 			((int*)render->surface->pixels)[y1 * W + render->x] = 
 				shade_hex_color(((int*)render->wtx->pixels)[
 					(curr_y % WTX_W) * WTX_W + (render->affine_x % WTX_W)], render->light);
 		else
-			((int*)render->surface->pixels)[y1 * W + render->x] = ((int*)render->wtx->pixels)[
-					(curr_y % WTX_W) * WTX_W + (render->affine_x % WTX_W)];
+			((int*)render->surface->pixels)[y1 * W + render->x] =
+				((int*)render->wtx->pixels)[(curr_y % WTX_W) *
+					WTX_W + (render->affine_x % WTX_W)];*/
 		y1 += 1;
     }
 	return (0);

@@ -32,8 +32,8 @@
 
 typedef struct s_item
 {
-    int sectorno;
-	int	sx1;
+	int sectorno;
+	int sx1;
 	int sx2;
 }				t_item;
 
@@ -83,9 +83,12 @@ typedef struct	s_height_info //yinfo
 
 typedef struct		s_entity
 {
+	short			id;
 	t_xyz			where;
 	short			sect;
 	float			dist;
+	SDL_Rect		srcr;
+	SDL_Rect		dstr;
 }					t_entity;
 
 typedef struct	s_sector
@@ -176,6 +179,8 @@ typedef struct		s_doom
 	char				*name;
 	SDL_Window			*win;
 	SDL_Surface			*surface;
+	SDL_Texture			*tx;
+	SDL_Renderer			*rend;
 	t_tpool				tpool;
 
 	//read_map
@@ -196,15 +201,16 @@ typedef struct		s_doom
 	int					end_x;
 	float				pitch;
 	t_fps				fps;
-	short				ytop[W];
+	short				ytop[W]; //20 sectors see at onece
 	short				ybot[W]; //W must be >= H
 	t_height_info		height_info;
+	char				pz[W * H];
 
 	//Textures
 	SDL_Surface			*texture[5];
 	int					u0;
 	int					u1;
-	SDL_Surface			*imp;
+	SDL_Surface				*imp;
 
 }						t_doom;
 
@@ -232,12 +238,16 @@ int		shade_hex_color(int hex, float shade_factor);
 void	floor_text(t_doom *doom, int x, int sy, int sx);
 void	trigon_rasterizer(SDL_Surface *surface, t_xyz a, t_xyz b, t_xyz c);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
-void	render_entity(t_doom *doom, t_sector *sect, int sect_num);
+//void	render_entity(t_doom *doom, t_sector *sect, int sect_num);
+void	render_entity(t_doom *doom, t_item curr);
+int	BlitScaled(SDL_Surface *src, SDL_Surface *dst, t_entity e);
+int	doom_pixel_copy(t_render *render, int pixel, int dst_add);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);
 int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
 float	point_side(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
 t_xyz	intersect(t_xyz s[2], float x3, float y3, float x4, float y4);
+int		find_sector(t_doom *doom, t_xyz e);
 
 #endif

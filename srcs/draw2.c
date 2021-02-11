@@ -94,25 +94,15 @@ void				floor_and_ceiling_texture(t_render *render, t_ab y, t_ab cy)
 		//horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
 		int y = abs((int)(y1 + render->player.pitch * VERT_FOV)) % CTX_W;
 		int x = abs((int)(render->x + render->player.yaw * HORI_FOV)) % CTX_W;
-		//if (render->light < 1.0)
-		//	((int*)render->surface->pixels)[y1 * W + render->x] = 
-		//		shade_hex_color(((int*)curr->pixels)[y * CTX_W + x],
-		//			render->light);	
-		//else
-			((int*)render->surface->pixels)[y1 * W + render->x] = 
-				((int*)curr->pixels)[y * CTX_W + x];
+		doom_pixel_copy(render, ((int*)curr->pixels)[y * CTX_W + x],
+			y1 * W + render->x);
 		y1 += 1;
 	}
 	while (y1 < render->ybot[render->x])
 	{
 		horz_surf_to_vert(render, sect_y, screenX, y1, pitch, &t);
-		//if (render->light < 1.0)
-		//	((int*)render->surface->pixels)[y1 * W + render->x] = 
-		//		shade_hex_color(((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x],
-		//			render->light);
-		//else
-			((int*)render->surface->pixels)[y1 * W + render->x] =
-				((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x];
+		doom_pixel_copy(render, ((int*)curr->pixels)[(int)t.y * CTX_W + (int)t.x],
+			y1 * W + render->x);
 		y1 += 1;
 	}
 }
@@ -127,13 +117,13 @@ void		DrawScreen(t_doom *doom)
 
 	qcurr = 0;
 	qtotal = qcurr;
+	memset(doom->pz, 0, (W*H)*sizeof(*doom->pz));
+    	//for (unsigned x = 0; x < W * H; ++x)
+	//	((int*)doom->surface->pixels)[x] = 0x000000;
     	for (unsigned x = 0; x < W; ++x)
-		doom->ybot[x] = H, doom->ytop[x] = 0;
+		doom->ytop[x] = 0, doom->ybot[x] = H;
 
 	queue[qtotal++] = (t_item){.sectorno = PLAYER.sector, .sx1 = 0, .sx2 = W};
-
-	//printf("Player is in sector %d\n", PLAYER.sector);
-	//printf("%f %f\n", PLAYER.yaw, PLAYER.pitch);
     	for (unsigned x = 0; x < SECTORNUM; ++x)
 		rendered[x] = 0;
 	while (qcurr < qtotal)
@@ -144,17 +134,6 @@ void		DrawScreen(t_doom *doom)
 		draw_sector(doom, queue, &qtotal, curr);
 		rendered[curr.sectorno] += 1;
 	}
-    	for (unsigned x = 0; x < SECTORNUM; ++x)
-		rendered[x] = 0;
-	while (--qcurr > -1)
-	{
-		curr = queue[qcurr];
-		if (rendered[curr.sectorno] > 1)
-			continue ;
-		//if (doom->sectors[curr.sectorno].entity_nb > 0)
-		render_entity(doom, &doom->sectors[curr.sectorno], curr.sectorno);
-		rendered[curr.sectorno] += 1;
-	}
 }
 
 static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
@@ -162,7 +141,7 @@ static inline void		texture_mapping_init(t_doom *doom, t_sector *sect, int s)
 	doom->u0 = 0;
 	doom->u1 = doom->texture[sect->textures[s]]->w - 1;
 	//doom->u1 = ft_pythagoras(fabs(sect->vertex[s].x - sect->vertex[s + 1].x),
-	//						 fabs(sect->vertex[s].y - sect->vertex[s + 1].y));
+	//		fabs(sect->vertex[s].y - sect->vertex[s + 1].y));
 	//doom->u1 *= (doom->texture[sect->textures[s]]->w / 6.4);
 }
 
@@ -178,6 +157,8 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 	
 	s = -1;
    	sect = &doom->sectors[curr.sectorno];
+	render_entity(doom, curr);
+	//SDL_UpdateWindowSurface(doom->win), SDL_Delay(200);
 	while (++s < sect->npoints)
 	{
 		rotate_wall_sector(sect, s, &doom->player, &viewpoint);
@@ -192,13 +173,16 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 			continue ;
 		floor_ceiling_heights(doom, sect->neighbors[s], sect, viewpoint);
 		render_wall(doom, curr, s, render, viewpoint);
-		if (sect->neighbors[s] >= 0 && sect->neighbors[s] != PLAYER.sector && doom->end_x > doom->start_x) //>=
+		if (sect->neighbors[s] >= 0 && sect->neighbors[s] != PLAYER.sector &&
+			doom->end_x > doom->start_x) //>=
 		{
 			queue[*qtotal] = (t_item){sect->neighbors[s], doom->start_x, doom->end_x};
 			*qtotal += 1;
 		}
 	}
-	tpool_wait(&doom->tpool);
+	tpool_wait(&doom->tpool);	
+	//SDL_UpdateWindowSurface(doom->win), SDL_Delay(200);
+	//render_entity(doom, curr);
 }
 
 void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale viewpoint)
@@ -212,10 +196,10 @@ void		floor_ceiling_heights(t_doom *doom, int neighbor, t_sector *sect, t_scale 
 		HEIGHT_INFO.nyceil  = doom->sectors[neighbor].ceil  - PLAYER.where.z;
 		HEIGHT_INFO.nyfloor = doom->sectors[neighbor].floor - PLAYER.where.z;
    	}
-   	HEIGHT_INFO.y.a1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[0].y) * viewpoint.yscale1);
-	HEIGHT_INFO.y.b1 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, viewpoint.edges[0].y) * viewpoint.yscale1);
-   	HEIGHT_INFO.y.a2 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[1].y) * viewpoint.yscale2);
-	HEIGHT_INFO.y.b2 =	H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, viewpoint.edges[1].y) * viewpoint.yscale2);
+   	HEIGHT_INFO.y.a1 = H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[0].y) * viewpoint.yscale1);
+	HEIGHT_INFO.y.b1 = H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, viewpoint.edges[0].y) * viewpoint.yscale1);
+   	HEIGHT_INFO.y.a2 = H / 2 - (int)(Yaw(HEIGHT_INFO.yceil, viewpoint.edges[1].y) * viewpoint.yscale2);
+	HEIGHT_INFO.y.b2 = H / 2 - (int)(Yaw(HEIGHT_INFO.yfloor, viewpoint.edges[1].y) * viewpoint.yscale2);
    	HEIGHT_INFO.ny.a1 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyceil, viewpoint.edges[0].y) * viewpoint.yscale1);
 	HEIGHT_INFO.ny.b1 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyfloor, viewpoint.edges[0].y) * viewpoint.yscale1);
    	HEIGHT_INFO.ny.a2 = H / 2 - (int)(Yaw(HEIGHT_INFO.nyceil, viewpoint.edges[1].y) * viewpoint.yscale2);
@@ -267,8 +251,8 @@ void		init_thread(t_render *render, int x, t_doom *doom, t_scale viewpoint)
 	render->x =				x;
 	render->surface =		doom->surface;
 	render->texture =		doom->key.t;
-	render->ytop =			doom->ytop;
-	render->ybot =			doom->ybot;
+	render->ytop =	doom->ytop;
+	render->ybot =	doom->ybot;
 	render->player =		doom->player;
 	render->height_info =	doom->height_info;
 	render->x1 = 			viewpoint.x1;
@@ -315,10 +299,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_scale vi
 	int		t;
 
 	t = doom->sectors[curr.sectorno].textures[s];
-	//printf("{[%d][%d]->", viewpoint.x1, viewpoint.x2);
    	doom->start_x	= max(viewpoint.x1, curr.sx1);		//screen fist wall pixel
 	doom->end_x	= min(viewpoint.x2, curr.sx2);		//screen last wall pixel
-	//printf("[%d][%d] ", doom->start_x, doom->end_x);
 	x = doom->start_x;
 	while (x < doom->end_x)
 	{

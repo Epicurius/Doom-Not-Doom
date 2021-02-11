@@ -28,7 +28,7 @@ void		z_order(t_player p, t_entity *e, short e_nb)
 	i = 0;
 	while (i < e_nb - 1)
 	{
-		if (e[i].dist < e[i + 1].dist)
+		if (e[i].dist > e[i + 1].dist)
 		{
 			tmp = e[i];
 			e[i] = e[i + 1];
@@ -39,8 +39,9 @@ void		z_order(t_player p, t_entity *e, short e_nb)
 	}
 }
 
-void		render_entity(t_doom *doom, t_sector *sect, int sect_num)
+void		render_entity(t_doom *doom, t_item curr)
 {
+	t_sector *sect	= &doom->sectors[curr.sectorno];
 	int			i;
 	t_xyz		v2;
 	t_entity	e[10]; //change if more 
@@ -48,29 +49,36 @@ void		render_entity(t_doom *doom, t_sector *sect, int sect_num)
 	int a = 0;
 	for (int i = 0; i < ENTITYNUM; i++)
 	{
-		if (doom->entity[i].sect == sect_num)
+		if (doom->entity[i].sect == curr.sectorno)
 			e[a++] = doom->entity[i];
 	}
-	if (a == 0)
+	if (a == 0) 
 		return ;
-	z_order(doom->player, e, a);
+	z_order(doom->player, e, a); //make permanent.
 	i = -1;
 	while (++i < a)
 	{
+		//X axis and Distance(z)
 		v2.x = 	(e[i].where.x - PLAYER.where.x) * PLAYER.anglesin -
 				(e[i].where.y - PLAYER.where.y) * PLAYER.anglecos;
-		v2.y = 	(e[i].where.x - PLAYER.where.x) * PLAYER.anglecos +
+		v2.z = 	(e[i].where.x - PLAYER.where.x) * PLAYER.anglecos +
 				(e[i].where.y - PLAYER.where.y) * PLAYER.anglesin;
-		if (v2.y <= 0)
+		if (v2.z <= 0)
 			continue ;
-  		//int a =	H / 2 - (int)(Yaw(30 - PLAYER.where.z,	v2.y) *
-			//(float)(VERT_FOV / v2.y));
-		int b =	H / 2 - (int)(Yaw(0 - PLAYER.where.z,	v2.y) * (float)(VERT_FOV / v2.y));
-		int w = doom->imp->w * ((float)(VERT_FOV / v2.y) / 100);
-		int h = doom->imp->h * ((float)(VERT_FOV / v2.y) / 100);
-		int x = W / 2 - (int)(v2.x * (float)(HORI_FOV / v2.y)) - (w / 2);
+  		//int a = H / 2 - (int)(Yaw(30 - PLAYER.where.z, v2.y) *
+		//(float)(VERT_FOV / v2.y));
+		int b =	H / 2 - (int)(Yaw(0 - PLAYER.where.z, v2.z) * (float)(VERT_FOV / v2.z));
+		int w = doom->imp->w * ((float)(VERT_FOV / v2.z) / 100);
+		int h = doom->imp->h * ((float)(VERT_FOV / v2.z) / 100);
+		int x = W / 2 - (int)(v2.x * (float)(HORI_FOV / v2.z)) - (w / 2);
 		int y = b - h;
-		SDL_Rect r = {.x = x, .y = y, .w = w, .h = h};
-		SDL_BlitScaled(doom->imp, NULL, doom->surface, &r);
+		if (x + w <= curr.sx1 || x > curr.sx2)
+			continue ;
+		//Size of box to fit the entire image
+		e[i].dstr = (SDL_Rect){.x = x, .y = y, .w = w, .h = h};
+		//What part of image to be copied, NULL is full
+		e[i].srcr = (SDL_Rect){.x = 0, .y = 0, .w = doom->imp->w, .h = doom->imp->h};
+		BlitScaled(doom->imp, doom->surface, e[i]);
 	}
 }
+

@@ -175,61 +175,6 @@ void	read_sectors(t_doom *doom, int fd)
 	ft_strdel(&line);
 }
 
-int		find_coord_sector(t_doom *doom, t_xyz p)
-{
-	int		i;
-	int		j;
-	int		s;
-	t_xyz	*v;
-
-	s = -1;
-	while (++s < SECTORNUM)
-	{
-		i = 0;
-		v = doom->sectors[s].vertex;
-		j = doom->sectors[s].npoints - 1;
-		while (i < doom->sectors[s].npoints)
-		{
-			if (((v[i].y > p.y) != (v[j].y > p.y)) &&
-					(p.x < (v[j].x - v[i].x) * (p.y - v[i].y)
-				 	/ (v[j].y - v[i].y) + v[i].x) )
-			{
-				PLAYER.sector = s;
-				PLAYER.where.z = doom->sectors[s].floor + EYE_HEIGHT;
-				return (1);
-			}
-			j = i++;
-		}
-	}
-	return (0);
-}
-
-int		find_entity_sector(t_doom *doom, t_xyz e)
-{
-	int		i;
-	int		j;
-	int		s;
-	t_xyz	*v;
-
-	s = -1;
-	while (++s < SECTORNUM)
-	{
-		i = 0;
-		v = doom->sectors[s].vertex;
-		j = doom->sectors[s].npoints - 1;
-		while (i < doom->sectors[s].npoints)
-		{
-			if (((v[i].y > e.y) != (v[j].y > e.y)) &&
-					(e.x < (v[j].x - v[i].x) * (e.y - v[i].y)
-				 	/ (v[j].y - v[i].y) + v[i].x) )
-			{
-				return (s);
-			}
-			j = i++;
-		}
-	}
-	return (-1);
-}
 void	read_entity(t_doom *doom, int fd)
 {
 	int			id;
@@ -244,22 +189,18 @@ void	read_entity(t_doom *doom, int fd)
 		if (line[0] == '-')
 			break ;
 		arr					= ft_strsplit(line, '\t');
+		entity->id		= atoi(arr[0]) + 1;
 		entity->where.x		= atof(arr[1]);
 		entity->where.y		= atof(arr[2]);
 		entity->where.z		= atof(arr[3]);
-		entity->sect		= find_entity_sector(doom, entity->where);
+		entity->sect		= find_sector(doom, entity->where);
+		printf("Entity:%d In sector:%d\n", entity->id, entity->sect);
 		entity->dist		= 0;
 		entity++;
-		//sect				= &doom->sectors[find_entity_sector(doom, entity.where)];
-		//sect->entity[sect->entity_nb] = entity;
-		//sect->entity_nb		+= 1;
-
 		free_array(arr);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	//for (int i = 0; i < ENTITYNUM; i++)
-	//	printf("[%f %f]\n", doom->entity[i].where.x, doom->entity[i].where.y);
 }
 
 int			read_file(t_doom *doom, char *file_name)
@@ -290,10 +231,12 @@ int			read_file(t_doom *doom, char *file_name)
 	}
 	close(fd);
 	free(line);
-	if (!find_coord_sector(doom, doom->player.where))
+	PLAYER.sector = find_sector(doom, doom->player.where);
+	if (PLAYER.sector == -1)
 	{
 		printf("ERROR: Invalide player spawn.\n");
 		return (0);
 	}
+	PLAYER.where.z = doom->sectors[PLAYER.sector].floor + EYE_HEIGHT;
 	return (1);
 }

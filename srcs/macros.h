@@ -73,6 +73,7 @@
 # define CTX_H	render->ctx->h
 # define FTX_W	render->ftx->w
 # define FTX_H	render->ftx->h
+# define OPAQUE	30			//Opaque scale for bliting
 #define G				0xAAAAAA
 
 /*

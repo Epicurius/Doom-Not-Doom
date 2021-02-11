@@ -36,11 +36,14 @@ void	init_doom(t_doom *doom)
 
 	FPS.curr = SDL_GetTicks();
 	FPS.font = TTF_OpenFont("./bmp/Minecraft.ttf", 20);
-	//doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-	//			SDL_WINDOWPOS_CENTERED, W, H, SDL_WINDOW_SHOWN);
 	doom->win = SDL_CreateWindow("DOOM", 0,
 				0, W, H, SDL_WINDOW_SHOWN);
+	//doom->rend = SDL_CreateRenderer(doom->win, -1, 0); //combine win and renderer
+	//doom->tx = SDL_CreateTexture(doom->rend, SDL_PIXELFORMAT_ARGB8888,
+	//					SDL_TEXTUREACCESS_STREAMING, W, H);
 	doom->surface = SDL_GetWindowSurface(doom->win);
+	doom->surface->userdata = doom->pz;
+	//doom->surface = SDL_CreateRGBSurface(0, W, H, 32, 0, 0, 0, 0);
 	doom->texture[0] = IMG_Load("./bmp/alloy.bmp");
 	doom->texture[1] = IMG_Load("./bmp/grass.bmp");
 	doom->texture[2] = IMG_Load("./bmp/ceiling.bmp");
@@ -48,13 +51,6 @@ void	init_doom(t_doom *doom)
 	doom->imp = IMG_Load("./bmp/doom_imp.bmp");
 	doom->key.t = 0;
 }
-/*
-void	test()
-{
-	for (int i = 0; i < W; i++)
-		screen_x[i] = ((960 - i) / HORI_FOV);
-}
-*/
 
 int main(int ac, char **av)
 {
@@ -70,8 +66,7 @@ int main(int ac, char **av)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
-		if (doom->key.t == 0)
-			DrawScreen(doom);
+		DrawScreen(doom);
 		if (doom->key.tab)
 			DrawMap(doom);
 		vertical_collision(doom);
@@ -88,6 +83,11 @@ int main(int ac, char **av)
 		}
 		mouse_and_keys(doom);
 		fps_func(doom);
+		//SDL_RenderClear(doom->rend);
+		//SDL_UpdateTexture(doom->tx, NULL, doom->surface->pixels, W * sizeof(Uint32));
+		//SDL_RenderClear(doom->rend);
+		//SDL_RenderCopy(doom->rend, doom->tx, NULL, NULL);
+		//SDL_RenderPresent(doom->rend);
 		SDL_UpdateWindowSurface(doom->win);
 	}	
 	free_tpool(&doom->tpool);

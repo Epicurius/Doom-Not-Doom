@@ -29,6 +29,8 @@ SRC = ./doom.c\
 	  ./intersect_box.c\
 	  ./rasterizer.c\
 	  ./enetity_draw.c\
+	./myBlit.c\
+	./find_sector.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o
