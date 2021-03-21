@@ -59,7 +59,7 @@ SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o
 INCLUDES = ./lib/libft/libft.a\
 		./lib/libpf/libpf.a\
-		./lib/tpool/t_pool.a
+		./lib/tpool/tpool.a
 
 FLAGS = -Wall -Wextra -Werror
 

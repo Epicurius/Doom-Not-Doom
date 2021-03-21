@@ -76,7 +76,6 @@ int main(void)
 		return (0);
 	init_scale(doom);
 	ft_putstr("Done with read_map.\n");
-	printf("%d\n", doom->textures[26].nb);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
