@@ -41,7 +41,6 @@ void	init_doom(t_doom *doom)
 	//doom->rend = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_SOFTWARE);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;
-	doom->imp = IMG_Load("./bmp/entities/imp.bmp");
 
 	init_camera(doom);
 	init_skybox(doom);
@@ -51,6 +50,7 @@ void	init_doom(t_doom *doom)
 #endif
 	init_minimap(doom);
 	load_textures(doom);
+	init_scale(doom);
 }
 	/*clock_gettime(_CLOCK_MONOTONIC, &start);
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
@@ -70,16 +70,14 @@ int main(void)
 
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
-	init_doom(doom);
-	ft_putstr("Done with init_doom.\n");
 	if (!read_file(doom, "./skybox.txt"))
 		return (0);
-	init_scale(doom);
 	ft_putstr("Done with read_map.\n");
+	init_doom(doom);
+	ft_putstr("Done with init_doom.\n");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
-
 		reset_render_arrays(doom);
 		update_camera(doom, 0, 0);
 		precompute_walls(doom);
@@ -87,8 +85,8 @@ int main(void)
 		DrawScreen(doom);
 		doom->player.shooting = 0;
 		DrawEntity(doom);
-		if (doom->key.tab)
-			map(doom);
+		//if (doom->key.tab)
+		//	map(doom);
 		//shade_zbuffer(doom);
 
         	while (SDL_PollEvent(&event))
@@ -106,6 +104,8 @@ int main(void)
 		horizontal_collision(doom, &doom->player);
 		draw_crosshair(doom);
 		fps_func(doom);
+		precompute_entities(doom);
+		//melee_ai(doom, &doom->entity[0]);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 #ifndef JONY

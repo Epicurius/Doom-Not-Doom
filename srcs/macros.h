@@ -61,6 +61,11 @@ typedef struct	s_double_xyz
 ** Entities
 */
 # define MAX_ENTITIES_RENDERED				20
+# define IDLE						0
+# define FOLLOW						1
+# define ATTACK						2
+# define STYLE_MELEE					0
+# define STYLE_RANGE					1
 
 /*
 ** FPS

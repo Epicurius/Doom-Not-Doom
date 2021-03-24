@@ -85,10 +85,9 @@ int	intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2)
 }
 
 //	Determine which side of a line the point is on. Return value: <0, =0 or >0.
-float	point_side(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2)
+double	point_side(t_xyz a, t_xyz b, t_xyz p)
 {
-	return (vxs(vert2.x - vert1.x, vert2.y - vert1.y,
-		(p.x + d.x) - vert1.x, (p.y + d.y) - vert1.y));
+	return (cross_product(b.x - a.x, b.y - a.y, p.x - a.x, p.y - a.y));
 }
 
 //	Calculate point of intersection between 2 lines.

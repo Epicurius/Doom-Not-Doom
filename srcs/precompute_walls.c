@@ -53,10 +53,9 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	i = -1;
 	while (++i < wall->wsprite.total)
 	{
-		if (wall->wsprite.num[i].t == 49)
-			if (!clock_wsprite(doom, wall, i))
+		if (wall->wsprite.num[i].tx == 49 && !clock_wsprite(doom, wall, i))
 				continue ;
-		if (doom->textures[wall->wsprite.num[i].t].nb > 0)
+		else if (doom->textures[wall->wsprite.num[i].tx].nb > 0)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
 		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w / wall->sv2.z;
 		wall->wsprite.num[i].tscale.y = wall->wsprite.num[i].scale_h;

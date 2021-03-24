@@ -20,6 +20,7 @@
 # include "../SDL2/includes/SDL_ttf.h"
 # include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
+# include "./utils.h"
 # include <math.h>
 # include <pthread.h>
 # include <fcntl.h>
@@ -28,43 +29,6 @@
 #define max(a,b)			(((a) > (b)) ? (a) : (b))
 #define clamp(a, mi,ma)			min(max(a,mi),ma)
 #define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
-
-typedef	struct	s_i2
-{
-	int	x;
-	int	y;
-}		t_i2;
-
-typedef	struct	s_v2
-{
-	double x;
-	double y;
-}		t_v2;
-
-typedef struct	s_xyz
-{
-	double	x;
-	double	y;
-	double	z;
-}		t_xyz;
-
-typedef	struct	s_limits
-{
-	int	min;
-	int	max;
-}		t_limits;
-
-typedef struct	s_texture
-{
-	SDL_Surface *surface;
-	int	nb;
-	int	nb_w;
-	int	nb_h;
-	int	x;
-	int 	y;
-	int	w;
-	int	h;
-}		t_texture;
 
 typedef	struct	s_floor_ceiling
 {
@@ -100,37 +64,62 @@ typedef struct	s_vline
 	t_v2	texel_range;
 }		t_vline;
 
-typedef struct s_item
-{
-	int sectorno;
-	int sx1;
-	int sx2;
-}				t_item;
-
 typedef struct		s_entity
 {
-	int			id;
-	t_xyz			where;
-	int			tx;
-	short			sect;
-	double			scale;
-	double			ratio;
-}					t_entity;
+	t_xyz		where;
+	t_xyz		velocity;
+	int		sector;
+	double		size;
+	double		yaw;
+	t_xyz		far_left;
+	t_xyz		far_right;
+
+	int		ground;
+	int		ducking;
+	int		flying;
+	int		shooting;
+
+	int		mood;
+	int		state;
+	
+	int		id;
+	int		tx;
+	double		scale;
+	int		frame;
+}			t_entity;
+
+typedef struct		s_player
+{
+	t_xyz		where;
+	t_xyz		velocity;
+	int		sector;
+	double		size;
+	double		yaw;
+
+	int		ground;
+	int		ducking;
+	int		flying;
+	int		shooting;
+
+	double		pitch;
+	double		anglesin;
+	double		anglecos;
+	double		horizon;
+
+}			t_player;
 
 typedef struct		s_sprite
 {
 	int	id;
-	int	ready;
-	t_v2	pos;
-	int	t;	
+	t_xyz	where;
+	int	tx;	
 	double	time;
 	int	frame;
-	unsigned int refresh;
-	int	x;
-	int	y;
+	t_rect	src;
 	double	scale_w;
 	double	scale_h;
 	t_v2	tscale;
+	int	ready;
 }			t_sprite;
 
 typedef struct		s_bh
@@ -200,16 +189,7 @@ typedef struct		s_wall
 	double		y1z0;
 	double		y0z1;
 	t_v2		tscale;
-}				t_wall;
-
-typedef struct		s_plane
-{
-	double		y;
-	int		tx;
-	double		head;
-	double		feet;
-	double		scale;
-}			t_plane;
+}			t_wall;
 
 typedef struct		s_sector
 {
@@ -241,41 +221,6 @@ typedef struct		s_camera
 	double		scale;
 }			t_camera;
 
-typedef struct	s_player
-{
-	t_xyz		where;
-	t_xyz		velocity;
-	double		size;
-	double		pitch;
-	double		yaw;
-	double		anglesin;
-	double		anglecos;
-	double		horizon;
-	int		sector;
-
-	int		ground;
-	int		ducking;
-	int		flying;
-	int		shooting;
-}				t_player;
-
-typedef	struct		s_keys
-{
-	int		chr;
-	short		num;
-	int		fnc;
-	int		w;
-	int		a;
-	int		s;
-	int		d;
-	int		t;
-	int		p;
-	int		space;
-	int		l_ctrl;
-	int		l_shift;
-	int		tab;
-}					t_keys;
-
 typedef struct		s_render
 {
 	SDL_Surface		*surface;
@@ -294,7 +239,6 @@ typedef struct		s_render
 	
 	t_bh			*bh;
 	t_wsprite		*wsprite;
-	//SDL_Surface		*bhtx;
 	int			light;
 	int			x;
 	int			s;
@@ -330,8 +274,18 @@ typedef	struct				s_fps
 	SDL_Surface	*surf;
 }					t_fps;
 
-typedef struct		s_doom
+typedef struct	s_texture_sheet
 {
+	SDL_Surface 	*surface;
+	t_rect		*pos;
+	t_rect		*flee;
+	t_rect		*death;
+	int		total;
+}			t_texture_sheet;
+
+typedef struct				s_doom
+{
+	t_texture_sheet			sprites[1];
 	//SDL_Renderer			*rend;
 	int				quit;
 	char				*file;
@@ -371,7 +325,7 @@ typedef struct		s_doom
 	//Textures
 	TTF_Font			*clock_font;
 	t_texture			textures[50];
-	t_texture			entity_t[2];
+	t_texture			entity_t[50];
 	t_texture			skybox_t[6]; //cube has 6 sides
 
 	//tmp
@@ -379,6 +333,7 @@ typedef struct		s_doom
 	//SDL_Surface				*bullet_hole;
 }						t_doom;
 
+int	orientation(t_xyz p1, t_xyz p2, double yaw);
 void	init_scale(t_doom *doom);
 void	load_textures(t_doom *doom);
 void	precompute_walls(t_doom *doom);
@@ -395,6 +350,11 @@ int	clip_wall(t_camera cam, t_wall *wall);
 void	update_camera(t_doom *doom, int x, int y);
 void	reset_render_arrays(t_doom *doom);
 
+//	Enteties
+void	precompute_entities(t_doom *doom);
+void	melee_ai(t_doom *doom, t_entity *entity);
+
+
 //	Bullet Holes
 void	draw_crosshair(t_doom *doom);
 void	crosshair_position(t_render *render, t_vline *vline, double alpha);
@@ -405,6 +365,7 @@ void	reset_bh(t_doom *doom);
 void	draw_wsprites(t_render *render, t_vline *vline);
 int	clock_wsprite(t_doom *doom, t_wall *wall, int x);
 int	animate_wsprite(t_doom *doom, t_sprite *sprite);
+int	animate_entities(t_doom *doom, t_sprite *sprite);
 
 //	Minimap
 void	init_minimap(t_doom *doom);
@@ -447,7 +408,7 @@ void	collision_detection(t_doom *doom, t_player *player);
 int		overlap(double a0, double a1, double b0 , double b);
 int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
 int		line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
-float	point_side(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
+double		point_side(t_xyz a, t_xyz b, t_xyz p);
 int		find_sector(t_doom *doom, t_xyz e);
 t_xyz		find_triangle_c(t_xyz a, t_xyz b, float dist);
 int		ft_clamp(int x, int min, int max);

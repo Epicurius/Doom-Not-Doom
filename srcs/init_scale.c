@@ -10,10 +10,12 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 	while (++i < wall->wsprite.total)
 	{
 		wsprite = &wall->wsprite.num[i];
-		wsprite->scale_w = (doom->textures[wsprite->t].w / wsprite->scale_w)
+		wsprite->scale_h = wsprite->scale_w * doom->textures[wsprite->tx].ratio;
+		wsprite->scale_w = (doom->textures[wsprite->tx].w / wsprite->scale_w)
 					* wall->width;
-		wsprite->scale_h = (doom->textures[wsprite->t].h / wsprite->scale_h)
+		wsprite->scale_h = (doom->textures[wsprite->tx].h / wsprite->scale_h)
 					* wall->height;
+		//printf("%f %f\n", wsprite->scale_w, wsprite->scale_h);
 	}
 
 }

@@ -54,6 +54,9 @@ SRC =	./doom.c\
 	./init_scale.c\
 	./clock_wsprite.c\
 	./animate_wsprites.c\
+	./precompute_entities.c\
+	./orientation.c\
+	./melee_ai.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

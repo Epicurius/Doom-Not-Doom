@@ -29,6 +29,7 @@ int	clock_digital_wsprite(t_doom *doom, t_wall *wall, int x)
 		return (0);	
 	doom->textures[49].surface =
 			SDL_ConvertSurface(tmp, doom->surface->format, 0);
+	//printf("%d %d\n", doom->textures[49].surface->w, doom->textures[49].surface->h);
 	SDL_FreeSurface(tmp);
 	return (1);
 }

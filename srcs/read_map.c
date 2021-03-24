@@ -117,7 +117,7 @@ void	read_player(t_doom *doom, int fd)
 		PLAYER.where.x	= atof(arr[0]) * doom->map_scale;
 		PLAYER.where.y	= atof(arr[1]) * doom->map_scale;
 		PLAYER.where.z	= atof(arr[2]) * doom->map_scale;
-		PLAYER.yaw	= atof(arr[3]);
+		PLAYER.yaw	= ft_atoi(arr[3]);
 		PLAYER.size	= PLAYER_RADIUS;
 		free_array(arr);
 		ft_strdel(&line);
@@ -223,7 +223,8 @@ void	read_entity(t_doom *doom, int fd)
 		entity->where.z		= atof(arr[3]) * doom->map_scale;
 		entity->tx		= atoi(arr[4]);
 		entity->scale		= atoi(arr[5]) * doom->map_scale;
-		entity->sect		= find_sector(doom, entity->where);
+		entity->sector		= find_sector(doom, entity->where);
+		entity->yaw		= 90;
 		entity++;
 		free_array(arr);
 		ft_strdel(&line);
@@ -236,7 +237,6 @@ void	read_wsprite(t_doom *doom, int fd)
 	int		i;
 	char		*line;
 	char		**arr;
-	char		**scale;
 	t_wsprite	*wsprite;
 	
 	while (get_next_line(fd, &line))
@@ -249,16 +249,13 @@ void	read_wsprite(t_doom *doom, int fd)
 		wsprite->num 			= ft_realloc(wsprite->num,
 							sizeof(t_sprite) * (i + 1));
 		wsprite->num[i].id		= ft_atoi(arr[0]);
-		wsprite->num[i].pos.x		= atof(arr[2]) * doom->map_scale;
-		wsprite->num[i].pos.y		= atof(arr[3]) * doom->map_scale;
-		wsprite->num[i].t		= ft_atoi(arr[4]);
+		wsprite->num[i].where.x		= atof(arr[2]) * doom->map_scale;
+		wsprite->num[i].where.y		= atof(arr[3]) * doom->map_scale;
+		wsprite->num[i].tx		= ft_atoi(arr[4]);
 		//wsprite->num[i].refresh	= ft_atoi(arr[5]);
-		scale				= ft_strsplit(arr[6], ' ');
-		wsprite->num[i].scale_w		= ft_atoi(scale[0]) * doom->map_scale;
-		wsprite->num[i].scale_h		= ft_atoi(scale[1]) * doom->map_scale;
+		wsprite->num[i].scale_w		= atof(arr[6]) * doom->map_scale;
 		wsprite->total 			+= 1;
 		free_array(arr);
-		free_array(scale);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

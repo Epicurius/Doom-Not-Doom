@@ -24,7 +24,7 @@ void	vline_wall_bh(t_render *render, t_vline *vline, t_sprite bh, int x)
 
 	text.z = vline->z;
 	text.x = x;
-	pos = bh.pos.y / render->wall.height;
+	pos = bh.where.y / render->wall.height;
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * W + render->x;
@@ -46,7 +46,7 @@ void	draw_wall_bh(t_render *render, t_vline *vline)
 		bh = render->bh->num[i];
 		if (!bh.ready)
 			continue ;
-		double pos = bh.pos.x / render->wall.width * bh.tscale.x;
+		double pos = bh.where.x / render->wall.width * bh.tscale.x;
 		pos *= (render->wall.sv2.z) ? render->wall.sv2.z : render->wall.cv2.z;
 		int x = vline->alpha * bh.tscale.x * vline->z + 0 - pos;
 		if (x >= render->wtx[48].x && x < render->wtx[48].w)

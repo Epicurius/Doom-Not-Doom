@@ -14,12 +14,12 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 		if (render->bh->curr >= MAX_BH)
 			render->bh->curr = 0;
 		bh = &render->bh->num[render->bh->curr];
-		bh->pos.x = (vline->alpha / wall->sv2.z) /
+		bh->where.x = (vline->alpha / wall->sv2.z) /
 			((1 - vline->alpha) / wall->sv1.z + vline->alpha / wall->sv2.z)
 				* wall->width;
-		bh->pos.y = alpha * wall->height;
-		bh->pos.x -= 0.5;
-		bh->pos.y -= 0.5;
+		bh->where.y = alpha * wall->height;
+		bh->where.x -= 0.5;
+		bh->where.y -= 0.5;
 		bh->ready = 0;
 		render->bh->curr += 1;
 		if (render->bh->total < MAX_BH)

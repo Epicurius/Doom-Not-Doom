@@ -1,36 +1,33 @@
 
 #include "doom.h"
 
-typedef struct	s_entity_render
+typedef struct		s_entity_render
 {
-	SDL_Surface *surface;
-	t_texture *texture;
-	t_xyz	screen;
-	double	scale;
-	double	ratio;
-	t_v2	size;
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
-	int	xstart;
-	int	ystart;
-	int	xend;
-	int	yend;
-	double	xrange;
-	double	yrange;
-}		t_entity_render;
+	SDL_Surface	*surface;
+	t_texture	*texture;
+	SDL_Surface	*surf;
+	t_xyz		screen;
+	double		scale_w;
+	double		scale_h;
+	t_xyz		start;
+	t_xyz		end;
+	t_xyz		clamp_start;
+	t_xyz		clamp_end;
+	double		xrange;
+	double		yrange;
+	t_rect		img;
+}			t_entity_render;
 
-int rotate_entity(t_doom *doom, t_entity *e, t_entity_render *render)
+int rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
 	t_player player;
 
 	player = doom->player;
-	dist.x = e->where.x - player.where.x;
-	dist.y = e->where.z - player.where.z;
-	dist.z = e->where.y - player.where.y;
+	dist.x = entity->where.x - player.where.x;
+	dist.y = entity->where.z - player.where.z;
+	dist.z = entity->where.y - player.where.y;
 	screen.x = dist.x * player.anglesin - dist.z * player.anglecos;
 	screen.z = dist.x * player.anglecos + dist.z * player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
@@ -38,8 +35,13 @@ int rotate_entity(t_doom *doom, t_entity *e, t_entity_render *render)
 		return (0);
 	render->screen = screen;
 	render->surface = doom->surface;
-	render->texture = &doom->entity_t[e->tx];
-	render->scale = e->scale;
+	render->scale_w = entity->scale;
+	if (entity->state == IDLE)
+		render->img = doom->sprites[0].pos[
+			orientation(entity->where, player.where, entity->yaw)];
+	else
+		render->img = doom->sprites[0].pos[orientation(entity->where, player.where, entity->yaw)];
+	render->surf = doom->sprites[0].surface;
 	return (1);
 }
 
@@ -58,7 +60,7 @@ void	find_visible_entitys(t_doom *doom, t_entity_render *render, int *nb)
 		i = -1;
 		while (++i < doom->nb.entities)
 		{
-			if (doom->entity[i].sect != doom->sectors[s].id)
+			if (doom->entity[i].sector != doom->sectors[s].id)
 				continue ;
 			if (!rotate_entity(doom, &doom->entity[i], &render[*nb]))
 				continue ;
@@ -73,52 +75,50 @@ void	 project_entity(t_doom *doom, t_entity_render *render)
 {
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
-	render->ratio = render->texture->w / (double)render->texture->h;
-	render->size.x = W * render->scale / render->screen.z; //10 size
-	render->size.y = render->size.x * render->ratio;
-	render->x1 = render->screen.x - render->size.y / 4;
-	render->x2 = render->screen.x + render->size.y / 4;
-	render->y1 = render->screen.y - render->size.x / 2;
-	render->y2 = render->screen.y;
-	render->xstart = ft_clamp(render->x1, 0, W - 1);
-	render->xend = ft_clamp(render->x2, 0, W - 1);
-	render->ystart = ft_clamp(render->y1, 0, H - 1);
-	render->yend  = ft_clamp(render->y2, 0, H - 1);
-	render->xrange = render->x2 - render->x1;
-	render->yrange = render->y2 - render->y1;
+	render->scale_w = W * render->scale_w / render->screen.z;
+	render->scale_h = render->scale_w * render->img.ratio;
+	render->start.x = render->screen.x - render->scale_h;
+	render->end.x	= render->screen.x + render->scale_h;
+	render->start.y = render->screen.y - render->scale_w * 2;
+	render->end.y	= render->screen.y;;
+	render->clamp_start.x = ft_clamp(render->start.x, 0, W - 1);
+	render->clamp_end.x = ft_clamp(render->end.x, 0, W - 1);
+	render->clamp_start.y = ft_clamp(render->start.y, 0, H - 1);
+	render->clamp_end.y  = ft_clamp(render->end.y, 0, H - 1);
+	render->xrange = render->end.x - render->start.x;
+	render->yrange = render->end.y - render->start.y;
 }
 
-void	put_entity_pixel(t_entity_render *render, int coord, t_v2 text)
+void	put_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 {
 	Uint32		pixel;
 
-	if (((double*)render->surface->userdata)[coord] < render->screen.z)
+	if (((double*)render->surface->userdata)[coord] < text.z)
 		return ;
-	pixel = ((Uint32*)render->texture->surface->pixels)
-		[(int)text.y * render->texture->w + (int)text.x];
-	if (((pixel >> 24) & 0xFF) < OPAQUE)
+	pixel = ((Uint32*)render->surf->pixels)
+		[(int)text.y * render->surf->w + (int)text.x];
+	if (pixel == 0xFF800080)
 		return ;
 	((Uint32*)render->surface->pixels)[coord] = pixel;
-	((double*)render->surface->userdata)[coord] = render->screen.z;
+	((double*)render->surface->userdata)[coord] = text.z;
 }
 
 void	render_entity(t_entity_render *render)
 {
 	t_v2 alpha;
-	t_v2 text;
-	t_texture *t;
+	t_xyz text;
 
-	t = render->texture;
-	int y = render->ystart;
-	while (++y < render->yend)
+	text.z = render->screen.z;
+	int y = render->clamp_start.y;
+	while (++y < render->clamp_end.y)
 	{
-		alpha.y = (y - render->y1) / render->yrange;
-		text.y = (1.0 - alpha.y) * t->y + alpha.y * t->h;
-		int x = render->xstart;
-		while (++x < render->xend)
+		alpha.y = (y - render->start.y) / render->yrange;
+		text.y = (1.0 - alpha.y) * render->img.y1 + alpha.y * render->img.y2;
+		int x = render->clamp_start.x;
+		while (++x < render->clamp_end.x)
 		{
-			alpha.x = (x - render->x1) / render->xrange;
-			text.x = (1.0 - alpha.x) * t->x + alpha.x * t->w;
+			alpha.x = (x - render->start.x) / render->xrange;
+			text.x = (1.0 - alpha.x) * render->img.x1 + alpha.x * render->img.x2;
 			put_entity_pixel(render, y * W + x, text);
 		}
 	}

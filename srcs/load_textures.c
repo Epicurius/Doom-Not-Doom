@@ -42,12 +42,13 @@ void	load_map_textures(t_doom *doom)
 	t_xyz size;
 	int i;
 
-	i = -1;
-	doom->textures[0].surface = IMG_Load("./bmp/walls/alloy.bmp");
+	i = 0;
+	//doom->textures[0].surface = IMG_Load("./bmp/walls/alloy.bmp");
 	doom->textures[1].surface = IMG_Load("./bmp/walls/grass.bmp");
 	doom->textures[2].surface = IMG_Load("./bmp/walls/wood.bmp");
 	doom->textures[3].surface = IMG_Load("./bmp/walls/stone.bmp");
-	while (++i < 4)
+	doom->textures[4].surface = IMG_Load("./bmp/walls/alloy.bmp");
+	while (++i < 5)
 		init_texture_values(&doom->textures[i], xyz(0,0,0));
 
 	doom->textures[26].surface = IMG_Load("./bmp/wsprites/vent.bmp");
@@ -103,14 +104,14 @@ int	init_alfred(t_doom *doom)
 	doom->sprites[0].death[4] = new_rect(403, 449, 491, 520);
 	doom->sprites[0].death[5] = new_rect(539, 449, 638, 537);
 
-	doom->sprites[0].pos[0] = new_rect(45,	33, 88,	 79);
-	doom->sprites[0].pos[1] = new_rect(133, 33, 163, 79);
-	doom->sprites[0].pos[2] = new_rect(210, 33, 239, 86);
-	doom->sprites[0].pos[3] = new_rect(283, 33, 317, 84);
-	doom->sprites[0].pos[4] = new_rect(362, 33, 405, 78);
-	doom->sprites[0].pos[5] = new_rect(424, 33, 456, 85);
-	doom->sprites[0].pos[6] = new_rect(500, 33, 531, 87);
-	doom->sprites[0].pos[7] = new_rect(576, 33, 607, 79);
+	doom->sprites[0].pos[4] = new_rect(45,	33, 88,	 79);
+	doom->sprites[0].pos[5] = new_rect(133, 33, 163, 79);
+	doom->sprites[0].pos[6] = new_rect(210, 33, 239, 86);
+	doom->sprites[0].pos[7] = new_rect(283, 33, 317, 84);
+	doom->sprites[0].pos[0] = new_rect(362, 33, 405, 78);
+	doom->sprites[0].pos[1] = new_rect(424, 33, 456, 85);
+	doom->sprites[0].pos[2] = new_rect(500, 33, 531, 87);
+	doom->sprites[0].pos[3] = new_rect(576, 33, 607, 79);
 	return (1);
 	
 }
