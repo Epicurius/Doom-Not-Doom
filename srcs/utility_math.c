@@ -12,6 +12,21 @@
 
 #include "doom.h"
 
+//		Make new t_rect struct for texture sheets
+t_rect		new_rect(int x1, int y1, int x2, int y2)
+{
+	t_rect new;
+
+	new.x1 = x1;
+	new.y1 = y1;
+	new.x2 = x2;
+	new.y2 = y2;
+	new.w = new.x2 - new.x1;
+	new.h = new.y2 - new.y1;
+	new.ratio = (double)new.w / (double)new.h;
+	return (new);
+}
+
 //	Clamp point x,y to rectagle border
 void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y)
 {

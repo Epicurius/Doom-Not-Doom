@@ -57,6 +57,7 @@ SRC =	./doom.c\
 	./precompute_entities.c\
 	./orientation.c\
 	./melee_ai.c\
+	./init_alfred.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

@@ -76,6 +76,7 @@ void	load_entities_textures(t_doom *doom)
 	
 }
 
+/*
 t_rect		new_rect(int x1, int y1, int x2, int y2)
 {
 	t_rect new;
@@ -90,38 +91,106 @@ t_rect		new_rect(int x1, int y1, int x2, int y2)
 	return (new);
 }
 
-int	init_alfred(t_doom *doom)
+int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
 {
-	doom->sprites[0].surface = IMG_Load("./bmp/entities/head_fix2.bmp");
-	doom->sprites[0].pos = ft_memalloc(sizeof(t_rect) * 8);
-	//doom->sprites[0].flee = ft_memalloc(sizeof(t_rect) * 5);
-	doom->sprites[0].death = ft_memalloc(sizeof(t_rect) * 6);
-
-	doom->sprites[0].death[0] = new_rect(44,  449, 	78, 499);
-	doom->sprites[0].death[1] = new_rect(122, 449, 158, 500);
-	doom->sprites[0].death[2] = new_rect(203, 449, 247, 496);
-	doom->sprites[0].death[3] = new_rect(291, 449, 359, 508);
-	doom->sprites[0].death[4] = new_rect(403, 449, 491, 520);
-	doom->sprites[0].death[5] = new_rect(539, 449, 638, 537);
-
-	doom->sprites[0].pos[4] = new_rect(45,	33, 88,	 79);
-	doom->sprites[0].pos[5] = new_rect(133, 33, 163, 79);
-	doom->sprites[0].pos[6] = new_rect(210, 33, 239, 86);
-	doom->sprites[0].pos[7] = new_rect(283, 33, 317, 84);
-	doom->sprites[0].pos[0] = new_rect(362, 33, 405, 78);
-	doom->sprites[0].pos[1] = new_rect(424, 33, 456, 85);
-	doom->sprites[0].pos[2] = new_rect(500, 33, 531, 87);
-	doom->sprites[0].pos[3] = new_rect(576, 33, 607, 79);
-	return (1);
+	int i;
 	
+	sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp");
+	sprite->nb[IDLE][FRAMES] = 1;
+	sprite->nb[IDLE][ANGLES] = 8;
+	sprite->nb[MOVE][FRAMES] = 1;
+	sprite->nb[MOVE][ANGLES] = 8;
+	sprite->nb[ATTACK][FRAMES] = 6;
+	sprite->nb[ATTACK][ANGLES] = 1;
+	sprite->nb[DEATH][FRAMES] = 0;
+	sprite->nb[DEATH][ANGLES] = 0;
+	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
+
+	i = -1;
+	if (sprite->nb[IDLE][FRAMES] > 0)
+		sprite->pos[IDLE] = ft_memalloc(sizeof(t_rect*) * sprite->nb[IDLE][FRAMES]);
+	while (++i < sprite->nb[IDLE][FRAMES])
+		sprite->pos[IDLE][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[IDLE][ANGLES]);
+	i = -1;
+	if (sprite->nb[MOVE][FRAMES] > 0)
+		sprite->pos[MOVE] = ft_memalloc(sizeof(t_rect*) * sprite->nb[MOVE][FRAMES]);
+	while (++i < sprite->nb[MOVE][FRAMES])
+		sprite->pos[MOVE][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[MOVE][ANGLES]);
+	i = -1;
+	if (sprite->nb[ATTACK][FRAMES] > 0)
+		sprite->pos[ATTACK] = ft_memalloc(sizeof(t_rect*) * sprite->nb[ATTACK][FRAMES]);
+	while (++i < sprite->nb[ATTACK][FRAMES])
+		sprite->pos[ATTACK][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[ATTACK][ANGLES]);
+	i = -1;
+	if (sprite->nb[DEATH][FRAMES] > 0)
+		sprite->pos[DEATH] = ft_memalloc(sizeof(t_rect*) * sprite->nb[DEATH][FRAMES]);
+	while (++i < sprite->nb[DEATH][FRAMES])
+		sprite->pos[DEATH][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[DEATH][ANGLES]);
+
+
+	sprite->pos[0][0][4] = new_rect(45,  33, 88,  79);
+	sprite->pos[0][0][5] = new_rect(133, 33, 163, 79);
+	sprite->pos[0][0][6] = new_rect(210, 33, 239, 86);
+	sprite->pos[0][0][7] = new_rect(283, 33, 317, 84);
+	sprite->pos[0][0][0] = new_rect(362, 33, 405, 78);
+	sprite->pos[0][0][1] = new_rect(424, 33, 456, 85);
+	sprite->pos[0][0][2] = new_rect(500, 33, 531, 87);
+	sprite->pos[0][0][3] = new_rect(576, 33, 607, 79);
+
+	sprite->pos[1][0][4] = new_rect(45,  33, 88,  79);
+	sprite->pos[1][0][5] = new_rect(133, 33, 163, 79);
+	sprite->pos[1][0][6] = new_rect(210, 33, 239, 86);
+	sprite->pos[1][0][7] = new_rect(283, 33, 317, 84);
+	sprite->pos[1][0][0] = new_rect(362, 33, 405, 78);
+	sprite->pos[1][0][1] = new_rect(424, 33, 456, 85);
+	sprite->pos[1][0][2] = new_rect(500, 33, 531, 87);
+	sprite->pos[1][0][3] = new_rect(576, 33, 607, 79);
+
+
+	sprite->pos[2][0][0] = new_rect(44,  449,  78, 499);
+	sprite->pos[2][1][0] = new_rect(122, 449, 158, 500);
+	sprite->pos[2][2][0] = new_rect(203, 449, 247, 496);
+	sprite->pos[2][3][0] = new_rect(291, 449, 359, 508);
+	sprite->pos[2][4][0] = new_rect(403, 449, 491, 520);
+	sprite->pos[2][5][0] = new_rect(539, 449, 638, 537);
+	return (1);
 }
+
+int	init_spooky(t_doom *doom)
+{
+	doom->spooky.surface = IMG_Load("./bmp/entities/Spooky.bmp");
+	doom->spooky.pos = ft_memalloc(sizeof(t_rect) * 14);
+	//sprite->pos[0]	= 0;
+	//sprite->follow = 8;
+	//sprite->death	= 13;
+	//sprite->flee	= ft_memalloc(sizeof(t_rect) * 5);
+	//sprite->death = ft_memalloc(sizeof(t_rect) * 6);
+
+
+	sprite->pos[4] = new_rect(45,	33, 88,	 79);
+	sprite->pos[5] = new_rect(133, 33, 163, 79);
+	sprite->pos[6] = new_rect(210, 33, 239, 86);
+	sprite->pos[7] = new_rect(283, 33, 317, 84);
+	sprite->pos[0] = new_rect(362, 33, 405, 78);
+	sprite->pos[1] = new_rect(424, 33, 456, 85);
+	sprite->pos[2] = new_rect(500, 33, 531, 87);
+	sprite->pos[3] = new_rect(576, 33, 607, 79);
+
+	sprite->pos[8] = new_rect(44,  449,  78, 499);
+	sprite->pos[9] = new_rect(122, 449, 158, 500);
+	sprite->pos[10] = new_rect(203, 449, 247, 496);
+	sprite->pos[11] = new_rect(291, 449, 359, 508);
+	sprite->pos[12] = new_rect(403, 449, 491, 520);
+	sprite->pos[13] = new_rect(539, 449, 638, 537);
+	return (1);
+}*/
 
 void	load_textures(t_doom *doom)
 {
 	load_skybox_textures(doom);
 	load_map_textures(doom);
 	load_entities_textures(doom);
-	init_alfred(doom);
+	init_alfred(doom, &doom->sprites[0]);
 }
 
 void	init_clock(t_doom *doom)
@@ -150,17 +219,17 @@ void	init_clock(t_doom *doom)
 /*
 int	init_demon(t_doom *doom)
 {
-	doom->sprites[0].surface = IMG_Load("./bmp/entities/demon2.bmp");
-	doom->sprites[0].total = 9;
-	doom->sprites[0].pos = ft_memalloc(sizeof(t_rect) * 9);
-	doom->sprites[0].pos[0] = new_rect(0, 0, 84, 108);
-	doom->sprites[0].pos[7] = new_rect(129, 0, 202, 108);
-	doom->sprites[0].pos[6] = new_rect(247, 0, 305, 108);
-	doom->sprites[0].pos[5] = new_rect(349, 0, 434, 108);
-	doom->sprites[0].pos[4] = new_rect(478, 0, 562, 108);
-	doom->sprites[0].pos[3] = new_rect(606, 0, 682, 108);
-	doom->sprites[0].pos[2] = new_rect(725, 0, 784, 108);
-	doom->sprites[0].pos[1] = new_rect(828, 0, 911, 108);
+	sprite->surface = IMG_Load("./bmp/entities/demon2.bmp");
+	sprite->total = 9;
+	sprite->pos = ft_memalloc(sizeof(t_rect) * 9);
+	sprite->pos[0] = new_rect(0, 0, 84, 108);
+	sprite->pos[7] = new_rect(129, 0, 202, 108);
+	sprite->pos[6] = new_rect(247, 0, 305, 108);
+	sprite->pos[5] = new_rect(349, 0, 434, 108);
+	sprite->pos[4] = new_rect(478, 0, 562, 108);
+	sprite->pos[3] = new_rect(606, 0, 682, 108);
+	sprite->pos[2] = new_rect(725, 0, 784, 108);
+	sprite->pos[1] = new_rect(828, 0, 911, 108);
 	return (1);
 	
 }*/

@@ -80,12 +80,18 @@ typedef struct		s_entity
 	int		shooting;
 
 	int		mood;
+
 	int		state;
+	int		frame;
+	int		angle;
 	
 	int		id;
 	int		tx;
+	int		ready;
 	double		scale;
-	int		frame;
+	double		time;
+	int		attack_frame_start;
+	int		attack_frame_end;
 }			t_entity;
 
 typedef struct		s_player
@@ -277,10 +283,8 @@ typedef	struct				s_fps
 typedef struct	s_texture_sheet
 {
 	SDL_Surface 	*surface;
-	t_rect		*pos;
-	t_rect		*flee;
-	t_rect		*death;
-	int		total;
+	int		nb[4][2];
+	t_rect		***pos;
 }			t_texture_sheet;
 
 typedef struct				s_doom
@@ -353,6 +357,7 @@ void	reset_render_arrays(t_doom *doom);
 //	Enteties
 void	precompute_entities(t_doom *doom);
 void	melee_ai(t_doom *doom, t_entity *entity);
+int	init_alfred(t_doom *doom, t_texture_sheet *sprite);
 
 
 //	Bullet Holes
@@ -425,4 +430,5 @@ SDL_Color	hex_to_sdl_color(int hex);
 
 int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);
+t_rect		new_rect(int x1, int y1, int x2, int y2);
 #endif

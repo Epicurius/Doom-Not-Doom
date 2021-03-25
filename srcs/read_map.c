@@ -223,8 +223,9 @@ void	read_entity(t_doom *doom, int fd)
 		entity->where.z		= atof(arr[3]) * doom->map_scale;
 		entity->tx		= atoi(arr[4]);
 		entity->scale		= atoi(arr[5]) * doom->map_scale;
+		entity->yaw		= 180;//atoi(arr[6]);
 		entity->sector		= find_sector(doom, entity->where);
-		entity->yaw		= 90;
+		entity->ready	=	1;
 		entity++;
 		free_array(arr);
 		ft_strdel(&line);

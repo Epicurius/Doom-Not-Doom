@@ -36,12 +36,8 @@ int rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	render->screen = screen;
 	render->surface = doom->surface;
 	render->scale_w = entity->scale;
-	if (entity->state == IDLE)
-		render->img = doom->sprites[0].pos[
-			orientation(entity->where, player.where, entity->yaw)];
-	else
-		render->img = doom->sprites[0].pos[orientation(entity->where, player.where, entity->yaw)];
 	render->surf = doom->sprites[0].surface;
+	render->img = doom->sprites[0].pos[entity->state][entity->frame][entity->angle];
 	return (1);
 }
 
@@ -60,6 +56,8 @@ void	find_visible_entitys(t_doom *doom, t_entity_render *render, int *nb)
 		i = -1;
 		while (++i < doom->nb.entities)
 		{
+			if (!doom->entity[i].ready)
+				continue ;
 			if (doom->entity[i].sector != doom->sectors[s].id)
 				continue ;
 			if (!rotate_entity(doom, &doom->entity[i], &render[*nb]))

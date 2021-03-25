@@ -62,8 +62,13 @@ typedef struct	s_double_xyz
 */
 # define MAX_ENTITIES_RENDERED				20
 # define IDLE						0
-# define FOLLOW						1
+# define MOVE						1
 # define ATTACK						2
+# define DEATH						3
+
+# define FRAMES						0
+# define ANGLES						1
+
 # define STYLE_MELEE					0
 # define STYLE_RANGE					1
 

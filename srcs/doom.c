@@ -84,6 +84,7 @@ int main(void)
 		precompute_skybox(doom);
 		DrawScreen(doom);
 		doom->player.shooting = 0;
+		precompute_entities(doom);
 		DrawEntity(doom);
 		//if (doom->key.tab)
 		//	map(doom);
@@ -104,7 +105,6 @@ int main(void)
 		horizontal_collision(doom, &doom->player);
 		draw_crosshair(doom);
 		fps_func(doom);
-		precompute_entities(doom);
 		//melee_ai(doom, &doom->entity[0]);
 		SDL_UpdateWindowSurface(doom->win);
 	}
