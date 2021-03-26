@@ -191,6 +191,7 @@ void	load_textures(t_doom *doom)
 	load_map_textures(doom);
 	load_entities_textures(doom);
 	init_alfred(doom, &doom->sprites[0]);
+	init_spooky(doom, &doom->sprites[1]);
 }
 
 void	init_clock(t_doom *doom)

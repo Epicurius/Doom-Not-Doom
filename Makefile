@@ -58,6 +58,7 @@ SRC =	./doom.c\
 	./orientation.c\
 	./melee_ai.c\
 	./init_alfred.c\
+	./init_spooky.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

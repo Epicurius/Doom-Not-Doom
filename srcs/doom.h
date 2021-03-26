@@ -289,7 +289,7 @@ typedef struct	s_texture_sheet
 
 typedef struct				s_doom
 {
-	t_texture_sheet			sprites[1];
+	t_texture_sheet			sprites[2];
 	//SDL_Renderer			*rend;
 	int				quit;
 	char				*file;
@@ -358,6 +358,7 @@ void	reset_render_arrays(t_doom *doom);
 void	precompute_entities(t_doom *doom);
 void	melee_ai(t_doom *doom, t_entity *entity);
 int	init_alfred(t_doom *doom, t_texture_sheet *sprite);
+int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
 
 
 //	Bullet Holes

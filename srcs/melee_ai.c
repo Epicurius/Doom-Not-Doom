@@ -72,7 +72,7 @@ void	vertical_entity_collision(t_doom *doom, t_entity *entity)
 	double	new_z;
 	t_sector sector;
 
-	entity->flying = 1;
+	//entity->flying = 1;
 	sector = doom->sectors[entity->sector];
 	if (!entity->flying)
 		entity->velocity.z -= sector.gravity;
@@ -105,13 +105,16 @@ t_xyz	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
 	speed *= 1;//time / 3;
 	move.x = player.where.x - entity->where.x;
 	move.y = player.where.y - entity->where.y;
-	move.z = (player.where.z - 1) - entity->where.z;
+	move.z = (player.where.z - EYE_HEIGHT) - entity->where.z;
 	if (move.x == 0 && move.y == 0 && move.z == 0)
 		return (move);
 	dist = sqrt(move.x * move.x + move.y * move.y + move.z * move.z);
 	move.x *= speed / dist;
 	move.y *= speed / dist;
-	move.z *= speed / dist;
+	if (entity->flying)
+		move.z *= speed / dist;
+	else
+		move.z = 0;
 	//printf("%f %f\n", entity->where.x, entity->where.y);
 	//printf("%f %f\n", move.x, move.y);
 	return (move);

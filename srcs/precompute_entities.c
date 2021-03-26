@@ -9,18 +9,15 @@ void	move_entity(t_doom *doom, t_entity *entity)
 		//range_ai();
 }
 
-void	attack_animation(t_doom *doom, t_entity *entity)
+void	frame_animation(t_doom *doom, t_entity *entity)
 {
 	if (entity->time - doom->fps.curr < -100)
 	{
-		if (entity->frame < 8)//entity->attack_frame_start)
-			entity->frame = 8;//entity->attack_frame_start;
-		else
-			entity->frame++;
+		entity->frame++;
 		entity->time = doom->fps.curr;
 	}
-	if (entity->frame == 14)//entity->attack_frame_end)
-		entity->ready = 0;
+	if (entity->frame >= doom->sprites[entity->tx].nb[entity->state][FRAMES])
+		entity->frame = 0;
 		
 }
 
@@ -70,10 +67,30 @@ int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 	//printf("%d\n", entity_see(doom, entity, dist));
 }
 
+void	entity_state(t_doom *doom, t_entity *entity)
+{
+	double dist;
+	int prev_state;
+
+	dist = point_distance_2d(entity->where.x, entity->where.y,
+			doom->player.where.x, doom->player.where.y);
+	prev_state = entity->state;
+	if (dist > 50)
+		entity->state = IDLE;
+	else if (dist < 4)
+		entity->state = ATTACK;
+	else if (entity_line_of_sight(doom, entity, dist))
+		entity->state = MOVE;
+	//else if (entity->health < 0)
+	//	entity->state = DEATH;
+	if (entity->state != prev_state)
+		entity->frame = 0;
+
+}
+
 void	precompute_entities(t_doom *doom)
 {
 	int i;
-	double dist;
 	t_entity *entity;
 
 	i = -1;
@@ -82,26 +99,16 @@ void	precompute_entities(t_doom *doom)
 		entity = &doom->entity[i];
 		if (entity->mood || !entity->ready)
 			continue ;
-		dist = point_distance_2d(entity->where.x, entity->where.y,
-				doom->player.where.x, doom->player.where.y);
-		if (dist > 50)
-			entity->state = IDLE;
-		else if (dist < 4)
-			entity->state = IDLE;
-		else if (entity_line_of_sight(doom, entity, dist))
-			entity->state = MOVE;
-	
-		if (entity->state == MOVE) //close
+		entity_state(doom, entity);
+		if (entity->state == MOVE)
 			move_entity(doom, entity);
-		else if (entity->state == ATTACK)
-		{
-			attack_animation(doom, entity);
-			continue ;
-		}
-		entity->frame = 0;
-		if (doom->sprites[0].nb[entity->state][ANGLES] == 8)
+		//else if (entity->state == ATTACK)
+		//	attack_animation(doom, entity);
+
+		if (doom->sprites[entity->tx].nb[entity->state][FRAMES] > 1)
+			frame_animation(doom, entity);
+		entity->angle = 0;
+		if (doom->sprites[entity->tx].nb[entity->state][ANGLES] == 8)
 			entity->angle = orientation(entity->where, doom->player.where, entity->yaw);
-		else
-			entity->angle = 0;
 	}
 }
