@@ -64,34 +64,43 @@ typedef struct	s_vline
 	t_v2	texel_range;
 }		t_vline;
 
+typedef struct	s_stats
+{
+	int		hp;
+	int		dmg;
+	int		hostile;
+	int		attack_style;
+	double		scale;
+	double		speed;
+	int		view_distance;
+	int		detection_radius;
+	int		attack_range;
+	int		frame_rate[4];
+	int		flying;
+}		t_stats;
+
 typedef struct		s_entity
 {
+	int		render;
 	t_xyz		where;
 	t_xyz		velocity;
 	int		sector;
-	double		size;
 	double		yaw;
 	t_xyz		far_left;
 	t_xyz		far_right;
 
 	int		ground;
-	int		ducking;
-	int		flying;
-	int		shooting;
 
-	int		mood;
 
+	t_stats		stat;
 	int		state;
 	int		frame;
 	int		angle;
 	
 	int		id;
 	int		tx;
-	int		ready;
 	double		scale;
 	double		time;
-	int		attack_frame_start;
-	int		attack_frame_end;
 }			t_entity;
 
 typedef struct		s_player
@@ -101,6 +110,8 @@ typedef struct		s_player
 	int		sector;
 	double		size;
 	double		yaw;
+
+	int		hp;
 
 	int		ground;
 	int		ducking;
@@ -356,16 +367,17 @@ void	reset_render_arrays(t_doom *doom);
 
 //	Enteties
 void	precompute_entities(t_doom *doom);
-void	melee_ai(t_doom *doom, t_entity *entity);
 int	init_alfred(t_doom *doom, t_texture_sheet *sprite);
 int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
-
+void	ai_movement(t_doom *doom, t_entity *entity);
+void	ai_attack(t_doom *doom, t_entity *entity);
 
 //	Bullet Holes
 void	draw_crosshair(t_doom *doom);
 void	crosshair_position(t_render *render, t_vline *vline, double alpha);
 void	draw_wall_bh(t_render *render, t_vline *vline);
 void	reset_bh(t_doom *doom);
+void	init_entity_stats(t_doom *doom);
 
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
@@ -432,4 +444,7 @@ SDL_Color	hex_to_sdl_color(int hex);
 int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect		new_rect(int x1, int y1, int x2, int y2);
+
+
+int		free_doom(t_doom *doom);
 #endif

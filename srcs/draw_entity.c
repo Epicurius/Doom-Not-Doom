@@ -56,7 +56,7 @@ void	find_visible_entitys(t_doom *doom, t_entity_render *render, int *nb)
 		i = -1;
 		while (++i < doom->nb.entities)
 		{
-			if (!doom->entity[i].ready)
+			if (!doom->entity[i].render)
 				continue ;
 			if (doom->entity[i].sector != doom->sectors[s].id)
 				continue ;

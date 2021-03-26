@@ -28,7 +28,7 @@ void	init_doom(t_doom *doom)
 	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (W * H))))
 		return ;
 	doom->player.ground = 0;
-	doom->player.flying = 1;
+	doom->player.flying = 0;
 	doom->w2 = W/2;
 	doom->h2 = H/2;
 
@@ -48,9 +48,10 @@ void	init_doom(t_doom *doom)
 #ifndef JONY
 	init_tpool(&doom->tpool, doom->nb.processors);
 #endif
-	init_minimap(doom);
+	//init_minimap(doom);
 	load_textures(doom);
 	init_scale(doom);
+	init_entity_stats(doom);
 }
 	/*clock_gettime(_CLOCK_MONOTONIC, &start);
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
@@ -63,7 +64,8 @@ double elapsed;
 #include <time.h>
 //Precompute takes 0,005% of fps
 
-int main(void)
+
+int main1(void)
 {
 	t_doom		*doom;
     	SDL_Event	event;
@@ -105,14 +107,17 @@ int main(void)
 		horizontal_collision(doom, &doom->player);
 		draw_crosshair(doom);
 		fps_func(doom);
-		//melee_ai(doom, &doom->entity[0]);
 		SDL_UpdateWindowSurface(doom->win);
 	}
-#ifndef JONY
-	free_tpool(&doom->tpool);
-#endif
-    	SDL_Quit();
-	TTF_Quit();
-	IMG_Quit();
+	free_doom(doom);
 	return (0);
+}
+
+
+int main(void)
+{
+	main1();
+	while (1)
+		;
+	return (1);
 }

@@ -17,7 +17,7 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite)
 {
 	int i;
 
-	sprite->surface = IMG_Load("./bmp/entities/spooky1.bmp");
+	sprite->surface = IMG_Load("./bmp/entities/spooky2.bmp");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_spooky_nb(sprite);
 	i = -1;
@@ -41,24 +41,23 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite)
 	while (++i < sprite->nb[DEATH][FRAMES])
 		sprite->pos[DEATH][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[DEATH][ANGLES]);
 
-	sprite->pos[0][0][4] = new_rect(0,    1153, 160,  1350);
-	sprite->pos[0][0][5] = new_rect(160,  1153, 320,  1350);
-	sprite->pos[0][0][6] = new_rect(320,  1153, 480,  1350);
-	sprite->pos[0][0][7] = new_rect(480,  1153, 640,  1350);
-	sprite->pos[0][0][0] = new_rect(640,  1153, 800,  1350);
-	sprite->pos[0][0][1] = new_rect(960,  1153, 1020, 1350);
-	sprite->pos[0][0][2] = new_rect(1020, 1153, 1180, 1350);
-	sprite->pos[0][0][3] = new_rect(1180, 1153, 1280, 1350);
+	sprite->pos[0][0][4] = new_rect(25,   1153, 139,  1350);
+	sprite->pos[0][0][5] = new_rect(172,  1153, 308,  1350);
+	sprite->pos[0][0][6] = new_rect(325,  1153, 471,  1350);
+	sprite->pos[0][0][7] = new_rect(494,  1153, 618,  1350);
+	sprite->pos[0][0][0] = new_rect(654,  1153, 775,  1350);
+	sprite->pos[0][0][1] = new_rect(821,  1153, 945,  1350);
+	sprite->pos[0][0][2] = new_rect(968,  1153, 1113, 1350);
+	sprite->pos[0][0][3] = new_rect(1132, 1153, 1265, 1350);
 
-
-	sprite->pos[1][0][4] = new_rect(0,    1153, 160,  1350);
-	sprite->pos[1][0][5] = new_rect(160,  1153, 320,  1350);
-	sprite->pos[1][0][6] = new_rect(320,  1153, 480,  1350);
-	sprite->pos[1][0][7] = new_rect(480,  1153, 640,  1350);
-	sprite->pos[1][0][0] = new_rect(640,  1153, 800,  1350);
-	sprite->pos[1][0][1] = new_rect(960,  1153, 1020, 1350);
-	sprite->pos[1][0][2] = new_rect(1020, 1153, 1180, 1350);
-	sprite->pos[1][0][3] = new_rect(1180, 1153, 1280, 1350);
+	sprite->pos[1][0][4] = new_rect(25,   1153, 139,  1350);
+	sprite->pos[1][0][5] = new_rect(172,  1153, 308,  1350);
+	sprite->pos[1][0][6] = new_rect(325,  1153, 471,  1350);
+	sprite->pos[1][0][7] = new_rect(494,  1153, 618,  1350);
+	sprite->pos[1][0][0] = new_rect(654,  1153, 775,  1350);
+	sprite->pos[1][0][1] = new_rect(821,  1153, 945,  1350);
+	sprite->pos[1][0][2] = new_rect(968,  1153, 1113, 1350);
+	sprite->pos[1][0][3] = new_rect(1132, 1153, 1265, 1350);
 
 	sprite->pos[1][1][4] = new_rect(0,    1350, 160,  1542);
 	sprite->pos[1][1][5] = new_rect(160,  1350, 320,  1542);

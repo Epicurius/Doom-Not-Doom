@@ -36,7 +36,7 @@ void	read_map(t_doom *doom, int fd)
 		if (line[0] == '-')
 			break ;
 		arr				= ft_strsplit(line, '\t');
-		doom->name			= ft_strdup(arr[0]);
+		//doom->name			= ft_strdup(arr[0]);
 		doom->map_scale			= atof(arr[1]);
 		doom->nb.vertices		= ft_atoi(arr[2]);
 		doom->nb.walls			= ft_atoi(arr[3]);
@@ -223,9 +223,9 @@ void	read_entity(t_doom *doom, int fd)
 		entity->where.z		= atof(arr[3]) * doom->map_scale;
 		entity->tx		= atoi(arr[4]);
 		entity->scale		= atoi(arr[5]) * doom->map_scale;
-		entity->yaw		= 180;//atoi(arr[6]);
+		entity->yaw		= atoi(arr[6]);
 		entity->sector		= find_sector(doom, entity->where);
-		entity->ready	=	1;
+		entity->render		= 1;
 		entity++;
 		free_array(arr);
 		ft_strdel(&line);
@@ -292,8 +292,9 @@ int			read_file(t_doom *doom, char *file_name)
 			read_wsprite(doom, fd);
 		ft_strdel(&line);
 	}
-	close(fd);
+	ft_strdel(&line);
 	free(line);
+	close(fd);
 	PLAYER.sector = find_sector(doom, doom->player.where);
 	if (PLAYER.sector == -1)
 	{

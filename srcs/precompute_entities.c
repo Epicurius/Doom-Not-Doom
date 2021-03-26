@@ -1,17 +1,9 @@
 
 #include "doom.h"
 
-void	move_entity(t_doom *doom, t_entity *entity)
-{
-	//if (doom->entity.attack_style == STYLE_MELEE)
-	melee_ai(doom, entity);
-	//else if (doom->entity.attack_style == RANGE)
-		//range_ai();
-}
-
 void	frame_animation(t_doom *doom, t_entity *entity)
 {
-	if (entity->time - doom->fps.curr < -100)
+	if (entity->time - doom->fps.curr < -(entity->stat.frame_rate[entity->state]))
 	{
 		entity->frame++;
 		entity->time = doom->fps.curr;
@@ -34,7 +26,6 @@ void	entity_fov(t_doom *doom, t_entity *entity)
 		right += 360;
 	left = (left * CONVERT_RADIANS);
 	right = (right * CONVERT_RADIANS);
-	//printf("Yaw %f %f %f\n", entity->yaw, left, right);
 	entity->far_left.x = 1000 * cos(left) + entity->where.x;
 	entity->far_left.y = 1000 * sin(left) + entity->where.y;
 	entity->far_right.x = 1000 * cos(right) + entity->where.x;
@@ -46,46 +37,63 @@ int	entity_see(t_doom *doom, t_entity *entity, double dist)
 	int l;
 	int r;
 
-	if (dist > 50) //Fov cone length
-		return (0);
 	l = point_side(entity->far_left, entity->where, doom->player.where);
 	r = point_side(entity->where, entity->far_right, doom->player.where);
 	if (l > 0 && r > 0)
 		return (1);
 	return (0);
-	//side = point_side(entity->far_left, entity->far_right, doom->player.where);
 }
 
 int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 {
 	entity_fov(doom, entity);
-	if (entity_see(doom, entity, dist))
+	if (dist < entity->stat.detection_radius)
 		return (1);
-	if (dist < 6) //Detection Radius
+	if (entity_see(doom, entity, dist))
 		return (2);
 	return (0);
-	//printf("%d\n", entity_see(doom, entity, dist));
 }
 
-void	entity_state(t_doom *doom, t_entity *entity)
+void	get_entity_state(t_doom *doom, t_entity *entity)
 {
 	double dist;
 	int prev_state;
 
+	if (entity->state == DEATH)
+		return ;
 	dist = point_distance_2d(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
 	prev_state = entity->state;
-	if (dist > 50)
+	if (entity->stat.view_distance + 10 < dist)
 		entity->state = IDLE;
-	else if (dist < 4)
+	else if (entity->stat.attack_range > dist)
 		entity->state = ATTACK;
 	else if (entity_line_of_sight(doom, entity, dist))
 		entity->state = MOVE;
-	//else if (entity->health < 0)
-	//	entity->state = DEATH;
+	else if (entity->stat.hp < 0)
+		entity->state = DEATH;
 	if (entity->state != prev_state)
 		entity->frame = 0;
 
+}
+
+void	preforme_entiy_state_fuction(t_doom *doom, t_entity *entity)
+{
+	if (entity->state == MOVE)
+		ai_movement(doom, entity);
+	else if (entity->state == ATTACK)
+		ai_attack(doom, entity);
+			
+}
+
+void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
+{
+	if (doom->sprites[entity->tx].nb[entity->state][FRAMES] > 1)
+		frame_animation(doom, entity);
+	entity->angle = 0;
+	if (doom->sprites[entity->tx].nb[entity->state][ANGLES] == 8)
+		entity->angle = orientation(entity->where,
+					doom->player.where, entity->yaw);
 }
 
 void	precompute_entities(t_doom *doom)
@@ -97,18 +105,12 @@ void	precompute_entities(t_doom *doom)
 	while (++i < doom->nb.entities)
 	{
 		entity = &doom->entity[i];
-		if (entity->mood || !entity->ready)
+		if (!entity->stat.hostile || !entity->render)
 			continue ;
-		entity_state(doom, entity);
-		if (entity->state == MOVE)
-			move_entity(doom, entity);
-		//else if (entity->state == ATTACK)
-		//	attack_animation(doom, entity);
-
-		if (doom->sprites[entity->tx].nb[entity->state][FRAMES] > 1)
-			frame_animation(doom, entity);
-		entity->angle = 0;
-		if (doom->sprites[entity->tx].nb[entity->state][ANGLES] == 8)
-			entity->angle = orientation(entity->where, doom->player.where, entity->yaw);
+		get_entity_state(doom, entity);
+		preforme_entiy_state_fuction(doom, entity);
+		if (!entity->render)
+			continue ;
+		get_coresponding_entity_state_frame(doom, entity);
 	}
 }
