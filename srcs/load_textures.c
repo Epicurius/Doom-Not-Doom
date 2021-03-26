@@ -59,27 +59,13 @@ void	load_map_textures(t_doom *doom)
 	init_texture_values(&doom->textures[47], xyz(100,94,40));
 	doom->textures[48].surface = IMG_Load("./bmp/wsprites/bh3.bmp");
 	init_texture_values(&doom->textures[48], xyz(0,0,0));
-	init_clock(doom);
 }
-/*
-void	load_entities_textures(t_doom *doom)
-{
-	int i;
-
-	i = -1;
-	doom->entity_t[0].surface = IMG_Load("./bmp/entities/imp.bmp");
-	doom->entity_t[1].surface = IMG_Load("./bmp/entities/hd1.bmp");
-	while (++i < 2)
-		init_texture_values(&doom->entity_t[i], xyz(0,0,0));
-	doom->entity_t[2].surface = IMG_Load("./bmp/wsprites/clown.bmp");
-	init_texture_values(&doom->entity_t[2], xyz(100,94,40));	
-}*/
 
 void	load_textures(t_doom *doom)
 {
 	load_skybox_textures(doom);
 	load_map_textures(doom);
-	//load_entities_textures(doom);
+	init_clock(doom);
 	init_alfred(doom, &doom->sprites[0]);
 	init_spooky(doom, &doom->sprites[1]);
 }
@@ -106,23 +92,3 @@ void	init_clock(t_doom *doom)
 	SDL_FreeSurface(tmp);
 	init_texture_values(&doom->textures[49], xyz(0,0,0));
 }
-
-/*
-int	init_demon(t_doom *doom)
-{
-	sprite->surface = IMG_Load("./bmp/entities/demon2.bmp");
-	sprite->total = 9;
-	sprite->pos = ft_memalloc(sizeof(t_rect) * 9);
-	sprite->pos[0] = new_rect(0, 0, 84, 108);
-	sprite->pos[7] = new_rect(129, 0, 202, 108);
-	sprite->pos[6] = new_rect(247, 0, 305, 108);
-	sprite->pos[5] = new_rect(349, 0, 434, 108);
-	sprite->pos[4] = new_rect(478, 0, 562, 108);
-	sprite->pos[3] = new_rect(606, 0, 682, 108);
-	sprite->pos[2] = new_rect(725, 0, 784, 108);
-	sprite->pos[1] = new_rect(828, 0, 911, 108);
-	return (1);
-	
-}*/
-
-

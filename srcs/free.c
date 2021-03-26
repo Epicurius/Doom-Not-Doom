@@ -48,6 +48,7 @@ void	free_entity_texture(t_doom *doom, int i, t_texture_sheet *sprite)
 		ft_memdel((void**)&sprite->pos[i]);
 	}
 	ft_memdel((void**)&sprite->pos);
+	SDL_FreeSurface(sprite->surface);
 }
 
 void	free_render_utils(t_doom *doom, int i)
@@ -80,7 +81,6 @@ int	free_doom(t_doom *doom)
 	SDL_Quit();
 	TTF_Quit();
 	IMG_Quit();
-	ft_memdel((void**)doom);
 	ft_putstr("All is free!\n");
 	free(doom);
 	return (1);

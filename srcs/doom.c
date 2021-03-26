@@ -117,7 +117,7 @@ int main1(void)
 int main(void)
 {
 	main1();
-	while (1)
-		;
+	//while (1)
+	//	;
 	return (1);
 }

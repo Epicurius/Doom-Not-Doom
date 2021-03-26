@@ -340,7 +340,7 @@ typedef struct				s_doom
 	//Textures
 	TTF_Font			*clock_font;
 	t_texture			textures[50];
-	t_texture			entity_t[50];
+	//t_texture			entity_t[50];
 	t_texture			skybox_t[6]; //cube has 6 sides
 
 	//tmp

@@ -17,7 +17,8 @@ int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
 {
 	int i;
 
-	sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp");
+	if (!(sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp")))
+		printf("Error Alfred!\n");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_alfred_nb(sprite);
 	i = -1;
