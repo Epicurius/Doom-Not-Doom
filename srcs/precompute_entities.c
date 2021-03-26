@@ -8,7 +8,7 @@ void	frame_animation(t_doom *doom, t_entity *entity)
 		entity->frame++;
 		entity->time = doom->fps.curr;
 	}
-	if (entity->frame >= doom->sprites[entity->tx].nb[entity->state][FRAMES])
+	if (entity->frame >= doom->sprites[entity->type].nb[entity->state][FRAMES])
 		entity->frame = 0;
 		
 }
@@ -88,10 +88,10 @@ void	preforme_entiy_state_fuction(t_doom *doom, t_entity *entity)
 
 void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
-	if (doom->sprites[entity->tx].nb[entity->state][FRAMES] > 1)
+	if (doom->sprites[entity->type].nb[entity->state][FRAMES] > 1)
 		frame_animation(doom, entity);
 	entity->angle = 0;
-	if (doom->sprites[entity->tx].nb[entity->state][ANGLES] == 8)
+	if (doom->sprites[entity->type].nb[entity->state][ANGLES] == 8)
 		entity->angle = orientation(entity->where,
 					doom->player.where, entity->yaw);
 }

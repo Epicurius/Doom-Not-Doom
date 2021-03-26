@@ -79,9 +79,18 @@ typedef struct	s_stats
 	int		flying;
 }		t_stats;
 
+typedef struct		s_projectile
+{
+	int		render;
+	t_xyz		curr;
+	t_xyz		dest;
+	double		dist;	
+}			t_projectile;
+
 typedef struct		s_entity
 {
 	int		render;
+	t_xyz		spawn;
 	t_xyz		where;
 	t_xyz		velocity;
 	int		sector;
@@ -98,9 +107,10 @@ typedef struct		s_entity
 	int		angle;
 	
 	int		id;
-	int		tx;
+	int		type;
 	double		scale;
 	double		time;
+	t_projectile	*orb;
 }			t_entity;
 
 typedef struct		s_player
@@ -278,6 +288,7 @@ typedef struct	t_nb
 	int	vertices;
 	int	entities;
 	int	processors;
+	int	projectiles;
 }		t_nb;
 
 typedef	struct				s_fps
@@ -326,6 +337,7 @@ typedef struct				s_doom
 	t_wall				skybox[4];
 	t_sector			*sectors;
 	t_entity			*entity;
+	t_projectile			*orb;
 	t_camera			cam;
 	t_player			player;
 

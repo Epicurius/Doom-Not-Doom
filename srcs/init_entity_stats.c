@@ -40,13 +40,28 @@ static void	spooky(t_stats	*spooky)
 void	init_entity_stats(t_doom *doom)
 {
 	int i;
+	int p;
 
 	i = -1;
 	while (++i < doom->nb.entities)
 	{
-		if (doom->entity[i].tx == 0)
+		if (doom->entity[i].type == 0)
 			alfred(&doom->entity[i].stat);
-		else if (doom->entity[i].tx == 1)
+		else if (doom->entity[i].type == 1)
 			spooky(&doom->entity[i].stat);
+		if (doom->entity[i].stat.attack_style == 1)
+			doom->nb.projectiles++;
+	}
+	doom->orb = ft_memalloc(sizeof(t_projectile) * doom->nb.projectiles);
+	p = 0;
+	i = -1;
+	while (++i < doom->nb.entities)
+	{
+		if (doom->entity[i].stat.attack_style == 1)
+		{
+			doom->entity[i].orb = &doom->orb[p];
+			p++;
+		}
+			
 	}
 }

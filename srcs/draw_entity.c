@@ -36,8 +36,8 @@ int rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	render->screen = screen;
 	render->surface = doom->surface;
 	render->scale_w = entity->scale;
-	render->surf = doom->sprites[entity->tx].surface;
-	render->img = doom->sprites[entity->tx].pos[entity->state][entity->frame][entity->angle];
+	render->surf = doom->sprites[entity->type].surface;
+	render->img = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);
 }
 
@@ -130,7 +130,7 @@ void 	DrawEntity(t_doom *doom)
 
 	nb = 0;
 	find_visible_entitys(doom, e, &nb);
-
+	//render in order of z!!!!
 	i = -1;
 	while (++i < nb)
 		project_entity(doom, &e[i]);

@@ -218,10 +218,11 @@ void	read_entity(t_doom *doom, int fd)
 			break ;
 		arr					= ft_strsplit(line, '\t');
 		entity->id		= atoi(arr[0]);
-		entity->where.x		= atof(arr[1]) * doom->map_scale;
-		entity->where.y		= atof(arr[2]) * doom->map_scale;
-		entity->where.z		= atof(arr[3]) * doom->map_scale;
-		entity->tx		= atoi(arr[4]);
+		entity->spawn.x		= atof(arr[1]) * doom->map_scale;
+		entity->spawn.y		= atof(arr[2]) * doom->map_scale;
+		entity->spawn.z		= atof(arr[3]) * doom->map_scale;
+		entity->where		= entity->spawn;
+		entity->type		= atoi(arr[4]);
 		entity->scale		= atoi(arr[5]) * doom->map_scale;
 		entity->yaw		= atoi(arr[6]);
 		entity->sector		= find_sector(doom, entity->where);
