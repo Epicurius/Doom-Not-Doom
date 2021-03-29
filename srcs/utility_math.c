@@ -12,6 +12,12 @@
 
 #include "doom.h"
 
+//		Space Diagonal
+double		space_diagonal(double x, double y, double z)
+{
+	return (sqrt(x * x + y * y + z * z));
+}
+
 //		Make new t_rect struct for texture sheets
 t_rect		new_rect(int x1, int y1, int x2, int y2)
 {

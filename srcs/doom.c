@@ -80,6 +80,7 @@ int main1(void)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
+		printf("%f\n", doom->player.where.z);
 		reset_render_arrays(doom);
 		update_camera(doom, 0, 0);
 		precompute_walls(doom);
@@ -87,6 +88,8 @@ int main1(void)
 		DrawScreen(doom);
 		doom->player.shooting = 0;
 		precompute_entities(doom);
+		precompute_projectiles(doom);
+		DrawProjectiles(doom);
 		DrawEntity(doom);
 		//if (doom->key.tab)
 		//	map(doom);

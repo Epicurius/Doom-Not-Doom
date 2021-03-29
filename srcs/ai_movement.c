@@ -24,11 +24,10 @@ int	fit_through_portal1(t_doom *doom, t_sector *sector, t_wall *wall, t_xyz wher
 	double portal_top;
 	double portal_bot;
 
-	double eye_height = 0;
 	portal_bot = max(sector->floor.y, doom->sectors[wall->n].floor.y);
 	portal_top = min(sector->ceiling.y, doom->sectors[wall->n].ceiling.y);
 	if (portal_top > where.z + OVER_HEAD_SPACE &&
-		portal_bot <= where.z - eye_height + STEP_HEIGHT)
+		portal_bot <= where.z - EYE_LVL + STEP_HEIGHT)
 		return (1);
 	return (0);
 }
@@ -91,28 +90,25 @@ void	vertical_entity_collision(t_doom *doom, t_entity *entity)
 		entity->where.z += entity->velocity.z;
 }
 
-t_xyz	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
+void	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
 {
-	Uint32	time;
-	t_xyz	move;
+	t_xyz	*v;
 	double	dist;
-	double speed = 0.2;
-	double z;
+	double	speed;
+	double	z;
 
-	z = entity->stat.flying ? 1 : EYE_HEIGHT;
-	//time = SDL_GetTicks() - doom->fps.curr;
-	//speed *= time / 3;
-	//dist = point_distance_3d(entity->where, player.where);
-	move.x = player.where.x - entity->where.x;
-	move.y = player.where.y - entity->where.y;
-	move.z = (player.where.z - z) - entity->where.z;
-	if (move.x == 0 && move.y == 0 && move.z == 0)
-		return (move);
-	dist = sqrt(move.x * move.x + move.y * move.y + move.z * move.z);
-	move.x *= speed / dist;
-	move.y *= speed / dist;
-	move.z *= (entity->stat.flying ? speed / dist : 0);
-	return (move);
+	v = &entity->velocity;
+	z = entity->stat.flying ? 1 : EYE_LVL;
+	speed = entity->stat.speed * (SDL_GetTicks() - doom->fps.curr);
+	v->x = player.where.x - entity->where.x;
+	v->y = player.where.y - entity->where.y;
+	v->z = (player.where.z - z) - entity->where.z;
+	if (v->x == 0 && v->y == 0 && v->z == 0)
+		return ;
+	dist = space_diagonal(v->x, v->y, v->z);
+	v->x *= speed / dist;
+	v->y *= speed / dist;
+	v->z *= (entity->stat.flying ? speed / dist : 0);
 }	
 
 void	ai_movement(t_doom *doom, t_entity *entity)
@@ -120,7 +116,7 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	t_player player;
 
 	player = doom->player;
-	entity->velocity = get_entity_movement(doom, entity, player);
+	get_entity_movement(doom, entity, player);
 	vertical_entity_collision(doom, entity);
 	horizontal_entity_collision(doom, entity);
 	entity->yaw = atan2(player.where.y - entity->where.y,

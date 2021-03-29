@@ -62,6 +62,9 @@ SRC =	./doom.c\
 	./init_entity_stats.c\
 	./ai_attack.c\
 	./free.c\
+	./precompute_projectiles.c\
+	./draw_projectile.c\
+	./blit_entity.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

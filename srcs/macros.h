@@ -43,9 +43,10 @@ typedef struct	s_double_xyz
 /*
 **	Vision
 */
-#define EYE_HEIGHT 					6
+#define PLAYER_HEIGHT 					7
+#define EYE_LVL						6
+#define OVER_HEAD_SPACE					2
 #define DUCK_HEIGHT					2.5
-#define OVER_HEAD_SPACE					1
 #define STEP_HEIGHT					2
 //720x480 id 3:2 aspect
 #define CAMERA_RATIO					(16.0/9.0)

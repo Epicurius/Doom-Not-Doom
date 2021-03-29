@@ -24,11 +24,10 @@ int	fit_through_portal(t_doom *doom, t_sector *sector, t_wall *wall)
 	double portal_top;
 	double portal_bot;
 
-	double eye_height = PLAYER.ducking ? DUCK_HEIGHT : EYE_HEIGHT;
 	portal_bot = max(sector->floor.y, doom->sectors[wall->n].floor.y);
 	portal_top = min(sector->ceiling.y, doom->sectors[wall->n].ceiling.y);
 	if (portal_top > doom->player.where.z + OVER_HEAD_SPACE &&
-		portal_bot <= doom->player.where.z - eye_height + STEP_HEIGHT)
+		portal_bot <= doom->player.where.z - EYE_LVL + STEP_HEIGHT)
 		return (1);
 	return (0);
 }

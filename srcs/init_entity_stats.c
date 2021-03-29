@@ -8,7 +8,7 @@ static void	alfred(t_stats	*alfred)
 	alfred->hostile = 1;
 	alfred->attack_style = 2;
 	alfred->scale = 1;
-	alfred->speed = 100;
+	alfred->speed = 0.05;
 	alfred->view_distance = 50;
 	alfred->detection_radius = 6;
 	alfred->attack_range = 4;
@@ -25,8 +25,8 @@ static void	spooky(t_stats	*spooky)
 	spooky->dmg = 30;
 	spooky->hostile = 1;
 	spooky->attack_style = 1;
-	spooky->scale = 2;
-	spooky->speed = 100;
+	spooky->scale = 1;
+	spooky->speed = 0.01;
 	spooky->view_distance = 50;
 	spooky->detection_radius = 6;
 	spooky->attack_range = 35;

@@ -82,9 +82,10 @@ typedef struct	s_stats
 typedef struct		s_projectile
 {
 	int		render;
-	t_xyz		curr;
-	t_xyz		dest;
-	double		dist;	
+	t_xyz		where;
+	t_xyz		velocity;
+	double		dist;
+	int		sector;	
 }			t_projectile;
 
 typedef struct		s_entity
@@ -248,6 +249,22 @@ typedef struct		s_camera
 	double		scale;
 }			t_camera;
 
+typedef struct		s_entity_render
+{
+	SDL_Surface	*surface;
+	SDL_Surface	*texture;
+	t_xyz		screen;
+	double		scale_w;
+	double		scale_h;
+	t_xyz		start;
+	t_xyz		end;
+	t_xyz		clamp_start;
+	t_xyz		clamp_end;
+	double		xrange;
+	double		yrange;
+	t_rect		img;
+}			t_entity_render;
+
 typedef struct		s_render
 {
 	SDL_Surface		*surface;
@@ -383,6 +400,11 @@ int	init_alfred(t_doom *doom, t_texture_sheet *sprite);
 int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
+void	blit_entity(t_entity_render *render);
+
+//	Projectiles
+void	precompute_projectiles(t_doom *doom);
+void	DrawProjectiles(t_doom *doom);
 
 //	Bullet Holes
 void	draw_crosshair(t_doom *doom);
@@ -452,6 +474,7 @@ int		sign(double x);
 void		rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
 unsigned int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 SDL_Color	hex_to_sdl_color(int hex);
+double 		space_diagonal(double x, double y, double z);
 
 int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);

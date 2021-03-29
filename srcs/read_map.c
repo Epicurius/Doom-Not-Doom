@@ -302,6 +302,6 @@ int			read_file(t_doom *doom, char *file_name)
 		printf("ERROR: Invalide player spawn.\n");
 		return (0);
 	}
-	PLAYER.where.z += EYE_HEIGHT;
+	PLAYER.where.z += EYE_LVL;
 	return (1);
 }
