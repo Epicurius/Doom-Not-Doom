@@ -19,15 +19,15 @@ int	hitbox_collision1(t_xyz dest, t_wall *wall)
 	return (0);
 }
 
-int	fit_through_portal1(t_doom *doom, t_sector *sector, t_wall *wall, t_xyz where)
+int	fit_through_portal1(t_doom *doom, t_sector *sector, t_wall *wall, t_entity *entity)
 {
 	double portal_top;
 	double portal_bot;
 
 	portal_bot = max(sector->floor.y, doom->sectors[wall->n].floor.y);
 	portal_top = min(sector->ceiling.y, doom->sectors[wall->n].ceiling.y);
-	if (portal_top > where.z + OVER_HEAD_SPACE &&
-		portal_bot <= where.z - EYE_LVL + STEP_HEIGHT)
+	if (portal_top > entity->where.z + entity->stat.height &&
+		portal_bot <= entity->where.z)
 		return (1);
 	return (0);
 }
@@ -50,14 +50,14 @@ void	horizontal_entity_collision(t_doom *doom, t_entity *entity)
 		{
 			if (wall->n == -1)
 				return ;
-			if (!fit_through_portal1(doom, sector, wall, entity->where))
+			if (!fit_through_portal1(doom, sector, wall, entity))
 				return ;
 			if (doom->sectors[wall->n].floor.y < sector->floor.y)
 				entity->ground = 0;
 			entity->sector = wall->n;
 			break ;
 		}
-		else if ((wall->n == -1 || !fit_through_portal1(doom, sector, wall, entity->where))
+		else if ((wall->n == -1 || !fit_through_portal1(doom, sector, wall, entity))
 			&& hitbox_collision1(dest, wall))
 			return ;
 	}
@@ -67,7 +67,6 @@ void	horizontal_entity_collision(t_doom *doom, t_entity *entity)
 
 void	vertical_entity_collision(t_doom *doom, t_entity *entity)
 {
-	double	cam_z = 0;
 	double	new_z;
 	t_sector sector;
 
@@ -76,21 +75,21 @@ void	vertical_entity_collision(t_doom *doom, t_entity *entity)
 		entity->velocity.z -= sector.gravity;
 	new_z = entity->where.z + entity->velocity.z;
 	// So to not keep on falling through floor.
-	if (entity->velocity.z < 0 && new_z < sector.floor.y + cam_z)
+	if (entity->velocity.z < 0 && new_z < sector.floor.y + entity->stat.height)
 	{
-		entity->where.z = sector.floor.y + cam_z;
+		entity->where.z = sector.floor.y;
 		entity->velocity.z = 0;
 		entity->ground = 1;
 	}
 	// If player has reached the cealing.
-	else if (entity->velocity.z > 0 && new_z > sector.ceiling.y)
+	else if (entity->velocity.z > 0 && new_z + 1 > sector.ceiling.y)
 		entity->velocity.z = 0;
 	// Let the player keep on falling.
 	else if (!entity->ground || entity->stat.flying)
 		entity->where.z += entity->velocity.z;
 }
 
-void	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
+void	get_entity_movement(t_doom *doom, t_entity *entity)
 {
 	t_xyz	*v;
 	double	dist;
@@ -100,9 +99,9 @@ void	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
 	v = &entity->velocity;
 	z = entity->stat.flying ? 1 : EYE_LVL;
 	speed = entity->stat.speed * (SDL_GetTicks() - doom->fps.curr);
-	v->x = player.where.x - entity->where.x;
-	v->y = player.where.y - entity->where.y;
-	v->z = (player.where.z - z) - entity->where.z;
+	v->x = entity->dest.x - entity->where.x;
+	v->y = entity->dest.y - entity->where.y;
+	v->z = entity->dest.z - entity->where.z;
 	if (v->x == 0 && v->y == 0 && v->z == 0)
 		return ;
 	dist = space_diagonal(v->x, v->y, v->z);
@@ -113,12 +112,8 @@ void	get_entity_movement(t_doom *doom, t_entity *entity, t_player player)
 
 void	ai_movement(t_doom *doom, t_entity *entity)
 {
-	t_player player;
-
-	player = doom->player;
-	get_entity_movement(doom, entity, player);
+	get_entity_movement(doom, entity);
 	vertical_entity_collision(doom, entity);
 	horizontal_entity_collision(doom, entity);
-	entity->yaw = atan2(player.where.y - entity->where.y,
-		player.where.x - entity->where.x) * CONVERT_DEGREES;
+	entity->yaw = angle_to_point(entity->where, entity->dest);
 }

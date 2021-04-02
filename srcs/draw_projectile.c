@@ -19,11 +19,11 @@ t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 	render.img = doom->sprites[0].pos[0][0][4];
 	render.screen.y = doom->h2 + (render.screen.y * doom->cam.scale / -render.screen.z);
 	render.screen.x = doom->w2 + (render.screen.x * doom->cam.scale / -render.screen.z);
-	render.scale_w = W * 0.5 / render.screen.z;
-	render.scale_h = render.scale_w * render.img.ratio;
-	render.start.x = render.screen.x - render.scale_h;
-	render.end.x   = render.screen.x + render.scale_h;
-	render.start.y = render.screen.y - render.scale_w * 2;
+	render.size.x = render.img.w * 20 / render.screen.z;
+	render.size.y = render.img.h * 20 / render.screen.z;
+	render.start.x = render.screen.x - render.size.x / 2;
+	render.end.x   = render.screen.x + render.size.x / 2;
+	render.start.y = render.screen.y - render.size.y;
 	render.end.y   = render.screen.y;
 	render.clamp_start.x = ft_clamp(render.start.x, 0, W - 1);
 	render.clamp_end.x = ft_clamp(render.end.x, 0, W - 1);

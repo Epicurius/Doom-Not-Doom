@@ -32,6 +32,8 @@ void	init_doom(t_doom *doom)
 	doom->w2 = W/2;
 	doom->h2 = H/2;
 
+	doom->player.hp = 1000;
+
 	FPS.count = 0;
 	FPS.surf = NULL;
 	FPS.font = TTF_OpenFont("./bmp/digital.ttf", FPS_FONT_SIZE);
@@ -80,7 +82,7 @@ int main1(void)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
-		printf("%f\n", doom->player.where.z);
+		printf("%d\n", doom->player.hp);
 		reset_render_arrays(doom);
 		update_camera(doom, 0, 0);
 		precompute_walls(doom);

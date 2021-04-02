@@ -21,6 +21,7 @@
 # include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
 # include "./utils.h"
+# include "./entity.h"
 # include <math.h>
 # include <pthread.h>
 # include <fcntl.h>
@@ -63,22 +64,25 @@ typedef struct	s_vline
 	t_v2	texel_nearz;
 	t_v2	texel_range;
 }		t_vline;
-
+/*
 typedef struct	s_stats
 {
 	int		hp;
+	int		height;
+	double		speed;
+	int		flying;
+
 	int		dmg;
 	int		hostile;
 	int		attack_style;
 	double		scale;
-	double		speed;
+	int		wonder_distance;
 	int		view_distance;
 	int		detection_radius;
 	int		attack_range;
 	int		frame_rate[4];
-	int		flying;
 }		t_stats;
-
+*/
 typedef struct		s_projectile
 {
 	int		render;
@@ -87,17 +91,17 @@ typedef struct		s_projectile
 	double		dist;
 	int		sector;	
 }			t_projectile;
-
+/*
 typedef struct		s_entity
 {
 	int		render;
-	t_xyz		spawn;
 	t_xyz		where;
+	t_xyz		dest;
 	t_xyz		velocity;
 	int		sector;
 	double		yaw;
-	t_xyz		far_left;
-	t_xyz		far_right;
+	//t_xyz		far_left;
+	//t_xyz		far_right;
 
 	int		ground;
 
@@ -135,7 +139,7 @@ typedef struct		s_player
 	double		horizon;
 
 }			t_player;
-
+*/
 typedef struct		s_sprite
 {
 	int	id;
@@ -254,8 +258,8 @@ typedef struct		s_entity_render
 	SDL_Surface	*surface;
 	SDL_Surface	*texture;
 	t_xyz		screen;
-	double		scale_w;
-	double		scale_h;
+	double		scale;
+	t_xyz		size;
 	t_xyz		start;
 	t_xyz		end;
 	t_xyz		clamp_start;
@@ -329,10 +333,8 @@ typedef struct	s_texture_sheet
 typedef struct				s_doom
 {
 	t_texture_sheet			sprites[2];
-	//SDL_Renderer			*rend;
 	int				quit;
 	char				*file;
-	char				*name;
 	SDL_Window			*win;
 	SDL_Surface			*surface;
 	double 				map_scale;
@@ -344,7 +346,6 @@ typedef struct				s_doom
 	t_fps				fps;
 	t_keys				key;
 	t_map				map;
-	//double				time;//in milliseconds
 
 	//Map
 	t_xyz				*vert;
@@ -355,6 +356,7 @@ typedef struct				s_doom
 	t_sector			*sectors;
 	t_entity			*entity;
 	t_projectile			*orb;
+
 	t_camera			cam;
 	t_player			player;
 
@@ -369,15 +371,13 @@ typedef struct				s_doom
 	//Textures
 	TTF_Font			*clock_font;
 	t_texture			textures[50];
-	//t_texture			entity_t[50];
 	t_texture			skybox_t[6]; //cube has 6 sides
 
 	//tmp
 	SDL_Surface				*imp;
-	//SDL_Surface				*bullet_hole;
 }						t_doom;
 
-int	orientation(t_xyz p1, t_xyz p2, double yaw);
+int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	init_scale(t_doom *doom);
 void	load_textures(t_doom *doom);
 void	precompute_walls(t_doom *doom);
@@ -401,6 +401,8 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 void	blit_entity(t_entity_render *render);
+void	init_entity_stats(t_doom *doom);
+int	ai_rand_move(t_entity *entity, int rand);
 
 //	Projectiles
 void	precompute_projectiles(t_doom *doom);
@@ -411,7 +413,6 @@ void	draw_crosshair(t_doom *doom);
 void	crosshair_position(t_render *render, t_vline *vline, double alpha);
 void	draw_wall_bh(t_render *render, t_vline *vline);
 void	reset_bh(t_doom *doom);
-void	init_entity_stats(t_doom *doom);
 
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
@@ -475,6 +476,10 @@ void		rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
 unsigned int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 SDL_Color	hex_to_sdl_color(int hex);
 double 		space_diagonal(double x, double y, double z);
+double		angle_to_point(t_xyz p1, t_xyz p2);
+int		compare_xyz(t_xyz a, t_xyz b);
+int		compare_xy(t_xyz a, t_xyz b);
+t_xyz		sum_xyz(t_xyz a, t_xyz b);
 
 int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);

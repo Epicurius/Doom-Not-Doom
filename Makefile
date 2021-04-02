@@ -61,6 +61,7 @@ SRC =	./doom.c\
 	./init_spooky.c\
 	./init_entity_stats.c\
 	./ai_attack.c\
+	./ai_rand.c\
 	./free.c\
 	./precompute_projectiles.c\
 	./draw_projectile.c\

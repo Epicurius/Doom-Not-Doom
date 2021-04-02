@@ -5,7 +5,7 @@ t_xyz	projectile_movement(t_xyz curr, t_xyz dest)
 {
 	t_xyz	move;
 	double	dist;
-	double	speed = 0.5;
+	double	speed = 1;
 
 	move.x = dest.x - curr.x;
 	move.y = dest.y - curr.y;
@@ -21,22 +21,21 @@ t_xyz	projectile_movement(t_xyz curr, t_xyz dest)
 
 void	ai_attack(t_doom *doom, t_entity *entity)
 {
-	if (entity->frame + 1 < doom->sprites[entity->type].nb[ATTACK][FRAMES])
+	entity->yaw = angle_to_point(entity->where, doom->player.where);
+	if (entity->frame < doom->sprites[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
-	if (1 == 2 && doom->sprites[entity->type].nb[DEATH][FRAMES] == 0)
+	if (doom->sprites[entity->type].nb[DEATH][FRAMES] == 0)
 	{
 		doom->player.hp -= entity->stat.dmg;
 		entity->render = 0;
-		printf("Explode\n");
 	}
 	else if (!entity->orb->render)
 	{
 		entity->orb->render = 1;
 		entity->orb->velocity = projectile_movement(entity->where, doom->player.where);
-		entity->orb->where.x = entity->where.x;// + entity->orb->velocity.x;
-		entity->orb->where.y = entity->where.y;// + entity->orb->velocity.y;
-		entity->orb->where.z = entity->where.z + 4;// + entity->orb->velocity.z;
+		entity->orb->where.x = entity->where.x;
+		entity->orb->where.y = entity->where.y;
+		entity->orb->where.z = entity->where.z + entity->stat.height / 2;
 		entity->orb->sector = entity->sector;
-		entity->render = 0;
 	}
 }

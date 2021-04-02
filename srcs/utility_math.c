@@ -12,6 +12,12 @@
 
 #include "doom.h"
 
+//		Set p1 angle to p2 (DEGREES)
+double		angle_to_point(t_xyz p1, t_xyz p2)
+{
+	return (atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_DEGREES);
+}
+
 //		Space Diagonal
 double		space_diagonal(double x, double y, double z)
 {
@@ -29,7 +35,7 @@ t_rect		new_rect(int x1, int y1, int x2, int y2)
 	new.y2 = y2;
 	new.w = new.x2 - new.x1;
 	new.h = new.y2 - new.y1;
-	new.ratio = (double)new.w / (double)new.h;
+	new.ratio = (double)new.h / (double)new.w;
 	return (new);
 }
 
@@ -215,4 +221,28 @@ int	point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer)
 	if (pv1 + pv2 >= len - buffer && pv1 + pv2 <= len + buffer)
 		return (1);
 	return (0);
+}
+
+int	compare_xyz(t_xyz a, t_xyz b)
+{
+	if (a.x == b.x && a.y == b.y && a.z == b.z)
+		return (1);
+	return (0);
+}
+
+int	compare_xy(t_xyz a, t_xyz b)
+{
+	if (a.x == b.x && a.y == b.y)
+		return (1);
+	return (0);
+}
+
+t_xyz	sum_xyz(t_xyz a, t_xyz b)
+{
+	t_xyz total;
+
+	total.x = a.x + b.x;
+	total.y = a.y + b.y;
+	total.z = a.z + b.z;
+	return (total);	
 }

@@ -73,6 +73,13 @@ typedef struct	s_double_xyz
 # define STYLE_MELEE					0
 # define STYLE_RANGE					1
 
+typedef enum	e_entities
+{
+	ALFRED,
+	SPOOKY,
+	SPAWNER
+}		t_entities;
+
 /*
 ** FPS
 */

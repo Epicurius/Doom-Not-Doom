@@ -36,7 +36,6 @@ void	read_map(t_doom *doom, int fd)
 		if (line[0] == '-')
 			break ;
 		arr				= ft_strsplit(line, '\t');
-		//doom->name			= ft_strdup(arr[0]);
 		doom->map_scale			= atof(arr[1]);
 		doom->nb.vertices		= ft_atoi(arr[2]);
 		doom->nb.walls			= ft_atoi(arr[3]);
@@ -216,13 +215,12 @@ void	read_entity(t_doom *doom, int fd)
 	{
 		if (line[0] == '-')
 			break ;
-		arr					= ft_strsplit(line, '\t');
+		arr			= ft_strsplit(line, '\t');
 		entity->id		= atoi(arr[0]);
-		entity->spawn.x		= atof(arr[1]) * doom->map_scale;
-		entity->spawn.y		= atof(arr[2]) * doom->map_scale;
-		entity->spawn.z		= atof(arr[3]) * doom->map_scale;
-		entity->where		= entity->spawn;
-		entity->type		= atoi(arr[4]);
+		entity->type		= atoi(arr[1]);
+		entity->where.x		= atof(arr[2]) * doom->map_scale;
+		entity->where.y		= atof(arr[3]) * doom->map_scale;
+		entity->where.z		= atof(arr[4]) * doom->map_scale;
 		entity->scale		= atoi(arr[5]) * doom->map_scale;
 		entity->yaw		= atoi(arr[6]);
 		entity->sector		= find_sector(doom, entity->where);
@@ -254,7 +252,6 @@ void	read_wsprite(t_doom *doom, int fd)
 		wsprite->num[i].where.x		= atof(arr[2]) * doom->map_scale;
 		wsprite->num[i].where.y		= atof(arr[3]) * doom->map_scale;
 		wsprite->num[i].tx		= ft_atoi(arr[4]);
-		//wsprite->num[i].refresh	= ft_atoi(arr[5]);
 		wsprite->num[i].scale_w		= atof(arr[6]) * doom->map_scale;
 		wsprite->total 			+= 1;
 		free_array(arr);

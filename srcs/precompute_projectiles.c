@@ -1,19 +1,17 @@
 
 #include "doom.h"
 
-int	vertical_projectile_collision(t_doom *doom, t_projectile *orb)
+int	vertical_projectile_collision(t_doom *doom, t_projectile *orb, t_xyz dest)
 {
-	double	new_z;
 	t_sector sector;
 
 	sector = doom->sectors[orb->sector];
-	new_z = orb->where.z + orb->velocity.z;
-	if (new_z < sector.floor.y || new_z > sector.ceiling.y)
+	if (dest.z < sector.floor.y || dest.z > sector.ceiling.y)
 		return (1);
 	return (0);
 }
 
-int	hitbox_collision2(t_xyz dest, t_wall *wall)
+static int	hitbox_collision(t_xyz dest, t_wall *wall)
 {
 	t_xyz point;
 
@@ -30,7 +28,7 @@ int	hitbox_collision2(t_xyz dest, t_wall *wall)
 	return (0);
 }
 
-int	fit_through_portal2(t_doom *doom, t_sector *sector, t_wall *wall, t_xyz where)
+static int	fit_through_portal(t_doom *doom, t_sector *sector, t_wall *wall, t_xyz where)
 {
 	double portal_top;
 	double portal_bot;
@@ -42,17 +40,14 @@ int	fit_through_portal2(t_doom *doom, t_sector *sector, t_wall *wall, t_xyz wher
 	return (0);
 }
 
-int	horizontal_projectile_collision(t_doom *doom, t_projectile *orb)
+int	horizontal_projectile_collision(t_doom *doom, t_projectile *orb, t_xyz dest)
 {
-	int i;
-	t_sector *sector;
-	t_wall *wall;
-	t_xyz	dest;
+	int		i;
+	t_wall		*wall;
+	t_sector	*sector;
 
 	i = -1;
 	sector = &doom->sectors[orb->sector];
-	dest.x = orb->where.x + orb->velocity.x;
-	dest.y = orb->where.y + orb->velocity.y;
 	while (++i < sector->npoints)
 	{
 		wall = sector->wall[i];
@@ -60,14 +55,24 @@ int	horizontal_projectile_collision(t_doom *doom, t_projectile *orb)
 		{
 			if (wall->n == -1)
 				return (1);
-			if (!fit_through_portal2(doom, sector, wall, orb->where))
+			if (!fit_through_portal(doom, sector, wall, orb->where))
 				return (1);
 			orb->sector = wall->n;
 			break ;
 		}
-		else if ((wall->n == -1 || !fit_through_portal2(doom, sector, wall, orb->where))
-			&& hitbox_collision2(dest, wall))
+		else if ((wall->n == -1 || !fit_through_portal(doom, sector, wall, orb->where))
+			&& hitbox_collision(dest, wall))
 			return (1);
+	}
+	return (0);
+}
+
+int	player_contact(t_doom *doom, t_xyz dest)
+{
+	if (point_distance_3d(doom->player.where, dest) <= 5)
+	{
+		doom->player.hp -= 200;
+		return (1);
 	}
 	return (0);
 }
@@ -75,22 +80,25 @@ int	horizontal_projectile_collision(t_doom *doom, t_projectile *orb)
 void	precompute_projectiles(t_doom *doom)
 {
 	int i;
-	t_xyz move;
+	t_xyz dest;
 
 	i = -1;
 	while (++i < doom->nb.projectiles)
 	{
 		if (!doom->orb[i].render)
 			continue ;
-		if (vertical_projectile_collision(doom, &doom->orb[i]))
+		dest = sum_xyz(doom->orb[i].where, doom->orb[i].velocity);
+		if (player_contact(doom, dest))
+			doom->orb[i].render = 0;	
+		if (vertical_projectile_collision(doom, &doom->orb[i], dest))
 			doom->orb[i].render = 0;
-		else if (horizontal_projectile_collision(doom, &doom->orb[i]))
+		else if (horizontal_projectile_collision(doom, &doom->orb[i], dest))
 			doom->orb[i].render = 0;
 		else
 		{
-			doom->orb->where.x += doom->orb->velocity.x;
-			doom->orb->where.y += doom->orb->velocity.y;
-			doom->orb->where.z += doom->orb->velocity.z;
+			doom->orb[i].where.x += doom->orb[i].velocity.x;
+			doom->orb[i].where.y += doom->orb[i].velocity.y;
+			doom->orb[i].where.z += doom->orb[i].velocity.z;
 		}
 	}
 }

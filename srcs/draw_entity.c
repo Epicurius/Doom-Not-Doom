@@ -18,7 +18,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 		return (0);
 	render->screen = screen;
 	render->surface = doom->surface;
-	render->scale_w = entity->scale;
+	render->scale = entity->stat.scale;
 	render->texture = doom->sprites[entity->type].surface;
 	render->img = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);
@@ -52,18 +52,18 @@ void	find_visible_entitys(t_doom *doom, t_entity_render *render, int *nb)
 
 void	 project_entity(t_doom *doom, t_entity_render *render)
 {
-	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
-	render->scale_w = W * render->scale_w / render->screen.z;
-	render->scale_h = render->scale_w * render->img.ratio;
-	render->start.x = render->screen.x - render->scale_h;
-	render->end.x	= render->screen.x + render->scale_h;
-	render->start.y = render->screen.y - render->scale_w * 2;
+	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
+	render->size.x	= render->img.w * render->scale / render->screen.z;
+	render->size.y	= render->img.h * render->scale / render->screen.z;
+	render->start.x	= render->screen.x - render->size.x / 2;
+	render->end.x	= render->screen.x + render->size.x / 2;
+	render->start.y = render->screen.y - render->size.y;
 	render->end.y	= render->screen.y;
-	render->clamp_start.x = ft_clamp(render->start.x, 0, W - 1);
-	render->clamp_end.x = ft_clamp(render->end.x, 0, W - 1);
-	render->clamp_start.y = ft_clamp(render->start.y, 0, H - 1);
-	render->clamp_end.y  = ft_clamp(render->end.y, 0, H - 1);
+	render->clamp_start.x	= ft_clamp(render->start.x, 0, W - 1);
+	render->clamp_end.x	= ft_clamp(render->end.x,   0, W - 1);
+	render->clamp_start.y	= ft_clamp(render->start.y, 0, H - 1);
+	render->clamp_end.y	= ft_clamp(render->end.y,   0, H - 1);
 	render->xrange = render->end.x - render->start.x;
 	render->yrange = render->end.y - render->start.y;
 }
