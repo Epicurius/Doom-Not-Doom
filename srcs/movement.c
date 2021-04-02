@@ -1,14 +1,14 @@
 
 #include "doom.h"
 
-void	get_velocity(t_doom *doom, float *speed)
+void	get_base_speed(t_doom *doom, float *speed)
 {
 	Uint32 time;
 
 	time = SDL_GetTicks() - doom->fps.curr;
-	if (PLAYER.ducking)
-		*speed = CROUCH_SPEED;
-	else if (doom->key.l_shift)
+	//if (PLAYER.ducking)
+	//	*speed = CROUCH_SPEED;
+	if (doom->key.l_shift)
 		*speed = SPRINT_SPEED;
 	else
 		*speed = WALK_SPEED;
@@ -43,6 +43,20 @@ void	get_movement(t_doom *doom, float speed, t_xyz *move)
 	}
 }
 
+void	get_velocity(t_doom *doom, t_xyz move)
+{
+	t_player *player;
+
+	player = &doom->player;
+	if (doom->key.space && player->where.z == doom->sectors[player->sector].floor.y)
+		player->velocity.z += 0.5;
+	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
+	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
+	if (!player->flying)
+		return ;
+	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+}
+
 void	movement(t_doom *doom)
 {
 	int x;
@@ -52,16 +66,8 @@ void	movement(t_doom *doom)
 
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);
-	//doom->player.ducking = (doom->key.l_ctrl && doom->player.ground);
-	get_velocity(doom, &speed);
+	get_base_speed(doom, &speed);
 	get_movement(doom, speed, &move);
-	PLAYER.velocity.x = (PLAYER.velocity.x + move.x) * ACCELERATION;
-	PLAYER.velocity.y = (PLAYER.velocity.y + move.y) * ACCELERATION;
-	if (PLAYER.flying)
-		PLAYER.velocity.z = (PLAYER.velocity.z + move.z) * ACCELERATION;
-	if (doom->key.space && doom->player.ground && !doom->player.ducking)
-	{
-		doom->player.velocity.z += 0.5;
-		doom->player.ground = 0;
-	}
+	get_velocity(doom, move);
+	//doom->player.dest = sum_xyz(doom->player.where, doom->player.velocity);
 }

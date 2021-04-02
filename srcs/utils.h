@@ -71,6 +71,7 @@ typedef struct		s_plane
 {
 	double		y;
 	int		tx;
+	double		correct;
 	double		head;
 	double		feet;
 	double		scale;

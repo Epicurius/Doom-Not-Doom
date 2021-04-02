@@ -68,7 +68,7 @@ int	sign(double x)
 }
 
 //	Vectors cross product
-double	cross_product(double x0, double y0, double x1, double y1)
+double	vxs(double x0, double y0, double x1, double y1)
 {
 	return (x0 * y1 - x1 * y0);
 }
@@ -114,7 +114,7 @@ int	intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2)
 //	Determine which side of a line the point is on. Return value: <0, =0 or >0.
 double	point_side(t_xyz a, t_xyz b, t_xyz p)
 {
-	return (cross_product(b.x - a.x, b.y - a.y, p.x - a.x, p.y - a.y));
+	return (vxs(b.x - a.x, b.y - a.y, p.x - a.x, p.y - a.y));
 }
 
 //	Calculate point of intersection between 2 lines.

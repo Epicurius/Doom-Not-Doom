@@ -13,6 +13,7 @@
 NAME = doom
 DIR_S = ./srcs
 SRC =	./doom.c\
+	./put_pixels.c\
 	./read_map.c\
 	./find_sector.c\
 	./utility_math.c\
@@ -66,6 +67,7 @@ SRC =	./doom.c\
 	./precompute_projectiles.c\
 	./draw_projectile.c\
 	./blit_entity.c\
+	./init_player.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

@@ -139,12 +139,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_wall *wa
 		render[x].ytop =	doom->ytop;
 		render[x].ybot =	doom->ybot;
 		render[x].wtx =		doom->textures;
-		render[x].ptx =		&doom->textures[wall->ptx];
-		render[x].ctx = 	&doom->textures[sector.ceiling.tx];
-		render[x].ftx = 	&doom->textures[sector.floor.tx];
 		render[x].stx =		doom->skybox_t;
 
-		//render[x].bhtx	=	doom->bullet_hole;
 		render[x].bh =		&wall->bh;
 		render[x].wsprite =	&wall->wsprite;
 	

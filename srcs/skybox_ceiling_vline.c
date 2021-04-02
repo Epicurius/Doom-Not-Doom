@@ -1,18 +1,6 @@
 
 #include "doom.h"
 
-void	put_skybox_ceiling_pixels(t_render *render, int coord, t_xyz text)
-{
-	Uint32		*pixels;
-
-	pixels = render->stx[5].surface->pixels;
-	//if (text.x >= 0 && text.x < 2048 && text.y >= 0 && text.y < 2048)
-	//{
-		((Uint32*)render->surface->pixels)[coord] =
-			pixels[(int)text.y * 2048 + (int)text.x];
-	//}
-}
-
 void	skybox_ceiling_vline(t_render *render, t_vline vline)
 {
 	t_xyz text;
@@ -30,9 +18,8 @@ void	skybox_ceiling_vline(t_render *render, t_vline vline)
 		if (text.x >= 2048 || text.x < 0)
 			text.x = abs((int)text.x % 2048);
 		text.x = 2048 - text.x;
-		if (RENDER_DISTANCE ==
-			((double*)render->surface->userdata)[coord])
-			put_skybox_ceiling_pixels(render, coord, text);
+		if (RENDER_DISTANCE == ((double*)render->surface->userdata)[coord])
+			blit_pixel_skybox(render, coord, text, 5);
 		vline.y1++;
 	}
 }

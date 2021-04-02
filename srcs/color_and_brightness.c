@@ -14,7 +14,7 @@ SDL_Color	hex_to_sdl_color(int hex)
 
 /*
 ** Darkens or brightens a color 
-** -x darker, 0 nothing, +x lighter
+** -x darker, 0 nothing, +x lighter obvs -255 to 255
 */
 Uint32		brightness(Uint32 src, int brightness)
 {

@@ -1,23 +1,15 @@
 
 #include "doom.h"
 
-void	put_ceiling_pixels(t_render *render, int coord, t_xyz text)
-{
-	Uint32		*pixels;
-
-	pixels = render->ctx->surface->pixels;
-	((Uint32*)render->surface->pixels)[coord] = 
-	brightness(pixels[(int)text.y * render->ctx->w + (int)text.x], render->light);
-	((double*)render->surface->userdata)[coord] = text.z;
-}
-
 void	draw_ceiling_texture(t_render *render, t_vline *vline)
 {
 	t_xyz text;
 	double alpha;
 	double divider;
 	int	coord;
+	t_texture *ctx;
 
+	ctx = &render->wtx[render->ceiling.tx];
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * W + render->x;
@@ -35,12 +27,12 @@ void	draw_ceiling_texture(t_render *render, t_vline *vline)
 				* divider;
 		text.y *= render->ceiling.scale;
 		text.x *= render->ceiling.scale;
-		//text.x = render->ctx->w - text.x;
-		if (text.y >= render->ctx->h || text.y < 0)
-			text.y = abs((int)text.y % render->ctx->h);
-		if (text.x >= render->ctx->w || text.x < 0)
-			text.x = abs((int)text.x % render->ctx->w);
-		put_ceiling_pixels(render, coord, text);
+
+		if (text.y >= ctx->h || text.y < 0)
+			text.y = abs((int)text.y % ctx->h);
+		if (text.x >= ctx->w || text.x < 0)
+			text.x = abs((int)text.x % ctx->w);
+		blit_pixel_brightness(render, coord, text, ctx);
 		vline->y1++;
 	}
 }

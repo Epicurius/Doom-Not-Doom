@@ -44,8 +44,10 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
 
-	double yceil = sector->ceiling.y - doom->player.where.z;
-	double yfloor = sector->floor.y - doom->player.where.z;
+	//double yceil = sector->ceiling.y - (doom->player.where.z + EYE_LVL);
+	//double yfloor = sector->floor.y - (doom->player.where.z + EYE_LVL);
+	double yfloor = sector->floor.correct;
+	double yceil = sector->ceiling.correct;
 	wall->s1.ceiling = doom->h2 + (yceil  + wall->angle_z1) * wall->scale_v1;
 	wall->s2.ceiling = doom->h2 + (yceil  + wall->angle_z2) * wall->scale_v2;
 	wall->s1.floor = doom->h2 + (yfloor + wall->angle_z1) * wall->scale_v1;
@@ -56,8 +58,10 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	if (wall->n == -1)
 		return ;
 
-	double nyceil = doom->sectors[wall->n].ceiling.y - doom->player.where.z;
-	double nyfloor= doom->sectors[wall->n].floor.y - doom->player.where.z;
+	//double nyceil = doom->sectors[wall->n].ceiling.y - (doom->player.where.z + EYE_LVL);
+	//double nyfloor= doom->sectors[wall->n].floor.y - (doom->player.where.z + EYE_LVL);
+	double nyfloor = doom->sectors[wall->n].floor.correct;
+	double nyceil = doom->sectors[wall->n].ceiling.correct;
 	wall->s1_n.ceiling = doom->h2 + (nyceil  + wall->angle_z1) * wall->scale_v1;
 	wall->s2_n.ceiling = doom->h2 + (nyceil  + wall->angle_z2) * wall->scale_v2;
 	wall->s1_n.floor = doom->h2 + (nyfloor + wall->angle_z1) * wall->scale_v1;

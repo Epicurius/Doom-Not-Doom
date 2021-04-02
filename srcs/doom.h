@@ -21,7 +21,6 @@
 # include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
 # include "./utils.h"
-# include "./entity.h"
 # include <math.h>
 # include <pthread.h>
 # include <fcntl.h>
@@ -29,7 +28,7 @@
 #define min(a,b)			(((a) < (b)) ? (a) : (b))
 #define max(a,b)			(((a) > (b)) ? (a) : (b))
 #define clamp(a, mi,ma)			min(max(a,mi),ma)
-#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
+//#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
 
 typedef	struct	s_floor_ceiling
 {
@@ -64,7 +63,16 @@ typedef struct	s_vline
 	t_v2	texel_nearz;
 	t_v2	texel_range;
 }		t_vline;
-/*
+
+typedef struct		s_projectile
+{
+	int		render;
+	t_xyz		where;
+	t_xyz		velocity;
+	double		dist;
+	int		sector;	
+}			t_projectile;
+
 typedef struct	s_stats
 {
 	int		hp;
@@ -82,16 +90,7 @@ typedef struct	s_stats
 	int		attack_range;
 	int		frame_rate[4];
 }		t_stats;
-*/
-typedef struct		s_projectile
-{
-	int		render;
-	t_xyz		where;
-	t_xyz		velocity;
-	double		dist;
-	int		sector;	
-}			t_projectile;
-/*
+
 typedef struct		s_entity
 {
 	int		render;
@@ -100,8 +99,6 @@ typedef struct		s_entity
 	t_xyz		velocity;
 	int		sector;
 	double		yaw;
-	//t_xyz		far_left;
-	//t_xyz		far_right;
 
 	int		ground;
 
@@ -123,23 +120,21 @@ typedef struct		s_player
 	t_xyz		where;
 	t_xyz		velocity;
 	int		sector;
-	double		size;
 	double		yaw;
-
-	int		hp;
-
-	int		ground;
-	int		ducking;
-	int		flying;
-	int		shooting;
-
 	double		pitch;
 	double		anglesin;
 	double		anglecos;
 	double		horizon;
 
+	int		hp;
+
+	int		flying;
+	int		shooting;
 }			t_player;
-*/
+
+
+
+
 typedef struct		s_sprite
 {
 	int	id;
@@ -393,6 +388,7 @@ void	shade_zbuffer(t_doom *doom);
 int	clip_wall(t_camera cam, t_wall *wall);
 void	update_camera(t_doom *doom, int x, int y);
 void	reset_render_arrays(t_doom *doom);
+int	init_player(t_doom *doom);
 
 //	Enteties
 void	precompute_entities(t_doom *doom);
@@ -437,6 +433,12 @@ void	draw_wall_texture(t_render *render, t_vline *vline);
 void	draw_portal_texture(t_render *render, t_vline *vline);
 void	draw_neighbor_wall(t_render *render, t_vline *vline);
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
+
+//	Blit pixels
+void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
 //	Skybox
 void	init_skybox(t_doom *doom);

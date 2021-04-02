@@ -62,6 +62,20 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 		wall->wsprite.num[i].ready = 1;
 	}
 }
+
+void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
+{
+	double eye_z;
+
+	eye_z = doom->player.where.z + EYE_LVL;
+	sector->ceiling.correct = sector->ceiling.y - eye_z;
+	sector->floor.correct = sector->floor.y - eye_z;
+	sector->ceiling.head = doom->h2 + sector->ceiling.correct
+				* doom->cam.scale / -doom->cam.near_z;
+	sector->floor.feet = doom->h2 + sector->floor.correct
+			* doom->cam.scale / -doom->cam.near_z;
+}
+
 void	precompute_walls(t_doom *doom)
 {
 	int i;
@@ -72,12 +86,7 @@ void	precompute_walls(t_doom *doom)
 	while (++i < doom->nb.sectors)
 	{
 		doom->sectors[i].visible = 0;
-		yceil = doom->sectors[i].ceiling.y - doom->player.where.z;
-		yfloor = doom->sectors[i].floor.y - doom->player.where.z;
-		doom->sectors[i].ceiling.head = doom->h2 + yceil
-			* doom->cam.scale / -doom->cam.near_z;
-		doom->sectors[i].floor.feet = doom->h2 + yfloor
-			* doom->cam.scale / -doom->cam.near_z;
+		precompute_floor_ceil(doom, &doom->sectors[i]);
 	}
 	i = -1;
 	while (++i < doom->nb.walls)

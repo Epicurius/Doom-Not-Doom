@@ -15,7 +15,6 @@
 #include <math.h>
 #include "doom.h"
 
-
 void	init_doom(t_doom *doom)
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -27,12 +26,8 @@ void	init_doom(t_doom *doom)
 		return ;
 	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (W * H))))
 		return ;
-	doom->player.ground = 0;
-	doom->player.flying = 0;
 	doom->w2 = W/2;
 	doom->h2 = H/2;
-
-	doom->player.hp = 1000;
 
 	FPS.count = 0;
 	FPS.surf = NULL;
@@ -40,10 +35,10 @@ void	init_doom(t_doom *doom)
 	FPS.color = hex_to_sdl_color(0x40eb34ff);
 	doom->clock_font = TTF_OpenFont("./bmp/digital.ttf", 100);
 	doom->win = SDL_CreateWindow("DOOM", 0, 0, W, H, SDL_WINDOW_SHOWN);
-	//doom->rend = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_SOFTWARE);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;
 
+	init_player(doom);
 	init_camera(doom);
 	init_skybox(doom);
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
@@ -82,17 +77,16 @@ int main1(void)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
-		printf("%d\n", doom->player.hp);
 		reset_render_arrays(doom);
 		update_camera(doom, 0, 0);
 		precompute_walls(doom);
 		precompute_skybox(doom);
 		DrawScreen(doom);
 		doom->player.shooting = 0;
-		precompute_entities(doom);
-		precompute_projectiles(doom);
-		DrawProjectiles(doom);
-		DrawEntity(doom);
+		//precompute_entities(doom);
+		//precompute_projectiles(doom);
+		//DrawProjectiles(doom);
+		//DrawEntity(doom);
 		//if (doom->key.tab)
 		//	map(doom);
 		//shade_zbuffer(doom);

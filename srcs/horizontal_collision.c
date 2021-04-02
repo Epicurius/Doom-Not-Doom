@@ -26,8 +26,10 @@ int	fit_through_portal(t_doom *doom, t_sector *sector, t_wall *wall)
 
 	portal_bot = max(sector->floor.y, doom->sectors[wall->n].floor.y);
 	portal_top = min(sector->ceiling.y, doom->sectors[wall->n].ceiling.y);
-	if (portal_top > doom->player.where.z + OVER_HEAD_SPACE &&
-		portal_bot <= doom->player.where.z - EYE_LVL + STEP_HEIGHT)
+	if (portal_top <= portal_bot + PLAYER_HEIGHT)
+		return (0);
+	if (portal_top > doom->player.where.z + PLAYER_HEIGHT &&
+		portal_bot <= doom->player.where.z + STEP_HEIGHT)
 		return (1);
 	return (0);
 }
@@ -52,8 +54,6 @@ void	horizontal_collision(t_doom *doom, t_player *player)
 				return ;
 			if (!fit_through_portal(doom, sector, wall))
 				return ;
-			if (doom->sectors[wall->n].floor.y < sector->floor.y)
-				player->ground = 0;
 			player->sector = wall->n;
 			break ;
 		}

@@ -117,7 +117,6 @@ void	read_player(t_doom *doom, int fd)
 		PLAYER.where.y	= atof(arr[1]) * doom->map_scale;
 		PLAYER.where.z	= atof(arr[2]) * doom->map_scale;
 		PLAYER.yaw	= ft_atoi(arr[3]);
-		PLAYER.size	= PLAYER_RADIUS;
 		free_array(arr);
 		ft_strdel(&line);
 	}
@@ -293,12 +292,5 @@ int			read_file(t_doom *doom, char *file_name)
 	ft_strdel(&line);
 	free(line);
 	close(fd);
-	PLAYER.sector = find_sector(doom, doom->player.where);
-	if (PLAYER.sector == -1)
-	{
-		printf("ERROR: Invalide player spawn.\n");
-		return (0);
-	}
-	PLAYER.where.z += EYE_LVL;
 	return (1);
 }
