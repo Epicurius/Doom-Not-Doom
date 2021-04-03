@@ -7,7 +7,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	t_xyz screen;
 
 	dist.x = entity->where.x - doom->player.where.x;
-	dist.y = entity->where.z - doom->player.where.z;
+	dist.y = entity->where.z - doom->player.where.z - EYE_LVL;
 	dist.z = entity->where.y - doom->player.where.y;
 	screen.x = dist.x * doom->player.anglesin
 			- dist.z * doom->player.anglecos;

@@ -109,11 +109,32 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	v->y *= speed / dist;
 	v->z *= (entity->stat.flying ? speed / dist : 0);
 }	
-
+/*
 void	ai_movement(t_doom *doom, t_entity *entity)
 {
 	get_entity_movement(doom, entity);
 	vertical_entity_collision(doom, entity);
 	horizontal_entity_collision(doom, entity);
+	entity->yaw = angle_to_point(entity->where, entity->dest);
+}
+*/
+
+void	ai_movement(t_doom *doom, t_entity *entity)
+{
+	t_collision_thread e[1];
+
+	get_entity_movement(doom, entity);
+	e->where		= &entity->where;
+	e->velocity		= &entity->velocity;
+	e->sector		= entity->sector;
+	e->sectors		= doom->sectors;
+	e->entities		= doom->entity;
+	e->nb_entities		= doom->nb.entities;
+	e->player		= 0;
+	e->hitbox_height	= PLAYER_HEIGHT;
+	e->hitbox_radius	= PLAYER_RADIUS;
+	e->step_height		= 1;
+	tpool_add(&doom->tpool, collision_detection, &e);
+	tpool_wait(&doom->tpool);
 	entity->yaw = angle_to_point(entity->where, entity->dest);
 }

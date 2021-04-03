@@ -7,8 +7,6 @@ void	vertical_collision(t_doom *doom, t_player *player)
 	t_sector sector;
 
 	sector = doom->sectors[player->sector];
-	if (!player->flying)
-		player->velocity.z -= sector.gravity;
 	new_z = player->where.z + player->velocity.z;
 	// So to not keep on falling through floor.
 	if (player->velocity.z < 0 && new_z < sector.floor.y)
@@ -19,7 +17,7 @@ void	vertical_collision(t_doom *doom, t_player *player)
 	// If player has reached the cealing.
 	else if (player->velocity.z > 0 && new_z + PLAYER_HEIGHT > sector.ceiling.y)
 		player->velocity.z = 0;
-	// Let the player keep on falling.
+	// Let the player keep on rising/falling.
 	else
 		player->where.z += player->velocity.z;
 }

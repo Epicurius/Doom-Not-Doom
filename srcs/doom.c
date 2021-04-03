@@ -83,10 +83,10 @@ int main1(void)
 		precompute_skybox(doom);
 		DrawScreen(doom);
 		doom->player.shooting = 0;
-		//precompute_entities(doom);
-		//precompute_projectiles(doom);
-		//DrawProjectiles(doom);
-		//DrawEntity(doom);
+		precompute_entities(doom);
+		precompute_projectiles(doom);
+		DrawProjectiles(doom);
+		DrawEntity(doom);
 		//if (doom->key.tab)
 		//	map(doom);
 		//shade_zbuffer(doom);
@@ -102,8 +102,9 @@ int main1(void)
 				exit (1);
 		}
 		movement(doom);
-		vertical_collision(doom, &doom->player);
-		horizontal_collision(doom, &doom->player);
+		//vertical_collision(doom, &doom->player);
+		//horizontal_collision(doom, &doom->player);
+		player_collision(doom);
 		draw_crosshair(doom);
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);

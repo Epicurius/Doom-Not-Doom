@@ -68,6 +68,8 @@ SRC =	./doom.c\
 	./draw_projectile.c\
 	./blit_entity.c\
 	./init_player.c\
+	./player_collision.c\
+	./object_collision.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o

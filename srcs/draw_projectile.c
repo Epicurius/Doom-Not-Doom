@@ -7,7 +7,7 @@ t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 	t_entity_render render;
 
 	dist.x = orb->where.x - doom->player.where.x;
-	dist.y = orb->where.z - doom->player.where.z;
+	dist.y = orb->where.z - doom->player.where.z - EYE_LVL;
 	dist.z = orb->where.y - doom->player.where.y;
 	render.screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	render.screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;

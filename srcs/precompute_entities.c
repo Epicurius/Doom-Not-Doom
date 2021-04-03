@@ -126,7 +126,7 @@ void	precompute_entities(t_doom *doom)
 	while (++i < doom->nb.entities)
 	{
 		entity = &doom->entity[i];
-		if (!entity->stat.hostile || !entity->render)
+		if (!entity->stat.animate || !entity->render)
 			continue ;
 		get_entity_state(doom, entity);
 		preforme_entiy_state_fuction(doom, entity);

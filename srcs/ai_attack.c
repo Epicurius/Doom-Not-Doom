@@ -9,7 +9,7 @@ t_xyz	projectile_movement(t_xyz curr, t_xyz dest)
 
 	move.x = dest.x - curr.x;
 	move.y = dest.y - curr.y;
-	move.z = dest.z - EYE_LVL - curr.z;
+	move.z = dest.z - curr.z;
 	if (move.x == 0 && move.y == 0 && move.z == 0)
 		return (move);
 	dist = sqrt(move.x * move.x + move.y * move.y + move.z * move.z);

@@ -46,15 +46,18 @@ void	get_movement(t_doom *doom, float speed, t_xyz *move)
 void	get_velocity(t_doom *doom, t_xyz move)
 {
 	t_player *player;
+	t_sector *sector;
 
 	player = &doom->player;
-	if (doom->key.space && player->where.z == doom->sectors[player->sector].floor.y)
+	sector = &doom->sectors[player->sector];
+	if (doom->key.space && player->where.z == sector->floor.y)
 		player->velocity.z += 0.5;
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
 	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
 	if (!player->flying)
-		return ;
-	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+		player->velocity.z -= sector->gravity;
+	else
+		player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
 }
 
 void	movement(t_doom *doom)

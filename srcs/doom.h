@@ -30,6 +30,7 @@
 #define clamp(a, mi,ma)			min(max(a,mi),ma)
 //#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
 
+
 typedef	struct	s_floor_ceiling
 {
 	double	floor;
@@ -81,6 +82,7 @@ typedef struct	s_stats
 	int		flying;
 
 	int		dmg;
+	int		animate;
 	int		hostile;
 	int		attack_style;
 	double		scale;
@@ -229,6 +231,23 @@ typedef struct		s_sector
 	float		gravity;
 	char		visible;
 } 			t_sector;
+
+
+typedef struct		s_collision_thread
+{
+	t_xyz		*where;
+	t_xyz		*velocity;
+	t_sector	*sectors;
+	t_entity	*entities;
+	int		nb_entities;
+	int		player;
+	int		sector;
+	float		hitbox_height;
+	float		hitbox_radius;
+	float		step_height;
+	
+}			t_collision_thread;
+
 
 typedef struct		s_camera
 {
@@ -457,7 +476,7 @@ void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 void	init_camera(t_doom *doom);
 void	screen_sectors(t_doom *doom, t_item *queue, int *qtotal);
-void	collision_detection(t_doom *doom, t_player *player);
+//void	collision_detection(t_doom *doom, t_player *player);
 
 //Math wiki func
 int		overlap(double a0, double a1, double b0 , double b);
@@ -487,6 +506,9 @@ int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect		new_rect(int x1, int y1, int x2, int y2);
 
+void	player_collision(t_doom *doom);
+int	entity_collision(t_collision_thread *entity, t_xyz dest);
+int	collision_detection(void *arg);
 
 int		free_doom(t_doom *doom);
 #endif

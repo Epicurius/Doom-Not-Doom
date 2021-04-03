@@ -5,6 +5,7 @@ static void	alfred(t_stats	*alfred)
 {
 	alfred->hp = 100;
 	alfred->dmg = 100;
+	alfred->animate = 1;
 	alfred->hostile = 1;
 	alfred->attack_style = 2;
 	alfred->scale = 50;
@@ -25,6 +26,7 @@ static void	spooky(t_stats	*spooky)
 {
 	spooky->hp = 200;
 	spooky->dmg = 30;
+	spooky->animate = 1;
 	spooky->hostile = 1;
 	spooky->attack_style = 1;
 	spooky->scale = 25;
