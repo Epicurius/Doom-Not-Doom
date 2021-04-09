@@ -271,6 +271,7 @@ int			read_file(t_doom *doom, char *file_name)
 	}
 	while (get_next_line(fd, &line))
 	{
+		//ft_strequ
 		if (!(ft_strncmp(line, "type:map", 7)))
 			read_map(doom, fd);
 		else if (!(ft_strncmp(line, "type:vertex", 7)))

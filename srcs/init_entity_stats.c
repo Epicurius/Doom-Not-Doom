@@ -1,16 +1,16 @@
 
 #include "doom.h"
 
-static void	alfred(t_stats	*alfred)
+static void	alfred(t_stats *alfred)
 {
-	alfred->hp = 100;
-	alfred->dmg = 100;
+	alfred->health = 100;
+	alfred->damage = 100;
 	alfred->animate = 1;
 	alfred->hostile = 1;
 	alfred->attack_style = 2;
 	alfred->scale = 50;
 	alfred->height = 4;
-	alfred->speed = 0.05;
+	alfred->speed = 0.02;
 	alfred->wonder_distance = 0;
 	alfred->view_distance = 50;
 	alfred->detection_radius = 6;
@@ -22,10 +22,10 @@ static void	alfred(t_stats	*alfred)
 	alfred->flying = 1;
 }
 
-static void	spooky(t_stats	*spooky)
+static void	spooky(t_stats *spooky)
 {
-	spooky->hp = 200;
-	spooky->dmg = 30;
+	spooky->health = 200;
+	spooky->damage = 30;
 	spooky->animate = 1;
 	spooky->hostile = 1;
 	spooky->attack_style = 1;
@@ -38,7 +38,7 @@ static void	spooky(t_stats	*spooky)
 	spooky->attack_range = 35;
 	spooky->frame_rate[IDLE] = 100;
 	spooky->frame_rate[MOVE] = 200;
-	spooky->frame_rate[ATTACK] = 400;
+	spooky->frame_rate[ATTACK] = 500;
 	spooky->frame_rate[DEATH] = 500;
 	spooky->flying = 0;
 }
@@ -47,6 +47,7 @@ void	init_projectiles(t_doom *doom)
 {
 	int p;
 	int i;
+	int type;
 
 	doom->orb = ft_memalloc(sizeof(t_projectile)
 				* doom->nb.projectiles);
@@ -59,25 +60,28 @@ void	init_projectiles(t_doom *doom)
 			doom->entity[i].orb = &doom->orb[p];
 			p++;
 		}
+		else
+			doom->entity[i].orb = NULL;
 	}
 }
 
 void	init_entity_stats(t_doom *doom)
 {
 	int i;
+	int type;
 
 	i = -1;
+	alfred(&doom->entity_stats[0]);
+	spooky(&doom->entity_stats[1]);
 	while (++i < doom->nb.entities)
 	{
-		if (doom->entity[i].type == ALFRED)
-			alfred(&doom->entity[i].stat);
-		else if (doom->entity[i].type == SPOOKY)
-			spooky(&doom->entity[i].stat);
+		type = doom->entity[i].type;
+		doom->entity[i].stat = doom->entity_stats[type];
+		doom->entity[i].hp = doom->entity[i].stat.health;
+		doom->entity[i].dest = doom->entity[i].where;
 		if (doom->entity[i].stat.attack_style == 1)
 			doom->nb.projectiles++;
-		doom->entity[i].dest = doom->entity[i].where;
 	}
-//	printf("%d\n", doom->nb.projectiles);
 	if (doom->nb.projectiles > 0)
 		init_projectiles(doom);
 }

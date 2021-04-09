@@ -73,6 +73,14 @@ int main1(void)
 		return (0);
 	ft_putstr("Done with read_map.\n");
 	init_doom(doom);
+
+	//SDL_RWops *rwop = SDL_RWFromFile("./back1.xpm", "rb");
+	//SDL_Surface *i = IMG_LoadXPM_RW(rwop);
+	//if (!i)
+	//	printf("asdasd\n");
+	//SDL_UpdateWindowSurface(doom->win);
+	//doom->quit = 1;
+
 	ft_putstr("Done with init_doom.\n");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
@@ -107,6 +115,7 @@ int main1(void)
 		player_collision(doom);
 		draw_crosshair(doom);
 		fps_func(doom);
+		//SDL_BlitSurface(i, NULL, doom->surface, NULL);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 	free_doom(doom);

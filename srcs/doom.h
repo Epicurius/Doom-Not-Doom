@@ -74,14 +74,13 @@ typedef struct		s_projectile
 	int		sector;	
 }			t_projectile;
 
-typedef struct	s_stats
+typedef struct		s_stats
 {
-	int		hp;
+	int		health;
 	int		height;
 	double		speed;
 	int		flying;
-
-	int		dmg;
+	int		damage;
 	int		animate;
 	int		hostile;
 	int		attack_style;
@@ -91,7 +90,7 @@ typedef struct	s_stats
 	int		detection_radius;
 	int		attack_range;
 	int		frame_rate[4];
-}		t_stats;
+}			t_stats;
 
 typedef struct		s_entity
 {
@@ -102,15 +101,13 @@ typedef struct		s_entity
 	int		sector;
 	double		yaw;
 
-	int		ground;
-
-
-	t_stats		stat;
 	int		state;
 	int		frame;
 	int		angle;
-	
+
+	t_stats		stat;
 	int		id;
+	int		hp;
 	int		type;
 	double		scale;
 	double		time;
@@ -133,9 +130,6 @@ typedef struct		s_player
 	int		flying;
 	int		shooting;
 }			t_player;
-
-
-
 
 typedef struct		s_sprite
 {
@@ -369,6 +363,7 @@ typedef struct				s_doom
 	t_wall				skybox[4];
 	t_sector			*sectors;
 	t_entity			*entity;
+	t_stats				entity_stats[2];
 	t_projectile			*orb;
 
 	t_camera			cam;

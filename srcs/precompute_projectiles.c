@@ -88,8 +88,8 @@ void	precompute_projectiles(t_doom *doom)
 		if (!doom->orb[i].render)
 			continue ;
 		dest = sum_xyz(doom->orb[i].where, doom->orb[i].velocity);
-		if (player_contact(doom, dest))
-			doom->orb[i].render = 0;	
+		//if (player_contact(doom, dest))
+		//	doom->orb[i].render = 0;	
 		if (vertical_projectile_collision(doom, &doom->orb[i], dest))
 			doom->orb[i].render = 0;
 		else if (horizontal_projectile_collision(doom, &doom->orb[i], dest))

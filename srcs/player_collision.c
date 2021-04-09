@@ -16,8 +16,7 @@ int	vertical_collision3(t_collision_thread *entity, t_xyz dest)
 	else if (entity->velocity->z > 0 && dest.z + entity->hitbox_height > sector.ceiling.y)
 		return (1);
 	// Let the player keep on rising/falling.
-	else
-		entity->where->z += entity->velocity->z;
+	entity->where->z += entity->velocity->z;
 	return (0);
 }
 
