@@ -15,6 +15,25 @@
 #include <math.h>
 #include "doom.h"
 
+
+struct timespec start, finish;
+double elapsed;
+#include <time.h>
+//Precompute takes 0,005% of fps
+
+void	cs(void)
+{
+	clock_gettime(_CLOCK_MONOTONIC, &start);
+}
+
+void	ce(void)
+{
+	clock_gettime(_CLOCK_MONOTONIC, &finish);
+	elapsed = (finish.tv_sec - start.tv_sec);
+	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+	printf("%f\n", elapsed);
+}
+
 void	init_doom(t_doom *doom)
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -46,21 +65,33 @@ void	init_doom(t_doom *doom)
 	init_tpool(&doom->tpool, doom->nb.processors);
 #endif
 	//init_minimap(doom);
+	cs();
 	load_textures(doom);
+	ce();
 	init_scale(doom);
 	init_entity_stats(doom);
 }
-	/*clock_gettime(_CLOCK_MONOTONIC, &start);
-	clock_gettime(_CLOCK_MONOTONIC, &finish);
-	elapsed = (finish.tv_sec - start.tv_sec);
-	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	printf("%f\n", elapsed);*/
 
-struct timespec start, finish;
-double elapsed;
-#include <time.h>
-//Precompute takes 0,005% of fps
 
+void	asd(SDL_Surface *surface, t_bxpm *bxpm)
+{
+	int x;
+	int y;
+	Uint32 *pix;
+
+	pix = surface->pixels;
+	y = -1;
+	while (++y < bxpm->h && y < H)
+	{
+		x = -1;
+		while (++x < bxpm->w && x < W)
+		{
+			//pix[y * W + x] = brightness(bxpm->clr[bxpm->pix[y * bxpm->w + x]], -150);
+			pix[y * W + x] = bxpm->palet[255 + -150][bxpm->pix[y * bxpm->w + x]];
+		}
+
+	}
+}
 
 int main1(void)
 {
@@ -71,21 +102,21 @@ int main1(void)
 		return (0);
 	if (!read_file(doom, "./skybox.txt"))
 		return (0);
+	cs();
+	load_bxpm(doom);
+	ce();
+	cs();
+	color_palets(doom);
+	ce();
 	ft_putstr("Done with read_map.\n");
 	init_doom(doom);
-
-	//SDL_RWops *rwop = SDL_RWFromFile("./back1.xpm", "rb");
-	//SDL_Surface *i = IMG_LoadXPM_RW(rwop);
-	//if (!i)
-	//	printf("asdasd\n");
-	//SDL_UpdateWindowSurface(doom->win);
-	//doom->quit = 1;
-
 	ft_putstr("Done with init_doom.\n");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
+		//cs();
 		reset_render_arrays(doom);
+		//ce();
 		update_camera(doom, 0, 0);
 		precompute_walls(doom);
 		precompute_skybox(doom);
@@ -110,12 +141,12 @@ int main1(void)
 				exit (1);
 		}
 		movement(doom);
-		//vertical_collision(doom, &doom->player);
-		//horizontal_collision(doom, &doom->player);
 		player_collision(doom);
 		draw_crosshair(doom);
+		//asd(doom->surface, &doom->mtx[2]);
+		//asd(doom->surface, &bxpm);
+		
 		fps_func(doom);
-		//SDL_BlitSurface(i, NULL, doom->surface, NULL);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 	free_doom(doom);

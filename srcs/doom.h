@@ -31,6 +31,17 @@
 //#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
 
 
+typedef struct		s_bxpm
+{
+	int		w;
+	int		h;
+	int		clr_nb;
+	int		pix_nb;
+	short		*pix;
+	uint32_t	*clr;
+	uint32_t	*palet[256 + 256];
+}			t_bxpm;
+
 typedef	struct	s_floor_ceiling
 {
 	double	floor;
@@ -284,7 +295,8 @@ typedef struct		s_render
 	t_texture		*ptx;
 	t_texture		*ctx;
 	t_texture		*ftx;
-	t_texture		*stx;
+	t_bxpm			*stx;
+	t_bxpm			*mtx;
 	t_wall			*skybox;
 	int			*ytop;
 	int			*ybot;
@@ -355,7 +367,7 @@ typedef struct				s_doom
 	t_keys				key;
 	t_map				map;
 
-	//Map
+	//	Map
 	t_xyz				*vert;
 	t_wall				*walls;
 	t_plane				*floors;
@@ -370,17 +382,18 @@ typedef struct				s_doom
 	t_player			player;
 
 
-	//Render
+	//	Render
 	int				str_x;
 	int				end_x;
 	int				*ytop;
 	int				*ybot;
 	double				*zbuffer;
 
-	//Textures
+	//	Textures
 	TTF_Font			*clock_font;
+	t_bxpm				stx[6];
+	t_bxpm				mtx[6];
 	t_texture			textures[50];
-	t_texture			skybox_t[6]; //cube has 6 sides
 
 	//tmp
 	SDL_Surface				*imp;
@@ -450,7 +463,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
 
 //	Blit pixels
 void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx);
-void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
 void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
@@ -505,5 +518,8 @@ void	player_collision(t_doom *doom);
 int	entity_collision(t_collision_thread *entity, t_xyz dest);
 int	collision_detection(void *arg);
 
+void		load_bxpm(t_doom *doom);
+void		color_palet(t_bxpm *bxpm, int light);
+void		color_palets(t_doom *doom);
 int		free_doom(t_doom *doom);
 #endif

@@ -41,3 +41,37 @@ unsigned int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 		<< 8
 		| ((aalpha * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
 }
+
+void	color_palet(t_bxpm *bxpm, int light)
+{
+	int i;
+
+	i = -1;
+	if (bxpm->palet[255 + light])
+		return ;
+	bxpm->palet[255 + light] = ft_memalloc(sizeof(uint32_t*) * bxpm->clr_nb);
+	while (++i < bxpm->clr_nb)
+		bxpm->palet[255 + light][i] = brightness(bxpm->clr[i], light);
+}
+
+void	color_palets(t_doom *doom)
+{
+	int s;
+	int w;
+
+	s = -1;
+	while (++s < doom->nb.sectors)
+	{
+		w = -1;
+		while (++w < doom->sectors[s].npoints)
+		{
+			color_palet(&doom->mtx[doom->sectors[s].wall[w]->wtx],
+					doom->sectors[s].light);
+		}
+		color_palet(&doom->mtx[doom->sectors[s].floor.tx],
+					doom->sectors[s].light);
+		color_palet(&doom->mtx[doom->sectors[s].ceiling.tx],
+					doom->sectors[s].light);
+		
+	}
+}

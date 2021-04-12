@@ -56,7 +56,7 @@ typedef struct	s_double_xyz
 #define PLAYER_RADIUS					1.0
 #define NEAR_Z						0.1
 #define FAR_Z						1000
-#define RENDER_DISTANCE					200
+#define RENDER_DISTANCE					200.0
 
 /*
 ** Entities

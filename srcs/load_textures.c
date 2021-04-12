@@ -19,7 +19,7 @@ void	init_texture_values(t_texture *texture, t_xyz size)
 	texture->x = 0;
 	texture->y = 0;
 }
-
+/*
 void	load_skybox_textures(t_doom *doom)
 {
 	int i;
@@ -33,7 +33,7 @@ void	load_skybox_textures(t_doom *doom)
 	doom->skybox_t[5].surface = IMG_Load("./bmp/skyboxes/top1.bmp");
 	while (++i < NB_SKYBOX_TEXTURES)
 		init_texture_values(&doom->skybox_t[i], xyz(0,0,0));
-}
+}*/
 
 void	init_clock(t_doom *doom);
 //precalc width / scale
@@ -63,7 +63,7 @@ void	load_map_textures(t_doom *doom)
 
 void	load_textures(t_doom *doom)
 {
-	load_skybox_textures(doom);
+	//load_skybox_textures(doom);
 	load_map_textures(doom);
 	init_clock(doom);
 	init_alfred(doom, &doom->sprites[0]);

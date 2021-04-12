@@ -97,7 +97,7 @@ void	draw_skybox(t_render *render, t_vline *vline, int side)
 		//skybox.z_near_z  = vline->z_near_z;
 		skybox_limits(render, vline, side, &limit);
 		compute_skybox_vline_data(render, &skybox, i);
-		texture_w = 2048 / (render->skybox[i].sv2.z ?
+		texture_w = 1024 / (render->skybox[i].sv2.z ?
 			render->skybox[i].sv2.z : render->skybox[i].cv2.z);
 		render->s = i;
 		draw_skybox_vline(render, skybox, texture_w, limit);

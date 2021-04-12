@@ -70,6 +70,7 @@ SRC =	./doom.c\
 	./init_player.c\
 	./player_collision.c\
 	./object_collision.c\
+	./load_bxpm.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
 OBJS = ./*.o
@@ -77,12 +78,16 @@ INCLUDES = ./lib/libft/libft.a\
 		./lib/libpf/libpf.a\
 		./lib/tpool/tpool.a
 
+TEXTURES = ./wood.bxpm
+
+SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0 -l SDL2_image-2.0.0
+
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	@gcc -o $(NAME) $(SRCS) $(INCLUDES) -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0 -l SDL2_image-2.0.0
+	@gcc -o $(NAME) $(SRCS) $(INCLUDES) $(SDL)
 	@echo "$(NAME) was created."
 clean:
 	/bin/rm -f $(OBJS)

@@ -28,10 +28,12 @@ int	reset_zbuffer_thread(void *arg)
 void	reset_render_arrays(t_doom *doom)
 {
 	int i;
+/*
 #ifndef JONY
 	t_reset_array arr[doom->nb.processors];
 
 	i = -1;
+	// dont reset force map to put pixel
 	while (++i < doom->nb.processors)
 	{
 		arr[i].start = W * H / (float)doom->nb.processors * i;
@@ -45,6 +47,7 @@ void	reset_render_arrays(t_doom *doom)
 	while (++i < W * H)
 		doom->zbuffer[i] = RENDER_DISTANCE;
 #endif
+*/
 	i = -1;
 	while (++i < W)
 	{
@@ -66,7 +69,7 @@ void	reset_render_arrays(t_doom *doom)
 		}
 	}
 #ifndef JONY
-	tpool_wait(&doom->tpool);
+	//tpool_wait(&doom->tpool);
 #endif
 }
 

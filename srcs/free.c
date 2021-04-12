@@ -17,12 +17,6 @@ void	free_map(t_doom *doom, int i)
 	ft_memdel((void**)&doom->sectors);
 }
 
-void	free_skybox_surface(t_doom *doom, int i)
-{
-	while (++i < 6)
-		SDL_FreeSurface(doom->skybox_t[i].surface);
-}
-
 void	free_textures_surface(t_doom *doom, int i)
 {
 	while (++i < 50)
@@ -67,7 +61,6 @@ void	free_font(t_doom *doom, int i)
 int	free_doom(t_doom *doom)
 {
 	free_map(doom, -1);
-	free_skybox_surface(doom, -1);
 	free_textures_surface(doom, -1);
 	free_entity_texture(doom, -1, &doom->sprites[0]);
 	free_entity_texture(doom, -1, &doom->sprites[1]);
