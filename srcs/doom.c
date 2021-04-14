@@ -29,6 +29,7 @@ void	cs(void)
 
 void	ce(char *str)
 {
+	//int i;
 	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
@@ -51,9 +52,9 @@ void	init_doom(t_doom *doom)
 
 	FPS.count = 0;
 	FPS.surf = NULL;
-	FPS.font = TTF_OpenFont("./bmp/digital.ttf", FPS_FONT_SIZE);
+	FPS.font = TTF_OpenFont("./resources/font/digital.ttf", FPS_FONT_SIZE);
 	FPS.color = hex_to_sdl_color(0x40eb34ff);
-	doom->clock_font = TTF_OpenFont("./bmp/digital.ttf", 100);
+	doom->clock_font = TTF_OpenFont("./resources/font/digital.ttf", 100);
 	doom->win = SDL_CreateWindow("DOOM", 0, 0, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;

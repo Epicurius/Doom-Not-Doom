@@ -1,6 +1,6 @@
 
 #include "doom.h"
-#include "../bxpm/spooky.bxpm"
+#include "../resources/bxpm/spooky.bxpm"
 
 void	init_spooky_nb(t_texture_sheet *sprite)
 {

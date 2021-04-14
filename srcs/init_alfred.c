@@ -1,6 +1,6 @@
 
 #include "doom.h"
-#include "../bxpm/alfred.bxpm"
+#include "../resources/bxpm/alfred.bxpm"
 
 void	init_alfred_nb(t_texture_sheet *sprite)
 {
