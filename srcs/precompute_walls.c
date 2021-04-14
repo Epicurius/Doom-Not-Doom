@@ -46,16 +46,16 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	i = -1;
 	while (++i < wall->bh.total)
 	{
-		wall->bh.num[i].tscale.x = 64 * wall->width / wall->sv2.z;
-		wall->bh.num[i].tscale.y = 64 * wall->height;
+		wall->bh.num[i].tscale.x = 128 * wall->width / wall->sv2.z;
+		wall->bh.num[i].tscale.y = 128 * wall->height;
 		wall->bh.num[i].ready = 1;
 	}
 	i = -1;
 	while (++i < wall->wsprite.total)
 	{
-		if (wall->wsprite.num[i].tx == 49 && !clock_wsprite(doom, wall, i))
+		if (wall->wsprite.num[i].tx == -1 && !clock_wsprite(doom, wall, i))
 				continue ;
-		else if (doom->textures[wall->wsprite.num[i].tx].nb > 0)
+		else if (wall->wsprite.num[i].tx == 1)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
 		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w / wall->sv2.z;
 		wall->wsprite.num[i].tscale.y = wall->wsprite.num[i].scale_h;
@@ -79,8 +79,6 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 void	precompute_walls(t_doom *doom)
 {
 	int i;
-	double yceil;
-	double yfloor;
 
 	i = -1;
 	while (++i < doom->nb.sectors)

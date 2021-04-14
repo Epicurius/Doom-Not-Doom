@@ -13,26 +13,6 @@
 #ifndef MACROS_H
 # define MACROS_H
 
-typedef struct	s_int_xyz
-{
-	int	x;
-	int	y;
-	int	z;
-}		t_int_xyz;
-
-typedef struct	s_double_xyz
-{
-	double	x;
-	double	y;
-	double	z;
-}		t_double_xyz;
-
-
-/*
-** Jony
-*/
-//# define JONY
-
 /*
 ** Screen info
 */

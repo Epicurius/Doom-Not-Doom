@@ -54,9 +54,8 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 			*qtotal += 1;
 		}
 	}
-#ifndef JONY
-	tpool_wait(&doom->tpool);
-#endif
+	if (!tpool_wait(&doom->tpool))
+		return ;
 }
 
 
@@ -102,9 +101,6 @@ int		draw_vline(void	*arg)
 	if (vline.curr.ceiling > render->ytop[render->x] ||
 		vline.curr.floor < render->ybot[render->x])
 			precompute_texels(render, render->wall, &vline);
-	if (ENABLE_BH)
-		draw_wall_bh(render, &vline);
-	draw_wsprites(render, &vline);
 	draw_floor_and_ceiling(render, &vline);
 	if (render->wall.n != -1)
 		draw_neighbor_wall(render, &vline);
@@ -118,7 +114,10 @@ int		draw_vline(void	*arg)
 		else
 			draw_wall_texture(render, &vline);
 	}
-	return (0);
+	draw_wsprites(render, &vline);
+	if (ENABLE_BH)
+		draw_wall_bh(render, &vline);
+	return (1);
 }
 
 void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_wall *wall)
@@ -144,6 +143,7 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_wall *wa
 		render[x].mtx =		doom->mtx;
 
 		render[x].bh =		&wall->bh;
+		render[x].clock =	doom->clock;
 		render[x].wsprite =	&wall->wsprite;
 	
 		// Copy
@@ -156,11 +156,8 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_wall *wa
    		render[x].light =	sector.light;
 		render[x].x =		x;
 		render[x].s =		s;
-#ifndef JONY
 		tpool_add(&doom->tpool, draw_vline, &render[x]);
-#else
-		draw_vline(&render[x]);
-#endif
+		//draw_vline(&render[x]);
 		x += 1;
 	}
 }

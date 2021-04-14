@@ -97,7 +97,7 @@ int	collision_detection(void *arg)
 		entity->velocity->x = 0;
 		entity->velocity->y = 0;
 		entity->velocity->z = 0;
-		return (0);
+		return (1);
 	}
 	if (vertical_collision3(entity, dest))
 		entity->velocity->z = 0;
@@ -106,7 +106,7 @@ int	collision_detection(void *arg)
 		entity->velocity->x = 0;
 		entity->velocity->y = 0;
 	}
-	return (0);
+	return (1);
 }
 
 void	player_collision(t_doom *doom)

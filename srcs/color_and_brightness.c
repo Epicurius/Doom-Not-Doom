@@ -58,20 +58,20 @@ void	color_palets(t_doom *doom)
 {
 	int s;
 	int w;
+	t_sector *sector;
+	
 
 	s = -1;
 	while (++s < doom->nb.sectors)
 	{
 		w = -1;
+		sector = &doom->sectors[s];
 		while (++w < doom->sectors[s].npoints)
 		{
-			color_palet(&doom->mtx[doom->sectors[s].wall[w]->wtx],
-					doom->sectors[s].light);
+			color_palet(&doom->mtx[sector->wall[w]->wtx], sector->light);
 		}
-		color_palet(&doom->mtx[doom->sectors[s].floor.tx],
-					doom->sectors[s].light);
-		color_palet(&doom->mtx[doom->sectors[s].ceiling.tx],
-					doom->sectors[s].light);
+		color_palet(&doom->mtx[sector->floor.tx], sector->light);
+		color_palet(&doom->mtx[sector->ceiling.tx], sector->light);
 		
 	}
 }

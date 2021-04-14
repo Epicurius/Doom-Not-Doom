@@ -23,21 +23,22 @@ double elapsed;
 
 void	cs(void)
 {
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
-void	ce(void)
+void	ce(char *str)
 {
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	printf("%f\n", elapsed);
+	printf("%s: %f\n", str, elapsed);
 }
 
 void	init_doom(t_doom *doom)
 {
 	SDL_Init(SDL_INIT_VIDEO);
-	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 	TTF_Init();
 	if (!(doom->ytop = ft_memalloc(sizeof(int) * W)))
 		return ;
@@ -61,36 +62,13 @@ void	init_doom(t_doom *doom)
 	init_camera(doom);
 	init_skybox(doom);
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
-#ifndef JONY
 	init_tpool(&doom->tpool, doom->nb.processors);
-#endif
-	//init_minimap(doom);
+	init_minimap(doom);
 	cs();
 	load_textures(doom);
-	ce();
+	ce("load textures");
 	init_scale(doom);
 	init_entity_stats(doom);
-}
-
-
-void	asd(SDL_Surface *surface, t_bxpm *bxpm)
-{
-	int x;
-	int y;
-	Uint32 *pix;
-
-	pix = surface->pixels;
-	y = -1;
-	while (++y < bxpm->h && y < H)
-	{
-		x = -1;
-		while (++x < bxpm->w && x < W)
-		{
-			//pix[y * W + x] = brightness(bxpm->clr[bxpm->pix[y * bxpm->w + x]], -150);
-			pix[y * W + x] = bxpm->palet[255 + -150][bxpm->pix[y * bxpm->w + x]];
-		}
-
-	}
 }
 
 int main1(void)
@@ -102,35 +80,47 @@ int main1(void)
 		return (0);
 	if (!read_file(doom, "./skybox.txt"))
 		return (0);
-	cs();
-	load_bxpm(doom);
-	ce();
-	cs();
-	color_palets(doom);
-	ce();
 	ft_putstr("Done with read_map.\n");
 	init_doom(doom);
 	ft_putstr("Done with init_doom.\n");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
-		//cs();
+		cs();
 		reset_render_arrays(doom);
-		//ce();
+		ce("1");
+		cs();
 		update_camera(doom, 0, 0);
+		ce("2");
+		cs();
 		precompute_walls(doom);
+		ce("3");
+		cs();
 		precompute_skybox(doom);
-		DrawScreen(doom);
+		ce("4");
+		cs();
+		DrawScreen(doom);//
+		ce("5");
+		cs();
 		doom->player.shooting = 0;
 		precompute_entities(doom);
+		ce("6");
+		cs();
 		precompute_projectiles(doom);
+		ce("7");
+		cs();
 		DrawProjectiles(doom);
-		DrawEntity(doom);
-		//if (doom->key.tab)
-		//	map(doom);
+		ce("8");
+		cs();
+		DrawEntity(doom);//
+		ce("10");
+		cs();
+		if (doom->key.tab)
+			map(doom);
 		//shade_zbuffer(doom);
-
-        	while (SDL_PollEvent(&event))
+		ce("11");
+		cs();
+        	while (SDL_PollEvent(&event))//
 		{
 			if (event.type == SDL_KEYUP || event.type == SDL_KEYDOWN)
 			{
@@ -140,12 +130,17 @@ int main1(void)
 			else if (event.type == SDL_QUIT)
 				exit (1);
 		}
+		ce("12");
+		cs();
 		movement(doom);
+		ce("13");
+		cs();
 		player_collision(doom);
+		ce("14");
+		cs();
 		draw_crosshair(doom);
 		//asd(doom->surface, &doom->mtx[2]);
-		//asd(doom->surface, &bxpm);
-		
+		ce("15");
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
 	}

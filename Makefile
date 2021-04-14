@@ -10,6 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
+RED := "\e[0;31m"
+GREEN := "\e[0;32m"
+YELLOW := "\e[0;33m"
+BLUE := "\e[0;34m"
+MAGENTA := "\e[0;35m"
+CYAN := "\e[0;36m"
+RESET :="\e[0m"
+
 NAME = doom
 DIR_S = ./srcs
 SRC =	./doom.c\
@@ -73,22 +81,35 @@ SRC =	./doom.c\
 	./load_bxpm.c\
 
 SRCS = $(addprefix $(DIR_S)/,$(SRC))
+
 OBJS = ./*.o
-INCLUDES = ./lib/libft/libft.a\
-		./lib/libpf/libpf.a\
-		./lib/tpool/tpool.a
 
-TEXTURES = ./wood.bxpm
+LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 
-SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0 -l SDL2_image-2.0.0
+SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
 
 FLAGS = -Wall -Wextra -Werror
+
+PATH_TO_XPM = ./textures/xpm
+PATH_TO_BXPM = ./textures/bxpm
+
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	@gcc -o $(NAME) $(SRCS) $(INCLUDES) $(SDL)
-	@echo "$(NAME) was created."
+
+ifneq ($(wildcard ./textures/bxpm),)
+	@printf "Found BXPM files.\n"
+else
+	@printf "Did not find BXPM files.\n"
+	@mkdir ./textures/bxpm
+	make -C ./bxpm_converter
+	./bxpm_converter/bxpm_convert ./textures/xpm/*.xpm
+	@-mv ./textures/xpm/*.bxpm ./textures/bxpm/
+	@printf "BXPM files moved to ./texture/bxpm.\n"
+endif
+	@gcc -o $(NAME) $(SRCS) $(LIBS) $(SDL)
+	@printf $(GREEN)"$(NAME) was created.\n"$(RESET)
 clean:
 	/bin/rm -f $(OBJS)
 	#make -C ./libft/ clean

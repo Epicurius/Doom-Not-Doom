@@ -38,6 +38,7 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	e->hitbox_radius	= 5;
 	e->step_height		= 1;
 	tpool_add(&doom->tpool, collision_detection, &e);
-	tpool_wait(&doom->tpool);
+	if(!tpool_wait(&doom->tpool))
+		ft_printf("tpool error\n");
 	entity->yaw = angle_to_point(entity->where, entity->dest);
 }

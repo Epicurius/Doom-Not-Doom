@@ -1,5 +1,6 @@
 
 #include "doom.h"
+#include "../bxpm/alfred.bxpm"
 
 void	init_alfred_nb(t_texture_sheet *sprite)
 {
@@ -17,8 +18,15 @@ int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
 {
 	int i;
 
-	if (!(sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp")))
-		printf("Error Alfred!\n");
+	sprite->bxpm.w		= bxpm_info_alfred[0];
+	sprite->bxpm.h		= bxpm_info_alfred[1];
+	sprite->bxpm.clr_nb	= bxpm_info_alfred[2];
+	sprite->bxpm.pix_nb	= bxpm_info_alfred[3];
+	sprite->bxpm.clr	= bxpm_colors_alfred;
+	sprite->bxpm.pix	= bxpm_pixels_alfred;
+
+	//if (!(sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp")))
+	//	printf("Error Alfred!\n");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_alfred_nb(sprite);
 	i = -1;
@@ -43,30 +51,30 @@ int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
 		sprite->pos[DEATH][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[DEATH][ANGLES]);
 
 
-	sprite->pos[0][0][4] = new_rect(45,  33, 88,  79);
-	sprite->pos[0][0][5] = new_rect(133, 33, 163, 79);
-	sprite->pos[0][0][6] = new_rect(210, 33, 239, 86);
-	sprite->pos[0][0][7] = new_rect(283, 33, 317, 84);
-	sprite->pos[0][0][0] = new_rect(362, 33, 405, 78);
-	sprite->pos[0][0][1] = new_rect(424, 33, 456, 85);
-	sprite->pos[0][0][2] = new_rect(500, 33, 531, 87);
-	sprite->pos[0][0][3] = new_rect(576, 33, 607, 79);
+	sprite->pos[0][0][4] = new_rect(0,	0,	43,	47);
+	sprite->pos[0][0][5] = new_rect(88,	0,	120,	47);
+	sprite->pos[0][0][6] = new_rect(164,	0,	195,	52);
+	sprite->pos[0][0][7] = new_rect(239,	0,	274,	52);
+	sprite->pos[0][0][0] = new_rect(318,	0,	362,	46);
+	sprite->pos[0][0][1] = new_rect(377,	0,	412,	51);
+	sprite->pos[0][0][2] = new_rect(456,	0,	487,	54);
+	sprite->pos[0][0][3] = new_rect(531,	0,	562,	47);
 
-	sprite->pos[1][0][4] = new_rect(45,  33, 88,  79);
-	sprite->pos[1][0][5] = new_rect(133, 33, 163, 79);
-	sprite->pos[1][0][6] = new_rect(210, 33, 239, 86);
-	sprite->pos[1][0][7] = new_rect(283, 33, 317, 84);
-	sprite->pos[1][0][0] = new_rect(362, 33, 405, 78);
-	sprite->pos[1][0][1] = new_rect(424, 33, 456, 85);
-	sprite->pos[1][0][2] = new_rect(500, 33, 531, 87);
-	sprite->pos[1][0][3] = new_rect(576, 33, 607, 79);
+	sprite->pos[1][0][4] = new_rect(0,	55,	44,	98);
+	sprite->pos[1][0][5] = new_rect(48,	55, 	107,	91);
+	sprite->pos[1][0][6] = new_rect(123,	55,	188,	89);
+	sprite->pos[1][0][7] = new_rect(196,	55,	251,	87);
+	sprite->pos[1][0][0] = new_rect(260,	55,	303,	80);
+	sprite->pos[1][0][1] = new_rect(308,	55,	362,	86);
+	sprite->pos[1][0][2] = new_rect(369,	55,	436,	88);
+	sprite->pos[1][0][3] = new_rect(451,	55,	511,	90);
 
 
-	sprite->pos[2][0][0] = new_rect(44,  449,  78, 499);
-	sprite->pos[2][1][0] = new_rect(122, 449, 158, 500);
-	sprite->pos[2][2][0] = new_rect(203, 449, 247, 496);
-	sprite->pos[2][3][0] = new_rect(291, 449, 359, 508);
-	sprite->pos[2][4][0] = new_rect(403, 449, 491, 520);
-	sprite->pos[2][5][0] = new_rect(539, 449, 638, 537);
+	sprite->pos[2][0][0] = new_rect(0,	101, 	33,	153);
+	sprite->pos[2][1][0] = new_rect(78,	101,	114,	155);
+	sprite->pos[2][2][0] = new_rect(158,	101,	202,	150);
+	sprite->pos[2][3][0] = new_rect(247,	101,	315,	161);
+	sprite->pos[2][4][0] = new_rect(359,	101,	447,	174);
+	sprite->pos[2][5][0] = new_rect(491,	101,	594,	192);
 	return (1);
 }

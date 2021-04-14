@@ -1,5 +1,6 @@
 
 #include "doom.h"
+#include "../bxpm/spooky.bxpm"
 
 void	init_spooky_nb(t_texture_sheet *sprite)
 {
@@ -17,7 +18,14 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite)
 {
 	int i;
 
-	sprite->surface = IMG_Load("./bmp/entities/spooky2.bmp");
+	sprite->bxpm.w		= bxpm_info_spooky[0];
+	sprite->bxpm.h		= bxpm_info_spooky[1];
+	sprite->bxpm.clr_nb	= bxpm_info_spooky[2];
+	sprite->bxpm.pix_nb	= bxpm_info_spooky[3];
+	sprite->bxpm.clr	= bxpm_colors_spooky;
+	sprite->bxpm.pix	= bxpm_pixels_spooky;
+
+	//sprite->surface = IMG_Load("./bmp/entities/spooky2.bmp");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_spooky_nb(sprite);
 	i = -1;

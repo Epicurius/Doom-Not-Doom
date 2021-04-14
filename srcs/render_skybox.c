@@ -56,5 +56,5 @@ int		draw_vline(void	*arg)
 		else
 			draw_wall_texture(render, &vline);
 	}
-	return (0);
+	return (1);
 }

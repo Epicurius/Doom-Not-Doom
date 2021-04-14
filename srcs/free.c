@@ -66,14 +66,12 @@ int	free_doom(t_doom *doom)
 	free_entity_texture(doom, -1, &doom->sprites[1]);
 	free_render_utils(doom, -1);
 	free_font(doom, -1);
-#ifndef JONY
 	free_tpool(&doom->tpool);
-#endif
 	SDL_FreeSurface(doom->surface);
 	SDL_DestroyWindow(doom->win);
 	SDL_Quit();
 	TTF_Quit();
-	IMG_Quit();
+	//IMG_Quit();
 	ft_putstr("All is free!\n");
 	free(doom);
 	return (1);

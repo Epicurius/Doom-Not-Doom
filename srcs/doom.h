@@ -37,7 +37,7 @@ typedef struct		s_bxpm
 	int		h;
 	int		clr_nb;
 	int		pix_nb;
-	short		*pix;
+	unsigned short	*pix;
 	uint32_t	*clr;
 	uint32_t	*palet[256 + 256];
 }			t_bxpm;
@@ -276,6 +276,7 @@ typedef struct		s_entity_render
 {
 	SDL_Surface	*surface;
 	SDL_Surface	*texture;
+	t_bxpm		*bxpm;
 	t_xyz		screen;
 	double		scale;
 	t_xyz		size;
@@ -291,6 +292,7 @@ typedef struct		s_entity_render
 typedef struct		s_render
 {
 	SDL_Surface		*surface;
+	SDL_Surface		*clock;
 	t_texture		*wtx;
 	t_texture		*ptx;
 	t_texture		*ctx;
@@ -346,13 +348,13 @@ typedef	struct				s_fps
 typedef struct	s_texture_sheet
 {
 	SDL_Surface 	*surface;
+	t_bxpm		bxpm;
 	int		nb[4][2];
 	t_rect		***pos;
 }			t_texture_sheet;
 
 typedef struct				s_doom
 {
-	t_texture_sheet			sprites[2];
 	int				quit;
 	char				*file;
 	SDL_Window			*win;
@@ -391,8 +393,10 @@ typedef struct				s_doom
 
 	//	Textures
 	TTF_Font			*clock_font;
+	SDL_Surface			*clock;
 	t_bxpm				stx[6];
 	t_bxpm				mtx[6];
+	t_texture_sheet			sprites[2];
 	t_texture			textures[50];
 
 	//tmp

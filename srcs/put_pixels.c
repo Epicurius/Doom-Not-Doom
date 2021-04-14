@@ -1,8 +1,6 @@
 
 #include "doom.h"
 
-//	precalc all texture brightness will save 10fps
-
 void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx)
 {
 	Uint32		*pixels;
@@ -15,14 +13,12 @@ void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx)
 
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 {
-	//Uint32		*pixels;
+	unsigned short	light;
+	unsigned short	pixel;
 
-	//pixels = tx->surface->pixels;
-	((Uint32*)render->surface->pixels)[coord] =
-		bxpm->palet[255 + render->light][bxpm->pix[(int)text.y * bxpm->w + (int)text.x]];
-		//bxpm->clr[bxpm->pix[(int)text.y * bxpm->w + (int)text.x]];
-	//brightness(pixels[(int)text.y * tx->w + (int)text.x], render->light);
-	//brightness(pixels[(int)text.y * tx->w + (int)text.x], render->light);
+	light = 255 + render->light;
+	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
+	((Uint32*)render->surface->pixels)[coord] = bxpm->palet[light][pixel];
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 

@@ -15,6 +15,20 @@ void	put_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
+void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
+{
+	uint32_t	clr;
+	unsigned short	pix;
+
+	if (text.z >= ((double*)render->surface->userdata)[coord])
+		return ;
+	pix = render->bxpm->pix[(int)text.y * render->bxpm->w + (int)text.x];
+	clr = render->bxpm->clr[pix];
+	if (clr == 0x800080)
+		return ;
+	((Uint32*)render->surface->pixels)[coord] = clr;
+	((double*)render->surface->userdata)[coord] = text.z;
+}
 void	blit_entity(t_entity_render *render)
 {
 	t_v2 alpha;
@@ -31,7 +45,7 @@ void	blit_entity(t_entity_render *render)
 		{
 			alpha.x = (x - render->start.x) / render->xrange;
 			text.x = (1.0 - alpha.x) * render->img.x1 + alpha.x * render->img.x2;
-			put_entity_pixel(render, y * W + x, text);
+			blit_entity_pixel(render, y * W + x, text);
 		}
 	}
 }

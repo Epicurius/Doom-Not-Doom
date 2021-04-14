@@ -50,15 +50,14 @@ int	fustrum_in_sector(void *arg)
 		double tmp = (x / (double)(W - 1)) * doom->cam.range + doom->cam.near_left;
 		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
 		pos.y = tmp * (-p.anglecos) - (-doom->cam.near_z) * p.anglesin + p.where.y;
-		pos.z = p.where.z;
+		pos.z = p.where.z + EYE_LVL;
 		//fix!! also check starting from player sector
-		fustrum[W - x - 1] = find_sector(doom, pos);
+		fustrum[x] = find_sector(doom, pos);
 		x += 1;
 	}
 	return (1);
 }
 
-// FIX!! place before zbuffer reset.
 //In how many sectors the camera/near_z is positioned
 void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
 {
@@ -73,14 +72,9 @@ void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
 		arr[x].end = W /(double)doom->nb.processors * (x + 1);
 		arr[x].fustrum = fustrum;
 		arr[x].doom = doom;
-#ifndef JONY
 		tpool_add(&doom->tpool, fustrum_in_sector, &arr[x]);
-#else
-		fustrum_in_sector(&arr[x]);
-#endif
+		//fustrum_in_sector(&arr[x]);
 	}
-#ifndef JONY
 	tpool_wait(&doom->tpool);
-#endif
 	partition_screen(doom, fustrum, queue, qtotal);
 }
