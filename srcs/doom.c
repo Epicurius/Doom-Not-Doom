@@ -29,7 +29,7 @@ void	cs(void)
 
 void	ce(char *str)
 {
-	//int i;
+	int i;
 	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);

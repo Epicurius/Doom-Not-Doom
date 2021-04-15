@@ -93,6 +93,7 @@ RAW_TEXTURES =	wood.xpm\
 NAME = doom
 CDIR = srcs
 ODIR = obj
+LIB_DIR = lib
 SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 
@@ -102,13 +103,15 @@ XPM = $(addprefix $(PATH_TO_XPM)/,$(RAW_TEXTURES))
 BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.xpm=.bxpm))
 
 LINK_ID = 1IBh1iV3SRCg1aIaTFb0ryNg-xbjdGMvr
+RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
 CFLAGS = -Wall -Wextra -Werror
 
 
-all: $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
+all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
+	@printf $(GREEN)"Done!\n"$(RESET)
 
 $(ODIR):
 	@mkdir -p $@
@@ -130,6 +133,13 @@ $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_XPM)/%.xpm
 	@./bxpm_converter/bxpm_convert $<
 	@mv ./resources/xpm/*.bxpm ./resources/bxpm/
 
+$(LIB_DIR):
+	@git clone https://github.com/Epicurius/lib.git
+
+$(LIBS): $(LIB_DIR)
+	@make --no-print-directory -C lib/libft
+	@make --no-print-directory -C lib/libpf
+	@make --no-print-directory -C lib/tpool
 
 clean:
 	@/bin/rm -rf $(ODIR)
@@ -140,7 +150,7 @@ fclean: clean
 fclean_all: fclean
 	@/bin/rm -rf $(PATH_TO_BXPM)
 
-test:
+$(RESOURCES):
 	@printf $(CYAN)"[INFO] Importing resources\n"$(GREEN)
 	@wget -q --show-progress \
 	"https://drive.google.com/uc?export=download&confirm=$$(wget --quiet $\
