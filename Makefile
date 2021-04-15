@@ -111,17 +111,19 @@ CFLAGS = -Wall -Wextra -Werror
 
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
-	@printf $(GREEN)"Done!\n"$(RESET)
+	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
 
 $(ODIR):
+	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
 
 $(PATH_TO_BXPM):
+	@printf $(CYAN)"[INFO]	Creating folder texture\bxpm.\n"$(RESET)
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
+	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
 	@gcc -o $@ $(OBJ) $(LIBS) $(SDL)
-	@printf $(GREEN)"$@ was created.\n"$(RESET)
 
 
 $(ODIR)/%.o: $(CDIR)/%.c
@@ -134,21 +136,25 @@ $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_XPM)/%.xpm
 	@mv ./resources/xpm/*.bxpm ./resources/bxpm/
 
 $(LIB_DIR):
-	@git clone https://github.com/Epicurius/lib.git
+	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
+	@git clone -q https://github.com/Epicurius/lib.git
 
 $(LIBS): $(LIB_DIR)
 	@make --no-print-directory -C lib/libft
 	@make --no-print-directory -C lib/libpf
 	@make --no-print-directory -C lib/tpool
-	@make --no-print-directory -C bxpm_converter
+	@make -q --no-print-directory -C bxpm_converter
 
 clean:
+	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
 	@/bin/rm -rf $(ODIR)
 
 fclean: clean
+	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
 	@/bin/rm -f $(NAME)
 
 fclean_all: fclean
+	@printf $(CYAN)"[INFO]	Deleted BXPM\n"$(RESET)
 	@/bin/rm -rf $(PATH_TO_BXPM)
 
 $(RESOURCES):
