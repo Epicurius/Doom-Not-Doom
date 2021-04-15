@@ -140,6 +140,7 @@ $(LIBS): $(LIB_DIR)
 	@make --no-print-directory -C lib/libft
 	@make --no-print-directory -C lib/libpf
 	@make --no-print-directory -C lib/tpool
+	@make --no-print-directory -C bxpm_converter
 
 clean:
 	@/bin/rm -rf $(ODIR)
