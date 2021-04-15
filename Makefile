@@ -79,16 +79,16 @@ RAW_SRC =	doom.c \
 		load_bxpm.c
 
 RAW_TEXTURES =	wood.xpm\
-		nebula1.xpm\
-		nebula2.xpm\
-		nebula3.xpm\
-		nebula4.xpm\
-		nebula5.xpm\
-		nebula6.xpm\
 		spooky.xpm\
 		alfred.xpm\
 		bh.xpm\
 		vent.xpm\
+		space0.xpm\
+		space1.xpm\
+		space2.xpm\
+		space3.xpm\
+		space4.xpm\
+		space5.xpm\
 
 NAME = doom
 CDIR = srcs
@@ -102,7 +102,7 @@ PATH_TO_BXPM = ./resources/bxpm
 XPM = $(addprefix $(PATH_TO_XPM)/,$(RAW_TEXTURES))
 BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.xpm=.bxpm))
 
-LINK_ID = 1IBh1iV3SRCg1aIaTFb0ryNg-xbjdGMvr
+LINK_ID = 12uqrsSoPmC0yZSbqm1596Rl3UAT6jp6W
 RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a

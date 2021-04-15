@@ -22,7 +22,7 @@ void	skybox_floor_vline(t_render *render, t_vline vline)
 		text.y = render->stx[4].h - text.y;
 		text.x = render->stx[4].w - text.x;
 		//if (RENDER_DISTANCE == ((double*)render->surface->userdata)[coord])
-			blit_pixel_skybox(render, coord, text, 4);
+			blit_pixel_skybox(render, coord, text, 5);
 		vline.y1++;
 	}
 }
