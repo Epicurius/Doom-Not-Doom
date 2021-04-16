@@ -79,9 +79,14 @@ void	init_entity_stats(t_doom *doom)
 		doom->entity[i].stat = doom->entity_stats[type];
 		doom->entity[i].hp = doom->entity[i].stat.health;
 		doom->entity[i].dest = doom->entity[i].where;
+		doom->entity[i].sector = find_sector(doom, doom->entity[i].where);
+		doom->entity[i].render = 1;
 		if (doom->entity[i].stat.attack_style == 1)
 			doom->nb.projectiles++;
 	}
 	if (doom->nb.projectiles > 0)
 		init_projectiles(doom);
+	doom->player.sector = find_sector(doom, doom->player.where);
+	doom->player.hp = 1000;
+	doom->player.flying = 0;
 }

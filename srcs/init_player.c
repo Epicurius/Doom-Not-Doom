@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-int	init_player(t_doom *doom)
+int	init_player1(t_doom *doom)
 {
 	t_player *player;
 

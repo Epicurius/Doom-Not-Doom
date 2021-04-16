@@ -76,7 +76,7 @@ RAW_SRC =	doom.c \
 		object_collision.c\
 		init_alfred.c\
 		init_spooky.c\
-		load_bxpm.c
+		load_bxpm.c\
 
 RAW_TEXTURES =	wood.xpm\
 		spooky.xpm\
@@ -143,7 +143,7 @@ $(LIBS): $(LIB_DIR)
 	@make --no-print-directory -C lib/libft
 	@make --no-print-directory -C lib/libpf
 	@make --no-print-directory -C lib/tpool
-	@make -q --no-print-directory -C bxpm_converter
+	@make -q -C bxpm_converter
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)

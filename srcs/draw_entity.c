@@ -19,7 +19,6 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	render->screen = screen;
 	render->surface = doom->surface;
 	render->scale = doom->entity_stats[entity->type].scale;
-	render->texture = doom->sprites[entity->type].surface;
 	render->bxpm = &doom->sprites[entity->type].bxpm;
 	render->img = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);

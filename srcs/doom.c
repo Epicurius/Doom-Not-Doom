@@ -29,7 +29,6 @@ void	cs(void)
 
 void	ce(char *str)
 {
-	int i;
 	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
@@ -59,7 +58,7 @@ void	init_doom(t_doom *doom)
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;
 
-	init_player(doom);
+	//init_player1(doom);
 	init_camera(doom);
 	init_skybox(doom);
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);

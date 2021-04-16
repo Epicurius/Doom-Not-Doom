@@ -419,7 +419,7 @@ void	shade_zbuffer(t_doom *doom);
 int	clip_wall(t_camera cam, t_wall *wall);
 void	update_camera(t_doom *doom, int x, int y);
 void	reset_render_arrays(t_doom *doom);
-int	init_player(t_doom *doom);
+int	init_player1(t_doom *doom);
 
 //	Enteties
 void	precompute_entities(t_doom *doom);
@@ -526,4 +526,7 @@ void		load_bxpm(t_doom *doom);
 void		color_palet(t_bxpm *bxpm, int light);
 void		color_palets(t_doom *doom);
 int		free_doom(t_doom *doom);
+
+void		free_array(char **arr);
+void		read_vertex1(t_doom *doom, int fd);
 #endif
