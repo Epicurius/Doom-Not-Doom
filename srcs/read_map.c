@@ -94,11 +94,11 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
 	l = -1;
 	while (++l < sect->npoints)
 	{
-		wall_nb				= atoi(id[l]);
+		wall_nb				= ft_atoi(id[l]);
 		sect->wall[l]			= &walls[wall_nb];
 		sect->wall[l]->id		= wall_nb;
 		sect->wall[l]->sect		= sect->id;
-		sect->wall[l]->n		= atoi(neighbour[l]);
+		sect->wall[l]->n		= ft_atoi(neighbour[l]);
 	}
 }
 

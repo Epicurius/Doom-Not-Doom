@@ -71,7 +71,6 @@ RAW_SRC =	doom.c \
 		precompute_projectiles.c\
 		draw_projectile.c\
 		blit_entity.c\
-		init_player.c\
 		player_collision.c\
 		object_collision.c\
 		init_alfred.c\

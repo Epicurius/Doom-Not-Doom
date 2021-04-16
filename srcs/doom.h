@@ -347,7 +347,6 @@ typedef	struct				s_fps
 
 typedef struct	s_texture_sheet
 {
-	SDL_Surface 	*surface;
 	t_bxpm		bxpm;
 	int		nb[4][2];
 	t_rect		***pos;
@@ -397,10 +396,6 @@ typedef struct				s_doom
 	t_bxpm				stx[6];
 	t_bxpm				mtx[6];
 	t_texture_sheet			sprites[2];
-	t_texture			textures[50];
-
-	//tmp
-	SDL_Surface				*imp;
 }						t_doom;
 
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);

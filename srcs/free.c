@@ -42,7 +42,7 @@ void	free_entity_texture(t_doom *doom, int i, t_texture_sheet *sprite)
 		ft_memdel((void**)&sprite->pos[i]);
 	}
 	ft_memdel((void**)&sprite->pos);
-	SDL_FreeSurface(sprite->surface);
+	//SDL_FreeSurface(sprite->surface);
 }
 
 void	free_render_utils(t_doom *doom, int i)
