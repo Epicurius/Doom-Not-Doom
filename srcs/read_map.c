@@ -12,16 +12,6 @@
 
 #include "doom.h"
 
-void	free_array(char **arr)
-{
-	int i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		ft_strdel(&arr[i++]);
-	free(arr);
-}
-
 void	init_map_header(t_doom *doom, char **arr)
 {
 	doom->map_scale		= ft_atof(arr[1]);
@@ -76,15 +66,6 @@ void	init_map_player(t_doom *doom, char **arr)
 	player->yaw	= ft_atoi(arr[3]);
 }
 
-int		npoints(char **arr)
-{
-	int n;
-
-	n = 0;
-	while (arr[n] != NULL)
-		n++;
-	return (n);
-}
 
 void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
 {
@@ -113,14 +94,17 @@ void	init_map_sector(t_doom *doom, char **arr)
 	sect->floor	= doom->floors[ft_atoi(arr[1])];
 	sect->ceiling	= doom->ceilings[ft_atoi(arr[1])];
 	walls		= ft_strsplit(arr[2], ' ');
-	sect->npoints	= npoints(walls);
+	//sect->npoints	= npoints(walls);
+	sect->npoints	= ft_strarr_func(walls, NULL);
 	sect->wall	= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
 	neighbour	= ft_strsplit(arr[3], ' ');
 	sect->gravity	= atof(arr[4]);
 	sect->light	= atoi(arr[5]);
 	complete_wall(sect, doom->walls, walls, neighbour);
-	free_array(walls);
-	free_array(neighbour);
+	ft_strarr_func(walls, ft_strdel);
+	ft_strarr_func(neighbour, ft_strdel);
+	free(walls);
+	free(neighbour);
 }
 
 void	init_map_entity(t_doom *doom, char **arr)
@@ -172,7 +156,8 @@ void		read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 			break ;
 		arr = ft_strsplit(line, '\t');
 		f(doom, arr);
-		free_array(arr);
+		ft_strarr_func(arr, ft_strdel);
+		free(arr);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
