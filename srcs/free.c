@@ -72,6 +72,7 @@ int	free_doom(t_doom *doom)
 	free_entity_pos(&doom->sprites[1]);
 	free_color_palets(doom);
 	SDL_FreeSurface(doom->clock);
+	SDL_FreeSurface(doom->fps.surf);
 	free(doom->orb);
 	free_render_utils(doom);
 	free_font(doom);

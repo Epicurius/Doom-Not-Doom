@@ -57,6 +57,7 @@ void	init_doom(t_doom *doom)
 	doom->win = SDL_CreateWindow("DOOM", 0, 0, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	init_tpool(&doom->tpool, doom->nb.processors);
@@ -82,8 +83,6 @@ int main1(void)
 	cs();
 	init_doom(doom);
 	ce("init_doom");
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-    	//doom->quit = 1;
     	while (!doom->quit)
     	{
 		cs();
