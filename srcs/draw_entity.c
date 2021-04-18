@@ -14,13 +14,13 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	screen.z = dist.x * doom->player.anglecos
 			+ dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
-	if (screen.z <= 1) //or outside screen borders?
+	if (screen.z <= 1)
 		return (0);
 	render->screen = screen;
-	render->surface = doom->surface;
 	render->scale = doom->entity_stats[entity->type].scale;
+	render->surface = doom->surface;
 	render->bxpm = &doom->sprites[entity->type].bxpm;
-	render->img = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
+	render->pos = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);
 }
 
@@ -29,7 +29,6 @@ void	find_visible_entitys(t_doom *doom, t_entity_render *render, int *nb)
 {
 	int s;
 	int i;
-	t_xyz pos;
 
 	s = -1;
 	while (++s < doom->nb.sectors)
@@ -54,8 +53,8 @@ void	 project_entity(t_doom *doom, t_entity_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
-	render->size.x	= render->img.w * render->scale / render->screen.z;
-	render->size.y	= render->img.h * render->scale / render->screen.z;
+	render->size.x	= render->pos.w * render->scale / render->screen.z;
+	render->size.y	= render->pos.h * render->scale / render->screen.z;
 	render->start.x	= render->screen.x - render->size.x / 2;
 	render->end.x	= render->screen.x + render->size.x / 2;
 	render->start.y = render->screen.y - render->size.y;
@@ -72,7 +71,7 @@ void 	DrawEntity(t_doom *doom)
 {
 	int		i;
 	int		nb;
-	t_entity_render e[doom->nb.entities];
+	t_entity_render e[10];
 
 	nb = 0;
 	find_visible_entitys(doom, e, &nb);

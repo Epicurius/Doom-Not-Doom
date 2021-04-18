@@ -47,7 +47,7 @@ RAW_SRC =	doom.c \
 		skybox_wall_vline.c\
 		skybox_ceiling_vline.c\
 		skybox_floor_vline.c\
-		reset_arrays.c\
+		reset_render_utils.c\
 		vertical_collision.c\
 		horizontal_collision.c\
 		movement.c\

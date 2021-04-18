@@ -33,7 +33,7 @@ void	ce(char *str)
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	printf("%s: %f\n", str, elapsed);
+	printf("%.10s:\t%f\n", str, elapsed);
 }
 
 void	init_doom(t_doom *doom)
@@ -83,41 +83,42 @@ int main1(void)
 	init_doom(doom);
 	ce("init_doom");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+    	//doom->quit = 1;
     	while (!doom->quit)
     	{
 		cs();
-		reset_render_arrays(doom);
-		ce("1");
+		reset_render_utils(doom);
+		ce("reset_render_arrays");
 		cs();
 		update_camera(doom, 0, 0);
-		ce("2");
+		ce("update_camera");
 		cs();
 		precompute_walls(doom);
-		ce("3");
+		ce("precompute_walls");
 		cs();
 		precompute_skybox(doom);
-		ce("4");
+		ce("precompute_skybox");
 		cs();
 		DrawScreen(doom);//
-		ce("5");
+		ce("DrawScreen");
 		cs();
 		doom->player.shooting = 0;
 		precompute_entities(doom);
-		ce("6");
+		ce("precomp_entities");
 		cs();
 		precompute_projectiles(doom);
-		ce("7");
+		ce("precomp_project");
 		cs();
 		DrawProjectiles(doom);
-		ce("8");
+		ce("draw_project");
 		cs();
 		DrawEntity(doom);//
-		ce("10");
+		ce("Draw_entity");
 		cs();
 		if (doom->key.tab)
 			map(doom);
 		//shade_zbuffer(doom);
-		ce("11");
+		ce("Tab_function");
 		cs();
         	while (SDL_PollEvent(&event))//
 		{
@@ -129,23 +130,22 @@ int main1(void)
 			else if (event.type == SDL_QUIT)
 				exit (1);
 		}
-		ce("12");
+		ce("SDL_Events");
 		cs();
 		movement(doom);
-		ce("13");
+		ce("movement");
 		cs();
 		player_collision(doom);
-		ce("14");
+		ce("player_collision");
 		cs();
 		draw_crosshair(doom);
-		ce("15");
+		ce("Croshair");
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 	free_doom(doom);
 	return (0);
 }
-
 
 int main(void)
 {

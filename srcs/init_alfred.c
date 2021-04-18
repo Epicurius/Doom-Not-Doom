@@ -14,7 +14,7 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 	sprite->nb[DEATH][ANGLES] = 0;
 }
 
-int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
+int	init_alfred(t_texture_sheet *sprite)
 {
 	int i;
 
@@ -25,8 +25,6 @@ int	init_alfred(t_doom *doom, t_texture_sheet *sprite)
 	sprite->bxpm.clr	= bxpm_colors_alfred;
 	sprite->bxpm.pix	= bxpm_pixels_alfred;
 
-	//if (!(sprite->surface = IMG_Load("./bmp/entities/head_fix2.bmp")))
-	//	printf("Error Alfred!\n");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_alfred_nb(sprite);
 	i = -1;

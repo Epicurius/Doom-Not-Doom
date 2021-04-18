@@ -1,7 +1,28 @@
 
 #include "doom.h"
 
-void	reset_render_arrays(t_doom *doom)
+void	reset_bh_dynamic(t_doom *doom)
+{
+	int i;
+	int j;
+	t_sector *sect;
+
+	i = -1;
+	while (++i < doom->nb.sectors)
+	{
+		if (doom->sectors[i].visible)
+			continue ;
+		sect = &doom->sectors[i];
+		j = -1;
+		while (++j < sect->npoints)
+		{
+			sect->wall[j]->bh.total = 0;
+			sect->wall[j]->bh.curr = 0;
+		}
+	}
+}
+
+void	reset_render_utils(t_doom *doom)
 {
 	int i;
 
@@ -11,20 +32,7 @@ void	reset_render_arrays(t_doom *doom)
 		doom->ytop[i] = 0;
 		doom->ybot[i] = H;
 	}
-	i = -1;
-	t_sector *sect;
-	while (++i < doom->nb.sectors)
-	{
-		if (doom->sectors[i].visible)
-			continue ;
-		sect = &doom->sectors[i];
-		int w = -1;
-		while (++w < sect->npoints)
-		{
-			sect->wall[w]->bh.total = 0;
-			sect->wall[w]->bh.curr = 0;
-		}
-	}
+
 }
 
 void	reset_bh(t_doom *doom)

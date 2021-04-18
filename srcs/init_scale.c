@@ -29,7 +29,6 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 void	init_scale(t_doom *doom)
 {
 	int i;
-	int j;
 	t_wall *wall;
 
 	i = -1;

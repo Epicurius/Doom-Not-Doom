@@ -47,7 +47,6 @@ void	init_projectiles(t_doom *doom)
 {
 	int p;
 	int i;
-	int type;
 
 	doom->orb = ft_memalloc(sizeof(t_projectile)
 				* doom->nb.projectiles);

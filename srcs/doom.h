@@ -18,17 +18,13 @@
 # include "../lib/tpool/tpool.h"
 # include "../SDL2/includes/SDL.h"
 # include "../SDL2/includes/SDL_ttf.h"
-# include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
 # include "./utils.h"
 # include <math.h>
-# include <pthread.h>
 # include <fcntl.h>
 
 #define min(a,b)			(((a) < (b)) ? (a) : (b))
 #define max(a,b)			(((a) > (b)) ? (a) : (b))
-#define clamp(a, mi,ma)			min(max(a,mi),ma)
-//#define vxs(x0,y0, x1,y1)		((x0)*(y1) - (x1)*(y0)) //Vector cross product
 
 
 typedef struct		s_bxpm
@@ -285,7 +281,7 @@ typedef struct		s_entity_render
 	t_xyz		clamp_end;
 	double		xrange;
 	double		yrange;
-	t_rect		img;
+	t_rect		pos;
 }			t_entity_render;
 
 typedef struct		s_render
@@ -397,28 +393,25 @@ typedef struct				s_doom
 	t_texture_sheet			sprites[2];
 }						t_doom;
 
-int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
+//	Render map
+void	DrawMap(t_doom *doom);
 void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
 void	precompute_walls(t_doom *doom);
 void	precompute_skybox(t_doom *doom);
 void	wall_to_screen_xz(t_player player, t_wall *wall);
 void	project_wall(t_doom *doom, t_wall *wall);
-t_xyz	xyz(double x, double y, double z);
-t_xyz	get_intersection(t_xyz a, t_xyz b, t_xyz c, t_xyz d);
 void	render_wall(t_doom *doom, t_item now, int s, t_render *render, t_wall *wall);
 void	vline_color(t_render *render, t_vline *vline, int color);
 void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal);
-void	shade_zbuffer(t_doom *doom);
 int	clip_wall(t_camera cam, t_wall *wall);
-void	update_camera(t_doom *doom, int x, int y);
-void	reset_render_arrays(t_doom *doom);
-int	init_player1(t_doom *doom);
+
 
 //	Enteties
+void	DrawEntity(t_doom *doom);
 void	precompute_entities(t_doom *doom);
-int	init_alfred(t_doom *doom, t_texture_sheet *sprite);
-int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
+int	init_alfred(t_texture_sheet *sprite);
+int	init_spooky(t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 void	blit_entity(t_entity_render *render);
@@ -473,8 +466,10 @@ void	skybox_ceiling_vline(t_render *render, t_vline vline);
 void	skybox_floor_vline(t_render *render, t_vline);
 
 
-void	DrawEntity(t_doom *doom);
-void	DrawMap(t_doom *doom);
+void	reset_render_utils(t_doom *doom);
+void	update_camera(t_doom *doom, int x, int y);
+int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
+void	shade_zbuffer(t_doom *doom);
 void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int	read_file(t_doom *doom, char *file_name);
 int	keys(t_doom *doom, SDL_Event *event);
@@ -482,44 +477,43 @@ void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 void	init_camera(t_doom *doom);
 void	screen_sectors(t_doom *doom, t_item *queue, int *qtotal);
-//void	collision_detection(t_doom *doom, t_player *player);
 
 //Math wiki func
-int		overlap(double a0, double a1, double b0 , double b);
-int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
-int		line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
-double		point_side(t_xyz a, t_xyz b, t_xyz p);
-int		find_sector(t_doom *doom, t_xyz e);
-t_xyz		find_triangle_c(t_xyz a, t_xyz b, float dist);
-int		ft_clamp(int x, int min, int max);
-Uint32		brightness(Uint32 src, int brightness);
+t_xyz	xyz(double x, double y, double z);
+t_xyz	get_intersection(t_xyz a, t_xyz b, t_xyz c, t_xyz d);
+int	find_sector(t_doom *doom, t_xyz e);
+int	overlap(double a0, double a1, double b0 , double b);
+int	intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
+int	line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
+double	point_side(t_xyz a, t_xyz b, t_xyz p);
+t_xyz	find_triangle_c(t_xyz a, t_xyz b, float dist);
 int	intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2);
-double		point_distance_2d(double x1, double y1, double x2, double y2);
-double		point_distance_3d(t_xyz p1, t_xyz p2);
-t_xyz		closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b);
-int		point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer);
-int		sign(double x);
-void		rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
-unsigned int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
-SDL_Color	hex_to_sdl_color(int hex);
-double 		space_diagonal(double x, double y, double z);
-double		angle_to_point(t_xyz p1, t_xyz p2);
-int		compare_xyz(t_xyz a, t_xyz b);
-int		compare_xy(t_xyz a, t_xyz b);
-t_xyz		sum_xyz(t_xyz a, t_xyz b);
-
-int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
-void		line(SDL_Surface *surf, Uint32 color, t_i2 *p);
-t_rect		new_rect(int x1, int y1, int x2, int y2);
+double	point_distance_2d(double x1, double y1, double x2, double y2);
+double	point_distance_3d(t_xyz p1, t_xyz p2);
+t_xyz	closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b);
+int	point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer);
+int	sign(double x);
+void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
+double 	space_diagonal(double x, double y, double z);
+double	angle_to_point(t_xyz p1, t_xyz p2);
+int	compare_xyz(t_xyz a, t_xyz b);
+int	compare_xy(t_xyz a, t_xyz b);
+t_xyz	sum_xyz(t_xyz a, t_xyz b);
+int	cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
+void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
+t_rect	new_rect(int x1, int y1, int x2, int y2);
 
 void	player_collision(t_doom *doom);
 int	entity_collision(t_collision_thread *entity, t_xyz dest);
 int	collision_detection(void *arg);
 
-void		load_bxpm(t_doom *doom);
-void		color_palet(t_bxpm *bxpm, int light);
-void		color_palets(t_doom *doom);
-int		free_doom(t_doom *doom);
+SDL_Color	hex_to_sdl_color(int hex);
+int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
+Uint32	brightness(Uint32 src, int brightness);
+void	load_bxpm(t_doom *doom);
+void	color_palet(t_bxpm *bxpm, int light);
+void	color_palets(t_doom *doom);
+int	free_doom(t_doom *doom);
 
-void		free_array(char **arr);
+void	free_array(char **arr);
 #endif

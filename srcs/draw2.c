@@ -67,10 +67,10 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 	vline->z = wall.zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
 	vline->max.ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
-	vline->curr.ceiling = clamp(vline->max.ceiling,
+	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
 				render->ytop[render->x], render->ybot[render->x]);
 	vline->max.floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
-	vline->curr.floor = clamp(vline->max.floor,
+	vline->curr.floor = ft_clamp(vline->max.floor,
 				render->ytop[render->x], render->ybot[render->x]);
 	vline->line_height = (vline->clipped_alpha * wall.range.floor + wall.s1.floor)
 				- (vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling);

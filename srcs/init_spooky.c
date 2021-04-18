@@ -14,7 +14,7 @@ void	init_spooky_nb(t_texture_sheet *sprite)
 	sprite->nb[DEATH][ANGLES] = 1;
 }
 
-int	init_spooky(t_doom *doom, t_texture_sheet *sprite)
+int	init_spooky(t_texture_sheet *sprite)
 {
 	int i;
 
@@ -25,7 +25,6 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite)
 	sprite->bxpm.clr	= bxpm_colors_spooky;
 	sprite->bxpm.pix	= bxpm_pixels_spooky;
 
-	//sprite->surface = IMG_Load("./bmp/entities/spooky2.bmp");
 	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	init_spooky_nb(sprite);
 	i = -1;

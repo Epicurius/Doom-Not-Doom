@@ -139,7 +139,6 @@ void	init_map_entity(t_doom *doom, char **arr)
 
 void	init_map_wsprite(t_doom *doom, char **arr)
 {
-	int		i;
 	t_wsprite	*wsprite;
 	t_sprite	*sprite;
 	
@@ -177,6 +176,7 @@ void		read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
+	free(line);
 }
 
 void			read_type(t_doom *doom, int fd, char *line)

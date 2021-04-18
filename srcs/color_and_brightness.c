@@ -20,26 +20,26 @@ Uint32		brightness(Uint32 src, int brightness)
 {
 	if (brightness == 0)
 		return (src);
-	src = ft_clamp(((brightness + 256) * (src >> 16 & 0xFF)) / 256, 0, 255)
-	<< 16 | ft_clamp(((brightness + 256) * (src >> 8 & 0xFF)) / 256, 0, 255)
-	<< 8 | ft_clamp(((brightness + 256) * (src & 0xFF)) / 256, 0, 255);
+	src = (int)ft_clamp(((brightness + 256) * (src >> 16 & 0xFF)) / 256, 0, 255)
+	<< 16 | (int)ft_clamp(((brightness + 256) * (src >> 8 & 0xFF)) / 256, 0, 255)
+	<< 8 | (int)ft_clamp(((brightness + 256) * (src & 0xFF)) / 256, 0, 255);
 	return (src);
 }
 
 /*
 ** Blends a src color with an alpha 0 - 255
 */
-unsigned int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
+int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 {
 	int	aalpha;
 
 	aalpha = 256 - alpha;
-	return (
-		((aalpha * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256)
-		<< 16
-		| ((aalpha * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256)
-		<< 8
-		| ((aalpha * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
+	return (((aalpha * (src >> 16 & 0xFF) +
+		alpha * (dest >> 16 & 0xFF)) / 256) << 16
+		| ((aalpha * (src >> 8 & 0xFF) +
+		alpha * (dest >> 8 & 0xFF)) / 256) << 8
+		| ((aalpha * (src & 0xFF) +
+		alpha * (dest & 0xFF)) / 256));
 }
 
 void	color_palet(t_bxpm *bxpm, int light)

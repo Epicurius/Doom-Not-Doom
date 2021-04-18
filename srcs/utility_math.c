@@ -73,16 +73,6 @@ double	vxs(double x0, double y0, double x1, double y1)
 	return (x0 * y1 - x1 * y0);
 }
 
-//	Clamp x value between min and max
-int	ft_clamp(int x, int min, int max)
-{
-	if (x < min)
-		x = min;
-	else if (x > max)
-		x = max;
-	return (x);
-}
-
 //	Make a new t_xyz struct and assign values
 t_xyz	xyz(double x, double y, double z)
 {
@@ -202,7 +192,7 @@ t_xyz	closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b)
 	ab.y = b.y - a.y;
 	len = ab.x * ab.x + ab.y * ab.y;
 	t = (ap.x * ab.x + ap.y * ab.y) / len;
-	t = clamp(t, 0, 1);
+	t = ft_clamp(t, 0, 1);
 	point.x = a.x + t * ab.x;
 	point.y = a.y + t * ab.y;
 	return (point);

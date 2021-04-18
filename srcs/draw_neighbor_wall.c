@@ -7,9 +7,9 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline)
 		render->wall.range_n.ceiling + render->wall.s1_n.ceiling;
 	vline->max_n.floor = vline->clipped_alpha *
 		render->wall.range_n.floor + render->wall.s1_n.floor;
-	vline->curr_n.ceiling = clamp(vline->max_n.ceiling,
+	vline->curr_n.ceiling = ft_clamp(vline->max_n.ceiling,
 		render->ytop[render->x], render->ybot[render->x]);
-	vline->curr_n.floor = clamp(vline->max_n.floor,
+	vline->curr_n.floor = ft_clamp(vline->max_n.floor,
 		render->ytop[render->x], render->ybot[render->x]);
 
 	if (vline->curr_n.ceiling > vline->curr.ceiling)
@@ -35,10 +35,10 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline)
 			draw_wall_texture(render, vline);
 	}
 	
-	render->ytop[render->x] = clamp(max(vline->curr_n.ceiling,
+	render->ytop[render->x] = ft_clamp(max(vline->curr_n.ceiling,
 	vline->curr.ceiling), render->ytop[render->x], render->ybot[render->x]);
 
-	render->ybot[render->x] = clamp(min(vline->curr_n.floor,
+	render->ybot[render->x] = ft_clamp(min(vline->curr_n.floor,
 	vline->curr.floor), render->ytop[render->x], render->ybot[render->x]);
 
 	if (render->wall.ptx >= 0)

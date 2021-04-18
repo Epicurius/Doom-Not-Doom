@@ -12,7 +12,7 @@ void	skybox_wall_vline(t_render *render, t_vline vline, int texture_w)
 		text.x -= render->stx[render->s].w;
 	while (text.x < 0)
 		text.x += render->stx[render->s].w;
-	text.x = clamp(text.x, 0, render->stx[render->s].w);
+	//text.x = ft_clamp(text.x, 0, render->stx[render->s].w);
 	while (vline.y1 < vline.y2)
 	{
 		coord = vline.y1 * W + render->x;
@@ -22,8 +22,7 @@ void	skybox_wall_vline(t_render *render, t_vline vline, int texture_w)
 			text.y -= render->stx[render->s].h;
 		while (text.y < 0)
 			text.y += render->stx[render->s].h;
-		//if (RENDER_DISTANCE == ((double*)render->surface->userdata)[coord])
-			blit_pixel_skybox(render, coord, text, render->s);
+		blit_pixel_skybox(render, coord, text, render->s);
 		vline.y1++;
 	}
 }

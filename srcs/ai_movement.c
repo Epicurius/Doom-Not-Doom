@@ -6,7 +6,6 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	t_xyz	*v;
 	double	dist;
 	double	speed;
-	double	z;
 
 	v = &entity->velocity;
 	entity->dest.z += entity->stat.flying ? EYE_LVL - 1 : 0;

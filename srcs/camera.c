@@ -35,11 +35,20 @@ void	init_camera(t_doom *doom)
 	update_camera(doom, 0, 0);
 }
 
+double test(double x, double min, double max)
+{
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);
+}
+
 void	update_camera(t_doom *doom, int x, int y)
 {
 	doom->player.yaw *= CONVERT_RADIANS;
 	doom->player.yaw += x * MOUSE_X;
-	doom->player.pitch = clamp(doom->player.pitch + y * MOUSE_Y, -1, 1);
+	doom->player.pitch = test(doom->player.pitch + y * MOUSE_Y, -1, 1);
 	doom->player.horizon = doom->h2 - PLAYER.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);
 	doom->player.anglecos = cos(doom->player.yaw);
