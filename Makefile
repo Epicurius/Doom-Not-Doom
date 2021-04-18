@@ -139,9 +139,9 @@ $(LIB_DIR):
 	@git clone -q https://github.com/Epicurius/lib.git
 
 $(LIBS): $(LIB_DIR)
-	@make --no-print-directory -C lib/libft
-	@make --no-print-directory -C lib/libpf
-	@make --no-print-directory -C lib/tpool
+	@make -q -C lib/libft
+	@make -q -C lib/libpf
+	@make -q -C lib/tpool
 	@make -q -C bxpm_converter
 
 clean:
