@@ -51,7 +51,11 @@ void	color_palet(t_bxpm *bxpm, int light)
 		return ;
 	bxpm->palet[255 + light] = ft_memalloc(sizeof(uint32_t*) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
+	{
+		if (bxpm->clr[i] == 0x800080)
+			bxpm->palet[255 + light][i] = 0x800080;
 		bxpm->palet[255 + light][i] = brightness(bxpm->clr[i], light);
+	}
 }
 
 void	color_palets(t_doom *doom)

@@ -37,10 +37,8 @@ void	init_camera(t_doom *doom)
 
 void	update_camera(t_doom *doom, int x, int y)
 {
-	//printf("Yaw %f\n", doom->player.yaw);
 	doom->player.yaw *= CONVERT_RADIANS;
 	doom->player.yaw += x * MOUSE_X;
-	//radians_fix(&doom->player.yaw);
 	doom->player.pitch = clamp(doom->player.pitch + y * MOUSE_Y, -1, 1);
 	doom->player.horizon = doom->h2 - PLAYER.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);

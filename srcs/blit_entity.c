@@ -1,20 +1,6 @@
 
 #include "doom.h"
 
-void	put_entity_pixel(t_entity_render *render, int coord, t_xyz text)
-{
-	Uint32		pixel;
-
-	if (((double*)render->surface->userdata)[coord] < text.z)
-		return ;
-	pixel = ((Uint32*)render->texture->pixels)
-		[(int)text.y * render->texture->w + (int)text.x];
-	if (pixel == 0xFF800080)
-		return ;
-	((Uint32*)render->surface->pixels)[coord] = pixel;
-	((double*)render->surface->userdata)[coord] = text.z;
-}
-
 void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;

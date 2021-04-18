@@ -21,7 +21,7 @@ RESET :="\e[0m"
 RAW_SRC =	doom.c \
 		put_pixels.c \
 		read_map.c\
-		load_textures.c\
+		init_textures.c\
 		find_sector.c\
 		utility_math.c\
 		vertical_line.c\
@@ -64,7 +64,7 @@ RAW_SRC =	doom.c \
 		precompute_entities.c\
 		orientation.c\
 		ai_movement.c\
-		init_entity_stats.c\
+		init_entity.c\
 		ai_attack.c\
 		ai_rand.c\
 		free.c\

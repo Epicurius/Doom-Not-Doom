@@ -22,7 +22,7 @@ void	init_clock(t_doom *doom)
 	SDL_FreeSurface(tmp);
 }
 
-void	load_textures(t_doom *doom)
+void	init_textures(t_doom *doom)
 {
 	init_clock(doom);
 	load_bxpm(doom);
@@ -30,4 +30,3 @@ void	load_textures(t_doom *doom)
 	init_spooky(doom, &doom->sprites[1]);
 	color_palets(doom);
 }
-

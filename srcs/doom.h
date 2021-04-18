@@ -275,7 +275,6 @@ typedef struct		s_camera
 typedef struct		s_entity_render
 {
 	SDL_Surface	*surface;
-	SDL_Surface	*texture;
 	t_bxpm		*bxpm;
 	t_xyz		screen;
 	double		scale;
@@ -400,7 +399,7 @@ typedef struct				s_doom
 
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	init_scale(t_doom *doom);
-void	load_textures(t_doom *doom);
+void	init_textures(t_doom *doom);
 void	precompute_walls(t_doom *doom);
 void	precompute_skybox(t_doom *doom);
 void	wall_to_screen_xz(t_player player, t_wall *wall);
@@ -423,7 +422,7 @@ int	init_spooky(t_doom *doom, t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 void	blit_entity(t_entity_render *render);
-void	init_entity_stats(t_doom *doom);
+void	init_entity(t_doom *doom);
 int	ai_rand_move(t_entity *entity, int rand);
 
 //	Projectiles
@@ -523,5 +522,4 @@ void		color_palets(t_doom *doom);
 int		free_doom(t_doom *doom);
 
 void		free_array(char **arr);
-void		read_vertex1(t_doom *doom, int fd);
 #endif

@@ -22,7 +22,7 @@ void	free_array(char **arr)
 	free(arr);
 }
 
-void	init_header(t_doom *doom, char **arr)
+void	init_map_header(t_doom *doom, char **arr)
 {
 	doom->map_scale		= ft_atof(arr[1]);
 	doom->nb.vertices	= ft_atoi(arr[2]);
@@ -37,7 +37,7 @@ void	init_header(t_doom *doom, char **arr)
 	doom->entity 	= ft_memalloc(sizeof(t_entity) * doom->nb.entities);
 }
 
-void	init_wall(t_doom *doom, char **arr)
+void	init_map_wall(t_doom *doom, char **arr)
 {
 	t_wall	*wall;
 
@@ -50,7 +50,7 @@ void	init_wall(t_doom *doom, char **arr)
 	wall->solid	= ft_atoi(arr[6]);
 }
 
-void	init_fc(t_doom *doom, char **arr)
+void	init_map_fc(t_doom *doom, char **arr)
 {
 	t_plane	*floor;
 	t_plane	*ceiling;
@@ -65,7 +65,7 @@ void	init_fc(t_doom *doom, char **arr)
 	ceiling->scale	= atof(arr[5]) * doom->map_scale;
 }
 
-void	init_player(t_doom *doom, char **arr)
+void	init_map_player(t_doom *doom, char **arr)
 {
 	t_player *player;
 
@@ -102,7 +102,7 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
 	}
 }
 
-void	init_sector(t_doom *doom, char **arr)
+void	init_map_sector(t_doom *doom, char **arr)
 {
 	t_sector	*sect;
 	char		**walls;
@@ -123,7 +123,7 @@ void	init_sector(t_doom *doom, char **arr)
 	free_array(neighbour);
 }
 
-void	init_entity(t_doom *doom, char **arr)
+void	init_map_entity(t_doom *doom, char **arr)
 {
 	t_entity	*entity;
 
@@ -137,7 +137,7 @@ void	init_entity(t_doom *doom, char **arr)
 	entity->yaw		= ft_atoi(arr[6]);
 }
 
-void	init_wsprite(t_doom *doom, char **arr)
+void	init_map_wsprite(t_doom *doom, char **arr)
 {
 	int		i;
 	t_wsprite	*wsprite;
@@ -155,7 +155,7 @@ void	init_wsprite(t_doom *doom, char **arr)
 	sprite->tx		= ft_atoi(arr[5]);
 }
 
-void	init_vertex(t_doom *doom, char **arr)
+void	init_map_vertex(t_doom *doom, char **arr)
 {
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
@@ -179,6 +179,26 @@ void		read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 	ft_strdel(&line);
 }
 
+void			read_type(t_doom *doom, int fd, char *line)
+{
+	if (ft_strnequ(line, "type:map", 8))
+		read_line(doom, fd, init_map_header);
+	else if (ft_strnequ(line, "type:vertex", 11))
+		read_line(doom, fd, init_map_vertex);
+	else if (ft_strnequ(line, "type:wall", 8))
+		read_line(doom, fd, init_map_wall);
+	else if (ft_strnequ(line, "type:spawn", 10))
+		read_line(doom, fd, init_map_player);
+	else if (ft_strnequ(line, "type:sectors", 12))
+		read_line(doom, fd, init_map_sector);
+	else if (ft_strnequ(line, "type:entity", 11))
+		read_line(doom, fd, init_map_entity);
+	else if (ft_strnequ(line, "type:f&c", 8))
+		read_line(doom, fd, init_map_fc);
+	else if (ft_strnequ(line, "type:wsprite", 12))
+		read_line(doom, fd, init_map_wsprite);
+}
+
 int			read_file(t_doom *doom, char *file_name)
 {
 	int fd;
@@ -191,22 +211,7 @@ int			read_file(t_doom *doom, char *file_name)
 	}
 	while (get_next_line(fd, &line))
 	{
-		if (ft_strnequ(line, "type:map", 8))
-			read_line(doom, fd, init_header);
-		else if (ft_strnequ(line, "type:vertex", 11))
-			read_line(doom, fd, init_vertex);
-		else if (ft_strnequ(line, "type:wall", 8))
-			read_line(doom, fd, init_wall);
-		else if (ft_strnequ(line, "type:spawn", 10))
-			read_line(doom, fd, init_player);
-		else if (ft_strnequ(line, "type:sectors", 12))
-			read_line(doom, fd, init_sector);
-		else if (ft_strnequ(line, "type:entity", 11))
-			read_line(doom, fd, init_entity);
-		else if (ft_strnequ(line, "type:f&c", 8))
-			read_line(doom, fd, init_fc);
-		else if (ft_strnequ(line, "type:wsprite", 12))
-			read_line(doom, fd, init_wsprite);
+		read_type(doom, fd, line);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

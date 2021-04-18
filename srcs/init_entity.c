@@ -65,7 +65,7 @@ void	init_projectiles(t_doom *doom)
 	}
 }
 
-void	init_entity_stats(t_doom *doom)
+void	init_entity(t_doom *doom)
 {
 	int i;
 	int type;

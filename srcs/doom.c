@@ -58,17 +58,14 @@ void	init_doom(t_doom *doom)
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	doom->surface->userdata = doom->zbuffer;
 
-	//init_player1(doom);
-	init_camera(doom);
-	init_skybox(doom);
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	init_tpool(&doom->tpool, doom->nb.processors);
+	init_camera(doom);
+	init_skybox(doom);
 	init_minimap(doom);
-	cs();
-	load_textures(doom);
-	ce("load textures");
+	init_textures(doom);
 	init_scale(doom);
-	init_entity_stats(doom);
+	init_entity(doom);
 }
 
 int main1(void)
@@ -78,11 +75,13 @@ int main1(void)
 
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
+	cs();
 	if (!read_file(doom, "./skybox.txt"))
 		return (0);
-	ft_putstr("Done with read_map.\n");
+	ce("Read_file");
+	cs();
 	init_doom(doom);
-	ft_putstr("Done with init_doom.\n");
+	ce("init_doom");
 	SDL_SetRelativeMouseMode(SDL_TRUE);
     	while (!doom->quit)
     	{
@@ -139,7 +138,6 @@ int main1(void)
 		ce("14");
 		cs();
 		draw_crosshair(doom);
-		//asd(doom->surface, &doom->mtx[2]);
 		ce("15");
 		fps_func(doom);
 		SDL_UpdateWindowSurface(doom->win);
