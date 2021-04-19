@@ -15,6 +15,7 @@ void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 	((Uint32*)render->surface->pixels)[coord] = clr;
 	((double*)render->surface->userdata)[coord] = text.z;
 }
+
 void	blit_entity(t_entity_render *render)
 {
 	t_v2 alpha;
@@ -35,3 +36,16 @@ void	blit_entity(t_entity_render *render)
 		}
 	}
 }
+/*
+void	blit_entity(t_entity_render *render)
+{
+	int y = -1;
+	thread	arr[10];
+
+	while (++y < 10)
+	{
+		arr[x].y = W /10.0 * y;
+		arr[x].end = W /10.0 * (y + 1);
+		tpool_add(&doom->tpool, fustrum_in_sector, &arr[y]);
+	}
+}*/

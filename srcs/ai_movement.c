@@ -28,7 +28,7 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	get_entity_movement(doom, entity);
 	e->where		= &entity->where;
 	e->velocity		= &entity->velocity;
-	e->sector		= entity->sector;
+	e->sector		= &entity->sector;
 	e->sectors		= doom->sectors;
 	e->entities		= doom->entity;
 	e->nb_entities		= doom->nb.entities;
@@ -36,8 +36,10 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	e->hitbox_height	= PLAYER_HEIGHT;
 	e->hitbox_radius	= 5;
 	e->step_height		= 1;
-	tpool_add(&doom->tpool, collision_detection, &e);
-	if(!tpool_wait(&doom->tpool))
-		ft_printf("tpool error\n");
+	collision_detection(&e);
+	//tpool_add(&doom->tpool, collision_detection, &e);
+	//if(!tpool_wait(&doom->tpool))
+	//	ft_printf("tpool error\n");
 	entity->yaw = angle_to_point(entity->where, entity->dest);
+	//printf("%d in sector %d\n", entity->id, entity->sector);
 }

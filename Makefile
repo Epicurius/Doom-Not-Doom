@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/19 11:51:43 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/19 13:02:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,6 @@ RAW_SRC =	doom.c \
 		skybox_ceiling_vline.c\
 		skybox_floor_vline.c\
 		reset_render_utils.c\
-		vertical_collision.c\
-		horizontal_collision.c\
 		movement.c\
 		minimap.c\
 		line.c\

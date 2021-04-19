@@ -30,7 +30,7 @@ void	degree_fix(double *degrees)
 {
 	while (*degrees > 360)
 		*degrees -= 360;
-	while (*degrees < 0)
+	while (*degrees <= 0)
 		*degrees += 360;
 }
 

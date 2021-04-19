@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 11:47:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:58:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ce(char *str)
 	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
-	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+	//elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+	elapsed += (finish.tv_nsec - start.tv_nsec) / 10000.0;
 	printf("%.10s:\t%f\n", str, elapsed);
 }
 

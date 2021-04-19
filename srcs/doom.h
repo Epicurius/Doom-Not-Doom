@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 14:47:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:56:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,9 +240,9 @@ typedef struct		s_collision_thread
 	t_xyz		*velocity;
 	t_sector	*sectors;
 	t_entity	*entities;
+	int		*sector;
 	int		nb_entities;
 	int		player;
-	int		sector;
 	float		hitbox_height;
 	float		hitbox_radius;
 	float		step_height;
@@ -440,8 +440,6 @@ void	map(t_doom *doom);
 
 //	Movement
 void	movement(t_doom *doom);
-void	vertical_collision(t_doom *doom, t_player *player);
-void	horizontal_collision(t_doom *doom, t_player *player);
 
 //	Texture
 void	DrawScreen(t_doom *doom);
@@ -516,4 +514,10 @@ void	color_palets(t_doom *doom);
 int	free_doom(t_doom *doom);
 
 void	free_array(char **arr);
+
+//REMOVE//
+void	cs(void);
+void	ce(char *str);
+
+
 #endif

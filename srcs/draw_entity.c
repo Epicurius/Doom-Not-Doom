@@ -14,7 +14,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	screen.z = dist.x * doom->player.anglecos
 			+ dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
-	if (screen.z <= 1)
+	if (screen.z <= 0.5)
 		return (0);
 	render->screen = screen;
 	render->scale = doom->entity_stats[entity->type].scale;

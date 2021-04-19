@@ -8,7 +8,7 @@ static void	alfred(t_stats *alfred)
 	alfred->animate = 1;
 	alfred->hostile = 1;
 	alfred->attack_style = 2;
-	alfred->scale = 5 * (W / 100);
+	alfred->scale = 4 * (W / 100);
 	alfred->height = 4;
 	alfred->speed = 0.02;
 	alfred->wonder_distance = 0;
