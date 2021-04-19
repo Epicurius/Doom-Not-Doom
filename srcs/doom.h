@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 15:14:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:02:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,9 @@ typedef struct		s_entity_render
 	double		xrange;
 	double		yrange;
 	t_rect		pos;
+	int			shooting;
+	int			dmg;
+	int			*hp;
 }			t_entity_render;
 
 typedef struct		s_render
@@ -470,7 +473,7 @@ int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	shade_zbuffer(t_doom *doom);
 void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int	read_file(t_doom *doom, char *file_name);
-int	keys(t_doom *doom, SDL_Event *event);
+void	keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 void	init_camera(t_doom *doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 13:58:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:34:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	init_doom(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
-	printf("processors: %d\n", doom->nb.processors);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_camera(doom);
 	init_skybox(doom);
@@ -74,7 +73,7 @@ void	init_doom(t_doom *doom)
 int main1(void)
 {
 	t_doom		*doom;
-    	SDL_Event	event;
+    SDL_Event	event;
 
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
@@ -85,8 +84,12 @@ int main1(void)
 	cs();
 	init_doom(doom);
 	ce("init_doom");
-    	while (!doom->quit)
-    	{
+    while (!doom->quit)
+    {
+		cs();
+        while (SDL_PollEvent(&event))
+				keys(doom, &event);
+		ce("SDL_Events");
 		cs();
 		reset_render_utils(doom);
 		ce("reset_render_arrays");
@@ -103,7 +106,6 @@ int main1(void)
 		DrawScreen(doom);//
 		ce("DrawScreen");
 		cs();
-		doom->player.shooting = 0;
 		precompute_entities(doom);
 		ce("precomp_entities");
 		cs();
@@ -115,23 +117,8 @@ int main1(void)
 		cs();
 		DrawEntity(doom);//
 		ce("Draw_entity");
-		cs();
-		if (doom->key.tab)
-			map(doom);
 		//shade_zbuffer(doom);
 		ce("Tab_function");
-		cs();
-        	while (SDL_PollEvent(&event))//
-		{
-			if (event.type == SDL_KEYUP || event.type == SDL_KEYDOWN)
-			{
-				if (keys(doom, &event))
-					break ;
-			}
-			else if (event.type == SDL_QUIT)
-				exit (1);
-		}
-		ce("SDL_Events");
 		cs();
 		movement(doom);
 		ce("movement");
@@ -142,6 +129,8 @@ int main1(void)
 		draw_crosshair(doom);
 		ce("Croshair");
 		fps_func(doom);
+		if (doom->key.tab)
+			map(doom);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 	free_doom(doom);

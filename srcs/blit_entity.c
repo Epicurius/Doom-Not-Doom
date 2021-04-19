@@ -1,6 +1,12 @@
 
 #include "doom.h"
 
+void	hit_enemy(t_entity_render *render, int coord)
+{
+	if (render->shooting && coord == H/2 * W + W/2)
+		*render->hp -= render->dmg;
+}
+
 void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
@@ -12,6 +18,7 @@ void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 	clr = render->bxpm->clr[pix];
 	if (clr == 0x800080)
 		return ;
+	hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] = clr;
 	((double*)render->surface->userdata)[coord] = text.z;
 }

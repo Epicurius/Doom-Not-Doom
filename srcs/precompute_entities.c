@@ -54,10 +54,13 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 {
 	double dist;
 
-	//if (entity->hp < 0)
-	//	entity->state = DEATH;
 	if (entity->frame != 0)
 		return ;
+	if (entity->hp <= 0)
+	{
+		entity->state = DEATH;
+		return ;
+	}
 	dist = point_distance_2d(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))

@@ -10,8 +10,8 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 	sprite->nb[MOVE][ANGLES] = 8;
 	sprite->nb[ATTACK][FRAMES] = 6;
 	sprite->nb[ATTACK][ANGLES] = 1;
-	sprite->nb[DEATH][FRAMES] = 0;
-	sprite->nb[DEATH][ANGLES] = 0;
+	sprite->nb[DEATH][FRAMES] = 6;
+	sprite->nb[DEATH][ANGLES] = 1;
 }
 
 int	init_alfred(t_texture_sheet *sprite)
@@ -67,12 +67,18 @@ int	init_alfred(t_texture_sheet *sprite)
 	sprite->pos[1][0][2] = new_rect(369,	55,	436,	88);
 	sprite->pos[1][0][3] = new_rect(451,	55,	511,	90);
 
-
 	sprite->pos[2][0][0] = new_rect(0,	101, 	33,	153);
 	sprite->pos[2][1][0] = new_rect(78,	101,	114,	155);
 	sprite->pos[2][2][0] = new_rect(158,	101,	202,	150);
 	sprite->pos[2][3][0] = new_rect(247,	101,	315,	161);
 	sprite->pos[2][4][0] = new_rect(359,	101,	447,	174);
 	sprite->pos[2][5][0] = new_rect(491,	101,	594,	192);
+
+	sprite->pos[3][0][0] = new_rect(0,	101, 	33,	153);
+	sprite->pos[3][1][0] = new_rect(78,	101,	114,	155);
+	sprite->pos[3][2][0] = new_rect(158,	101,	202,	150);
+	sprite->pos[3][3][0] = new_rect(247,	101,	315,	161);
+	sprite->pos[3][4][0] = new_rect(359,	101,	447,	174);
+	sprite->pos[3][5][0] = new_rect(491,	101,	594,	192);
 	return (1);
 }

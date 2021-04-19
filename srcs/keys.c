@@ -6,32 +6,27 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 14:54:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:11:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	key_up(t_doom *doom, SDL_Event *event)
+void	mouse(t_doom *doom, SDL_Event *event)
 {
-	if (event->key.keysym.sym == 't')
-		doom->key.t = doom->key.t == 0;
-	else if (event->key.keysym.sym == 'p')
-		doom->key.p = doom->key.p == 0;
-	else if (event->key.keysym.sym == 'l')
-		doom->player.shooting = 1;
-
+	if (event->button.button == SDL_BUTTON_LEFT)
+			doom->player.shooting = event->type == SDL_MOUSEBUTTONDOWN;
 }
 
-int		keys(t_doom *doom, SDL_Event *event)
+void	key(t_doom *doom, SDL_Event *event)
 {
-	if (event->key.keysym.sym == 'w')
+	if (event->key.keysym.sym == SDLK_w)
 		doom->key.w = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == 'a')
+	else if (event->key.keysym.sym == SDLK_a)
 		doom->key.a = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == 's')
+	else if (event->key.keysym.sym == SDLK_s)
 		doom->key.s = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == 'd')
+	else if (event->key.keysym.sym == SDLK_d)
 		doom->key.d = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_SPACE)
 		doom->key.space = event->type == SDL_KEYDOWN;
@@ -41,13 +36,16 @@ int		keys(t_doom *doom, SDL_Event *event)
 		doom->key.l_shift = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_TAB)
 		doom->key.tab = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == 'q')
+	else if (event->key.keysym.sym == SDLK_q)
 		doom->quit = 1;
-	else if (event->type == SDL_KEYUP)
-		key_up(doom, event);
-	//else if (event->type == SDL_KEYDOWN)
-	//	key_down(doom, event);
-	else
-		return (0);
-	return (1);
+}
+
+void	keys(t_doom *doom, SDL_Event *event)
+{
+	if (event->type == SDL_QUIT)
+		doom->quit = 1;
+	if (event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
+			key(doom, event);
+	if (event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEBUTTONDOWN)
+			mouse(doom, event);
 }

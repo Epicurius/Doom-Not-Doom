@@ -24,7 +24,7 @@ static void	alfred(t_stats *alfred)
 
 static void	spooky(t_stats *spooky)
 {
-	spooky->health = 200;
+	spooky->health = 30;
 	spooky->damage = 30;
 	spooky->animate = 1;
 	spooky->hostile = 1;

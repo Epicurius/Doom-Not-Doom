@@ -40,7 +40,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	return (1);
 }
 
-void	entity_threads(t_doom *doom, t_entity_render render, int type, t_entity_render *thread)
+void	entity_threads(t_doom *doom, t_entity_render render, t_entity *entity, t_entity_render *thread)
 {
 	int y;
 
@@ -53,7 +53,10 @@ void	entity_threads(t_doom *doom, t_entity_render render, int type, t_entity_ren
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
 		thread[y].surface = doom->surface;
-		thread[y].bxpm = &doom->sprites[type].bxpm;
+		thread[y].bxpm = &doom->sprites[entity->type].bxpm;
+		thread[y].shooting = doom->player.shooting;
+		thread[y].dmg = 10;
+		thread[y].hp = &entity->hp;
 		tpool_add(&doom->tpool, blit_entity, &thread[y]);
 	}
 }
@@ -78,7 +81,7 @@ void	DrawEntity(t_doom *doom)
 				rotate_entity(doom, &doom->entity[i], &render);
 				project_entity(doom, &render);
 				tpool_wait(&doom->tpool);
-				entity_threads(doom, render, doom->entity[i].type, thread);
+				entity_threads(doom, render, &doom->entity[i], thread);
 			}
 		}
 	}
