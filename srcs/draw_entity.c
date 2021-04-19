@@ -19,7 +19,7 @@ void	 project_entity(t_doom *doom, t_entity_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render render, t_entity_render *thread)
+int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -34,17 +34,31 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render render, t_enti
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	if (screen.z <= 0.5)
 		return (0);
-	render.screen = xyz(screen.x, screen.y, screen.z);
-	render.scale = doom->entity_stats[entity->type].scale;
-	render.pos = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
-	project_entity(doom, &render);
-	tpool_wait(&doom->tpool);
-	blit_entity(doom, render, entity->type, thread);
+	render->screen = xyz(screen.x, screen.y, screen.z);
+	render->scale = doom->entity_stats[entity->type].scale;
+	render->pos = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);
 }
 
+void	entity_threads(t_doom *doom, t_entity_render render, int type, t_entity_render *thread)
+{
+	int y;
 
-void	find_visible_entitys(t_doom *doom)
+	y = -1;
+	int i = render.clamp_end.y - render.clamp_start.y;
+	while (++y < 10)
+	{
+		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_entity_render));
+		thread[y].clamp_start.y	+= i / 10.0 * y;
+		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
+		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
+		thread[y].surface = doom->surface;
+		thread[y].bxpm = &doom->sprites[type].bxpm;
+		tpool_add(&doom->tpool, blit_entity, &thread[y]);
+	}
+}
+
+void	DrawEntity(t_doom *doom)
 {
 	int s;
 	int i;
@@ -59,23 +73,14 @@ void	find_visible_entitys(t_doom *doom)
 		i = -1;
 		while (++i < doom->nb.entities)
 		{
-			if (!doom->entity[i].render)
-				continue ;
-			if (doom->entity[i].sector != doom->sectors[s].id)
-				continue ;
-			rotate_entity(doom, &doom->entity[i], render, thread);
+			if (doom->entity[i].render && doom->entity[i].sector == doom->sectors[s].id)
+			{
+				rotate_entity(doom, &doom->entity[i], &render);
+				project_entity(doom, &render);
+				tpool_wait(&doom->tpool);
+				entity_threads(doom, render, doom->entity[i].type, thread);
+			}
 		}
 	}
 	tpool_wait(&doom->tpool);
-}
-
-void 	DrawEntity(t_doom *doom)
-{
-	int		i;
-	int		nb;
-
-	nb = 0;
-	find_visible_entitys(doom);
-	//i = -1;
-	//while (++i < nb)
 }
