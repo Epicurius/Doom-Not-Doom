@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 14:58:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:47:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_doom(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	printf("processors: %d\n", doom->nb.processors);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_camera(doom);
 	init_skybox(doom);

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2020/11/24 12:13:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/19 11:51:43 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,10 +139,11 @@ $(LIB_DIR):
 	@git clone -q https://github.com/Epicurius/lib.git
 
 $(LIBS): $(LIB_DIR)
-	@make -q -C lib/libft
-	@make -q -C lib/libpf
-	@make -q -C lib/tpool
-	@make -q -C bxpm_converter
+	@make -C ./lib/libft
+	@make -C ./lib/libpf
+	@make -C ./lib/tpool
+	@make -C ./bxpm_converter
+	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
@@ -157,17 +158,18 @@ fclean_all: fclean
 	@/bin/rm -rf $(PATH_TO_BXPM)
 
 $(RESOURCES):
-	@printf $(CYAN)"[INFO] Importing resources\n"$(GREEN)
-	@wget -q --show-progress \
+	@curl -L "https://drive.google.com/uc?export=download&id=$(LINK_ID)" > file.tar.gz
+	@printf $(CYAN)"[INFO] Unarchiving resources\n"$(RESET)
+	@tar -xf file.tar.gz
+	@rm -rf file.tar.gz
+
+	@#printf $(CYAN)"[INFO] Importing resources\n"$(GREEN)
+	@#wget -q --show-progress \
 	"https://drive.google.com/uc?export=download&confirm=$$(wget --quiet $\
 	--no-check-certificate 'https://drive.google.com/uc?export=download&id=$\
 	$(LINK_ID)' -O- | gsed -rn $\
 	's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')\
 	&id=$(LINK_ID)" -O file.tar.gz $\
-	@printf $(CYAN)"[INFO] Unarchiving resources\n"$(RESET)
-	@tar -xf file.tar.gz
-	@rm -rf file.tar.gz
-
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 13:59:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:58:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 /*
 ** Screen info
 */
-# define W						1280
-# define H						720
-# define MAX_PROCESSORS					8
+# define W						2560
+# define H						1440
+# define MAX_PROCESSORS			64
 
 /*
 **	Vision
@@ -28,7 +28,6 @@
 #define OVER_HEAD_SPACE					2
 #define DUCK_HEIGHT					2.5
 #define STEP_HEIGHT					2
-//720x480 id 3:2 aspect
 #define CAMERA_RATIO					(16.0/9.0)
 #define FOV						90
 #define PLAYER_YAW					45

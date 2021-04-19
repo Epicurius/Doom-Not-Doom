@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 14:16:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:34:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	init_map_sector(t_doom *doom, char **arr)
 	sect->floor	= doom->floors[ft_atoi(arr[1])];
 	sect->ceiling	= doom->ceilings[ft_atoi(arr[1])];
 	walls		= ft_strsplit(arr[2], ' ');
-	//sect->npoints	= npoints(walls);
 	sect->npoints	= ft_strarr_func(walls, NULL);
 	sect->wall	= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
 	neighbour	= ft_strsplit(arr[3], ' ');
@@ -117,8 +116,7 @@ void	init_map_entity(t_doom *doom, char **arr)
 	entity->where.x		= ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y		= ft_atof(arr[3]) * doom->map_scale;
 	entity->where.z		= ft_atof(arr[4]) * doom->map_scale;
-	entity->scale		= ft_atoi(arr[5]) * doom->map_scale;
-	entity->yaw		= ft_atoi(arr[6]);
+	entity->yaw		= ft_atoi(arr[5]);
 }
 
 void	init_map_wsprite(t_doom *doom, char **arr)

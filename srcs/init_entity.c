@@ -8,7 +8,7 @@ static void	alfred(t_stats *alfred)
 	alfred->animate = 1;
 	alfred->hostile = 1;
 	alfred->attack_style = 2;
-	alfred->scale = 50;
+	alfred->scale = 5 * (W / 100);
 	alfred->height = 4;
 	alfred->speed = 0.02;
 	alfred->wonder_distance = 0;
@@ -29,7 +29,7 @@ static void	spooky(t_stats *spooky)
 	spooky->animate = 1;
 	spooky->hostile = 1;
 	spooky->attack_style = 1;
-	spooky->scale = 25;
+	spooky->scale = 2 * (W / 100);
 	spooky->height = 9;
 	spooky->speed = 0.01;
 	spooky->wonder_distance = 20;
