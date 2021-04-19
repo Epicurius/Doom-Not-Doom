@@ -1,6 +1,6 @@
 
 #include "doom.h"
-
+/*
 t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 {
 	t_xyz dist;
@@ -33,9 +33,9 @@ t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 	render.yrange = render.end.y - render.start.y;
 	return (render);
 }
-
+*/
 void 	DrawProjectiles(t_doom *doom)
-{
+{/*
 	int i;
 	t_entity_render render;
 
@@ -48,5 +48,5 @@ void 	DrawProjectiles(t_doom *doom)
 		if (render.screen.z <= 1)
 			continue ;
 		blit_entity(&render);
-	}
+	}*/
 }

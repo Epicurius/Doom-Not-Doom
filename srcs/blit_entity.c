@@ -16,11 +16,13 @@ void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_entity(t_entity_render *render)
+int		blit_entity1(void *arg)
 {
 	t_v2 alpha;
 	t_xyz text;
+	t_entity_render *render;
 
+	render = arg;
 	text.z = render->screen.z;
 	int y = render->clamp_start.y;
 	while (++y < render->clamp_end.y)
@@ -35,17 +37,26 @@ void	blit_entity(t_entity_render *render)
 			blit_entity_pixel(render, y * W + x, text);
 		}
 	}
+	return (1);
 }
-/*
-void	blit_entity(t_entity_render *render)
-{
-	int y = -1;
-	thread	arr[10];
 
-	while (++y < 10)
+# define TEST 10
+
+void	blit_entity(t_doom *doom, t_entity_render render, int type, t_entity_render *thread)
+{
+	int y;
+
+	y = -1;
+	int i = render.clamp_end.y - render.clamp_start.y;
+	while (++y < TEST)
 	{
-		arr[x].y = W /10.0 * y;
-		arr[x].end = W /10.0 * (y + 1);
-		tpool_add(&doom->tpool, fustrum_in_sector, &arr[y]);
+		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_entity_render));
+		thread[y].clamp_start.y	+= i / (double)TEST * y;
+		thread[y].clamp_end.y		+= i / (double)TEST * (y + 1);
+		thread[y].clamp_end.y = min(thread[y].clamp_end.y, render.clamp_end.y);
+		thread[y].surface = doom->surface;
+		thread[y].bxpm = &doom->sprites[type].bxpm;
+		tpool_add(&doom->tpool, blit_entity1, &thread[y]);
 	}
-}*/
+	//tpool_wait(&doom->tpool);
+}

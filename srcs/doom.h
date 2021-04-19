@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 13:56:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:55:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -414,7 +414,7 @@ int	init_alfred(t_texture_sheet *sprite);
 int	init_spooky(t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
-void	blit_entity(t_entity_render *render);
+void	blit_entity(t_doom *doom, t_entity_render render, int type, t_entity_render *thread);
 void	init_entity(t_doom *doom);
 int	ai_rand_move(t_entity *entity, int rand);
 
