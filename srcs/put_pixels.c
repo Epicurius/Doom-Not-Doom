@@ -22,14 +22,16 @@ void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx)
+void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 {
-	Uint32		pixel;
+	unsigned short	light;
+	unsigned short	pixel;
 
-	pixel = ((Uint32*)tx->surface->pixels)[(int)text.y * tx->w + (int)text.x];
-	if (((pixel >> 24) & 0xFF) < OPAQUE)
-		return ;
-	((Uint32*)render->surface->pixels)[coord] = pixel;
+	light = 255 + render->light;
+	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
+	if (bxpm->palet[light][pixel] == 0x800080)
+			return ;
+	((Uint32*)render->surface->pixels)[coord] = bxpm->palet[light][pixel];
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 

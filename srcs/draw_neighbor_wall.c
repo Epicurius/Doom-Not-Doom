@@ -40,11 +40,11 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline)
 
 	render->ybot[render->x] = ft_clamp(min(vline->curr_n.floor,
 	vline->curr.floor), render->ytop[render->x], render->ybot[render->x]);
-
+	/*
 	if (render->wall.ptx >= 0)
 	{
 		vline->y1 = render->ytop[render->x]; 
 		vline->y2 = render->ybot[render->x]; 
 		draw_portal_texture(render, vline);
-	}
+	}*/
 }

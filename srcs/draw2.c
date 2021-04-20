@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 15:17:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:03:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void		DrawScreen(t_doom *doom)
 	qtotal = qcurr;
 	queue[0] = (t_item){.sectorno = -2, .sx1 = 0, .sx2 = W};
 	find_start_sectors(doom, queue, &qtotal);
+	cs();
 	while (qcurr < qtotal)
 	{
 		curr = queue[qcurr++];
 		draw_sector(doom, queue, &qtotal, curr);
 	}
+	ce("DRAW_SCREEN");
 }
 
 /*
@@ -47,15 +49,16 @@ void		draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr)
 			continue ;
 		sect->visible = 1;
 		render_wall(doom, curr, s, render, sect->wall[s]);
+		//add walll instead of sectors
 		if (sect->wall[s]->n != -1 && doom->end_x > doom->str_x)
 		{
-			queue[*qtotal] = (t_item){sect->wall[s]->n,
-				doom->str_x, doom->end_x};
+			queue[*qtotal] = (t_item){sect->wall[s]->n, doom->str_x, doom->end_x};
 			*qtotal += 1;
 		}
 	}
 	if (!tpool_wait(&doom->tpool))
 		return ;
+
 }
 
 
@@ -159,6 +162,7 @@ void		render_wall(t_doom *doom, t_item curr, int s, t_render *render, t_wall *wa
 		//draw_vline(&render[x]);
 		x += 1;
 	}
+		//SDL_UpdateWindowSurface(doom->win);
 }
 //Threading add is 0.33% faster
 //Making copy of wall saves 4 fps

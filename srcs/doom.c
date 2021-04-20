@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 16:34:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:03:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ int main1(void)
 		cs();
 		precompute_skybox(doom);
 		ce("precompute_skybox");
-		cs();
 		DrawScreen(doom);//
-		ce("DrawScreen");
 		cs();
 		precompute_entities(doom);
 		ce("precomp_entities");
@@ -117,8 +115,7 @@ int main1(void)
 		cs();
 		DrawEntity(doom);//
 		ce("Draw_entity");
-		//shade_zbuffer(doom);
-		ce("Tab_function");
+
 		cs();
 		movement(doom);
 		ce("movement");
@@ -131,6 +128,7 @@ int main1(void)
 		fps_func(doom);
 		if (doom->key.tab)
 			map(doom);
+		//shade_zbuffer(doom);
 		SDL_UpdateWindowSurface(doom->win);
 	}
 	free_doom(doom);

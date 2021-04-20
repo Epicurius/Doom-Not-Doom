@@ -65,6 +65,7 @@ void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
 	int			fustrum[W];
 	t_fustrum_thread	arr[doom->nb.processors];
 
+	cs();
 	x = -1;	
 	while (++x < doom->nb.processors)
 	{
@@ -76,5 +77,8 @@ void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
 		//fustrum_in_sector(&arr[x]);
 	}
 	tpool_wait(&doom->tpool);
+	ce("Find screen x");
+	cs();
 	partition_screen(doom, fustrum, queue, qtotal);
+	ce("partition screen x");
 }

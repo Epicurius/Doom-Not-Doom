@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 17:02:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/20 13:54:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,10 +291,6 @@ typedef struct		s_render
 {
 	SDL_Surface		*surface;
 	SDL_Surface		*clock;
-	t_texture		*wtx;
-	t_texture		*ptx;
-	t_texture		*ctx;
-	t_texture		*ftx;
 	t_bxpm			*stx;
 	t_bxpm			*mtx;
 	t_wall			*skybox;
@@ -456,7 +452,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
 //	Blit pixels
 void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx);
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
 //	Skybox
