@@ -66,6 +66,7 @@ int		find_start_sectors(t_doom *doom)
 	int			x;
 	t_fustrum_thread	arr[doom->nb.processors];
 
+	cs();
 	x = -1;	
 	while (++x < doom->nb.processors)
 	{

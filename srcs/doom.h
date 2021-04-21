@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 15:50:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:12:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,7 +458,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
 //	Blit pixels
 void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx);
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx);
+void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
 //	Skybox

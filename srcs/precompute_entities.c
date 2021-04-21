@@ -93,13 +93,7 @@ void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
 	if (doom->sprites[entity->type].nb[entity->state][FRAMES] > 1)
-	{
-		//if (entity->state == ATTACK && entity->stat.attack_style == 1
-		//		&& entity->orb->render)
-		//	entity->frame = 0;
-		//else
 			frame_animation(doom, entity);
-	}
 	entity->angle = orientation(entity->where, doom->player.where,
 		entity->yaw, doom->sprites[entity->type].nb[entity->state][ANGLES]);
 }

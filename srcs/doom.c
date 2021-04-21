@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 17:03:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:13:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int main1(void)
 		fps_func(doom);
 		if (doom->key.tab)
 			map(doom);
+		//shade_zbuffer(doom);
 		SDL_UpdateWindowSurface(doom->win);
 		//if change fix scale
 		//doom->sectors[3].ceiling.y += 0.05;

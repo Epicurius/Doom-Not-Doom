@@ -6,9 +6,9 @@ void	draw_portal_texture(t_render *render, t_vline *vline)
 	t_xyz text;
 	double alpha;
 	int	coord;
-	t_texture *ptx;
+	t_bxpm *ptx;
 
-	ptx = &render->wtx[1];
+	ptx = &render->mtx[1];
 	text.z = vline->z;
 	text.x = (vline->alpha * render->wall.tscale.x * vline->z);
 	if (text.x >= ptx->w || text.x < 0)

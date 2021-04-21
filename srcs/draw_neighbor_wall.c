@@ -34,13 +34,12 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline)
 		else
 			draw_wall_texture(render, vline);
 	}
-	
 	render->ytop = ft_clamp(max(vline->curr_n.ceiling,
 	vline->curr.ceiling), render->ytop, render->ybot);
 
 	render->ybot = ft_clamp(min(vline->curr_n.floor,
 	vline->curr.floor), render->ytop, render->ybot);
-/*
+	/*
 	if (render->wall.ptx >= 0)
 	{
 		vline->y1 = render->ytop; 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 17:00:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:11:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,5 @@ void		DrawScreen(t_doom *doom)
 		doom->render[x].x = x;
 		tpool_add(&doom->tpool, render_vline, &doom->render[x]);
 	}
+		//SDL_UpdateWindowSurface(doom->win);
 }
