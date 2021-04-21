@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/17 12:20:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 13:57:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ void				fps_func(t_doom *doom)
 		return ;
 	rect = (SDL_Rect){.x = 0, .y = 0, .w = fps->surf->w, .h = fps->surf->h};
 	SDL_BlitSurface(fps->surf, NULL, doom->surface, &rect);
+}
+
+void	init_fps(t_doom *doom)
+{
+	doom->fps.count = 0;
+	doom->fps.surf = NULL;
+	doom->fps.font = TTF_OpenFont("./resources/font/digital.ttf", FPS_FONT_SIZE);
+	doom->fps.color = hex_to_sdl_color(0x40eb34ff);
 }

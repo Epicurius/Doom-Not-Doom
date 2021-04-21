@@ -6,8 +6,6 @@ int	clock_digital_wsprite(t_doom *doom, t_wall *wall, int x)
 	time_t t;
 	struct tm curr_time;
 	char *str;
-	SDL_Color fc;
-	SDL_Color bc;
 
 	t = time(NULL);
 	curr_time = *localtime(&t);
@@ -16,11 +14,10 @@ int	clock_digital_wsprite(t_doom *doom, t_wall *wall, int x)
 	str = ft_sprintf("%02d:%02d:%02d",curr_time.tm_hour,
 			curr_time.tm_min, curr_time.tm_sec);
 	wall->wsprite.num[x].time = curr_time.tm_sec;
-	bc = hex_to_sdl_color(0x000000ff);
-	fc = hex_to_sdl_color(0xffffffff);
 	SDL_FreeSurface(doom->clock);
 	SDL_Surface *tmp;
-	tmp = TTF_RenderText_Shaded(doom->clock_font, str, fc, bc);
+	tmp = TTF_RenderText_Shaded(doom->clock_font, str,
+			hex_to_sdl_color(0xffffffff), hex_to_sdl_color(0x000000ff));
 	free(str);
 	if (tmp == NULL)
 		return (0);	

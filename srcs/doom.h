@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 17:02:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 15:50:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ typedef struct		s_sector
 	int		light;
 	float		gravity;
 	char		visible;
+	int			xmax;
 } 			t_sector;
 
 
@@ -287,30 +288,28 @@ typedef struct		s_entity_render
 	int			*hp;
 }			t_entity_render;
 
-typedef struct		s_render
+typedef struct	s_render
 {
-	SDL_Surface		*surface;
-	SDL_Surface		*clock;
-	t_texture		*wtx;
-	t_texture		*ptx;
-	t_texture		*ctx;
-	t_texture		*ftx;
-	t_bxpm			*stx;
-	t_bxpm			*mtx;
-	t_wall			*skybox;
-	int			*ytop;
-	int			*ybot;
-	t_wall			wall;
-	t_plane			floor;
-	t_plane			ceiling;
-	t_player		player;
-	
+	SDL_Surface	*surface;
+	t_sector	*sectors;
+	int 		*fustrum;
+	t_wall		*skybox;
+	t_bxpm		*mtx;
+	t_bxpm		*stx;
+	t_player	player;
+	int			ytop;
+	int			ybot;
+	int			x;
+
+	t_wall		wall;
+	t_plane		floor;
+	t_plane		ceiling;
+	int			light;
+	int			s;
 	t_bh			*bh;
 	t_wsprite		*wsprite;
-	int			light;
-	int			x;
-	int			s;
-}					t_render;
+	SDL_Surface		*clock;
+}				t_render;
 
 typedef struct	s_map
 {
@@ -382,10 +381,8 @@ typedef struct				s_doom
 
 
 	//	Render
-	int				str_x;
-	int				end_x;
-	int				*ytop;
-	int				*ybot;
+	t_render			*render;
+	int					*fustrum;
 	double				*zbuffer;
 
 	//	Textures
@@ -393,32 +390,38 @@ typedef struct				s_doom
 	SDL_Surface			*clock;
 	t_bxpm				stx[6];
 	t_bxpm				mtx[6];
-	t_texture_sheet			sprites[2];
+	t_texture_sheet		sprites[2];
 }						t_doom;
+
+//		Init
+void	init_render(t_doom *doom);
+void	init_fps(t_doom *doom);
+void	init_entity(t_doom *doom);
+void	init_scale(t_doom *doom);
+void	init_textures(t_doom *doom);
+int		init_alfred(t_texture_sheet *sprite);
+int		init_spooky(t_texture_sheet *sprite);
+void	init_minimap(t_doom *doom);
+void	init_skybox(t_doom *doom);
+void	init_camera(t_doom *doom);
 
 //	Render map
 void	DrawMap(t_doom *doom);
-void	init_scale(t_doom *doom);
-void	init_textures(t_doom *doom);
 void	precompute_walls(t_doom *doom);
 void	precompute_skybox(t_doom *doom);
 void	wall_to_screen_xz(t_player player, t_wall *wall);
 void	project_wall(t_doom *doom, t_wall *wall);
-void	render_wall(t_doom *doom, t_item now, int s, t_render *render, t_wall *wall);
-void	vline_color(t_render *render, t_vline *vline, int color);
-void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal);
+void	vline_monochromic(t_render *render, t_vline *vline);
+int		find_start_sectors(t_doom *doom);
 int	clip_wall(t_camera cam, t_wall *wall);
 
 
 //	Enteties
 void	DrawEntity(t_doom *doom);
 void	precompute_entities(t_doom *doom);
-int	init_alfred(t_texture_sheet *sprite);
-int	init_spooky(t_texture_sheet *sprite);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 int		blit_entity(void *arg);
-void	init_entity(t_doom *doom);
 int		ai_rand_move(t_entity *entity, int rand);
 
 //	Projectiles
@@ -438,7 +441,6 @@ int	animate_wsprite(t_doom *doom, t_sprite *sprite);
 int	animate_entities(t_doom *doom, t_sprite *sprite);
 
 //	Minimap
-void	init_minimap(t_doom *doom);
 void	map(t_doom *doom);
 
 //	Movement
@@ -460,7 +462,6 @@ void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_texture *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
 //	Skybox
-void	init_skybox(t_doom *doom);
 void	draw_skybox(t_render *render, t_vline *vline, int side);
 void	skybox_wall_vline(t_render *render, t_vline vline, int texture_w);
 void	skybox_ceiling_vline(t_render *render, t_vline vline);
@@ -470,13 +471,11 @@ void	skybox_floor_vline(t_render *render, t_vline);
 void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
-void	shade_zbuffer(t_doom *doom);
 void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int	read_file(t_doom *doom, char *file_name);
 void	keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
-void	init_camera(t_doom *doom);
 void	screen_sectors(t_doom *doom, t_item *queue, int *qtotal);
 
 //Math wiki func
@@ -517,6 +516,8 @@ void	color_palets(t_doom *doom);
 int	free_doom(t_doom *doom);
 
 void	free_array(char **arr);
+int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);
+int 	find_pos_sector(t_doom *doom, t_xyz pos);
 
 //REMOVE//
 void	cs(void);

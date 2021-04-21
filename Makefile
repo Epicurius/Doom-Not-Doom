@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/19 13:02:37 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/21 16:03:19 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ RAW_SRC =	doom.c \
 		precompute_walls.c\
 		precompute_skybox.c\
 		find_start_sectors.c\
-		zbuffer_utils.c\
 		draw_entity.c\
 		draw_skybox.c\
 		skybox_wall_vline.c\
@@ -74,6 +73,7 @@ RAW_SRC =	doom.c \
 		init_alfred.c\
 		init_spooky.c\
 		load_bxpm.c\
+		init_render.c\
 
 RAW_TEXTURES =	wood.xpm\
 		spooky.xpm\
@@ -124,8 +124,8 @@ $(NAME): $(OBJ)
 
 
 $(ODIR)/%.o: $(CDIR)/%.c
-	@printf $(YELLOW)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@
+	@printf $(GREEN)"Compiling $<\n"$(RESET)
+	@gcc -c $< -o $@ $(CFLAGS)
 
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_XPM)/%.xpm

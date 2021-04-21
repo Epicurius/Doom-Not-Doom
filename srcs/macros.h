@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 17:31:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 15:56:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef enum	e_entities
 ** Bullet Holes
 */
 #define ENABLE_BH					1
-#define MAX_BH						10
+#define MAX_BH						200
 
 /*
 ** Values !!DONT TOUCH!!
@@ -81,8 +81,8 @@ typedef enum	e_entities
 /*
 **	Movement
 */
-#define WALK_SPEED					0.01f
-#define SPRINT_SPEED					0.02f
+#define WALK_SPEED					0.05f
+#define SPRINT_SPEED					0.1f
 #define CROUCH_SPEED					0.006f
 #define	GRAVITY						0.05f
 #define MOUSE_X						0.005f
@@ -103,6 +103,8 @@ typedef enum	e_entities
 /*
 ** Texture
 */
+# define ZBUFFER_COLOR				1
+# define TEXTURE_DISABLED			0
 //Opaque scale for bliting
 # define OPAQUE						30
 # define NB_SKYBOX_TEXTURES				6

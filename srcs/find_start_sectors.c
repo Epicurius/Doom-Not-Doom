@@ -1,29 +1,31 @@
 
 #include "doom.h"
-
-int		partition_screen(t_doom *doom, int *fustrum, t_item *queue, int *qtotal)
+/*
+int		partition_screen(t_doom *doom, int *fustrum)
 {
 	int	x;
 	int	i;
+	int count = 0;
 
 	x = -1;
 	while (++x < W)
 	{
 		i = 0;
 		int sector = fustrum[x];
-		while (i < doom->nb.sectors && i < *qtotal && queue[i].sectorno != sector)
+		while (i < doom->nb.sectors && doom->screen_sectors[i] != -1
+				&& doom->screen_sectors[i] != sector)
 			i++;
-		if (i < doom->nb.sectors && queue[i].sectorno != sector && sector != -1)
+		if (i < doom->nb.sectors && doom->screen_sectors[i] == -1 && sector != -1)
 		{
-			queue[i].sectorno = sector;
-			queue[i].sx1 = x;
-			*qtotal += 1;
+			doom->screen_sectors[i] = sector;
+			doom->xmin[i] = x;
+			count++;
 		}
-		else if (i < doom->nb.sectors && queue[i].sectorno == sector)
-			queue[i].sx2 = x;
+		else if (i < doom->nb.sectors && doom->screen_sectors[i] == sector)
+			doom->xmax[i] = x;
 	}
-	return (0);
-}
+	return (count);
+}*/
 
 typedef struct	s_fustrum_thread
 {
@@ -49,7 +51,7 @@ int	fustrum_in_sector(void *arg)
 	{
 		double tmp = (x / (double)(W - 1)) * doom->cam.range + doom->cam.near_left;
 		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
-		pos.y = tmp * (-p.anglecos) - (-doom->cam.near_z) * p.anglesin + p.where.y;
+		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
 		pos.z = p.where.z + EYE_LVL;
 		//fix!! also check starting from player sector
 		fustrum[x] = find_sector(doom, pos);
@@ -59,10 +61,9 @@ int	fustrum_in_sector(void *arg)
 }
 
 //In how many sectors the camera/near_z is positioned
-void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
+int		find_start_sectors(t_doom *doom)
 {
 	int			x;
-	int			fustrum[W];
 	t_fustrum_thread	arr[doom->nb.processors];
 
 	x = -1;	
@@ -70,11 +71,10 @@ void	find_start_sectors(t_doom *doom, t_item *queue, int *qtotal)
 	{
 		arr[x].x = W /(double)doom->nb.processors * x;
 		arr[x].end = W /(double)doom->nb.processors * (x + 1);
-		arr[x].fustrum = fustrum;
+		arr[x].fustrum = doom->fustrum;
 		arr[x].doom = doom;
 		tpool_add(&doom->tpool, fustrum_in_sector, &arr[x]);
-		//fustrum_in_sector(&arr[x]);
 	}
 	tpool_wait(&doom->tpool);
-	partition_screen(doom, fustrum, queue, qtotal);
+	return (1);
 }

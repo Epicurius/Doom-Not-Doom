@@ -6,8 +6,6 @@ void	put_bh_pixels(t_render *render, int coord, t_xyz text)
 	uint32_t	clr;
 	unsigned short	pix;
 
-	//if (text.z >= ((double*)render->surface->userdata)[coord])
-	//	return ;
 	pix = render->mtx[0].pix[(int)text.y * 128 + (int)text.x];
 	clr = render->mtx[0].clr[pix];
 	if (clr == 0x800080)
@@ -42,6 +40,8 @@ void	draw_wall_bh(t_render *render, t_vline *vline)
 	int i = -1;
 	t_sprite bh;
 
+	if (!ENABLE_BH)
+		return ;
 	while (++i < render->bh->total)
 	{
 		bh = render->bh->num[i];

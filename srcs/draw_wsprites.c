@@ -1,18 +1,5 @@
 
 #include "doom.h"
-/*
-void	put_wsprite_pixels(t_render *render, int coord, t_xyz text, t_texture *wstx)
-{
-	Uint32		pixels;
-
-	//if (text.z >= ((double*)render->surface->userdata)[coord])
-	//	return ;
-	pixels = ((Uint32*)wstx->surface->pixels)[(int)text.y * wstx->surface->w + (int)text.x];
-	if (((pixels >> 24) & 0xFF) < OPAQUE)
-		return ;
-	((Uint32*)render->surface->pixels)[coord] = pixels;
-	((double*)render->surface->userdata)[coord] = text.z;
-}*/
 
 void	blit_clock_pixels(t_render *render, int coord, t_xyz text)
 {

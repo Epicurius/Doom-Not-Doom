@@ -22,19 +22,6 @@ void	reset_bh_dynamic(t_doom *doom)
 	}
 }
 
-void	reset_render_utils(t_doom *doom)
-{
-	int i;
-
-	i = -1;
-	while (++i < W)
-	{
-		doom->ytop[i] = 0;
-		doom->ybot[i] = H;
-	}
-
-}
-
 void	reset_bh(t_doom *doom)
 {
 	int i;

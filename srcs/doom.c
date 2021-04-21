@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 16:34:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:03:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,23 @@ void	init_doom(t_doom *doom)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	if (!(doom->ytop = ft_memalloc(sizeof(int) * W)))
-		return ;
-	if (!(doom->ybot = ft_memalloc(sizeof(int) * W)))
-		return ;
-	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (W * H))))
-		return ;
 	doom->w2 = W/2;
 	doom->h2 = H/2;
 
-	FPS.count = 0;
-	FPS.surf = NULL;
-	FPS.font = TTF_OpenFont("./resources/font/digital.ttf", FPS_FONT_SIZE);
-	FPS.color = hex_to_sdl_color(0x40eb34ff);
-	doom->clock_font = TTF_OpenFont("./resources/font/digital.ttf", 100);
 	doom->win = SDL_CreateWindow("DOOM", 0, 0, W, H, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
-	doom->surface->userdata = doom->zbuffer;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	init_tpool(&doom->tpool, doom->nb.processors);
+	init_fps(doom);
 	init_camera(doom);
 	init_skybox(doom);
 	init_minimap(doom);
 	init_textures(doom);
 	init_scale(doom);
 	init_entity(doom);
+	init_render(doom);
 }
 
 int main1(void)
@@ -86,13 +76,10 @@ int main1(void)
 	ce("init_doom");
     while (!doom->quit)
     {
-		cs();
-        while (SDL_PollEvent(&event))
-				keys(doom, &event);
-		ce("SDL_Events");
-		cs();
-		reset_render_utils(doom);
-		ce("reset_render_arrays");
+		//cs();
+		//SDL_FillRect(doom->surface, &((SDL_Rect){0,0,W,H}), 0x000000);
+		//ce("Fill Rect");
+
 		cs();
 		update_camera(doom, 0, 0);
 		ce("update_camera");
@@ -102,39 +89,51 @@ int main1(void)
 		cs();
 		precompute_skybox(doom);
 		ce("precompute_skybox");
-		cs();
+		//cs();
 		DrawScreen(doom);//
-		ce("DrawScreen");
+		//ce("DrawScreen");
+
+		/* All this has no time requirements */
+		{
+
+			cs();
+			precompute_entities(doom);
+			//ce("precomp_entities");
+			//cs();
+			precompute_projectiles(doom);
+			//ce("precomp_project");
+			//cs();
+			movement(doom);
+			//ce("movement");
+			//cs();
+			player_collision(doom);
+			//ce("player_collision");
+			while (SDL_PollEvent(&event))
+				keys(doom, &event);
+			ce("WHILE DRAW");
+		}
 		cs();
-		precompute_entities(doom);
-		ce("precomp_entities");
-		cs();
-		precompute_projectiles(doom);
-		ce("precomp_project");
+		tpool_wait(&doom->tpool);
+		ce("Draw tpool_wait");
 		cs();
 		DrawProjectiles(doom);
 		ce("draw_project");
 		cs();
 		DrawEntity(doom);//
 		ce("Draw_entity");
+		cs();
 		//shade_zbuffer(doom);
-		ce("Tab_function");
-		cs();
-		movement(doom);
-		ce("movement");
-		cs();
-		player_collision(doom);
-		ce("player_collision");
-		cs();
 		draw_crosshair(doom);
 		ce("Croshair");
 		fps_func(doom);
 		if (doom->key.tab)
 			map(doom);
 		SDL_UpdateWindowSurface(doom->win);
+		//if change fix scale
+		//doom->sectors[3].ceiling.y += 0.05;
 	}
 	free_doom(doom);
-	return (0);
+	return (1);
 }
 
 int main(void)

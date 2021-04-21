@@ -22,8 +22,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 
 		if (text.y >= wtx->h || text.y < 0)
 			text.y = abs((int)text.y % wtx->h);
-		//if (text.z < ((double*)render->surface->userdata)[coord])
-			blit_pixel_brightness(render, coord, text, wtx);
+		blit_pixel_brightness(render, coord, text, wtx);
 		vline->y1++;
 	}
 }

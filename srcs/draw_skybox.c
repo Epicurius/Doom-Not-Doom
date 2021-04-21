@@ -6,13 +6,13 @@ void	skybox_limits(t_render *render, t_vline *vline, int side, t_limits *limit)
 {
 	if (side == TOP)
 	{
-		limit->min = render->ytop[render->x];
+		limit->min = render->ytop;
 		limit->max = vline->curr.ceiling;
 	}
 	else if (side == BOT)
 	{
 		limit->min = vline->curr.floor;
-		limit->max = render->ybot[render->x];
+		limit->max = render->ybot;
 	}
 	else if (side == SIDES)
 	{
@@ -69,11 +69,9 @@ void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	vline->texel.x = (wall.x0z1 + vline->alpha * wall.xzrange) * vline->divider;
 	vline->texel.y = (wall.y0z1 + vline->alpha * wall.yzrange) * vline->divider;
 	vline->max.ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
-				render->ytop[render->x], render->ybot[render->x]);
+	vline->curr.ceiling = ft_clamp(vline->max.ceiling,render->ytop, render->ybot);
 	vline->max.floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
-	vline->curr.floor = ft_clamp(vline->max.floor,
-				render->ytop[render->x], render->ybot[render->x]);
+	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
 	vline->start.ceiling = vline->max.ceiling - render->player.horizon;
 	vline->start.floor = vline->max.floor - render->player.horizon;
 	vline->line_height = (vline->clipped_alpha * wall.range.floor + wall.s1.floor)

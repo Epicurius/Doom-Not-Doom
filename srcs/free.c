@@ -37,9 +37,9 @@ void	free_entity_pos(t_texture_sheet *sprite)
 
 void	free_render_utils(t_doom *doom)
 {
-	free(doom->ybot);
-	free(doom->ytop);
 	free(doom->zbuffer);
+	free(doom->fustrum);
+	free(doom->render);
 }
 
 void	free_font(t_doom *doom)

@@ -1,6 +1,6 @@
 
 #include "doom.h"
-
+/*
 void	draw_portal_texture(t_render *render, t_vline *vline)
 {
 	t_xyz text;
@@ -25,4 +25,4 @@ void	draw_portal_texture(t_render *render, t_vline *vline)
 			blit_pixel_opaque(render, coord, text, ptx);
 		vline->y1++;
 	}
-}
+}*/
