@@ -1,59 +1,58 @@
 
 #include "doom.h"
 
-
-void	skybox_limits(t_render *render, t_vline *vline, int side, t_limits *limit)
+void	skybox_limits(t_render *render, t_vline *vline, int side, int *limit)
 {
 	if (side == TOP)
 	{
-		limit->min = render->ytop;
-		limit->max = vline->curr.ceiling;
+		limit[0] = render->ytop;
+		limit[1] = vline->curr.ceiling;
 	}
 	else if (side == BOT)
 	{
-		limit->min = vline->curr.floor;
-		limit->max = render->ybot;
+		limit[0] = vline->curr.floor;
+		limit[1] = render->ybot;
 	}
 	else if (side == SIDES)
 	{
-		limit->min = vline->curr.ceiling;
-		limit->max = vline->curr.floor;
+		limit[0] = vline->curr.ceiling;
+		limit[1] = vline->curr.floor;
 	}
 	else if (side == TOP_HALF)
 	{
-		limit->min = vline->curr.ceiling;
-		limit->max = vline->curr_n.ceiling;
+		limit[0] = vline->curr.ceiling;
+		limit[1] = vline->curr_n.ceiling;
 	}
 	else if (side == BOT_HALF)
 	{
-		limit->min = vline->curr_n.floor;
-		limit->max = vline->curr.floor;
+		limit[0] = vline->curr_n.floor;
+		limit[1] = vline->curr.floor;
 	}
-	else
-		printf("ERROR %d\n", side);
 }
 
-void	draw_skybox_vline(t_render *render, t_vline skybox, int texture_w, t_limits limit)
+void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 {
-	if (limit.min < skybox.curr.ceiling)
-	{
-		skybox.y1 = limit.min;
-		skybox.y2 = min(skybox.curr.ceiling, limit.max);
-		skybox_ceiling_vline(render, skybox);
-	}
-	if (skybox.curr.ceiling < limit.max)
-	{
-		skybox.y1 = max(limit.min, skybox.curr.ceiling);
-		skybox.y2 = min(skybox.curr.floor, limit.max);
-		skybox_wall_vline(render, skybox, texture_w);
-	}
-	if (skybox.curr.floor < limit.max)
-	{
-		skybox.y1 = max(limit.min, skybox.curr.floor);
-		skybox.y2 = limit.max;
-		skybox_floor_vline(render, skybox);
-	}
+	int i;
 
+	i = (render->wall.wtx + 1) * (-6);
+	if (limit[0] < skybox.curr.ceiling)
+	{
+		skybox.y1 = limit[0];
+		skybox.y2 = min(skybox.curr.ceiling, limit[1]);
+		skybox_ceiling_vline(render, skybox, i + 4);
+	}
+	if (skybox.curr.ceiling < limit[1])
+	{	
+		skybox.y1 = max(limit[0], skybox.curr.ceiling);
+		skybox.y2 = min(skybox.curr.floor, limit[1]);
+		skybox_wall_vline(render, skybox, i + render->s);
+	}
+	if (skybox.curr.floor < limit[1])
+	{
+		skybox.y1 = max(limit[0], skybox.curr.floor);
+		skybox.y2 = limit[1];
+		skybox_floor_vline(render, skybox, i + 5);
+	}
 }
 
 void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
@@ -80,24 +79,22 @@ void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 
 void	draw_skybox(t_render *render, t_vline *vline, int side)
 {
+	int			i;
+	int			limit[2];
 	t_vline		skybox;
-	t_limits	limit;
-	int		texture_w;
 
-	int i = -1;
+	i = -1;
 	while (++i < 4)
 	{
-		if (!render->skybox[i].visible ||
-			render->skybox[i].cx1 >= render->skybox[i].cx2 ||
+		if (!render->skybox[i].visible)
+			continue ;
+		if (render->skybox[i].cx1 >= render->skybox[i].cx2 ||
 			render->skybox[i].cx1 > render->x ||
 			render->skybox[i].cx2 < render->x)
 			continue ;
-		//skybox.z_near_z  = vline->z_near_z;
-		skybox_limits(render, vline, side, &limit);
-		compute_skybox_vline_data(render, &skybox, i);
-		texture_w = 1024 / (render->skybox[i].sv2.z ?
-			render->skybox[i].sv2.z : render->skybox[i].cv2.z);
 		render->s = i;
-		draw_skybox_vline(render, skybox, texture_w, limit);
+		compute_skybox_vline_data(render, &skybox, i);
+		skybox_limits(render, vline, side, limit);
+		draw_skybox_vline(render, skybox, limit);
 	}
 }

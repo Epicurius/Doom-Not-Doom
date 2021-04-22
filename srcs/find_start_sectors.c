@@ -71,7 +71,8 @@ int		find_start_sectors(t_doom *doom)
 	while (++x < doom->nb.processors)
 	{
 		arr[x].x = W /(double)doom->nb.processors * x;
-		arr[x].end = W /(double)doom->nb.processors * (x + 1);
+		// maybe clamp
+		arr[x].end = min(W /(double)doom->nb.processors * (x + 1), W);
 		arr[x].fustrum = doom->fustrum;
 		arr[x].doom = doom;
 		tpool_add(&doom->tpool, fustrum_in_sector, &arr[x]);

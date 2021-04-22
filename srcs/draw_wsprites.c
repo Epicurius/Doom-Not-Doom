@@ -55,11 +55,11 @@ void	draw_wsprites(t_render *render, t_vline *vline)
 	int i = -1;
 	t_sprite sprite;
 
-	while (++i < render->wsprite->total)
+	while (++i < render->wsprite.total)
 	{
-		if (!render->wsprite->num[i].ready)
+		if (!render->wsprite.num[i].ready)
 			continue ;
-		sprite = render->wsprite->num[i];
+		sprite = render->wsprite.num[i];
 		double pos = sprite.where.x / render->wall.width * sprite.tscale.x;
 		pos *= (render->wall.sv2.z) ? render->wall.sv2.z : render->wall.cv2.z;
 		int x = vline->alpha * sprite.tscale.x * vline->z + sprite.src.x1 - pos;

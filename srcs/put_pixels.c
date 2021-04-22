@@ -1,16 +1,6 @@
 
 #include "doom.h"
 
-void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx)
-{
-	Uint32		*pixels;
-
-	pixels = tx->surface->pixels;
-	((Uint32*)render->surface->pixels)[coord] =
-	pixels[(int)text.y * tx->w + (int)text.x];
-	((double*)render->surface->userdata)[coord] = text.z;
-}
-
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 {
 	unsigned short	light;

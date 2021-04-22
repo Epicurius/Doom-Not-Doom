@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2020/10/21 14:35:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:13:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,8 @@ double	point_distance_3d(t_xyz p1, t_xyz p2)
 //	Closest point on a segment to a external point
 t_xyz	closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b)
 {
-	t_v2	ab;
-	t_v2	ap;
+	t_xyz	ab;
+	t_xyz	ap;
 	t_xyz	point;
 	double	len;
 	double	t;

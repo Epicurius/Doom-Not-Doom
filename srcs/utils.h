@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 13:59:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:16:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 
 typedef	struct	s_i2
 {
-	int	x;
-	int	y;
-}		t_i2;
-
-typedef	struct	s_v2
-{
-	double x;
-	double y;
-}		t_v2;
+	int x;
+	int y;
+}				t_i2;
 
 typedef struct	s_xyz
 {
@@ -43,34 +37,10 @@ typedef struct	s_rect
 	double	ratio;
 }		t_rect;
 
-typedef	struct	s_limits
-{
-	int	min;
-	int	max;
-}		t_limits;
-
-typedef struct	s_texture
-{
-	SDL_Surface *surface;
-	double	ratio;
-	int	nb;
-	int	x;
-	int 	y;
-	int	w;
-	int	h;
-}		t_texture;
-
-typedef struct s_item
-{
-	int sectorno;
-	int sx1;
-	int sx2;
-}				t_item;
-
 typedef struct		s_plane
 {
-	double		y;
 	int		tx;
+	double		y;
 	double		correct;
 	double		head;
 	double		feet;
@@ -80,7 +50,7 @@ typedef struct		s_plane
 typedef	struct		s_keys
 {
 	int		chr;
-	short		num;
+	short	num;
 	int		fnc;
 	int		w;
 	int		a;

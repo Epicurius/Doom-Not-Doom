@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 17:12:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:22:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct		s_bxpm
 	int		h;
 	int		clr_nb;
 	int		pix_nb;
-	unsigned short	*pix;
-	uint32_t	*clr;
+	const uint32_t	*clr;
+	const unsigned short	*pix;
 	uint32_t	*palet[256 + 256];
 }			t_bxpm;
 
@@ -67,9 +67,9 @@ typedef struct	s_vline
 	t_floor_ceiling	curr_n;
 
 	/* Texel */
-	t_v2	texel;
-	t_v2	texel_nearz;
-	t_v2	texel_range;
+	t_xyz	texel;
+	t_xyz	texel_nearz;
+	t_xyz	texel_range;
 }		t_vline;
 
 typedef struct		s_projectile
@@ -148,7 +148,7 @@ typedef struct		s_sprite
 	t_rect	src;
 	double	scale_w;
 	double	scale_h;
-	t_v2	tscale;
+	t_xyz	tscale;
 	int	ready;
 }			t_sprite;
 
@@ -218,7 +218,7 @@ typedef struct		s_wall
 	double		x0z1;
 	double		y1z0;
 	double		y0z1;
-	t_v2		tscale;
+	t_xyz		tscale;
 }			t_wall;
 
 typedef struct		s_sector
@@ -231,7 +231,6 @@ typedef struct		s_sector
 	int		light;
 	float		gravity;
 	char		visible;
-	int			xmax;
 } 			t_sector;
 
 
@@ -300,6 +299,7 @@ typedef struct	s_render
 	int			ytop;
 	int			ybot;
 	int			x;
+	int			xend;
 
 	t_wall		wall;
 	t_plane		floor;
@@ -307,7 +307,7 @@ typedef struct	s_render
 	int			light;
 	int			s;
 	t_bh			*bh;
-	t_wsprite		*wsprite;
+	t_wsprite		wsprite;
 	SDL_Surface		*clock;
 }				t_render;
 
@@ -329,6 +329,7 @@ typedef struct	t_nb
 	int	entities;
 	int	processors;
 	int	projectiles;
+	int threads;
 }		t_nb;
 
 typedef	struct				s_fps
@@ -388,7 +389,7 @@ typedef struct				s_doom
 	//	Textures
 	TTF_Font			*clock_font;
 	SDL_Surface			*clock;
-	t_bxpm				stx[6];
+	t_bxpm				stx[12];
 	t_bxpm				mtx[6];
 	t_texture_sheet		sprites[2];
 }						t_doom;
@@ -456,27 +457,24 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline);
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
 
 //	Blit pixels
-void	blit_pixel(t_render *render, int coord, t_xyz text, t_texture *tx);
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
 void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
 
 //	Skybox
 void	draw_skybox(t_render *render, t_vline *vline, int side);
-void	skybox_wall_vline(t_render *render, t_vline vline, int texture_w);
-void	skybox_ceiling_vline(t_render *render, t_vline vline);
-void	skybox_floor_vline(t_render *render, t_vline);
+void	skybox_wall_vline(t_render *render, t_vline vline, int tx);
+void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx);
+void	skybox_floor_vline(t_render *render, t_vline, int tx);
 
 
 void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
-void	draw_sector(t_doom *doom, t_item *queue, int *qtotal, t_item curr);
 int	read_file(t_doom *doom, char *file_name);
 void	keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
-void	screen_sectors(t_doom *doom, t_item *queue, int *qtotal);
 
 //Math wiki func
 t_xyz	xyz(double x, double y, double z);
@@ -523,5 +521,6 @@ int 	find_pos_sector(t_doom *doom, t_xyz pos);
 void	cs(void);
 void	ce(char *str);
 
+void	if_norm(char *file_name, t_bxpm *bxpm);
 
 #endif

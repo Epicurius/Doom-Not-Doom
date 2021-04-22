@@ -32,7 +32,7 @@ void	init_camera(t_doom *doom)
 	cam->hscale = doom->w2 / (cam->near_up / cam->near_z);
 	cam->vscale = doom->h2 / (cam->near_down / cam->near_z);
 	cam->scale = cam->vscale;
-	update_camera(doom, 0, 0);
+	update_camera(doom, 10, 10);
 }
 
 void	update_camera(t_doom *doom, int x, int y)

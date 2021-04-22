@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 17:11:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:33:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 				- (vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling);
 }
 
-void	precompute_texels(t_render *render, t_wall wall, t_vline *vline)
+void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
 {
-	t_v2 camera_z;
+	t_xyz camera_z;
 
 	camera_z.x = render->player.where.x * vline->z;
 	camera_z.y = render->player.where.y * vline->z;
@@ -44,14 +44,13 @@ void	precompute_texels(t_render *render, t_wall wall, t_vline *vline)
 	vline->zrange = vline->z - NEAR_Z;
 }
 
-int		draw_vline(t_render *render)
+void	draw_vline(t_render *render)
 {
 	t_vline		vline;
 
 	compute_vline_data(render, render->wall, &vline);
-	if (vline.curr.ceiling > render->ytop ||
-		vline.curr.floor < render->ybot)
-			precompute_texels(render, render->wall, &vline);
+	if (vline.curr.ceiling > render->ytop || vline.curr.floor < render->ybot)
+			compute_vline_texels(render, render->wall, &vline);
 	draw_floor_and_ceiling(render, &vline);
 	if (render->wall.n != -1)
 		draw_neighbor_wall(render, &vline);
@@ -68,7 +67,6 @@ int		draw_vline(t_render *render)
 	}
 	draw_wsprites(render, &vline);
 	draw_wall_bh(render, &vline);
-	return (1);
 }
 
 void		render_wall_vline(t_render *render, t_sector *sector, int s)
@@ -79,23 +77,21 @@ void		render_wall_vline(t_render *render, t_sector *sector, int s)
 	wall->visible 	= 1;
 
 	render->wall		= *wall;
+	render->wsprite		= wall->wsprite;
 	render->floor		= sector->floor;
 	render->ceiling		= sector->ceiling;
 
 	render->bh			= &wall->bh;
-	render->wsprite		= &wall->wsprite;
 	
 	render->light		= sector->light;
 	render->s			= s;
 	draw_vline(render);
 }
 
-int		render_vline(void	*arg)
+int		render_vline(t_render *render, int sector)
 {
 	int	s;
-	t_render *render;
-	render = arg;
-	t_sector *sect = &render->sectors[render->fustrum[render->x]];
+	t_sector *sect = &render->sectors[sector];
 
 	s = -1;
 	while (++s < sect->npoints)
@@ -113,7 +109,7 @@ int		render_vline(void	*arg)
 	}
 	return (1);
 }
-
+/*
 void		DrawScreen(t_doom *doom)
 {
 	int x;
@@ -130,4 +126,52 @@ void		DrawScreen(t_doom *doom)
 		tpool_add(&doom->tpool, render_vline, &doom->render[x]);
 	}
 		//SDL_UpdateWindowSurface(doom->win);
+}*/
+
+int		loop_screen_sector(void	*arg)
+{
+	t_render *render;
+
+	render = arg;
+	while (render->x < render->xend)
+	{
+		render->ytop = 0;
+		render->ybot = H;
+		render_vline(render, render->fustrum[render->x]);
+		render->x++;
+	}
+	return (1);
+}
+
+void		screen_x_sector(t_doom *doom, int x, int xend)
+{
+	t_xyz pos;
+	t_player p;
+	
+	p = doom->player;
+	while (x < xend)
+	{
+		double tmp = (x / (double)(W - 1)) * doom->cam.range + doom->cam.near_left;
+		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
+		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
+		pos.z = p.where.z + EYE_LVL;
+		doom->fustrum[x] = find_sector(doom, pos);
+		x++;
+	}
+}
+
+void		DrawScreen(t_doom *doom)
+{
+	int x;
+
+	x = -1;
+	while (++x < doom->nb.threads)
+	{
+		doom->render[x].x = W /(double)doom->nb.threads * x;
+		doom->render[x].xend = min(W /(double)doom->nb.threads * (x + 1), W);
+		screen_x_sector(doom, doom->render[x].x, doom->render[x].xend);
+		doom->render[x].player = doom->player;
+		doom->render[x].clock = doom->clock;
+		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
+	}
 }

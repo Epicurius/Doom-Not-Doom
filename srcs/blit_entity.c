@@ -25,7 +25,8 @@ void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 
 int		blit_entity(void *arg)
 {
-	t_v2 alpha;
+	double alphax;
+	double alphay;
 	t_xyz text;
 	t_entity_render *render;
 
@@ -34,13 +35,13 @@ int		blit_entity(void *arg)
 	int y = render->clamp_start.y;
 	while (++y < render->clamp_end.y)
 	{
-		alpha.y = (y - render->start.y) / render->yrange;
-		text.y = (1.0 - alpha.y) * render->pos.y1 + alpha.y * render->pos.y2;
+		alphay = (y - render->start.y) / render->yrange;
+		text.y = (1.0 - alphay) * render->pos.y1 + alphay * render->pos.y2;
 		int x = render->clamp_start.x;
 		while (++x < render->clamp_end.x)
 		{
-			alpha.x = (x - render->start.x) / render->xrange;
-			text.x = (1.0 - alpha.x) * render->pos.x1 + alpha.x * render->pos.x2;
+			alphax = (x - render->start.x) / render->xrange;
+			text.x = (1.0 - alphax) * render->pos.x1 + alphax * render->pos.x2;
 			blit_entity_pixel(render, y * W + x, text);
 		}
 	}

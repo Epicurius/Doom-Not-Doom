@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/21 16:03:19 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/22 16:29:03 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ RAW_SRC =	doom.c \
 		init_spooky.c\
 		load_bxpm.c\
 		init_render.c\
+		if_norm.c\
 
 RAW_TEXTURES =	wood.xpm\
 		spooky.xpm\
@@ -86,6 +87,12 @@ RAW_TEXTURES =	wood.xpm\
 		space3.xpm\
 		space4.xpm\
 		space5.xpm\
+		top.xpm\
+		bottom.xpm\
+		left.xpm\
+		right.xpm\
+		front.xpm\
+		back.xpm\
 
 NAME = doom
 CDIR = srcs
@@ -104,7 +111,7 @@ RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wunused-variable
 
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
@@ -125,7 +132,7 @@ $(NAME): $(OBJ)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@ $(CFLAGS)
+	@gcc -c $< -o $@
 
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_XPM)/%.xpm

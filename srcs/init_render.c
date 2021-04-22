@@ -7,13 +7,13 @@ void	init_render(t_doom *doom)
 
 	if (!(doom->fustrum = ft_memalloc(sizeof(int) * W)))
 		return ;
-	if (!(doom->render = ft_memalloc(sizeof(t_render) * W)))
+	if (!(doom->render = ft_memalloc(sizeof(t_render) * doom->nb.threads)))
 		return ;
 	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (W * H))))
 		return ;
 	doom->surface->userdata = doom->zbuffer;
 	x = -1;
-	while (++x < W)
+	while (++x < doom->nb.threads)
 	{
 		doom->render[x].surface = doom->surface;
 		doom->render[x].sectors = doom->sectors;

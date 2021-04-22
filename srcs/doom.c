@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 17:13:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:22:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	ce(char *str)
 	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
-	//elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	elapsed += (finish.tv_nsec - start.tv_nsec) / 10000.0;
+	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+	//elapsed += (finish.tv_nsec - start.tv_nsec) / 10000.0;
 	printf("%.10s:\t%f\n", str, elapsed);
 }
 
@@ -49,12 +49,16 @@ void	init_doom(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	doom->nb.threads = W / 10;
+	printf("nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_fps(doom);
 	init_camera(doom);
 	init_skybox(doom);
 	init_minimap(doom);
+	cs();
 	init_textures(doom);
+	ce("Asdasd");
 	init_scale(doom);
 	init_entity(doom);
 	init_render(doom);
