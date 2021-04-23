@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/23 22:36:41 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/24 00:32:22 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,8 @@ PATH_TO_BXPM = ./resources/bxpm
 XPM = $(addprefix $(PATH_TO_XPM)/,$(RAW_TEXTURES))
 BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.xpm=.bxpm))
 
-LINK_ID = 12uqrsSoPmC0yZSbqm1596Rl3UAT6jp6W
+LINK_ID = "1rM2pmhjjHUMCA2Zvv6nrDSb5u5RWgc2g"
+FILE_NAME = "file.tar.gz"
 RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
@@ -162,7 +163,8 @@ fclean_all: fclean
 	@/bin/rm -rf $(PATH_TO_BXPM)
 
 $(RESOURCES):
-	@curl -L "https://drive.google.com/uc?export=download&id=$(LINK_ID)" > file.tar.gz
+	@#curl -L "https://drive.google.com/uc?export=download&id=1rM2pmhjjHUMCA2Zvv6nrDSb5u5RWgc2g" -o file
+	@./google_drive.sh
 	@printf $(CYAN)"[INFO] Unarchiving resources\n"$(RESET)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz

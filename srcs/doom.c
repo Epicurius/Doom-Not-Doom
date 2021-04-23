@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/23 23:46:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 00:32:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int main1(void)
 int main(void)
 {
 	main1();
-	while (1)
-		;
+	//while (1)
+	//	;
 	return (1);
 }
