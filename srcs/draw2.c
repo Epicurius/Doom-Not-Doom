@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/22 14:33:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/23 22:21:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
 	vline->zrange = vline->z - NEAR_Z;
 }
 
-void	draw_vline(t_render *render)
+t_vline		draw_vline(t_render *render)
 {
 	t_vline		vline;
 
@@ -67,9 +67,10 @@ void	draw_vline(t_render *render)
 	}
 	draw_wsprites(render, &vline);
 	draw_wall_bh(render, &vline);
+	return (vline);
 }
 
-void		render_wall_vline(t_render *render, t_sector *sector, int s)
+t_vline 	render_wall_vline(t_render *render, t_sector *sector, int s)
 {
 	t_wall		*wall;
 
@@ -85,48 +86,35 @@ void		render_wall_vline(t_render *render, t_sector *sector, int s)
 	
 	render->light		= sector->light;
 	render->s			= s;
-	draw_vline(render);
+	//draw_vline(render);
+	return (draw_vline(render));
 }
 
-int		render_vline(t_render *render, int sector)
+int		render_vline(t_render render, int sector)
 {
 	int	s;
-	t_sector *sect = &render->sectors[sector];
+	t_sector *sect;
+	t_vline vline;
 
 	s = -1;
+   	sect = &render.sectors[sector];
 	while (++s < sect->npoints)
 	{
 		if (!sect->wall[s]->visible)
 			continue ;
-		if (render->x < sect->wall[s]->cx1 || render->x > sect->wall[s]->cx2)
+		if (render.x < sect->wall[s]->cx1 || render.x > sect->wall[s]->cx2)
 			continue ;
 		sect->visible = 1;
-		render_wall_vline(render, sect, s);
+		vline = render_wall_vline(&render, sect, s);
 		if (sect->wall[s]->n == -1)
 			return (1);
-		sect = &render->sectors[sect->wall[s]->n];
-		s = -1;
+		render_vline(render, sect->wall[s]->n);
+		if (sect->wall[s]->ptx != -1)
+			draw_portal_texture(&render, &vline);
+		return (1);
 	}
 	return (1);
 }
-/*
-void		DrawScreen(t_doom *doom)
-{
-	int x;
-
-	x = -1;
-	find_start_sectors(doom);
-	while (++x < W)
-	{
-		doom->render[x].player = doom->player;
-		doom->render[x].clock = doom->clock;
-		doom->render[x].ytop = 0;
-		doom->render[x].ybot = H;
-		doom->render[x].x = x;
-		tpool_add(&doom->tpool, render_vline, &doom->render[x]);
-	}
-		//SDL_UpdateWindowSurface(doom->win);
-}*/
 
 int		loop_screen_sector(void	*arg)
 {
@@ -137,7 +125,7 @@ int		loop_screen_sector(void	*arg)
 	{
 		render->ytop = 0;
 		render->ybot = H;
-		render_vline(render, render->fustrum[render->x]);
+		render_vline(*render, render->fustrum[render->x]);
 		render->x++;
 	}
 	return (1);

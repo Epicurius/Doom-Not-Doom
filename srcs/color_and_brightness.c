@@ -72,10 +72,13 @@ void	color_palets(t_doom *doom)
 		sector = &doom->sectors[s];
 		while (++w < doom->sectors[s].npoints)
 		{
-			color_palet(&doom->mtx[sector->wall[w]->wtx], sector->light);
+			if (sector->wall[w]->wtx >= 0)
+				color_palet(&doom->mtx[sector->wall[w]->wtx], sector->light);
 		}
-		color_palet(&doom->mtx[sector->floor.tx], sector->light);
-		color_palet(&doom->mtx[sector->ceiling.tx], sector->light);
+		if (sector->ceiling.tx >= 0)
+			color_palet(&doom->mtx[sector->floor.tx], sector->light);
+		if (sector->ceiling.tx >= 0)
+			color_palet(&doom->mtx[sector->ceiling.tx], sector->light);
 		
 	}
 }

@@ -54,7 +54,7 @@ void	free_color_palets(t_doom *doom)
 	int j;
 
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
 	{
 		j = -1;
 		while (++j < 256 + 256)

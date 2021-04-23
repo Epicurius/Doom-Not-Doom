@@ -67,7 +67,7 @@ int	horizontal_collision(t_collision_thread *entity, t_xyz dest)
 		if (intersect_check(*entity->where, dest, wall->v1, wall->v2))
 		{
 			// Is wall solid.
-			if (wall->n == -1)
+			if (wall->solid)
 				return (1);
 			// Can fit through portal to next sector.
 			if (!fit_through_portal(entity, sector, wall))
@@ -76,7 +76,7 @@ int	horizontal_collision(t_collision_thread *entity, t_xyz dest)
 			break ;
 		}
 		// Dose hitbox collide with solid surface
-		else if ((wall->n == -1 || !fit_through_portal(entity, sector, wall))
+		else if ((wall->solid || !fit_through_portal(entity, sector, wall))
 			&& hitbox_collision(dest, wall, entity->hitbox_radius))
 			return (1);
 	}

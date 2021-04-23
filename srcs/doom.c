@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/22 17:22:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/23 23:46:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_doom(t_doom *doom)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
+	//IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG);
 	doom->w2 = W/2;
 	doom->h2 = H/2;
 
@@ -56,9 +57,7 @@ void	init_doom(t_doom *doom)
 	init_camera(doom);
 	init_skybox(doom);
 	init_minimap(doom);
-	cs();
 	init_textures(doom);
-	ce("Asdasd");
 	init_scale(doom);
 	init_entity(doom);
 	init_render(doom);
@@ -80,10 +79,6 @@ int main1(void)
 	ce("init_doom");
     while (!doom->quit)
     {
-		//cs();
-		//SDL_FillRect(doom->surface, &((SDL_Rect){0,0,W,H}), 0x000000);
-		//ce("Fill Rect");
-
 		cs();
 		update_camera(doom, 0, 0);
 		ce("update_camera");
@@ -93,9 +88,9 @@ int main1(void)
 		cs();
 		precompute_skybox(doom);
 		ce("precompute_skybox");
-		//cs();
-		DrawScreen(doom);//
-		//ce("DrawScreen");
+		cs();
+		DrawScreen(doom);
+		ce("DrawScreen");
 
 		/* All this has no time requirements */
 		{
@@ -134,8 +129,6 @@ int main1(void)
 			map(doom);
 		//shade_zbuffer(doom);
 		SDL_UpdateWindowSurface(doom->win);
-		//if change fix scale
-		//doom->sectors[3].ceiling.y += 0.05;
 	}
 	free_doom(doom);
 	return (1);
@@ -144,7 +137,7 @@ int main1(void)
 int main(void)
 {
 	main1();
-	//while (1)
-	//	;
+	while (1)
+		;
 	return (1);
 }

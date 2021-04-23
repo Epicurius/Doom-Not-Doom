@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/22 17:22:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/23 23:36:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/tpool/tpool.h"
 # include "../SDL2/includes/SDL.h"
 # include "../SDL2/includes/SDL_ttf.h"
+# include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
 # include "./utils.h"
 # include <math.h>
@@ -27,16 +28,16 @@
 #define max(a,b)			(((a) > (b)) ? (a) : (b))
 
 
-typedef struct		s_bxpm
+typedef struct				s_bxpm
 {
-	int		w;
-	int		h;
-	int		clr_nb;
-	int		pix_nb;
-	const uint32_t	*clr;
+	int						w;
+	int						h;
+	int						clr_nb;
+	int						pix_nb;
+	const uint32_t			*clr;
 	const unsigned short	*pix;
-	uint32_t	*palet[256 + 256];
-}			t_bxpm;
+	uint32_t				*palet[(256 + 256)];
+}							t_bxpm;
 
 typedef	struct	s_floor_ceiling
 {
@@ -390,7 +391,7 @@ typedef struct				s_doom
 	TTF_Font			*clock_font;
 	SDL_Surface			*clock;
 	t_bxpm				stx[12];
-	t_bxpm				mtx[6];
+	t_bxpm				mtx[5];
 	t_texture_sheet		sprites[2];
 }						t_doom;
 
@@ -415,7 +416,7 @@ void	project_wall(t_doom *doom, t_wall *wall);
 void	vline_monochromic(t_render *render, t_vline *vline);
 int		find_start_sectors(t_doom *doom);
 int	clip_wall(t_camera cam, t_wall *wall);
-
+void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 
 //	Enteties
 void	DrawEntity(t_doom *doom);
@@ -452,9 +453,10 @@ void	DrawScreen(t_doom *doom);
 void	draw_ceiling_texture(t_render *render, t_vline *vline);
 void	draw_floor_texture(t_render *render, t_vline *vline);
 void	draw_wall_texture(t_render *render, t_vline *vline);
-void	draw_portal_texture(t_render *render, t_vline *vline);
 void	draw_neighbor_wall(t_render *render, t_vline *vline);
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline);
+void	draw_portal_texture1(t_render *render, t_vline *vline);
+void	draw_portal_texture(t_render *render, t_vline *vline);
 
 //	Blit pixels
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
