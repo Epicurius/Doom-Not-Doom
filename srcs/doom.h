@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 13:31:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:12:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,20 +235,20 @@ typedef struct		s_sector
 } 			t_sector;
 
 
-typedef struct		s_collision_thread
+typedef struct		s_collision
 {
 	t_xyz		*where;
 	t_xyz		*velocity;
 	t_sector	*sectors;
-	t_entity	*entities;
-	int		*sector;
-	int		nb_entities;
-	int		player;
+	t_list		*entities;
+	int			*sector;
+	int			nb_entities;
+	int			player;
 	float		hitbox_height;
 	float		hitbox_radius;
 	float		step_height;
 	
-}			t_collision_thread;
+}				t_collision;
 
 
 typedef struct		s_camera
@@ -374,7 +374,7 @@ typedef struct				s_doom
 	t_plane				*ceilings;
 	t_wall				skybox[4];
 	t_sector			*sectors;
-	t_entity			*entity;
+	t_list				*entity;
 	t_stats				entity_stats[2];
 	t_projectile			*orb;
 
@@ -505,8 +505,8 @@ void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect	new_rect(int x1, int y1, int x2, int y2);
 
 void	player_collision(t_doom *doom);
-int	entity_collision(t_collision_thread *entity, t_xyz dest);
-int	collision_detection(void *arg);
+int		entity_collision(t_collision *entity, t_xyz dest);
+int		collision_detection(t_collision *entity);
 
 SDL_Color	hex_to_sdl_color(int hex);
 int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);

@@ -97,7 +97,7 @@ void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 	entity->angle = orientation(entity->where, doom->player.where,
 		entity->yaw, doom->sprites[entity->type].nb[entity->state][ANGLES]);
 }
-
+/*
 void	precompute_entities(t_doom *doom)
 {
 	int i;
@@ -107,6 +107,26 @@ void	precompute_entities(t_doom *doom)
 	while (++i < doom->nb.entities)
 	{
 		entity = &doom->entity[i];
+		if (!entity->stat.animate || !entity->render)
+			continue ;
+		get_entity_state(doom, entity);
+		preforme_entity_state_fuction(doom, entity);
+		if (!entity->render)
+			continue ;
+		get_coresponding_entity_state_frame(doom, entity);
+	}
+}*/
+
+void	precompute_entities(t_doom *doom)
+{
+	t_list		*curr;
+	t_entity	*entity;
+
+	curr = doom->entity;
+	while (curr)
+	{
+		entity = curr->content;
+		curr = curr->next;
 		if (!entity->stat.animate || !entity->render)
 			continue ;
 		get_entity_state(doom, entity);

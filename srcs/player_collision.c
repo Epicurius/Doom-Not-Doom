@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-int	vertical_collision(t_collision_thread *entity, t_xyz dest)
+int	vertical_collision(t_collision *entity, t_xyz dest)
 {
 	t_sector sector;
 
@@ -37,7 +37,7 @@ int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
 	return (0);
 }
 
-int	fit_through_portal(t_collision_thread *entity, t_sector *sector, t_wall *wall)
+int	fit_through_portal(t_collision *entity, t_sector *sector, t_wall *wall)
 {
 	double portal_top;
 	double portal_bot;
@@ -52,7 +52,7 @@ int	fit_through_portal(t_collision_thread *entity, t_sector *sector, t_wall *wal
 	return (0);
 }
 
-int	horizontal_collision(t_collision_thread *entity, t_xyz dest)
+int	horizontal_collision(t_collision *entity, t_xyz dest)
 {
 	int i;
 	t_wall *wall;
@@ -85,12 +85,10 @@ int	horizontal_collision(t_collision_thread *entity, t_xyz dest)
 	return (0);
 }
 
-int	collision_detection(void *arg)
+int	collision_detection(t_collision *entity)
 {
-	t_collision_thread *entity;
 	t_xyz	dest;
 
-	entity = arg;
 	dest = sum_xyz(*entity->where, *entity->velocity);
 	if (entity->player && entity_collision(entity, dest))
 	{
@@ -111,19 +109,17 @@ int	collision_detection(void *arg)
 
 void	player_collision(t_doom *doom)
 {
-	t_collision_thread p[1];
+	t_collision p;
 
-	p->where		= &doom->player.where;
-	p->velocity		= &doom->player.velocity;
-	p->sector		= &doom->player.sector;
-	p->sectors		= doom->sectors;
-	p->entities		= doom->entity;
-	p->nb_entities		= doom->nb.entities;
-	p->player		= 1;
-	p->hitbox_height	= PLAYER_HEIGHT;
-	p->hitbox_radius	= PLAYER_RADIUS;
-	p->step_height		= STEP_HEIGHT;
+	p.where				= &doom->player.where;
+	p.velocity			= &doom->player.velocity;
+	p.sector			= &doom->player.sector;
+	p.sectors			= doom->sectors;
+	p.entities			= doom->entity;
+	p.nb_entities		= doom->nb.entities;
+	p.player			= 1;
+	p.hitbox_height		= PLAYER_HEIGHT;
+	p.hitbox_radius		= PLAYER_RADIUS;
+	p.step_height		= STEP_HEIGHT;
 	collision_detection(&p);
-	//tpool_add(&doom->tpool, collision_detection, &p);	
-	//tpool_wait(&doom->tpool);
 }

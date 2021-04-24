@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 14:04:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:07:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	init_map_header(t_doom *doom, char **arr)
 	doom->nb.vertices	= ft_atoi(arr[2]);
 	doom->nb.walls		= ft_atoi(arr[3]);
 	doom->nb.sectors	= ft_atoi(arr[4]);
-	doom->nb.entities	= ft_atoi(arr[5]);
+	doom->nb.entities	= 0;
 	doom->vert	= ft_memalloc(sizeof(t_xyz) * doom->nb.vertices);
 	doom->walls	= ft_memalloc(sizeof(t_wall) * doom->nb.walls);
 	doom->sectors	= ft_memalloc(sizeof(t_sector) * doom->nb.sectors);
 	doom->floors	= ft_memalloc(sizeof(t_plane) * doom->nb.sectors);
 	doom->ceilings	= ft_memalloc(sizeof(t_plane) * doom->nb.sectors);
-	doom->entity 	= ft_memalloc(sizeof(t_entity) * doom->nb.entities);
 }
 
 void	init_map_wall(t_doom *doom, char **arr)
@@ -108,18 +107,23 @@ void	init_map_sector(t_doom *doom, char **arr)
 
 void	init_map_entity(t_doom *doom, char **arr)
 {
+	t_list		*new;
 	t_entity	*entity;
 
-	//doom->nb.entities += 1;
-	//doom->entity = ft_realloc(doom->entity, sizeof(t_entity) * doom->nb.entities);
-	entity			= &doom->entity[ft_atoi(arr[0])];
-	//entity				= &doom->entity[doom->nb.entities - 1];
+	doom->nb.entities += 1;
+	new = ft_lstnew(0, 0);
+	if (!(doom->entity))
+		doom->entity = new;
+	else
+		ft_lstadd(&(doom->entity), new);
+	entity = ft_memalloc(sizeof(t_entity));
 	entity->id			= ft_atoi(arr[0]);
 	entity->type		= ft_atoi(arr[1]);
 	entity->where.x		= ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y		= ft_atof(arr[3]) * doom->map_scale;
 	entity->where.z		= ft_atof(arr[4]) * doom->map_scale;
 	entity->yaw		= ft_atoi(arr[5]);
+	doom->entity->content = entity;
 }
 
 void	init_map_wsprite(t_doom *doom, char **arr)

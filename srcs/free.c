@@ -8,7 +8,6 @@ void	free_map(t_doom *doom)
 	ft_memdel((void*)&doom->vert);
 	ft_memdel((void*)&doom->floors);
 	ft_memdel((void*)&doom->ceilings);
-	ft_memdel((void*)&doom->entity);
 	i = -1;
 	while (++i < doom->nb.walls)
 		ft_memdel((void*)&doom->walls[i].wsprite);
@@ -65,9 +64,26 @@ void	free_color_palets(t_doom *doom)
 	}	
 }
 
+void	free_entities(t_doom *doom)
+{
+	t_list *tmp;
+	t_list *curr;
+	t_entity *entity;
+
+	curr = doom->entity;
+	while (curr)
+	{
+		free(curr->content);
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+}
+
 int	free_doom(t_doom *doom)
 {
 	free_map(doom);
+	free_entities(doom);
 	free_entity_pos(&doom->sprites[0]);
 	free_entity_pos(&doom->sprites[1]);
 	free_color_palets(doom);

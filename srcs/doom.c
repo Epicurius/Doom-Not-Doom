@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 14:05:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:30:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,17 @@ int main1(void)
 
 			cs();
 			precompute_entities(doom);
-			//ce("precomp_entities");
-			//cs();
+			ce("precomp_entities");
+			cs();
 			precompute_projectiles(doom);
-			//ce("precomp_project");
-			//cs();
+			ce("precomp_project");
+			cs();
 			movement(doom);
-			//ce("movement");
-			//cs();
+			ce("movement");
+			cs();
 			player_collision(doom);
-			//ce("player_collision");
+			ce("player_collision");
+			cs();
 			while (SDL_PollEvent(&event))
 				keys(doom, &event);
 			ce("WHILE DRAW");

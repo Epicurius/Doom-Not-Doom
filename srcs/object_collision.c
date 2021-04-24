@@ -13,17 +13,19 @@ void	object_collision(t_doom *doom, t_player *player)
 }
 */
 
-int	entity_collision(t_collision_thread *entity, t_xyz dest)
+int	entity_collision(t_collision *e, t_xyz dest)
 {
-	int i;
+	t_list *curr;
+	t_entity *entities;
 
-	i = -1;
-	while (++i < entity->nb_entities)
+	curr = e->entities;
+	while (curr)
 	{
-		if (!entity->entities[i].render)
+		entities = curr->content;
+		curr = curr->next;
+		if (!entities->render)
 			continue ;
-		if (point_distance_3d(entity->entities[i].where, dest)
-				> entity->hitbox_radius)
+		if (point_distance_3d(entities->where, dest) > (e->hitbox_radius + 3))
 			continue ;
 		//if (entity->entities[i].animate)
 		//	return (1);

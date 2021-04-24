@@ -46,24 +46,27 @@ static void	spooky(t_stats *spooky)
 void	init_projectiles(t_doom *doom)
 {
 	int p;
-	int i;
+	t_list *curr;
+	t_entity *entity;
 
 	doom->orb = ft_memalloc(sizeof(t_projectile)
 				* doom->nb.projectiles);
 	p = 0;
-	i = -1;
-	while (++i < doom->nb.entities)
+	curr = doom->entity;
+	while (curr)
 	{
-		if (doom->entity[i].stat.attack_style == 1)
+		entity = curr->content;
+		curr = curr->next;
+		if (entity->stat.attack_style == 1)
 		{
-			doom->entity[i].orb = &doom->orb[p];
+			entity->orb = &doom->orb[p];
 			p++;
 		}
 		else
-			doom->entity[i].orb = NULL;
+			entity->orb = NULL;
 	}
 }
-
+/*
 void	init_entity(t_doom *doom)
 {
 	int i;
@@ -81,6 +84,36 @@ void	init_entity(t_doom *doom)
 		doom->entity[i].sector = find_sector(doom, doom->entity[i].where);
 		doom->entity[i].render = 1;
 		if (doom->entity[i].stat.attack_style == 1)
+			doom->nb.projectiles++;
+	}
+	if (doom->nb.projectiles > 0)
+		init_projectiles(doom);
+	doom->player.sector = find_sector(doom, doom->player.where);
+	doom->player.hp = 1000;
+	doom->player.flying = 0;
+}
+*/
+
+void	init_entity(t_doom *doom)
+{
+	int			type;
+	t_list		*curr;
+	t_entity	*entity;
+
+	alfred(&doom->entity_stats[0]);
+	spooky(&doom->entity_stats[1]);
+	curr = doom->entity;
+	while (curr)
+	{
+		entity = curr->content;
+		curr = curr->next;
+		type = entity->type;
+		entity->stat = doom->entity_stats[type];
+		entity->hp = entity->stat.health;
+		entity->dest = entity->where;//
+		entity->sector = find_sector(doom, entity->where);
+		entity->render = 1;
+		if (entity->stat.attack_style == 1)
 			doom->nb.projectiles++;
 	}
 	if (doom->nb.projectiles > 0)
