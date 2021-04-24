@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 15:12:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:05:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,6 +375,7 @@ typedef struct				s_doom
 	t_wall				skybox[4];
 	t_sector			*sectors;
 	t_list				*entity;
+	t_list				*spawner;
 	t_stats				entity_stats[2];
 	t_projectile			*orb;
 
@@ -394,6 +395,10 @@ typedef struct				s_doom
 	t_bxpm				mtx[5];
 	t_texture_sheet		sprites[2];
 }						t_doom;
+
+//		Read_file
+int	read_file(t_doom *doom, char *file_name);
+void	init_map_entity(t_doom *doom, char **arr);
 
 //		Init
 void	init_render(t_doom *doom);
@@ -474,7 +479,6 @@ void	skybox_floor_vline(t_render *render, t_vline, int tx);
 void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
-int	read_file(t_doom *doom, char *file_name);
 void	keys(t_doom *doom, SDL_Event *event);
 void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
