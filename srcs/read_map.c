@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/21 15:03:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:04:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,10 @@ void	init_map_entity(t_doom *doom, char **arr)
 	t_entity	*entity;
 
 	//doom->nb.entities += 1;
-	//doom->entity = ft_realloc(doom->entity, sizeof(t_entity) * (doom->nb.entities + 1));
+	//doom->entity = ft_realloc(doom->entity, sizeof(t_entity) * doom->nb.entities);
 	entity			= &doom->entity[ft_atoi(arr[0])];
-	entity->id		= ft_atoi(arr[0]);
+	//entity				= &doom->entity[doom->nb.entities - 1];
+	entity->id			= ft_atoi(arr[0]);
 	entity->type		= ft_atoi(arr[1]);
 	entity->where.x		= ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y		= ft_atof(arr[3]) * doom->map_scale;

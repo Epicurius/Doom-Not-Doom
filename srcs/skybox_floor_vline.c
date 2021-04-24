@@ -21,8 +21,7 @@ void	skybox_floor_vline(t_render *render, t_vline vline, int tx)
 			text.x = abs((int)text.x % render->stx[4].w);
 		text.y = render->stx[tx].h - text.y;
 		text.x = render->stx[tx].w - text.x;
-		//if (RENDER_DISTANCE == ((double*)render->surface->userdata)[coord])
-			blit_pixel_skybox(render, coord, text, tx);
+		blit_pixel_skybox(render, coord, text, tx);
 		vline.y1++;
 	}
 }

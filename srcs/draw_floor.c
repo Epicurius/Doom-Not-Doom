@@ -16,12 +16,6 @@ void	draw_floor_texture(t_render *render, t_vline *vline)
 		alpha = (vline->y1 - vline->max.floor) / vline->height.floor;
 		divider = 1 / (NEAR_Z + alpha * vline->zrange);
 		text.z = vline->z_near_z * divider;
-		/*if (text.z >= ((double*)render->surface->userdata)[coord])
-		{
-			printf("asd\n");
-			vline->y1++;
-			continue;
-		}*/
 		text.y = (vline->texel_nearz.y + alpha * vline->texel_range.y)
 				* divider;
 		text.x = (vline->texel_nearz.x + alpha * vline->texel_range.x)

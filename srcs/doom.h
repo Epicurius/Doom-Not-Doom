@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/23 23:36:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:31:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -460,8 +460,9 @@ void	draw_portal_texture(t_render *render, t_vline *vline);
 
 //	Blit pixels
 void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
 void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
+void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
+void	blit_pixel_alpha(t_render *render, int coord, t_xyz text, t_bxpm *tx);
 
 //	Skybox
 void	draw_skybox(t_render *render, t_vline *vline, int side);
