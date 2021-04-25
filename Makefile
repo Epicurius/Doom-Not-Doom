@@ -76,6 +76,7 @@ RAW_SRC =	doom.c \
 		init_render.c\
 		collision_detection.c\
 		init_map_entity.c\
+		read_bxpm.c\
 
 RAW_TEXTURES =	wood.xpm\
 		spooky.xpm\

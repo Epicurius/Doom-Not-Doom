@@ -528,6 +528,7 @@ int 	find_pos_sector(t_doom *doom, t_xyz pos);
 void	cs(void);
 void	ce(char *str);
 
+t_bxpm read_bxpm(char *file);
 void	if_norm(char *file_name, t_bxpm *bxpm);
 
 #endif

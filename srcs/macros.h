@@ -16,8 +16,8 @@
 /*
 ** Screen info
 */
-# define W						2560
-# define H						1440
+# define W						1280
+# define H						720
 # define MAX_PROCESSORS			64
 
 /*
