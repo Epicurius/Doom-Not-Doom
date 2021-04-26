@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/26 10:57:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:55:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct				s_bxpm
 	int8_t				bpp;
 	int32_t				clr_nb;
 	int32_t				pix_nb;
-	uint32_t				*clr;
-	unsigned short			*pix;
-	uint32_t				*palet[(256 + 256)];
+	uint32_t			*clr;
+	unsigned short		*pix;
+	uint32_t			*palet[(256 + 256)];
 }							t_bxpm;
 
 typedef	struct	s_floor_ceiling

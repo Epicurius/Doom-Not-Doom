@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/22 13:15:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:37:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	shade_zbuffer(t_render *render, t_vline vline)
 
 	x = render->x;
 	pix = (Uint32*)render->surface->pixels;
-	clr = set_zbuffer_shade(vline.z, 100);
+	clr = set_zbuffer_shade(vline.z, 200);
 	while (vline.y1 < vline.y2)
 	{
 		pix[vline.y1 * render->surface->w + x] = clr;

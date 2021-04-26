@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/26 14:03:21 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/26 14:55:38 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ RAW_SRC =	doom.c \
 		init_render.c\
 		collision_detection.c\
 		init_map_entity.c\
+		read_bxpm.c\
 
 RAW_TEXTURES =	wood.bmp\
 		spooky.bmp\
