@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/24 16:04:25 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/26 11:39:46 by jsalmi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,6 @@ RAW_SRC =	doom.c \
 		init_render.c\
 		collision_detection.c\
 		init_map_entity.c\
-		read_bxpm.c\
 
 RAW_TEXTURES =	wood.xpm\
 		spooky.xpm\
@@ -113,7 +112,7 @@ FILE_NAME = "file.tar.gz"
 RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
-SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0 -l SDL2_image-2.0.0
+SDL = -I SDL2/include -L SDL2/lib -l SDL2 -l SDl2_ttf -l SDL2_image
 CFLAGS = -Wall -Wextra -Werror -Wunused-variable
 
 
