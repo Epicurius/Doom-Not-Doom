@@ -60,33 +60,6 @@ void	entity_threads(t_doom *doom, t_entity_render render, t_entity *entity, t_en
 		tpool_add(&doom->tpool, blit_entity, &thread[y]);
 	}
 }
-/*
-void	DrawEntity(t_doom *doom)
-{
-	int s;
-	int i;
-	t_entity_render render;
-	t_entity_render	thread[10];
-
-	s = -1;
-	while (++s < doom->nb.sectors)
-	{
-		if (!doom->sectors[s].visible)
-			continue ;
-		i = -1;
-		while (++i < doom->nb.entities)
-		{
-			if (doom->entity[i].render && doom->entity[i].sector == doom->sectors[s].id)
-			{
-				rotate_entity(doom, &doom->entity[i], &render);
-				project_entity(doom, &render);
-				tpool_wait(&doom->tpool);
-				entity_threads(doom, render, &doom->entity[i], thread);
-			}
-		}
-	}
-	tpool_wait(&doom->tpool);
-}*/
 
 void	DrawEntity(t_doom *doom)
 {

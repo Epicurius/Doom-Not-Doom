@@ -32,7 +32,7 @@ void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 
 	light = 255 + render->light;
 	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
-	if (bxpm->clr[pixel] == 0x800080)
+	if (bxpm->clr[pixel] == 0xFF800080)
 		return ;
 	((uint32_t*)render->surface->pixels)[coord] = bxpm->clr[pixel];
 	((double*)render->surface->userdata)[coord] = text.z;

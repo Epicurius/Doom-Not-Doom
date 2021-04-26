@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/24 16:04:25 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/26 13:44:48 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,23 +78,24 @@ RAW_SRC =	doom.c \
 		init_map_entity.c\
 		read_bxpm.c\
 
-RAW_TEXTURES =	wood.xpm\
-		spooky.xpm\
-		alfred.xpm\
-		bh.xpm\
-		vent.xpm\
-		space0.xpm\
-		space1.xpm\
-		space2.xpm\
-		space3.xpm\
-		space4.xpm\
-		space5.xpm\
-		top.xpm\
-		bottom.xpm\
-		left.xpm\
-		right.xpm\
-		front.xpm\
-		back.xpm\
+RAW_TEXTURES =	wood.bmp\
+		spooky.bmp\
+		alfred.bmp\
+		bh.bmp\
+		vent.bmp\
+		bars.bmp\
+		space0.bmp\
+		space1.bmp\
+		space2.bmp\
+		space3.bmp\
+		space4.bmp\
+		space5.bmp\
+		land0.bmp\
+		land1.bmp\
+		land2.bmp\
+		land3.bmp\
+		land4.bmp\
+		land5.bmp\
 
 NAME = doom
 CDIR = srcs
@@ -103,10 +104,12 @@ LIB_DIR = lib
 SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 
-PATH_TO_XPM = ./resources/xpm
-PATH_TO_BXPM = ./resources/bxpm
-XPM = $(addprefix $(PATH_TO_XPM)/,$(RAW_TEXTURES))
-BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.xpm=.bxpm))
+PATH_TO_BMP =	./resources/BMP
+PATH_TO_BXPM =	./resources/BXPM
+PATH_TO_BBMP =	./resources/BBMP
+BMP = $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
+BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
+BBMP = $(addprefix $(PATH_TO_BBMP)/,$(RAW_TEXTURES:.bmp=.bbmp))
 
 LINK_ID = "1rM2pmhjjHUMCA2Zvv6nrDSb5u5RWgc2g"
 FILE_NAME = "file.tar.gz"
@@ -124,10 +127,6 @@ $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
 
-$(PATH_TO_BXPM):
-	@printf $(CYAN)"[INFO]	Creating folder texture\bxpm.\n"$(RESET)
-	@mkdir -p $@
-
 $(NAME): $(OBJ)
 	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
 	@gcc -o $@ $(OBJ) $(LIBS) $(SDL)
@@ -138,9 +137,10 @@ $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@
 
 
-$(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_XPM)/%.xpm
-	@./bxpm_converter/bxpm_convert $<
-	@mv ./resources/xpm/*.bxpm ./resources/bxpm/
+$(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
+	@./bxpm_conv/bxpm_conv $<
+	@mv ./resources/BMP/*.bxpm ./resources/BXPM/
+	@mv ./resources/BMP/*.bbmp ./resources/BBMP/
 
 $(LIB_DIR):
 	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
@@ -150,7 +150,7 @@ $(LIBS): $(LIB_DIR)
 	@make -C ./lib/libft
 	@make -C ./lib/libpf
 	@make -C ./lib/tpool
-	@make -C ./bxpm_converter
+	@make -C ./bxpm_conv
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
@@ -162,23 +162,15 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 
 fclean_all: fclean
-	@printf $(CYAN)"[INFO]	Deleted BXPM\n"$(RESET)
-	@/bin/rm -rf $(PATH_TO_BXPM)
+	@printf $(CYAN)"[INFO]	Deleted BXPM and BBMP\n"$(RESET)
+	@/bin/rm -rf $(PATH_TO_BXPM)/*.bxpm
+	@/bin/rm -rf $(PATH_TO_BBMP)/*.bbmp
 
 $(RESOURCES):
-	@#curl -L "https://drive.google.com/uc?export=download&id=1rM2pmhjjHUMCA2Zvv6nrDSb5u5RWgc2g" -o file
 	@./google_drive.sh
 	@printf $(CYAN)"[INFO] Unarchiving resources\n"$(RESET)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
-
-	@#printf $(CYAN)"[INFO] Importing resources\n"$(GREEN)
-	@#wget -q --show-progress \
-	"https://drive.google.com/uc?export=download&confirm=$$(wget --quiet $\
-	--no-check-certificate 'https://drive.google.com/uc?export=download&id=$\
-	$(LINK_ID)' -O- | gsed -rn $\
-	's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')\
-	&id=$(LINK_ID)" -O file.tar.gz $\
 
 re: fclean all
 

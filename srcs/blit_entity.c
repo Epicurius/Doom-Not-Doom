@@ -16,7 +16,7 @@ void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
 		return ;
 	pix = render->bxpm->pix[(int)text.y * render->bxpm->w + (int)text.x];
 	clr = render->bxpm->clr[pix];
-	if (clr == 0x800080)
+	if (clr == 0xFF800080)
 		return ;
 	hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] = clr;

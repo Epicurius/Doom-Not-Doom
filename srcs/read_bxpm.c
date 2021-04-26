@@ -56,9 +56,9 @@ t_bxpm read_bxpm(char *file)
 	read(fd, header, 20);
 	bxpm->w = read_int32(header, 0);
 	bxpm->h = read_int32(header, 4);
-	//bxpm->bpp = read_int32(w, 8);
-	bxpm->clr_nb = read_int32(header, 12);
-	bxpm->pix_nb = read_int32(header, 16);
+	bxpm->clr_nb = read_int32(header, 8);
+	bxpm->pix_nb = read_int32(header, 12);
+	bxpm->bpp = read_int32(header, 16);
 	bxpm->clr = malloc(sizeof(uint32_t) * bxpm->clr_nb);
 	bxpm->pix = malloc(sizeof(unsigned short) * bxpm->pix_nb);
 
