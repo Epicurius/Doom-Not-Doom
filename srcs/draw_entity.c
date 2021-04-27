@@ -64,7 +64,6 @@ void	entity_threads(t_doom *doom, t_entity_render render, t_entity *entity, t_en
 void	DrawEntity(t_doom *doom)
 {
 	int s;
-	int i;
 	t_list *curr;
 	t_entity *entity;
 	t_entity_render render;

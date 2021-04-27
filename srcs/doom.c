@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/26 13:57:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/27 09:43:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int main(int ac, char **av)
     SDL_Event	event;
 
 	if (ac == 1)
-		return (0);
+		printf("%s\n", av[0]);
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
 	cs();
-	if (!read_file(doom, av[1]))
+	if (!read_file(doom, "skybox.txt"))
 		return (0);
 	ce("Read_file");
 	cs();

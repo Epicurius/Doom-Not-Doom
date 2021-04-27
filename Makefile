@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/26 14:55:38 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/27 09:41:47 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,7 @@ RESOURCES = resources
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
-CFLAGS = -Wall -Wextra -Werror -Wunused-variable
+CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
@@ -129,12 +129,12 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
-	@gcc -o $@ $(OBJ) $(LIBS) $(SDL)
+	@gcc -o $@ $(OBJ) $(LIBS) $(SDL) $(CFLAGS)
 
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@
+	@gcc -c $< -o $@ $(CFLAGS)
 
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp

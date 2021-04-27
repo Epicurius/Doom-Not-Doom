@@ -68,7 +68,6 @@ void	free_entities(t_doom *doom)
 {
 	t_list *tmp;
 	t_list *curr;
-	t_entity *entity;
 
 	curr = doom->entity;
 	while (curr)
