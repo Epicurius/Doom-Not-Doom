@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_alfred.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
+/*   Updated: 2021/04/27 15:30:21 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
-#include "../resources/BXPM/alfred.bxpm"
 
 void	init_alfred_nb(t_texture_sheet *sprite)
 {
@@ -17,16 +27,9 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 int	init_alfred(t_texture_sheet *sprite)
 {
 	int i;
-
-	sprite->bxpm.w		= bxpm_info_alfred[0];
-	sprite->bxpm.h		= bxpm_info_alfred[1];
-	sprite->bxpm.clr_nb	= bxpm_info_alfred[2];
-	sprite->bxpm.pix_nb	= bxpm_info_alfred[3];
-	sprite->bxpm.clr	= bxpm_colors_alfred;
-	sprite->bxpm.pix	= bxpm_pixels_alfred;
-
-	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
+	
 	init_alfred_nb(sprite);
+	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
 	i = -1;
 	if (sprite->nb[IDLE][FRAMES] > 0)
 		sprite->pos[IDLE] = ft_memalloc(sizeof(t_rect*) * sprite->nb[IDLE][FRAMES]);

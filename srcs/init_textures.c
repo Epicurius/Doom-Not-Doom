@@ -24,10 +24,10 @@ void	init_clock(t_doom *doom)
 
 void	init_textures(t_doom *doom)
 {
-	//doom->shotgun = IMG_Load("./resources/NewXPM/shot1.bmp");
 	doom->clock_font = TTF_OpenFont("./resources/font/digital.ttf", 100);
 	init_clock(doom);
-	load_bxpm(doom);
+	//load_bxpm(doom);
+	load_bbmp(doom);
 	init_alfred(&doom->sprites[0]);
 	init_spooky(&doom->sprites[1]);
 	color_palets(doom);

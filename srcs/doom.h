@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/26 14:55:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:35:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct				s_bxpm
 {
 	int32_t				w;
 	int32_t				h;
-	int8_t				bpp;
+	int32_t				bpp;
 	int32_t				clr_nb;
 	int32_t				pix_nb;
 	uint32_t			*clr;
@@ -516,7 +516,6 @@ int		collision_detection(t_collision *entity);
 SDL_Color	hex_to_sdl_color(int hex);
 int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 Uint32	brightness(Uint32 src, int brightness);
-void	load_bxpm(t_doom *doom);
 void	color_palet(t_bxpm *bxpm, int light);
 void	color_palets(t_doom *doom);
 int	free_doom(t_doom *doom);
@@ -525,11 +524,14 @@ void	free_array(char **arr);
 int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);
 int 	find_pos_sector(t_doom *doom, t_xyz pos);
 
+void	load_bxpm(t_doom *doom);
+void	load_bbmp(t_doom *doom);
+void	read_bbmp(t_bxpm *bxpm, char *file);
+
 //REMOVE//
 void	cs(void);
 void	ce(char *str);
 
-t_bxpm read_bxpm(char *file);
 void	if_norm(char *file_name, t_bxpm *bxpm);
 
 #endif

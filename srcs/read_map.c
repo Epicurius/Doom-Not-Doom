@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 16:05:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:58:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,29 +104,7 @@ void	init_map_sector(t_doom *doom, char **arr)
 	free(walls);
 	free(neighbour);
 }
-/*
-void	init_map_entity(t_doom *doom, char **arr)
-{
-	t_list		*new;
-	t_entity	*entity;
 
-	entity 				= ft_memalloc(sizeof(t_entity));
-	entity->id			= ft_atoi(arr[0]);
-	entity->type		= ft_atoi(arr[1]);
-	entity->where.x		= ft_atof(arr[2]) * doom->map_scale;
-	entity->where.y		= ft_atof(arr[3]) * doom->map_scale;
-	entity->where.z		= ft_atof(arr[4]) * doom->map_scale;
-	entity->yaw			= ft_atoi(arr[5]);
-
-	new = ft_lstnew(0, 0);
-	if (!(doom->entity))
-		doom->entity = new;
-	else
-		ft_lstadd(&(doom->entity), new);
-	doom->entity->content = entity;
-	doom->nb.entities	+= 1;
-}
-*/
 void	init_map_wsprite(t_doom *doom, char **arr)
 {
 	t_wsprite	*wsprite;

@@ -6,9 +6,36 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/27 09:41:47 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/27 16:11:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+RAW_TEXTURES =	wood.bmp\
+		spooky.bmp\
+		alfred.bmp\
+		bh.bmp\
+		vent.bmp\
+		bars.bmp\
+		space0.bmp\
+		space1.bmp\
+		space2.bmp\
+		space3.bmp\
+		space4.bmp\
+		space5.bmp\
+		land0.bmp\
+		land1.bmp\
+		land2.bmp\
+		land3.bmp\
+		land4.bmp\
+		land5.bmp\
+
+RESOURCES =		./resources
+PATH_TO_BMP =	./resources/BMP
+PATH_TO_BXPM =	./resources/BXPM
+PATH_TO_BBMP =	./resources/BBMP
+BMP = $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
+BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
+BBMP = $(addprefix $(PATH_TO_BBMP)/,$(RAW_TEXTURES:.bmp=.bbmp))
 
 RED := "\e[0;31m"
 GREEN := "\e[0;32m"
@@ -17,8 +44,9 @@ BLUE := "\e[0;34m"
 MAGENTA := "\e[0;35m"
 CYAN := "\e[0;36m"
 RESET :="\e[0m"
+#load_bxpm.c\
 
-RAW_SRC =	doom.c \
+RAW_SRC = doom.c\
 		put_pixels.c \
 		read_map.c\
 		init_textures.c\
@@ -72,31 +100,12 @@ RAW_SRC =	doom.c \
 		object_collision.c\
 		init_alfred.c\
 		init_spooky.c\
-		load_bxpm.c\
+		load_bbmp.c\
 		init_render.c\
 		collision_detection.c\
 		init_map_entity.c\
-		read_bxpm.c\
-
-RAW_TEXTURES =	wood.bmp\
-		spooky.bmp\
-		alfred.bmp\
-		bh.bmp\
-		vent.bmp\
-		bars.bmp\
-		space0.bmp\
-		space1.bmp\
-		space2.bmp\
-		space3.bmp\
-		space4.bmp\
-		space5.bmp\
-		land0.bmp\
-		land1.bmp\
-		land2.bmp\
-		land3.bmp\
-		land4.bmp\
-		land5.bmp\
-
+		read_bbmp.c\
+		
 NAME = doom
 CDIR = srcs
 ODIR = obj
@@ -104,21 +113,9 @@ LIB_DIR = lib
 SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 
-PATH_TO_BMP =	./resources/BMP
-PATH_TO_BXPM =	./resources/BXPM
-PATH_TO_BBMP =	./resources/BBMP
-BMP = $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
-BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
-BBMP = $(addprefix $(PATH_TO_BBMP)/,$(RAW_TEXTURES:.bmp=.bbmp))
-
-LINK_ID = "1rM2pmhjjHUMCA2Zvv6nrDSb5u5RWgc2g"
-FILE_NAME = "file.tar.gz"
-RESOURCES = resources
-
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
 CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
-
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
 	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
@@ -129,13 +126,11 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
-	@gcc -o $@ $(OBJ) $(LIBS) $(SDL) $(CFLAGS)
-
+	@gcc -o $@ $(OBJ) $(LIBS) $(SDL)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@ $(CFLAGS)
-
+	@gcc -c $< -o $@
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bxpm_conv/bxpm_conv $<
