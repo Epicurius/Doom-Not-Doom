@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 16:10:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:14:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	init_map_entity(t_doom *doom, char **arr)
 	entity->where.z		= ft_atof(arr[4]) * doom->map_scale;
 	entity->yaw			= ft_atoi(arr[5]);
 	add_entity_to_list(doom, entity);
-	//if (entity->type == 2)
-	//	add_spawner_to_list(doom, entity);
+	if (entity->type == 2)
+		add_spawner_to_list(doom, entity);
 }
