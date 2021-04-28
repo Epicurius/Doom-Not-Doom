@@ -105,12 +105,12 @@ void	init_map_sector(t_doom *doom, char **arr)
 
 void	init_map_wsprite(t_doom *doom, char **arr)
 {
-	t_wsprite	*wsprite;
-	t_sprite	*sprite;
+	t_wsprites	*wsprite;
+	t_wsprite	*sprite;
 	
 	wsprite			= &doom->walls[ft_atoi(arr[1])].wsprite;
 	wsprite->total 		+= 1;
-	wsprite->num 		= ft_realloc(wsprite->num, sizeof(t_sprite)
+	wsprite->num 		= ft_realloc(wsprite->num, sizeof(t_wsprite)
 						* wsprite->total);
 	sprite			= &wsprite->num[wsprite->total - 1];
 	sprite->id		= ft_atoi(arr[0]);

@@ -24,7 +24,7 @@ void	blit_wsprite_pixels(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	vline_wsprite(t_render *render, t_vline *vline, t_sprite sprite, int x)
+void	vline_wsprite(t_render *render, t_vline *vline, t_wsprite sprite, int x)
 {
 	t_xyz text;
 	double alpha;
@@ -53,7 +53,7 @@ void	vline_wsprite(t_render *render, t_vline *vline, t_sprite sprite, int x)
 void	draw_wsprites(t_render *render, t_vline *vline)
 {
 	int i = -1;
-	t_sprite sprite;
+	t_wsprite sprite;
 
 	while (++i < render->wsprite.total)
 	{

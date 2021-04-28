@@ -6,7 +6,7 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 	int i;
 	int x;
 	int y;
-	t_sprite *wsprite;
+	t_wsprite *wsprite;
 
 	i = -1;
 	while (++i < wall->wsprite.total)

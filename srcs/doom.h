@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 14:09:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:47:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,35 +142,35 @@ typedef struct		s_player
 
 typedef struct		s_sprite
 {
-	int	id;
-	t_xyz	where;
-	int	tx;	
-	double	time;
-	int	frame;
-	t_rect	src;
-	double	scale_w;
-	double	scale_h;
-	t_xyz	tscale;
-	int	ready;
-}			t_sprite;
+	int				id;
+	t_xyz			where;
+	int				tx;	
+	double			time;
+	int				frame;
+	t_rect			src;
+	double			scale_w;
+	double			scale_h;
+	t_xyz			tscale;
+	int				ready;
+}					t_wsprite;
 
 typedef struct		s_bh
 {
-	t_sprite		num[MAX_BH];
+	t_wsprite		num[MAX_BH];
 	int			curr;
 	int			total;
 }			t_bh;
 
-typedef struct		s_wsprite
+typedef struct		s_wsprites
 {
-	t_sprite		*num;
-	int			curr;
-	int			total;
-}			t_wsprite;
+	t_wsprite		*num;
+	int				curr;
+	int				total;
+}					t_wsprites;
 
 typedef struct		s_wall
 {
-	t_wsprite		wsprite;
+	t_wsprites		wsprite;
 	t_bh			bh;
 	int			id;
 	int			sect;
@@ -309,7 +309,7 @@ typedef struct	s_render
 	int			light;
 	int			s;
 	t_bh			*bh;
-	t_wsprite		wsprite;
+	t_wsprites		wsprite;
 	SDL_Surface		*clock;
 }				t_render;
 
@@ -447,8 +447,8 @@ void	reset_bh(t_doom *doom);
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
 int	clock_wsprite(t_doom *doom, t_wall *wall, int x);
-int	animate_wsprite(t_doom *doom, t_sprite *sprite);
-int	animate_entities(t_doom *doom, t_sprite *sprite);
+int	animate_wsprite(t_doom *doom, t_wsprite *sprite);
+int	animate_entities(t_doom *doom, t_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);

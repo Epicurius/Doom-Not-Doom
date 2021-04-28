@@ -4,7 +4,7 @@
 void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 {
 	t_wall *wall;
-	t_sprite *bh;
+	t_wsprite *bh;
 
 	if (!ENABLE_BH)
 		return ;

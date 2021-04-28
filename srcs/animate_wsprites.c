@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-int	animate_wsprite(t_doom *doom, t_sprite *sprite)
+int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
 {
 	if (sprite->time - doom->fps.curr < -100)
 	{
@@ -25,7 +25,7 @@ int	animate_wsprite(t_doom *doom, t_sprite *sprite)
 	return (1);
 }
 /*
-int	animate_wsprite(t_doom *doom, t_sprite *sprite)
+int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
 {
 	if (sprite->time - doom->fps.curr < -100)
 	{
