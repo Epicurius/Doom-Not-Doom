@@ -1,10 +1,10 @@
 
 #include "doom.h"
 
-t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
+t_sprite_render project_projectile(t_doom *doom, t_projectile *orb)
 {
 	t_xyz dist;
-	t_entity_render render;
+	t_sprite_render render;
 
 	dist.x = orb->where.x - doom->player.where.x;
 	dist.y = orb->where.z - doom->player.where.z - EYE_LVL;
@@ -37,7 +37,7 @@ t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 void 	DrawProjectiles(t_doom *doom)
 {
 	int i;
-	t_entity_render render;
+	t_sprite_render render;
 
 	i = -1;
 	while (++i < doom->nb.projectiles)

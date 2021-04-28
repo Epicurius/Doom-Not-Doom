@@ -1,13 +1,13 @@
 
 #include "doom.h"
 
-void	hit_enemy(t_entity_render *render, int coord)
+void	hit_enemy(t_sprite_render *render, int coord)
 {
 	if (render->shooting && coord == H/2 * W + W/2)
 		*render->hp -= render->dmg;
 }
 
-void	blit_entity_pixel(t_entity_render *render, int coord, t_xyz text)
+void	blit_entity_pixel(t_sprite_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -28,7 +28,7 @@ int		blit_entity(void *arg)
 	double alphax;
 	double alphay;
 	t_xyz text;
-	t_entity_render *render;
+	t_sprite_render *render;
 
 	render = arg;
 	text.z = render->screen.z;

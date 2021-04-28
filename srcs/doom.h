@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 15:04:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:13:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct		s_bxpm
 	int32_t			pix_nb;
 	uint32_t		*clr;
 	unsigned short	*pix;
-	uint32_t		*palet[(256 + 256)];
+	uint32_t		*palet[512];
 }					t_bxpm;
 
 typedef	struct		s_floor_ceiling
@@ -269,7 +269,7 @@ typedef struct		s_camera
 	double			scale;
 }					t_camera;
 
-typedef struct		s_entity_render
+typedef struct		s_sprite_render
 {
 	SDL_Surface		*surface;
 	t_bxpm			*bxpm;
@@ -286,7 +286,7 @@ typedef struct		s_entity_render
 	int				shooting;
 	int				dmg;
 	int				*hp;
-}					t_entity_render;
+}					t_sprite_render;
 
 typedef struct		s_render
 {

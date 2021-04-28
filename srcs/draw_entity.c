@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	 project_entity(t_doom *doom, t_entity_render *render)
+void	 project_entity(t_doom *doom, t_sprite_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
@@ -19,7 +19,7 @@ void	 project_entity(t_doom *doom, t_entity_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_entity(t_doom *doom, t_sprite *entity, t_entity_render *render)
+int	rotate_entity(t_doom *doom, t_sprite *entity, t_sprite_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -40,7 +40,7 @@ int	rotate_entity(t_doom *doom, t_sprite *entity, t_entity_render *render)
 	return (1);
 }
 
-void	entity_threads(t_doom *doom, t_entity_render render, t_sprite *entity, t_entity_render *thread)
+void	entity_threads(t_doom *doom, t_sprite_render render, t_sprite *entity, t_sprite_render *thread)
 {
 	int y;
 
@@ -48,7 +48,7 @@ void	entity_threads(t_doom *doom, t_entity_render render, t_sprite *entity, t_en
 	int i = render.clamp_end.y - render.clamp_start.y;
 	while (++y < 10)
 	{
-		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_entity_render));
+		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_sprite_render));
 		thread[y].clamp_start.y	+= i / 10.0 * y;
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
@@ -66,8 +66,8 @@ void	DrawEntity(t_doom *doom)
 	int s;
 	t_list *curr;
 	t_sprite *entity;
-	t_entity_render render;
-	t_entity_render	thread[10];
+	t_sprite_render render;
+	t_sprite_render	thread[10];
 
 	s = -1;
 	while (++s < doom->nb.sectors)
