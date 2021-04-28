@@ -61,7 +61,7 @@ void	free_entities(t_doom *doom)
 	t_list *tmp;
 	t_list *curr;
 
-	curr = doom->entity;
+	curr = doom->sprite;
 	while (curr)
 	{
 		free(curr->content);

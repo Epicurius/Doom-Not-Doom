@@ -20,7 +20,7 @@ void	player_collision(t_doom *doom)
 	p.velocity			= &doom->player.velocity;
 	p.sector			= &doom->player.sector;
 	p.sectors			= doom->sectors;
-	p.entities			= doom->entity;
+	p.entities			= doom->sprite;
 	p.nb_entities		= doom->nb.entities;
 	p.player			= 1;
 	p.hitbox_height		= PLAYER_HEIGHT;

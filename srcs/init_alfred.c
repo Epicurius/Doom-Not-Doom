@@ -14,14 +14,14 @@
 
 void	init_alfred_nb(t_texture_sheet *sprite)
 {
-	sprite->nb[IDLE][FRAMES] = 1;
-	sprite->nb[IDLE][ANGLES] = 8;
-	sprite->nb[MOVE][FRAMES] = 1;
-	sprite->nb[MOVE][ANGLES] = 8;
+	sprite->nb[IDLE  ][FRAMES] = 1;
+	sprite->nb[IDLE  ][ANGLES] = 8;
+	sprite->nb[MOVE  ][FRAMES] = 1;
+	sprite->nb[MOVE  ][ANGLES] = 8;
 	sprite->nb[ATTACK][FRAMES] = 6;
 	sprite->nb[ATTACK][ANGLES] = 1;
-	sprite->nb[DEATH][FRAMES] = 6;
-	sprite->nb[DEATH][ANGLES] = 1;
+	sprite->nb[DEATH ][FRAMES] = 6;
+	sprite->nb[DEATH ][ANGLES] = 1;
 }
 
 int	init_alfred(t_texture_sheet *sprite)

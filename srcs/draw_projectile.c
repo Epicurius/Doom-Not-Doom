@@ -47,6 +47,6 @@ void 	DrawProjectiles(t_doom *doom)
 		render = project_projectile(doom, &doom->orb[i]);
 		if (render.screen.z <= 1)
 			continue ;
-		blit_entity(&render);
+		blit_sprite(&render);
 	}
 }

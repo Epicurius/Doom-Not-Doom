@@ -60,7 +60,7 @@ void	init_doom(t_doom *doom)
 	init_textures(doom);
 	ce("BXPM");
 	init_scale(doom);
-	init_entity(doom);
+	init_sprite(doom);
 	init_render(doom);
 	//((t_sprite*)doom->sprite->content)->type = 1;
 }
@@ -122,7 +122,7 @@ int main(int ac, char **av)
 		DrawProjectiles(doom);
 		ce("draw_project");
 		cs();
-		DrawEntity(doom);//
+		Drawsprite(doom);//
 		ce("Draw_sprite");
 		cs();
 		//shade_zbuffer(doom);

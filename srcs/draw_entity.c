@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	 project_entity(t_doom *doom, t_sprite_render *render)
+void	 project_sprite(t_doom *doom, t_sprite_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
@@ -19,14 +19,14 @@ void	 project_entity(t_doom *doom, t_sprite_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_entity(t_doom *doom, t_sprite *entity, t_sprite_render *render)
+int	rotate_sprite(t_doom *doom, t_sprite *sprite, t_sprite_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
 
-	dist.x = entity->where.x - doom->player.where.x;
-	dist.y = entity->where.z - doom->player.where.z - EYE_LVL;
-	dist.z = entity->where.y - doom->player.where.y;
+	dist.x = sprite->where.x - doom->player.where.x;
+	dist.y = sprite->where.z - doom->player.where.z - EYE_LVL;
+	dist.z = sprite->where.y - doom->player.where.y;
 	screen.x = dist.x * doom->player.anglesin
 			- dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos
@@ -35,12 +35,12 @@ int	rotate_entity(t_doom *doom, t_sprite *entity, t_sprite_render *render)
 	if (screen.z <= 0.5)
 		return (0);
 	render->screen = xyz(screen.x, screen.y, screen.z);
-	render->scale = doom->entity_stats[entity->type].scale;
-	render->pos = doom->sheet[entity->type].pos[entity->state][entity->frame][entity->angle];
+	render->scale = doom->sprite_stats[sprite->type].scale;
+	render->pos = doom->sheet[sprite->type].pos[sprite->state][sprite->frame][sprite->angle];
 	return (1);
 }
 
-void	entity_threads(t_doom *doom, t_sprite_render render, t_sprite *entity, t_sprite_render *thread)
+void	sprite_threads(t_doom *doom, t_sprite_render render, t_sprite *sprite, t_sprite_render *thread)
 {
 	int y;
 
@@ -53,19 +53,19 @@ void	entity_threads(t_doom *doom, t_sprite_render render, t_sprite *entity, t_sp
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
 		thread[y].surface = doom->surface;
-		thread[y].bxpm = &doom->sheet[entity->type].bxpm;
+		thread[y].bxpm = &doom->sheet[sprite->type].bxpm;
 		thread[y].shooting = doom->player.shooting;
 		thread[y].dmg = 10;
-		thread[y].hp = &entity->hp;
-		tpool_add(&doom->tpool, blit_entity, &thread[y]);
+		thread[y].hp = &sprite->hp;
+		tpool_add(&doom->tpool, blit_sprite, &thread[y]);
 	}
 }
 
-void	DrawEntity(t_doom *doom)
+void	Drawsprite(t_doom *doom)
 {
 	int s;
 	t_list *curr;
-	t_sprite *entity;
+	t_sprite *sprite;
 	t_sprite_render render;
 	t_sprite_render	thread[10];
 
@@ -74,17 +74,17 @@ void	DrawEntity(t_doom *doom)
 	{
 		if (!doom->sectors[s].visible)
 			continue ;
-		curr = doom->entity;
+		curr = doom->sprite;
 		while (curr)
 		{
-			entity = curr->content;
+			sprite = curr->content;
 			curr = curr->next;
-			if (entity->render && entity->sector == doom->sectors[s].id)
+			if (sprite->render && sprite->sector == doom->sectors[s].id)
 			{
-				rotate_entity(doom, entity, &render);
-				project_entity(doom, &render);
+				rotate_sprite(doom, sprite, &render);
+				project_sprite(doom, &render);
 				tpool_wait(&doom->tpool);
-				entity_threads(doom, render, entity, thread);
+				sprite_threads(doom, render, sprite, thread);
 			}
 		}
 	}

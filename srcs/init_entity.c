@@ -47,43 +47,43 @@ void	init_projectiles(t_doom *doom)
 {
 	int p;
 	t_list *curr;
-	t_sprite *entity;
+	t_sprite *sprite;
 
 	doom->orb = ft_memalloc(sizeof(t_projectile)
 				* doom->nb.projectiles);
 	p = 0;
-	curr = doom->entity;
+	curr = doom->sprite;
 	while (curr)
 	{
-		entity = curr->content;
+		sprite = curr->content;
 		curr = curr->next;
-		if (entity->stat.attack_style == 1)
+		if (sprite->stat.attack_style == 1)
 		{
-			entity->orb = &doom->orb[p];
+			sprite->orb = &doom->orb[p];
 			p++;
 		}
 		else
-			entity->orb = NULL;
+			sprite->orb = NULL;
 	}
 }
 /*
-void	init_entity(t_doom *doom)
+void	init_sprite(t_doom *doom)
 {
 	int i;
 	int type;
 
 	i = -1;
-	alfred(&doom->entity_stats[0]);
-	spooky(&doom->entity_stats[1]);
+	alfred(&doom->sprite_stats[0]);
+	spooky(&doom->sprite_stats[1]);
 	while (++i < doom->nb.entities)
 	{
-		type = doom->entity[i].type;
-		doom->entity[i].stat = doom->entity_stats[type];
-		doom->entity[i].hp = doom->entity[i].stat.health;
-		doom->entity[i].dest = doom->entity[i].where;
-		doom->entity[i].sector = find_sector(doom, doom->entity[i].where);
-		doom->entity[i].render = 1;
-		if (doom->entity[i].stat.attack_style == 1)
+		type = doom->sprite[i].type;
+		doom->sprite[i].stat = doom->sprite_stats[type];
+		doom->sprite[i].hp = doom->sprite[i].stat.health;
+		doom->sprite[i].dest = doom->sprite[i].where;
+		doom->sprite[i].sector = find_sector(doom, doom->sprite[i].where);
+		doom->sprite[i].render = 1;
+		if (doom->sprite[i].stat.attack_style == 1)
 			doom->nb.projectiles++;
 	}
 	if (doom->nb.projectiles > 0)
@@ -94,26 +94,26 @@ void	init_entity(t_doom *doom)
 }
 */
 
-void	init_entity(t_doom *doom)
+void	init_sprite(t_doom *doom)
 {
 	int			type;
 	t_list		*curr;
-	t_sprite	*entity;
+	t_sprite	*sprite;
 
-	alfred(&doom->entity_stats[0]);
-	spooky(&doom->entity_stats[1]);
-	curr = doom->entity;
+	alfred(&doom->sprite_stats[0]);
+	spooky(&doom->sprite_stats[1]);
+	curr = doom->sprite;
 	while (curr)
 	{
-		entity = curr->content;
+		sprite = curr->content;
 		curr = curr->next;
-		type = entity->type;
-		entity->stat = doom->entity_stats[type];
-		entity->hp = entity->stat.health;
-		entity->dest = entity->where;//
-		entity->sector = find_sector(doom, entity->where);
-		entity->render = 1;
-		if (entity->stat.attack_style == 1)
+		type = sprite->type;
+		sprite->stat = doom->sprite_stats[type];
+		sprite->hp = sprite->stat.health;
+		sprite->dest = sprite->where;//
+		sprite->sector = find_sector(doom, sprite->where);
+		sprite->render = 1;
+		if (sprite->stat.attack_style == 1)
 			doom->nb.projectiles++;
 	}
 	if (doom->nb.projectiles > 0)

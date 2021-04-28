@@ -103,7 +103,7 @@ void	precompute_entities(t_doom *doom)
 	t_list		*curr;
 	t_sprite	*entity;
 
-	curr = doom->entity;
+	curr = doom->sprite;
 	while (curr)
 	{
 		entity = curr->content;

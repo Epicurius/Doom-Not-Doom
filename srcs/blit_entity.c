@@ -7,7 +7,7 @@ void	hit_enemy(t_sprite_render *render, int coord)
 		*render->hp -= render->dmg;
 }
 
-void	blit_entity_pixel(t_sprite_render *render, int coord, t_xyz text)
+void	blit_sprite_pixel(t_sprite_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -23,7 +23,7 @@ void	blit_entity_pixel(t_sprite_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-int		blit_entity(void *arg)
+int		blit_sprite(void *arg)
 {
 	double alphax;
 	double alphay;
@@ -42,7 +42,7 @@ int		blit_entity(void *arg)
 		{
 			alphax = (x - render->start.x) / render->xrange;
 			text.x = (1.0 - alphax) * render->pos.x1 + alphax * render->pos.x2;
-			blit_entity_pixel(render, y * W + x, text);
+			blit_sprite_pixel(render, y * W + x, text);
 		}
 	}
 	return (1);

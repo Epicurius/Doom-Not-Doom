@@ -12,22 +12,22 @@
 
 #include "doom.h"
 
-int	vertical_collision(t_collision *entity, t_xyz dest)
+int	vertical_collision(t_collision *sprite, t_xyz dest)
 {
 	t_sector sector;
 
-	sector = entity->sectors[*entity->sector];
+	sector = sprite->sectors[*sprite->sector];
 	// So to not keep on falling through floor.
-	if (entity->velocity->z < 0 && dest.z < sector.floor.y)
+	if (sprite->velocity->z < 0 && dest.z < sector.floor.y)
 	{
-		entity->where->z = sector.floor.y;
+		sprite->where->z = sector.floor.y;
 		return (1);
 	}
 	// If player has reached the cealing.
-	else if (entity->velocity->z > 0 && dest.z + entity->hitbox_height > sector.ceiling.y)
+	else if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > sector.ceiling.y)
 		return (1);
 	// Let the player keep on rising/falling.
-	entity->where->z += entity->velocity->z;
+	sprite->where->z += sprite->velocity->z;
 	return (0);
 }
 
@@ -48,72 +48,72 @@ int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
 	return (0);
 }
 
-int	fit_through_portal(t_collision *entity, t_sector *sector, t_wall *wall)
+int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall)
 {
 	double portal_top;
 	double portal_bot;
 
-	portal_bot = max(sector->floor.y, entity->sectors[wall->n].floor.y);
-	portal_top = min(sector->ceiling.y, entity->sectors[wall->n].ceiling.y);
-	if (portal_top <= portal_bot + entity->hitbox_height)
+	portal_bot = max(sector->floor.y, sprite->sectors[wall->n].floor.y);
+	portal_top = min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
+	if (portal_top <= portal_bot + sprite->hitbox_height)
 		return (0);
-	if (portal_top > entity->where->z + entity->hitbox_height &&
-		portal_bot <= entity->where->z + entity->step_height)
+	if (portal_top > sprite->where->z + sprite->hitbox_height &&
+		portal_bot <= sprite->where->z + sprite->step_height)
 		return (1);
 	return (0);
 }
 
-int	horizontal_collision(t_collision *entity, t_xyz dest)
+int	horizontal_collision(t_collision *sprite, t_xyz dest)
 {
 	int i;
 	t_wall *wall;
 	t_sector *sector;
 
 	i = -1;
-	sector = &entity->sectors[*entity->sector];
+	sector = &sprite->sectors[*sprite->sector];
 	while (++i < sector->npoints)
 	{
 		wall = sector->wall[i];
 		// Dose path intersecta wall.
-		if (intersect_check(*entity->where, dest, wall->v1, wall->v2))
+		if (intersect_check(*sprite->where, dest, wall->v1, wall->v2))
 		{
 			// Is wall solid.
 			if (wall->solid)
 				return (1);
 			// Can fit through portal to next sector.
-			if (!fit_through_portal(entity, sector, wall))
+			if (!fit_through_portal(sprite, sector, wall))
 				return (1);
-			*entity->sector = wall->n;
+			*sprite->sector = wall->n;
 			break ;
 		}
 		// Dose hitbox collide with solid surface
-		else if ((wall->solid || !fit_through_portal(entity, sector, wall))
-			&& hitbox_collision(dest, wall, entity->hitbox_radius))
+		else if ((wall->solid || !fit_through_portal(sprite, sector, wall))
+			&& hitbox_collision(dest, wall, sprite->hitbox_radius))
 			return (1);
 	}
-	entity->where->x += entity->velocity->x;
-	entity->where->y += entity->velocity->y;
+	sprite->where->x += sprite->velocity->x;
+	sprite->where->y += sprite->velocity->y;
 	return (0);
 }
 
-int	collision_detection(t_collision *entity)
+int	collision_detection(t_collision *sprite)
 {
 	t_xyz	dest;
 
-	dest = sum_xyz(*entity->where, *entity->velocity);
-	if (entity->player && entity_collision(entity, dest))
+	dest = sum_xyz(*sprite->where, *sprite->velocity);
+	if (sprite->player && sprite_collision(sprite, dest))
 	{
-		entity->velocity->x = 0;
-		entity->velocity->y = 0;
-		entity->velocity->z = 0;
+		sprite->velocity->x = 0;
+		sprite->velocity->y = 0;
+		sprite->velocity->z = 0;
 		return (1);
 	}
-	if (vertical_collision(entity, dest))
-		entity->velocity->z = 0;
-	if (horizontal_collision(entity, dest))
+	if (vertical_collision(sprite, dest))
+		sprite->velocity->z = 0;
+	if (horizontal_collision(sprite, dest))
 	{
-		entity->velocity->x = 0;
-		entity->velocity->y = 0;
+		sprite->velocity->x = 0;
+		sprite->velocity->y = 0;
 	}
 	return (1);
 }

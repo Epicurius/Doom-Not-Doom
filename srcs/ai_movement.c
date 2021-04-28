@@ -30,7 +30,7 @@ void	ai_movement(t_doom *doom, t_sprite *entity)
 	e.velocity		= &entity->velocity;
 	e.sector		= &entity->sector;
 	e.sectors		= doom->sectors;
-	e.entities		= doom->entity;
+	e.entities		= doom->sprite;
 	e.nb_entities	= doom->nb.entities;
 	e.player		= 0;
 	e.hitbox_height	= PLAYER_HEIGHT;

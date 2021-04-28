@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 15:13:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:44:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,13 +372,13 @@ typedef struct		s_doom
 	t_wall			*walls;
 	t_wall			skybox[4];
 	t_sector		*sectors;
-	t_list			*entity;
+	t_list			*sprite;
 
 	t_list			*spawners;
 	t_list			*entitys1;
 	t_list			*objects;
 
-	t_stats			entity_stats[2];
+	t_stats			sprite_stats[2];
 	t_projectile	*orb;
 
 	t_camera		cam;
@@ -398,13 +398,13 @@ typedef struct		s_doom
 }					t_doom;
 
 //		Read_file
-int	read_file(t_doom *doom, char *file_name);
+int		read_file(t_doom *doom, char *file_name);
 void	init_map_entity(t_doom *doom, char **arr);
 
 //		Init
 void	init_render(t_doom *doom);
 void	init_fps(t_doom *doom);
-void	init_entity(t_doom *doom);
+void	init_sprite(t_doom *doom);
 void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
 int		init_alfred(t_texture_sheet *sprite);
@@ -425,11 +425,11 @@ int	clip_wall(t_camera cam, t_wall *wall);
 void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 
 //	Enteties
-void	DrawEntity(t_doom *doom);
+void	Drawsprite(t_doom *doom);
 void	precompute_entities(t_doom *doom);
 void	ai_movement(t_doom *doom, t_sprite *entity);
 void	ai_attack(t_doom *doom, t_sprite *entity);
-int		blit_entity(void *arg);
+int		blit_sprite(void *arg);
 int		ai_rand_move(t_sprite *entity, int rand);
 
 //	Projectiles
@@ -510,8 +510,8 @@ void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect	new_rect(int x1, int y1, int x2, int y2);
 
 void	player_collision(t_doom *doom);
-int		entity_collision(t_collision *entity, t_xyz dest);
-int		collision_detection(t_collision *entity);
+int		sprite_collision(t_collision *entity, t_xyz dest);
+int		collision_detection(t_collision *sprite);
 
 SDL_Color	hex_to_sdl_color(int hex);
 int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
