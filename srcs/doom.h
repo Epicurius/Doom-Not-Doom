@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 14:47:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:49:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ typedef struct		s_player
 	int		shooting;
 }			t_player;
 
-typedef struct		s_sprite
+typedef struct		s_wsprite
 {
 	int				id;
 	t_xyz			where;
