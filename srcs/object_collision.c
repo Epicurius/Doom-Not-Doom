@@ -16,7 +16,7 @@ void	object_collision(t_doom *doom, t_player *player)
 int	entity_collision(t_collision *e, t_xyz dest)
 {
 	t_list *curr;
-	t_entity *entities;
+	t_sprite *entities;
 
 	curr = e->entities;
 	while (curr)

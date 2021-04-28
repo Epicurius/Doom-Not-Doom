@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	get_entity_movement(t_doom *doom, t_entity *entity)
+void	get_entity_movement(t_doom *doom, t_sprite *entity)
 {
 	t_xyz	*v;
 	double	dist;
@@ -21,7 +21,7 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	v->z *= (entity->stat.flying ? speed / dist : 0);
 }	
 
-void	ai_movement(t_doom *doom, t_entity *entity)
+void	ai_movement(t_doom *doom, t_sprite *entity)
 {
 	t_collision e;
 

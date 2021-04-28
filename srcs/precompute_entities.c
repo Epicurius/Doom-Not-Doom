@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	frame_animation(t_doom *doom, t_entity *entity)
+void	frame_animation(t_doom *doom, t_sprite *entity)
 {
 	if (entity->time - doom->fps.curr < -(entity->stat.frame_rate[entity->state]))
 	{
@@ -17,7 +17,7 @@ void	frame_animation(t_doom *doom, t_entity *entity)
 		
 }
 
-int		entity_see(t_doom *doom, t_entity *entity)
+int		entity_see(t_doom *doom, t_sprite *entity)
 {
 	t_xyz	far_left;
 	t_xyz	far_right;
@@ -39,7 +39,7 @@ int		entity_see(t_doom *doom, t_entity *entity)
 	return (0);
 }
 
-int		entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
+int		entity_line_of_sight(t_doom *doom, t_sprite *entity, double dist)
 {
 	if (dist > entity->stat.view_distance)
 		return (0);
@@ -50,7 +50,7 @@ int		entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 	return (0);
 }
 
-void	get_entity_state(t_doom *doom, t_entity *entity)
+void	get_entity_state(t_doom *doom, t_sprite *entity)
 {
 	double dist;
 
@@ -82,7 +82,7 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 	}
 }
 
-void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
+void	preforme_entity_state_fuction(t_doom *doom, t_sprite *entity)
 {
 	if (entity->state == MOVE)
 		ai_movement(doom, entity);
@@ -90,7 +90,7 @@ void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 		ai_attack(doom, entity);
 }
 
-void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
+void	get_coresponding_entity_state_frame(t_doom *doom, t_sprite *entity)
 {
 	if (doom->sheet[entity->type].nb[entity->state][FRAMES] > 1)
 			frame_animation(doom, entity);
@@ -101,7 +101,7 @@ void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 void	precompute_entities(t_doom *doom)
 {
 	t_list		*curr;
-	t_entity	*entity;
+	t_sprite	*entity;
 
 	curr = doom->entity;
 	while (curr)

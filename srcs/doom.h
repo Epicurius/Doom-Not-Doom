@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 14:49:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:04:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,35 @@
 #define max(a,b)			(((a) > (b)) ? (a) : (b))
 
 
-typedef struct				s_bxpm
+typedef struct		s_bxpm
 {
-	int32_t				w;
-	int32_t				h;
-	int32_t				bpp;
-	int32_t				clr_nb;
-	int32_t				pix_nb;
-	uint32_t			*clr;
-	unsigned short		*pix;
-	uint32_t			*palet[(256 + 256)];
-}							t_bxpm;
+	int32_t			w;
+	int32_t			h;
+	int32_t			bpp;
+	int32_t			clr_nb;
+	int32_t			pix_nb;
+	uint32_t		*clr;
+	unsigned short	*pix;
+	uint32_t		*palet[(256 + 256)];
+}					t_bxpm;
 
-typedef	struct	s_floor_ceiling
+typedef	struct		s_floor_ceiling
 {
-	double	floor;
-	double	ceiling;
-}		t_floor_ceiling;
+	double			floor;
+	double			ceiling;
+}					t_floor_ceiling;
 
-typedef struct	s_vline
+typedef struct		s_vline
 {
-	int	y1;
-	int	y2;
-	double	alpha;
-	double	clipped_alpha;
-	double	divider;
-	double	z;
-	double	zrange;
-	double	z_near_z;
-	double	line_height;
+	int				y1;
+	int				y2;
+	double			alpha;
+	double			clipped_alpha;
+	double			divider;
+	double			z;
+	double			zrange;
+	double			z_near_z;
+	double			line_height;
 
 	t_floor_ceiling	start;
 	t_floor_ceiling	height;
@@ -69,76 +69,76 @@ typedef struct	s_vline
 	t_floor_ceiling	curr_n;
 
 	/* Texel */
-	t_xyz	texel;
-	t_xyz	texel_nearz;
-	t_xyz	texel_range;
-}		t_vline;
+	t_xyz			texel;
+	t_xyz			texel_nearz;
+	t_xyz			texel_range;
+}					t_vline;
 
 typedef struct		s_projectile
 {
-	int		render;
-	t_xyz		where;
-	t_xyz		velocity;
-	double		dist;
-	int		sector;	
-}			t_projectile;
+	int				render;
+	t_xyz			where;
+	t_xyz			velocity;
+	double			dist;
+	int				sector;	
+}					t_projectile;
 
 typedef struct		s_stats
 {
-	int		health;
-	int		height;
-	double		speed;
-	int		flying;
-	int		damage;
-	int		animate;
-	int		hostile;
-	int		attack_style;
-	double		scale;
-	int		wonder_distance;
-	int		view_distance;
-	int		detection_radius;
-	int		attack_range;
-	int		frame_rate[4];
-}			t_stats;
+	int				health;
+	int				height;
+	double			speed;
+	int				flying;
+	int				damage;
+	int				animate;
+	int				hostile;
+	int				attack_style;
+	double			scale;
+	int				wonder_distance;
+	int				view_distance;
+	int				detection_radius;
+	int				attack_range;
+	int				frame_rate[4];
+}					t_stats;
 
-typedef struct		s_entity
+typedef struct		s_sprite
 {
-	int		render;
-	t_xyz		where;
-	t_xyz		dest;
-	t_xyz		velocity;
-	int		sector;
-	double		yaw;
+	int				render;
+	t_xyz			where;
+	t_xyz			dest;
+	t_xyz			velocity;
+	int				sector;
+	double			yaw;
 
-	int		state;
-	int		frame;
-	int		angle;
+	int				state;
+	int				frame;
+	int				angle;
 
-	t_stats		stat;
-	int		id;
-	int		hp;
-	int		type;
-	double		scale;
-	double		time;
+	t_stats			stat;
+	int				id;
+	int				hp;
+	int				type;
+	double			scale;
+	double			time;
 	t_projectile	*orb;
-}			t_entity;
+}					t_sprite;
 
 typedef struct		s_player
 {
-	t_xyz		where;
-	t_xyz		velocity;
-	int		sector;
-	double		yaw;
-	double		pitch;
-	double		anglesin;
-	double		anglecos;
-	double		horizon;
+	t_xyz			where;
+	t_xyz			velocity;
+	int				sector;
+	double			yaw;
+	double			pitch;
+	double			anglesin;
+	double			anglecos;
+	double			horizon;
 
-	int		hp;
+	int				hp;
 
-	int		flying;
-	int		shooting;
-}			t_player;
+	int				flying;
+	int				shooting;
+}					t_player;
 
 typedef struct		s_wsprite
 {
@@ -157,9 +157,9 @@ typedef struct		s_wsprite
 typedef struct		s_bh
 {
 	t_wsprite		num[MAX_BH];
-	int			curr;
-	int			total;
-}			t_bh;
+	int				curr;
+	int				total;
+}					t_bh;
 
 typedef struct		s_wsprites
 {
@@ -172,9 +172,9 @@ typedef struct		s_wall
 {
 	t_wsprites		wsprite;
 	t_bh			bh;
-	int			id;
-	int			sect;
-	int			visible;
+	int				id;
+	int				sect;
+	int				visible;
 	t_xyz			v1;
 	t_xyz			v2;
 	t_xyz			sv1;
@@ -192,14 +192,14 @@ typedef struct		s_wall
 	signed char		n;
 
 	/*Perspective*/
-	double		scale_v1;
-	double		scale_v2;
-	double		angle_z1;
-	double		angle_z2;
-	double		x1;
-	double		x2;
-	double		cx1;
-	double		cx2;
+	double			scale_v1;
+	double			scale_v2;
+	double			angle_z1;
+	double			angle_z2;
+	double			x1;
+	double			x2;
+	double			cx1;
+	double			cx2;
 
 	t_floor_ceiling	s1;
 	t_floor_ceiling	s2;
@@ -211,193 +211,191 @@ typedef struct		s_wall
 	t_floor_ceiling	range_n;
 
 	/*Texture values*/
-	double		xrange;
-	double		zrange;
-	double		zcomb;
-	double		xzrange;
-	double		yzrange;
-	double		x1z0;
-	double		x0z1;
-	double		y1z0;
-	double		y0z1;
-	t_xyz		tscale;
-}			t_wall;
+	double			xrange;
+	double			zrange;
+	double			zcomb;
+	double			xzrange;
+	double			yzrange;
+	double			x1z0;
+	double			x0z1;
+	double			y1z0;
+	double			y0z1;
+	t_xyz			tscale;
+}					t_wall;
 
 typedef struct		s_sector
 {
-	int		id;
-    	int		npoints;
-	t_wall		**wall;
-	t_plane		floor;
-	t_plane		ceiling;
-	int		light;
-	float		gravity;
-	char		visible;
-} 			t_sector;
+	int				id;
+    int				npoints;
+	t_wall			**wall;
+	t_plane			floor;
+	t_plane			ceiling;
+	int				light;
+	float			gravity;
+	char			visible;
+} 					t_sector;
 
 
 typedef struct		s_collision
 {
-	t_xyz		*where;
-	t_xyz		*velocity;
-	t_sector	*sectors;
-	t_list		*entities;
-	int			*sector;
-	int			nb_entities;
-	int			player;
-	float		hitbox_height;
-	float		hitbox_radius;
-	float		step_height;
+	t_xyz			*where;
+	t_xyz			*velocity;
+	t_sector		*sectors;
+	t_list			*entities;
+	int				*sector;
+	int				nb_entities;
+	int				player;
+	float			hitbox_height;
+	float			hitbox_radius;
+	float			step_height;
 	
-}				t_collision;
-
+}					t_collision;
 
 typedef struct		s_camera
 {
-	double		hfov;
-	double		vfov;
-	double		near_left;
-	double		near_right;
-	double		far_left;
-	double		far_right;
-	double		near_z;
-	double		far_z;
-	double		range;
-	double		near_up;
-	double		near_down;
-	double		hscale;
-	double		vscale;
-	double		scale;
-}			t_camera;
+	double			hfov;
+	double			vfov;
+	double			near_left;
+	double			near_right;
+	double			far_left;
+	double			far_right;
+	double			near_z;
+	double			far_z;
+	double			range;
+	double			near_up;
+	double			near_down;
+	double			hscale;
+	double			vscale;
+	double			scale;
+}					t_camera;
 
 typedef struct		s_entity_render
 {
-	SDL_Surface	*surface;
-	t_bxpm		*bxpm;
-	t_xyz		screen;
-	double		scale;
-	t_xyz		size;
-	t_xyz		start;
-	t_xyz		end;
-	t_xyz		clamp_start;
-	t_xyz		clamp_end;
-	double		xrange;
-	double		yrange;
-	t_rect		pos;
-	int			shooting;
-	int			dmg;
-	int			*hp;
-}			t_entity_render;
+	SDL_Surface		*surface;
+	t_bxpm			*bxpm;
+	t_xyz			screen;
+	double			scale;
+	t_xyz			size;
+	t_xyz			start;
+	t_xyz			end;
+	t_xyz			clamp_start;
+	t_xyz			clamp_end;
+	double			xrange;
+	double			yrange;
+	t_rect			pos;
+	int				shooting;
+	int				dmg;
+	int				*hp;
+}					t_entity_render;
 
-typedef struct	s_render
+typedef struct		s_render
 {
-	SDL_Surface	*surface;
-	t_sector	*sectors;
-	int 		*fustrum;
-	t_wall		*skybox;
-	t_bxpm		*mtx;
-	t_bxpm		*stx;
-	t_player	player;
-	int			ytop;
-	int			ybot;
-	int			x;
-	int			xend;
+	SDL_Surface		*surface;
+	t_sector		*sectors;
+	int 			*fustrum;
+	t_wall			*skybox;
+	t_bxpm			*mtx;
+	t_bxpm			*stx;
+	t_player		player;
+	int				ytop;
+	int				ybot;
+	int				x;
+	int				xend;
 
-	t_wall		wall;
-	t_plane		floor;
-	t_plane		ceiling;
-	int			light;
-	int			s;
+	t_wall			wall;
+	t_plane			floor;
+	t_plane			ceiling;
+	int				light;
+	int				s;
 	t_bh			*bh;
 	t_wsprites		wsprite;
 	SDL_Surface		*clock;
-}				t_render;
+}					t_render;
 
-typedef struct	s_map
+typedef struct		s_map
 {
-	int	w;
-	int	h;
-	t_i2	min;
-	t_i2	max;
-	int	pos_x;
-	int	pos_y;
-}		t_map;
+	int				w;
+	int				h;
+	t_i2			min;
+	t_i2			max;
+	int				pos_x;
+	int				pos_y;
+}					t_map;
 
-typedef struct	t_nb
+typedef struct		t_nb
 {
-	int	walls;
-	int	sectors;
-	int	vertices;
-	int	entities;
-	int	processors;
-	int	projectiles;
-	int threads;
-}		t_nb;
+	int				walls;
+	int				sectors;
+	int				vertices;
+	int				entities;
+	int				processors;
+	int				projectiles;
+	int				 threads;
+}					t_nb;
 
-typedef	struct				s_fps
+typedef	struct		s_fps
 {
-	float		curr;
-	float		prev;
-	int		fps;
-	int		count;
-	SDL_Color	color;
-	TTF_Font	*font;
-	SDL_Surface	*surf;
+	float			curr;
+	float			prev;
+	int				fps;
+	int				count;
+	SDL_Color		color;
+	TTF_Font		*font;
+	SDL_Surface		*surf;
 }					t_fps;
 
-typedef struct	s_texture_sheet
+typedef struct		s_texture_sheet
 {
-	t_bxpm		bxpm;
-	int		nb[4][2];
-	t_rect		***pos;
-}			t_texture_sheet;
+	t_bxpm			bxpm;
+	int				nb[4][2];
+	t_rect			***pos;
+}					t_texture_sheet;
 
-typedef struct				s_doom
+typedef struct		s_doom
 {
 	int				quit;
-	char				*file;
-	SDL_Window			*win;
-	SDL_Surface			*surface;
-	double 				map_scale;
+	char			*file;
+	SDL_Window		*win;
+	SDL_Surface		*surface;
+	double 			map_scale;
 	int				w2;
 	int				h2;
 
-	t_nb				nb;
-	t_tpool				tpool;
-	t_fps				fps;
-	t_keys				key;
-	t_map				map;
+	t_nb			nb;
+	t_tpool			tpool;
+	t_fps			fps;
+	t_keys			key;
+	t_map			map;
 
 	//	Map
-	t_xyz				*vert;
-	t_wall				*walls;
-	t_wall				skybox[4];
-	t_sector			*sectors;
-	t_list				*entity;
+	t_xyz			*vert;
+	t_wall			*walls;
+	t_wall			skybox[4];
+	t_sector		*sectors;
+	t_list			*entity;
 
-	t_list				*spawners;
-	t_list				*entitys1;
-	t_list				*objects;
+	t_list			*spawners;
+	t_list			*entitys1;
+	t_list			*objects;
 
-	t_stats				entity_stats[2];
-	t_projectile			*orb;
+	t_stats			entity_stats[2];
+	t_projectile	*orb;
 
-	t_camera			cam;
-	t_player			player;
-
+	t_camera		cam;
+	t_player		player;
 
 	//	Render
-	t_render			*render;
-	int					*fustrum;
-	double				*zbuffer;
+	t_render		*render;
+	int				*fustrum;
+	double			*zbuffer;
 
 	//	Textures
-	TTF_Font			*clock_font;
-	SDL_Surface			*clock;
-	t_bxpm				stx[12];
-	t_bxpm				mtx[5];
-	t_texture_sheet		sheet[2];
-}						t_doom;
+	TTF_Font		*clock_font;
+	SDL_Surface		*clock;
+	t_bxpm			stx[12];
+	t_bxpm			mtx[5];
+	t_texture_sheet	sheet[2];
+}					t_doom;
 
 //		Read_file
 int	read_file(t_doom *doom, char *file_name);
@@ -429,10 +427,10 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 //	Enteties
 void	DrawEntity(t_doom *doom);
 void	precompute_entities(t_doom *doom);
-void	ai_movement(t_doom *doom, t_entity *entity);
-void	ai_attack(t_doom *doom, t_entity *entity);
+void	ai_movement(t_doom *doom, t_sprite *entity);
+void	ai_attack(t_doom *doom, t_sprite *entity);
 int		blit_entity(void *arg);
-int		ai_rand_move(t_entity *entity, int rand);
+int		ai_rand_move(t_sprite *entity, int rand);
 
 //	Projectiles
 void	precompute_projectiles(t_doom *doom);

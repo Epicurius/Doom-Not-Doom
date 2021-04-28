@@ -21,7 +21,7 @@ int		sprite_type(char *str)
 	return (-1);
 }
 
-void	add_to_list(t_entity *content, t_list **list)
+void	add_to_list(t_sprite *content, t_list **list)
 {
 	t_list		*new;
 
@@ -35,9 +35,9 @@ void	add_to_list(t_entity *content, t_list **list)
 
 void	init_map_entity(t_doom *doom, char **arr)
 {
-	t_entity	*sprite;
+	t_sprite	*sprite;
 
-	sprite 				= ft_memalloc(sizeof(t_entity));
+	sprite 				= ft_memalloc(sizeof(t_sprite));
 	sprite->type		= sprite_type(arr[0]);
 	sprite->where.x		= ft_atof(arr[1]) * doom->map_scale;
 	sprite->where.y		= ft_atof(arr[2]) * doom->map_scale;

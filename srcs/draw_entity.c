@@ -19,7 +19,7 @@ void	 project_entity(t_doom *doom, t_entity_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
+int	rotate_entity(t_doom *doom, t_sprite *entity, t_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -40,7 +40,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	return (1);
 }
 
-void	entity_threads(t_doom *doom, t_entity_render render, t_entity *entity, t_entity_render *thread)
+void	entity_threads(t_doom *doom, t_entity_render render, t_sprite *entity, t_entity_render *thread)
 {
 	int y;
 
@@ -65,7 +65,7 @@ void	DrawEntity(t_doom *doom)
 {
 	int s;
 	t_list *curr;
-	t_entity *entity;
+	t_sprite *entity;
 	t_entity_render render;
 	t_entity_render	thread[10];
 

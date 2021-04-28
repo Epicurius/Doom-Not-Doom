@@ -19,7 +19,7 @@ t_xyz	projectile_movement(t_xyz curr, t_xyz dest)
 	return (move);
 }
 
-void	ai_attack(t_doom *doom, t_entity *entity)
+void	ai_attack(t_doom *doom, t_sprite *entity)
 {
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
 	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)

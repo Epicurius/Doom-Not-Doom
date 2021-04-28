@@ -47,7 +47,7 @@ void	init_projectiles(t_doom *doom)
 {
 	int p;
 	t_list *curr;
-	t_entity *entity;
+	t_sprite *entity;
 
 	doom->orb = ft_memalloc(sizeof(t_projectile)
 				* doom->nb.projectiles);
@@ -98,7 +98,7 @@ void	init_entity(t_doom *doom)
 {
 	int			type;
 	t_list		*curr;
-	t_entity	*entity;
+	t_sprite	*entity;
 
 	alfred(&doom->entity_stats[0]);
 	spooky(&doom->entity_stats[1]);

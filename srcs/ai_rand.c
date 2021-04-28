@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-int	ai_rand_move(t_entity *entity, int rand)
+int	ai_rand_move(t_sprite *entity, int rand)
 {
 	double angle;
 
