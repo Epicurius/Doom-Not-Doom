@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/27 15:35:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,12 +371,14 @@ typedef struct				s_doom
 	//	Map
 	t_xyz				*vert;
 	t_wall				*walls;
-	t_plane				*floors;
-	t_plane				*ceilings;
 	t_wall				skybox[4];
 	t_sector			*sectors;
 	t_list				*entity;
-	t_list				*spawner;
+
+	t_list				*spawners;
+	t_list				*entitys1;
+	t_list				*objects;
+
 	t_stats				entity_stats[2];
 	t_projectile			*orb;
 
@@ -394,7 +396,7 @@ typedef struct				s_doom
 	SDL_Surface			*clock;
 	t_bxpm				stx[12];
 	t_bxpm				mtx[5];
-	t_texture_sheet		sprites[2];
+	t_texture_sheet		sheet[2];
 }						t_doom;
 
 //		Read_file

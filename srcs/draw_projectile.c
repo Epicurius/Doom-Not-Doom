@@ -15,8 +15,8 @@ t_entity_render project_projectile(t_doom *doom, t_projectile *orb)
 	if (render.screen.z <= 1) //or outside screen borders?
 		return (render);
 	render.surface = doom->surface;
-	render.bxpm = &doom->sprites[0].bxpm;
-	render.pos = doom->sprites[0].pos[0][0][4];
+	render.bxpm = &doom->sheet[0].bxpm;
+	render.pos = doom->sheet[0].pos[0][0][4];
 	render.screen.y = doom->h2 + (render.screen.y * doom->cam.scale / -render.screen.z);
 	render.screen.x = doom->w2 + (render.screen.x * doom->cam.scale / -render.screen.z);
 	render.size.x = render.pos.w * 20 / render.screen.z;

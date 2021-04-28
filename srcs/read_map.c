@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/27 15:58:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 10:50:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	init_map_header(t_doom *doom, char **arr)
 	doom->vert	= ft_memalloc(sizeof(t_xyz) * doom->nb.vertices);
 	doom->walls	= ft_memalloc(sizeof(t_wall) * doom->nb.walls);
 	doom->sectors	= ft_memalloc(sizeof(t_sector) * doom->nb.sectors);
-	doom->floors	= ft_memalloc(sizeof(t_plane) * doom->nb.sectors);
-	doom->ceilings	= ft_memalloc(sizeof(t_plane) * doom->nb.sectors);
 }
 
 void	init_map_wall(t_doom *doom, char **arr)
@@ -41,17 +39,19 @@ void	init_map_wall(t_doom *doom, char **arr)
 
 void	init_map_fc(t_doom *doom, char **arr)
 {
+	int		sect;
 	t_plane	*floor;
 	t_plane	*ceiling;
 
-	floor		= &doom->floors[ft_atoi(arr[0])];
-	ceiling		= &doom->ceilings[ft_atoi(arr[0])];
-	floor->y	= atof(arr[1]) * doom->map_scale;
-	ceiling->y	= atof(arr[2]) * doom->map_scale;
-	floor->tx	= ft_atoi(arr[3]);
-	ceiling->tx	= ft_atoi(arr[4]);
-	floor->scale	= atof(arr[5]) * doom->map_scale;
-	ceiling->scale	= atof(arr[5]) * doom->map_scale;
+	sect			= ft_atoi(arr[1]);
+	floor			= &doom->sectors[sect].floor;
+	ceiling			= &doom->sectors[sect].ceiling;
+	floor->y		= atof(arr[2]) * doom->map_scale;
+	ceiling->y		= atof(arr[3]) * doom->map_scale;
+	floor->tx		= ft_atoi(arr[4]);
+	ceiling->tx		= ft_atoi(arr[5]);
+	floor->scale	= atof(arr[6]) * doom->map_scale;
+	ceiling->scale	= atof(arr[6]) * doom->map_scale;
 }
 
 void	init_map_player(t_doom *doom, char **arr)
@@ -74,7 +74,7 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
 	l = -1;
 	while (++l < sect->npoints)
 	{
-		wall_nb				= ft_atoi(id[l]);
+		wall_nb					= ft_atoi(id[l]);
 		sect->wall[l]			= &walls[wall_nb];
 		sect->wall[l]->id		= wall_nb;
 		sect->wall[l]->sect		= sect->id;
@@ -88,16 +88,14 @@ void	init_map_sector(t_doom *doom, char **arr)
 	char		**walls;
 	char		**neighbour;
 
-	sect		= &doom->sectors[ft_atoi(arr[0])];
-	sect->id	= ft_atoi(arr[0]);
-	sect->floor	= doom->floors[ft_atoi(arr[1])];
-	sect->ceiling	= doom->ceilings[ft_atoi(arr[1])];
-	walls		= ft_strsplit(arr[2], ' ');
+	sect			= &doom->sectors[ft_atoi(arr[0])];
+	sect->id		= ft_atoi(arr[0]);
+	walls			= ft_strsplit(arr[1], ' ');
 	sect->npoints	= ft_strarr_func(walls, NULL);
-	sect->wall	= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
-	neighbour	= ft_strsplit(arr[3], ' ');
-	sect->gravity	= atof(arr[4]);
-	sect->light	= atoi(arr[5]);
+	sect->wall		= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
+	neighbour		= ft_strsplit(arr[2], ' ');
+	sect->gravity	= ft_atoi(arr[3]) / 1000.0;
+	sect->light		= ft_atoi(arr[4]);
 	complete_wall(sect, doom->walls, walls, neighbour);
 	ft_strarr_func(walls, ft_strdel);
 	ft_strarr_func(neighbour, ft_strdel);

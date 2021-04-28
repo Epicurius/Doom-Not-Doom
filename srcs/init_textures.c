@@ -28,7 +28,7 @@ void	init_textures(t_doom *doom)
 	init_clock(doom);
 	//load_bxpm(doom);
 	load_bbmp(doom);
-	init_alfred(&doom->sprites[0]);
-	init_spooky(&doom->sprites[1]);
+	init_alfred(&doom->sheet[0]);
+	init_spooky(&doom->sheet[1]);
 	color_palets(doom);
 }

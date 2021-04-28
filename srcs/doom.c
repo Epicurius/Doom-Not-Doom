@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/27 15:57:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:21:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@ double elapsed;
 
 void	cs(void)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	//elapsed += (finish.tv_nsec - start.tv_nsec) / 10000.0;
-	printf("%.10s:\t%f\n", str, elapsed);
+	ft_printf("%.10s:\t%f\n", str, elapsed);
 }
 
 void	init_doom(t_doom *doom)
@@ -59,10 +58,11 @@ void	init_doom(t_doom *doom)
 	init_minimap(doom);
 	cs();
 	init_textures(doom);
-	ce("LOAD ASDASDASDASDASDASDASDASDASDASDASD");
+	ce("BXPM");
 	init_scale(doom);
 	init_entity(doom);
 	init_render(doom);
+	//((t_sprite*)doom->sprite->content)->type = 1;
 }
 
 int main(int ac, char **av)
@@ -78,64 +78,63 @@ int main(int ac, char **av)
 	if (!read_file(doom, "skybox.txt"))
 		return (0);
 	ce("Read_file");
-	//cs();
 	init_doom(doom);
-	//ce("init_doom");
     //doom->quit = 1;
     while (!doom->quit)
     {
-		//cs();
+		cs();
 		update_camera(doom, 0, 0);
-		//ce("update_camera");
-		//cs();
+		ce("update_camera");
+		cs();
 		precompute_walls(doom);
-		//ce("precompute_walls");
-		//cs();
+		ce("precompute_walls");
+		cs();
 		precompute_skybox(doom);
-		//ce("precompute_skybox");
-		//cs();
+		ce("precompute_skybox");
+		cs();
 		DrawScreen(doom);
-		//ce("DrawScreen");
+		ce("DrawScreen");
 
 		/* All this has no time requirements */
 		{
 
-			//cs();
+			cs();
 			precompute_entities(doom);
-			//ce("precomp_entities");
-			//cs();
+			ce("precomp_entities");
+			cs();
 			precompute_projectiles(doom);
-			//ce("precomp_project");
-			//cs();
+			ce("precomp_project");
+			cs();
 			movement(doom);
-			//ce("movement");
-			//cs();
+			ce("movement");
+			cs();
 			player_collision(doom);
-			//ce("player_collision");
-			//cs();
+			ce("player_collision");
+			cs();
 			while (SDL_PollEvent(&event))
 				keys(doom, &event);
-			//ce("WHILE DRAW");
+			ce("WHILE DRAW");
 		}
-		//cs();
+		cs();
 		tpool_wait(&doom->tpool);
-		//ce("Draw tpool_wait");
-		//cs();
+		ce("Draw tpool_wait");
+		cs();
 		DrawProjectiles(doom);
-		//ce("draw_project");
-		//cs();
+		ce("draw_project");
+		cs();
 		DrawEntity(doom);//
-		//ce("Draw_entity");
-		//cs();
+		ce("Draw_sprite");
+		cs();
 		//shade_zbuffer(doom);
 		draw_crosshair(doom);
-		//ce("Croshair");
+		ce("Croshair");
 		fps_func(doom);
 		if (doom->key.tab)
 			map(doom);
 		//shade_zbuffer(doom);
+		cs();
 		SDL_UpdateWindowSurface(doom->win);
-		//ce("asdasdasdasd");
+		ce("UpdateWindowSurface");
 	}
 	free_doom(doom);
 	return (1);

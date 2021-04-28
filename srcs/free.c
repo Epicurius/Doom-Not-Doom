@@ -6,8 +6,6 @@ void	free_map(t_doom *doom)
 	int i;
 
 	ft_memdel((void*)&doom->vert);
-	ft_memdel((void*)&doom->floors);
-	ft_memdel((void*)&doom->ceilings);
 	i = -1;
 	while (++i < doom->nb.walls)
 		ft_memdel((void*)&doom->walls[i].wsprite);
@@ -18,7 +16,7 @@ void	free_map(t_doom *doom)
 	ft_memdel((void*)&doom->sectors);
 }
 
-void	free_entity_pos(t_texture_sheet *sprite)
+void	free_sprite_pos(t_texture_sheet *sprite)
 {
 	int i;
 	int j;
@@ -47,21 +45,15 @@ void	free_font(t_doom *doom)
 	TTF_CloseFont(doom->clock_font);
 }
 
-void	free_color_palets(t_doom *doom)
+void	free_color_palet(t_bxpm *bxpm)
 {
 	int i;
-	int j;
 
-	i = -1;
-	while (++i < 4)
+	while (++i < 256 + 256)
 	{
-		j = -1;
-		while (++j < 256 + 256)
-		{
-			if (doom->mtx[i].palet[j])
-				free(doom->mtx[i].palet[j]);
-		}
-	}	
+		if (bxpm->palet[i])
+			free(bxpm->palet[i]);
+	}
 }
 
 void	free_entities(t_doom *doom)
@@ -79,13 +71,40 @@ void	free_entities(t_doom *doom)
 	}
 }
 
+void	free_textures(t_doom *doom)
+{
+	int i;
+
+	i = -1;
+	while (++i < 5)
+	{
+		free(doom->mtx[i].clr);
+		free(doom->mtx[i].pix);
+		free_color_palet(&doom->mtx[i]);
+	}
+	i = -1;
+	while (++i < 12)
+	{
+		free(doom->stx[i].clr);
+		free(doom->stx[i].pix);
+	}
+	i = -1;
+	while (++i < 2)
+	{
+		free(doom->sheet[i].bxpm.clr);
+		free(doom->sheet[i].bxpm.pix);
+	}
+
+
+}
+
 int	free_doom(t_doom *doom)
 {
 	free_map(doom);
 	free_entities(doom);
-	free_entity_pos(&doom->sprites[0]);
-	free_entity_pos(&doom->sprites[1]);
-	free_color_palets(doom);
+	free_textures(doom);
+	free_sprite_pos(&doom->sheet[0]);
+	free_sprite_pos(&doom->sheet[1]);
 	SDL_FreeSurface(doom->clock);
 	SDL_FreeSurface(doom->fps.surf);
 	free(doom->orb);

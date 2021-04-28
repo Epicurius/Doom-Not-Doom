@@ -22,7 +22,7 @@ t_xyz	projectile_movement(t_xyz curr, t_xyz dest)
 void	ai_attack(t_doom *doom, t_entity *entity)
 {
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
-	if (entity->frame < doom->sprites[entity->type].nb[ATTACK][FRAMES] - 1)
+	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
 	if (entity->stat.attack_style == 2)
 		entity->render = 0;

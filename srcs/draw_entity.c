@@ -36,7 +36,7 @@ int	rotate_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 		return (0);
 	render->screen = xyz(screen.x, screen.y, screen.z);
 	render->scale = doom->entity_stats[entity->type].scale;
-	render->pos = doom->sprites[entity->type].pos[entity->state][entity->frame][entity->angle];
+	render->pos = doom->sheet[entity->type].pos[entity->state][entity->frame][entity->angle];
 	return (1);
 }
 
@@ -53,7 +53,7 @@ void	entity_threads(t_doom *doom, t_entity_render render, t_entity *entity, t_en
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
 		thread[y].surface = doom->surface;
-		thread[y].bxpm = &doom->sprites[entity->type].bxpm;
+		thread[y].bxpm = &doom->sheet[entity->type].bxpm;
 		thread[y].shooting = doom->player.shooting;
 		thread[y].dmg = 10;
 		thread[y].hp = &entity->hp;

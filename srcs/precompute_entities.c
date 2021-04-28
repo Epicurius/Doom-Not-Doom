@@ -8,7 +8,7 @@ void	frame_animation(t_doom *doom, t_entity *entity)
 		entity->frame++;
 		entity->time = doom->fps.curr;
 	}
-	if (entity->frame >= doom->sprites[entity->type].nb[entity->state][FRAMES])
+	if (entity->frame >= doom->sheet[entity->type].nb[entity->state][FRAMES])
 	{
 		if (entity->state == DEATH)
 			entity->render = 0;
@@ -17,7 +17,7 @@ void	frame_animation(t_doom *doom, t_entity *entity)
 		
 }
 
-int	entity_see(t_doom *doom, t_entity *entity)
+int		entity_see(t_doom *doom, t_entity *entity)
 {
 	t_xyz	far_left;
 	t_xyz	far_right;
@@ -39,7 +39,7 @@ int	entity_see(t_doom *doom, t_entity *entity)
 	return (0);
 }
 
-int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
+int		entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 {
 	if (dist > entity->stat.view_distance)
 		return (0);
@@ -92,30 +92,11 @@ void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 
 void	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
-	if (doom->sprites[entity->type].nb[entity->state][FRAMES] > 1)
+	if (doom->sheet[entity->type].nb[entity->state][FRAMES] > 1)
 			frame_animation(doom, entity);
 	entity->angle = orientation(entity->where, doom->player.where,
-		entity->yaw, doom->sprites[entity->type].nb[entity->state][ANGLES]);
+		entity->yaw, doom->sheet[entity->type].nb[entity->state][ANGLES]);
 }
-/*
-void	precompute_entities(t_doom *doom)
-{
-	int i;
-	t_entity *entity;
-
-	i = -1;
-	while (++i < doom->nb.entities)
-	{
-		entity = &doom->entity[i];
-		if (!entity->stat.animate || !entity->render)
-			continue ;
-		get_entity_state(doom, entity);
-		preforme_entity_state_fuction(doom, entity);
-		if (!entity->render)
-			continue ;
-		get_coresponding_entity_state_frame(doom, entity);
-	}
-}*/
 
 void	precompute_entities(t_doom *doom)
 {
