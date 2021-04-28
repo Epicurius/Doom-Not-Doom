@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 16:44:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:48:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,10 +327,13 @@ typedef struct		t_nb
 	int				walls;
 	int				sectors;
 	int				vertices;
-	int				entities;
 	int				processors;
 	int				projectiles;
 	int				 threads;
+	int				sprites;
+	int				entities;
+	int				spawners;
+	int				objects;
 }					t_nb;
 
 typedef	struct		s_fps
@@ -375,7 +378,7 @@ typedef struct		s_doom
 	t_list			*sprite;
 
 	t_list			*spawners;
-	t_list			*entitys1;
+	t_list			*entities;
 	t_list			*objects;
 
 	t_stats			sprite_stats[2];

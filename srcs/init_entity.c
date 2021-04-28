@@ -75,7 +75,7 @@ void	init_sprite(t_doom *doom)
 	i = -1;
 	alfred(&doom->sprite_stats[0]);
 	spooky(&doom->sprite_stats[1]);
-	while (++i < doom->nb.entities)
+	while (++i < doom->nb.sprites)
 	{
 		type = doom->sprite[i].type;
 		doom->sprite[i].stat = doom->sprite_stats[type];

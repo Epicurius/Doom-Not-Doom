@@ -18,7 +18,7 @@ void	init_map_header(t_doom *doom, char **arr)
 	doom->nb.vertices	= ft_atoi(arr[2]);
 	doom->nb.walls		= ft_atoi(arr[3]);
 	doom->nb.sectors	= ft_atoi(arr[4]);
-	doom->nb.entities	= 0;
+	doom->nb.sprites	= 0;
 	doom->vert	= ft_memalloc(sizeof(t_xyz) * doom->nb.vertices);
 	doom->walls	= ft_memalloc(sizeof(t_wall) * doom->nb.walls);
 	doom->sectors	= ft_memalloc(sizeof(t_sector) * doom->nb.sectors);

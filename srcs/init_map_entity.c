@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 14:24:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:48:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	init_map_entity(t_doom *doom, char **arr)
 	sprite->where.y		= ft_atof(arr[2]) * doom->map_scale;
 	sprite->where.z		= ft_atof(arr[3]) * doom->map_scale;
 	sprite->yaw			= ft_atoi(arr[4]);
-	doom->nb.entities	+= 1;
+	doom->nb.sprites	+= 1;
 	add_to_list(sprite, &doom->sprite);
 	if (sprite->type == 2) //spawner
 		add_to_list(sprite, &doom->spawners);
 	else if (sprite->type == 0 || sprite->type == 1) //enemy
-		add_to_list(sprite, &doom->entitys1);
+		add_to_list(sprite, &doom->entities);
 	else
 		add_to_list(sprite, &doom->objects); //objects
 }
