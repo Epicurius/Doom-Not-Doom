@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 16:48:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/29 13:12:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,6 @@ typedef struct		s_collision
 	float			hitbox_height;
 	float			hitbox_radius;
 	float			step_height;
-	
 }					t_collision;
 
 typedef struct		s_camera

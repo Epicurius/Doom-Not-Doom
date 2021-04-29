@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 10:50:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/29 11:19:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void			read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, init_map_wall);
 	else if (ft_strnequ(line, "type:spawn", 10))
 		read_line(doom, fd, init_map_player);
-	else if (ft_strnequ(line, "type:sectors", 12))
+	else if (ft_strnequ(line, "type:sector", 11))
 		read_line(doom, fd, init_map_sector);
 	else if (ft_strnequ(line, "type:entity", 11))
 		read_line(doom, fd, init_map_entity);

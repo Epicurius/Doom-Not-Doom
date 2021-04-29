@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 16:48:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:05:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	add_to_list(t_sprite *content, t_list **list)
 	t_list		*new;
 
 	new = ft_lstnew(0, 0);
-	if (!(*list))
-		*list = new;
-	else
-		ft_lstadd(&(*list), new);
-	(*list)->content = content;
+	new->content = content;
+	ft_lstadd(&(*list), new);
 }
 
 void	init_map_entity(t_doom *doom, char **arr)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 10:22:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:27:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ double elapsed;
 
 void	cs(void)
 {
-	return ;
+	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	return ;
+	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
@@ -61,7 +61,8 @@ void	init_doom(t_doom *doom)
 	init_scale(doom);
 	init_sprite(doom);
 	init_render(doom);
-	//((t_sprite*)doom->sprite->content)->type = 1;
+	//if ((t_sprite*)doom->sprite->next->prev == NULL)
+	//		ft_printf("Aasdasdasd\n");
 }
 
 int main(int ac, char **av)
@@ -69,8 +70,9 @@ int main(int ac, char **av)
 	t_doom		*doom;
     SDL_Event	event;
 
-	if (ac == 1)
-		printf("%s\n", av[0]);
+	//if (ac == 1)
+	//	return (0);
+	//	printf("%s\n", av[0]);
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
 	cs();
