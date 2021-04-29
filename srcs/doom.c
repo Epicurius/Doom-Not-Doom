@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/28 14:21:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:22:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 struct timespec start, finish;
 double elapsed;
 #include <time.h>
-//Precompute takes 0,005% of fps
 
 void	cs(void)
 {
