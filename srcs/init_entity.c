@@ -42,7 +42,7 @@ static void	spooky(t_stats *spooky)
 	spooky->frame_rate[DEATH] = 500;
 	spooky->flying = 0;
 }
-
+/*
 void	init_projectiles(t_doom *doom)
 {
 	int p;
@@ -66,34 +66,7 @@ void	init_projectiles(t_doom *doom)
 			sprite->orb = NULL;
 	}
 }
-/*
-void	init_sprite(t_doom *doom)
-{
-	int i;
-	int type;
-
-	i = -1;
-	alfred(&doom->sprite_stats[0]);
-	spooky(&doom->sprite_stats[1]);
-	while (++i < doom->nb.sprites)
-	{
-		type = doom->sprite[i].type;
-		doom->sprite[i].stat = doom->sprite_stats[type];
-		doom->sprite[i].hp = doom->sprite[i].stat.health;
-		doom->sprite[i].dest = doom->sprite[i].where;
-		doom->sprite[i].sector = find_sector(doom, doom->sprite[i].where);
-		doom->sprite[i].render = 1;
-		if (doom->sprite[i].stat.attack_style == 1)
-			doom->nb.projectiles++;
-	}
-	if (doom->nb.projectiles > 0)
-		init_projectiles(doom);
-	doom->player.sector = find_sector(doom, doom->player.where);
-	doom->player.hp = 1000;
-	doom->player.flying = 0;
-}
 */
-
 void	init_sprite(t_doom *doom)
 {
 	int			type;
@@ -113,12 +86,14 @@ void	init_sprite(t_doom *doom)
 		sprite->dest = sprite->where;//
 		sprite->sector = find_sector(doom, sprite->where);
 		sprite->render = 1;
-		if (sprite->stat.attack_style == 1)
-			doom->nb.projectiles++;
+		//if (sprite->stat.attack_style == 1)
+		//	doom->nb.projectiles++;
 	}
-	if (doom->nb.projectiles > 0)
-		init_projectiles(doom);
-	doom->player.sector = find_sector(doom, doom->player.where);
-	doom->player.hp = 1000;
-	doom->player.flying = 0;
+	//if (doom->nb.projectiles > 0)
+	//	init_projectiles(doom);
+	{
+		doom->player.sector = find_sector(doom, doom->player.where);
+		doom->player.hp = 1000;
+		doom->player.flying = 0;
+	}
 }

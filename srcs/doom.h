@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 13:12:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:17:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_vline
 
 typedef struct		s_projectile
 {
-	int				render;
+	t_xyz			start;
 	t_xyz			where;
 	t_xyz			velocity;
 	double			dist;
@@ -99,6 +99,7 @@ typedef struct		s_stats
 	int				detection_radius;
 	int				attack_range;
 	int				frame_rate[4];
+	double			attack_speed;
 }					t_stats;
 
 typedef struct		s_sprite
@@ -120,7 +121,6 @@ typedef struct		s_sprite
 	int				type;
 	double			scale;
 	double			time;
-	t_projectile	*orb;
 }					t_sprite;
 
 typedef struct		s_player
@@ -381,8 +381,8 @@ typedef struct		s_doom
 	t_list			*objects;
 
 	t_stats			sprite_stats[2];
-	t_projectile	*orb;
 
+	t_list			*orb;
 	t_camera		cam;
 	t_player		player;
 
@@ -401,7 +401,14 @@ typedef struct		s_doom
 
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);
-void	init_map_entity(t_doom *doom, char **arr);
+void	parse_header(t_doom *doom, char **arr);
+void	parse_vertex(t_doom *doom, char **arr);
+void	parse_wall(t_doom *doom, char **arr);
+void	parse_player(t_doom *doom, char **arr);
+void	parse_sector(t_doom *doom, char **arr);
+void	parse_wsprite(t_doom *doom, char **arr);
+void	parse_entity(t_doom *doom, char **arr);
+void	parse_fc(t_doom *doom, char **arr);
 
 //		Init
 void	init_render(t_doom *doom);
@@ -455,6 +462,7 @@ void	map(t_doom *doom);
 
 //	Movement
 void	movement(t_doom *doom);
+int		horizontal_collision(t_collision *sprite, t_xyz dest);
 
 //	Texture
 void	DrawScreen(t_doom *doom);

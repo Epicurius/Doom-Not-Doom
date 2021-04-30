@@ -63,29 +63,21 @@ void	sprite_threads(t_doom *doom, t_sprite_render render, t_sprite *sprite, t_sp
 
 void	Drawsprite(t_doom *doom)
 {
-	int s;
 	t_list *curr;
 	t_sprite *sprite;
 	t_sprite_render render;
 	t_sprite_render	thread[10];
 
-	s = -1;
-	while (++s < doom->nb.sectors)
+	curr = doom->sprite;
+	while (curr)
 	{
-		if (!doom->sectors[s].visible)
-			continue ;
-		curr = doom->sprite;
-		while (curr)
+		sprite = curr->content;
+		curr = curr->next;
+		if (sprite->render && doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
 		{
-			sprite = curr->content;
-			curr = curr->next;
-			if (sprite->render && sprite->sector == doom->sectors[s].id)
-			{
-				rotate_sprite(doom, sprite, &render);
-				project_sprite(doom, &render);
-				tpool_wait(&doom->tpool);
-				sprite_threads(doom, render, sprite, thread);
-			}
+			project_sprite(doom, &render);
+			tpool_wait(&doom->tpool);
+			sprite_threads(doom, render, sprite, thread);
 		}
 	}
 	tpool_wait(&doom->tpool);

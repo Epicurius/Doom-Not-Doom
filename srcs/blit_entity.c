@@ -3,7 +3,9 @@
 
 void	hit_enemy(t_sprite_render *render, int coord)
 {
-	if (render->shooting && coord == H/2 * W + W/2)
+	if (render->hp == NULL)
+		return ;
+	if (render->shooting && coord == (H/2 * W + W/2))
 		*render->hp -= render->dmg;
 }
 

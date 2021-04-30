@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/28 10:55:34 by nneronin         ###   ########.fr        #
+#    Updated: 2021/04/30 14:29:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,9 @@ RAW_SRC = doom.c\
 		load_bbmp.c\
 		init_render.c\
 		collision_detection.c\
-		init_map_entity.c\
+		parse_map_sprite.c\
+		parse_map_header.c\
+		parse_map_sector.c\
 		read_bbmp.c\
 		
 NAME = doom
@@ -134,7 +136,7 @@ $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
-	@./bxpm_conv/bxpm_conv $<
+	@./bmp_to_bxpm/converter $<
 	@mv ./resources/BMP/*.bxpm ./resources/BXPM/
 	@mv ./resources/BMP/*.bbmp ./resources/BBMP/
 
@@ -146,7 +148,7 @@ $(LIBS): $(LIB_DIR)
 	@make -C ./lib/libft
 	@make -C ./lib/libpf
 	@make -C ./lib/tpool
-	@make -C ./bxpm_conv
+	@make -C ./bmp_to_bxpm
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:

@@ -6,11 +6,28 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 14:05:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:25:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	parse_wsprite(t_doom *doom, char **arr)
+{
+	t_wsprites	*wsprite;
+	t_wsprite	*sprite;
+
+	wsprite			= &doom->walls[ft_atoi(arr[1])].wsprite;
+	wsprite->total 		+= 1;
+	wsprite->num 		= ft_realloc(wsprite->num, sizeof(t_wsprite)
+						* wsprite->total);
+	sprite			= &wsprite->num[wsprite->total - 1];
+	sprite->id		= ft_atoi(arr[0]);
+	sprite->where.x		= ft_atof(arr[2]) * doom->map_scale;
+	sprite->where.y		= ft_atof(arr[3]) * doom->map_scale;
+	sprite->scale_w		= ft_atof(arr[4]) * doom->map_scale;
+	sprite->tx		= ft_atoi(arr[5]);
+}
 
 int		sprite_type(char *str)
 {
@@ -21,16 +38,7 @@ int		sprite_type(char *str)
 	return (-1);
 }
 
-void	add_to_list(t_sprite *content, t_list **list)
-{
-	t_list		*new;
-
-	new = ft_lstnew(0, 0);
-	new->content = content;
-	ft_lstadd(&(*list), new);
-}
-
-void	init_map_entity(t_doom *doom, char **arr)
+void	parse_entity(t_doom *doom, char **arr)
 {
 	t_sprite	*sprite;
 
@@ -41,11 +49,11 @@ void	init_map_entity(t_doom *doom, char **arr)
 	sprite->where.z		= ft_atof(arr[3]) * doom->map_scale;
 	sprite->yaw			= ft_atoi(arr[4]);
 	doom->nb.sprites	+= 1;
-	add_to_list(sprite, &doom->sprite);
+	ft_lstadd_new(&doom->sprite, sprite, sizeof(sprite));
 	if (sprite->type == 2) //spawner
-		add_to_list(sprite, &doom->spawners);
+		ft_lstadd_new(&doom->spawners, sprite, sizeof(sprite));
 	else if (sprite->type == 0 || sprite->type == 1) //enemy
-		add_to_list(sprite, &doom->entities);
+		ft_lstadd_new(&doom->entities, sprite, sizeof(sprite));
 	else
-		add_to_list(sprite, &doom->objects); //objects
+		ft_lstadd_new(&doom->objects, sprite, sizeof(sprite));
 }

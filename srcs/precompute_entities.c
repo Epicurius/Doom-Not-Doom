@@ -104,7 +104,7 @@ void	precompute_entities(t_doom *doom)
 	t_sprite	*entity;
 
 	curr = doom->sprite;
-	while (curr)
+	while (curr != NULL)
 	{
 		entity = curr->content;
 		curr = curr->next;

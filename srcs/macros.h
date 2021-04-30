@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 10:40:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/30 13:51:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
 ** Screen info
 */
-# define W						1024
-# define H						512
+# define W						2560
+# define H						1440
 # define MAX_PROCESSORS			64
 
 /*
@@ -51,6 +51,8 @@
 
 # define STYLE_MELEE					0
 # define STYLE_RANGE					1
+
+# define PROJECTILE_MAX_RANGE			70
 
 typedef enum	e_entities
 {

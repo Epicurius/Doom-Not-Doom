@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 14:27:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/04/30 13:34:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ double elapsed;
 
 void	cs(void)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
@@ -55,17 +55,13 @@ void	init_doom(t_doom *doom)
 	init_camera(doom);
 	init_skybox(doom);
 	init_minimap(doom);
-	cs();
 	init_textures(doom);
-	ce("BXPM");
 	init_scale(doom);
 	init_sprite(doom);
 	init_render(doom);
-	//if ((t_sprite*)doom->sprite->next->prev == NULL)
-	//		ft_printf("Aasdasdasd\n");
 }
 
-int main(int ac, char **av)
+int main1(void)
 {
 	t_doom		*doom;
     SDL_Event	event;
@@ -82,7 +78,7 @@ int main(int ac, char **av)
 	init_doom(doom);
     //doom->quit = 1;
     while (!doom->quit)
-    {
+    {	
 		cs();
 		update_camera(doom, 0, 0);
 		ce("update_camera");
@@ -94,11 +90,10 @@ int main(int ac, char **av)
 		ce("precompute_skybox");
 		cs();
 		DrawScreen(doom);
-		ce("DrawScreen");
+		ce("DRAW_SCREEN");
 
 		/* All this has no time requirements */
 		{
-
 			cs();
 			precompute_entities(doom);
 			ce("precomp_entities");
@@ -114,17 +109,17 @@ int main(int ac, char **av)
 			cs();
 			while (SDL_PollEvent(&event))
 				keys(doom, &event);
-			ce("WHILE DRAW");
+			ce("pollevent");
 		}
 		cs();
 		tpool_wait(&doom->tpool);
-		ce("Draw tpool_wait");
+		ce("DRAW_WAIT");
 		cs();
 		DrawProjectiles(doom);
 		ce("draw_project");
 		cs();
 		Drawsprite(doom);//
-		ce("Draw_sprite");
+		ce("draw_sprite");
 		cs();
 		//shade_zbuffer(doom);
 		draw_crosshair(doom);
@@ -140,11 +135,11 @@ int main(int ac, char **av)
 	free_doom(doom);
 	return (1);
 }
-/*
+
 int main(void)
 {
 	main1();
 	//while (1)
 	//	;
 	return (1);
-}*/
+}

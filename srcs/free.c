@@ -56,7 +56,7 @@ void	free_color_palet(t_bxpm *bxpm)
 	}
 }
 
-void	free_entities(t_doom *doom)
+void	free_sprites(t_doom *doom)
 {
 	t_list *tmp;
 	t_list *curr;
@@ -65,6 +65,27 @@ void	free_entities(t_doom *doom)
 	while (curr)
 	{
 		free(curr->content);
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+	curr = doom->spawners;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+	curr = doom->entities;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+	curr = doom->objects;
+	while (curr)
+	{
 		tmp = curr;
 		curr = curr->next;
 		free(tmp);
@@ -94,20 +115,32 @@ void	free_textures(t_doom *doom)
 		free(doom->sheet[i].bxpm.clr);
 		free(doom->sheet[i].bxpm.pix);
 	}
+}
 
-
+void	free_projectiles(t_doom *doom)
+{
+	t_list *curr;
+	t_list *del;
+	curr = doom->orb;
+	while (curr)
+	{
+		del = curr;
+		curr = curr->next;
+		free(del->content);
+		free(del);
+	}
 }
 
 int	free_doom(t_doom *doom)
 {
 	free_map(doom);
-	free_entities(doom);
+	free_sprites(doom);
 	free_textures(doom);
 	free_sprite_pos(&doom->sheet[0]);
 	free_sprite_pos(&doom->sheet[1]);
 	SDL_FreeSurface(doom->clock);
 	SDL_FreeSurface(doom->fps.surf);
-	free(doom->orb);
+	free_projectiles(doom);
 	free_render_utils(doom);
 	free_font(doom);
 	free_tpool(&doom->tpool);
