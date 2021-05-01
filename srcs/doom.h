@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 15:44:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:17:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct		s_projectile
 	int				sector;	
 }					t_projectile;
 
-typedef struct		s_stats
+typedef struct		s_npe_data
 {
 	int				health;
 	int				height;
@@ -100,11 +100,11 @@ typedef struct		s_stats
 	int				attack_range;
 	int				frame_rate[4];
 	double			attack_speed;
-}					t_stats;
+}					t_npe_data;
 
 typedef struct		s_sprite
 {
-	int				render;
+	int				render; //will depend on hp
 	t_xyz			where;
 	t_xyz			dest;
 	t_xyz			velocity;
@@ -115,12 +115,13 @@ typedef struct		s_sprite
 	int				frame;
 	int				angle;
 
-	t_stats			stat;
+	//t_stats			stat;
 	int				id;
 	int				hp;
 	int				type;
 	double			scale;
 	double			time;
+	t_npe_data		*data;
 }					t_sprite;
 
 typedef struct		s_player
@@ -154,19 +155,19 @@ typedef struct		s_wsprite
 	int				ready;
 }					t_wsprite;
 
-typedef struct		s_bh
-{
-	t_wsprite		num[MAX_BH];
-	int				curr;
-	int				total;
-}					t_bh;
-
 typedef struct		s_wsprites
 {
 	t_wsprite		*num;
 	int				curr;
 	int				total;
 }					t_wsprites;
+
+typedef struct		s_bh
+{
+	t_wsprite		num[MAX_BH];
+	int				curr;
+	int				total;
+}					t_bh;
 
 typedef struct		s_wall
 {
@@ -383,7 +384,7 @@ typedef struct		s_doom
 	t_list			*entities;
 	t_list			*objects;
 
-	t_stats			sprite_stats[2];
+	t_npe_data		npe_data[2];
 
 	t_list			*orb;
 	t_camera		cam;
@@ -413,6 +414,7 @@ void	parse_entity(t_doom *doom, char **arr);
 void	parse_fc(t_doom *doom, char **arr);
 
 //		Init
+void	init_player(t_doom *doom);
 void	init_render(t_doom *doom);
 void	init_fps(t_doom *doom);
 void	init_sprite(t_doom *doom);
@@ -438,7 +440,7 @@ void	wall_to_screen_xz(t_player player, t_wall *wall);
 void	project_wall(t_doom *doom, t_wall *wall);
 void	vline_monochromic(t_render *render, t_vline *vline);
 int		find_start_sectors(t_doom *doom);
-int	clip_wall(t_camera cam, t_wall *wall);
+int		clip_wall(t_camera cam, t_wall *wall);
 void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 
 //	Enteties
@@ -461,9 +463,9 @@ void	reset_bh(t_doom *doom);
 
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
-int	clock_wsprite(t_doom *doom, t_wall *wall, int x);
-int	animate_wsprite(t_doom *doom, t_wsprite *sprite);
-int	animate_entities(t_doom *doom, t_wsprite *sprite);
+int		clock_wsprite(t_doom *doom, t_wall *wall, int x);
+int		animate_wsprite(t_doom *doom, t_wsprite *sprite);
+int		animate_entities(t_doom *doom, t_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);
@@ -497,7 +499,7 @@ void	skybox_floor_vline(t_render *render, t_vline, int tx);
 
 void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
-int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
+int		orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	keys(t_doom *doom, SDL_Event *event);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/01 15:32:23 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/01 17:18:14 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ RAW_SRC = doom.c\
 		parse_map_sector.c\
 		read_bbmp.c\
 		clock.c\
+		init_player.c\
 		surf_to_bxpm.c
 		
 NAME = doom

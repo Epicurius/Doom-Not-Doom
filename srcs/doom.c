@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 13:42:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:18:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_doom(t_doom *doom)
 	init_minimap(doom);
 	init_textures(doom);
 	init_scale(doom);
+	init_player(doom);
 	init_sprite(doom);
 	init_render(doom);
 }

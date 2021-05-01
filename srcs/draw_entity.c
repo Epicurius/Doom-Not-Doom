@@ -35,7 +35,7 @@ int	rotate_sprite(t_doom *doom, t_sprite *sprite, t_sprite_render *render)
 	if (screen.z <= 0.5)
 		return (0);
 	render->screen = xyz(screen.x, screen.y, screen.z);
-	render->scale = doom->sprite_stats[sprite->type].scale;
+	render->scale = sprite->data->scale;
 	render->pos = doom->sheet[sprite->type].pos[sprite->state][sprite->frame][sprite->angle];
 	return (1);
 }

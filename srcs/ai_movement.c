@@ -8,8 +8,8 @@ void	get_entity_movement(t_doom *doom, t_sprite *entity)
 	double	speed;
 
 	v = &entity->velocity;
-	entity->dest.z += entity->stat.flying ? EYE_LVL - 1 : 0;
-	speed = entity->stat.speed * (SDL_GetTicks() - doom->time.curr);
+	entity->dest.z += entity->data->flying ? EYE_LVL - 1 : 0;
+	speed = entity->data->speed * (SDL_GetTicks() - doom->time.curr);
 	v->x = entity->dest.x - entity->where.x;
 	v->y = entity->dest.y - entity->where.y;
 	v->z = entity->dest.z - entity->where.z;
@@ -18,7 +18,7 @@ void	get_entity_movement(t_doom *doom, t_sprite *entity)
 	dist = space_diagonal(v->x, v->y, v->z);
 	v->x *= speed / dist;
 	v->y *= speed / dist;
-	v->z *= (entity->stat.flying ? speed / dist : 0);
+	v->z *= (entity->data->flying ? speed / dist : 0);
 }	
 
 void	ai_movement(t_doom *doom, t_sprite *entity)

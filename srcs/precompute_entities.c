@@ -3,7 +3,7 @@
 
 void	frame_animation(t_doom *doom, t_sprite *entity)
 {
-	if (entity->time - doom->time.curr < -(entity->stat.frame_rate[entity->state]))
+	if (entity->time - doom->time.curr < -(entity->data->frame_rate[entity->state]))
 	{
 		entity->frame++;
 		entity->time = doom->time.curr;
@@ -40,9 +40,9 @@ int		entity_see(t_doom *doom, t_sprite *entity)
 
 int		entity_line_of_sight(t_doom *doom, t_sprite *entity, double dist)
 {
-	if (dist > entity->stat.view_distance)
+	if (dist > entity->data->view_distance)
 		return (0);
-	if (dist < entity->stat.detection_radius)
+	if (dist < entity->data->detection_radius)
 		return (1);
 	if (entity_see(doom, entity))
 		return (2);
@@ -64,7 +64,7 @@ void	get_entity_state(t_doom *doom, t_sprite *entity)
 			doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))
 	{
-		if (entity->stat.attack_range > dist)
+		if (entity->data->attack_range > dist)
 			entity->state = ATTACK;
 		else
 		{
@@ -74,7 +74,7 @@ void	get_entity_state(t_doom *doom, t_sprite *entity)
 	}
 	else
 	{
-		if (entity->stat.wonder_distance > 0 && ai_rand_move(entity, rand() % 40000))
+		if (entity->data->wonder_distance > 0 && ai_rand_move(entity, rand() % 40000))
 			entity->state = MOVE;
 		else
 			entity->state = IDLE;
@@ -107,7 +107,7 @@ void	precompute_entities(t_doom *doom)
 	{
 		entity = curr->content;
 		curr = curr->next;
-		if (!entity->stat.animate || !entity->render)
+		if (!entity->data->animate || !entity->render)
 			continue ;
 		get_entity_state(doom, entity);
 		preforme_entity_state_fuction(doom, entity);
