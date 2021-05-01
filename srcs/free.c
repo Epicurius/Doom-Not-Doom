@@ -41,8 +41,8 @@ void	free_render_utils(t_doom *doom)
 
 void	free_font(t_doom *doom)
 {
-	TTF_CloseFont(doom->fps.font);
-	TTF_CloseFont(doom->clock_font);
+	TTF_CloseFont(doom->time.font);
+	TTF_CloseFont(doom->time.clock_font);
 }
 
 void	free_color_palet(t_bxpm *bxpm)
@@ -138,8 +138,8 @@ int	free_doom(t_doom *doom)
 	free_textures(doom);
 	free_sprite_pos(&doom->sheet[0]);
 	free_sprite_pos(&doom->sheet[1]);
-	SDL_FreeSurface(doom->clock);
-	SDL_FreeSurface(doom->fps.surf);
+	//SDL_FreeSurface(doom->time.clock);
+	SDL_FreeSurface(doom->time.surf);
 	free_projectiles(doom);
 	free_render_utils(doom);
 	free_font(doom);

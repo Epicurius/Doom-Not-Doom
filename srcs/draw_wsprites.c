@@ -1,6 +1,6 @@
 
 #include "doom.h"
-
+/*
 void	blit_clock_pixels(t_render *render, int coord, t_xyz text)
 {
 	Uint32		pixels;
@@ -9,7 +9,7 @@ void	blit_clock_pixels(t_render *render, int coord, t_xyz text)
 	((Uint32*)render->surface->pixels)[coord] = pixels;
 	((double*)render->surface->userdata)[coord] = text.z;
 }
-
+*/
 
 void	blit_wsprite_pixels(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 {
@@ -40,12 +40,7 @@ void	vline_wsprite(t_render *render, t_vline *vline, t_wsprite sprite, int x)
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = (alpha - pos) * sprite.tscale.y + sprite.src.y1;
 		if (text.y > sprite.src.y1 && text.y < sprite.src.y2)
-		{
-			if (sprite.tx == -1)
-				blit_clock_pixels(render, coord, text);
-			else
-				blit_wsprite_pixels(render, coord, text, &render->mtx[sprite.tx]);
-		}
+			blit_wsprite_pixels(render, coord, text, &render->mtx[sprite.tx]);
 		vline->y1++;
 	}
 }

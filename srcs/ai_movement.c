@@ -9,7 +9,7 @@ void	get_entity_movement(t_doom *doom, t_sprite *entity)
 
 	v = &entity->velocity;
 	entity->dest.z += entity->stat.flying ? EYE_LVL - 1 : 0;
-	speed = entity->stat.speed * (SDL_GetTicks() - doom->fps.curr);
+	speed = entity->stat.speed * (SDL_GetTicks() - doom->time.curr);
 	v->x = entity->dest.x - entity->where.x;
 	v->y = entity->dest.y - entity->where.y;
 	v->z = entity->dest.z - entity->where.z;

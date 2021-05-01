@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/29 11:59:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:39:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void		DrawScreen(t_doom *doom)
 		doom->render[x].xend = min(W /(double)doom->nb.threads * (x + 1), W);
 		screen_x_sector(doom, doom->render[x].x, doom->render[x].xend);
 		doom->render[x].player = doom->player;
-		doom->render[x].clock = doom->clock;
+		//doom->render[x].clock = doom->time.clock;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
 	}
 }

@@ -3,10 +3,10 @@
 
 void	frame_animation(t_doom *doom, t_sprite *entity)
 {
-	if (entity->time - doom->fps.curr < -(entity->stat.frame_rate[entity->state]))
+	if (entity->time - doom->time.curr < -(entity->stat.frame_rate[entity->state]))
 	{
 		entity->frame++;
-		entity->time = doom->fps.curr;
+		entity->time = doom->time.curr;
 	}
 	if (entity->frame >= doom->sheet[entity->type].nb[entity->state][FRAMES])
 	{
@@ -14,7 +14,6 @@ void	frame_animation(t_doom *doom, t_sprite *entity)
 			entity->render = 0;
 		entity->frame = 0;
 	}
-		
 }
 
 int		entity_see(t_doom *doom, t_sprite *entity)

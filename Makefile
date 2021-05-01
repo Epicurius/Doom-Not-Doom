@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/30 14:29:55 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/01 15:32:23 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,6 @@ RAW_SRC = doom.c\
 		draw_bullet_holes.c\
 		draw_wsprites.c\
 		init_scale.c\
-		clock_wsprite.c\
 		animate_wsprites.c\
 		precompute_entities.c\
 		orientation.c\
@@ -108,6 +107,8 @@ RAW_SRC = doom.c\
 		parse_map_header.c\
 		parse_map_sector.c\
 		read_bbmp.c\
+		clock.c\
+		surf_to_bxpm.c
 		
 NAME = doom
 CDIR = srcs

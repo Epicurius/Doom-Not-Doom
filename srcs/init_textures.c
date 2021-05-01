@@ -1,30 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/01 15:32:59 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_clock(t_doom *doom)
-{
-	time_t t;
-	struct tm curr_time;
-	char *str;
-	SDL_Color fc;
-	SDL_Color bc;
-
-	t = time(NULL);
-	curr_time = *localtime(&t);
-	str = ft_sprintf("%02d:%02d:%02d",curr_time.tm_hour,
-			curr_time.tm_min, curr_time.tm_sec);
-	bc = hex_to_sdl_color(0x000000ff);
-	fc = hex_to_sdl_color(0xffffffff);
-	SDL_Surface *tmp;
-	tmp = TTF_RenderText_Shaded(doom->clock_font, str, fc, bc);
-	free(str);
-	doom->clock = SDL_ConvertSurface(tmp, doom->surface->format, 0);
-	SDL_FreeSurface(tmp);
-}
-
 void	init_textures(t_doom *doom)
 {
-	doom->clock_font = TTF_OpenFont("./resources/font/digital.ttf", 100);
+	doom->time.clock_font = TTF_OpenFont("./resources/font/digital.ttf", 100);
 	init_clock(doom);
 	//load_bxpm(doom);
 	load_bbmp(doom);

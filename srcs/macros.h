@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/30 13:51:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:58:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,56 +16,46 @@
 /*
 ** Screen info
 */
-# define W						2560
-# define H						1440
-# define MAX_PROCESSORS			64
+# define W							2560
+# define H							1440
+# define MAX_PROCESSORS				64
 
 /*
 **	Vision
 */
-#define PLAYER_HEIGHT 					7
+#define PLAYER_HEIGHT 				7
 #define EYE_LVL						6
-#define OVER_HEAD_SPACE					2
+#define OVER_HEAD_SPACE				2
 #define DUCK_HEIGHT					2.5
 #define STEP_HEIGHT					2
-#define CAMERA_RATIO					(16.0/9.0)
-#define FOV						90
+#define CAMERA_RATIO				(16.0/9.0)
+#define FOV							90
 #define PLAYER_YAW					45
-#define PLAYER_PITCH					10
-#define PLAYER_RADIUS					1.0
+#define PLAYER_PITCH				10
+#define PLAYER_RADIUS				1.0
 #define NEAR_Z						0.1
 #define FAR_Z						1000
-#define RENDER_DISTANCE					200.0
+#define RENDER_DISTANCE				200.0
 
 /*
 ** Entities
 */
-# define MAX_ENTITIES_RENDERED				20
+# define MAX_ENTITIES_RENDERED		20
 # define IDLE						0
 # define MOVE						1
 # define ATTACK						2
 # define DEATH						3
-
 # define FRAMES						0
 # define ANGLES						1
-
-# define STYLE_MELEE					0
-# define STYLE_RANGE					1
-
-# define PROJECTILE_MAX_RANGE			70
-
-typedef enum	e_entities
-{
-	ALFRED,
-	SPOOKY,
-	SPAWNER
-}				t_entities;
+# define STYLE_MELEE				0
+# define STYLE_RANGE				1
+# define PROJECTILE_MAX_RANGE		70
 
 /*
 ** FPS
 */
 # define FPS_FONT					"./bmp/Minecraft.ttf"
-# define FPS_FONT_SIZE					20
+# define FPS_FONT_SIZE				20
 # define FPS_COLOR					0xff00ffff
 
 /*
@@ -77,19 +67,19 @@ typedef enum	e_entities
 /*
 ** Values !!DONT TOUCH!!
 */
-#define CONVERT_RADIANS					0.0174532925199432955
-#define CONVERT_DEGREES					57.2957795130823228647
+#define CONVERT_RADIANS				0.0174532925199432955
+#define CONVERT_DEGREES				57.2957795130823228647
 
 /*
 **	Movement
 */
 #define WALK_SPEED					0.05f
-#define SPRINT_SPEED					0.1f
-#define CROUCH_SPEED					0.006f
+#define SPRINT_SPEED				0.1f
+#define CROUCH_SPEED				0.006f
 #define	GRAVITY						0.05f
 #define MOUSE_X						0.005f
 #define MOUSE_Y						0.005f
-#define	ACCELERATION					0.7
+#define	ACCELERATION				0.7
 
 /*
 ** Map Rendering
@@ -97,31 +87,26 @@ typedef enum	e_entities
 # define MAXQUEUE					32
 
 /*
-**	Shortcuts
-*/
-# define PLAYER						doom->player
-# define FPS						doom->fps
-
-/*
 ** Texture
 */
 # define ZBUFFER_COLOR				1
 # define TEXTURE_DISABLED			0
-//Opaque scale for bliting
 # define OPAQUE						30
-# define NB_SKYBOX_TEXTURES				6
-# define NB_WALL_TEXTURES				5
-# define NB_CEILING_TEXTURES				1
-# define NB_FLOOR_TEXTURES				1
+# define NB_SKYBOX_TEXTURES			6
+# define NB_WALL_TEXTURES			5
+# define NB_CEILING_TEXTURES		1
+# define NB_FLOOR_TEXTURES			1
+# define CLOCK_BG_COLOR				0xFF000000
+# define CLOCK_FG_COLOR				0xFFFFFFFF
 
 /*
 ** Minimap
 */
 # define MM_SCALE					0.8
-# define MM_SECTORS_SCALE				2
-# define MM_BEZEL_SIZE					5
-# define MM_BEZEL_COLOR					0x222222
-# define MM_VIEW_COLOR					0xFFD700
+# define MM_SECTORS_SCALE			2
+# define MM_BEZEL_SIZE				5
+# define MM_BEZEL_COLOR				0x222222
+# define MM_VIEW_COLOR				0xFFD700
 # define MM_ALPHA					100
 
 /*
@@ -133,4 +118,10 @@ typedef enum	e_entities
 # define TOP_HALF					4
 # define BOT_HALF					5
 
+typedef enum	e_entities
+{
+	ALFRED,
+	SPOOKY,
+	SPAWNER
+}				t_entities;
 #endif

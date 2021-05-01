@@ -42,31 +42,7 @@ static void	spooky(t_stats *spooky)
 	spooky->frame_rate[DEATH] = 500;
 	spooky->flying = 0;
 }
-/*
-void	init_projectiles(t_doom *doom)
-{
-	int p;
-	t_list *curr;
-	t_sprite *sprite;
 
-	doom->orb = ft_memalloc(sizeof(t_projectile)
-				* doom->nb.projectiles);
-	p = 0;
-	curr = doom->sprite;
-	while (curr)
-	{
-		sprite = curr->content;
-		curr = curr->next;
-		if (sprite->stat.attack_style == 1)
-		{
-			sprite->orb = &doom->orb[p];
-			p++;
-		}
-		else
-			sprite->orb = NULL;
-	}
-}
-*/
 void	init_sprite(t_doom *doom)
 {
 	int			type;
@@ -86,11 +62,7 @@ void	init_sprite(t_doom *doom)
 		sprite->dest = sprite->where;//
 		sprite->sector = find_sector(doom, sprite->where);
 		sprite->render = 1;
-		//if (sprite->stat.attack_style == 1)
-		//	doom->nb.projectiles++;
 	}
-	//if (doom->nb.projectiles > 0)
-	//	init_projectiles(doom);
 	{
 		doom->player.sector = find_sector(doom, doom->player.where);
 		doom->player.hp = 1000;

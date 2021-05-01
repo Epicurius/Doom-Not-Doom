@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/30 14:17:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:44:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,6 @@ typedef struct		s_render
 	int				s;
 	t_bh			*bh;
 	t_wsprites		wsprite;
-	SDL_Surface		*clock;
 }					t_render;
 
 typedef struct		s_map
@@ -335,16 +334,20 @@ typedef struct		t_nb
 	int				objects;
 }					t_nb;
 
-typedef	struct		s_fps
+typedef	struct		s_time
 {
 	float			curr;
 	float			prev;
 	int				fps;
-	int				count;
 	SDL_Color		color;
 	TTF_Font		*font;
 	SDL_Surface		*surf;
-}					t_fps;
+
+	struct tm		date;
+	TTF_Font		*clock_font;
+	SDL_Color		clock_fg;
+	SDL_Color		clock_bg;
+}					t_time;
 
 typedef struct		s_texture_sheet
 {
@@ -365,7 +368,7 @@ typedef struct		s_doom
 
 	t_nb			nb;
 	t_tpool			tpool;
-	t_fps			fps;
+	t_time			time;
 	t_keys			key;
 	t_map			map;
 
@@ -392,10 +395,9 @@ typedef struct		s_doom
 	double			*zbuffer;
 
 	//	Textures
-	TTF_Font		*clock_font;
-	SDL_Surface		*clock;
+
 	t_bxpm			stx[12];
-	t_bxpm			mtx[5];
+	t_bxpm			mtx[6];
 	t_texture_sheet	sheet[2];
 }					t_doom;
 
@@ -421,6 +423,12 @@ int		init_spooky(t_texture_sheet *sprite);
 void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
+void	init_clock(t_doom *doom);
+
+//		Time
+void	get_time(time_t *t);
+void	blit_fps(t_doom *doom);
+void	fps_func(t_doom *doom);
 
 //	Render map
 void	DrawMap(t_doom *doom);
@@ -491,7 +499,6 @@ void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
 int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	keys(t_doom *doom, SDL_Event *event);
-void	fps_func(t_doom *doom);
 void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 
 //Math wiki func
@@ -537,6 +544,7 @@ int 	find_pos_sector(t_doom *doom, t_xyz pos);
 void	load_bxpm(t_doom *doom);
 void	load_bbmp(t_doom *doom);
 void	read_bbmp(t_bxpm *bxpm, char *file);
+void	surf_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm);
 
 //REMOVE//
 void	cs(void);

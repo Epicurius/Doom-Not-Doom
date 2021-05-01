@@ -14,9 +14,7 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 		wsprite = &wall->wsprite.num[i];
 		x = doom->mtx[wsprite->tx].w;
 		y = doom->mtx[wsprite->tx].h;
-		if (wsprite->tx == -1)
-			x = doom->clock->w, y = doom->clock->h;
-		else if (wsprite->tx == 1)
+		if (wsprite->tx == 1)
 			x = 64, y = 64;
 		wsprite->scale_h = wsprite->scale_w * ((float)y / (float)x);
 		wsprite->scale_w = (x / wsprite->scale_w) * wall->width;

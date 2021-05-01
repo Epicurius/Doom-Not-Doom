@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/30 13:34:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:42:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ce(char *str)
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	ft_printf("%.10s:\t%f\n", str, elapsed);
+	printf("%.10s:\t%f\n", str, elapsed);
 }
 
 void	init_doom(t_doom *doom)
@@ -66,9 +66,6 @@ int main1(void)
 	t_doom		*doom;
     SDL_Event	event;
 
-	//if (ac == 1)
-	//	return (0);
-	//	printf("%s\n", av[0]);
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
 	cs();
@@ -125,6 +122,7 @@ int main1(void)
 		draw_crosshair(doom);
 		ce("Croshair");
 		fps_func(doom);
+		blit_fps(doom);
 		if (doom->key.tab)
 			map(doom);
 		//shade_zbuffer(doom);
