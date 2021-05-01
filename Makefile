@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/01 17:18:14 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/01 17:42:24 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ RAW_SRC = doom.c\
 		object_collision.c\
 		init_alfred.c\
 		init_spooky.c\
+		init_rift.c\
 		load_bbmp.c\
 		init_render.c\
 		collision_detection.c\

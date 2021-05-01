@@ -43,6 +43,15 @@ static void	spooky(t_npe_data *spooky)
 	spooky->flying 				= 0;
 }
 
+static void	rift(t_npe_data *rift)
+{
+	rift->health 				= 500;
+	rift->damage 				= 200;
+	rift->attack_style 		= 2;
+	rift->scale 				= 2 * (W / 100);
+	rift->height 				= 9;
+}
+
 void	init_sprite(t_doom *doom)
 {
 	t_list		*curr;
@@ -50,6 +59,7 @@ void	init_sprite(t_doom *doom)
 
 	alfred(&doom->npe_data[0]);
 	spooky(&doom->npe_data[1]);
+	rift(&doom->npe_data[2]);
 	curr = doom->sprite;
 	while (curr)
 	{

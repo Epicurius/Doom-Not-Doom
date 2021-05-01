@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 17:17:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:43:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,7 +384,7 @@ typedef struct		s_doom
 	t_list			*entities;
 	t_list			*objects;
 
-	t_npe_data		npe_data[2];
+	t_npe_data		npe_data[3];
 
 	t_list			*orb;
 	t_camera		cam;
@@ -399,7 +399,7 @@ typedef struct		s_doom
 
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
-	t_texture_sheet	sheet[2];
+	t_texture_sheet	sheet[3];
 }					t_doom;
 
 //		Read_file

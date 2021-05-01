@@ -64,7 +64,6 @@ void	color_palets(t_doom *doom)
 	int w;
 	t_sector *sector;
 	
-
 	s = -1;
 	while (++s < doom->nb.sectors)
 	{
@@ -79,6 +78,5 @@ void	color_palets(t_doom *doom)
 			color_palet(&doom->mtx[sector->floor.tx], sector->light);
 		if (sector->ceiling.tx >= 0)
 			color_palet(&doom->mtx[sector->ceiling.tx], sector->light);
-		
 	}
 }
