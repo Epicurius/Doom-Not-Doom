@@ -48,7 +48,7 @@ static void	rift(t_npe_data *rift)
 	rift->health 				= 500;
 	rift->damage 				= 200;
 	rift->attack_style 		= 2;
-	rift->scale 				= 2 * (W / 100);
+	rift->scale 				= 1.3 * (W / 100);
 	rift->height 				= 9;
 }
 

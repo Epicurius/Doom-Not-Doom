@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 17:43:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:06:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,7 @@ void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
 int		init_alfred(t_texture_sheet *sprite);
 int		init_spooky(t_texture_sheet *sprite);
+int		init_rift(t_texture_sheet *sprite);
 void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
