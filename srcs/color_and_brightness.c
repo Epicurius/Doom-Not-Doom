@@ -34,12 +34,9 @@ int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 	int	aalpha;
 
 	aalpha = 256 - alpha;
-	return (((aalpha * (src >> 16 & 0xFF) +
-		alpha * (dest >> 16 & 0xFF)) / 256) << 16
-		| ((aalpha * (src >> 8 & 0xFF) +
-		alpha * (dest >> 8 & 0xFF)) / 256) << 8
-		| ((aalpha * (src & 0xFF) +
-		alpha * (dest & 0xFF)) / 256));
+	return (((aalpha * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
+		| ((aalpha * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256) << 8
+		| ((aalpha * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
 }
 
 void	color_palet(t_bxpm *bxpm, int light)
@@ -52,8 +49,8 @@ void	color_palet(t_bxpm *bxpm, int light)
 	bxpm->palet[255 + light] = ft_memalloc(sizeof(uint32_t*) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
 	{
-		if (bxpm->clr[i] == 0x800080)
-			bxpm->palet[255 + light][i] = 0x800080;
+		if (bxpm->clr[i] == 0xFF800080)
+			bxpm->palet[255 + light][i] = 0xFF800080;
 		bxpm->palet[255 + light][i] = brightness(bxpm->clr[i], light);
 	}
 }

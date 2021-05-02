@@ -9,7 +9,7 @@ void	hit_enemy(t_sprite_render *render, int coord)
 		*render->hp -= render->dmg;
 }
 
-void	blit_sprite_pixel(t_sprite_render *render, int coord, t_xyz text)
+void	blit_sprite24(t_sprite_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -22,6 +22,23 @@ void	blit_sprite_pixel(t_sprite_render *render, int coord, t_xyz text)
 		return ;
 	hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] = clr;
+	((double*)render->surface->userdata)[coord] = text.z;
+}
+
+void	blit_sprite32(t_sprite_render *render, int coord, t_xyz text)
+{
+	uint32_t	clr;
+	unsigned short	pix;
+
+	if (text.z >= ((double*)render->surface->userdata)[coord])
+		return ;
+	pix = render->bxpm->pix[(int)text.y * render->bxpm->w + (int)text.x];
+	clr = render->bxpm->clr[pix];
+	if (clr == 0x00000000)
+		return ;
+	hit_enemy(render, coord);
+	((Uint32*)render->surface->pixels)[coord] =
+		blend_alpha(((uint32_t*)render->surface->pixels)[coord], clr, clr >> 24 & 0xFF);
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
@@ -44,7 +61,10 @@ int		blit_sprite(void *arg)
 		{
 			alphax = (x - render->start.x) / render->xrange;
 			text.x = (1.0 - alphax) * render->pos.x1 + alphax * render->pos.x2;
-			blit_sprite_pixel(render, y * W + x, text);
+			if (render->bxpm->bpp == 32)
+				blit_sprite32(render, y * W + x, text);
+			else
+				blit_sprite24(render, y * W + x, text);
 		}
 	}
 	return (1);

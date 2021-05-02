@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/30 14:18:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:57:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_header(t_doom *doom, char **arr)
 	doom->sectors	= ft_memalloc(sizeof(t_sector) * doom->nb.sectors);
 	doom->orb = NULL;
 	doom->sprite = NULL;
-	doom->spawners = NULL;
+	doom->rifts = NULL;
 	doom->entities = NULL;
 	doom->objects = NULL;
 }

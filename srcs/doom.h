@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 18:06:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:56:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,7 +380,7 @@ typedef struct		s_doom
 	t_sector		*sectors;
 	t_list			*sprite;
 
-	t_list			*spawners;
+	t_list			*rifts;
 	t_list			*entities;
 	t_list			*objects;
 

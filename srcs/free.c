@@ -69,7 +69,7 @@ void	free_sprites(t_doom *doom)
 		curr = curr->next;
 		free(tmp);
 	}
-	curr = doom->spawners;
+	curr = doom->rifts;
 	while (curr)
 	{
 		tmp = curr;

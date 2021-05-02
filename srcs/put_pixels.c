@@ -22,7 +22,7 @@ void	blit_pixel_alpha(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 	if (alpha == 0)
 		return ;
 	((uint32_t*)render->surface->pixels)[coord] = 
-		blend_alpha(bxpm->clr[pixel], ((uint32_t*)render->surface->pixels)[coord], alpha);
+		blend_alpha(bxpm->clr[pixel], ((uint32_t*)render->surface->pixels)[coord], -alpha);
 }
 
 void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)

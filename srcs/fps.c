@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 15:58:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:32:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,28 @@ void	blit_fps(t_doom *doom)
 
 	if (doom->time.surf == NULL)
 		return ;
-	dstr.x = 0;
+	dstr.x = 500;
 	dstr.y = 0;
-	dstr.w = 500;
-	dstr.h = 500;
+	dstr.w = 100;
+	dstr.h = 75;
 	srcr.x = 0;
 	srcr.y = 0;
 	srcr.w = doom->time.surf->w - 10;
 	srcr.h = doom->time.surf->h - 10;
 	//SDL_BlitScaled(doom->time.surf, &srcr, doom->surface, &dstr);
 	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
+
+
+	SDL_Surface *temp;
+	SDL_Surface *surf;
+	char *str;
+	str = ft_itoa(doom->player.hp);
+	temp = TTF_RenderText_Solid(doom->time.font, str, doom->time.color);
+	surf = SDL_ConvertSurface(temp, doom->surface->format, 0);
+	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
+	free(str);
+	SDL_FreeSurface(temp);
+	SDL_FreeSurface(surf);
 }
 
 void	update_fps_surface(t_time *time)

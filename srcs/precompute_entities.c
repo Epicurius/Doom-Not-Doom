@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	frame_animation(t_doom *doom, t_sprite *entity)
+int	frame_animation(t_doom *doom, t_sprite *entity)
 {
 	if (entity->time - doom->time.curr < -(entity->data->frame_rate[entity->state]))
 	{
@@ -11,9 +11,10 @@ void	frame_animation(t_doom *doom, t_sprite *entity)
 	if (entity->frame >= doom->sheet[entity->type].nb[entity->state][FRAMES])
 	{
 		if (entity->state == DEATH)
-			entity->render = 0;
+			return (0);
 		entity->frame = 0;
 	}
+	return (1);
 }
 
 int		entity_see(t_doom *doom, t_sprite *entity)
@@ -60,6 +61,8 @@ void	get_entity_state(t_doom *doom, t_sprite *entity)
 		entity->state = DEATH;
 		return ;
 	}
+	if (!entity->data->animate)
+		return ;
 	dist = point_distance_2d(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))
@@ -89,30 +92,28 @@ void	preforme_entity_state_fuction(t_doom *doom, t_sprite *entity)
 		ai_attack(doom, entity);
 }
 
-void	get_coresponding_entity_state_frame(t_doom *doom, t_sprite *entity)
+int		get_coresponding_entity_state_frame(t_doom *doom, t_sprite *entity)
 {
 	if (doom->sheet[entity->type].nb[entity->state][FRAMES] > 1)
-			frame_animation(doom, entity);
+			if (!frame_animation(doom, entity))
+				return (0);
 	entity->angle = orientation(entity->where, doom->player.where,
 		entity->yaw, doom->sheet[entity->type].nb[entity->state][ANGLES]);
+	return (1);
 }
 
 void	precompute_entities(t_doom *doom)
 {
 	t_list		*curr;
-	t_sprite	*entity;
 
 	curr = doom->sprite;
 	while (curr != NULL)
 	{
-		entity = curr->content;
-		curr = curr->next;
-		if (!entity->data->animate || !entity->render)
-			continue ;
-		get_entity_state(doom, entity);
-		preforme_entity_state_fuction(doom, entity);
-		if (!entity->render)
-			continue ;
-		get_coresponding_entity_state_frame(doom, entity);
+		get_entity_state(doom, curr->content);
+		preforme_entity_state_fuction(doom, curr->content);
+		if (!(get_coresponding_entity_state_frame(doom, curr->content)))
+			curr = ft_dellstnode(&doom->sprite, curr);
+		else
+			curr = curr->next;
 	}
 }

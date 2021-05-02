@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/30 13:51:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:32:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	player_contact(t_doom *doom, t_xyz start, t_xyz dest)
 {
 	if (point_distance_3d(doom->player.where, dest) <= 5)
 	{
-		//doom->player.hp -= 200;
+		doom->player.hp -= 10;
 		return (1);
 	}
 	if (point_distance_3d(start, dest) > PROJECTILE_MAX_RANGE)

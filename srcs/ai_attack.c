@@ -25,10 +25,15 @@ void	ai_attack(t_doom *doom, t_sprite *entity)
 	t_projectile	*orb;
 
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
+	if (entity->data->attack_style == 2)
+	{
+		doom->player.hp -= entity->data->damage;
+		entity->hp = 0;
+		entity->state = DEATH;
+		return ;
+	}
 	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
-	if (entity->data->attack_style == 2)
-		entity->render = 0;
 	else if (entity->data->attack_style == 1 && doom->orb == NULL)
 	{
 		orb = malloc(sizeof(t_projectile));
