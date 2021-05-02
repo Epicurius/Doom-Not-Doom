@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 17:39:41 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 16:56:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/02 18:36:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_rift_nb(t_texture_sheet *sprite)
 	sprite->nb[MOVE  ][ANGLES] = 0;
 	sprite->nb[ATTACK][FRAMES] = 0;
 	sprite->nb[ATTACK][ANGLES] = 0;
-	sprite->nb[DEATH ][FRAMES] = 3;
+	sprite->nb[DEATH ][FRAMES] = 4;
 	sprite->nb[DEATH ][ANGLES] = 1;
 }
 
@@ -52,9 +52,9 @@ int	init_rift(t_texture_sheet *sprite)
 		sprite->pos[DEATH][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[DEATH][ANGLES]);
 
 	sprite->pos[0][0][0] = new_rect(0,		0,	174, 315);
-	//sprite->pos[0][0][0] = new_rect(533,		0,	174, 687);
 	sprite->pos[3][0][0] = new_rect(174,	0,	351, 315);
 	sprite->pos[3][1][0] = new_rect(351,	0,	527, 315);
 	sprite->pos[3][2][0] = new_rect(527,	0,	689, 315);
+	sprite->pos[3][3][0] = new_rect(689,	0,	875, 315);
 	return (1);
 }
