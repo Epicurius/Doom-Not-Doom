@@ -34,7 +34,7 @@ void	ai_attack(t_doom *doom, t_sprite *entity)
 	}
 	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
-	else if (entity->data->attack_style == 1 && doom->orb == NULL)
+	else if (entity->data->attack_style == 1)// && doom->orb == NULL)
 	{
 		orb = malloc(sizeof(t_projectile));
 		orb->velocity = projectile_movement(doom, entity->where, doom->player.where);

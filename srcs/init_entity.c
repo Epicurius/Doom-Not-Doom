@@ -10,9 +10,9 @@ static void	alfred(t_npe_data *alfred)
 	alfred->attack_style 		= 2;
 	alfred->scale 				= 4 * (W / 100);
 	alfred->height 				= 4;
-	alfred->speed 				= 0.02;
+	alfred->speed 				= 0.07;
 	alfred->wonder_distance 	= 0;
-	alfred->view_distance 		= 50;
+	alfred->view_distance 		= 100;
 	alfred->detection_radius 	= 6;
 	alfred->attack_range 		= 4;
 	alfred->frame_rate[IDLE] 	= 100;
@@ -31,11 +31,11 @@ static void	spooky(t_npe_data *spooky)
 	spooky->attack_style 		= 1;
 	spooky->scale 				= 2 * (W / 100);
 	spooky->height 				= 9;
-	spooky->speed 				= 0.01;
-	spooky->wonder_distance 	= 20;
-	spooky->view_distance 		= 50;
+	spooky->speed 				= 0.03;
+	spooky->wonder_distance 	= 40;
+	spooky->view_distance 		= 150;
 	spooky->detection_radius 	= 5;
-	spooky->attack_range 		= 35;
+	spooky->attack_range 		= 100;
 	spooky->frame_rate[IDLE] 	= 100;
 	spooky->frame_rate[MOVE] 	= 200;
 	spooky->frame_rate[ATTACK] 	= 500;
@@ -47,17 +47,16 @@ static void	rift(t_npe_data *rift)
 {
 	rift->health 				= 10;
 	rift->damage 				= 200;
-	rift->attack_style 		= 2;
+	rift->attack_style 			= 2;
 	rift->scale 				= 2 * (W / 100);
 	rift->height 				= 9;
-	rift->frame_rate[IDLE] 	= 100;
-	rift->frame_rate[MOVE] 	= 200;
-	rift->frame_rate[ATTACK] 	= 500;
+	rift->frame_rate[IDLE] 		= 100;
 	rift->frame_rate[DEATH] 	= 700;
 }
 
 void	init_sprite(t_doom *doom)
 {
+	t_list *new;
 	t_list		*curr;
 	t_sprite	*sprite;
 
@@ -68,12 +67,18 @@ void	init_sprite(t_doom *doom)
 	while (curr)
 	{
 		sprite = curr->content;
-		curr = curr->next;
 		sprite->data = &doom->npe_data[sprite->type];
 		sprite->hp = sprite->data->health;
 		sprite->sector = find_sector(doom, sprite->where);
 		sprite->dest = sprite->where;
 		sprite->state = IDLE;
 		sprite->render = 1;
+		if (sprite->type == 2)
+		{
+			new = ft_lstnew(curr->content, sizeof(t_sprite));
+			ft_lstadd(&doom->rifts, new);
+			doom->nb.rifts += 1;
+		}
+		curr = curr->next;
 	}
 }

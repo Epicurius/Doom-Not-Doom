@@ -72,13 +72,13 @@ void	Drawsprite(t_doom *doom)
 	while (curr)
 	{
 		sprite = curr->content;
-		curr = curr->next;
 		if (sprite->render && doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
 		{
 			project_sprite(doom, &render);
 			tpool_wait(&doom->tpool);
 			sprite_threads(doom, render, sprite, thread);
 		}
+		curr = curr->next;
 	}
 	tpool_wait(&doom->tpool);
 }

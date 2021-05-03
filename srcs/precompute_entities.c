@@ -50,21 +50,12 @@ int		entity_line_of_sight(t_doom *doom, t_sprite *entity, double dist)
 	return (0);
 }
 
-void	get_entity_state(t_doom *doom, t_sprite *entity)
+void	animated_entity_state(t_doom *doom, t_sprite *entity)
 {
 	double dist;
 
-	if (entity->frame != 0)
-		return ;
-	if (entity->hp <= 0)
-	{
-		entity->state = DEATH;
-		return ;
-	}
-	if (!entity->data->animate)
-		return ;
 	dist = point_distance_2d(entity->where.x, entity->where.y,
-			doom->player.where.x, doom->player.where.y);
+							doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))
 	{
 		if (entity->data->attack_range > dist)
@@ -82,6 +73,19 @@ void	get_entity_state(t_doom *doom, t_sprite *entity)
 		else
 			entity->state = IDLE;
 	}
+}
+
+void	get_entity_state(t_doom *doom, t_sprite *entity)
+{
+
+	if (entity->frame)
+		return ;
+	else if (entity->hp <= 0)
+		entity->state = DEATH;
+	else if (!entity->data->animate)
+		return ;
+	else
+		animated_entity_state(doom, entity);
 }
 
 void	preforme_entity_state_fuction(t_doom *doom, t_sprite *entity)
@@ -112,7 +116,10 @@ void	precompute_entities(t_doom *doom)
 		get_entity_state(doom, curr->content);
 		preforme_entity_state_fuction(doom, curr->content);
 		if (!(get_coresponding_entity_state_frame(doom, curr->content)))
+		{
 			curr = ft_dellstnode(&doom->sprite, curr);
+			doom->nb.sprites -= 1;
+		}
 		else
 			curr = curr->next;
 	}

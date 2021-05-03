@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 11:56:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:03:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,5 @@ void	parse_entity(t_doom *doom, char **arr)
 	sprite->where.z		= ft_atof(arr[3]) * doom->map_scale;
 	sprite->yaw			= ft_atoi(arr[4]);
 	doom->nb.sprites	+= 1;
-	ft_lstadd_new(&doom->sprite, sprite, sizeof(sprite));
-	if (sprite->type == 2) //rift
-	{
-		t_list *new;
-		new = ft_lstnew(sprite, sizeof(sprite));
-		ft_lstadd(&doom->rifts, new);
-	}
-	/*
-	else if (sprite->type == 0 || sprite->type == 1) //enemy
-		ft_lstadd_new(&doom->entities, sprite, sizeof(sprite));
-	else
-		ft_lstadd_new(&doom->objects, sprite, sizeof(sprite));
-	*/
+	ft_lstadd_new(&doom->sprite, sprite, sizeof(t_sprite));
 }

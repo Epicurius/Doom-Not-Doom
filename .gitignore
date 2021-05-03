@@ -3,6 +3,6 @@ lib
 doom
 obj
 resources
-bxpm_converter/bxpm_convert
+bmp_to_bxpm/converter
 old
 README

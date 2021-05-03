@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 17:49:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:28:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ double elapsed;
 
 void	cs(void)
 {
-	return ;
+	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	return ;
+	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
@@ -60,6 +60,7 @@ void	init_doom(t_doom *doom)
 	init_player(doom);
 	init_sprite(doom);
 	init_render(doom);
+	init_gamemode(doom);
 }
 
 int main1(void)
@@ -92,6 +93,7 @@ int main1(void)
 
 		/* All this has no time requirements */
 		{
+			gamemode(doom);
 			cs();
 			precompute_entities(doom);
 			ce("precomp_entities");

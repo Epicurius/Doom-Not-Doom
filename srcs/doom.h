@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 11:56:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:04:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,7 +331,7 @@ typedef struct		t_nb
 	int				 threads;
 	int				sprites;
 	int				entities;
-	int				spawners;
+	int				rifts;
 	int				objects;
 }					t_nb;
 
@@ -357,6 +357,16 @@ typedef struct		s_texture_sheet
 	t_rect			***pos;
 }					t_texture_sheet;
 
+typedef struct		s_gamemode
+{
+	int				round;
+	int				spawns;
+	int				time;
+	int				spawn_rate;
+	int				cool_down;
+}					t_gamemode;
+
+
 typedef struct		s_doom
 {
 	int				quit;
@@ -367,6 +377,7 @@ typedef struct		s_doom
 	int				w2;
 	int				h2;
 
+	t_gamemode		game;
 	t_nb			nb;
 	t_tpool			tpool;
 	t_time			time;
@@ -402,6 +413,10 @@ typedef struct		s_doom
 	t_texture_sheet	sheet[3];
 }					t_doom;
 
+
+//		GAme
+void	gamemode(t_doom *doom);
+
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);
 void	parse_header(t_doom *doom, char **arr);
@@ -427,6 +442,7 @@ void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
 void	init_clock(t_doom *doom);
+void	init_gamemode(t_doom *doom);
 
 //		Time
 void	get_time(time_t *t);
@@ -543,6 +559,7 @@ int	free_doom(t_doom *doom);
 void	free_array(char **arr);
 int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);
 int 	find_pos_sector(t_doom *doom, t_xyz pos);
+void	rift_spawn(t_doom *doom);
 
 void	load_bxpm(t_doom *doom);
 void	load_bbmp(t_doom *doom);

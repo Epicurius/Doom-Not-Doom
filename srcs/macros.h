@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 17:48:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:30:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
 ** Screen info
 */
-# define W							2560
-# define H							1440
+# define W							1920
+# define H							1080
 # define MAX_PROCESSORS				64
 
 /*
@@ -62,7 +62,7 @@
 ** Bullet Holes
 */
 #define ENABLE_BH					1
-#define MAX_BH						200
+#define MAX_BH						20
 
 /*
 ** Values !!DONT TOUCH!!
