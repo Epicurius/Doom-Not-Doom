@@ -76,20 +76,6 @@ void	free_sprites(t_doom *doom)
 		curr = curr->next;
 		free(tmp);
 	}
-	curr = doom->entities;
-	while (curr)
-	{
-		tmp = curr;
-		curr = curr->next;
-		free(tmp);
-	}
-	curr = doom->objects;
-	while (curr)
-	{
-		tmp = curr;
-		curr = curr->next;
-		free(tmp);
-	}
 }
 
 void	free_textures(t_doom *doom)
@@ -131,14 +117,22 @@ void	free_projectiles(t_doom *doom)
 	}
 }
 
+void	free_weapons(t_doom *doom)
+{
+	//Fix each frmae free
+	free(doom->weapon[0].bxpm);
+	free(doom->weapon[1].bxpm);
+	free(doom->weapon[2].bxpm);
+}
+
 int	free_doom(t_doom *doom)
 {
 	free_map(doom);
 	free_sprites(doom);
 	free_textures(doom);
+	free_weapons(doom);
 	free_sprite_pos(&doom->sheet[0]);
 	free_sprite_pos(&doom->sheet[1]);
-	//SDL_FreeSurface(doom->time.clock);
 	SDL_FreeSurface(doom->time.surf);
 	free_projectiles(doom);
 	free_render_utils(doom);

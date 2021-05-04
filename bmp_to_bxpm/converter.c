@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 17:52:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:42:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	main(int ac, char **av)
 		}
 		ft_printf("Create\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
-		write_bxpm(bxpm, path, name);
-		ft_printf("Writing\t%s.bxpm\n", path);
+		//write_bxpm(bxpm, path, name);
+		//ft_printf("Writing\t%s.bxpm\n", path);
 		write_bbmp(bxpm, path, name);
 		ft_printf("Writing\t%s.bbmp\n", path);
 		free_bmp(bmp);

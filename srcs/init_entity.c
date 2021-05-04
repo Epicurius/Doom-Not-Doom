@@ -3,7 +3,7 @@
 
 static void	alfred(t_npe_data *alfred)
 {
-	alfred->health 				= 100;
+	alfred->health 				= 1;
 	alfred->damage 				= 100;
 	alfred->animate 			= 1;
 	alfred->hostile 			= 1;
@@ -24,7 +24,7 @@ static void	alfred(t_npe_data *alfred)
 
 static void	spooky(t_npe_data *spooky)
 {
-	spooky->health 				= 30;
+	spooky->health 				= 1;
 	spooky->damage 				= 30;
 	spooky->animate 			= 1;
 	spooky->hostile 			= 1;
@@ -33,9 +33,9 @@ static void	spooky(t_npe_data *spooky)
 	spooky->height 				= 9;
 	spooky->speed 				= 0.03;
 	spooky->wonder_distance 	= 40;
-	spooky->view_distance 		= 150;
+	spooky->view_distance 		= 120;
 	spooky->detection_radius 	= 5;
-	spooky->attack_range 		= 100;
+	spooky->attack_range 		= 80;
 	spooky->frame_rate[IDLE] 	= 100;
 	spooky->frame_rate[MOVE] 	= 200;
 	spooky->frame_rate[ATTACK] 	= 500;
@@ -45,7 +45,7 @@ static void	spooky(t_npe_data *spooky)
 
 static void	rift(t_npe_data *rift)
 {
-	rift->health 				= 10;
+	rift->health 				= 1;
 	rift->damage 				= 200;
 	rift->attack_style 			= 2;
 	rift->scale 				= 2 * (W / 100);

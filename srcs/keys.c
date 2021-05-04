@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/19 16:11:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:45:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	mouse(t_doom *doom, SDL_Event *event)
 {
+	//if (event->button.button == SDL_BUTTON_LEFT)
+	//		doom->player.shooting = event->type == SDL_MOUSEBUTTONDOWN;
 	if (event->button.button == SDL_BUTTON_LEFT)
-			doom->player.shooting = event->type == SDL_MOUSEBUTTONDOWN;
+			doom->key.lmouse = event->type == SDL_MOUSEBUTTONDOWN;
 }
 
 void	key(t_doom *doom, SDL_Event *event)

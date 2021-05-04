@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/03 14:04:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/04 16:35:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ typedef struct		s_player
 
 	int				flying;
 	int				shooting;
+	int				equiped;
 }					t_player;
 
 typedef struct		s_wsprite
@@ -366,6 +367,16 @@ typedef struct		s_gamemode
 	int				cool_down;
 }					t_gamemode;
 
+typedef struct		s_weapon
+{
+	int				time;
+	t_bxpm			*bxpm;
+	int				frame;
+	int				frames;
+	int				frame_rate;
+	int				dmg;
+	float			scale;
+}					t_weapon;
 
 typedef struct		s_doom
 {
@@ -390,10 +401,7 @@ typedef struct		s_doom
 	t_wall			skybox[4];
 	t_sector		*sectors;
 	t_list			*sprite;
-
 	t_list			*rifts;
-	t_list			*entities;
-	t_list			*objects;
 
 	t_npe_data		npe_data[3];
 
@@ -410,12 +418,16 @@ typedef struct		s_doom
 
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
+	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 }					t_doom;
 
 
 //		GAme
 void	gamemode(t_doom *doom);
+void	blit_weapon(t_doom *doom);
+void	precompute_weapon(t_doom *doom);
+void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
 
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);
@@ -565,6 +577,7 @@ void	load_bxpm(t_doom *doom);
 void	load_bbmp(t_doom *doom);
 void	read_bbmp(t_bxpm *bxpm, char *file);
 void	surf_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm);
+void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 //REMOVE//
 void	cs(void);

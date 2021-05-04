@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/03 16:11:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/04 10:30:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_gamemode(t_doom *doom)
 {
 	doom->game.round = 0;
-	doom->game.spawns = ft_min(doom->nb.sprites - doom->nb.rifts, 10);
+	doom->game.spawns = doom->nb.sprites;
 	doom->game.time = doom->time.curr;
 	doom->game.spawn_rate = 5000;
 	doom->game.cool_down = 0;
@@ -37,7 +37,7 @@ void	spawn_mob(t_doom *doom, t_sprite *rift)
 	mob->hp = mob->data->health;
 	ft_lstadd_new(&doom->sprite, mob, sizeof(mob));
 	doom->nb.sprites += 1;
-	doom->game.spawns -= 1;
+	doom->game.spawns += 1;
 }
 
 void	rift_spawn(t_doom *doom)
@@ -55,10 +55,9 @@ void	rift_spawn(t_doom *doom)
 
 int		eternal_round(t_doom *doom)
 {
-	if (doom->sprite == NULL)
+	if (doom->game.spawns == 0)
 	{
 		doom->game.round++;
-		doom->game.spawns = doom->game.round * 10;
 		doom->game.spawn_rate -= 200;
 		ft_printf("Round: %d\n", doom->game.round);
 		return (1);
@@ -80,9 +79,9 @@ void	respawn_rifts(t_doom *doom)
 	curr = doom->rifts;
 	while (curr != NULL)
 	{
-		ft_printf("%d\n", ((t_sprite*)curr->content)->type);
 		new = ft_lstnew(curr->content, curr->content_size);
 		ft_lstadd(&doom->sprite, new);
+		doom->game.spawns += 1;
 		curr = curr->next;
 	}
 	ft_printf("Respawn Rifts Done\n");

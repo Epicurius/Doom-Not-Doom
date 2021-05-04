@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/03 14:28:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/04 16:37:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ double elapsed;
 
 void	cs(void)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	//return ;
+	return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	printf("%.10s:\t%f\n", str, elapsed);
+	ft_printf("%15s:\t%f\n", str, elapsed);
 }
 
 void	init_doom(t_doom *doom)
@@ -93,7 +93,10 @@ int main1(void)
 
 		/* All this has no time requirements */
 		{
+			cs();
 			gamemode(doom);
+			ce("gamemode");
+			precompute_weapon(doom);
 			cs();
 			precompute_entities(doom);
 			ce("precomp_entities");
@@ -124,6 +127,9 @@ int main1(void)
 		//shade_zbuffer(doom);
 		draw_crosshair(doom);
 		ce("Croshair");
+		{
+			blit_weapon(doom);	
+		}
 		fps_func(doom);
 		blit_fps(doom);
 		if (doom->key.tab)
@@ -140,7 +146,7 @@ int main1(void)
 int main(void)
 {
 	main1();
-	//while (1)
-	//	;
+	while (1)
+		;
 	return (1);
 }

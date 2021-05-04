@@ -119,6 +119,7 @@ void	precompute_entities(t_doom *doom)
 		{
 			curr = ft_dellstnode(&doom->sprite, curr);
 			doom->nb.sprites -= 1;
+			doom->game.spawns -= 1;
 		}
 		else
 			curr = curr->next;
