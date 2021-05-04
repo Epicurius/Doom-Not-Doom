@@ -119,10 +119,20 @@ void	free_projectiles(t_doom *doom)
 
 void	free_weapons(t_doom *doom)
 {
-	//Fix each frmae free
-	free(doom->weapon[0].bxpm);
-	free(doom->weapon[1].bxpm);
-	free(doom->weapon[2].bxpm);
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < 3)
+	{
+		j = -1;
+		while (++j < doom->weapon[i].frames)
+		{
+			free(doom->weapon[i].bxpm[j].pix);
+			free(doom->weapon[i].bxpm[j].clr);
+		}
+		free(doom->weapon[i].bxpm);
+	}
 }
 
 int	free_doom(t_doom *doom)
