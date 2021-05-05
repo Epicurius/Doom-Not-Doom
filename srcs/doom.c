@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:28:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_doom(t_doom *doom, t_settings *settings)
 	doom->h2 = settings->height / 2;
 
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			settings->width, settings->height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+			settings->width, settings->height, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
