@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/27 15:30:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 10:55:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,9 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 
 int	init_alfred(t_texture_sheet *sprite)
 {
-	int i;
-	
 	init_alfred_nb(sprite);
-	sprite->pos = (t_rect***)ft_memalloc(sizeof(t_rect**) * 4);
-	i = -1;
-	if (sprite->nb[IDLE][FRAMES] > 0)
-		sprite->pos[IDLE] = ft_memalloc(sizeof(t_rect*) * sprite->nb[IDLE][FRAMES]);
-	while (++i < sprite->nb[IDLE][FRAMES])
-		sprite->pos[IDLE][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[IDLE][ANGLES]);
-	i = -1;
-	if (sprite->nb[MOVE][FRAMES] > 0)
-		sprite->pos[MOVE] = ft_memalloc(sizeof(t_rect*) * sprite->nb[MOVE][FRAMES]);
-	while (++i < sprite->nb[MOVE][FRAMES])
-		sprite->pos[MOVE][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[MOVE][ANGLES]);
-	i = -1;
-	if (sprite->nb[ATTACK][FRAMES] > 0)
-		sprite->pos[ATTACK] = ft_memalloc(sizeof(t_rect*) * sprite->nb[ATTACK][FRAMES]);
-	while (++i < sprite->nb[ATTACK][FRAMES])
-		sprite->pos[ATTACK][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[ATTACK][ANGLES]);
-	i = -1;
-	if (sprite->nb[DEATH][FRAMES] > 0)
-		sprite->pos[DEATH] = ft_memalloc(sizeof(t_rect*) * sprite->nb[DEATH][FRAMES]);
-	while (++i < sprite->nb[DEATH][FRAMES])
-		sprite->pos[DEATH][i] = ft_memalloc(sizeof(t_rect) * sprite->nb[DEATH][ANGLES]);
-
-
+	if (!malloc_texture_pos(sprite))
+		return (0);
 	sprite->pos[0][0][4] = new_rect(0,		0,		43,		47);
 	sprite->pos[0][0][5] = new_rect(88,		0,		120,	47);
 	sprite->pos[0][0][6] = new_rect(164,	0,		195,	52);

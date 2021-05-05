@@ -9,7 +9,7 @@ void	skybox_floor_vline(t_render *render, t_vline vline, int tx)
 
 	while (vline.y1 < vline.y2)
 	{
-		coord = vline.y1 * W + render->x;
+		coord = vline.y1 * render->surface->w + render->x;
 		alpha = vline.start.floor / (double)(vline.y1 - render->player.horizon);
 		text.y = (alpha * vline.texel.y + (1.0 - alpha) * 5)
 				* render->stx[tx].h / 10;

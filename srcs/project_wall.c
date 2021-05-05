@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 12:34:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:39:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,15 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->x1 = doom->w2 + wall->sv1.x * cam.scale / -wall->sv1.z;
 	wall->x2 = doom->w2 + wall->sv2.x * cam.scale / -wall->sv2.z;
 
-        wall->xrange		= wall->x2 - wall->x1;
-	wall->zrange		= wall->sv1.z - wall->sv2.z;
-        wall->zcomb		= wall->sv2.z * wall->sv1.z;
-        wall->x0z1		= wall->v1.x * wall->sv2.z;
-        wall->x1z0		= wall->v2.x * wall->sv1.z;
-	wall->xzrange		= wall->x1z0 - wall->x0z1;
-        //wall->xzrange		= (wall->v2.x * wall->sv1.z) - (wall->v1.x * wall->sv2.z);
-        wall->y0z1		= wall->v1.y * wall->sv2.z;
+	wall->xrange	= wall->x2 - wall->x1;
+	wall->zrange	= wall->sv1.z - wall->sv2.z;
+	wall->zcomb		= wall->sv2.z * wall->sv1.z;
+	wall->x0z1		= wall->v1.x * wall->sv2.z;
+	wall->x1z0		= wall->v2.x * wall->sv1.z;
+	wall->xzrange	= wall->x1z0 - wall->x0z1;
+	wall->y0z1		= wall->v1.y * wall->sv2.z;
 	wall->y1z0		= wall->v2.y * wall->sv1.z;
-        //wall->yzrange		= (wall->v2.y * wall->sv1.z) - (wall->v1.y * wall->sv2.z);
-	wall->yzrange		= wall->y1z0 - wall->y0z1;
+	wall->yzrange	= wall->y1z0 - wall->y0z1;
 
 	/*Y for wall 4 corners*/
 	t_sector *sector;
@@ -44,8 +42,6 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
 
-	//double yceil = sector->ceiling.y - (doom->player.where.z + EYE_LVL);
-	//double yfloor = sector->floor.y - (doom->player.where.z + EYE_LVL);
 	double yfloor = sector->floor.correct;
 	double yceil = sector->ceiling.correct;
 	wall->s1.ceiling = doom->h2 + (yceil  + wall->angle_z1) * wall->scale_v1;
@@ -58,8 +54,6 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	if (wall->n == -1)
 		return ;
 
-	//double nyceil = doom->sectors[wall->n].ceiling.y - (doom->player.where.z + EYE_LVL);
-	//double nyfloor= doom->sectors[wall->n].floor.y - (doom->player.where.z + EYE_LVL);
 	double nyfloor = doom->sectors[wall->n].floor.correct;
 	double nyceil = doom->sectors[wall->n].ceiling.correct;
 	wall->s1_n.ceiling = doom->h2 + (nyceil  + wall->angle_z1) * wall->scale_v1;

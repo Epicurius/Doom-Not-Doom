@@ -1,15 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_wsprites.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/05 11:50:08 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
-/*
-void	blit_clock_pixels(t_render *render, int coord, t_xyz text)
-{
-	Uint32		pixels;
-
-	pixels = ((Uint32*)render->clock->pixels)[(int)text.y * render->clock->w + (int)text.x];
-	((Uint32*)render->surface->pixels)[coord] = pixels;
-	((double*)render->surface->userdata)[coord] = text.z;
-}
-*/
 
 void	blit_wsprite_pixels(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 {
@@ -36,7 +37,7 @@ void	vline_wsprite(t_render *render, t_vline *vline, t_wsprite sprite, int x)
 	pos = sprite.where.y / render->wall.height;
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = (alpha - pos) * sprite.tscale.y + sprite.src.y1;
 		if (text.y > sprite.src.y1 && text.y < sprite.src.y2)

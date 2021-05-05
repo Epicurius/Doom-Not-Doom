@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/04 11:38:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:00:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*
 ** Screen info
 */
-# define W							1920
-# define H							1080
+# define W							1280
+# define H							720
 # define MAX_PROCESSORS				64
 
 /*

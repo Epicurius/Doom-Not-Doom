@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/04/30 14:27:52 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/05 13:15:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = converter
 SRC =	converter.c\
 		read_byte.c\
 		create_bxpm.c\
-		write_bbmp.c\
 		write_bxpm.c\
+		write_bxpm2.c\
 
 OBJ = $(SRCS:.c=.o)
 

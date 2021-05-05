@@ -15,7 +15,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 		text.x = abs((int)text.x % wtx->w);
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		crosshair_position(render, vline, alpha);
 		text.y = alpha * render->wall.tscale.y;

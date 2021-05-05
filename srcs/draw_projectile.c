@@ -11,10 +11,10 @@ void	 project_projectile(t_doom *doom, t_sprite_render *render)
 	render->end.x	= render->screen.x + render->size.x / 2;
 	render->start.y = render->screen.y - render->size.y;
 	render->end.y	= render->screen.y;
-	render->clamp_start.x	= ft_clamp(render->start.x, 0, W - 1);
-	render->clamp_end.x		= ft_clamp(render->end.x,   0, W - 1);
-	render->clamp_start.y	= ft_clamp(render->start.y, 0, H - 1);
-	render->clamp_end.y		= ft_clamp(render->end.y,   0, H - 1);
+	render->clamp_start.x	= ft_clamp(render->start.x, 0, doom->surface->w - 1);
+	render->clamp_end.x		= ft_clamp(render->end.x,   0, doom->surface->w - 1);
+	render->clamp_start.y	= ft_clamp(render->start.y, 0, doom->surface->h - 1);
+	render->clamp_end.y		= ft_clamp(render->end.y,   0, doom->surface->h - 1);
 	render->xrange = render->end.x - render->start.x;
 	render->yrange = render->end.y - render->start.y;
 }

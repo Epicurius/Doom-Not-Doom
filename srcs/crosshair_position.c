@@ -8,7 +8,8 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 
 	if (!ENABLE_BH)
 		return ;
-	if (render->player.shooting && render->x == W/2 && vline->y1 == H/2)
+	if (render->player.shooting && render->x == render->surface->w / 2
+			&& vline->y1 == render->surface->h / 2)
 	{
 		wall = &render->wall;
 		if (render->bh->curr >= MAX_BH)

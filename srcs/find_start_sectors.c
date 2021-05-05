@@ -1,31 +1,5 @@
 
 #include "doom.h"
-/*
-int		partition_screen(t_doom *doom, int *fustrum)
-{
-	int	x;
-	int	i;
-	int count = 0;
-
-	x = -1;
-	while (++x < W)
-	{
-		i = 0;
-		int sector = fustrum[x];
-		while (i < doom->nb.sectors && doom->screen_sectors[i] != -1
-				&& doom->screen_sectors[i] != sector)
-			i++;
-		if (i < doom->nb.sectors && doom->screen_sectors[i] == -1 && sector != -1)
-		{
-			doom->screen_sectors[i] = sector;
-			doom->xmin[i] = x;
-			count++;
-		}
-		else if (i < doom->nb.sectors && doom->screen_sectors[i] == sector)
-			doom->xmax[i] = x;
-	}
-	return (count);
-}*/
 
 typedef struct	s_fustrum_thread
 {
@@ -49,10 +23,10 @@ int	fustrum_in_sector(void *arg)
 	p = doom->player;
 	while (x < end)
 	{
-		double tmp = (x / (double)(W - 1)) * doom->cam.range + doom->cam.near_left;
+		double tmp = (x / (double)(doom->surface->w - 1)) * doom->cam.range + doom->cam.near_left;
 		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
 		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
-		pos.z = p.where.z + EYE_LVL;
+		//pos.z = p.where.z + EYE_LVL;
 		//fix!! also check starting from player sector
 		fustrum[x] = find_sector(doom, pos);
 		x += 1;
@@ -63,16 +37,16 @@ int	fustrum_in_sector(void *arg)
 //In how many sectors the camera/near_z is positioned
 int		find_start_sectors(t_doom *doom)
 {
-	int			x;
+	int					x;
+	int					w;
 	t_fustrum_thread	arr[doom->nb.processors];
 
-	cs();
-	x = -1;	
+	x = -1;
+	w = doom->surface->w;	
 	while (++x < doom->nb.processors)
 	{
-		arr[x].x = W /(double)doom->nb.processors * x;
-		// maybe clamp
-		arr[x].end = min(W /(double)doom->nb.processors * (x + 1), W);
+		arr[x].x = w /(double)doom->nb.processors * x;
+		arr[x].end = min(w /(double)doom->nb.processors * (x + 1), w);
 		arr[x].fustrum = doom->fustrum;
 		arr[x].doom = doom;
 		tpool_add(&doom->tpool, fustrum_in_sector, &arr[x]);

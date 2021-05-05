@@ -1,14 +1,14 @@
 
 #include "doom.h"
 
-static void	alfred(t_npe_data *alfred)
+static void	alfred(t_doom *doom, t_npe_data *alfred)
 {
 	alfred->health 				= 1;
 	alfred->damage 				= 100;
 	alfred->animate 			= 1;
 	alfred->hostile 			= 1;
 	alfred->attack_style 		= 2;
-	alfred->scale 				= 4 * (W / 100);
+	alfred->scale 				= 4 * (doom->surface->w / 100);
 	alfred->height 				= 4;
 	alfred->speed 				= 0.07;
 	alfred->wonder_distance 	= 0;
@@ -22,14 +22,14 @@ static void	alfred(t_npe_data *alfred)
 	alfred->flying 				= 1;
 }
 
-static void	spooky(t_npe_data *spooky)
+static void	spooky(t_doom *doom, t_npe_data *spooky)
 {
 	spooky->health 				= 1;
 	spooky->damage 				= 30;
 	spooky->animate 			= 1;
 	spooky->hostile 			= 1;
 	spooky->attack_style 		= 1;
-	spooky->scale 				= 2 * (W / 100);
+	spooky->scale 				= 2 * (doom->surface->w / 100);
 	spooky->height 				= 9;
 	spooky->speed 				= 0.03;
 	spooky->wonder_distance 	= 40;
@@ -43,12 +43,12 @@ static void	spooky(t_npe_data *spooky)
 	spooky->flying 				= 0;
 }
 
-static void	rift(t_npe_data *rift)
+static void	rift(t_doom *doom, t_npe_data *rift)
 {
 	rift->health 				= 1;
 	rift->damage 				= 200;
 	rift->attack_style 			= 2;
-	rift->scale 				= 2 * (W / 100);
+	rift->scale 				= 2 * (doom->surface->w / 100);
 	rift->height 				= 9;
 	rift->frame_rate[IDLE] 		= 100;
 	rift->frame_rate[DEATH] 	= 700;
@@ -56,13 +56,13 @@ static void	rift(t_npe_data *rift)
 
 void	init_sprite(t_doom *doom)
 {
-	t_list *new;
+	t_list		*new;
 	t_list		*curr;
 	t_sprite	*sprite;
 
-	alfred(&doom->npe_data[0]);
-	spooky(&doom->npe_data[1]);
-	rift(&doom->npe_data[2]);
+	alfred(doom, &doom->npe_data[0]);
+	spooky(doom, &doom->npe_data[1]);
+	rift(doom, &doom->npe_data[2]);
 	curr = doom->sprite;
 	while (curr)
 	{

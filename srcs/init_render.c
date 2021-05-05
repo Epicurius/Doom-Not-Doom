@@ -5,14 +5,14 @@ void	init_render(t_doom *doom)
 {
 	int x;
 
-	if (!(doom->fustrum = ft_memalloc(sizeof(int) * W)))
+	x = -1;
+	if (!(doom->fustrum = ft_memalloc(sizeof(int) * doom->surface->w)))
 		return ;
 	if (!(doom->render = ft_memalloc(sizeof(t_render) * doom->nb.threads)))
 		return ;
-	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (W * H))))
+	if (!(doom->zbuffer = ft_memalloc(sizeof(double) * (doom->surface->w * doom->surface->h))))
 		return ;
 	doom->surface->userdata = doom->zbuffer;
-	x = -1;
 	while (++x < doom->nb.threads)
 	{
 		doom->render[x].surface = doom->surface;

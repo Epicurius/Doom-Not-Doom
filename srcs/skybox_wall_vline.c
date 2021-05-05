@@ -20,7 +20,7 @@ void	skybox_wall_vline(t_render *render, t_vline vline, int tx)
 	//text.x = ft_clamp(text.x, 0, render->stx[render->s].w);
 	while (vline.y1 < vline.y2)
 	{
-		coord = vline.y1 * W + render->x;
+		coord = vline.y1 * render->surface->w + render->x;
 		alpha = (vline.y1 - vline.max.ceiling) / vline.line_height;
 		text.y = alpha * render->stx[tx].h;
 		while (text.y >= render->stx[tx].h)

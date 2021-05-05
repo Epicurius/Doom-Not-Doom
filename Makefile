@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/04 15:16:50 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/05 13:14:58 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,16 +55,13 @@ RAW_TEXTURES =	wood.bmp\
 		mini3.bmp\
 		mini4.bmp\
 		mini5.bmp\
-		mini6.bmp\
-		jony.bmp
+		mini6.bmp
 
 RESOURCES =		./resources
 PATH_TO_BMP =	./resources/BMP
 PATH_TO_BXPM =	./resources/BXPM
-PATH_TO_BBMP =	./resources/BBMP
 BMP = $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
 BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
-BBMP = $(addprefix $(PATH_TO_BBMP)/,$(RAW_TEXTURES:.bmp=.bbmp))
 
 RED := "\e[0;31m"
 GREEN := "\e[0;32m"
@@ -142,7 +139,9 @@ RAW_SRC = doom.c\
 		surf_to_bxpm.c\
 		blit_bxpm.c\
 		wave.c\
-		weapon_animation.c
+		weapon_animation.c\
+		malloc_texture_pos.c\
+		debug_loop.c
 		
 NAME = doom
 CDIR = srcs
@@ -155,7 +154,7 @@ LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 SDL = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0 -l SDl2_ttf-2.0.0
 CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
-all: $(LIBS) $(RESOURCES) $(PATH_TO_BBMP) $(BBMP) $(ODIR) $(NAME)
+all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
 	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
 
 $(ODIR):
@@ -170,9 +169,9 @@ $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
 	@gcc -c $< -o $@
 
-$(PATH_TO_BBMP)/%.bbmp: $(PATH_TO_BMP)/%.bmp
+$(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bmp_to_bxpm/converter $<
-	@mv ./resources/BMP/*.bbmp ./resources/BBMP/
+	@mv ./resources/BMP/*.bxpm ./resources/BXPM/
 
 $(LIB_DIR):
 	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 14:39:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:40:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int		loop_screen_sector(void	*arg)
 	while (render->x < render->xend)
 	{
 		render->ytop = 0;
-		render->ybot = H;
+		render->ybot = render->surface->h;
 		render_vline(*render, render->fustrum[render->x]);
 		render->x++;
 	}
@@ -135,14 +135,15 @@ void		screen_x_sector(t_doom *doom, int x, int xend)
 {
 	t_xyz pos;
 	t_player p;
+	double tmp;
 	
 	p = doom->player;
 	while (x < xend)
 	{
-		double tmp = (x / (double)(W - 1)) * doom->cam.range + doom->cam.near_left;
+		tmp = (x / (double)(doom->surface->w - 1)) * doom->cam.range + doom->cam.near_left;
 		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
 		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
-		pos.z = p.where.z + EYE_LVL;
+		//pos.z = p.where.z + EYE_LVL;
 		doom->fustrum[x] = find_sector(doom, pos);
 		x++;
 	}
@@ -151,15 +152,16 @@ void		screen_x_sector(t_doom *doom, int x, int xend)
 void		DrawScreen(t_doom *doom)
 {
 	int x;
+	int w;
 
 	x = -1;
+	w = doom->surface->w;
 	while (++x < doom->nb.threads)
 	{
-		doom->render[x].x = W /(double)doom->nb.threads * x;
-		doom->render[x].xend = min(W /(double)doom->nb.threads * (x + 1), W);
+		doom->render[x].x = w /(double)doom->nb.threads * x;
+		doom->render[x].xend = min(w /(double)doom->nb.threads * (x + 1), w);
 		screen_x_sector(doom, doom->render[x].x, doom->render[x].xend);
 		doom->render[x].player = doom->player;
-		//doom->render[x].clock = doom->time.clock;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
 	}
 }

@@ -67,9 +67,9 @@ void	map_area(t_doom *doom)
 		while (x <= map.max.x + MM_BEZEL_SIZE)
 		{
 			if (x < map.min.x || x > map.max.x || y < map.min.y || y > map.max.y)
-				pixels[y * W + x] = MM_BEZEL_COLOR;
+				pixels[y * doom->surface->w + x] = MM_BEZEL_COLOR;
 			else if (MM_ALPHA > 0)
-				pixels[y * W + x] = blend_alpha(pixels[y * W + x], 0, MM_ALPHA);
+				pixels[y * doom->surface->w + x] = blend_alpha(pixels[y * doom->surface->w + x], 0, MM_ALPHA);
 			x++;
 		}
 		y++;

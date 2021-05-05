@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 17:34:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:35:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_portal_solid(t_render *render, t_vline *vline)
 		text.x = abs((int)text.x % ptx->w);
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = alpha * render->wall.tscale.y;
 		if (text.y >= ptx->h || text.y < 0)
@@ -50,7 +50,7 @@ void	draw_portal_alpha(t_render *render, t_vline *vline)
 		text.x = abs((int)text.x % ptx->w);
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = alpha * render->wall.tscale.y;
 		if (text.y >= ptx->h || text.y < 0)

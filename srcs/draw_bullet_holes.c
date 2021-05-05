@@ -26,7 +26,7 @@ void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
 	pos = bh.where.y / render->wall.height;
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = (alpha - pos) * bh.tscale.y + 0;
 		if (text.y >= 0 && text.y < 128)

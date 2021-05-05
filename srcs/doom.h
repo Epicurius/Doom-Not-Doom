@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/04 16:35:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:12:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,11 +329,9 @@ typedef struct		t_nb
 	int				vertices;
 	int				processors;
 	int				projectiles;
-	int				 threads;
+	int				threads;
 	int				sprites;
-	int				entities;
 	int				rifts;
-	int				objects;
 }					t_nb;
 
 typedef	struct		s_time
@@ -381,7 +379,6 @@ typedef struct		s_weapon
 typedef struct		s_doom
 {
 	int				quit;
-	char			*file;
 	SDL_Window		*win;
 	SDL_Surface		*surface;
 	double 			map_scale;
@@ -415,15 +412,27 @@ typedef struct		s_doom
 	double			*zbuffer;
 
 	//	Textures
-
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
 	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 }					t_doom;
 
+typedef struct	s_settings
+{
+	char		*map;
+	int			mode;
+	int			god;
+	int			width;
+	int			height;
+	int			mouse_x;
+	int			mouse_y;
+}				t_settings;
 
-//		GAme
+//		Debug
+void	debug_loop(t_doom *doom, SDL_Event *event);
+
+//		Game
 void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
@@ -479,6 +488,7 @@ void	ai_movement(t_doom *doom, t_sprite *entity);
 void	ai_attack(t_doom *doom, t_sprite *entity);
 int		blit_sprite(void *arg);
 int		ai_rand_move(t_sprite *entity, int rand);
+int		malloc_texture_pos(t_texture_sheet *sprite);;
 
 //	Projectiles
 void	precompute_projectiles(t_doom *doom);

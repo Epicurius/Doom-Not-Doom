@@ -6,49 +6,26 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 09:59:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:28:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include "doom.h"
 
-
-struct timespec start, finish;
-double elapsed;
-#include <time.h>
-
-void	cs(void)
-{
-	return ;
-	clock_gettime(_CLOCK_MONOTONIC, &start);
-}
-
-void	ce(char *str)
-{
-	return ;
-	clock_gettime(_CLOCK_MONOTONIC, &finish);
-	elapsed = (finish.tv_sec - start.tv_sec);
-	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	ft_printf("%15s:\t%f\n", str, elapsed);
-}
-
-void	init_doom(t_doom *doom)
+void	init_doom(t_doom *doom, t_settings *settings)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	//IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG);
-	doom->w2 = W/2;
-	doom->h2 = H/2;
+	doom->w2 = settings->width / 2;
+	doom->h2 = settings->height / 2;
 
-	doom->win = SDL_CreateWindow("DOOM", 0, 0, W, H, SDL_WINDOW_SHOWN);
+	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			settings->width, settings->height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
-	doom->nb.threads = W / 10;
+	doom->nb.threads = doom->surface->w / 10;
 	printf("nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_fps(doom);
@@ -63,90 +40,63 @@ void	init_doom(t_doom *doom)
 	init_gamemode(doom);
 }
 
-int main1(void)
+void	game_loop(t_doom *doom, SDL_Event *event)
+{
+
+	update_camera(doom, 0, 0);
+	precompute_walls(doom);
+	precompute_skybox(doom);
+	DrawScreen(doom);
+	/* All this has no time requirements */
+	{
+		gamemode(doom);
+		precompute_weapon(doom);
+		precompute_entities(doom);
+		precompute_projectiles(doom);
+		movement(doom);
+		player_collision(doom);
+		while (SDL_PollEvent(event))
+			keys(doom, event);
+	}
+	tpool_wait(&doom->tpool);
+	DrawProjectiles(doom);
+	Drawsprite(doom);
+	draw_crosshair(doom);
+	blit_weapon(doom);	
+	fps_func(doom);
+	blit_fps(doom);
+	if (doom->key.tab)
+		map(doom);
+	SDL_UpdateWindowSurface(doom->win);
+}
+
+int	game(t_settings *settings)
 {
 	t_doom		*doom;
     SDL_Event	event;
 
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
-	cs();
-	if (!read_file(doom, "skybox.txt"))
+	if (!read_file(doom, settings->map))
 		return (0);
-	ce("Read_file");
-	init_doom(doom);
-    //doom->quit = 1;
+	init_doom(doom, settings);
     while (!doom->quit)
-    {	
-		cs();
-		update_camera(doom, 0, 0);
-		ce("update_camera");
-		cs();
-		precompute_walls(doom);
-		ce("precompute_walls");
-		cs();
-		precompute_skybox(doom);
-		ce("precompute_skybox");
-		cs();
-		DrawScreen(doom);
-		ce("DRAW_SCREEN");
-
-		/* All this has no time requirements */
-		{
-			cs();
-			gamemode(doom);
-			ce("gamemode");
-			precompute_weapon(doom);
-			cs();
-			precompute_entities(doom);
-			ce("precomp_entities");
-			cs();
-			precompute_projectiles(doom);
-			ce("precomp_project");
-			cs();
-			movement(doom);
-			ce("movement");
-			cs();
-			player_collision(doom);
-			ce("player_collision");
-			cs();
-			while (SDL_PollEvent(&event))
-				keys(doom, &event);
-			ce("pollevent");
-		}
-		cs();
-		tpool_wait(&doom->tpool);
-		ce("DRAW_WAIT");
-		cs();
-		DrawProjectiles(doom);
-		ce("draw_project");
-		cs();
-		Drawsprite(doom);//
-		ce("draw_sprite");
-		cs();
-		//shade_zbuffer(doom);
-		draw_crosshair(doom);
-		ce("Croshair");
-		{
-			blit_weapon(doom);	
-		}
-		fps_func(doom);
-		blit_fps(doom);
-		if (doom->key.tab)
-			map(doom);
-		//shade_zbuffer(doom);
-		cs();
-		SDL_UpdateWindowSurface(doom->win);
-		ce("UpdateWindowSurface");
-	}
+		game_loop(doom, &event);
+	//debug_loop(doom, &event);
 	free_doom(doom);
 	return (1);
 }
 
+
 int main(void)
 {
-	main1();
-	//while (1)
-	//	;
+	t_settings settings;
+
+	settings.map = ft_strdup("./resources/MAPS/skybox.txt");
+	settings.width = 2560;
+	settings.height = 1440;
+	settings.mode = 1;
+	settings.god = 0;
+	game(&settings);
 	return (1);
 }

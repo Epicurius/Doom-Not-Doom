@@ -12,7 +12,7 @@ void	draw_floor_texture(t_render *render, t_vline *vline)
 	ftx = &render->mtx[render->floor.tx];
 	while (vline->y1 < vline->y2)
 	{
-		coord = vline->y1 * W + render->x;
+		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.floor) / vline->height.floor;
 		divider = 1 / (NEAR_Z + alpha * vline->zrange);
 		text.z = vline->z_near_z * divider;
