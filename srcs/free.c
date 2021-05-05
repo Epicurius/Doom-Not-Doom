@@ -69,9 +69,17 @@ void	free_sprites(t_doom *doom)
 		curr = curr->next;
 		free(tmp);
 	}
+}
+
+void	free_rifts(t_doom *doom)
+{
+	t_list *tmp;
+	t_list *curr;
+
 	curr = doom->rifts;
 	while (curr)
 	{
+		free(curr->content);
 		tmp = curr;
 		curr = curr->next;
 		free(tmp);
@@ -83,7 +91,7 @@ void	free_textures(t_doom *doom)
 	int i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 6)
 	{
 		free(doom->mtx[i].clr);
 		free(doom->mtx[i].pix);
@@ -96,7 +104,7 @@ void	free_textures(t_doom *doom)
 		free(doom->stx[i].pix);
 	}
 	i = -1;
-	while (++i < 2)
+	while (++i < 3)
 	{
 		free(doom->sheet[i].bxpm.clr);
 		free(doom->sheet[i].bxpm.pix);
@@ -139,12 +147,14 @@ int	free_doom(t_doom *doom)
 {
 	free_map(doom);
 	free_sprites(doom);
+	free_rifts(doom);
+	free_projectiles(doom);
 	free_textures(doom);
 	free_weapons(doom);
 	free_sprite_pos(&doom->sheet[0]);
 	free_sprite_pos(&doom->sheet[1]);
+	free_sprite_pos(&doom->sheet[2]);
 	SDL_FreeSurface(doom->time.surf);
-	free_projectiles(doom);
 	free_render_utils(doom);
 	free_font(doom);
 	free_tpool(&doom->tpool);
