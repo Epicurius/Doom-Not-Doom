@@ -6,13 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 12:30:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:24:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		Multythread
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
 	Uint32 clr;
@@ -34,12 +33,11 @@ void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 	}
 }
 
-void		copy_pixel1(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
+static void		copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
 	uint32_t clr;
 
 	clr = src->clr[src->pix[srcr.y2 * src->w + srcr.x2]];
-	//if (clr != 0xFF800080)
 	if (clr != 0xFFc10099)
 		((Uint32*)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
 }
@@ -61,12 +59,11 @@ void		copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 			pos -= 0x10000L;
 		}
 		if (dstr.y2 > 0 && dstr.y2 < dst->h)
-			copy_pixel1(dst, dstr, src, srcr);
+			copy_pixel(dst, dstr, src, srcr);
 		pos += inc;
 		dstr.y2++;
 	}
 }
-
 
 void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
