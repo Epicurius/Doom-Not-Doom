@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/05 13:14:58 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/05 13:43:16 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -127,13 +127,13 @@ RAW_SRC = doom.c\
 		init_alfred.c\
 		init_spooky.c\
 		init_rift.c\
-		load_bbmp.c\
+		load_bxpm.c\
 		init_render.c\
 		collision_detection.c\
 		parse_map_sprite.c\
 		parse_map_header.c\
 		parse_map_sector.c\
-		read_bbmp.c\
+		read_bxpm.c\
 		clock.c\
 		init_player.c\
 		surf_to_bxpm.c\

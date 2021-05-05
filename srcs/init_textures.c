@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 10:58:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:44:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_entity_pos(t_doom *doom)
 void	init_textures(t_doom *doom)
 {
 	init_clock(doom);
-	load_bbmp(doom);
+	load_bxpm(doom);
 	init_entity_pos(doom);
 	color_palets(doom);
 }

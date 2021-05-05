@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:12:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:45:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -584,8 +584,8 @@ int 	find_pos_sector(t_doom *doom, t_xyz pos);
 void	rift_spawn(t_doom *doom);
 
 void	load_bxpm(t_doom *doom);
-void	load_bbmp(t_doom *doom);
-void	read_bbmp(t_bxpm *bxpm, char *file);
+void	load_bxpm2(t_doom *doom);
+void	read_bxpm(t_bxpm *bxpm, char *file);
 void	surf_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
