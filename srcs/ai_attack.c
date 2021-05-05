@@ -20,9 +20,9 @@ t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
 	return (move);
 }
 
-void	ai_attack(t_doom *doom, t_sprite *entity)
+void	ai_attack(t_doom *doom, t_game_entity *entity)
 {
-	t_projectile	*orb;
+	t_game_project	*orb;
 
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
 	if (entity->data->attack_style == 2)
@@ -36,7 +36,7 @@ void	ai_attack(t_doom *doom, t_sprite *entity)
 		return ;
 	else if (entity->data->attack_style == 1)// && doom->orb == NULL)
 	{
-		orb = malloc(sizeof(t_projectile));
+		orb = malloc(sizeof(t_game_project));
 		orb->velocity = projectile_movement(doom, entity->where, doom->player.where);
 		orb->where.x = entity->where.x;
 		orb->where.y = entity->where.y;

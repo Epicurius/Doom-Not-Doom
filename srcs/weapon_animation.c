@@ -17,7 +17,7 @@ void	blit_weapon(t_doom *doom)
 	t_rect dstr;
 	t_rect srcr;
 	t_bxpm *bxpm;
-	t_weapon *weapon;
+	t_game_weapon *weapon;
 
 	weapon = &doom->weapon[doom->player.equiped];
 	bxpm = &weapon->bxpm[weapon->frame];
@@ -30,7 +30,7 @@ void	blit_weapon(t_doom *doom)
 	blit_bxpm_scaled(doom->surface, dstr, &weapon->bxpm[weapon->frame], srcr);
 }
 
-void	weapon_animate(t_doom *doom, t_weapon *weapon)
+void	weapon_animate(t_doom *doom, t_game_weapon *weapon)
 {
 
 	if (weapon->time - doom->time.curr < -(100))
@@ -46,7 +46,7 @@ void	weapon_animate(t_doom *doom, t_weapon *weapon)
 
 void	precompute_weapon(t_doom *doom)
 {
-	t_weapon *weapon;
+	t_game_weapon *weapon;
 
 	weapon = &doom->weapon[doom->player.equiped];
 	doom->player.shooting = 0;

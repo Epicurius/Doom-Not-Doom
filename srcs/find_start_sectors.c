@@ -14,7 +14,7 @@ int	fustrum_in_sector(void *arg)
 	int	x;
 	int	end;
 	t_xyz	pos;
-	t_player p;
+	t_game_player p;
 
 	x = ((t_fustrum_thread*)arg)->x;
 	end = ((t_fustrum_thread*)arg)->end;

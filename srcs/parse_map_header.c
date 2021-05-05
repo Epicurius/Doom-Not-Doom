@@ -22,8 +22,8 @@ void	parse_header(t_doom *doom, char **arr)
 	doom->nb.projectiles	= 0;
 	doom->nb.rifts	= 0;
 	doom->vert	= ft_memalloc(sizeof(t_xyz) * doom->nb.vertices);
-	doom->walls	= ft_memalloc(sizeof(t_wall) * doom->nb.walls);
-	doom->sectors	= ft_memalloc(sizeof(t_sector) * doom->nb.sectors);
+	doom->walls	= ft_memalloc(sizeof(t_game_wall) * doom->nb.walls);
+	doom->sectors	= ft_memalloc(sizeof(t_game_sector) * doom->nb.sectors);
 	doom->orb = NULL;
 	doom->sprite = NULL;
 	doom->rifts = NULL;

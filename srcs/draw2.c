@@ -12,7 +12,7 @@
 
 #include "doom.h"
 
-void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
+void	compute_vline_data(t_render *render, t_game_wall wall, t_vline *vline)
 {
 	vline->alpha = (render->x - wall.x1) / wall.xrange;
 	vline->clipped_alpha = (render->x - wall.cx1) / (wall.cx2 - wall.cx1);
@@ -29,7 +29,7 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 				- (vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling);
 }
 
-void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
+void	compute_vline_texels(t_render *render, t_game_wall wall, t_vline *vline)
 {
 	t_xyz camera_z;
 
@@ -70,9 +70,9 @@ t_vline		draw_vline(t_render *render)
 	return (vline);
 }
 
-t_vline 	render_wall_vline(t_render *render, t_sector *sector, int s)
+t_vline 	render_wall_vline(t_render *render, t_game_sector *sector, int s)
 {
-	t_wall		*wall;
+	t_game_wall		*wall;
 
 	wall = sector->wall[s];
 	wall->visible 	= 1;
@@ -93,7 +93,7 @@ t_vline 	render_wall_vline(t_render *render, t_sector *sector, int s)
 int		render_vline(t_render render, int sector)
 {
 	int	s;
-	t_sector *sect;
+	t_game_sector *sect;
 	t_vline vline;
 
 	s = -1;
@@ -134,7 +134,7 @@ int		loop_screen_sector(void	*arg)
 void		screen_x_sector(t_doom *doom, int x, int xend)
 {
 	t_xyz pos;
-	t_player p;
+	t_game_player p;
 	double tmp;
 	
 	p = doom->player;

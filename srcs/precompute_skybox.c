@@ -3,7 +3,7 @@
 
 void	compute_skybox(t_doom *doom)
 {
-	t_player player;
+	t_game_player player;
 
 	player = doom->player;
 	// (coord - 5)
@@ -22,7 +22,7 @@ void	compute_skybox(t_doom *doom)
 }
 
 
-void		project_skybox(t_doom *doom, t_wall *wall)
+void		project_skybox(t_doom *doom, t_game_wall *wall)
 {
 	t_camera cam;
 

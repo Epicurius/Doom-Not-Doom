@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-void	 project_sprite(t_doom *doom, t_sprite_render *render)
+void	 project_game_entity(t_doom *doom, t_game_entity_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
@@ -19,7 +19,7 @@ void	 project_sprite(t_doom *doom, t_sprite_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_sprite(t_doom *doom, t_sprite *sprite, t_sprite_render *render)
+int	rotate_sprite(t_doom *doom, t_game_entity *sprite, t_game_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -40,7 +40,7 @@ int	rotate_sprite(t_doom *doom, t_sprite *sprite, t_sprite_render *render)
 	return (1);
 }
 
-void	sprite_threads(t_doom *doom, t_sprite_render render, t_sprite *sprite, t_sprite_render *thread)
+void	sprite_threads(t_doom *doom, t_game_entity_render render, t_game_entity *sprite, t_game_entity_render *thread)
 {
 	int y;
 
@@ -48,7 +48,7 @@ void	sprite_threads(t_doom *doom, t_sprite_render render, t_sprite *sprite, t_sp
 	int i = render.clamp_end.y - render.clamp_start.y;
 	while (++y < 10)
 	{
-		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_sprite_render));
+		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_game_entity_render));
 		thread[y].clamp_start.y	+= i / 10.0 * y;
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
@@ -57,16 +57,16 @@ void	sprite_threads(t_doom *doom, t_sprite_render render, t_sprite *sprite, t_sp
 		thread[y].shooting = doom->player.shooting;
 		thread[y].dmg = 10;
 		thread[y].hp = &sprite->hp;
-		tpool_add(&doom->tpool, blit_sprite, &thread[y]);
+		tpool_add(&doom->tpool, blit_game_entity, &thread[y]);
 	}
 }
 
 void	Drawsprite(t_doom *doom)
 {
 	t_list *curr;
-	t_sprite *sprite;
-	t_sprite_render render;
-	t_sprite_render	thread[10];
+	t_game_entity *sprite;
+	t_game_entity_render render;
+	t_game_entity_render	thread[10];
 
 	curr = doom->sprite;
 	while (curr)
@@ -74,7 +74,7 @@ void	Drawsprite(t_doom *doom)
 		sprite = curr->content;
 		if (sprite->render && doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
 		{
-			project_sprite(doom, &render);
+			project_game_entity(doom, &render);
 			tpool_wait(&doom->tpool);
 			sprite_threads(doom, render, sprite, thread);
 		}

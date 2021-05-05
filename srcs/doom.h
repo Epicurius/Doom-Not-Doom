@@ -40,11 +40,11 @@ typedef struct		s_bxpm
 	uint32_t		*palet[512];
 }					t_bxpm;
 
-typedef	struct		s_floor_ceiling
+typedef	struct		s_game_fc
 {
 	double			floor;
 	double			ceiling;
-}					t_floor_ceiling;
+}					t_game_fc;
 
 typedef struct		s_vline
 {
@@ -58,15 +58,15 @@ typedef struct		s_vline
 	double			z_near_z;
 	double			line_height;
 
-	t_floor_ceiling	start;
-	t_floor_ceiling	height;
+	t_game_fc	start;
+	t_game_fc	height;
 
-	t_floor_ceiling	max;
-	t_floor_ceiling	curr;
+	t_game_fc	max;
+	t_game_fc	curr;
 
 	/* Neighbor */
-	t_floor_ceiling	max_n;
-	t_floor_ceiling	curr_n;
+	t_game_fc	max_n;
+	t_game_fc	curr_n;
 
 	/* Texel */
 	t_xyz			texel;
@@ -74,16 +74,16 @@ typedef struct		s_vline
 	t_xyz			texel_range;
 }					t_vline;
 
-typedef struct		s_projectile
+typedef struct		s_game_project
 {
 	t_xyz			start;
 	t_xyz			where;
 	t_xyz			velocity;
 	double			dist;
 	int				sector;	
-}					t_projectile;
+}					t_game_project;
 
-typedef struct		s_npe_data
+typedef struct		s_game_data
 {
 	int				health;
 	int				height;
@@ -100,9 +100,9 @@ typedef struct		s_npe_data
 	int				attack_range;
 	int				frame_rate[4];
 	double			attack_speed;
-}					t_npe_data;
+}					t_game_data;
 
-typedef struct		s_sprite
+typedef struct		s_game_entity
 {
 	int				render; //will depend on hp
 	t_xyz			where;
@@ -121,10 +121,10 @@ typedef struct		s_sprite
 	int				type;
 	double			scale;
 	double			time;
-	t_npe_data		*data;
-}					t_sprite;
+	t_game_data		*data;
+}					t_game_entity;
 
-typedef struct		s_player
+typedef struct		s_game_player
 {
 	t_xyz			where;
 	t_xyz			velocity;
@@ -140,9 +140,9 @@ typedef struct		s_player
 	int				flying;
 	int				shooting;
 	int				equiped;
-}					t_player;
+}					t_game_player;
 
-typedef struct		s_wsprite
+typedef struct		s_game_wsprite
 {
 	int				id;
 	t_xyz			where;
@@ -154,26 +154,26 @@ typedef struct		s_wsprite
 	double			scale_h;
 	t_xyz			tscale;
 	int				ready;
-}					t_wsprite;
+}					t_game_wsprite;
 
-typedef struct		s_wsprites
+typedef struct		s_game_wsprites
 {
-	t_wsprite		*num;
+	t_game_wsprite		*num;
 	int				curr;
 	int				total;
-}					t_wsprites;
+}					t_game_wsprites;
 
-typedef struct		s_bh
+typedef struct		s_game_bh
 {
-	t_wsprite		num[MAX_BH];
+	t_game_wsprite		num[MAX_BH];
 	int				curr;
 	int				total;
-}					t_bh;
+}					t_game_bh;
 
-typedef struct		s_wall
+typedef struct		s_game_wall
 {
-	t_wsprites		wsprite;
-	t_bh			bh;
+	t_game_wsprites		wsprite;
+	t_game_bh			bh;
 	int				id;
 	int				sect;
 	int				visible;
@@ -203,14 +203,14 @@ typedef struct		s_wall
 	double			cx1;
 	double			cx2;
 
-	t_floor_ceiling	s1;
-	t_floor_ceiling	s2;
-	t_floor_ceiling	range;
+	t_game_fc	s1;
+	t_game_fc	s2;
+	t_game_fc	range;
 
 	/*Neighbors values*/
-	t_floor_ceiling	s1_n;
-	t_floor_ceiling	s2_n;
-	t_floor_ceiling	range_n;
+	t_game_fc	s1_n;
+	t_game_fc	s2_n;
+	t_game_fc	range_n;
 
 	/*Texture values*/
 	double			xrange;
@@ -223,26 +223,26 @@ typedef struct		s_wall
 	double			y1z0;
 	double			y0z1;
 	t_xyz			tscale;
-}					t_wall;
+}					t_game_wall;
 
-typedef struct		s_sector
+typedef struct		s_game_sector
 {
 	int				id;
     int				npoints;
-	t_wall			**wall;
+	t_game_wall			**wall;
 	t_plane			floor;
 	t_plane			ceiling;
 	int				light;
 	float			gravity;
 	char			visible;
-} 					t_sector;
+} 					t_game_sector;
 
 
 typedef struct		s_collision
 {
 	t_xyz			*where;
 	t_xyz			*velocity;
-	t_sector		*sectors;
+	t_game_sector		*sectors;
 	t_list			*entities;
 	int				*sector;
 	int				nb_entities;
@@ -287,32 +287,32 @@ typedef struct		s_sprite_render
 	int				shooting;
 	int				dmg;
 	int				*hp;
-}					t_sprite_render;
+}					t_game_entity_render;
 
 typedef struct		s_render
 {
 	SDL_Surface		*surface;
-	t_sector		*sectors;
+	t_game_sector		*sectors;
 	int 			*fustrum;
-	t_wall			*skybox;
+	t_game_wall			*skybox;
 	t_bxpm			*mtx;
 	t_bxpm			*stx;
-	t_player		player;
+	t_game_player		player;
 	int				ytop;
 	int				ybot;
 	int				x;
 	int				xend;
 
-	t_wall			wall;
+	t_game_wall			wall;
 	t_plane			floor;
 	t_plane			ceiling;
 	int				light;
 	int				s;
-	t_bh			*bh;
-	t_wsprites		wsprite;
+	t_game_bh			*bh;
+	t_game_wsprites		wsprite;
 }					t_render;
 
-typedef struct		s_map
+typedef struct		s_game_map
 {
 	int				w;
 	int				h;
@@ -320,7 +320,7 @@ typedef struct		s_map
 	t_i2			max;
 	int				pos_x;
 	int				pos_y;
-}					t_map;
+}					t_game_map;
 
 typedef struct		t_nb
 {
@@ -334,7 +334,7 @@ typedef struct		t_nb
 	int				rifts;
 }					t_nb;
 
-typedef	struct		s_time
+typedef	struct		s_game_time
 {
 	float			curr;
 	float			prev;
@@ -347,7 +347,7 @@ typedef	struct		s_time
 	TTF_Font		*clock_font;
 	SDL_Color		clock_fg;
 	SDL_Color		clock_bg;
-}					t_time;
+}					t_game_time;
 
 typedef struct		s_texture_sheet
 {
@@ -356,16 +356,16 @@ typedef struct		s_texture_sheet
 	t_rect			***pos;
 }					t_texture_sheet;
 
-typedef struct		s_gamemode
+typedef struct		s_game_mode
 {
 	int				round;
 	int				spawns;
 	int				time;
 	int				spawn_rate;
 	int				cool_down;
-}					t_gamemode;
+}					t_game_mode;
 
-typedef struct		s_weapon
+typedef struct		s_game_weapon
 {
 	int				time;
 	t_bxpm			*bxpm;
@@ -374,7 +374,7 @@ typedef struct		s_weapon
 	int				frame_rate;
 	int				dmg;
 	float			scale;
-}					t_weapon;
+}					t_game_weapon;
 
 typedef struct		s_doom
 {
@@ -385,26 +385,26 @@ typedef struct		s_doom
 	int				w2;
 	int				h2;
 
-	t_gamemode		game;
+	t_game_mode		game;
 	t_nb			nb;
 	t_tpool			tpool;
-	t_time			time;
+	t_game_time			time;
 	t_keys			key;
-	t_map			map;
+	t_game_map			map;
 
 	//	Map
 	t_xyz			*vert;
-	t_wall			*walls;
-	t_wall			skybox[4];
-	t_sector		*sectors;
+	t_game_wall			*walls;
+	t_game_wall			skybox[4];
+	t_game_sector		*sectors;
 	t_list			*sprite;
 	t_list			*rifts;
 
-	t_npe_data		npe_data[3];
+	t_game_data		npe_data[3];
 
 	t_list			*orb;
 	t_camera		cam;
-	t_player		player;
+	t_game_player		player;
 
 	//	Render
 	t_render		*render;
@@ -414,7 +414,7 @@ typedef struct		s_doom
 	//	Textures
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
-	t_weapon		weapon[3];
+	t_game_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 }					t_doom;
 
@@ -453,7 +453,7 @@ void	parse_fc(t_doom *doom, char **arr);
 void	init_player(t_doom *doom);
 void	init_render(t_doom *doom);
 void	init_fps(t_doom *doom);
-void	init_sprite(t_doom *doom);
+void	init_game_entity(t_doom *doom);
 void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
 int		init_alfred(t_texture_sheet *sprite);
@@ -474,20 +474,20 @@ void	fps_func(t_doom *doom);
 void	DrawMap(t_doom *doom);
 void	precompute_walls(t_doom *doom);
 void	precompute_skybox(t_doom *doom);
-void	wall_to_screen_xz(t_player player, t_wall *wall);
-void	project_wall(t_doom *doom, t_wall *wall);
+void	wall_to_screen_xz(t_game_player player, t_game_wall *wall);
+void	project_wall(t_doom *doom, t_game_wall *wall);
 void	vline_monochromic(t_render *render, t_vline *vline);
 int		find_start_sectors(t_doom *doom);
-int		clip_wall(t_camera cam, t_wall *wall);
-void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
+int		clip_wall(t_camera cam, t_game_wall *wall);
+void	compute_vline_data(t_render *render, t_game_wall wall, t_vline *vline);
 
 //	Enteties
 void	Drawsprite(t_doom *doom);
 void	precompute_entities(t_doom *doom);
-void	ai_movement(t_doom *doom, t_sprite *entity);
-void	ai_attack(t_doom *doom, t_sprite *entity);
-int		blit_sprite(void *arg);
-int		ai_rand_move(t_sprite *entity, int rand);
+void	ai_movement(t_doom *doom, t_game_entity *entity);
+void	ai_attack(t_doom *doom, t_game_entity *entity);
+int		blit_game_entity(void *arg);
+int		ai_rand_move(t_game_entity *entity, int rand);
 int		malloc_texture_pos(t_texture_sheet *sprite);;
 
 //	Projectiles
@@ -502,9 +502,9 @@ void	reset_bh(t_doom *doom);
 
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
-int		clock_wsprite(t_doom *doom, t_wall *wall, int x);
-int		animate_wsprite(t_doom *doom, t_wsprite *sprite);
-int		animate_entities(t_doom *doom, t_wsprite *sprite);
+int		clock_wsprite(t_doom *doom, t_game_wall *wall, int x);
+int		animate_wsprite(t_doom *doom, t_game_wsprite *sprite);
+int		animate_entities(t_doom *doom, t_game_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);

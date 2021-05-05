@@ -35,7 +35,7 @@ void	init_doom(t_doom *doom, t_settings *settings)
 	init_textures(doom);
 	init_scale(doom);
 	init_player(doom);
-	init_sprite(doom);
+	init_game_entity(doom);
 	init_render(doom);
 	init_gamemode(doom);
 }

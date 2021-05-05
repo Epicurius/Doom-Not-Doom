@@ -21,7 +21,7 @@ void	parse_vertex(t_doom *doom, char **arr)
 
 void	parse_wall(t_doom *doom, char **arr)
 {
-	t_wall	*wall;
+	t_game_wall	*wall;
 
 	wall		= &doom->walls[ft_atoi(arr[0])];
 	wall->v1	= doom->vert[ft_atoi(arr[1])];
@@ -49,7 +49,7 @@ void	parse_fc(t_doom *doom, char **arr)
 	ceiling->scale	= atof(arr[6]) * doom->map_scale;
 }
 
-void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
+void	complete_wall(t_game_sector *sect, t_game_wall *walls, char **id, char **neighbour)
 {
 	int l;
 	int wall_nb;
@@ -67,7 +67,7 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
 
 void	parse_sector(t_doom *doom, char **arr)
 {
-	t_sector	*sect;
+	t_game_sector	*sect;
 	char		**walls;
 	char		**neighbour;
 
@@ -75,7 +75,7 @@ void	parse_sector(t_doom *doom, char **arr)
 	sect->id		= ft_atoi(arr[0]);
 	walls			= ft_strsplit(arr[1], ' ');
 	sect->npoints	= ft_strarr_func(walls, NULL);
-	sect->wall		= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
+	sect->wall		= ft_memalloc(sizeof(t_game_wall*) * (sect->npoints));
 	neighbour		= ft_strsplit(arr[2], ' ');
 	sect->gravity	= ft_atoi(arr[3]) / 1000.0;
 	sect->light		= ft_atoi(arr[4]);

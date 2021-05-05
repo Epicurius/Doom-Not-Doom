@@ -1,13 +1,13 @@
 
 #include "doom.h"
 
-void	hit_enemy(t_sprite_render *render, int coord)
+void	hit_enemy(t_game_entity_render *render, int coord)
 {
 	if (render->shooting && coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
 		*render->hp -= render->dmg;
 }
 
-void	blit_sprite24(t_sprite_render *render, int coord, t_xyz text)
+void	blit_game_entity24(t_game_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -23,7 +23,7 @@ void	blit_sprite24(t_sprite_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_sprite32(t_sprite_render *render, int coord, t_xyz text)
+void	blit_game_entity32(t_game_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -41,12 +41,12 @@ void	blit_sprite32(t_sprite_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-int		blit_sprite(void *arg)
+int		blit_game_entity(void *arg)
 {
 	double alphax;
 	double alphay;
 	t_xyz text;
-	t_sprite_render *render;
+	t_game_entity_render *render;
 
 	render = arg;
 	text.z = render->screen.z;
@@ -61,9 +61,9 @@ int		blit_sprite(void *arg)
 			alphax = (x - render->start.x) / render->xrange;
 			text.x = (1.0 - alphax) * render->pos.x1 + alphax * render->pos.x2;
 			if (render->bxpm->bpp == 32)
-				blit_sprite32(render, y * render->surface->w + x, text);
+				blit_game_entity32(render, y * render->surface->w + x, text);
 			else
-				blit_sprite24(render, y * render->surface->w + x, text);
+				blit_game_entity24(render, y * render->surface->w + x, text);
 		}
 	}
 	return (1);

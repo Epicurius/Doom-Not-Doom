@@ -1,12 +1,12 @@
 
 #include "doom.h"
 
-void	init_wsprite_scale(t_doom *doom, t_wall *wall)
+void	init_wsprite_scale(t_doom *doom, t_game_wall *wall)
 {
 	int i;
 	int x;
 	int y;
-	t_wsprite *wsprite;
+	t_game_wsprite *wsprite;
 
 	i = -1;
 	while (++i < wall->wsprite.total)
@@ -27,7 +27,7 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 void	init_scale(t_doom *doom)
 {
 	int i;
-	t_wall *wall;
+	t_game_wall *wall;
 
 	i = -1;
 	while (++i < doom->nb.walls)

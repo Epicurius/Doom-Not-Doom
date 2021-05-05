@@ -14,7 +14,7 @@ void	put_bh_pixels(t_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
+void	vline_wall_bh(t_render *render, t_vline *vline, t_game_wsprite bh, int x)
 {
 	t_xyz text;
 	double alpha;
@@ -38,7 +38,7 @@ void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
 void	draw_wall_bh(t_render *render, t_vline *vline)
 {
 	int i = -1;
-	t_wsprite bh;
+	t_game_wsprite bh;
 
 	if (!ENABLE_BH)
 		return ;

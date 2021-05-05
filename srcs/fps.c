@@ -43,7 +43,7 @@ void	blit_fps(t_doom *doom)
 	SDL_FreeSurface(surf);
 }
 
-void	update_fps_surface(t_time *time)
+void	update_fps_surface(t_game_time *time)
 {
 	char	*str;
 
@@ -56,7 +56,7 @@ void	update_fps_surface(t_time *time)
 
 void				fps_func(t_doom *doom)
 {
-	t_time		*time;
+	t_game_time		*time;
 	SDL_Rect	rect;
 
 	time = &doom->time;

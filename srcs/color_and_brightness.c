@@ -59,7 +59,7 @@ void	color_palets(t_doom *doom)
 {
 	int s;
 	int w;
-	t_sector *sector;
+	t_game_sector *sector;
 	
 	s = -1;
 	while (++s < doom->nb.sectors)

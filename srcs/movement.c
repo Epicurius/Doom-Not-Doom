@@ -16,7 +16,7 @@ void	get_base_speed(t_doom *doom, float *speed)
 }
 
 
-void	get_movement(t_doom *doom, t_player player, float speed, t_xyz *move)
+void	get_movement(t_doom *doom, t_game_player player, float speed, t_xyz *move)
 {
 	*move = xyz(0, 0, 0);
 	if (doom->key.w)
@@ -45,8 +45,8 @@ void	get_movement(t_doom *doom, t_player player, float speed, t_xyz *move)
 
 void	get_velocity(t_doom *doom, t_xyz move)
 {
-	t_player *player;
-	t_sector *sector;
+	t_game_player *player;
+	t_game_sector *sector;
 
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];

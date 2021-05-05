@@ -57,7 +57,7 @@ void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 
 void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 {
-	t_wall wall;
+	t_game_wall wall;
 
 	wall = render->skybox[i];
 	vline->alpha = (render->x - wall.x1) / wall.xrange;

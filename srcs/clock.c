@@ -35,7 +35,7 @@ void	init_clock(t_doom *doom)
 {
 	char		*str;
 	time_t		t;
-	t_time		*time;
+	t_game_time		*time;
 	SDL_Surface	*tmp;
 
 	get_time(&t);
@@ -58,11 +58,11 @@ void	init_clock(t_doom *doom)
 	free(str);
 }
 
-int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
+int	clock_wsprite(t_doom *doom, t_game_wall *wall, int x)
 {
 	char		*str;
 	time_t		t;
-	t_time		*time;
+	t_game_time		*time;
 	SDL_Surface	*tmp;
 
 	get_time(&t);

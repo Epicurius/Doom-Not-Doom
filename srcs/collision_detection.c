@@ -14,7 +14,7 @@
 
 int	vertical_collision(t_collision *sprite, t_xyz dest)
 {
-	t_sector sector;
+	t_game_sector sector;
 
 	sector = sprite->sectors[*sprite->sector];
 	// So to not keep on falling through floor.
@@ -31,7 +31,7 @@ int	vertical_collision(t_collision *sprite, t_xyz dest)
 	return (0);
 }
 
-int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
+int	hitbox_collision(t_xyz dest, t_game_wall *wall, float hitbox_radius)
 {
 	t_xyz point;
 
@@ -48,7 +48,7 @@ int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
 	return (0);
 }
 
-int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall)
+int	fit_through_portal(t_collision *sprite, t_game_sector *sector, t_game_wall *wall)
 {
 	double portal_top;
 	double portal_bot;
@@ -66,8 +66,8 @@ int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall)
 int	horizontal_collision(t_collision *sprite, t_xyz dest)
 {
 	int i;
-	t_wall *wall;
-	t_sector *sector;
+	t_game_wall *wall;
+	t_game_sector *sector;
 
 	i = -1;
 	sector = &sprite->sectors[*sprite->sector];

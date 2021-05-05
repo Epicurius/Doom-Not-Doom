@@ -21,11 +21,11 @@ void	init_gamemode(t_doom *doom)
 	doom->game.cool_down = 0;
 }
 
-void	spawn_mob(t_doom *doom, t_sprite *rift)
+void	spawn_mob(t_doom *doom, t_game_entity *rift)
 {
-	t_sprite *mob;
+	t_game_entity *mob;
 
-	mob = ft_memalloc(sizeof(t_sprite));
+	mob = ft_memalloc(sizeof(t_game_entity));
 	mob->type = rand() % 2;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;
@@ -47,7 +47,7 @@ void	rift_spawn(t_doom *doom)
 	curr = doom->sprite;
 	while (curr)
 	{
-		if (((t_sprite*)curr->content)->type == 2)
+		if (((t_game_entity*)curr->content)->type == 2)
 			spawn_mob(doom, curr->content);
 		curr = curr->next;
 	}

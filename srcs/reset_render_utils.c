@@ -70,7 +70,7 @@ void	reset_bh_dynamic(t_doom *doom)
 {
 	int i;
 	int j;
-	t_sector *sect;
+	t_game_sector *sect;
 
 	i = -1;
 	while (++i < doom->nb.sectors)

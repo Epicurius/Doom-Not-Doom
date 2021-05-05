@@ -12,7 +12,7 @@
 
 #include "doom.h"
 
-void		project_wall(t_doom *doom, t_wall *wall)
+void		project_wall(t_doom *doom, t_game_wall *wall)
 {
 	t_camera cam;
 
@@ -36,7 +36,7 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->yzrange	= wall->y1z0 - wall->y0z1;
 
 	/*Y for wall 4 corners*/
-	t_sector *sector;
+	t_game_sector *sector;
 
 	sector = &doom->sectors[wall->sect];
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;

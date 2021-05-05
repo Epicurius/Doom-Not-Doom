@@ -1,7 +1,7 @@
 
 #include "doom.h"
 
-int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
+int	animate_wsprite(t_doom *doom, t_game_wsprite *sprite)
 {
 	if (sprite->time - doom->time.curr < -100)
 	{
