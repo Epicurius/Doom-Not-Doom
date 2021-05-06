@@ -92,7 +92,7 @@ int main(void)
 {
 	t_settings settings;
 
-	settings.map = ft_strdup("./resources/MAPS/skybox.txt");
+	settings.map = ft_strdup(GAME_PATH"resources/MAPS/skybox.txt");
 	settings.width = 2560;
 	settings.height = 1440;
 	settings.mode = 1;

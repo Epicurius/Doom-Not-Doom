@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 11:19:02 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/05/06 13:57:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/tpool/tpool.h"
 # include "../../SDL2/includes/SDL.h"
 # include "../../SDL2/includes/SDL_ttf.h"
+# include "../../path.h"
 # include "./macros.h"
 # include "./utils.h"
 # include <math.h>

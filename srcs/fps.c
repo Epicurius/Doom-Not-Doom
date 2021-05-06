@@ -75,6 +75,6 @@ void	init_fps(t_doom *doom)
 	doom->time.curr = SDL_GetTicks();
 	doom->time.prev = 0;
 	doom->time.surf = NULL;
-	doom->time.font = TTF_OpenFont("./resources/TTF/digital.ttf", 100);
+	doom->time.font = TTF_OpenFont(GAME_PATH"resources/TTF/digital.ttf", 100);
 	doom->time.color = hex_to_sdl_color(0x40eb34ff);
 }
