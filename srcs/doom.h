@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 13:57:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:58:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -429,7 +429,7 @@ typedef struct	s_settings
 void	debug_loop(t_doom *doom, SDL_Event *event);
 
 //		Game
-int		game(t_settings *settings);
+int		game(int ac, char **av);
 void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
