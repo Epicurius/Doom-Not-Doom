@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:24:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 11:10:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	update_fps_surface(t_game_time *time)
 void				fps_func(t_doom *doom)
 {
 	t_game_time		*time;
-	SDL_Rect	rect;
 
 	time = &doom->time;
 	time->curr = SDL_GetTicks();

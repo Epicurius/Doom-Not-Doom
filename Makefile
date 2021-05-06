@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/05 13:43:16 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/06 11:09:35 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,7 +167,7 @@ $(NAME): $(OBJ)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@
+	@gcc -c $< -o $@ $(CFLAGS)
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bmp_to_bxpm/converter $<

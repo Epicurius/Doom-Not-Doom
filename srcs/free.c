@@ -49,7 +49,8 @@ void	free_color_palet(t_bxpm *bxpm)
 {
 	int i;
 
-	while (++i < 256 + 256)
+	i = -1;
+	while (++i < 512)
 	{
 		if (bxpm->palet[i])
 			free(bxpm->palet[i]);

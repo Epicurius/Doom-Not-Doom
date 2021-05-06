@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:16:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 10:56:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,15 @@ void	create_path_and_name(char *file, char **path, char **name)
 	free(temp);
 }
 
-void	free_bmp(t_bmp *bmp)
-{
-	free(bmp->data);
-	free(bmp);
-}
-
-void	free_bxpm(t_bxpm *bxpm)
+void	free_converter(t_bmp *bmp, t_bxpm *bxpm, char *path, char *name)
 {
 	free(bxpm->clr);
 	free(bxpm->pix);
 	free(bxpm);
+	free(bmp->data);
+	free(bmp);
+	free(path);
+	free(name);
 }
 
 int	main(int ac, char **av)
@@ -73,26 +71,14 @@ int	main(int ac, char **av)
 	{
 		if (!ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".bmp"))
 			continue ;
-		if (!(bmp = read_bmp(av[i])))
-		{
-			ft_printf("{RED}ERROR{RESET}\n");
-			return (0);
-		}
-		ft_printf("Read\t%s\n", av[i]);
-		if (!(bxpm = create_bxpm(bmp)))
-		{
-			ft_printf("{RED}ERROR{RESET}\n");
-			return (0);
-		}
+		bmp = read_bmp(av[i]);
+		bxpm = create_bxpm(bmp);
 		ft_printf("Create\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
-		write_bxpm(bxpm, path, name);
 		ft_printf("Writing\t%s.bxpm\n", path);
-		free_bmp(bmp);
-		free_bxpm(bxpm);
+		write_bxpm(bxpm, path, name);
 		ft_printf("{GREEN}Done with: %s{RESET}\n", path);
-		free(path);
-		free(name);
+		free_converter(bmp, bxpm, path, name);
 	}
-	return (0);
+	return (1);
 }
