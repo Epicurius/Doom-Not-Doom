@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 16:28:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:44:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,17 @@ int	game(char *map, t_settings init)
 		return (0);
 	init_doom(doom, init);
     while (!doom->quit)
-		debug_loop(doom, &event);
-	//game_loop(doom, &event);
+		game_loop(doom, &event);
+		//debug_loop(doom, &event);
 	free_doom(doom);
 	return (1);
 }
 
 void	launcher(void)
 {
-	char *arr[3];
+	char *arr[2];
 	
+	ft_putstr("here\n");
 	arr[0] = ft_strdup(ROOT_PATH"ui/dialog");
 	arr[1] = NULL;
 	execv(arr[0], arr);
@@ -108,7 +109,7 @@ int main(int ac, char **av)
 	init.flag = 0;
 	if (ac <= 1)
 		return (ft_printf("{RED}[ERROR]{RESET} No map.\n"));
-	if (ac > 4)
+	if (ac >= 4)
 	{
 		init.w = ft_atoi(av[2]);
 		init.h = ft_atoi(av[3]);
@@ -117,6 +118,7 @@ int main(int ac, char **av)
 		init.diff = ft_atoi(av[4]);
 	if (ac > 6)
 		init.flag = ft_atoi(av[5]);
+	//ft_printf("%d %d %d %d %d\n", ac, init.w, init.h, init.diff, init.flag);
 	game(av[1], init);
 	if (init.flag == 1)
 		launcher();
