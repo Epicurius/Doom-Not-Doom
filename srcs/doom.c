@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 16:44:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:47:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int main(int ac, char **av)
 		init.w = ft_atoi(av[2]);
 		init.h = ft_atoi(av[3]);
 	}
-	if (ac > 5)
+	if (ac >= 5)
 		init.diff = ft_atoi(av[4]);
-	if (ac > 6)
+	if (ac >= 6)
 		init.flag = ft_atoi(av[5]);
 	//ft_printf("%d %d %d %d %d\n", ac, init.w, init.h, init.diff, init.flag);
 	game(av[1], init);
