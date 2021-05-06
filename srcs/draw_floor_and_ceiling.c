@@ -9,7 +9,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 	if (vline->height.ceiling > render->ytop)
 	{
 		vline->y1 = render->ytop;
-		vline->y2 = min(vline->curr.ceiling, render->ybot);
+		vline->y2 = ft_min(vline->curr.ceiling, render->ybot);
 		if (render->ceiling.tx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline);
 		else if (render->ceiling.tx < 0)
@@ -20,7 +20,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 	}
 	if (vline->curr.floor < render->ybot)
 	{
-		vline->y1 = max(0, vline->curr.floor);
+		vline->y1 = ft_max(0, vline->curr.floor);
 		vline->y2 = render->ybot;
 		if (render->floor.tx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline);

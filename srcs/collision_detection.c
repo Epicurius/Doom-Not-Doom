@@ -53,8 +53,8 @@ int	fit_through_portal(t_collision *sprite, t_game_sector *sector, t_game_wall *
 	double portal_top;
 	double portal_bot;
 
-	portal_bot = max(sector->floor.y, sprite->sectors[wall->n].floor.y);
-	portal_top = min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
+	portal_bot = ft_max(sector->floor.y, sprite->sectors[wall->n].floor.y);
+	portal_top = ft_min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
 	if (portal_top <= portal_bot + sprite->hitbox_height)
 		return (0);
 	if (portal_top > sprite->where->z + sprite->hitbox_height &&

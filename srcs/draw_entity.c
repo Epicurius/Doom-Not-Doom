@@ -51,7 +51,7 @@ void	sprite_threads(t_doom *doom, t_game_entity_render render, t_game_entity *sp
 		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_game_entity_render));
 		thread[y].clamp_start.y	+= i / 10.0 * y;
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
-		thread[y].clamp_end.y	= min(thread[y].clamp_end.y, render.clamp_end.y);
+		thread[y].clamp_end.y	= ft_min(thread[y].clamp_end.y, render.clamp_end.y);
 		thread[y].surface = doom->surface;
 		thread[y].bxpm = &doom->sheet[sprite->type].bxpm;
 		thread[y].shooting = doom->player.shooting;

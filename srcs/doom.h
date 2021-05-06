@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:45:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 10:35:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,10 @@
 # include "../lib/tpool/tpool.h"
 # include "../SDL2/includes/SDL.h"
 # include "../SDL2/includes/SDL_ttf.h"
-# include "../SDL2/includes/SDL_image.h"
 # include "./macros.h"
 # include "./utils.h"
 # include <math.h>
 # include <fcntl.h>
-
-#define min(a,b)			(((a) < (b)) ? (a) : (b))
-#define max(a,b)			(((a) > (b)) ? (a) : (b))
-
 
 typedef struct		s_bxpm
 {

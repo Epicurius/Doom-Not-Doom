@@ -87,8 +87,8 @@ t_xyz	xyz(double x, double y, double z)
 //	Determine whether the two number ranges overlap.
 int	overlap(double a0, double a1, double b0, double b1)
 {
-	if (min(a0, a1) <= max(b0, b1) &&
-		min(b0, b1) <= max(a0, a1))
+	if (ft_min(a0, a1) <= ft_max(b0, b1) &&
+		ft_min(b0, b1) <= ft_max(a0, a1))
 		return (1);
 	return (0);
 }

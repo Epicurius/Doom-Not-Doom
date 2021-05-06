@@ -38,18 +38,18 @@ void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 	if (limit[0] < skybox.curr.ceiling)
 	{
 		skybox.y1 = limit[0];
-		skybox.y2 = min(skybox.curr.ceiling, limit[1]);
+		skybox.y2 = ft_min(skybox.curr.ceiling, limit[1]);
 		skybox_ceiling_vline(render, skybox, i + 4);
 	}
 	if (skybox.curr.ceiling < limit[1])
 	{	
-		skybox.y1 = max(limit[0], skybox.curr.ceiling);
-		skybox.y2 = min(skybox.curr.floor, limit[1]);
+		skybox.y1 = ft_max(limit[0], skybox.curr.ceiling);
+		skybox.y2 = ft_min(skybox.curr.floor, limit[1]);
 		skybox_wall_vline(render, skybox, i + render->s);
 	}
 	if (skybox.curr.floor < limit[1])
 	{
-		skybox.y1 = max(limit[0], skybox.curr.floor);
+		skybox.y1 = ft_max(limit[0], skybox.curr.floor);
 		skybox.y2 = limit[1];
 		skybox_floor_vline(render, skybox, i + 5);
 	}

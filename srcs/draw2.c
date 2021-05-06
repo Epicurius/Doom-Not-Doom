@@ -159,7 +159,7 @@ void		DrawScreen(t_doom *doom)
 	while (++x < doom->nb.threads)
 	{
 		doom->render[x].x = w /(double)doom->nb.threads * x;
-		doom->render[x].xend = min(w /(double)doom->nb.threads * (x + 1), w);
+		doom->render[x].xend = ft_min(w /(double)doom->nb.threads * (x + 1), w);
 		screen_x_sector(doom, doom->render[x].x, doom->render[x].xend);
 		doom->render[x].player = doom->player;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);

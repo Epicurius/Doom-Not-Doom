@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 14:16:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 10:30:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_doom(t_doom *doom, t_settings *settings)
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
-	doom->nb.processors = min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	printf("nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
@@ -81,8 +81,8 @@ int	game(t_settings *settings)
 		return (0);
 	init_doom(doom, settings);
     while (!doom->quit)
-		game_loop(doom, &event);
-	//debug_loop(doom, &event);
+		debug_loop(doom, &event);
+	//	game_loop(doom, &event);
 	free_doom(doom);
 	return (1);
 }
