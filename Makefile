@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/06 11:23:55 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/06 19:00:25 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,9 +150,21 @@ LIB_DIR = lib
 SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 
+INCL =	-I ./SDL/SDL2.framework/Headers \
+		-I ./SDL/SDL2_TTF.framework/Headers \
+		-I ./SDL/SDL2_mixer.framework/Headers
+
+#INCL =	-I ./SDL/*.framework/Headers
+
+FRAME = -F ./SDL
+SDL =	-F ./SDL	-framework SDL2 \
+					-framework SDL2_TTF \
+					-framework SDL2_mixer \
+					-Wl, -rpath ./SDL
+
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
-SDL = -I ../SDL2/include -L ../SDL2/lib -l SDL2 -l SDL2_ttf
 CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
+
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
 	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
@@ -163,11 +175,11 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
-	@gcc -o $@ $(OBJ) $(LIBS) $(SDL)
+	@gcc -o $(NAME) $(SDL) $(CFLAGS) $(INCL) $(OBJ) $(LIBS)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -c $< -o $@ $(CFLAGS)
+	@gcc -o $@ -c $< -g $(FRAME) $(INCL) $(CFLAGS)
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bmp_to_bxpm/converter $<

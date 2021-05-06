@@ -6,18 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 16:20:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:13:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_H
 # define DOOM_H
 
+# include "SDL.h"
+# include "SDL_ttf.h"
 # include "../lib/libft/libft.h"
 # include "../lib/libpf/ft_printf.h"
 # include "../lib/tpool/tpool.h"
-# include "../../SDL2/includes/SDL.h"
-# include "../../SDL2/includes/SDL_ttf.h"
 # include "../../path.h"
 # include "./macros.h"
 # include "./utils.h"
