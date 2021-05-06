@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 10:46:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 11:19:02 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../lib/libft/libft.h"
 # include "../lib/libpf/ft_printf.h"
 # include "../lib/tpool/tpool.h"
-# include "../SDL2/includes/SDL.h"
-# include "../SDL2/includes/SDL_ttf.h"
+# include "../../SDL2/includes/SDL.h"
+# include "../../SDL2/includes/SDL_ttf.h"
 # include "./macros.h"
 # include "./utils.h"
 # include <math.h>
