@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/06 11:20:04 by jsalmi           ###   ########.fr        #
+#    Updated: 2021/05/06 11:23:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,7 +151,7 @@ SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
-SDL = -I ../SDL2/include -L ../SDL2/lib -l SDL2 -l SDl2_ttf
+SDL = -I ../SDL2/include -L ../SDL2/lib -l SDL2 -l SDL2_ttf
 CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
