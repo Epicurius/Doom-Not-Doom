@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 14:58:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:20:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ typedef struct		s_bxpm
 	unsigned short	*pix;
 	uint32_t		*palet[512];
 }					t_bxpm;
+
+typedef struct	s_settings
+{
+	int	w;
+	int h;
+	int diff;
+	int mouse_x;
+	int mouse_y;
+	int fov;
+	int flag;
+}				t_settings;
 
 typedef	struct		s_game_fc
 {
@@ -412,24 +423,15 @@ typedef struct		s_doom
 	t_bxpm			mtx[6];
 	t_game_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
-}					t_doom;
 
-typedef struct	s_settings
-{
-	char		*map;
-	int			mode;
-	int			god;
-	int			width;
-	int			height;
-	int			mouse_x;
-	int			mouse_y;
-}				t_settings;
+	t_settings		settings;
+}					t_doom;
 
 //		Debug
 void	debug_loop(t_doom *doom, SDL_Event *event);
 
 //		Game
-int		game(int ac, char **av);
+int		game(char *map, t_settings init);
 void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);

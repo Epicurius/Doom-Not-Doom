@@ -6,21 +6,22 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 14:59:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:28:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_doom(t_doom *doom, int w, int h)
+void	init_doom(t_doom *doom, t_settings init)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	doom->w2 = w / 2;
-	doom->h2 = h / 2;
+	doom->settings = init;
+	doom->w2 = doom->settings.w / 2;
+	doom->h2 = doom->settings.h / 2;
 
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			w, h, SDL_WINDOW_SHOWN);
+			doom->settings.w, doom->settings.h, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
@@ -70,46 +71,54 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	SDL_UpdateWindowSurface(doom->win);
 }
 
-int	doom(char *name, int w, int h)
+int	game(char *map, t_settings init)
 {
 	t_doom		*doom;
     SDL_Event	event;
 
 	if (!(doom = ft_memalloc(sizeof(t_doom))))
 		return (0);
-	if (!read_file(doom, name))
+	if (!read_file(doom, map))
 		return (0);
-	init_doom(doom, w, h);
+	init_doom(doom, init);
     while (!doom->quit)
 		debug_loop(doom, &event);
-	//	game_loop(doom, &event);
+	//game_loop(doom, &event);
 	free_doom(doom);
 	return (1);
 }
 
-int game(int ac, char **av)
+void	launcher(void)
 {
-	int w;
-	int h;
-
-	w = 1920;
-	h = 1080;
-	if (ac <= 1)
-		return (ft_printf("{RED}[ERROR]{RESET} No map.\n"));
-	if (ac >= 3)
-	{
-		w = ft_atoi(av[2]);
-		h = ft_atoi(av[3]);
-	}
-	if (w > h)
-		doom(av[1], w, h);
-	else
-		ft_printf("{RED}[ERROR]{RESET} Game does not support %d/%d aspect ratio\n", w, h);
-	return (1);
+	char *arr[3];
+	
+	arr[0] = ft_strdup(ROOT_PATH"ui/dialog");
+	arr[1] = NULL;
+	execv(arr[0], arr);
+	free(&arr[0]);
 }
 
 int main(int ac, char **av)
 {
-	game(ac, av);
+	t_settings init;
+
+	init.w = 1920;
+	init.h = 1080;
+	init.diff = 0;
+	init.flag = 0;
+	if (ac <= 1)
+		return (ft_printf("{RED}[ERROR]{RESET} No map.\n"));
+	if (ac > 4)
+	{
+		init.w = ft_atoi(av[2]);
+		init.h = ft_atoi(av[3]);
+	}
+	if (ac > 5)
+		init.diff = ft_atoi(av[4]);
+	if (ac > 6)
+		init.flag = ft_atoi(av[5]);
+	game(av[1], init);
+	if (init.flag == 1)
+		launcher();
 	return (1);
 }
