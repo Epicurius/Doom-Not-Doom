@@ -44,7 +44,7 @@ void 	DrawProjectiles(t_doom *doom)
 	render.pos		= new_rect(810, 76, 856, 119);
 	render.surface	= doom->surface;
 	curr = doom->orb;
-	while (curr != NULL)
+	while (curr)
 	{
 		orb = curr->content;
 		if (doom->sectors[orb->sector].visible)

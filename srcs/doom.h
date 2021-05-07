@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 12:48:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/07 14:15:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "SDL.h"
 # include "SDL_ttf.h"
+# include "SDL_mixer.h"
 # include "../lib/libft/libft.h"
 # include "../lib/libpf/ft_printf.h"
 # include "../lib/tpool/tpool.h"
 # include "../../path.h"
 # include "./macros.h"
+# include "./sound.h"
 # include "./utils.h"
 # include <math.h>
 # include <fcntl.h>
@@ -424,9 +426,12 @@ typedef struct		s_doom
 	t_game_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 
+	Mix_Chunk		*sound[2];
+
 	t_settings		settings;
 }					t_doom;
-
+//		Sound
+void	init_sound(t_doom *doom);
 //		Debug
 void	debug_loop(t_doom *doom, SDL_Event *event);
 

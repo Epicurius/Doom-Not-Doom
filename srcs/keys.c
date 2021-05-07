@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 13:09:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/07 14:07:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	keys(t_doom *doom, SDL_Event *event)
 	if (event->type == SDL_QUIT)
 		doom->quit = 1;
 	if (event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
-			key(doom, event);
+		key(doom, event);
 	if (event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEBUTTONDOWN)
-			mouse(doom, event);
+		mouse(doom, event);
+	//if (doom->key.lmouse)
+	//	Mix_PlayChannel(-1, doom->sound[1], 5);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/06 17:21:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/07 15:16:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	init_doom(t_doom *doom, t_settings init)
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	TTF_Init();
+	Mix_Init(MIX_INIT_FLAC);
 	doom->settings = init;
 	doom->w2 = doom->settings.w / 2;
 	doom->h2 = doom->settings.h / 2;
@@ -39,6 +40,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	init_game_entity(doom);
 	init_render(doom);
 	init_gamemode(doom);
+	init_sound(doom);
 }
 
 void	game_loop(t_doom *doom, SDL_Event *event)
@@ -60,7 +62,9 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 			keys(doom, event);
 	}
 	tpool_wait(&doom->tpool);
+	ft_putstr("a\n");
 	DrawProjectiles(doom);
+	ft_putstr("b\n");
 	Drawsprite(doom);
 	draw_crosshair(doom);
 	blit_weapon(doom);	
@@ -118,9 +122,10 @@ int main(int ac, char **av)
 		init.diff = ft_atoi(av[4]);
 	if (ac >= 6)
 		init.flag = ft_atoi(av[5]);
-	//ft_printf("%d %d %d %d %d\n", ac, init.w, init.h, init.diff, init.flag);
 	game(av[1], init);
 	if (init.flag == 1)
 		launcher();
+	//while (1)
+	//	;
 	return (1);
 }

@@ -144,6 +144,15 @@ void	free_weapons(t_doom *doom)
 	}
 }
 
+void	free_sounds(t_doom *doom)
+{
+	int i;
+
+	i = -1;
+	while (++i < 2)
+		Mix_FreeChunk(doom->sound[i]);
+}
+
 int	free_doom(t_doom *doom)
 {
 	free_map(doom);
@@ -158,10 +167,12 @@ int	free_doom(t_doom *doom)
 	SDL_FreeSurface(doom->time.surf);
 	free_render_utils(doom);
 	free_font(doom);
+	free_sounds(doom);
 	free_tpool(&doom->tpool);
 	SDL_FreeSurface(doom->surface);
 	SDL_DestroyWindow(doom->win);
 	SDL_Quit();
+	Mix_Quit();
 	TTF_Quit();
 	ft_putstr("All is free!\n");
 	free(doom);
