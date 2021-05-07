@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/07 13:24:07 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/07 15:39:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,8 @@ RAW_SRC = doom.c\
 		wave.c\
 		weapon_animation.c\
 		malloc_texture_pos.c\
-		debug_loop.c
+		debug_loop.c\
+		sound.c
 		
 NAME = doom
 CDIR = srcs
@@ -166,20 +167,21 @@ SDL =	-F ./SDL	-framework SDL2 \
 					-Wl, -rpath ./SDL
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
-CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
+CFLAGS = #-Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
+SHELL_NAME	:= $(shell uname -s)
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
-	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
-
 ifeq ($(SHELL_NAME), Darwin)
 	@mkdir -p ~/Library/Frameworks
 ifeq ("$(wildcard ~/Library/Frameworks/SDL2.framework)","")
-	@cp -R ./SDL/SDL2.framework ~/Library/Frameworks
-	@cp -R ./SDL/SDL2_ttf.framework ~/Library/Frameworks
-	@cp -R ./SDL/SDL2_image.framework ~/Library/Frameworks
-	@cp -R ./SDL/SDL2_mixer.framework ~/Library/Frameworks
-	@echo "$(MSG)SDL installed!$(END)"
+	@cp -Rf ./SDL/SDL2.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_ttf.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_image.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_mixer.framework ~/Library/Frameworks/
+	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
+else
+	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
 endif
 endif
 
