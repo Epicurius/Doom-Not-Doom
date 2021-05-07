@@ -39,8 +39,8 @@ void	draw_map(t_doom *doom)
 		sect = &doom->sectors[s];
 		while (++w < sect->npoints)
 		{
-			if (sect->wall[w]->n != -1)
-				continue ; 
+			//if (sect->wall[w]->n != -1)
+			//	continue ; 
 			p[0].x = doom->w2 + (sect->wall[w]->v1.x - where.x) * MM_SECTORS_SCALE;
 			p[0].y = doom->h2 + (sect->wall[w]->v1.y - where.y) * MM_SECTORS_SCALE;
 			p[1].x = doom->w2 + (sect->wall[w]->v2.x - where.x) * MM_SECTORS_SCALE;

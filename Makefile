@@ -1,14 +1,24 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    NewMakefile                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/06 19:00:25 by nneronin         ###   ########.fr        #
+#    Created: 2021/05/07 09:50:43 by nneronin          #+#    #+#              #
+#    Updated: 2021/05/07 12:24:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+RED := "\e[0;31m"
+GREEN := "\e[0;32m"
+YELLOW := "\e[0;33m"
+BLUE := "\e[0;34m"
+MAGENTA := "\e[0;35m"
+CYAN := "\e[0;36m"
+RESET :="\e[0m"
+
+SHELL_NAME	:= $(shell uname -s)
 
 RAW_TEXTURES =	wood.bmp\
 		spooky.bmp\
@@ -62,14 +72,6 @@ PATH_TO_BMP =	./resources/BMP
 PATH_TO_BXPM =	./resources/BXPM
 BMP = $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
 BXPM = $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
-
-RED := "\e[0;31m"
-GREEN := "\e[0;32m"
-YELLOW := "\e[0;33m"
-BLUE := "\e[0;34m"
-MAGENTA := "\e[0;35m"
-CYAN := "\e[0;36m"
-RESET :="\e[0m"
 
 #load_bxpm.c\
 
@@ -142,44 +144,58 @@ RAW_SRC = doom.c\
 		weapon_animation.c\
 		malloc_texture_pos.c\
 		debug_loop.c
-		
+
 NAME = doom
 CDIR = srcs
 ODIR = obj
 LIB_DIR = lib
 SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
-
-INCL =	-I ./SDL/SDL2.framework/Headers \
-		-I ./SDL/SDL2_TTF.framework/Headers \
-		-I ./SDL/SDL2_mixer.framework/Headers
-
-#INCL =	-I ./SDL/*.framework/Headers
-
-FRAME = -F ./SDL
-SDL =	-F ./SDL	-framework SDL2 \
-					-framework SDL2_TTF \
-					-framework SDL2_mixer \
-					-Wl, -rpath ./SDL
-
+DEP	:=	$(OBJ:.o=.d)
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
-CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
+FLAGS := -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result -MMD -g
+
+#ifeq ($(SHELL_NAME), Darwin)
+#SDL_PATH	= ./SDL_Darwin
+#SDL			:= -I $(SDL_PATH)/SDL2.framework/Headers -framework SDL2 -F $(SDL_PATH)
+#SDL_TTF		:= -I $(SDL_PATH)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_PATH)
+#SDL_IMAGE	:= -I $(SDL_PATH)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_PATH)
+#SDL_MIXER	:= -I $(SDL_PATH)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $SDL_PATH)
+#else
+#SDL_PATH	:= ./SDL_Windows
+#SDL			:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2
+#SDL_TTF		:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2_ttf
+#SDL_MIXER	:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2_mixer
+#endif
+
+SDL_PATH	:= ./SDL_OSX
+SDL			:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2
+SDL_TTF		:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2_ttf
+SDL_MIXER	:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2_mixer
+SDL_IMAGE	:= -I $(SDL_PATH) -L $(SDL_PATH) -l SDL2_image
+
+FLAGS		+= $(LIBS) $(SDL) $(SDL_IMAGE) $(SDL_TTF) $(SDL_MIXER)
+
+ifeq ($(SHELL_NAME), Linux)
+	FLAGS		+= -lm -ldl -pthread
+endif
 
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
-	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
+	@printf $(YELLOW)"~~~~ Doom is ready! ($(SHELL_NAME)) ~~~~\n"$(RESET)
+
+-include $(DEP)
 
 $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
-	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
-	@gcc -o $(NAME) $(SDL) $(CFLAGS) $(INCL) $(OBJ) $(LIBS)
+	@gcc $(OBJ) -o $(NAME) $(FLAGS) $(CFLAGS)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -o $@ -c $< -g $(FRAME) $(INCL) $(CFLAGS)
+	@gcc -o $@ -c $< -w $(FLAGS) $(CFLAGS)
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bmp_to_bxpm/converter $<
@@ -217,4 +233,4 @@ $(RESOURCES):
 
 re: fclean all
 
-.PHONY: clean, all, re, fclean
+.PHONY: all clean fclean re
