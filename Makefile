@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/07 12:55:44 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/07 13:24:07 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,6 +171,17 @@ CFLAGS = -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
 all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
 	@printf $(GREEN)"~~~~~~~~ Doom is ready! ~~~~~~~~\n"$(RESET)
+
+ifeq ($(SHELL_NAME), Darwin)
+	@mkdir -p ~/Library/Frameworks
+ifeq ("$(wildcard ~/Library/Frameworks/SDL2.framework)","")
+	@cp -R ./SDL/SDL2.framework ~/Library/Frameworks
+	@cp -R ./SDL/SDL2_ttf.framework ~/Library/Frameworks
+	@cp -R ./SDL/SDL2_image.framework ~/Library/Frameworks
+	@cp -R ./SDL/SDL2_mixer.framework ~/Library/Frameworks
+	@echo "$(MSG)SDL installed!$(END)"
+endif
+endif
 
 -include $(DEP)
 
