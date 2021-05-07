@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/07 15:39:37 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/07 16:24:38 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,38 +152,33 @@ SRCS = $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ = $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP	:=	$(OBJ:.o=.d)
 
-INCL =	-I ./SDL/SDL2.framework/Headers \
-		-I ./SDL/SDL2_TTF.framework/Headers \
+#INCL =	-I ./SDL/SDL2.framework/Headers \
+		-I ./SDL/SDL2_ttf.framework/Headers \
 		-I ./SDL/SDL2_mixer.framework/Headers \
 		-I ./SDL/SDL2_image.framework/Headers
 
 #INCL =	-I ./SDL/*.framework/Headers
 
-FRAME = -F ./SDL
-SDL =	-F ./SDL	-framework SDL2 \
-					-framework SDL2_TTF \
-					-framework SDL2_mixer \
-					-framework SDL2_image \
-					-Wl, -rpath ./SDL
+#FRAME = -F ~/Library/Frameworks
+#SDL =	-F ~/Library/Frameworks	-framework SDL2 \
+								-framework SDL2_ttf \
+								-framework SDL2_mixer \
+								-framework SDL2_image \
+								-Wl, -rpath ~/Library/Frameworks
+
+SDL_PATH	:= ./SDL
+SDL_MAIN	:= -I $(SDL_PATH)/SDL2.framework/Headers -framework SDL2 -F $(SDL_PATH)
+SDL_IMAGE	:= -I $(SDL_PATH)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_PATH)
+SDL_MIXER	:= -I $(SDL_PATH)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_PATH)
+SDL_TTF		:= -I $(SDL_PATH)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_PATH)
 
 LIBS = ./lib/libft/libft.a ./lib/libpf/libpf.a ./lib/tpool/tpool.a
 CFLAGS = #-Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
-
+FLAGS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)
 SHELL_NAME	:= $(shell uname -s)
 
-all: $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
-ifeq ($(SHELL_NAME), Darwin)
-	@mkdir -p ~/Library/Frameworks
-ifeq ("$(wildcard ~/Library/Frameworks/SDL2.framework)","")
-	@cp -Rf ./SDL/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf ./SDL/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf ./SDL/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf ./SDL/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
-else
-	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
-endif
-endif
+
+all: framework $(LIBS) $(RESOURCES) $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
 
 -include $(DEP)
 
@@ -193,11 +188,11 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@printf $(CYAN)"[INFO]	Linking Project.\n"$(RESET)
-	@gcc -o $(NAME) $(SDL) $(INCL) $(OBJ) $(LIBS) $(CFLAGS) 
+	@gcc -o $(NAME) $(FLAGS) $(OBJ) $(LIBS) $(CFLAGS) 
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
-	@gcc -o $@ -c $< $(FRAME) $(INCL) $(CFLAGS)
+	@gcc -o $@ -c $< $(FLAGS) $(CFLAGS)
 
 $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@./bmp_to_bxpm/converter $<
@@ -213,6 +208,20 @@ $(LIBS): $(LIB_DIR)
 	@make -C ./lib/tpool
 	@make -C ./bmp_to_bxpm
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
+
+framework:
+ifeq ($(SHELL_NAME), Darwin)
+	@mkdir -p ~/Library/Frameworks
+ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
+	@cp -Rf ./SDL/SDL2.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_ttf.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_image.framework ~/Library/Frameworks/
+	@cp -Rf ./SDL/SDL2_mixer.framework ~/Library/Frameworks/
+	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
+else
+	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
+endif
+endif
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
