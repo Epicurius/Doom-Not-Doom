@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/08 12:28:48 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/08 12:47:10 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -211,7 +211,7 @@ resources: $(RESOURCES)
 
 framework:
 ifeq ($(SHELL_NAME), Darwin)
-	@mkdir -p ~/Library/Frameworks
+	@mkdir -p ~/Library/Frameworks	
 ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
 	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
 	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
@@ -227,6 +227,13 @@ framework_del:
 	@rm -rf ~/Library/Frameworks/SDL2*.framework
 	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
-re: fclean all
+framework_re: framework_del
+	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
+	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
 
-.PHONY: clean, all, re, fclean, resources, framework, frameworks_del
+re: framework_re fclean all
+
+.PHONY: clean, all, re, fclean, resources, framework, framework_del, frameworks_re
