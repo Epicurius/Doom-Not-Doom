@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:42:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:38:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ SDL_Color	hex_to_sdl_color(int hex)
 {
 	SDL_Color color;
 
-	color.r = hex >> 24;
-	color.g = hex >> 16;
-	color.b = hex >> 8;
-	color.a = hex;
+	color.a = hex >> 24;
+	color.r = hex >> 16;
+	color.g = hex >> 8;
+	color.b = hex;
 	return (color);
 }
 
@@ -31,9 +31,10 @@ Uint32		brightness(Uint32 src, int brightness)
 {
 	if (brightness == 0)
 		return (src);
-	src = (int)ft_clamp(((brightness + 256) * (src >> 16 & 0xFF)) / 256, 0, 255)
-	<< 16 | (int)ft_clamp(((brightness + 256) * (src >> 8 & 0xFF)) / 256, 0, 255)
-	<< 8 | (int)ft_clamp(((brightness + 256) * (src & 0xFF)) / 256, 0, 255);
+	src = ((src >> 24 & 0xFF) << 24) |
+		(int)ft_clamp(((brightness + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16 |
+		(int)ft_clamp(((brightness + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8 |
+		(int)ft_clamp(((brightness + 256) * (src & 0xFF)) / 256, 0, 255);
 	return (src);
 }
 

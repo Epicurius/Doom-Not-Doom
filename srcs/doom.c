@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 16:05:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 18:36:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	game(char *map, t_settings init)
     while (!doom->quit)
 		game_loop(doom, &event);
 		//debug_loop(doom, &event);
+	game_over(doom);
 	free_doom(doom);
 	return (1);
 }

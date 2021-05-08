@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 16:58:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:10:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,7 +395,7 @@ typedef struct		s_doom
 	int				w2;
 	int				h2;
 
-	t_game_mode			game;
+	t_game_mode		game;
 	t_nb			nb;
 	t_tpool			tpool;
 	t_time			time;
@@ -410,7 +410,7 @@ typedef struct		s_doom
 	t_list			*sprite;
 	t_list			*rifts;
 
-	t_data		npe_data[3];
+	t_data			npe_data[3];
 
 	t_list			*orb;
 	t_camera		cam;
@@ -442,6 +442,7 @@ void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
 void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
+void	game_over(t_doom *doom);
 
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);
