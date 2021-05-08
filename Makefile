@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/08 12:47:10 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/08 13:01:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -225,6 +225,7 @@ endif
 
 framework_del:
 	@rm -rf ~/Library/Frameworks/SDL2*.framework
+	@/bin/rm -f $(NAME)
 	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
 framework_re: framework_del
@@ -234,6 +235,6 @@ framework_re: framework_del
 	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
 	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
 
-re: framework_re fclean all
+re: fclean all
 
 .PHONY: clean, all, re, fclean, resources, framework, framework_del, frameworks_re
