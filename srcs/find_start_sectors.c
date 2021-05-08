@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_start_sectors.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:51:04 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:51:06 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
@@ -14,7 +25,7 @@ int	fustrum_in_sector(void *arg)
 	int	x;
 	int	end;
 	t_xyz	pos;
-	t_game_player p;
+	t_player p;
 
 	x = ((t_fustrum_thread*)arg)->x;
 	end = ((t_fustrum_thread*)arg)->end;

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_skybox.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:44:13 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
@@ -57,7 +68,7 @@ void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 
 void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 {
-	t_game_wall wall;
+	t_wall wall;
 
 	wall = render->skybox[i];
 	vline->alpha = (render->x - wall.x1) / wall.xrange;

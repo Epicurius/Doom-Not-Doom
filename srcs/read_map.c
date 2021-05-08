@@ -14,7 +14,7 @@
 
 void	parse_player(t_doom *doom, char **arr)
 {
-	t_game_player *player;
+	t_player *player;
 
 	player		= &doom->player;
 	player->where.x	= ft_atof(arr[0]) * doom->map_scale;

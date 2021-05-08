@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_scale.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:51:49 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_wsprite_scale(t_doom *doom, t_game_wall *wall)
+void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 {
 	int i;
 	int x;
 	int y;
-	t_game_wsprite *wsprite;
+	t_wsprite *wsprite;
 
 	i = -1;
 	while (++i < wall->wsprite.total)
@@ -27,7 +38,7 @@ void	init_wsprite_scale(t_doom *doom, t_game_wall *wall)
 void	init_scale(t_doom *doom)
 {
 	int i;
-	t_game_wall *wall;
+	t_wall *wall;
 
 	i = -1;
 	while (++i < doom->nb.walls)

@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:52:25 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
 void	map_player(t_doom *doom)
 {
 	t_i2	p[2];
-	t_game_map	map;
-	t_game_player player;
+	t_map	map;
+	t_player player;
 
 	map = doom->map;
 	player = doom->player;
@@ -28,9 +39,9 @@ void	draw_map(t_doom *doom)
 	int s;
 	int w;
 	t_i2 p[2];
-	t_game_map map = doom->map;
+	t_map map = doom->map;
 	t_xyz where = doom->player.where;
-	t_game_sector *sect;
+	t_sector *sect;
 
 	s = -1;
 	while (++s < doom->nb.sectors)
@@ -57,7 +68,7 @@ void	map_area(t_doom *doom)
 	int x;
 	int y;
 	Uint32*	pixels = doom->surface->pixels;
-	t_game_map map = doom->map;
+	t_map map = doom->map;
 
 
 	y = map.min.y - MM_BEZEL_SIZE;
@@ -86,7 +97,7 @@ void	map(t_doom *doom)
 
 void	init_minimap(t_doom *doom)
 {
-	t_game_map *map;
+	t_map *map;
 
 	map = &doom->map;
 	map->h = doom->surface->h * (float)MM_SCALE;

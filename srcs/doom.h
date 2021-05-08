@@ -49,11 +49,11 @@ typedef struct	s_settings
 	int flag;
 }				t_settings;
 
-typedef	struct		s_game_fc
+typedef	struct		s_fc
 {
 	double			floor;
 	double			ceiling;
-}					t_game_fc;
+}					t_fc;
 
 typedef struct		s_vline
 {
@@ -67,15 +67,15 @@ typedef struct		s_vline
 	double			z_near_z;
 	double			line_height;
 
-	t_game_fc	start;
-	t_game_fc	height;
+	t_fc	start;
+	t_fc	height;
 
-	t_game_fc	max;
-	t_game_fc	curr;
+	t_fc	max;
+	t_fc	curr;
 
 	/* Neighbor */
-	t_game_fc	max_n;
-	t_game_fc	curr_n;
+	t_fc	max_n;
+	t_fc	curr_n;
 
 	/* Texel */
 	t_xyz			texel;
@@ -83,16 +83,16 @@ typedef struct		s_vline
 	t_xyz			texel_range;
 }					t_vline;
 
-typedef struct		s_game_project
+typedef struct		s_project
 {
 	t_xyz			start;
 	t_xyz			where;
 	t_xyz			velocity;
 	double			dist;
 	int				sector;	
-}					t_game_project;
+}					t_project;
 
-typedef struct		s_game_data
+typedef struct		s_data
 {
 	int				health;
 	int				height;
@@ -109,9 +109,9 @@ typedef struct		s_game_data
 	int				attack_range;
 	int				frame_rate[4];
 	double			attack_speed;
-}					t_game_data;
+}					t_data;
 
-typedef struct		s_game_entity
+typedef struct		s_entity
 {
 	int				render; //will depend on hp
 	t_xyz			where;
@@ -130,10 +130,10 @@ typedef struct		s_game_entity
 	int				type;
 	double			scale;
 	double			time;
-	t_game_data		*data;
-}					t_game_entity;
+	t_data		*data;
+}					t_entity;
 
-typedef struct		s_game_player
+typedef struct		s_player
 {
 	t_xyz			where;
 	t_xyz			velocity;
@@ -149,9 +149,9 @@ typedef struct		s_game_player
 	int				flying;
 	int				shooting;
 	int				equiped;
-}					t_game_player;
+}					t_player;
 
-typedef struct		s_game_wsprite
+typedef struct		s_wsprite
 {
 	int				id;
 	t_xyz			where;
@@ -163,26 +163,26 @@ typedef struct		s_game_wsprite
 	double			scale_h;
 	t_xyz			tscale;
 	int				ready;
-}					t_game_wsprite;
+}					t_wsprite;
 
-typedef struct		s_game_wsprites
+typedef struct		s_wsprites
 {
-	t_game_wsprite		*num;
+	t_wsprite		*num;
 	int				curr;
 	int				total;
-}					t_game_wsprites;
+}					t_wsprites;
 
-typedef struct		s_game_bh
+typedef struct		s_bh
 {
-	t_game_wsprite		num[MAX_BH];
+	t_wsprite		num[MAX_BH];
 	int				curr;
 	int				total;
-}					t_game_bh;
+}					t_bh;
 
-typedef struct		s_game_wall
+typedef struct		s_wall
 {
-	t_game_wsprites		wsprite;
-	t_game_bh			bh;
+	t_wsprites		wsprite;
+	t_bh			bh;
 	int				id;
 	int				sect;
 	int				visible;
@@ -212,14 +212,14 @@ typedef struct		s_game_wall
 	double			cx1;
 	double			cx2;
 
-	t_game_fc	s1;
-	t_game_fc	s2;
-	t_game_fc	range;
+	t_fc	s1;
+	t_fc	s2;
+	t_fc	range;
 
 	/*Neighbors values*/
-	t_game_fc	s1_n;
-	t_game_fc	s2_n;
-	t_game_fc	range_n;
+	t_fc	s1_n;
+	t_fc	s2_n;
+	t_fc	range_n;
 
 	/*Texture values*/
 	double			xrange;
@@ -232,26 +232,26 @@ typedef struct		s_game_wall
 	double			y1z0;
 	double			y0z1;
 	t_xyz			tscale;
-}					t_game_wall;
+}					t_wall;
 
-typedef struct		s_game_sector
+typedef struct		s_sector
 {
 	int				id;
     int				npoints;
-	t_game_wall			**wall;
+	t_wall			**wall;
 	t_plane			floor;
 	t_plane			ceiling;
 	int				light;
 	float			gravity;
 	char			visible;
-} 					t_game_sector;
+} 					t_sector;
 
 
 typedef struct		s_collision
 {
 	t_xyz			*where;
 	t_xyz			*velocity;
-	t_game_sector		*sectors;
+	t_sector		*sectors;
 	t_list			*entities;
 	int				*sector;
 	int				nb_entities;
@@ -296,32 +296,32 @@ typedef struct		s_sprite_render
 	int				shooting;
 	int				dmg;
 	int				*hp;
-}					t_game_entity_render;
+}					t_entity_render;
 
 typedef struct		s_render
 {
 	SDL_Surface		*surface;
-	t_game_sector		*sectors;
+	t_sector		*sectors;
 	int 			*fustrum;
-	t_game_wall			*skybox;
+	t_wall			*skybox;
 	t_bxpm			*mtx;
 	t_bxpm			*stx;
-	t_game_player		player;
+	t_player		player;
 	int				ytop;
 	int				ybot;
 	int				x;
 	int				xend;
 
-	t_game_wall			wall;
+	t_wall			wall;
 	t_plane			floor;
 	t_plane			ceiling;
 	int				light;
 	int				s;
-	t_game_bh			*bh;
-	t_game_wsprites		wsprite;
+	t_bh			*bh;
+	t_wsprites		wsprite;
 }					t_render;
 
-typedef struct		s_game_map
+typedef struct		s_map
 {
 	int				w;
 	int				h;
@@ -329,7 +329,7 @@ typedef struct		s_game_map
 	t_i2			max;
 	int				pos_x;
 	int				pos_y;
-}					t_game_map;
+}					t_map;
 
 typedef struct		t_nb
 {
@@ -343,7 +343,7 @@ typedef struct		t_nb
 	int				rifts;
 }					t_nb;
 
-typedef	struct		s_game_time
+typedef	struct		s_time
 {
 	float			curr;
 	float			prev;
@@ -356,7 +356,7 @@ typedef	struct		s_game_time
 	TTF_Font		*clock_font;
 	SDL_Color		clock_fg;
 	SDL_Color		clock_bg;
-}					t_game_time;
+}					t_time;
 
 typedef struct		s_texture_sheet
 {
@@ -374,7 +374,7 @@ typedef struct		s_game_mode
 	int				cool_down;
 }					t_game_mode;
 
-typedef struct		s_game_weapon
+typedef struct		s_weapon
 {
 	int				time;
 	t_bxpm			*bxpm;
@@ -383,7 +383,7 @@ typedef struct		s_game_weapon
 	int				frame_rate;
 	int				dmg;
 	float			scale;
-}					t_game_weapon;
+}					t_weapon;
 
 typedef struct		s_doom
 {
@@ -394,26 +394,26 @@ typedef struct		s_doom
 	int				w2;
 	int				h2;
 
-	t_game_mode		game;
+	t_game_mode			game;
 	t_nb			nb;
 	t_tpool			tpool;
-	t_game_time			time;
+	t_time			time;
 	t_keys			key;
-	t_game_map			map;
+	t_map			map;
 
 	//	Map
 	t_xyz			*vert;
-	t_game_wall			*walls;
-	t_game_wall			skybox[4];
-	t_game_sector		*sectors;
+	t_wall			*walls;
+	t_wall			skybox[4];
+	t_sector		*sectors;
 	t_list			*sprite;
 	t_list			*rifts;
 
-	t_game_data		npe_data[3];
+	t_data		npe_data[3];
 
 	t_list			*orb;
 	t_camera		cam;
-	t_game_player		player;
+	t_player		player;
 
 	//	Render
 	t_render		*render;
@@ -423,7 +423,7 @@ typedef struct		s_doom
 	//	Textures
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
-	t_game_weapon		weapon[3];
+	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 
 	Mix_Chunk		*sound[2];
@@ -478,20 +478,20 @@ void	fps_func(t_doom *doom);
 void	DrawMap(t_doom *doom);
 void	precompute_walls(t_doom *doom);
 void	precompute_skybox(t_doom *doom);
-void	wall_to_screen_xz(t_game_player player, t_game_wall *wall);
-void	project_wall(t_doom *doom, t_game_wall *wall);
+void	wall_to_screen_xz(t_player player, t_wall *wall);
+void	project_wall(t_doom *doom, t_wall *wall);
 void	vline_monochromic(t_render *render, t_vline *vline);
 int		find_start_sectors(t_doom *doom);
-int		clip_wall(t_camera cam, t_game_wall *wall);
-void	compute_vline_data(t_render *render, t_game_wall wall, t_vline *vline);
+int		clip_wall(t_camera cam, t_wall *wall);
+void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 
 //	Enteties
 void	Drawsprite(t_doom *doom);
 void	precompute_entities(t_doom *doom);
-void	ai_movement(t_doom *doom, t_game_entity *entity);
-void	ai_attack(t_doom *doom, t_game_entity *entity);
+void	ai_movement(t_doom *doom, t_entity *entity);
+void	ai_attack(t_doom *doom, t_entity *entity);
 int		blit_game_entity(void *arg);
-int		ai_rand_move(t_game_entity *entity, int rand);
+int		ai_rand_move(t_entity *entity, int rand);
 int		malloc_texture_pos(t_texture_sheet *sprite);;
 
 //	Projectiles
@@ -506,9 +506,9 @@ void	reset_bh(t_doom *doom);
 
 //	Wall Sprites
 void	draw_wsprites(t_render *render, t_vline *vline);
-int		clock_wsprite(t_doom *doom, t_game_wall *wall, int x);
-int		animate_wsprite(t_doom *doom, t_game_wsprite *sprite);
-int		animate_entities(t_doom *doom, t_game_wsprite *sprite);
+int		clock_wsprite(t_doom *doom, t_wall *wall, int x);
+int		animate_wsprite(t_doom *doom, t_wsprite *sprite);
+int		animate_entities(t_doom *doom, t_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);
@@ -549,25 +549,25 @@ void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 //Math wiki func
 t_xyz	xyz(double x, double y, double z);
 t_xyz	get_intersection(t_xyz a, t_xyz b, t_xyz c, t_xyz d);
-int	find_sector(t_doom *doom, t_xyz e);
-int	overlap(double a0, double a1, double b0 , double b);
-int	intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
-int	line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
+int		find_sector(t_doom *doom, t_xyz e);
+int		overlap(double a0, double a1, double b0 , double b);
+int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
+int		line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
 double	point_side(t_xyz a, t_xyz b, t_xyz p);
 t_xyz	find_triangle_c(t_xyz a, t_xyz b, float dist);
-int	intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2);
+int		intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2);
 double	point_distance_2d(double x1, double y1, double x2, double y2);
 double	point_distance_3d(t_xyz p1, t_xyz p2);
 t_xyz	closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b);
-int	point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer);
-int	sign(double x);
+int		point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer);
+int		sign(double x);
 void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
 double 	space_diagonal(double x, double y, double z);
 double	angle_to_point(t_xyz p1, t_xyz p2);
-int	compare_xyz(t_xyz a, t_xyz b);
-int	compare_xy(t_xyz a, t_xyz b);
+int		compare_xyz(t_xyz a, t_xyz b);
+int		compare_xy(t_xyz a, t_xyz b);
 t_xyz	sum_xyz(t_xyz a, t_xyz b);
-int	cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
+int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
 void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect	new_rect(int x1, int y1, int x2, int y2);
 
@@ -576,11 +576,11 @@ int		sprite_collision(t_collision *entity, t_xyz dest);
 int		collision_detection(t_collision *sprite);
 
 SDL_Color	hex_to_sdl_color(int hex);
-int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
+int		blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 Uint32	brightness(Uint32 src, int brightness);
 void	color_palet(t_bxpm *bxpm, int light);
 void	color_palets(t_doom *doom);
-int	free_doom(t_doom *doom);
+int		free_doom(t_doom *doom);
 
 void	free_array(char **arr);
 int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);

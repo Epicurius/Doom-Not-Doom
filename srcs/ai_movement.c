@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ai_movement.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:41:54 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	get_entity_movement(t_doom *doom, t_game_entity *entity)
+void	get_entity_movement(t_doom *doom, t_entity *entity)
 {
 	t_xyz	*v;
 	double	dist;
@@ -21,7 +32,7 @@ void	get_entity_movement(t_doom *doom, t_game_entity *entity)
 	v->z *= (entity->data->flying ? speed / dist : 0);
 }	
 
-void	ai_movement(t_doom *doom, t_game_entity *entity)
+void	ai_movement(t_doom *doom, t_entity *entity)
 {
 	t_collision e;
 

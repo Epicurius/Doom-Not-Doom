@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   precompute_walls.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:53:27 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	clip_to_fustrum(t_camera cam, t_game_wall *wall)
+void	clip_to_fustrum(t_camera cam, t_wall *wall)
 {
 	t_xyz i;
 
@@ -19,7 +30,7 @@ void	clip_to_fustrum(t_camera cam, t_game_wall *wall)
 		wall->cv2 = xyz(wall->sv2.x, 0, wall->sv2.z);
 }
 
-int	clip_wall(t_camera cam, t_game_wall *wall)
+int	clip_wall(t_camera cam, t_wall *wall)
 {
 	if ((wall->sv1.z < cam.near_z && wall->sv2.z < cam.near_z) ||
 		(wall->sv1.z > cam.far_z && wall->sv2.z > cam.far_z) ||
@@ -34,7 +45,7 @@ int	clip_wall(t_camera cam, t_game_wall *wall)
 	return (0);
 }
 
-void	precompute_texture(t_doom *doom, t_game_wall *wall)
+void	precompute_texture(t_doom *doom, t_wall *wall)
 {
 	int i;
 	
@@ -63,7 +74,7 @@ void	precompute_texture(t_doom *doom, t_game_wall *wall)
 	}
 }
 
-void	precompute_floor_ceil(t_doom *doom, t_game_sector *sector)
+void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 {
 	double eye_z;
 

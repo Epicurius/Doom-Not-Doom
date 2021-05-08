@@ -12,7 +12,7 @@
 
 #include "doom.h"
 
-void	wall_to_screen_xz(t_game_player player, t_game_wall *wall)
+void	wall_to_screen_xz(t_player player, t_wall *wall)
 {
 	t_xyz v1;
 	t_xyz v2;

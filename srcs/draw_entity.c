@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_entity.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:43:46 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	 project_game_entity(t_doom *doom, t_game_entity_render *render)
+void	 project_game_entity(t_doom *doom, t_entity_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
@@ -19,7 +30,7 @@ void	 project_game_entity(t_doom *doom, t_game_entity_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-int	rotate_sprite(t_doom *doom, t_game_entity *sprite, t_game_entity_render *render)
+int	rotate_sprite(t_doom *doom, t_entity *sprite, t_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -40,7 +51,7 @@ int	rotate_sprite(t_doom *doom, t_game_entity *sprite, t_game_entity_render *ren
 	return (1);
 }
 
-void	sprite_threads(t_doom *doom, t_game_entity_render render, t_game_entity *sprite, t_game_entity_render *thread)
+void	sprite_threads(t_doom *doom, t_entity_render render, t_entity *sprite, t_entity_render *thread)
 {
 	int y;
 
@@ -48,7 +59,7 @@ void	sprite_threads(t_doom *doom, t_game_entity_render render, t_game_entity *sp
 	int i = render.clamp_end.y - render.clamp_start.y;
 	while (++y < 10)
 	{
-		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_game_entity_render));
+		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_entity_render));
 		thread[y].clamp_start.y	+= i / 10.0 * y;
 		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
 		thread[y].clamp_end.y	= ft_min(thread[y].clamp_end.y, render.clamp_end.y);
@@ -64,9 +75,9 @@ void	sprite_threads(t_doom *doom, t_game_entity_render render, t_game_entity *sp
 void	Drawsprite(t_doom *doom)
 {
 	t_list *curr;
-	t_game_entity *sprite;
-	t_game_entity_render render;
-	t_game_entity_render	thread[10];
+	t_entity *sprite;
+	t_entity_render render;
+	t_entity_render	thread[10];
 
 	curr = doom->sprite;
 	while (curr)

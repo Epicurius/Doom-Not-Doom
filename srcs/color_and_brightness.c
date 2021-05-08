@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_and_brightness.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:42:34 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
@@ -59,7 +70,7 @@ void	color_palets(t_doom *doom)
 {
 	int s;
 	int w;
-	t_game_sector *sector;
+	t_sector *sector;
 	
 	s = -1;
 	while (++s < doom->nb.sectors)

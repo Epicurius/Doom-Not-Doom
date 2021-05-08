@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_bullet_holes.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:42:52 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
@@ -14,7 +25,7 @@ void	put_bh_pixels(t_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	vline_wall_bh(t_render *render, t_vline *vline, t_game_wsprite bh, int x)
+void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
 {
 	t_xyz text;
 	double alpha;
@@ -38,7 +49,7 @@ void	vline_wall_bh(t_render *render, t_vline *vline, t_game_wsprite bh, int x)
 void	draw_wall_bh(t_render *render, t_vline *vline)
 {
 	int i = -1;
-	t_game_wsprite bh;
+	t_wsprite bh;
 
 	if (!ENABLE_BH)
 		return ;

@@ -51,9 +51,9 @@ int	player_contact(t_doom *doom, t_xyz start, t_xyz dest)
 	return (0);
 }
 
-static int		vertical_collision(t_doom *doom, t_game_project *orb, t_xyz dest)
+static int		vertical_collision(t_doom *doom, t_project *orb, t_xyz dest)
 {
-	t_game_sector sector;
+	t_sector sector;
 
 	sector = doom->sectors[orb->sector];
 	if (dest.z < sector.floor.y || dest.z > sector.ceiling.y)
@@ -62,7 +62,7 @@ static int		vertical_collision(t_doom *doom, t_game_project *orb, t_xyz dest)
 	return (0);
 }
 
-int		projectile_collision(t_doom *doom, t_game_project *orb, t_xyz dest)
+int		projectile_collision(t_doom *doom, t_project *orb, t_xyz dest)
 {
 	t_collision o;
 
@@ -84,7 +84,7 @@ void	precompute_projectiles(t_doom *doom)
 {
 	t_xyz dest;
 	t_list *curr;
-	t_game_project *orb;
+	t_project *orb;
 
 	curr = doom->orb;
 	while (curr)

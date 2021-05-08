@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   animate_wsprites.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:41:58 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:42:00 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-int	animate_wsprite(t_doom *doom, t_game_wsprite *sprite)
+int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
 {
 	if (sprite->time - doom->time.curr < -100)
 	{

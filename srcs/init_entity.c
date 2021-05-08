@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_entity.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:51:32 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-static void	alfred(t_doom *doom, t_game_data *alfred)
+static void	alfred(t_doom *doom, t_data *alfred)
 {
 	alfred->health 				= 1;
 	alfred->damage 				= 100;
@@ -22,7 +33,7 @@ static void	alfred(t_doom *doom, t_game_data *alfred)
 	alfred->flying 				= 1;
 }
 
-static void	spooky(t_doom *doom, t_game_data *spooky)
+static void	spooky(t_doom *doom, t_data *spooky)
 {
 	spooky->health 				= 1;
 	spooky->damage 				= 30;
@@ -43,7 +54,7 @@ static void	spooky(t_doom *doom, t_game_data *spooky)
 	spooky->flying 				= 0;
 }
 
-static void	rift(t_doom *doom, t_game_data *rift)
+static void	rift(t_doom *doom, t_data *rift)
 {
 	rift->health 				= 1;
 	rift->damage 				= 200;
@@ -58,7 +69,7 @@ void	init_game_entity(t_doom *doom)
 {
 	t_list		*new;
 	t_list		*curr;
-	t_game_entity	*sprite;
+	t_entity	*sprite;
 
 	alfred(doom, &doom->npe_data[0]);
 	spooky(doom, &doom->npe_data[1]);
@@ -75,7 +86,7 @@ void	init_game_entity(t_doom *doom)
 		sprite->render = 1;
 		if (sprite->type == 2)
 		{
-			new = ft_lstnew(curr->content, sizeof(t_game_entity));
+			new = ft_lstnew(curr->content, sizeof(t_entity));
 			ft_lstadd(&doom->rifts, new);
 			doom->nb.rifts += 1;
 		}

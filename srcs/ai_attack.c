@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ai_attack.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:41:41 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
@@ -20,9 +31,9 @@ t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
 	return (move);
 }
 
-void	ai_attack(t_doom *doom, t_game_entity *entity)
+void	ai_attack(t_doom *doom, t_entity *entity)
 {
-	t_game_project	*orb;
+	t_project	*orb;
 
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
 	if (entity->data->attack_style == 2)
@@ -36,7 +47,7 @@ void	ai_attack(t_doom *doom, t_game_entity *entity)
 		return ;
 	else if (entity->data->attack_style == 1)// && doom->orb == NULL)
 	{
-		orb = malloc(sizeof(t_game_project));
+		orb = malloc(sizeof(t_project));
 		orb->velocity = projectile_movement(doom, entity->where, doom->player.where);
 		orb->where.x = entity->where.x;
 		orb->where.y = entity->where.y;

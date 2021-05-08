@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   blit_entity.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:42:10 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	hit_enemy(t_game_entity_render *render, int coord)
+void	hit_enemy(t_entity_render *render, int coord)
 {
 	if (render->shooting && coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
 		*render->hp -= render->dmg;
 }
 
-void	blit_game_entity24(t_game_entity_render *render, int coord, t_xyz text)
+void	blit_game_entity24(t_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -23,7 +34,7 @@ void	blit_game_entity24(t_game_entity_render *render, int coord, t_xyz text)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_game_entity32(t_game_entity_render *render, int coord, t_xyz text)
+void	blit_game_entity32(t_entity_render *render, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -46,7 +57,7 @@ int		blit_game_entity(void *arg)
 	double alphax;
 	double alphay;
 	t_xyz text;
-	t_game_entity_render *render;
+	t_entity_render *render;
 
 	render = arg;
 	text.z = render->screen.z;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                              :+:      :+:    :+:   */
+/*   time.c                                              :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -43,7 +43,7 @@ void	blit_fps(t_doom *doom)
 	SDL_FreeSurface(surf);
 }
 
-void	update_fps_surface(t_game_time *time)
+void	update_fps_surface(t_time *time)
 {
 	char	*str;
 
@@ -56,7 +56,7 @@ void	update_fps_surface(t_game_time *time)
 
 void				fps_func(t_doom *doom)
 {
-	t_game_time		*time;
+	t_time		*time;
 
 	time = &doom->time;
 	time->curr = SDL_GetTicks();

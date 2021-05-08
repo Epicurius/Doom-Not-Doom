@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_projectile.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:44:06 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
-void	 project_game_project(t_doom *doom, t_game_entity_render *render)
+void	 project_game(t_doom *doom, t_entity_render *render)
 {
 	render->screen.x = doom->w2 + (render->screen.x * doom->cam.scale / -render->screen.z);
 	render->screen.y = doom->h2 + (render->screen.y * doom->cam.scale / -render->screen.z);
@@ -19,7 +30,7 @@ void	 project_game_project(t_doom *doom, t_game_entity_render *render)
 	render->yrange = render->end.y - render->start.y;
 }
 
-void	rotate_projectile(t_doom *doom, t_game_project *orb, t_game_entity_render *render)
+void	rotate_projectile(t_doom *doom, t_project *orb, t_entity_render *render)
 {
 	t_xyz dist;
 	t_xyz screen;
@@ -36,8 +47,8 @@ void	rotate_projectile(t_doom *doom, t_game_project *orb, t_game_entity_render *
 void 	DrawProjectiles(t_doom *doom)
 {
 	t_list *curr;
-	t_game_project *orb;
-	t_game_entity_render render;
+	t_project *orb;
+	t_entity_render render;
 
 	render.hp		= NULL;
 	render.bxpm		= &doom->sheet[1].bxpm;
@@ -50,7 +61,7 @@ void 	DrawProjectiles(t_doom *doom)
 		if (doom->sectors[orb->sector].visible)
 		{
 			rotate_projectile(doom, orb, &render);
-			project_game_project(doom, &render);
+			project_game(doom, &render);
 			blit_game_entity(&render);
 		}
 		curr = curr->next;

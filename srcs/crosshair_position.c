@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   crosshair_position.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:42:40 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
 void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 {
-	t_game_wall *wall;
-	t_game_wsprite *bh;
+	t_wall *wall;
+	t_wsprite *bh;
 
 	if (!ENABLE_BH)
 		return ;

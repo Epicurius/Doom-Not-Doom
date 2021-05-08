@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_collision.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:52:36 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 /*
-void	object_collision(t_doom *doom, t_game_player *player)
+void	object_collision(t_doom *doom, t_player *player)
 {
 	if (sprite->type == AMMO)
 		doom->player.ammo += 50;
@@ -16,7 +27,7 @@ void	object_collision(t_doom *doom, t_game_player *player)
 int	sprite_collision(t_collision *e, t_xyz dest)
 {
 	t_list *curr;
-	t_game_entity *entities;
+	t_entity *entities;
 
 	curr = e->entities;
 	while (curr)

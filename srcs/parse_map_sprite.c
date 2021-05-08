@@ -14,12 +14,12 @@
 
 void	parse_wsprite(t_doom *doom, char **arr)
 {
-	t_game_wsprites	*wsprite;
-	t_game_wsprite	*sprite;
+	t_wsprites	*wsprite;
+	t_wsprite	*sprite;
 
 	wsprite			= &doom->walls[ft_atoi(arr[1])].wsprite;
 	wsprite->total 		+= 1;
-	wsprite->num 		= ft_realloc(wsprite->num, sizeof(t_game_wsprite)
+	wsprite->num 		= ft_realloc(wsprite->num, sizeof(t_wsprite)
 						* wsprite->total);
 	sprite			= &wsprite->num[wsprite->total - 1];
 	sprite->id		= ft_atoi(arr[0]);
@@ -42,14 +42,14 @@ int		sprite_type(char *str)
 
 void	parse_entity(t_doom *doom, char **arr)
 {
-	t_game_entity	*sprite;
+	t_entity	*sprite;
 
-	sprite 				= ft_memalloc(sizeof(t_game_entity));
+	sprite 				= ft_memalloc(sizeof(t_entity));
 	sprite->type		= sprite_type(arr[0]);
 	sprite->where.x		= ft_atof(arr[1]) * doom->map_scale;
 	sprite->where.y		= ft_atof(arr[2]) * doom->map_scale;
 	sprite->where.z		= ft_atof(arr[3]) * doom->map_scale;
 	sprite->yaw			= ft_atoi(arr[4]);
 	doom->nb.sprites	+= 1;
-	ft_lstadd_new(&doom->sprite, sprite, sizeof(t_game_entity));
+	ft_lstadd_new(&doom->sprite, sprite, sizeof(t_entity));
 }

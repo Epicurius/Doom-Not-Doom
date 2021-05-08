@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   precompute_skybox.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/08 10:53:22 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "doom.h"
 
 void	compute_skybox(t_doom *doom)
 {
-	t_game_player player;
+	t_player player;
 
 	player = doom->player;
 	// (coord - 5)
@@ -22,7 +33,7 @@ void	compute_skybox(t_doom *doom)
 }
 
 
-void		project_skybox(t_doom *doom, t_game_wall *wall)
+void		project_skybox(t_doom *doom, t_wall *wall)
 {
 	t_camera cam;
 

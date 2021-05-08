@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 15:16:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 10:56:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 			keys(doom, event);
 	}
 	tpool_wait(&doom->tpool);
-	ft_putstr("a\n");
+	//ft_putstr("a\n");
 	DrawProjectiles(doom);
-	ft_putstr("b\n");
+	//ft_putstr("b\n");
 	Drawsprite(doom);
 	draw_crosshair(doom);
 	blit_weapon(doom);	
