@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/08 11:50:26 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/08 12:28:48 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -196,6 +196,19 @@ libs: $(LIB_DIR)
 	@make -C ./bmp_to_bxpm
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
+clean:
+	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
+	@/bin/rm -rf $(ODIR)
+
+fclean: clean
+	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
+	@/bin/rm -f $(NAME)
+
+resources: $(RESOURCES)
+	@./google_drive.sh
+	@tar -xf file.tar.gz
+	@rm -rf file.tar.gz
+
 framework:
 ifeq ($(SHELL_NAME), Darwin)
 	@mkdir -p ~/Library/Frameworks
@@ -210,27 +223,10 @@ else
 endif
 endif
 
-clean:
-	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
-	@/bin/rm -rf $(ODIR)
-
-fclean: clean
-	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
-	@/bin/rm -f $(NAME)
-
-fclean_all: fclean
-	@/bin/rm -rf $(PATH_TO_BXPM)/*.bxpm
-	@printf $(CYAN)"[INFO]	Deleted BXPM\n"$(RESET)
-
-resources: $(RESOURCES)
-	@./google_drive.sh
-	@tar -xf file.tar.gz
-	@rm -rf file.tar.gz
-
-rm_frameworks:
+framework_del:
 	@rm -rf ~/Library/Frameworks/SDL2*.framework
 	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
 re: fclean all
 
-.PHONY: clean, all, re, fclean, resources, framework, rm_frameworks
+.PHONY: clean, all, re, fclean, resources, framework, frameworks_del
