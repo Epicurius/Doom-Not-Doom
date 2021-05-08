@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/04 10:30:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:05:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	spawn_mob(t_doom *doom, t_entity *rift)
 	mob->state = IDLE;
 	mob->render = 1;
 	mob->data = &doom->npe_data[mob->type];
+	if (mob->data->flying)
+		mob->where.z += 5;
 	mob->hp = mob->data->health;
 	ft_lstadd_new(&doom->sprite, mob, sizeof(mob));
 	doom->nb.sprites += 1;

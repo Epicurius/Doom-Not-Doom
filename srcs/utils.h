@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 15:13:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:20:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct		s_plane
 typedef	struct		s_keys
 {
 	int		chr;
-	short	num;
 	int		fnc;
 	int		w;
 	int		a;
@@ -50,6 +49,7 @@ typedef	struct		s_keys
 	int		l_shift;
 	int		lmouse;
 	int		tab;
+	int		num;
 }					t_keys;
 
 #endif

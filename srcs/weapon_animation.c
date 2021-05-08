@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 14:16:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:32:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	blit_weapon(t_doom *doom)
 	t_bxpm *bxpm;
 	t_weapon *weapon;
 
+	if (doom->player.equiped < 0)
+		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	bxpm = &weapon->bxpm[weapon->frame];
 	dstr = new_rect(doom->w2,
 					doom->surface->h - (float)(bxpm->h * weapon->scale),
 					doom->w2 + (float)(bxpm->w * weapon->scale),
 					doom->surface->h);
-	//dstr = new_rect(doom->w2, doom->h2, doom->w2 + bxpm->w, doom->h2 + bxpm->h);
 	srcr = new_rect(0,	0,	weapon->bxpm[weapon->frame].w,	weapon->bxpm[weapon->frame].h);
 	blit_bxpm_scaled(doom->surface, dstr, &weapon->bxpm[weapon->frame], srcr);
 }
@@ -34,7 +35,7 @@ void	weapon_animate(t_doom *doom, t_weapon *weapon)
 {
 	if (weapon->frame == 0)
 		Mix_PlayChannel(-1, doom->sound[SHOTGUN], 0);
-	if (weapon->time - doom->time.curr < -(100))
+	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
 	{
 		if (!weapon->frame)
 			doom->player.shooting = 1;
@@ -45,10 +46,19 @@ void	weapon_animate(t_doom *doom, t_weapon *weapon)
 		weapon->frame = 0;
 }
 
+void	equip_weapon(t_doom *doom)
+{
+	if (doom->key.num <= 3)
+		doom->player.equiped = doom->key.num - 1;
+}
+
 void	precompute_weapon(t_doom *doom)
 {
 	t_weapon *weapon;
 
+	equip_weapon(doom);
+	if (doom->player.equiped < 0)
+		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	doom->player.shooting = 0;
 	if (weapon->frame || doom->key.lmouse)

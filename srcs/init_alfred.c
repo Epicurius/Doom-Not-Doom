@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 10:55:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:52:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 {
 	sprite->nb[IDLE  ][FRAMES] = 1;
 	sprite->nb[IDLE  ][ANGLES] = 8;
-	sprite->nb[MOVE  ][FRAMES] = 1;
+	sprite->nb[MOVE  ][FRAMES] = 4;
 	sprite->nb[MOVE  ][ANGLES] = 8;
 	sprite->nb[ATTACK][FRAMES] = 6;
 	sprite->nb[ATTACK][ANGLES] = 1;
@@ -46,6 +46,33 @@ int	init_alfred(t_texture_sheet *sprite)
 	sprite->pos[1][0][1] = new_rect(308,	55,		362,	86);
 	sprite->pos[1][0][2] = new_rect(369,	55,		436,	88);
 	sprite->pos[1][0][3] = new_rect(451,	55,		511,	90);
+
+	sprite->pos[1][1][4] = sprite->pos[1][0][4];
+	sprite->pos[1][1][5] = sprite->pos[1][0][5];
+	sprite->pos[1][1][6] = sprite->pos[1][0][6];
+	sprite->pos[1][1][7] = sprite->pos[1][0][7];
+	sprite->pos[1][1][0] = sprite->pos[1][0][0];
+	sprite->pos[1][1][1] = sprite->pos[1][0][1];
+	sprite->pos[1][1][2] = sprite->pos[1][0][2];
+	sprite->pos[1][1][3] = sprite->pos[1][0][3];
+
+	sprite->pos[1][2][4] = sprite->pos[1][0][4];
+	sprite->pos[1][2][5] = sprite->pos[1][0][5];
+	sprite->pos[1][2][6] = sprite->pos[1][0][6];
+	sprite->pos[1][2][7] = sprite->pos[1][0][7];
+	sprite->pos[1][2][0] = sprite->pos[1][0][0];
+	sprite->pos[1][2][1] = sprite->pos[1][0][1];
+	sprite->pos[1][2][2] = sprite->pos[1][0][2];
+	sprite->pos[1][2][3] = sprite->pos[1][0][3];
+
+	sprite->pos[1][3][4] = sprite->pos[1][0][4];
+	sprite->pos[1][3][5] = sprite->pos[1][0][5];
+	sprite->pos[1][3][6] = sprite->pos[1][0][6];
+	sprite->pos[1][3][7] = sprite->pos[1][0][7];
+	sprite->pos[1][3][0] = sprite->pos[1][0][0];
+	sprite->pos[1][3][1] = sprite->pos[1][0][1];
+	sprite->pos[1][3][2] = sprite->pos[1][0][2];
+	sprite->pos[1][3][3] = sprite->pos[1][0][3];
 
 	sprite->pos[2][0][0] = new_rect(0,		103, 	33,		153);
 	sprite->pos[2][1][0] = new_rect(78,		103,	114,	155);

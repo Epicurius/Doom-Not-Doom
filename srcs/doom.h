@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 13:25:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:58:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct		s_data
 	int				attack_range;
 	int				frame_rate[4];
 	double			attack_speed;
+	int				head_y;
 }					t_data;
 
 typedef struct		s_entity

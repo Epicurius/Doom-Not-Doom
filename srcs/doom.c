@@ -6,11 +6,21 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 14:50:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:05:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	launcher(void)
+{
+	char *arr[2];
+	
+	arr[0] = ft_strdup(ROOT_PATH"ui/dialog");
+	arr[1] = NULL;
+	execv(arr[0], arr);
+	free(&arr[0]);
+}
 
 void	init_doom(t_doom *doom, t_settings init)
 {
@@ -88,17 +98,6 @@ int	game(char *map, t_settings init)
 		//debug_loop(doom, &event);
 	free_doom(doom);
 	return (1);
-}
-
-void	launcher(void)
-{
-	char *arr[2];
-	
-	ft_putstr("here\n");
-	arr[0] = ft_strdup(ROOT_PATH"ui/dialog");
-	arr[1] = NULL;
-	execv(arr[0], arr);
-	free(&arr[0]);
 }
 
 int main(int ac, char **av)

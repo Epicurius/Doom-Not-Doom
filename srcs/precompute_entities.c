@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:53:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:06:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		entity_see(t_doom *doom, t_entity *entity)
 	t_xyz	far_left;
 	t_xyz	far_right;
 
-	far_left.z	= entity->yaw + 65;
-	far_right.z	= entity->yaw - 65;
+	far_left.z	= entity->yaw + 67.5;
+	far_right.z	= entity->yaw - 67.5;
 	far_left.z	-= far_left.z > 360 ? 360 : 0;
 	far_right.z	+= far_right.z < 0 ? 360 : 0;
 	far_left.z	= (far_left.z * CONVERT_RADIANS);
@@ -74,6 +74,7 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 		else
 		{
 			entity->dest = doom->player.where;
+			entity->dest.z += EYE_LVL;
 			entity->state = MOVE;
 		}
 	}
@@ -89,7 +90,7 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
 
-	if (entity->frame)
+	if (entity->frame)// || !compare_xyz(entity->where, entity->dest))
 		return ;
 	else if (entity->hp <= 0)
 		entity->state = DEATH;

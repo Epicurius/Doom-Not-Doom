@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:41:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:54:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	double	speed;
 
 	v = &entity->velocity;
-	entity->dest.z += entity->data->flying ? EYE_LVL - 1 : 0;
+	//entity->dest.z += entity->data->flying ? EYE_LVL - 1 : 0;
 	speed = entity->data->speed * (SDL_GetTicks() - doom->time.curr);
 	v->x = entity->dest.x - entity->where.x;
 	v->y = entity->dest.y - entity->where.y;

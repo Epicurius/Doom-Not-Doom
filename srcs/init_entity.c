@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:51:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:07:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->attack_style 		= 2;
 	alfred->scale 				= 4 * (doom->surface->w / 100);
 	alfred->height 				= 4;
-	alfred->speed 				= 0.07;
-	alfred->wonder_distance 	= 0;
+	alfred->speed 				= 0.1;
+	alfred->wonder_distance 	= 50;
 	alfred->view_distance 		= 100;
-	alfred->detection_radius 	= 6;
+	alfred->detection_radius 	= 20;
 	alfred->attack_range 		= 4;
 	alfred->frame_rate[IDLE] 	= 100;
-	alfred->frame_rate[MOVE] 	= 100;
-	alfred->frame_rate[ATTACK]	 = 100;
-	alfred->frame_rate[DEATH]	 = 100;
+	alfred->frame_rate[MOVE] 	= 200;
+	alfred->frame_rate[ATTACK]	= 100;
+	alfred->frame_rate[DEATH]	= 100;
 	alfred->flying 				= 1;
 }
 
@@ -45,12 +45,12 @@ static void	spooky(t_doom *doom, t_data *spooky)
 	spooky->speed 				= 0.03;
 	spooky->wonder_distance 	= 40;
 	spooky->view_distance 		= 120;
-	spooky->detection_radius 	= 5;
+	spooky->detection_radius 	= 20;
 	spooky->attack_range 		= 80;
 	spooky->frame_rate[IDLE] 	= 100;
 	spooky->frame_rate[MOVE] 	= 200;
-	spooky->frame_rate[ATTACK] 	= 500;
-	spooky->frame_rate[DEATH] 	= 500;
+	spooky->frame_rate[ATTACK] 	= 300;
+	spooky->frame_rate[DEATH] 	= 300;
 	spooky->flying 				= 0;
 }
 

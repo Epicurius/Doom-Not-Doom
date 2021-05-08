@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 14:07:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:22:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	mouse(t_doom *doom, SDL_Event *event)
 {
-	//if (event->button.button == SDL_BUTTON_LEFT)
-	//		doom->player.shooting = event->type == SDL_MOUSEBUTTONDOWN;
 	if (event->button.button == SDL_BUTTON_LEFT)
 			doom->key.lmouse = event->type == SDL_MOUSEBUTTONDOWN;
 }
@@ -42,6 +40,9 @@ void	key(t_doom *doom, SDL_Event *event)
 		doom->quit = 1;
 	else if (event->key.keysym.sym == SDLK_p)
 		doom->key.p = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym >= SDLK_1 &&
+			event->key.keysym.sym <= SDLK_9)
+		doom->key.num = event->key.keysym.sym - 48;
 }
 
 void	keys(t_doom *doom, SDL_Event *event)
@@ -52,6 +53,4 @@ void	keys(t_doom *doom, SDL_Event *event)
 		key(doom, event);
 	if (event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEBUTTONDOWN)
 		mouse(doom, event);
-	//if (doom->key.lmouse)
-	//	Mix_PlayChannel(-1, doom->sound[1], 5);
 }
