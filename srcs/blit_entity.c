@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:42:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 13:47:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	blit_game_entity24(t_entity_render *render, int coord, t_xyz text)
 	clr = render->bxpm->clr[pix];
 	if (clr == 0xFF800080)
 		return ;
-	hit_enemy(render, coord);
+	if (render->hp != NULL)
+		hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] = clr;
 	((double*)render->surface->userdata)[coord] = text.z;
 }

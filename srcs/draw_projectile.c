@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:44:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 13:49:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void 	DrawProjectiles(t_doom *doom)
 		if (doom->sectors[orb->sector].visible)
 		{
 			rotate_projectile(doom, orb, &render);
-			project_game(doom, &render);
-			blit_game_entity(&render);
+			if (render.screen.z > 0.5)
+			{
+				project_game(doom, &render);
+				blit_game_entity(&render);
+			}
 		}
 		curr = curr->next;
 	}

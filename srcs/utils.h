@@ -6,25 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/04 12:46:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/08 15:13:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-typedef	struct	s_i2
-{
-	int x;
-	int y;
-}				t_i2;
-
-typedef struct	s_xyz
-{
-	double	x;
-	double	y;
-	double	z;
-}		t_xyz;
 
 typedef struct	s_rect
 {
