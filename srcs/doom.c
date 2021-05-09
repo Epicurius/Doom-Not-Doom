@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 18:36:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:10:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	init_doom(t_doom *doom, t_settings init)
 
 void	game_loop(t_doom *doom, SDL_Event *event)
 {
-
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
 	precompute_skybox(doom);
@@ -68,8 +67,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		precompute_projectiles(doom);
 		movement(doom);
 		player_collision(doom);
-		while (SDL_PollEvent(event))
-			keys(doom, event);
+		poll_event(doom, event);
 	}
 	tpool_wait(&doom->tpool);
 	DrawProjectiles(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 16:22:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:20:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,37 @@ void	keys(t_doom *doom, SDL_Event *event)
 		key(doom, event);
 	if (event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEBUTTONDOWN)
 		mouse(doom, event);
+}
+
+void	pause_game(t_doom *doom)
+{
+	SDL_Event *event;
+	t_bxpm	bxpm[1];
+
+	read_bxpm(&bxpm[0], GAME_PATH"resources/BXPM/pause.bxpm");
+	tpool_wait(&doom->tpool);
+	blit_bxpm(doom->surface, &bxpm[0], 100, 100);
+	free(bxpm->clr);
+	free(bxpm->pix);
+	SDL_UpdateWindowSurface(doom->win);
+	while (1)
+	{
+		SDL_PollEvent(event);
+		if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_p)
+		{
+			doom->key.p = 0;
+			break ;
+		}
+
+	}
+}
+
+void	poll_event(t_doom *doom, SDL_Event *event)
+{
+	while (SDL_PollEvent(event))
+	{
+		keys(doom, event);
+		//if (doom->key.p)
+		//	pause_game(doom);
+	}
 }

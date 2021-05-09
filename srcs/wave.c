@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 17:05:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 16:47:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	gamemode(t_doom *doom)
 		if (doom->game.cool_down <= 0)
 			respawn_rifts(doom);
 	}
-	else if (eternal_round(doom))
+	else if (doom->intro && eternal_round(doom))
 		doom->game.cool_down = 1000;
 }

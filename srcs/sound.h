@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 14:15:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 16:07:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 typedef enum	e_sounds
 {
 	MAIN_THEME,
-	SHOTGUN
+	SHOTGUN,
+	SS_SAVED,
+	INTRO
 }				e_sounds;
 
 #endif

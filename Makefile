@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/08 19:19:23 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/09 17:49:09 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ RAW_TEXTURES =	wood.bmp\
 				mini4.bmp\
 				mini5.bmp\
 				mini6.bmp\
-				game_over.bmp
+				game_over.bmp\
+				pause.bmp
 
 RESOURCES_DIR	= ./resources
 PATH_TO_BMP		= $(RESOURCES_DIR)/BMP
@@ -143,7 +144,8 @@ RAW_SRC =		doom.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
-				game_over.c
+				game_over.c\
+				surface_to_bmp.c
 		
 NAME			= doom
 CDIR			= srcs

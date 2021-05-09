@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 19:10:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:10:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,6 +342,7 @@ typedef struct		t_nb
 	int				threads;
 	int				sprites;
 	int				rifts;
+	int				kills;
 }					t_nb;
 
 typedef	struct		s_time
@@ -386,6 +387,13 @@ typedef struct		s_weapon
 	float			scale;
 }					t_weapon;
 
+typedef struct s_dialog
+{
+	Mix_Chunk	*sound1;
+	Mix_Chunk	*sound2;
+	int			*done;
+}				t_dialog;
+
 typedef struct		s_doom
 {
 	int				quit;
@@ -427,7 +435,10 @@ typedef struct		s_doom
 	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 
-	Mix_Chunk		*sound[2];
+	Mix_Chunk		*sound[4];
+	int				intro[1]; //idk frogga jony
+	t_dialog		d;
+	pthread_t		t;
 
 	t_settings		settings;
 }					t_doom;
@@ -437,6 +448,7 @@ void	init_sound(t_doom *doom);
 void	debug_loop(t_doom *doom, SDL_Event *event);
 
 //		Game
+void	poll_event(t_doom *doom, SDL_Event *event);
 int		game(char *map, t_settings init);
 void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
@@ -593,6 +605,7 @@ void	load_bxpm(t_doom *doom);
 void	load_bxpm2(t_doom *doom);
 void	read_bxpm(t_bxpm *bxpm, char *file);
 void	surf_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm);
+void	surface_to_bmp(SDL_Surface *surf, char *name, int bpp);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 //REMOVE//

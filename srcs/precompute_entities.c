@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 17:06:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:23:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	frame_animation(t_doom *doom, t_entity *entity)
 	if (entity->frame >= doom->sheet[entity->type].nb[entity->state][FRAMES])
 	{
 		if (entity->state == DEATH)
+		{
+			doom->nb.kills += 1;
 			return (0);
+		}
 		entity->frame = 0;
 	}
 	return (1);
