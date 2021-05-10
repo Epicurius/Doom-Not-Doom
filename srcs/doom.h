@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 18:10:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:51:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,13 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "tpool.h"
+# include "bxpm.h"
 # include "../../path.h"
 # include "./macros.h"
 # include "./sound.h"
 # include "./utils.h"
 # include <math.h>
 # include <fcntl.h>
-
-typedef struct		s_bxpm
-{
-	int32_t			w;
-	int32_t			h;
-	int32_t			bpp;
-	int32_t			clr_nb;
-	int32_t			pix_nb;
-	uint32_t		*clr;
-	unsigned short	*pix;
-	uint32_t		*palet[512];
-}					t_bxpm;
 
 typedef struct	s_settings
 {
@@ -603,16 +592,10 @@ void	rift_spawn(t_doom *doom);
 
 void	load_bxpm(t_doom *doom);
 void	load_bxpm2(t_doom *doom);
-void	read_bxpm(t_bxpm *bxpm, char *file);
-void	surf_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm);
-void	surface_to_bmp(SDL_Surface *surf, char *name, int bpp);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 //REMOVE//
 void	cs(void);
 void	ce(char *str);
-
-void	if_norm(char *file_name, t_bxpm *bxpm);
-
 
 #endif

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/09 17:49:09 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/10 17:56:43 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,18 +134,15 @@ RAW_SRC =		doom.c\
 				parse_map_sprite.c\
 				parse_map_header.c\
 				parse_map_sector.c\
-				read_bxpm.c\
 				clock.c\
 				init_player.c\
-				surf_to_bxpm.c\
 				blit_bxpm.c\
 				wave.c\
 				weapon_animation.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
-				game_over.c\
-				surface_to_bmp.c
+				game_over.c
 		
 NAME			= doom
 CDIR			= srcs
@@ -164,8 +161,9 @@ LIB_DIR			:= ./lib
 LIBFT			:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF			:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP			:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
+LIBBXPM			:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
 
-LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF)
+LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
 CFLAGS			= -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
 

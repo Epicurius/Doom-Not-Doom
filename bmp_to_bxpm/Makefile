@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/08 14:02:19 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/10 17:58:23 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,11 @@ RESET			:= "\e[0m"
 
 NAME = converter
 
-SRC =	converter.c\
-		read_byte.c\
-		create_bxpm.c\
-		write_bxpm.c\
-		write_bxpm2.c\
+SRC =	converter.c
 
 OBJ = $(SRCS:.c=.o)
 
-INCLUDES = ../lib/libft/libft.a ../lib/libpf/libpf.a
+INCLUDES = ../lib/libft/libft.a ../lib/libpf/libpf.a ../lib/libbxpm/libbxpm.a
 
 FLAGS = -Wall -Wextra -Werror
 

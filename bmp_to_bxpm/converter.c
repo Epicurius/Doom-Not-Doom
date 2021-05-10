@@ -6,30 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 15:01:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/10 17:58:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "converter.h"
-
-t_bmp	*read_bmp(char *file)
-{
-	int		fd;
-	t_bmp	*bmp;
-
-	fd = open(file, O_RDONLY);
-	bmp = malloc(sizeof(t_bmp));
-	if (!bmp)
-		return (NULL);
-	if (read(fd, &bmp->header, 54) <= 0)
-		return (NULL);
-	bmp->data = malloc(sizeof(*bmp->data) * bmp->header.image_size_bytes);
-	if (!bmp->data)
-		return (NULL);
-	read(fd, bmp->data, bmp->header.image_size_bytes);
-	close(fd);
-	return (bmp);
-}
+# include "../lib/libft/libft.h"
+# include "../lib/libpf/ft_printf.h"
+# include "../lib/libbxpm/bxpm.h"
 
 void	create_path_and_name(char *file, char **path, char **name)
 {
@@ -76,8 +59,7 @@ int	main(int ac, char **av)
 		ft_printf("Create\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
 		ft_printf("Writing\t%s.bxpm\n", path);
-		write_bxpm(bxpm, path, name);
-		//write_bxpm2(bxpm, path, name);
+		write_bxpm(bxpm, path);
 		ft_printf("{GREEN}Done with: %s{RESET}\n", path);
 		free_converter(bmp, bxpm, path, name);
 	}

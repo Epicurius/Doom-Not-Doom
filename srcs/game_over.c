@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 17:53:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/10 15:16:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	print_score(t_doom *doom, int *i)
 {
 	char	*name;
+	t_bmp *bmp;
 
-	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH, doom->time.date.tm_mon,
+	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH, doom->time.date.tm_mon + 1,
 			doom->time.date.tm_mday, doom->time.date.tm_min);
-	surface_to_bmp(doom->surface, name, 3);
+	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
+			doom->surface->pixels);
+	write_bmp(name, bmp);
+	free(bmp);
 	free(name);
 	*i = 1;
 	Mix_PlayChannel(-1, doom->sound[SS_SAVED], 0);
