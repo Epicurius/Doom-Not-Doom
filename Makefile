@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/10 17:56:43 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/10 18:11:12 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,6 +195,7 @@ libs: $(LIB_DIR)
 	@make -C ./lib/libft
 	@make -C ./lib/libpf
 	@make -C ./lib/libtp
+	@make -C ./lib/libbxpm
 	@make -C ./bmp_to_bxpm
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
