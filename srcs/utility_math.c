@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/22 14:13:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:11:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ int	sign(double x)
 	if (x < 0)
 		return (-1);
 	return (0);
+}
+
+//https://www.geeksforgeeks.org/program-dot-product-cross-product-two-vector/
+double	dot_product(double x0, double y0, double x1, double y1)
+{
+	return (x0 * x1 + y0 * y1);
 }
 
 //	Vectors cross product

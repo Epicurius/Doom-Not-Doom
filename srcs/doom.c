@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 18:10:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:18:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	init_doom(t_doom *doom, t_settings init)
 	doom->nb.threads = doom->surface->w / 10;
 	printf("nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
+	if (fix_map(doom))
+		doom->quit = 1;
 	init_fps(doom);
 	init_camera(doom);
 	init_skybox(doom);

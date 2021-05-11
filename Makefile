@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/10 18:11:12 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/11 10:18:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,6 +142,7 @@ RAW_SRC =		doom.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
+				clockwise_order.c\
 				game_over.c
 		
 NAME			= doom

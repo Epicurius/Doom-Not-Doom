@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/10 14:51:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:36:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ typedef struct		s_sector
 	int				light;
 	float			gravity;
 	char			visible;
+	t_xyz			center;
 } 					t_sector;
 
 
@@ -433,6 +434,7 @@ typedef struct		s_doom
 }					t_doom;
 //		Sound
 void	init_sound(t_doom *doom);
+
 //		Debug
 void	debug_loop(t_doom *doom, SDL_Event *event);
 
