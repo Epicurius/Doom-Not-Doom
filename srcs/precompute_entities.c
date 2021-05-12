@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 12:17:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:43:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 	{
 		entity->state = DEATH;
 		entity->frame = 0;
+		entity->time = 0;
 	}
 	else if (entity->frame)// || !compare_xyz(entity->where, entity->dest))
 		return ;

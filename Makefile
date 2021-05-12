@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/12 10:30:39 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/12 14:59:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ RAW_SRC =		doom.c\
 				read_map.c\
 				init_textures.c\
 				find_sector.c\
-				utility_math.c\
+				math.c\
 				vertical_line.c\
 				project_wall.c\
 				wall_to_screen_xz.c\
@@ -106,7 +106,7 @@ RAW_SRC =		doom.c\
 				movement.c\
 				minimap.c\
 				line.c\
-				clip_line_inside_rectangle.c\
+				cohen_sutherland.c\
 				crosshair_position.c\
 				draw_crosshair.c\
 				draw_bullet_holes.c\
@@ -143,7 +143,9 @@ RAW_SRC =		doom.c\
 				debug_loop.c\
 				sound.c\
 				validate_map.c\
-				game_over.c
+				game_over.c\
+				init_weapons.c\
+				icon.c
 		
 NAME			= doom
 CDIR			= srcs

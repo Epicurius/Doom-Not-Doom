@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 11:08:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:51:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ void	init_doom(t_doom *doom, t_settings init)
 			doom->settings.w, doom->settings.h, SDL_WINDOW_SHOWN);
 	doom->surface = SDL_GetWindowSurface(doom->win);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	ft_set_icon(doom->win, GAME_PATH"icon.bmp");
 
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	ft_printf("{CYAN}[INFO]{RESET} nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_fps(doom);
+	init_weapons(doom);
 	init_camera(doom);
 	init_skybox(doom);
 	init_minimap(doom);

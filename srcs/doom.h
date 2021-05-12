@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:10:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:09:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,12 +314,9 @@ typedef struct		s_render
 
 typedef struct		s_map
 {
-	int				w;
-	int				h;
-	t_i2			min;
-	t_i2			max;
 	int				pos_x;
 	int				pos_y;
+	t_rect			size;
 }					t_map;
 
 typedef struct		t_nb
@@ -433,6 +430,7 @@ typedef struct		s_doom
 
 	t_settings		settings;
 }					t_doom;
+
 //		Sound
 void	init_sound(t_doom *doom);
 
@@ -460,6 +458,7 @@ void	parse_entity(t_doom *doom, char **arr);
 void	parse_fc(t_doom *doom, char **arr);
 
 //		Init
+void	init_weapons(t_doom *doom);
 void	init_player(t_doom *doom);
 void	init_render(t_doom *doom);
 void	init_fps(t_doom *doom);
@@ -518,10 +517,15 @@ int		animate_entities(t_doom *doom, t_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);
+int		cohen_sutherland(t_i2 vec[2], t_rect size);
+void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 
 //	Movement
 void	movement(t_doom *doom);
 int		horizontal_collision(t_collision *sprite, t_xyz dest);
+void	player_collision(t_doom *doom);
+int		sprite_collision(t_collision *entity, t_xyz dest);
+int		collision_detection(t_collision *sprite);
 
 //	Texture
 void	DrawScreen(t_doom *doom);
@@ -546,11 +550,9 @@ void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx);
 void	skybox_floor_vline(t_render *render, t_vline, int tx);
 
 
-void	reset_render_utils(t_doom *doom);
 void	update_camera(t_doom *doom, int x, int y);
 int		orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
 void	keys(t_doom *doom, SDL_Event *event);
-void	ft_circle(SDL_Surface *surface, int xc, int yc, int r);
 
 //Math wiki func
 t_xyz	xyz(double x, double y, double z);
@@ -558,9 +560,7 @@ t_xyz	get_intersection(t_xyz a, t_xyz b, t_xyz c, t_xyz d);
 int		find_sector(t_doom *doom, t_xyz e);
 int		overlap(double a0, double a1, double b0 , double b);
 int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
-int		line_intersect(t_xyz a0, t_xyz a1, t_xyz b0, t_xyz b1);
 double	point_side(t_xyz a, t_xyz b, t_xyz p);
-t_xyz	find_triangle_c(t_xyz a, t_xyz b, float dist);
 int		intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2);
 double	point_distance_2d(double x1, double y1, double x2, double y2);
 double	point_distance_3d(t_xyz p1, t_xyz p2);
@@ -573,13 +573,9 @@ double	angle_to_point(t_xyz p1, t_xyz p2);
 int		compare_xyz(t_xyz a, t_xyz b);
 int		compare_xy(t_xyz a, t_xyz b);
 t_xyz	sum_xyz(t_xyz a, t_xyz b);
-int		cohen_sutherland(t_i2 *v1, t_i2 *v2, t_i2 min, t_i2 max);
-void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
 t_rect	new_rect(int x1, int y1, int x2, int y2);
 
-void	player_collision(t_doom *doom);
-int		sprite_collision(t_collision *entity, t_xyz dest);
-int		collision_detection(t_collision *sprite);
+
 
 SDL_Color	hex_to_sdl_color(int hex);
 int		blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
@@ -588,14 +584,13 @@ void	color_palet(t_bxpm *bxpm, int light);
 void	color_palets(t_doom *doom);
 void	free_doom(t_doom *doom);
 
-void	free_array(char **arr);
-int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);
-int 	find_pos_sector(t_doom *doom, t_xyz pos);
 void	rift_spawn(t_doom *doom);
 
 void	load_bxpm(t_doom *doom);
 void	load_bxpm2(t_doom *doom);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
+
+void	ft_set_icon(SDL_Window *window, char *dir);
 
 //REMOVE//
 void	cs(void);
