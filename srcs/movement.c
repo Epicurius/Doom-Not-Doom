@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:07:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:46:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	get_base_speed(t_doom *doom, float *speed)
 {
 	Uint32 time;
 
-	time = SDL_GetTicks() - doom->time.curr;
+	//time = SDL_GetTicks() - doom->time.curr;
+	time = doom->time.delta;
 	//if (player->ducking)
 	//	*speed = CROUCH_SPEED;
 	if (doom->key.l_shift)
