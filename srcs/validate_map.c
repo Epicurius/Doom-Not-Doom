@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/11 17:28:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:38:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	sector_center(t_sector *sector)
+void	sector_center(t_sector *sector)
 {
 	int		i;
 	t_xyz	c;
@@ -28,16 +28,12 @@ static void	sector_center(t_sector *sector)
 	sector->center.z = (sector->ceiling.y - sector->floor.y) / 2.0;
 }
 
-static void	fix_wall_orientation(t_sector *sector)
+void	fix_wall_orientation(t_sector *sector)
 {
 	int i;
-	t_xyz v1;
-	t_xyz v2;
 	t_xyz temp;
 
-	i = 0;
-	v1 = sector->wall[i]->v1;
-	v2 = sector->wall[i]->v2;
+	i = -1;
 	while (++i < sector->npoints)
 	{
 		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2, sector->center) < 0)
@@ -65,6 +61,7 @@ int	fix_wall_order2(t_sector *sector, int i, t_xyz v2)
 			return (1);
 		}
 	}
+	ft_printf("{RED}[ERROR]{RESET} Sector %d wall %d coordinates don't match up!\n", sector->id, i);
 	return (0);
 }
 
@@ -76,11 +73,11 @@ int	fix_wall_order(t_sector *sector)
 
 	i = 0;
 	v2 = sector->wall[i]->v2;
-	while (++i < sector->npoints)
+	while (++i <= sector->npoints)
 	{
-		if (compare_xyz(v2, sector->wall[i]->v1))
+		if (compare_xyz(v2, sector->wall[i % sector->npoints]->v1))
 		{
-			v2 = sector->wall[i]->v2;
+			v2 = sector->wall[i % sector->npoints]->v2;
 			continue ;
 		}
 		if (!fix_wall_order2(sector, i, v2))
@@ -110,14 +107,41 @@ int	is_convex(t_sector *sector)
         if (curr != 0)
 		{
             if (curr * prev < 0)
-                return (1);
+			{
+				ft_printf("{RED}[ERROR]{RESET} Sector %d is convex!\n", sector->id);
+                return (0);
+			}
 			prev = curr;
         }
     }
-    return (0);
+    return (1);
 }
 
-int	fix_map(t_doom *doom)
+int check_entities(t_doom *doom)
+{
+	t_list		*curr;
+
+	curr = doom->sprite;
+	while (curr)
+	{
+		((t_entity *)curr->content)->sector =
+			find_sector(doom, ((t_entity *)curr->content)->where);
+		if (((t_entity *)curr->content)->sector < 0)
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
+}
+
+int check_player(t_doom *doom)
+{
+	doom->player.sector = find_sector(doom, doom->player.where);
+	if (doom->player.sector < 0)
+		return (0);
+	return (1);
+}
+
+int check_map(t_doom *doom)
 {
 	int i;
 
@@ -127,9 +151,21 @@ int	fix_map(t_doom *doom)
 		sector_center(&doom->sectors[i]);
 		fix_wall_orientation(&doom->sectors[i]);
 		if (!fix_wall_order(&doom->sectors[i]))
-			return (ft_printf("[ERROR] Sector %d walls are wrong!\n", i));
-		if (is_convex(&doom->sectors[i]))
-			return (ft_printf("[ERROR] Sector %d is convex!\n", i));
+			return (0);
+		if (!is_convex(&doom->sectors[i]))
+			return (0);
 	}
+	return (1);
+}
+
+
+int		validate_map(t_doom *doom)
+{
+	if (check_map(doom) &&
+		check_player(doom) &&
+		check_entities(doom))
+		return (1);
+	doom->quit = -1;
 	return (0);
+	//check_textures();
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/11 17:18:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 11:08:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	init_doom(t_doom *doom, t_settings init)
 
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
-	printf("nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
+	ft_printf("{CYAN}[INFO]{RESET} nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
-	if (fix_map(doom))
-		doom->quit = 1;
 	init_fps(doom);
 	init_camera(doom);
 	init_skybox(doom);
@@ -83,6 +81,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	SDL_UpdateWindowSurface(doom->win);
 }
 
+//debug_loop(doom, &event);
 int	game(char *map, t_settings init)
 {
 	t_doom		*doom;
@@ -92,11 +91,12 @@ int	game(char *map, t_settings init)
 		return (0);
 	if (!read_file(doom, map))
 		return (0);
-	init_doom(doom, init);
+	if (validate_map(doom))
+		init_doom(doom, init);
     while (!doom->quit)
 		game_loop(doom, &event);
-		//debug_loop(doom, &event);
-	game_over(doom);
+	if (doom->quit == 1)
+		game_over(doom);
 	free_doom(doom);
 	return (1);
 }
@@ -123,7 +123,5 @@ int main(int ac, char **av)
 	game(av[1], init);
 	if (init.flag == 1)
 		launcher();
-	//while (1)
-	//	;
 	return (1);
 }

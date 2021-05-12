@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/10 15:16:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:49:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_score(t_doom *doom, int *i)
 {
 	char	*name;
-	t_bmp *bmp;
+	t_bmp	*bmp;
 
 	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH, doom->time.date.tm_mon + 1,
 			doom->time.date.tm_mday, doom->time.date.tm_min);
@@ -91,6 +91,8 @@ void	game_over(t_doom *doom)
 	int			screen_shot;
 
 	screen_shot = 0;
+	if (doom->quit == -1)
+		return ;
 	blit_game_over(doom);
 	blit_game_stats(doom);
 	blit_screen_shot(doom);

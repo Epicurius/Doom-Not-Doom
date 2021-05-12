@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 17:07:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:22:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_game_entity(t_doom *doom)
 		sprite = curr->content;
 		sprite->data = &doom->npe_data[sprite->type];
 		sprite->hp = sprite->data->health;
-		sprite->sector = find_sector(doom, sprite->where);
+		//sprite->sector = find_sector(doom, sprite->where);
 		sprite->dest = sprite->where;
 		sprite->state = IDLE;
 		sprite->render = 1;

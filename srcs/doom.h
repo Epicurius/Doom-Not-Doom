@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/11 14:36:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:42:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -585,7 +585,7 @@ int		blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 Uint32	brightness(Uint32 src, int brightness);
 void	color_palet(t_bxpm *bxpm, int light);
 void	color_palets(t_doom *doom);
-int		free_doom(t_doom *doom);
+void	free_doom(t_doom *doom);
 
 void	free_array(char **arr);
 int 	is_in_sector(t_doom *doom, int sector, t_xyz pos);

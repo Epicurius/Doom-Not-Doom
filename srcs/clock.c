@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 15:44:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:46:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	init_clock(t_doom *doom)
 	doom->mtx[4].h = tmp->h;
 	doom->mtx[4].clr_nb = 2;
 	doom->mtx[4].pix_nb = tmp->w * tmp->h;
-	doom->mtx[4].clr = malloc(sizeof(uint32_t) * 2);
-	doom->mtx[4].pix = malloc(sizeof(unsigned short) * (tmp->w * tmp->h));
+	doom->mtx[4].clr = ft_memalloc(sizeof(uint32_t) * 2);
+	doom->mtx[4].pix = ft_memalloc(sizeof(unsigned short) * (tmp->w * tmp->h));
 	doom->mtx[4].clr[0] = CLOCK_FG_COLOR;
 	doom->mtx[4].clr[1] = CLOCK_BG_COLOR;
 	clock_to_bxpm(tmp, &doom->mtx[4]);

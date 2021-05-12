@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:51:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 11:07:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,15 +160,17 @@ void	free_sounds(t_doom *doom)
 	int i;
 
 	i = -1;
-	while (++i < 2)
+	while (++i < 4)
 		Mix_FreeChunk(doom->sound[i]);
 }
 
-int	free_doom(t_doom *doom)
+void	free_doom(t_doom *doom)
 {
 	free_map(doom);
 	free_sprites(doom);
 	free_rifts(doom);
+	if (doom->quit == -1)
+		return (free(doom));
 	free_projectiles(doom);
 	free_textures(doom);
 	free_weapons(doom);
@@ -185,7 +187,6 @@ int	free_doom(t_doom *doom)
 	SDL_Quit();
 	Mix_Quit();
 	TTF_Quit();
-	ft_putstr("All is free!\n");
 	free(doom);
-	return (1);
+	ft_putstr("All is free!\n");
 }

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/11 10:18:08 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/12 10:30:39 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ RAW_SRC =		doom.c\
 				color_and_brightness.c\
 				precompute_walls.c\
 				precompute_skybox.c\
-				find_start_sectors.c\
+				fustrum_sectors.c\
 				draw_entity.c\
 				draw_skybox.c\
 				skybox_wall_vline.c\
@@ -142,7 +142,7 @@ RAW_SRC =		doom.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
-				clockwise_order.c\
+				validate_map.c\
 				game_over.c
 		
 NAME			= doom
