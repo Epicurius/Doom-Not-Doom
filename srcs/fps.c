@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/07 12:46:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:41:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	blit_fps(t_doom *doom)
 	srcr.y = 0;
 	srcr.w = doom->time.surf->w - 10;
 	srcr.h = doom->time.surf->h - 10;
-	//SDL_BlitScaled(doom->time.surf, &srcr, doom->surface, &dstr);
+	SDL_BlitScaled(doom->time.surf, &srcr, doom->surface, &dstr);
 	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
 
 
@@ -59,6 +59,7 @@ void				fps_func(t_doom *doom)
 	t_time		*time;
 
 	time = &doom->time;
+	//time->delta = SDL_GetTicks() - time->curr;
 	time->curr = SDL_GetTicks();
 	time->fps++;
 	if (time->curr - time->prev >= 1000)

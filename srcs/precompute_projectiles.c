@@ -6,39 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/02 11:32:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:25:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-/*
-t_list	*free_projectile(t_doom *doom, t_list *del)
-{
-	t_list *next;
 
-	next = NULL;
-	if (del->prev == NULL && del->next == NULL)
-		doom->orb = NULL;
-	else if (del->next != NULL && del->prev != NULL)
-	{
-		del->next->prev = del->prev;
-		del->prev->next = del->next;
-	}
-	else if (del->next != NULL)
-	{
-		doom->orb = del->next;
-		del->next->prev = NULL;
-	}
-	else if (del->prev != NULL)
-		del->prev->next = NULL;
-	if (doom->orb != NULL)
-		next = del->next;
-	free(del->content);
-	free(del);
-	doom->nb.projectiles -= 1;
-	return (next);
-}
-*/
 int	player_contact(t_doom *doom, t_xyz start, t_xyz dest)
 {
 	if (point_distance_3d(doom->player.where, dest) <= 5)
