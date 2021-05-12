@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/10 17:58:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 12:11:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	free_converter(t_bmp *bmp, t_bxpm *bxpm, char *path, char *name)
 	free(bxpm->pix);
 	free(bxpm);
 	free(bmp->data);
-	free(bmp);
 	free(path);
 	free(name);
 }
@@ -42,7 +41,7 @@ void	free_converter(t_bmp *bmp, t_bxpm *bxpm, char *path, char *name)
 int	main(int ac, char **av)
 {
 	int		i;
-	t_bmp	*bmp;
+	t_bmp	bmp[1];
 	t_bxpm	*bxpm;
 	char	*path;
 	char	*name;
@@ -54,8 +53,8 @@ int	main(int ac, char **av)
 	{
 		if (!ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".bmp"))
 			continue ;
-		bmp = read_bmp(av[i]);
-		bxpm = create_bxpm(bmp);
+		read_bmp(&bmp[0], av[i]);
+		bxpm = bmp_to_bxpm(bmp);
 		ft_printf("Create\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
 		ft_printf("Writing\t%s.bxpm\n", path);
