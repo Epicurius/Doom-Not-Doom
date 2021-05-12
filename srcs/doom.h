@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 10:42:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:10:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,6 +375,7 @@ typedef struct		s_weapon
 	int				frame_rate;
 	int				dmg;
 	float			scale;
+	int				sound;
 }					t_weapon;
 
 typedef struct s_dialog
@@ -425,7 +426,7 @@ typedef struct		s_doom
 	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 
-	Mix_Chunk		*sound[4];
+	Mix_Chunk		*sound[7];
 	int				intro[1]; //idk frogga jony
 	t_dialog		d;
 	pthread_t		t;

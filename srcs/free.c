@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 11:07:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:09:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	free_sounds(t_doom *doom)
 	int i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 7)
 		Mix_FreeChunk(doom->sound[i]);
 }
 

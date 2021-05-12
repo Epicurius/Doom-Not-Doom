@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 17:23:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/12 12:17:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
-
-	if (entity->frame)// || !compare_xyz(entity->where, entity->dest))
-		return ;
-	else if (entity->hp <= 0)
+	if (entity->hp <= 0 && entity->state != DEATH)
+	{
 		entity->state = DEATH;
+		entity->frame = 0;
+	}
+	else if (entity->frame)// || !compare_xyz(entity->where, entity->dest))
+		return ;
 	else if (!entity->data->animate)
 		return ;
 	else
