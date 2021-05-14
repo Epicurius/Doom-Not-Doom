@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 15:45:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/13 14:29:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
 {
 	t_xyz	move;
 	double	dist;
-	double	speed = 0.3;
+	double	speed = 40;
 
 	//speed *= SDL_GetTicks() - doom->time.curr;
 	speed *= doom->time.delta;

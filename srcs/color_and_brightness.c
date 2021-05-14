@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 19:38:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/13 11:35:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 	int	aalpha;
 
 	aalpha = 256 - alpha;
-	return (((aalpha * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
+	return ((alpha) << 24
+		| ((aalpha * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
 		| ((aalpha * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256) << 8
 		| ((aalpha * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
 }

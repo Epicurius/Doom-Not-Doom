@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/12 14:59:08 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/14 10:23:21 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,7 +145,8 @@ RAW_SRC =		doom.c\
 				validate_map.c\
 				game_over.c\
 				init_weapons.c\
-				icon.c
+				icon.c\
+				custom_error.c
 		
 NAME			= doom
 CDIR			= srcs

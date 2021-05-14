@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 15:39:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/13 14:24:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,7 +337,7 @@ typedef	struct		s_time
 	float			curr;
 	float			prev;
 	int				fps;
-	int				delta;
+	float			delta;
 	SDL_Color		color;
 	TTF_Font		*font;
 	SDL_Surface		*surf;
