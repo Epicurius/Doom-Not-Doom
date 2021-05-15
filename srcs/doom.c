@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/14 10:25:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/15 21:27:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int main(int ac, char **av)
 {
 	t_settings init;
 
-	custom_error("asdasd %s\n", "arrrr");
 	init.w = 1920;
 	init.h = 1080;
 	init.diff = 0;
