@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 10:38:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/17 14:47:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,30 @@ int	is_convex(t_sector *sector)
 {
 	int i;
 	int n;
-    double prev;
-    double curr;
+	double prev;
+	double curr;
 
    	i = -1;
 	prev = 0;
 	curr = 0;
-    n = sector->npoints;
+	n = sector->npoints;
 	while (++i < sector->npoints)
 	{
 		curr = (sector->wall[(i + 1) % n]->v1.x - sector->wall[i]->v1.x) *
 				(sector->wall[(i + 2) % n]->v1.y - sector->wall[i]->v1.y) -
 				(sector->wall[(i + 1) % n]->v1.y - sector->wall[i]->v1.y) *
 				(sector->wall[(i + 2) % n]->v1.x - sector->wall[i]->v1.x);
-        if (curr != 0)
+		if (curr != 0)
 		{
-            if (curr * prev < 0)
+			if (curr * prev < 0)
 			{
 				ft_printf("{RED}[ERROR]{RESET} Sector %d is convex!\n", sector->id);
-                return (0);
+				return (0);
 			}
 			prev = curr;
-        }
-    }
-    return (1);
+		}
+	}
+	return (1);
 }
 
 int check_entities(t_doom *doom)
