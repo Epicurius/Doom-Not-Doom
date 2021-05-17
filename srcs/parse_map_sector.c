@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 16:17:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:19:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,12 @@ void	parse_sector(t_doom *doom, char **arr)
 
 	sect			= &doom->sectors[ft_atoi(arr[0])];
 	sect->id		= ft_atoi(arr[0]);
-	walls			= ft_strsplit(arr[1], ' ');
-	sect->npoints	= ft_strarr_func(walls, NULL);
+	walls			= ft_strsplit(arr[1], ' ', &sect->npoints);
 	sect->wall		= ft_memalloc(sizeof(t_wall*) * (sect->npoints));
-	neighbour		= ft_strsplit(arr[2], ' ');
+	neighbour		= ft_strsplit(arr[2], ' ', NULL);
 	sect->gravity	= ft_atoi(arr[3]) / 1000.0;
 	sect->light		= ft_atoi(arr[4]);
 	complete_wall(sect, doom->walls, walls, neighbour);
-	ft_strarr_func(walls, ft_strdel);
-	ft_strarr_func(neighbour, ft_strdel);
 	free(walls);
 	free(neighbour);
 }

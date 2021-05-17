@@ -6,9 +6,11 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/15 21:27:04 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/17 18:22:58 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#https://stackoverflow.com/questions/47762070/makefile-optimization-for-quickly-compiling-a-library-as-quickly-as-possible
 
 SHELL_NAME	:= $(shell uname -s)
 
@@ -76,6 +78,7 @@ BMP				= $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
 BXPM			= $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
 
 RAW_SRC =		doom.c\
+				error.c\
 				put_pixels.c \
 				read_map.c\
 				init_textures.c\

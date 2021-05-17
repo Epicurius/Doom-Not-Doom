@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/15 21:27:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/17 18:52:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int main(int ac, char **av)
 	init.diff = 0;
 	init.flag = 0;
 	if (ac <= 1)
-		return (ft_printf("{RED}[ERROR]{RESET} No map.\n"));
+		error_term(NULL, "No map.\n");
 	if (ac >= 4)
 	{
 		init.w = ft_atoi(av[2]);

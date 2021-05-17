@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:09:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/17 18:40:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,12 @@ void	free_doom(t_doom *doom)
 	free_projectiles(doom);
 	free_textures(doom);
 	free_weapons(doom);
-	free_sprite_pos(&doom->sheet[0]);
-	free_sprite_pos(&doom->sheet[1]);
-	free_sprite_pos(&doom->sheet[2]);
+	if (doom->sheet[0].pos)
+		free_sprite_pos(&doom->sheet[0]);
+	if (doom->sheet[1].pos)
+		free_sprite_pos(&doom->sheet[1]);
+	if (doom->sheet[2].pos)
+		free_sprite_pos(&doom->sheet[2]);
 	SDL_FreeSurface(doom->time.surf);
 	free_render_utils(doom);
 	free_font(doom);

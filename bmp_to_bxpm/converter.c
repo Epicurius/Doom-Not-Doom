@@ -6,12 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 12:11:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/17 17:40:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../lib/libft/libft.h"
-# include "../lib/libpf/ft_printf.h"
+# include "../lib/libpf/libpf.h"
 # include "../lib/libbxpm/bxpm.h"
 
 void	create_path_and_name(char *file, char **path, char **name)
