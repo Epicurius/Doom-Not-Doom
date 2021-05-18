@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:29:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:33:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:49:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_set_icon(SDL_Window *window, char *dir)
 
 	icon = SDL_LoadBMP(dir);
 	if (icon == NULL)
-		return ;
+		error_msg("Could not load icon: %s\n", SDL_GetError());
 	SDL_SetWindowIcon(window, icon);
 	SDL_FreeSurface(icon);
 }

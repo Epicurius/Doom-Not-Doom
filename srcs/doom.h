@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DOOM.h                                             :+:      :+:    :+:   */
+/*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 11:10:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:13:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,11 +383,21 @@ typedef struct s_dialog
 	int			*done;
 }				t_dialog;
 
+/*typedef struct	s_surface
+{
+	uint8_t		w;
+	uint8_t		h;
+	uint32_t	*pix;
+}				t_surface;
+*/
 typedef struct		s_doom
 {
 	int				quit;
 	SDL_Window		*win;
 	SDL_Surface		*surface;
+	SDL_Renderer	*renderer;
+	SDL_Texture		*texture;
+	//t_surface		*surf;
 	double 			map_scale;
 	int				w2;
 	int				h2;
@@ -592,7 +602,7 @@ void	load_bxpm2(t_doom *doom);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 void	ft_set_icon(SDL_Window *window, char *dir);
-void	error_term(int i, const char *restrict format, ...);
+void	error_msg(const char *restrict format, ...);
 
 //REMOVE//
 void	cs(void);

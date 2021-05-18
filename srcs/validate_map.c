@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clockwise_order.c                                  :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 11:13:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:42:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 			return ;
 		}
 	}
-	error_term(LAUNCH, "Sector %d wall %d coordinates don't match up!\n", sector->id, i);
+	error_msg("Sector %d wall %d coordinates don't match up!\n", sector->id, i);
 }
 
 void	fix_wall_order(t_doom *doom, t_sector *sector)
@@ -104,7 +104,7 @@ void	is_convex(t_doom *doom, t_sector *sector)
 		if (curr != 0)
 		{
 			if (curr * prev < 0)
-				error_term(LAUNCH, "Sector %d is convex!\n", sector->id);
+				error_msg("Sector %d is convex!\n", sector->id);
 			prev = curr;
 		}
 	}
@@ -120,7 +120,7 @@ void	check_entities(t_doom *doom)
 		((t_entity *)curr->content)->sector =
 			find_sector(doom, ((t_entity *)curr->content)->where);
 		if (((t_entity *)curr->content)->sector < 0)
-			error_term(LAUNCH, "Entity is outside map boundaries!\n");
+			error_msg("Entity is outside map boundaries!\n");
 		curr = curr->next;
 	}
 }
@@ -129,7 +129,7 @@ void	check_player(t_doom *doom)
 {
 	doom->player.sector = find_sector(doom, doom->player.where);
 	if (doom->player.sector < 0)
-		error_term(LAUNCH, "Player is outside map boundaries!\n");
+		error_msg("Player is outside map boundaries!\n");
 }
 
 void	check_map(t_doom *doom)

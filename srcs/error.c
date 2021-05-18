@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 11:12:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:42:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	error_term(int flag, const char *restrict format, ...)
+void	error_msg(const char *restrict format, ...)
 {
 	t_pf	p;
 	char	buff[PF_BUFF_SIZE];
@@ -30,7 +30,6 @@ void	error_term(int flag, const char *restrict format, ...)
 	}
 	else
 		write(1, "\n", 1);
-	if (flag == 1)
-		launcher();
+	//launcher();
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/13 14:33:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:04:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->attack_style 		= 2;
 	alfred->scale 				= 4 * (doom->surface->w / 100);
 	alfred->height 				= 4;
-	alfred->speed 				= 200;
+	alfred->speed 				= 20;
 	alfred->wonder_distance 	= 200;
 	alfred->view_distance 		= 200;
 	alfred->detection_radius 	= 20;

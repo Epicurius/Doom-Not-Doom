@@ -6,11 +6,27 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:09:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 12:00:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	load_wav(t_doom *doom)
+{
+	doom->sound[MAIN_THEME] = Mix_LoadWAV(GAME_PATH"resources/WAV/at_dooms_gate.wav");
+	doom->sound[SHOTGUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/shotgun.wav");
+	doom->sound[SS_SAVED] = Mix_LoadWAV(GAME_PATH"resources/WAV/ss_saved.wav");
+	doom->sound[INTRO] = Mix_LoadWAV(GAME_PATH"resources/WAV/Intro.wav");
+	doom->sound[FOOT_STEPS] = Mix_LoadWAV(GAME_PATH"resources/WAV/footstep.wav");
+	doom->sound[JUMP] = Mix_LoadWAV(GAME_PATH"resources/WAV/jump.wav");
+	doom->sound[GUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/gun.wav");
+
+	if (!doom->sound[MAIN_THEME] || !doom->sound[SHOTGUN] || !doom->sound[SS_SAVED]
+			|| !doom->sound[INTRO] || !doom->sound[FOOT_STEPS] || !doom->sound[JUMP]
+			|| !doom->sound[GUN])
+		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
+}
 
 void	intro(void	*arg)
 {
@@ -27,15 +43,10 @@ void	intro(void	*arg)
 
 void	init_sound(t_doom *doom)
 {
-	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048);
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(10);
-	doom->sound[MAIN_THEME] = Mix_LoadWAV(GAME_PATH"resources/WAV/at_dooms_gate.wav");
-	doom->sound[SHOTGUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/shotgun.wav");
-	doom->sound[SS_SAVED] = Mix_LoadWAV(GAME_PATH"resources/WAV/ss_saved.wav");
-	doom->sound[INTRO] = Mix_LoadWAV(GAME_PATH"resources/WAV/Intro.wav");
-	doom->sound[FOOT_STEPS] = Mix_LoadWAV(GAME_PATH"resources/WAV/footstep.wav");
-	doom->sound[JUMP] = Mix_LoadWAV(GAME_PATH"resources/WAV/jump.wav");
-	doom->sound[GUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/gun.wav");
+	load_wav(doom);
 
 	/* Intro */
 	//doom->d.sound1 = doom->sound[INTRO];
