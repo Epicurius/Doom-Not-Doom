@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/17 18:40:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 16:20:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,9 @@ void	free_doom(t_doom *doom)
 	free_sounds(doom);
 	free_tpool(&doom->tpool);
 	SDL_FreeSurface(doom->surface);
+	SDL_DestroyTexture(doom->texture);
+	SDL_DestroyTexture(doom->texture);
+	SDL_DestroyRenderer(doom->renderer);
 	SDL_DestroyWindow(doom->win);
 	SDL_Quit();
 	Mix_Quit();

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 14:13:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 16:24:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_doom(t_doom *doom, t_settings init)
 	TTF_Init();
 	Mix_Init(MIX_INIT_FLAC);
 	doom->settings = init;
-	doom->settings.w = init.w * 0.75f;
-	doom->settings.h = init.h * 0.75f;
+	doom->settings.w = init.w * 0.5f;
+	doom->settings.h = init.h * 0.5f;
 	doom->w2 = doom->settings.w / 2;
 	doom->h2 = doom->settings.h / 2;
 
@@ -123,7 +123,6 @@ void	game(char *map, t_settings init)
 	game_over(doom);
 	free_doom(doom);
 }
-
 
 int main(int ac, char **av)
 {
