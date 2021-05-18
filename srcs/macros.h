@@ -6,12 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/13 14:26:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:00:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
+
+# define LAUNCH						doom->settings.flag
 
 /*
 ** Screen info

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/17 18:52:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:09:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_doom(t_doom *doom, t_settings init)
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	TTF_Init();
 	Mix_Init(MIX_INIT_FLAC);
-	doom->settings = init;
 	doom->w2 = doom->settings.w / 2;
 	doom->h2 = doom->settings.h / 2;
 
@@ -39,7 +38,6 @@ void	init_doom(t_doom *doom, t_settings init)
 
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
-	ft_printf("{CYAN}[INFO]{RESET} nb.processors %d, nb.threads %d\n", doom->nb.processors, doom->nb.threads);
 	init_tpool(&doom->tpool, doom->nb.processors);
 	init_fps(doom);
 	init_weapons(doom);
@@ -57,7 +55,6 @@ void	init_doom(t_doom *doom, t_settings init)
 
 void	game_loop(t_doom *doom, SDL_Event *event)
 {
-	//ft_printf("%d\n", SDL_GetPerformanceCounter());
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
 	precompute_skybox(doom);
@@ -82,28 +79,27 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	if (doom->key.tab)
 		map(doom);
 	SDL_UpdateWindowSurface(doom->win);
-	//ft_printf("%d\n", doom->time.delta);
 }
 
 //debug_loop(doom, &event);
-int	game(char *map, t_settings init)
+void	game(char *map, t_settings init)
 {
 	t_doom		*doom;
     SDL_Event	event;
 
-	if (!(doom = ft_memalloc(sizeof(t_doom))))
-		return (0);
-	if (!read_file(doom, map))
-		return (0);
-	if (validate_map(doom))
-		init_doom(doom, init);
+	doom = ft_memalloc(sizeof(t_doom));
+	if (!doom)
+		error_term(init.flag, "Doom malloc.\n");
+	doom->settings = init;
+	read_file(doom, map);
+	validate_map(doom);
+	init_doom(doom, init);
     while (!doom->quit)
 		game_loop(doom, &event);
-	if (doom->quit == 1)
-		game_over(doom);
+	game_over(doom);
 	free_doom(doom);
-	return (1);
 }
+
 
 int main(int ac, char **av)
 {

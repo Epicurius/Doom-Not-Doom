@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/17 18:36:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:11:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	read_file(t_doom *doom, char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		error_term(doom, "File does not exist.\n");
+		error_term(LAUNCH, "File does not exist or could not be opened.\n");
 	while (get_next_line(fd, &line))
 	{
 		read_type(doom, fd, line);

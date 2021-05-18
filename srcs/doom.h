@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/15 21:26:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:10:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,7 +440,7 @@ void	debug_loop(t_doom *doom, SDL_Event *event);
 
 //		Game
 void	poll_event(t_doom *doom, SDL_Event *event);
-int		game(char *map, t_settings init);
+void	game(char *map, t_settings init);
 void	gamemode(t_doom *doom);
 void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
@@ -592,6 +592,7 @@ void	load_bxpm2(t_doom *doom);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 void	ft_set_icon(SDL_Window *window, char *dir);
+void	error_term(int i, const char *restrict format, ...);
 
 //REMOVE//
 void	cs(void);
