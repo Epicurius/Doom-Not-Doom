@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 16:06:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:49:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@
 
 typedef struct	s_settings
 {
-	int	w;
-	int h;
-	int diff;
-	int mouse_x;
-	int mouse_y;
+	int	display_h;
+	int	display_w;
+	float render_resolution;
+	float mouse_sens_x;
+	float mouse_sens_y;
+	int difficulty;
 	int fov;
 	int flag;
 }				t_settings;
@@ -431,8 +432,6 @@ typedef struct		s_doom
 	int				intro[1]; //idk frogga jony
 	t_dialog		d;
 	pthread_t		t;
-
-	t_settings		settings;
 }					t_doom;
 
 //		Sound

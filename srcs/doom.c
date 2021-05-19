@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 16:33:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:55:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,26 @@ void	init_doom(t_doom *doom, t_settings init)
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	TTF_Init();
 	Mix_Init(MIX_INIT_FLAC);
-	doom->settings = init;
-	doom->settings.w = init.w;// * 0.666f;
-	doom->settings.h = init.h;// * 0.666f;
-	doom->w2 = doom->settings.w / 2;
-	doom->h2 = doom->settings.h / 2;
+
 
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			init.w, init.h, SDL_WINDOW_SHOWN);//SDL_WINDOW_MOUSE_FOCUS
+			init.display_w, init.display_h, SDL_WINDOW_MOUSE_FOCUS);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 
-	doom->surface = SDL_CreateRGBSurfaceWithFormat(0, doom->settings.w, doom->settings.h,
+	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
+			init.display_w * init.render_resolution,
+			init.display_h * init.render_resolution,
 			32, SDL_PIXELFORMAT_ARGB8888);
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
 
-	doom->renderer = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_TARGETTEXTURE);//SDL_RENDERER_TARGETTEXTURE
+	doom->renderer = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_TARGETTEXTURE);
 	if (!doom->renderer)
 		error_msg("Could not create renderer: %s\n", SDL_GetError());
 	
 	doom->texture = SDL_CreateTexture(doom->renderer, SDL_PIXELFORMAT_ARGB8888,
-			SDL_TEXTUREACCESS_STREAMING, doom->settings.w, doom->settings.h);
+			SDL_TEXTUREACCESS_STREAMING, doom->surface->w, doom->surface->h);
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
 
@@ -56,6 +54,9 @@ void	init_doom(t_doom *doom, t_settings init)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	ft_set_icon(doom->win, GAME_PATH"resources/SpaceStudio.bmp");
 
+
+	doom->w2 = init.display_w * init.render_resolution / 2;
+	doom->h2 = init.display_h * init.render_resolution / 2;
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
@@ -127,19 +128,20 @@ int main(int ac, char **av)
 	t_settings init;
 
 	//2560 1390
-	init.w = 1920;
-	init.h = 1080;
-	init.diff = 0;
+	init.display_w = 1920;
+	init.display_h = 1080;
+	init.render_resolution = 0.7f;
+	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)
 		error_msg("No map.\n");
 	if (ac >= 4)
 	{
-		init.w = ft_atoi(av[2]);
-		init.h = ft_atoi(av[3]);
+		init.display_w = ft_atoi(av[2]);
+		init.display_h = ft_atoi(av[3]);
 	}
 	if (ac >= 5)
-		init.diff = ft_atoi(av[4]);
+		init.difficulty = ft_atoi(av[4]);
 	if (ac >= 6)
 		init.flag = ft_atoi(av[5]);
 	game(av[1], init);
