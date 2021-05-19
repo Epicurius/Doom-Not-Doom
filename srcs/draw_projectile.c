@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 13:49:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void 	DrawProjectiles(t_doom *doom)
 
 	render.hp		= NULL;
 	render.bxpm		= &doom->sheet[1].bxpm;
-	render.pos		= new_rect(810, 76, 856, 119);
+	render.pos		= rect_xy2(810, 76, 856, 119);
 	render.surface	= doom->surface;
 	curr = doom->orb;
 	while (curr)

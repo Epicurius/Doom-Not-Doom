@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 14:13:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:06:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,13 +383,6 @@ typedef struct s_dialog
 	int			*done;
 }				t_dialog;
 
-/*typedef struct	s_surface
-{
-	uint8_t		w;
-	uint8_t		h;
-	uint32_t	*pix;
-}				t_surface;
-*/
 typedef struct		s_doom
 {
 	int				quit;
@@ -397,8 +390,8 @@ typedef struct		s_doom
 	SDL_Surface		*surface;
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
-	//t_surface		*surf;
 	double 			map_scale;
+	float			tx_scale;
 	int				w2;
 	int				h2;
 
@@ -584,7 +577,8 @@ double	angle_to_point(t_xyz p1, t_xyz p2);
 int		compare_xyz(t_xyz a, t_xyz b);
 int		compare_xy(t_xyz a, t_xyz b);
 t_xyz	sum_xyz(t_xyz a, t_xyz b);
-t_rect	new_rect(int x1, int y1, int x2, int y2);
+t_rect	rect_xy2(int x1, int y1, int x2, int y2);
+t_rect	rect_xywh(int x1, int y1, int w, int h);
 
 
 

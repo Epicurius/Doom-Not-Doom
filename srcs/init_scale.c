@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:51:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 		wsprite->scale_h = wsprite->scale_w * ((float)y / (float)x);
 		wsprite->scale_w = (x / wsprite->scale_w) * wall->width;
 		wsprite->scale_h = (y / wsprite->scale_h) * wall->height;
-		wsprite->src = new_rect(0, 0, x, y);
+		wsprite->src = rect_xy2(0, 0, x, y);
 	}
 
 }

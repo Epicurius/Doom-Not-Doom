@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 16:24:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:33:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,31 @@ void	init_doom(t_doom *doom, t_settings init)
 	TTF_Init();
 	Mix_Init(MIX_INIT_FLAC);
 	doom->settings = init;
-	doom->settings.w = init.w * 0.5f;
-	doom->settings.h = init.h * 0.5f;
+	doom->settings.w = init.w;// * 0.666f;
+	doom->settings.h = init.h;// * 0.666f;
 	doom->w2 = doom->settings.w / 2;
 	doom->h2 = doom->settings.h / 2;
 
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			init.w, init.h, SDL_WINDOW_SHOWN);
+			init.w, init.h, SDL_WINDOW_SHOWN);//SDL_WINDOW_MOUSE_FOCUS
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 
-
-	//doom->surf.w = doom->settings.w;
-	//doom->surf.h = doom->settings.h;
-	//doom->surf.pix = ft_memalloc(4 * (doom->surf.w * doom->surf.h)); 
-	doom->surface = SDL_CreateRGBSurfaceWithFormat(0, doom->settings.w, doom->settings.h, 32, SDL_PIXELFORMAT_ARGB8888);
+	doom->surface = SDL_CreateRGBSurfaceWithFormat(0, doom->settings.w, doom->settings.h,
+			32, SDL_PIXELFORMAT_ARGB8888);
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
 
-	doom->renderer = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_ACCELERATED);
+	doom->renderer = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_TARGETTEXTURE);//SDL_RENDERER_TARGETTEXTURE
 	if (!doom->renderer)
 		error_msg("Could not create renderer: %s\n", SDL_GetError());
 	
-	doom->texture = SDL_CreateTexture(doom->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET,
-			doom->settings.w, doom->settings.h);
+	doom->texture = SDL_CreateTexture(doom->renderer, SDL_PIXELFORMAT_ARGB8888,
+			SDL_TEXTUREACCESS_STREAMING, doom->settings.w, doom->settings.h);
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
 
+	SDL_SetWindowDisplayMode(doom->win, NULL);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	ft_set_icon(doom->win, GAME_PATH"resources/SpaceStudio.bmp");
 
@@ -128,6 +126,7 @@ int main(int ac, char **av)
 {
 	t_settings init;
 
+	//2560 1390
 	init.w = 1920;
 	init.h = 1080;
 	init.diff = 0;

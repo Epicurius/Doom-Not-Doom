@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:13:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	blit_weapon(t_doom *doom)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	bxpm = &weapon->bxpm[weapon->frame];
-	dstr = new_rect(doom->w2,
+	dstr = rect_xy2(doom->w2,
 					doom->surface->h - (float)(bxpm->h * weapon->scale),
 					doom->w2 + (float)(bxpm->w * weapon->scale),
 					doom->surface->h);
-	srcr = new_rect(0,	0,	weapon->bxpm[weapon->frame].w,	weapon->bxpm[weapon->frame].h);
+	srcr = rect_xy2(0,	0,	weapon->bxpm[weapon->frame].w,	weapon->bxpm[weapon->frame].h);
 	blit_bxpm_scaled(doom->surface, dstr, &weapon->bxpm[weapon->frame], srcr);
 }
 

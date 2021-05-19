@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/13 14:20:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:31:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	init_fps(t_doom *doom)
 	doom->time.prev = 0;
 	doom->time.surf = NULL;
 	doom->time.font = TTF_OpenFont(GAME_PATH"resources/TTF/digital.ttf", 100);
-	doom->time.color = hex_to_sdl_color(0x40eb34ff);
+	doom->time.color = hex_to_sdl_color(0x8800FF00);
 }

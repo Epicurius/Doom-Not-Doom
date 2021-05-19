@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_box.c                                    :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/11 17:11:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:53:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double		space_diagonal(double x, double y, double z)
 }
 
 //		Make new t_rect struct for texture sheets
-t_rect		new_rect(int x1, int y1, int x2, int y2)
+t_rect		rect_xy2(int x1, int y1, int x2, int y2)
 {
 	t_rect new;
 
@@ -35,6 +35,20 @@ t_rect		new_rect(int x1, int y1, int x2, int y2)
 	new.y2 = y2;
 	new.w = new.x2 - new.x1;
 	new.h = new.y2 - new.y1;
+	new.ratio = (double)new.h / (double)new.w;
+	return (new);
+}
+
+t_rect		rect_xywh(int x1, int y1, int w, int h)
+{
+	t_rect new;
+
+	new.x1 = x1;
+	new.y1 = y1;
+	new.x2 = x1 + w;
+	new.y2 = y1 + h;
+	new.w = w;
+	new.h = h;
 	new.ratio = (double)new.h / (double)new.w;
 	return (new);
 }
