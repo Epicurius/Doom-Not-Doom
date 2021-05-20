@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/09 16:47:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:36:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	spawn_mob(t_doom *doom, t_entity *rift)
 	t_entity *mob;
 
 	mob = ft_memalloc(sizeof(t_entity));
-	mob->type = rand() % 2;
+	mob->type = 0;//rand() % 2;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;
 	mob->sector = rift->sector;
 	mob->dest = mob->where;
 	mob->state = IDLE;
-	mob->render = 1;
 	mob->data = &doom->npe_data[mob->type];
 	if (mob->data->flying)
 		mob->where.z += 5;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 14:04:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:40:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->wonder_distance 	= 200;
 	alfred->view_distance 		= 200;
 	alfred->detection_radius 	= 20;
-	alfred->attack_range 		= 4;
+	alfred->attack_range 		= 7;
 	alfred->frame_rate[IDLE] 	= 100;
 	alfred->frame_rate[MOVE] 	= 200;
 	alfred->frame_rate[ATTACK]	= 100;
@@ -80,10 +80,8 @@ void	init_game_entity(t_doom *doom)
 		sprite = curr->content;
 		sprite->data = &doom->npe_data[sprite->type];
 		sprite->hp = sprite->data->health;
-		//sprite->sector = find_sector(doom, sprite->where);
 		sprite->dest = sprite->where;
 		sprite->state = IDLE;
-		sprite->render = 1;
 		if (sprite->type == 2)
 		{
 			new = ft_lstnew(curr->content, sizeof(t_entity));

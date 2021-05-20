@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 15:56:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:22:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	draw_hud(doom);
 	if (doom->key.tab)
 		map(doom);
-	SDL_UpdateTexture(doom->texture, NULL, doom->surface->pixels, doom->surface->pitch);
-	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
-	SDL_RenderPresent(doom->renderer);
+	update_screen(doom, doom->surface);
 	if (doom->key.p)
 		game_pause(doom);
 	else if (doom->quit == 1)
@@ -137,7 +135,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 1.0f;
+	init.render_resolution = 0.75f;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

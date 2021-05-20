@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 15:56:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:24:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,9 @@ void	game_pause(t_doom *doom)
 			doom->w2 - bxpm->w / 2, doom->h2 - bxpm->h / 2);
 	s_to_save_screen_shot(doom);
 	p_to_unpause(doom, doom->h2 + bxpm->h / 2);
-	SDL_UpdateTexture(doom->texture, NULL,
-			doom->surface->pixels, doom->surface->pitch);
-	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
-	SDL_RenderPresent(doom->renderer);
+	update_screen(doom, doom->surface);;
 	pause_loop(doom, bxpm, bmp);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	free(bmp->data);
-	free(bmp);
-	free(bxpm->pix);
-	free(bxpm->clr);
-	free(bxpm);
+	free_bmp(bmp);
+	free_bxpm(bxpm);
 }

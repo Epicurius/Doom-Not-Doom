@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/13 14:29:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:41:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
 {
 	t_xyz	move;
 	double	dist;
-	double	speed = 40;
+	double	speed;
 
-	//speed *= SDL_GetTicks() - doom->time.curr;
-	speed *= doom->time.delta;
+	speed = PROJECTILE_SPEED * doom->time.delta;
 	move.x = dest.x - curr.x;
 	move.y = dest.y - curr.y;
 	move.z = dest.z - curr.z;
@@ -37,16 +36,15 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	t_project	*orb;
 
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
+	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
+		return ;
 	if (entity->data->attack_style == 2)
 	{
 		doom->player.hp -= entity->data->damage;
 		entity->hp = 0;
 		entity->state = DEATH;
-		return ;
 	}
-	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
-		return ;
-	else if (entity->data->attack_style == 1)// && doom->orb == NULL)
+	else if (entity->data->attack_style == 1)
 	{
 		orb = ft_memalloc(sizeof(t_project));
 		orb->velocity = projectile_movement(doom, entity->where, doom->player.where);
@@ -56,6 +54,7 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 		orb->start = orb->where;
 		orb->sector = entity->sector;
 		ft_lstadd_new(&doom->orb, orb, sizeof(orb));
+		entity->frame += 1;
 		doom->nb.projectiles += 1;
 	}
 }

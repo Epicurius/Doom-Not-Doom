@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 15:56:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:44:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct		s_data
 
 typedef struct		s_entity
 {
-	int				render; //will depend on hp
 	t_xyz			where;
 	t_xyz			dest;
 	t_xyz			velocity;
@@ -120,7 +119,7 @@ typedef struct		s_entity
 	int				type;
 	double			scale;
 	double			time;
-	t_data		*data;
+	t_data			*data;
 }					t_entity;
 
 typedef struct		s_player
@@ -384,22 +383,22 @@ typedef struct		s_weapon
 	int				frames;
 }					t_weapon;
 
-typedef struct s_dialog
+typedef struct		s_dialog
 {
-	Mix_Chunk	*sound1;
-	Mix_Chunk	*sound2;
-	int			*done;
-}				t_dialog;
+	Mix_Chunk		*sound1;
+	Mix_Chunk		*sound2;
+	int				*done;
+}					t_dialog;
 
-typedef struct	t_inv
+typedef struct		t_inv
 {
-	int			dosh;
-	int			*hp;
-	int			*armour;
-	t_weapon	*weapon;
-	float		*speed;
-	float		*jump;
-}				t_inv;
+	int				dosh;
+	int				*hp;
+	int				*armour;
+	t_weapon		*weapon;
+	float			*speed;
+	float			*jump;
+}					t_inv;
 
 typedef struct		s_doom
 {
@@ -470,6 +469,7 @@ void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
 void	game_over(t_doom *doom);
 void	game_pause(t_doom *doom);
 void	game_quit(t_doom *doom);
+void	update_screen(t_doom *doom, SDL_Surface *surface);
 
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);

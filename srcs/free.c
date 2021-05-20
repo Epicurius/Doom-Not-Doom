@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 16:20:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:06:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ void	free_map(t_doom *doom)
 	while (++i < doom->nb.sectors)
 		ft_memdel((void*)&doom->sectors[i].wall);
 	ft_memdel((void*)&doom->sectors);
-}
-
-void	free_sprite_pos(t_texture_sheet *sprite)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < sprite->nb[i][FRAMES])
-			free(sprite->pos[i][j]);
-		free(sprite->pos[i]);
-	}
-	free(sprite->pos);
 }
 
 void	free_render_utils(t_doom *doom)
@@ -66,6 +50,32 @@ void	free_color_palet(t_bxpm *bxpm)
 		if (bxpm->palet[i])
 			free(bxpm->palet[i]);
 	}
+}
+
+void	free_sprite_pos(t_texture_sheet *sprite)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < sprite->nb[i][FRAMES])
+			free(sprite->pos[i][j]);
+		free(sprite->pos[i]);
+	}
+	free(sprite->pos);
+}
+
+void	free_sprites_pos(t_doom *doom)
+{
+	if (doom->sheet[0].pos)
+		free_sprite_pos(&doom->sheet[0]);
+	if (doom->sheet[1].pos)
+		free_sprite_pos(&doom->sheet[1]);
+	if (doom->sheet[2].pos)
+		free_sprite_pos(&doom->sheet[2]);
 }
 
 void	free_sprites(t_doom *doom)
@@ -164,22 +174,29 @@ void	free_sounds(t_doom *doom)
 		Mix_FreeChunk(doom->sound[i]);
 }
 
+void	free_icon(t_doom *doom)
+{
+	int i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		free(doom->icon[i].clr);
+		free(doom->icon[i].pix);
+	}
+
+}
+
 void	free_doom(t_doom *doom)
 {
 	free_map(doom);
 	free_sprites(doom);
+	free_sprites_pos(doom);
 	free_rifts(doom);
-	if (doom->quit == -1)
-		return (free(doom));
 	free_projectiles(doom);
 	free_textures(doom);
+	free_icon(doom);
 	free_weapons(doom);
-	if (doom->sheet[0].pos)
-		free_sprite_pos(&doom->sheet[0]);
-	if (doom->sheet[1].pos)
-		free_sprite_pos(&doom->sheet[1]);
-	if (doom->sheet[2].pos)
-		free_sprite_pos(&doom->sheet[2]);
 	SDL_FreeSurface(doom->time.surf);
 	free_render_utils(doom);
 	free_font(doom);

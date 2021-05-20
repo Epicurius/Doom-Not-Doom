@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 15:56:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:25:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	quit_loop(t_doom *doom)
 			doom->quit = 0;
 			break ;
 		}
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y)
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y
+				|| event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q)
 			break ;
 	}
 }
@@ -52,12 +53,7 @@ void	game_quit(t_doom *doom)
 	blit_bxpm(doom->surface, bxpm,
 			doom->w2 - bxpm->w / 2, doom->h2 - bxpm->h / 2);
 	y_or_n(doom, doom->h2 + bxpm->h / 2);
-	SDL_UpdateTexture(doom->texture, NULL,
-			doom->surface->pixels, doom->surface->pitch);
-	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
-	SDL_RenderPresent(doom->renderer);
+	update_screen(doom, doom->surface);
 	quit_loop(doom);
-	free(bxpm->pix);
-	free(bxpm->clr);
-	free(bxpm);
+	free_bxpm(bxpm);
 }

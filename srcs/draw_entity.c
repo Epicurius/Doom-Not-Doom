@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 12:46:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:39:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	rotate_sprite(t_doom *doom, t_entity *sprite, t_entity_render *render)
 	screen.z = dist.x * doom->player.anglecos
 			+ dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
-	if (screen.z <= 0.5)
+	if (screen.z <= 0.3)
 		return (0);
 	render->screen = xyz(screen.x, screen.y, screen.z);
 	render->scale = sprite->data->scale;
@@ -83,7 +83,7 @@ void	Drawsprite(t_doom *doom)
 	while (curr)
 	{
 		sprite = curr->content;
-		if (sprite->render && doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
+		if (doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
 		{
 			project_game_entity(doom, &render);
 			tpool_wait(&doom->tpool);

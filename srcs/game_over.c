@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 12:35:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:24:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_score(t_doom *doom, int *i)
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	write_bmp(name, bmp);
-	free(bmp);
+	free_bmp(bmp);
 	free(name);
 	*i = 1;
 	Mix_PlayChannel(-1, doom->sound[WAV_SCREEN_SHOT], 0);
@@ -36,9 +36,7 @@ void	blit_game_over(t_doom *doom)
 	bxpm = malloc(sizeof(t_bxpm));
 	read_bxpm(bxpm, GAME_PATH"resources/BXPM/game_over.bxpm");
 	blit_bxpm(doom->surface, bxpm, doom->surface->w * 0.05, doom->surface->h * 0.05);
-	free(bxpm->clr);
-	free(bxpm->pix);
-	free(bxpm);
+	free_bxpm(bxpm);
 }
 
 void	blit_game_stats(t_doom *doom)
@@ -97,9 +95,7 @@ void	game_over(t_doom *doom)
 	blit_game_over(doom);
 	blit_game_stats(doom);
 	blit_screen_shot(doom);
-	SDL_UpdateTexture(doom->texture, NULL, doom->surface->pixels, doom->surface->pitch);
-	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
-	SDL_RenderPresent(doom->renderer);
+	update_screen(doom, doom->surface);
 	while (1)
 	{
 		SDL_PollEvent(&event);
