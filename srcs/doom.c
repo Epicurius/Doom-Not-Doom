@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:22:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 17:05:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 0.75f;
+	init.render_resolution = 1.0f;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:36:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:56:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	spawn_mob(t_doom *doom, t_entity *rift)
 	t_entity *mob;
 
 	mob = ft_memalloc(sizeof(t_entity));
-	mob->type = 0;//rand() % 2;
+	mob->type = rand() % 2;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;
 	mob->sector = rift->sector;

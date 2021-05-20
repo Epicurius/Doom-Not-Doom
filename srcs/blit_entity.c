@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 14:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 17:09:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 void	hit_enemy(t_entity_render *render, int coord)
 {
-	if (render->shooting && coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
+	if (render->hp != NULL && render->shooting
+			&& coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
 		*render->hp -= render->dmg;
+	//if (coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
+	//	*render->danger = 1;
+	//else
+	//	*render->danger = 0;
 }
 
 void	blit_game_entity24(t_entity_render *render, int coord, t_xyz text)
@@ -46,7 +51,6 @@ void	blit_game_entity32(t_entity_render *render, int coord, t_xyz text)
 	clr = render->bxpm->clr[pix];
 	if (clr == 0x00000000)
 		return ;
-	if (render->hp != NULL)
 		hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] =
 		blend_alpha(((uint32_t*)render->surface->pixels)[coord], clr, clr >> 24 & 0xFF);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:44:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 17:09:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct		s_entity
 	t_xyz			velocity;
 	int				sector;
 	double			yaw;
+	//int				danger;
 
 	int				state;
 	int				frame;
@@ -289,6 +290,7 @@ typedef struct		s_sprite_render
 	int				shooting;
 	int				dmg;
 	int				*hp;
+	//int				*danger;
 }					t_entity_render;
 
 typedef struct		s_render

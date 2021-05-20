@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 13:43:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 17:09:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 							doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))
 	{
+		///if (entity->danger && ai_rand_move(entity, rand() % 40000))
+		//	entity->state = MOVE;
 		if (entity->data->attack_range > dist)
 			entity->state = ATTACK;
 		else
