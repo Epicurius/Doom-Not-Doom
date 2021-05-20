@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 11:00:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 12:59:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@
 #define WALK_SPEED					10
 #define SPRINT_SPEED				20
 #define CROUCH_SPEED				0.006f
-#define	GRAVITY						0.05f
 #define MOUSE_X						0.005f
 #define MOUSE_Y						0.005f
 #define	ACCELERATION				0.7

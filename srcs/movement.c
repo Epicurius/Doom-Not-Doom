@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/13 14:25:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:02:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	get_base_speed(t_doom *doom, float *speed)
 {
-	//time = SDL_GetTicks() - doom->time.curr;
-	//if (player->ducking)
-	//	*speed = CROUCH_SPEED;
 	if (doom->key.l_shift)
-		*speed = SPRINT_SPEED;
+		*speed = doom->player.sprint_speed;
 	else
-		*speed = WALK_SPEED;
+		*speed = doom->player.walk_speed;
 	*speed *= doom->time.delta;
 }
 
@@ -53,12 +50,12 @@ void	get_movement(t_doom *doom, t_player player, float speed, t_xyz *move)
 	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
 			&& player.where.z == doom->sectors[player.sector].floor.y)
 	{
-		if (!Mix_Playing(STEPS))
-			Mix_PlayChannel(STEPS, doom->sound[FOOT_STEPS], -1);
+		if (!Mix_Playing(CHANNEL_STEPS))
+			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
 	}
-	else if (Mix_Playing(STEPS))
+	else if (Mix_Playing(CHANNEL_STEPS))
 	{
-		Mix_FadeOutChannel(STEPS, 600);
+		Mix_FadeOutChannel(CHANNEL_STEPS, 600);
 		//Mix_HaltChannel(2);
 	}
 }
@@ -72,8 +69,8 @@ void	get_velocity(t_doom *doom, t_xyz move)
 	sector = &doom->sectors[player->sector];
 	if (doom->key.space && player->where.z == sector->floor.y)
 	{
-		Mix_PlayChannel(STEPS, doom->sound[JUMP], 0);
-		player->velocity.z += 0.5;
+		Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_JUMP], 0);
+		player->velocity.z += (0.5 + doom->player.jump_height);
 	}
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
 	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;

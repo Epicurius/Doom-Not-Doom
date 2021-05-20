@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 16:34:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 12:35:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	print_score(t_doom *doom, int *i)
 	free(bmp);
 	free(name);
 	*i = 1;
-	Mix_PlayChannel(-1, doom->sound[SS_SAVED], 0);
-	Mix_VolumeChunk(doom->sound[SS_SAVED], 128);
+	Mix_PlayChannel(-1, doom->sound[WAV_SCREEN_SHOT], 0);
+	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 }
 
 void	blit_game_over(t_doom *doom)
@@ -50,18 +50,18 @@ void	blit_game_stats(t_doom *doom)
 
 	amaz = TTF_OpenFont(GAME_PATH"resources/TTF/AmazDoom.ttf", 50);
 	str = ft_sprintf("Rounds Survived %d", doom->game.round);
-	surface = TTF_RenderText_Solid(amaz, str, hex_to_sdl_color(0xFFFFFFFF));
+	surface = TTF_RenderText_Blended(amaz, str, hex_to_sdl_color(0xFFFFFFFF));
 	free(str);
 	dstr = (SDL_Rect){doom->surface->w * 0.05 + 10, doom->surface->h * 0.05 + 210, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
 	str = ft_sprintf("Enemies Killed: %d", doom->nb.kills);
-	surface = TTF_RenderText_Solid(amaz, str, hex_to_sdl_color(0xFFFFFFFF));
+	surface = TTF_RenderText_Blended(amaz, str, hex_to_sdl_color(0xFFFFFFFF));
 	free(str);
 	dstr = (SDL_Rect){doom->surface->w * 0.05 + 10, doom->surface->h * 0.05 + 260, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
-	surface = TTF_RenderText_Solid(amaz, "Press Enter to Continue ",
+	surface = TTF_RenderText_Blended(amaz, "Press Enter to Continue ",
 			hex_to_sdl_color(0xFF303030));
 	dstr = (SDL_Rect){doom->surface->w - surface->w,
 		doom->surface->h - surface->h, surface->w, surface->h};
@@ -77,7 +77,7 @@ void	blit_screen_shot(t_doom *doom)
 	SDL_Surface	*surface;
 
 	amaz = TTF_OpenFont(GAME_PATH"resources/TTF/digital.ttf", 25);
-	surface = TTF_RenderText_Solid(amaz, "'P' to Save Screen Shot",
+	surface = TTF_RenderText_Blended(amaz, "'P' to Save Screen Shot",
 			hex_to_sdl_color(0xFFFFFFFF));
 	dstr = (SDL_Rect){	doom->surface->w - surface->w,
 						doom->surface->h - surface->h,

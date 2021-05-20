@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:43:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 12:46:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	sprite_threads(t_doom *doom, t_entity_render render, t_entity *sprite, t_en
 		thread[y].surface = doom->surface;
 		thread[y].bxpm = &doom->sheet[sprite->type].bxpm;
 		thread[y].shooting = doom->player.shooting;
-		thread[y].dmg = 10;
+		thread[y].dmg = doom->weapon[doom->player.equiped].damage;
 		thread[y].hp = &sprite->hp;
 		tpool_add(&doom->tpool, blit_game_entity, &thread[y]);
 	}

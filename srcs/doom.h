@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 16:49:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:06:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "bxpm.h"
 # include "../../path.h"
 # include "./macros.h"
-# include "./sound.h"
+# include "./enum.h"
 # include "./utils.h"
 # include <math.h>
 # include <fcntl.h>
@@ -115,7 +115,6 @@ typedef struct		s_entity
 	int				frame;
 	int				angle;
 
-	//t_stats			stat;
 	int				id;
 	int				hp;
 	int				type;
@@ -136,7 +135,10 @@ typedef struct		s_player
 	double			horizon;
 
 	int				hp;
-
+	int				armour;
+	float			walk_speed;
+	float			sprint_speed;
+	float			jump_height;
 	int				flying;
 	int				shooting;
 	int				equiped;
@@ -367,14 +369,19 @@ typedef struct		s_game_mode
 
 typedef struct		s_weapon
 {
-	int				time;
+	int				own;
+	int				damage;
+	int				reload_speed;
+	int				ammo_amount;
+	int				mag_size;
+
 	t_bxpm			*bxpm;
+	int				frame_rate;
+	int				sound;
+	float			scale;
+	int				time;
 	int				frame;
 	int				frames;
-	int				frame_rate;
-	int				dmg;
-	float			scale;
-	int				sound;
 }					t_weapon;
 
 typedef struct s_dialog
@@ -384,19 +391,36 @@ typedef struct s_dialog
 	int			*done;
 }				t_dialog;
 
+typedef struct	t_inv
+{
+	int			dosh;
+	int			*hp;
+	int			*armour;
+	t_weapon	*weapon;
+	float		*speed;
+	float		*jump;
+}				t_inv;
+
 typedef struct		s_doom
 {
 	int				quit;
 	SDL_Window		*win;
+
+	//	Render
+	int				*fustrum;
+	double			*zbuffer;
+	t_render		*render;
 	SDL_Surface		*surface;
-	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
+	SDL_Renderer	*renderer;
+
 	double 			map_scale;
 	float			tx_scale;
 	int				w2;
 	int				h2;
 
 	t_game_mode		game;
+	t_inv			inv;
 	t_nb			nb;
 	t_tpool			tpool;
 	t_time			time;
@@ -417,14 +441,10 @@ typedef struct		s_doom
 	t_camera		cam;
 	t_player		player;
 
-	//	Render
-	t_render		*render;
-	int				*fustrum;
-	double			*zbuffer;
-
 	//	Textures
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
+	t_bxpm			icon[4];
 	t_weapon		weapon[3];
 	t_texture_sheet	sheet[3];
 
@@ -475,6 +495,7 @@ void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
 void	init_clock(t_doom *doom);
+void	init_inv(t_doom *doom);
 void	init_gamemode(t_doom *doom);
 
 //		Time
@@ -594,7 +615,7 @@ void	load_bxpm(t_doom *doom);
 void	load_bxpm2(t_doom *doom);
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
-void	ft_set_icon(SDL_Window *window, char *dir);
+int		set_icon(SDL_Window *window, char *dir);
 void	error_msg(const char *restrict format, ...);
 
 //REMOVE//

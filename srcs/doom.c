@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 16:55:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:28:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,34 @@ void	launcher(void)
 
 void	init_doom(t_doom *doom, t_settings init)
 {
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	TTF_Init();
-	Mix_Init(MIX_INIT_FLAC);
-
-
-	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			init.display_w, init.display_h, SDL_WINDOW_MOUSE_FOCUS);
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
+		error_msg("Could not init SDL: %s\n", SDL_GetError());
+	if (TTF_Init())
+		error_msg("Could not init TTF: %s\n", SDL_GetError());
+	if (Mix_Init(MIX_INIT_FLAC)&MIX_INIT_FLAC != MIX_INIT_FLAC)
+		error_msg("Could not init MIX: %s\n", SDL_GetError());
+	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED,init.display_w, init.display_h,
+			SDL_WINDOW_MOUSE_FOCUS);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
-
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
 			init.display_w * init.render_resolution,
 			init.display_h * init.render_resolution,
 			32, SDL_PIXELFORMAT_ARGB8888);
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
-
-	doom->renderer = SDL_CreateRenderer(doom->win, -1, SDL_RENDERER_TARGETTEXTURE);
+	doom->renderer = SDL_CreateRenderer(doom->win, -1,
+			SDL_RENDERER_TARGETTEXTURE);
 	if (!doom->renderer)
-		error_msg("Could not create renderer: %s\n", SDL_GetError());
-	
+		error_msg("Could not create renderer: %s\n", SDL_GetError());	
 	doom->texture = SDL_CreateTexture(doom->renderer, SDL_PIXELFORMAT_ARGB8888,
 			SDL_TEXTUREACCESS_STREAMING, doom->surface->w, doom->surface->h);
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
-
-	SDL_SetWindowDisplayMode(doom->win, NULL);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	ft_set_icon(doom->win, GAME_PATH"resources/SpaceStudio.bmp");
+	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
+		error_msg("Could not set icon: %s\n", SDL_GetError());
 
 
 	doom->w2 = init.display_w * init.render_resolution / 2;
@@ -73,6 +72,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	init_render(doom);
 	init_gamemode(doom);
 	init_sound(doom);
+	init_inv(doom);
 }
 
 void	game_loop(t_doom *doom, SDL_Event *event)
@@ -98,6 +98,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	blit_weapon(doom);	
 	fps_func(doom);
 	blit_fps(doom);
+	draw_hud(doom);
 	if (doom->key.tab)
 		map(doom);
 	SDL_UpdateTexture(doom->texture, NULL, doom->surface->pixels, doom->surface->pitch);
@@ -115,11 +116,13 @@ void	game(char *map, t_settings init)
 	if (!doom)
 		error_msg(init.flag, "Doom malloc.\n");
 	read_file(doom, map);
-	validate_map(doom);
+	if (!validate_map(doom))
+		return ;
 	init_doom(doom, init);
-    while (!doom->quit)
+    while (!doom->quit && doom->player.hp > 0)
 		game_loop(doom, &event);
-	game_over(doom);
+	if (doom->player.hp <= 0)
+		game_over(doom);
 	free_doom(doom);
 }
 
@@ -130,7 +133,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 0.7f;
+	init.render_resolution = 1.0f;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

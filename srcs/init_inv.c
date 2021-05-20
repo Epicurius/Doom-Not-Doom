@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   icon.c                                             :+:      :+:    :+:   */
+/*   init_inv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 13:29:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 17:07:18 by nneronin         ###   ########.fr       */
+/*   Created: 2021/05/20 12:11:55 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/20 13:06:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	set_icon(SDL_Window *window, char *dir)
+void	init_inv(t_doom *doom)
 {
-	SDL_Surface *icon;
-
-	icon = SDL_LoadBMP(dir);
-	if (icon == NULL)
-		return (0);
-	SDL_SetWindowIcon(window, icon);
-	SDL_FreeSurface(icon);
-	return (1);
+	doom->inv.dosh = 0;
+	doom->inv.hp = doom->player.hp;
+	doom->inv.armour = NULL;
+	doom->inv.weapon = doom->weapon;
+	doom->inv.speed = &doom->player.sprint_speed;
+	doom->inv.jump = &doom->player.jump_height;
 }

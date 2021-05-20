@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 13:30:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ void	blit_weapon(t_doom *doom)
 
 void	weapon_animate(t_doom *doom, t_weapon *weapon)
 {
-	if (weapon->frame == 0)
-		Mix_PlayChannel(WEAPON, doom->sound[weapon->sound], 0);
+	if (weapon->frame == 0 && weapon->ammo_amount > 0)
+		Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
 	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
 	{
 		if (!weapon->frame)
+		{
 			doom->player.shooting = 1;
+ 			weapon->ammo_amount -= 1;
+		}
 		weapon->frame++;
 		weapon->time = doom->time.curr;
 	}
@@ -48,7 +51,7 @@ void	weapon_animate(t_doom *doom, t_weapon *weapon)
 
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->key.num <= 3)
+	if (doom->key.num >= 1 && doom->key.num <= 3 && doom->weapon[doom->key.num - 1].own)
 		doom->player.equiped = doom->key.num - 1;
 }
 
@@ -61,6 +64,8 @@ void	precompute_weapon(t_doom *doom)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	doom->player.shooting = 0;
-	if (weapon->frame || doom->key.lmouse)
+	if (weapon->frame || (doom->key.lmouse && weapon->ammo_amount > 0))
 		weapon_animate(doom, weapon);
+	//else if (doom->key.lmouse && weapon->ammo_amount <= 0)
+		//play empty clip sound
 }

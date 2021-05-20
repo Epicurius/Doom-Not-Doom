@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 11:42:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/19 17:42:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fix_wall_orientation(t_sector *sector)
 	}
 }
 
-void	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
+int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 {
 	int		j;
 	t_wall	*temp;
@@ -58,13 +58,14 @@ void	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 			temp = sector->wall[i];
 			sector->wall[i] = sector->wall[j];
 			sector->wall[j] = temp;
-			return ;
+			return (1);
 		}
 	}
-	error_msg("Sector %d wall %d coordinates don't match up!\n", sector->id, i);
+	error_msg("{YELLOW}[INFO]{RESET} Sector %d wall %d coordinates don't match up!\n", sector->id, i);
+	return (0);
 }
 
-void	fix_wall_order(t_doom *doom, t_sector *sector)
+int	fix_wall_order(t_doom *doom, t_sector *sector)
 {
 	int		i;
 	int		j;
@@ -79,12 +80,14 @@ void	fix_wall_order(t_doom *doom, t_sector *sector)
 			v2 = sector->wall[i % sector->npoints]->v2;
 			continue ;
 		}
-		fix_wall_order2(doom, sector, i, v2);
+		if (!fix_wall_order2(doom, sector, i, v2))
+			return (0);
 		i -= 1;
 	}
+	return (1);
 }
 
-void	is_convex(t_doom *doom, t_sector *sector)
+int	is_convex(t_doom *doom, t_sector *sector)
 {
 	int i;
 	int n;
@@ -104,13 +107,17 @@ void	is_convex(t_doom *doom, t_sector *sector)
 		if (curr != 0)
 		{
 			if (curr * prev < 0)
-				error_msg("Sector %d is convex!\n", sector->id);
+			{
+				ft_printf("{YELLOW}[INFO]{RESET} Sector %d is concave, must be convex!\n", sector->id);
+				return (0);
+			}
 			prev = curr;
 		}
 	}
+	return (1);
 }
 
-void	check_entities(t_doom *doom)
+int	check_entities(t_doom *doom)
 {
 	t_list		*curr;
 
@@ -120,19 +127,27 @@ void	check_entities(t_doom *doom)
 		((t_entity *)curr->content)->sector =
 			find_sector(doom, ((t_entity *)curr->content)->where);
 		if (((t_entity *)curr->content)->sector < 0)
-			error_msg("Entity is outside map boundaries!\n");
+		{
+			ft_printf("{YELLOW}[INFO]{RESET} Entity is outside map boundaries!\n");
+			return (0);
+		}
 		curr = curr->next;
 	}
+	return (1);
 }
 
-void	check_player(t_doom *doom)
+int	check_player(t_doom *doom)
 {
 	doom->player.sector = find_sector(doom, doom->player.where);
 	if (doom->player.sector < 0)
-		error_msg("Player is outside map boundaries!\n");
+	{
+		ft_printf("{YELLOW}[INFO]{RESET} Player is outside map boundaries!\n");
+		return (0);
+	}
+	return (1);
 }
 
-void	check_map(t_doom *doom)
+int	check_map(t_doom *doom)
 {
 	int i;
 
@@ -141,16 +156,29 @@ void	check_map(t_doom *doom)
 	{
 		sector_center(&doom->sectors[i]);
 		fix_wall_orientation(&doom->sectors[i]);
-		fix_wall_order(doom, &doom->sectors[i]);
-		is_convex(doom, &doom->sectors[i]);
+		if (!fix_wall_order(doom, &doom->sectors[i]))
+			return (0);
+		if (!is_convex(doom, &doom->sectors[i]))
+			return (0);
 	}
+	return (1);
 }
 
-
-void	validate_map(t_doom *doom)
+int	file_exists(char *filename, int *i)
 {
-	check_map(doom);
-	check_player(doom);
-	check_entities(doom);
-	//check_textures();
+	struct stat	buffer;
+	if (stat (filename, &buffer))
+		return (0);
+	return (1);
+}
+
+int	validate_map(t_doom *doom)
+{
+	if (check_map(doom)
+		&& check_player(doom)
+		&& check_entities(doom))
+		return (1);
+	free_doom(doom);
+	return (0);
+
 }

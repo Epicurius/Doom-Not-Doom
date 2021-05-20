@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/17 18:22:58 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/20 12:18:05 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,8 @@ RAW_SRC =		doom.c\
 				line.c\
 				cohen_sutherland.c\
 				crosshair_position.c\
+				hud.c\
+				init_inv.c\
 				draw_crosshair.c\
 				draw_bullet_holes.c\
 				draw_wsprites.c\
