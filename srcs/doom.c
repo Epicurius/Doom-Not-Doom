@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 13:28:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:56:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	SDL_UpdateTexture(doom->texture, NULL, doom->surface->pixels, doom->surface->pitch);
 	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
 	SDL_RenderPresent(doom->renderer);
+	if (doom->key.p)
+		game_pause(doom);
+	else if (doom->quit == 1)
+		game_quit(doom);
 }
 
 //debug_loop(doom, &event);

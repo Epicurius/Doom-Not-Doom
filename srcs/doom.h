@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 13:06:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:56:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,6 +468,8 @@ void	blit_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
 void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
 void	game_over(t_doom *doom);
+void	game_pause(t_doom *doom);
+void	game_quit(t_doom *doom);
 
 //		Read_file
 int		read_file(t_doom *doom, char *file_name);

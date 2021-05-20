@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/20 12:18:05 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/20 15:54:59 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,9 @@ RAW_SRC =		doom.c\
 				skybox_floor_vline.c\
 				movement.c\
 				minimap.c\
+				game_pause.c\
+				game_quit.c\
+				game_over.c\
 				line.c\
 				cohen_sutherland.c\
 				crosshair_position.c\
@@ -148,7 +151,6 @@ RAW_SRC =		doom.c\
 				debug_loop.c\
 				sound.c\
 				validate_map.c\
-				game_over.c\
 				init_weapons.c\
 				icon.c
 		
