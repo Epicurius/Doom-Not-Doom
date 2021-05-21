@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 17:09:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/21 11:18:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct		s_data
 	int				hostile;
 	int				attack_style;
 	double			scale;
-	int				wonder_distance;
+	int				move;
 	int				view_distance;
 	int				detection_radius;
 	int				attack_range;
@@ -109,7 +109,7 @@ typedef struct		s_entity
 	t_xyz			velocity;
 	int				sector;
 	double			yaw;
-	//int				danger;
+	int				danger;
 
 	int				state;
 	int				frame;
@@ -287,10 +287,12 @@ typedef struct		s_sprite_render
 	double			xrange;
 	double			yrange;
 	t_rect			pos;
+
 	int				shooting;
 	int				dmg;
 	int				*hp;
-	//int				*danger;
+	int				*danger;
+	int				center;
 }					t_entity_render;
 
 typedef struct		s_render
@@ -419,6 +421,7 @@ typedef struct		s_doom
 	float			tx_scale;
 	int				w2;
 	int				h2;
+	int				c;
 
 	t_game_mode		game;
 	t_inv			inv;
@@ -524,7 +527,7 @@ void	precompute_entities(t_doom *doom);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 int		blit_game_entity(void *arg);
-int		ai_rand_move(t_entity *entity, int rand);
+int		ai_rand_move(t_entity *entity, int chance, int angle);
 int		malloc_texture_pos(t_texture_sheet *sprite);;
 
 //	Projectiles

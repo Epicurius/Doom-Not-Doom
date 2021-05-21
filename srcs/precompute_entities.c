@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 17:09:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/21 11:21:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,22 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 {
 	double dist;
 
+	if (entity->danger && doom->player.shooting && ai_rand_move(entity, 900, 360))
+	{
+		entity->state = MOVE;
+		entity->danger = 0;
+		return ;
+	}
 	dist = point_distance_2d(entity->where.x, entity->where.y,
 							doom->player.where.x, doom->player.where.y);
 	if (entity_line_of_sight(doom, entity, dist))
 	{
-		///if (entity->danger && ai_rand_move(entity, rand() % 40000))
-		//	entity->state = MOVE;
-		if (entity->data->attack_range > dist)
+		if (entity->danger && ai_rand_move(entity, 900, 45))
+		{
+			entity->state = MOVE;	
+			entity->danger = 0;
+		}
+		else if (entity->data->attack_range > dist)
 			entity->state = ATTACK;
 		else
 		{
@@ -85,10 +94,11 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 	}
 	else
 	{
-		if (entity->data->wonder_distance > 0 && ai_rand_move(entity, rand() % 40000))
+		if (entity->data->move && ai_rand_move(entity, 10, 360))
 			entity->state = MOVE;
 		else
 			entity->state = IDLE;
+		entity->danger = 0;
 	}
 }
 

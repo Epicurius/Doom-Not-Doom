@@ -6,21 +6,20 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:42:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/01 16:50:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/21 11:19:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	ai_rand_move(t_entity *entity, int rand)
+int	ai_rand_move(t_entity *entity, int chance, int angle)
 {
-	double angle;
-
-	if (rand > 360 || rand < 0)
+	double a;
+	if ((rand() % 1000) > chance)
 		return (0);
-	angle = rand * CONVERT_RADIANS;
-	entity->dest.x = (entity->data->wonder_distance * cos(angle));
-	entity->dest.y = (entity->data->wonder_distance * sin(angle));
+	a = (entity->angle + ((rand() % angle) - angle / 2)) * CONVERT_RADIANS;
+	entity->dest.x = (100 * cos(a));
+	entity->dest.y = (100 * sin(a));
 	entity->dest.x += entity->where.x;
 	entity->dest.y += entity->where.y;
 	entity->dest.z = entity->where.z;

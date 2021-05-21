@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 17:09:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/21 10:39:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	hit_enemy(t_entity_render *render, int coord)
 {
-	if (render->hp != NULL && render->shooting
-			&& coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
-		*render->hp -= render->dmg;
-	//if (coord == (render->surface->h/2 * render->surface->w + render->surface->w/2))
-	//	*render->danger = 1;
-	//else
-	//	*render->danger = 0;
+	if (render->hp != NULL && coord == render->center)
+	{
+		if (render->shooting)
+			*render->hp -= render->dmg;
+		*render->danger = 1;
+	}
 }
 
 void	blit_game_entity24(t_entity_render *render, int coord, t_xyz text)

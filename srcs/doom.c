@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 17:05:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:16:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	init_doom(t_doom *doom, t_settings init)
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
 
-
 	doom->w2 = init.display_w * init.render_resolution / 2;
 	doom->h2 = init.display_h * init.render_resolution / 2;
+	doom->c = doom->h2 * doom->surface->w + doom->w2;
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
