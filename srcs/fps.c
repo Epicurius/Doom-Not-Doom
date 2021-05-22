@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 11:56:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 16:14:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ void	update_fps_surface(t_time *time)
 void				fps_func(t_doom *doom)
 {
 	t_time		*time;
+	double		prev;
 
 	time = &doom->time;
-	time->delta = (SDL_GetTicks() - time->curr) / 1000.0f;
+	prev = time->curr;
 	time->curr = SDL_GetTicks();
+	time->delta = (time->curr - prev) / 1000.0f;
 	time->fps++;
 	if (time->curr - time->prev >= 1000)
 	{

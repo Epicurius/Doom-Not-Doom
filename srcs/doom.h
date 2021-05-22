@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/21 11:18:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 18:30:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,13 +277,13 @@ typedef struct		s_sprite_render
 {
 	SDL_Surface		*surface;
 	t_bxpm			*bxpm;
-	t_xyz			screen;
+	t_xyz			screen;//t_i2
 	double			scale;
-	t_xyz			size;
-	t_xyz			start;
-	t_xyz			end;
-	t_xyz			clamp_start;
-	t_xyz			clamp_end;
+	t_i2			size;
+	t_i2			start;
+	t_i2			end;
+	t_i2			clamp_start;
+	t_i2			clamp_end;
 	double			xrange;
 	double			yrange;
 	t_rect			pos;

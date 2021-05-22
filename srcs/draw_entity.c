@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/21 10:33:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 18:30:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,18 @@ int	rotate_sprite(t_doom *doom, t_entity *sprite, t_entity_render *render)
 void	sprite_threads(t_doom *doom, t_entity_render render, t_entity *sprite, t_entity_render *thread)
 {
 	int y;
+	int i;
+	int t = 5;
 
 	y = -1;
-	int i = render.clamp_end.y - render.clamp_start.y;
-	while (++y < 10)
+	i = (render.clamp_end.y - render.clamp_start.y) / t;
+	while (++y < t)
 	{
 		ft_memcpy((void*)&thread[y], (void*)&render, sizeof(t_entity_render));
-		thread[y].clamp_start.y	+= i / 10.0 * y;
-		thread[y].clamp_end.y	+= i / 10.0 * (y + 1);
-		thread[y].clamp_end.y	= ft_min(thread[y].clamp_end.y, render.clamp_end.y);
+		thread[y].clamp_start.y	+= i * y;
+		thread[y].clamp_end.y = thread[y].clamp_start.y + i;
+		if (y == t - 1)
+			thread[y].clamp_end.y = render.clamp_end.y;
 		thread[y].surface = doom->surface;
 		thread[y].bxpm = &doom->sheet[sprite->type].bxpm;
 		thread[y].shooting = doom->player.shooting;
@@ -82,7 +85,8 @@ void	Drawsprite(t_doom *doom)
 	t_entity_render	thread[10];
 
 	curr = doom->sprite;
-	while (curr)
+	//ft_printf("start\n");
+	while (curr != NULL)
 	{
 		sprite = curr->content;
 		if (doom->sectors[sprite->sector].visible && rotate_sprite(doom, sprite, &render))
@@ -94,4 +98,5 @@ void	Drawsprite(t_doom *doom)
 		curr = curr->next;
 	}
 	tpool_wait(&doom->tpool);
+	//ft_printf("END\n");
 }

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ai_rand.c                                          :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 16:42:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 16:25:19 by nneronin         ###   ########.fr       */
+/*   Created: 2021/05/22 16:36:35 by nneronin          #+#    #+#             */
+/*   Updated: 2021/05/22 16:40:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	ai_rand_move(t_entity *entity, int chance, int angle)
+void	get_entity_state_name(t_entity *entity)
 {
-	double a;
-	if ((rand() % 1000) > chance)
-		return (0);
-	a = (entity->yaw + ((rand() % angle) - angle / 2)) * CONVERT_RADIANS;
-	entity->dest.x = (200 * cos(a));
-	entity->dest.y = (200 * sin(a));
-	entity->dest.x += entity->where.x;
-	entity->dest.y += entity->where.y;
-	entity->dest.z = entity->where.z;
-	return (1);
+	if (entity->state == DEATH)
+		ft_printf("DEATH\n");
+	else if (entity->state == ATTACK)
+		ft_printf("ATTACK\n");
+	else if (entity->state == MOVE)
+		ft_printf("MOVE\n");
+	else if (entity->state == IDLE)
+		ft_printf("IDLE\n");
 }

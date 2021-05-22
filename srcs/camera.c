@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:42:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 17:09:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	update_camera(t_doom *doom, int x, int y)
 		doom->player.yaw -= 360;
 	while (doom->player.yaw < 0)
 		doom->player.yaw += 360;
+	//printf("%f\n", doom->player.yaw);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:53:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:25:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 //		Set p1 angle to p2 (DEGREES)
 double		angle_to_point(t_xyz p1, t_xyz p2)
 {
-	return (atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_DEGREES);
+	double angle;
+	
+	angle = atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_DEGREES;
+	while (angle > 360)
+		angle -= 360;
+	while (angle < 0)
+		angle += 360;
+	return (angle);
 }
 
 //		Space Diagonal

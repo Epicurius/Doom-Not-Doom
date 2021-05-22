@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/21 11:04:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 19:00:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->height 				= 4;
 	alfred->speed 				= 20;
 	alfred->move			 	= 1;
-	alfred->view_distance 		= 20;
-	alfred->detection_radius 	= 20;
+	alfred->view_distance 		= 200;
+	alfred->detection_radius 	= 40;
 	alfred->attack_range 		= 7;
-	alfred->frame_rate[IDLE] 	= 100;
-	alfred->frame_rate[MOVE] 	= 200;
-	alfred->frame_rate[ATTACK]	= 100;
-	alfred->frame_rate[DEATH]	= 100;
+	alfred->frame_rate[IDLE] 	= 2000;
+	alfred->frame_rate[MOVE] 	= 12000;
+	alfred->frame_rate[ATTACK]	= 2000;
+	alfred->frame_rate[DEATH]	= 6000;
 	alfred->flying 				= 1;
 }
 
@@ -44,13 +44,13 @@ static void	spooky(t_doom *doom, t_data *spooky)
 	spooky->height 				= 9;
 	spooky->speed 				= 10;
 	spooky->move			 	= 1;
-	spooky->view_distance 		= 200;
-	spooky->detection_radius 	= 20;
+	spooky->view_distance 		= 100;
+	spooky->detection_radius 	= 40;
 	spooky->attack_range 		= 200;//80
-	spooky->frame_rate[IDLE] 	= 100;
-	spooky->frame_rate[MOVE] 	= 200;
-	spooky->frame_rate[ATTACK] 	= 300;
-	spooky->frame_rate[DEATH] 	= 300;
+	spooky->frame_rate[IDLE] 	= 2000;
+	spooky->frame_rate[MOVE] 	= 6000;
+	spooky->frame_rate[ATTACK] 	= 18000;
+	spooky->frame_rate[DEATH] 	= 12000;
 	spooky->flying 				= 0;
 }
 
@@ -61,8 +61,8 @@ static void	rift(t_doom *doom, t_data *rift)
 	rift->attack_style 			= 2;
 	rift->scale 				= 2 * (doom->surface->w / 100);
 	rift->height 				= 9;
-	rift->frame_rate[IDLE] 		= 100;
-	rift->frame_rate[DEATH] 	= 700;
+	rift->frame_rate[IDLE] 		= 2000;
+	rift->frame_rate[DEATH] 	= 8000;
 }
 
 void	init_game_entity(t_doom *doom)

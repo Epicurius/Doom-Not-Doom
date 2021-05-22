@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/21 10:39:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 18:43:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	hit_enemy(t_entity_render *render, int coord)
 	if (render->hp != NULL && coord == render->center)
 	{
 		if (render->shooting)
+		{
 			*render->hp -= render->dmg;
-		*render->danger = 1;
+			ft_printf("{RED}%d %d{RESET}\n", *render->hp, coord);
+		}
 	}
 }
 
@@ -50,7 +52,7 @@ void	blit_game_entity32(t_entity_render *render, int coord, t_xyz text)
 	clr = render->bxpm->clr[pix];
 	if (clr == 0x00000000)
 		return ;
-		hit_enemy(render, coord);
+	hit_enemy(render, coord);
 	((Uint32*)render->surface->pixels)[coord] =
 		blend_alpha(((uint32_t*)render->surface->pixels)[coord], clr, clr >> 24 & 0xFF);
 	((double*)render->surface->userdata)[coord] = text.z;
@@ -65,12 +67,12 @@ int		blit_game_entity(void *arg)
 
 	render = arg;
 	text.z = render->screen.z;
-	int y = render->clamp_start.y;
+	int y = render->clamp_start.y - 1;
 	while (++y < render->clamp_end.y)
 	{
 		alphay = (y - render->start.y) / render->yrange;
 		text.y = (1.0 - alphay) * render->pos.y1 + alphay * render->pos.y2;
-		int x = render->clamp_start.x;
+		int x = render->clamp_start.x - 1;
 		while (++x < render->clamp_end.x)
 		{
 			alphax = (x - render->start.x) / render->xrange;

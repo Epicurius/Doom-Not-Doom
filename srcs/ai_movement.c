@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 15:46:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:19:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	double	speed;
 
 	v = &entity->velocity;
-	speed = entity->data->speed;
-	//speed *= (SDL_GetTicks() - doom->time.curr);
-	speed *= doom->time.delta;
+	speed = doom->time.delta *  entity->data->speed;
 	v->x = entity->dest.x - entity->where.x;
 	v->y = entity->dest.y - entity->where.y;
 	v->z = entity->dest.z - entity->where.z;

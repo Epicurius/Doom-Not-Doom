@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:37:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 12:39:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/22 18:48:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ double elapsed;
 
 void	cs(void)
 {
-	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &start);
 }
 
 void	ce(char *str)
 {
-	//return ;
 	clock_gettime(_CLOCK_MONOTONIC, &finish);
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
@@ -64,8 +62,7 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 		player_collision(doom);
 		ce("player_collision");
 		cs();
-		while (SDL_PollEvent(event))
-			keys(doom, event);
+		poll_event(doom, event);
 		ce("pollevent");
 	}
 	cs();
@@ -85,9 +82,18 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 	ce("Blit_weapon");
 	fps_func(doom);
 	blit_fps(doom);
+	cs();
+	draw_hud(doom);
+	ce("drarw_hud");
 	if (doom->key.tab)
 		map(doom);
 	cs();
-	SDL_UpdateWindowSurface(doom->win);
+	update_screen(doom, doom->surface);
 	ce("UpdateWindowSurface");
+	cs();
+	if (doom->key.p)
+		game_pause(doom);
+	else if (doom->quit == 1)
+		game_quit(doom);
+	ce("exit");
 }
