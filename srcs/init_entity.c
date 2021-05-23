@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 19:00:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 12:45:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->detection_radius 	= 40;
 	alfred->attack_range 		= 7;
 	alfred->frame_rate[IDLE] 	= 2000;
-	alfred->frame_rate[MOVE] 	= 12000;
-	alfred->frame_rate[ATTACK]	= 2000;
+	alfred->frame_rate[MOVE] 	= 4000;
+	alfred->frame_rate[ATTACK]	= 6000;
 	alfred->frame_rate[DEATH]	= 6000;
 	alfred->flying 				= 1;
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 18:30:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 18:42:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,27 +101,6 @@ typedef struct		s_data
 	double			attack_speed;
 	int				head_y;
 }					t_data;
-
-typedef struct		s_entity
-{
-	t_xyz			where;
-	t_xyz			dest;
-	t_xyz			velocity;
-	int				sector;
-	double			yaw;
-	int				danger;
-
-	int				state;
-	int				frame;
-	int				angle;
-
-	int				id;
-	int				hp;
-	int				type;
-	double			scale;
-	double			time;
-	t_data			*data;
-}					t_entity;
 
 typedef struct		s_player
 {
@@ -273,27 +252,49 @@ typedef struct		s_camera
 	double			scale;
 }					t_camera;
 
-typedef struct		s_sprite_render
+typedef struct		s_entity_render
 {
-	SDL_Surface		*surface;
-	t_bxpm			*bxpm;
-	t_xyz			screen;//t_i2
-	double			scale;
-	t_i2			size;
+	float			z;
 	t_i2			start;
 	t_i2			end;
 	t_i2			clamp_start;
 	t_i2			clamp_end;
 	double			xrange;
 	double			yrange;
+}					t_entity_render;
+
+typedef struct		s_entity
+{
+	t_xyz			where;
+	t_xyz			dest;
+	t_xyz			velocity;
+	int				sector;
+	double			yaw;
+	int				danger;
+	int				state;
+	int				frame;
+	int				angle;
+	t_entity_render	render;
+	int				id;
+	int				hp;
+	int				type;
+	double			scale;
+	double			time;
+	t_data			*data;
+}					t_entity;
+
+typedef struct		s_entity_thread
+{
+	SDL_Surface		*surface;
+	t_entity_render	render;
+	t_bxpm			*bxpm;
 	t_rect			pos;
 
-	int				shooting;
 	int				dmg;
 	int				*hp;
-	int				*danger;
+	int				shooting;
 	int				center;
-}					t_entity_render;
+}					t_entity_thread;
 
 typedef struct		s_render
 {
@@ -527,8 +528,11 @@ void	precompute_entities(t_doom *doom);
 void	ai_movement(t_doom *doom, t_entity *entity);
 void	ai_attack(t_doom *doom, t_entity *entity);
 int		blit_game_entity(void *arg);
-int		ai_rand_move(t_entity *entity, int chance, int angle);
-int		malloc_texture_pos(t_texture_sheet *sprite);;
+int		ai_track_player(t_doom *doom, t_entity *entity);
+int		ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
+int		ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
+int		malloc_texture_pos(t_texture_sheet *sprite);
+void	get_entity_render(t_doom *doom, t_entity *entity);
 
 //	Projectiles
 void	precompute_projectiles(t_doom *doom);

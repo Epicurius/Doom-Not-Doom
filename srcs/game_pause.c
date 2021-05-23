@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:24:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 12:30:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	pause_loop(t_doom *doom, t_bxpm *bxpm, t_bmp *bmp)
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s && !i)
 		{
 			write_bmp("Pause.bmp", bmp);
-			Mix_PlayChannel(-1, doom->sound[WAV_SCREEN_SHOT], 0);
+			//Mix_PlayChannel(-1, doom->sound[WAV_SCREEN_SHOT], 0);
 			Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 			i = 1;
 		}

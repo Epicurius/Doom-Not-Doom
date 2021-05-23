@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 12:35:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 12:30:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	intro(void	*arg)
 	t_dialog	*d;
 
 	d = arg;
-	Mix_PlayChannel(1, d->sound1, 0);
+	//Mix_PlayChannel(1, d->sound1, 0);
     while (Mix_Playing(1) != 0)
 		SDL_Delay(200);
-	Mix_PlayChannel(1, d->sound2, -1);
+	//Mix_PlayChannel(1, d->sound2, -1);
 	SDL_Delay(1300);
 	d->done[0] = 1;
 }
@@ -54,7 +54,7 @@ void	init_sound(t_doom *doom)
 	//doom->d.done = &doom->intro;
 	//pthread_create(&doom->t, NULL, intro, &doom->d);
 	
-	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
+	//Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 	Mix_Volume(CHANNEL_MUSIC, 5);
 	doom->intro[1] = 1;
 }

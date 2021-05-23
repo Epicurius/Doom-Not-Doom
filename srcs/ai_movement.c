@@ -6,12 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 15:19:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 19:20:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
+/*
 void	get_entity_movement(t_doom *doom, t_entity *entity)
 {
 	t_xyz	*v;
@@ -30,12 +30,11 @@ void	get_entity_movement(t_doom *doom, t_entity *entity)
 	v->y *= speed / dist;
 	v->z *= (entity->data->flying ? speed / dist : 0);
 }	
-
+*/
 void	ai_movement(t_doom *doom, t_entity *entity)
 {
 	t_collision e;
 
-	get_entity_movement(doom, entity);
 	e.where			= &entity->where;
 	e.velocity		= &entity->velocity;
 	e.sector		= &entity->sector;
@@ -47,5 +46,5 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	e.hitbox_radius	= 5;
 	e.step_height	= 1;
 	collision_detection(&e);
-	entity->yaw = angle_to_point(entity->where, entity->dest);
+	entity->yaw = angle_to_point(entity->where, sum_xyz(entity->where, entity->velocity));
 }

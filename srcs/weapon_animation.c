@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 18:52:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 12:43:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	blit_weapon(t_doom *doom)
 void	weapon_animate(t_doom *doom, t_weapon *weapon)
 {
 	if (weapon->frame == 0 && weapon->ammo_amount > 0)
-		Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
+		;
+		//Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
 	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
 	{
 		if (!weapon->frame)

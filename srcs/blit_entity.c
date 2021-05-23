@@ -6,56 +6,53 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 18:43:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/23 17:57:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	hit_enemy(t_entity_render *render, int coord)
+void	hit_enemy(t_entity_thread *thread, int coord)
 {
-	if (render->hp != NULL && coord == render->center)
+	if (thread->hp != NULL && thread->shooting && coord == thread->center)
 	{
-		if (render->shooting)
-		{
-			*render->hp -= render->dmg;
-			ft_printf("{RED}%d %d{RESET}\n", *render->hp, coord);
-		}
+		*thread->hp -= thread->dmg;
+		//ft_printf("{RED}%d %d{RESET}\n", *thread->hp, coord);
 	}
 }
 
-void	blit_game_entity24(t_entity_render *render, int coord, t_xyz text)
+void	blit_game_entity24(t_entity_thread *thread, int coord, t_xyz text)
 {
-	uint32_t	clr;
+	uint32_t		clr;
 	unsigned short	pix;
 
-	if (text.z >= ((double*)render->surface->userdata)[coord])
+	if (text.z >= ((double*)thread->surface->userdata)[coord])
 		return ;
-	pix = render->bxpm->pix[(int)text.y * render->bxpm->w + (int)text.x];
-	clr = render->bxpm->clr[pix];
+	pix = thread->bxpm->pix[(int)text.y * thread->bxpm->w + (int)text.x];
+	clr = thread->bxpm->clr[pix];
 	if (clr == 0xFF800080)
 		return ;
-	if (render->hp != NULL)
-		hit_enemy(render, coord);
-	((Uint32*)render->surface->pixels)[coord] = clr;
-	((double*)render->surface->userdata)[coord] = text.z;
+	if (thread->hp != NULL)
+		hit_enemy(thread, coord);
+	((Uint32*)thread->surface->pixels)[coord] = clr;
+	((double*)thread->surface->userdata)[coord] = text.z;
 }
 
-void	blit_game_entity32(t_entity_render *render, int coord, t_xyz text)
+void	blit_game_entity32(t_entity_thread *thread, int coord, t_xyz text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
 
-	if (text.z >= ((double*)render->surface->userdata)[coord])
+	if (text.z >= ((double*)thread->surface->userdata)[coord])
 		return ;
-	pix = render->bxpm->pix[(int)text.y * render->bxpm->w + (int)text.x];
-	clr = render->bxpm->clr[pix];
+	pix = thread->bxpm->pix[(int)text.y * thread->bxpm->w + (int)text.x];
+	clr = thread->bxpm->clr[pix];
 	if (clr == 0x00000000)
 		return ;
-	hit_enemy(render, coord);
-	((Uint32*)render->surface->pixels)[coord] =
-		blend_alpha(((uint32_t*)render->surface->pixels)[coord], clr, clr >> 24 & 0xFF);
-	((double*)render->surface->userdata)[coord] = text.z;
+	hit_enemy(thread, coord);
+	((Uint32*)thread->surface->pixels)[coord] =
+		blend_alpha(((uint32_t*)thread->surface->pixels)[coord], clr, clr >> 24 & 0xFF);
+	((double*)thread->surface->userdata)[coord] = text.z;
 }
 
 int		blit_game_entity(void *arg)
@@ -63,24 +60,24 @@ int		blit_game_entity(void *arg)
 	double alphax;
 	double alphay;
 	t_xyz text;
-	t_entity_render *render;
+	t_entity_thread *thread;
 
-	render = arg;
-	text.z = render->screen.z;
-	int y = render->clamp_start.y - 1;
-	while (++y < render->clamp_end.y)
+	thread = arg;
+	text.z = thread->render.z;
+	int y = thread->render.clamp_start.y - 1;
+	while (++y < thread->render.clamp_end.y)
 	{
-		alphay = (y - render->start.y) / render->yrange;
-		text.y = (1.0 - alphay) * render->pos.y1 + alphay * render->pos.y2;
-		int x = render->clamp_start.x - 1;
-		while (++x < render->clamp_end.x)
+		alphay = (y - thread->render.start.y) / thread->render.yrange;
+		text.y = (1.0 - alphay) * thread->pos.y1 + alphay * thread->pos.y2;
+		int x = thread->render.clamp_start.x - 1;
+		while (++x < thread->render.clamp_end.x)
 		{
-			alphax = (x - render->start.x) / render->xrange;
-			text.x = (1.0 - alphax) * render->pos.x1 + alphax * render->pos.x2;
-			if (render->bxpm->bpp == 32)
-				blit_game_entity32(render, y * render->surface->w + x, text);
+			alphax = (x - thread->render.start.x) / thread->render.xrange;
+			text.x = (1.0 - alphax) * thread->pos.x1 + alphax * thread->pos.x2;
+			if (thread->bxpm->bpp == 32)
+				blit_game_entity32(thread, y * thread->surface->w + x, text);
 			else
-				blit_game_entity24(render, y * render->surface->w + x, text);
+				blit_game_entity24(thread, y * thread->surface->w + x, text);
 		}
 	}
 	return (1);
