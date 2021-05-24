@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/24 13:41:07 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/24 15:50:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,12 +85,6 @@ RAW_TEXTURES =	DoomScore.bmp\
 				rift.bmp\
 				shotgun-0.bmp\
 				shotgun-1.bmp\
-				shotgun-10.bmp\
-				shotgun-11.bmp\
-				shotgun-12.bmp\
-				shotgun-13.bmp\
-				shotgun-14.bmp\
-				shotgun-15.bmp\
 				shotgun-2.bmp\
 				shotgun-3.bmp\
 				shotgun-4.bmp\
@@ -99,6 +93,10 @@ RAW_TEXTURES =	DoomScore.bmp\
 				shotgun-7.bmp\
 				shotgun-8.bmp\
 				shotgun-9.bmp\
+				shotgun-10.bmp\
+				shotgun-11.bmp\
+				shotgun-12.bmp\
+				shotgun-13.bmp\
 				space0.bmp\
 				space1.bmp\
 				space2.bmp\

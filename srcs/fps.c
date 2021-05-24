@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 16:14:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:23:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	blit_fps(t_doom *doom)
 	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
 }
 
-void	update_fps_surface(t_time *time)
+void	update_fps_surface(TTF_Font *font, t_time *time)
 {
 	char	*str;
 
 	str = ft_itoa(time->fps);
 	if (time->surf != NULL)
 		SDL_FreeSurface(time->surf);
-	time->surf = TTF_RenderText_Blended(time->font, str, time->color);
+	time->surf = TTF_RenderText_Blended(font, str, time->color);
 	free(str);
 }
 
@@ -43,7 +43,7 @@ void				fps_func(t_doom *doom)
 	if (time->curr - time->prev >= 1000)
 	{
 		time->prev = time->curr;
-		update_fps_surface(&doom->time);
+		update_fps_surface(doom->font.digi50, &doom->time);
 		time->fps = 0;
 	}
 }
@@ -54,6 +54,5 @@ void	init_fps(t_doom *doom)
 	doom->time.curr = SDL_GetTicks();
 	doom->time.prev = 0;
 	doom->time.surf = NULL;
-	doom->time.font = TTF_OpenFont(GAME_PATH"resources/TTF/digital.ttf", 100);
 	doom->time.color = hex_to_sdl_color(0x8800FF00);
 }

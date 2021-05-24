@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:25:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:00:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	game_quit(t_doom *doom)
 	t_bxpm		*bxpm;
 
 	bxpm = malloc(sizeof(t_bxpm));
-	read_bxpm(bxpm, GAME_PATH"resources/BXPM/quit.bxpm");
+	if (!bxpm)
+		error_msg(0, "game_over malloc");
+	if (!read_bxpm(bxpm, GAME_PATH"resources/BXPM/quit.bxpm"))
+		error_msg(0, "read game_over");
 	blit_bxpm(doom->surface, bxpm,
 			doom->w2 - bxpm->w / 2, doom->h2 - bxpm->h / 2);
 	y_or_n(doom, doom->h2 + bxpm->h / 2);

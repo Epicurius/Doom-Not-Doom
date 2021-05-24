@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 10:46:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:24:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_clock(t_doom *doom)
 	time->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);
 	time->date = *localtime(&t);
 	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour, time->date.tm_min, time->date.tm_sec);
-	tmp = TTF_RenderText_Shaded(time->font, str, time->clock_fg, time->clock_bg);
+	tmp = TTF_RenderText_Shaded(doom->font.digi100, str, time->clock_fg, time->clock_bg);
 	doom->mtx[4].w = tmp->w;
 	doom->mtx[4].h = tmp->h;
 	doom->mtx[4].clr_nb = 2;
@@ -72,7 +72,7 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 		return (1);
 	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour, time->date.tm_min, time->date.tm_sec);
 	wall->wsprite.num[x].time = time->date.tm_sec;
-	tmp = TTF_RenderText_Shaded(time->font, str, time->clock_fg, time->clock_bg);
+	tmp = TTF_RenderText_Shaded(doom->font.digi100, str, time->clock_fg, time->clock_bg);
 	clock_to_bxpm(tmp, &doom->mtx[4]);
 	SDL_FreeSurface(tmp);
 	free(str);

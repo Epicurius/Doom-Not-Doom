@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:06:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:27:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	free_render_utils(t_doom *doom)
 
 void	free_font(t_doom *doom)
 {
-	TTF_CloseFont(doom->time.font);
-	TTF_CloseFont(doom->time.clock_font);
+	TTF_CloseFont(doom->font.amaz50);
+	TTF_CloseFont(doom->font.digi100);
 }
 
 void	free_color_palet(t_bxpm *bxpm)
@@ -153,10 +153,10 @@ void	free_weapons(t_doom *doom)
 	int j;
 
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
 	{
 		j = -1;
-		while (++j < doom->weapon[i].frames)
+		while (++j < (doom->weapon[i].reload_frames + doom->weapon[i].fire_frames))
 		{
 			free(doom->weapon[i].bxpm[j].pix);
 			free(doom->weapon[i].bxpm[j].clr);
@@ -179,7 +179,7 @@ void	free_icon(t_doom *doom)
 	int i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		free(doom->icon[i].clr);
 		free(doom->icon[i].pix);

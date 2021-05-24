@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 12:34:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:23:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,11 +346,9 @@ typedef	struct		s_time
 	int				fps;
 	float			delta;
 	SDL_Color		color;
-	TTF_Font		*font;
 	SDL_Surface		*surf;
 
 	struct tm		date;
-	TTF_Font		*clock_font;
 	SDL_Color		clock_fg;
 	SDL_Color		clock_bg;
 }					t_time;
@@ -375,9 +373,11 @@ typedef struct		s_weapon
 {
 	int				own;
 	int				damage;
-	int				reload_speed;
-	int				ammo_amount;
 	int				mag_size;
+	int				cur_ammo;
+	int				mag_ammo;				
+	int				max_ammo;
+
 
 	t_bxpm			*bxpm;
 	int				frame_rate;
@@ -385,7 +385,8 @@ typedef struct		s_weapon
 	float			scale;
 	int				time;
 	int				frame;
-	int				frames;
+	int				fire_frames;
+	int				reload_frames;
 }					t_weapon;
 
 typedef struct		s_dialog
@@ -405,6 +406,13 @@ typedef struct		t_inv
 	float			*jump;
 }					t_inv;
 
+typedef struct		s_fonts
+{
+	TTF_Font		*amaz50;
+	TTF_Font		*digi50;
+	TTF_Font		*digi100;
+}					t_fonts;
+
 typedef struct		s_doom
 {
 	int				quit;
@@ -417,6 +425,7 @@ typedef struct		s_doom
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
+	t_fonts			font;
 
 	double 			map_scale;
 	float			tx_scale;
@@ -449,7 +458,7 @@ typedef struct		s_doom
 	//	Textures
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
-	t_bxpm			icon[4];
+	t_bxpm			icon[5];
 	t_weapon		weapon[4];
 	t_texture_sheet	sheet[3];
 

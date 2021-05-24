@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 14:19:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:38:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,41 @@ void	blit_weapon(t_doom *doom)
 	blit_bxpm_scaled(doom->surface, dstr, &weapon->bxpm[weapon->frame], srcr);
 }
 
-void	weapon_animate(t_doom *doom, t_weapon *weapon)
+void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 {
-	if (weapon->frame == 0 && weapon->ammo_amount > 0)
+	if (weapon->frame == 0 && weapon->mag_ammo > 0)
 		;//Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
 	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
 	{
 		if (!weapon->frame)
 		{
 			doom->player.shooting = 1;
- 			weapon->ammo_amount -= 1;
+ 			weapon->mag_ammo -= 1;
 		}
 		weapon->frame++;
 		weapon->time = doom->time.curr;
 	}
-	if (weapon->frame >= weapon->frames)
+	if (weapon->frame >= weapon->fire_frames)
 		weapon->frame = 0;
 }
 
+void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
+{
+	if (!weapon->frame)
+		weapon->frame = weapon->fire_frames;
+	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
+	{
+		weapon->frame++;
+		weapon->time = doom->time.curr;
+	}
+	if (weapon->frame >= weapon->reload_frames + weapon->fire_frames || !weapon->reload_frames)
+	{
+		weapon->frame = 0;
+		weapon->mag_ammo = ft_min(weapon->mag_size, weapon->cur_ammo);
+		weapon->cur_ammo -= ft_min(weapon->mag_size, weapon->cur_ammo);
+	}
+	
+}
 void	equip_weapon(t_doom *doom)
 {
 	if (doom->key.num >= 1 && doom->key.num <= 4 && doom->weapon[doom->key.num - 1].own)
@@ -66,8 +83,12 @@ void	precompute_weapon(t_doom *doom)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	doom->player.shooting = 0;
-	if (weapon->frame || (doom->key.lmouse && weapon->ammo_amount > 0))
-		weapon_animate(doom, weapon);
-	//else if (doom->key.lmouse && weapon->ammo_amount <= 0)
-		//play empty clip sound
+	if (weapon->frame && weapon->frame < weapon->fire_frames || (doom->key.lmouse && weapon->mag_ammo > 0))
+		weapon_fire_animate(doom, weapon);
+	else if (weapon->frame >= weapon->fire_frames)
+		weapon_reload_animate(doom, weapon);
+	else if (doom->key.r && !weapon->frame && !weapon->mag_ammo && weapon->cur_ammo)
+		weapon_reload_animate(doom, weapon);
+		//weapon->frame = weapon->fire_frames;
+
 }

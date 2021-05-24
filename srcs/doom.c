@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 10:53:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:26:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ void	init_doom(t_doom *doom, t_settings init)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
+
+	doom->font.amaz50 = TTF_OpenFont(GAME_PATH"resources/TTF/AmazDoom.ttf", 50);
+	if (!doom->font.amaz50)
+		error_msg("Could not open font: %s\n", TTF_GetError());
+	doom->font.digi50 = TTF_OpenFont(GAME_PATH"resources/TTF/Digital.ttf", 50);
+	if (!doom->font.digi50)
+		error_msg("Could not open font: %s\n", TTF_GetError());
+	doom->font.digi100 = TTF_OpenFont(GAME_PATH"resources/TTF/Digital.ttf", 100);
+	if (!doom->font.digi100)
+		error_msg("Could not open font: %s\n", TTF_GetError());
 
 	doom->w2 = init.display_w * init.render_resolution / 2;
 	doom->h2 = init.display_h * init.render_resolution / 2;
