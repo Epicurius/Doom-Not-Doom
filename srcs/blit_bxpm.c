@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:48:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 11:53:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 		while (++x < bxpm->w)
 		{
 			clr = bxpm->clr[bxpm->pix[y * bxpm->w + x]];
-			if (0 != (clr >> 24 & 0xFF))
+			if (0 != (clr >> 24 & 0xFF) && clr != 0xFFc10099)
 				((Uint32*)surface->pixels)[(sy + y) * surface->w + (sx + x)] = clr;
 		}
 	}
@@ -36,7 +36,7 @@ static void		copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 	uint32_t clr;
 
 	clr = src->clr[src->pix[srcr.y2 * src->w + srcr.x2]];
-	if (clr != 0x000000 && clr != 0xFFc10099)
+	if (0 != (clr >> 24 & 0xFF) && clr != 0xFFc10099)
 		((Uint32*)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
 }
 

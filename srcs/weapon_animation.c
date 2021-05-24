@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 12:43:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 14:19:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	blit_weapon(t_doom *doom)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	bxpm = &weapon->bxpm[weapon->frame];
+	//blit_bxpm(doom->surface, bxpm, (doom->surface->w - bxpm->w) / 1.5, (doom->surface->h - bxpm->h));
+	//return ;
 	dstr = rect_xy2(doom->w2,
 					doom->surface->h - (float)(bxpm->h * weapon->scale),
 					doom->w2 + (float)(bxpm->w * weapon->scale),
@@ -34,8 +36,7 @@ void	blit_weapon(t_doom *doom)
 void	weapon_animate(t_doom *doom, t_weapon *weapon)
 {
 	if (weapon->frame == 0 && weapon->ammo_amount > 0)
-		;
-		//Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
+		;//Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[weapon->sound], 0);
 	if (weapon->time - doom->time.curr < -(weapon->frame_rate))
 	{
 		if (!weapon->frame)
@@ -52,7 +53,7 @@ void	weapon_animate(t_doom *doom, t_weapon *weapon)
 
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->key.num >= 1 && doom->key.num <= 3 && doom->weapon[doom->key.num - 1].own)
+	if (doom->key.num >= 1 && doom->key.num <= 4 && doom->weapon[doom->key.num - 1].own)
 		doom->player.equiped = doom->key.num - 1;
 }
 

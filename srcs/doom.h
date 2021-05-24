@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 18:42:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/24 12:34:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ typedef struct		s_doom
 	t_bxpm			stx[12];
 	t_bxpm			mtx[6];
 	t_bxpm			icon[4];
-	t_weapon		weapon[3];
+	t_weapon		weapon[4];
 	t_texture_sheet	sheet[3];
 
 	Mix_Chunk		*sound[7];

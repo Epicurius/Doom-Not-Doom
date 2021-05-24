@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/22 16:39:13 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/24 14:18:00 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,61 +21,6 @@ BLUE			:= "\e[0;34m"
 MAGENTA			:= "\e[0;35m"
 CYAN			:= "\e[0;36m"
 RESET			:= "\e[0m"
-
-RAW_TEXTURES =	wood.bmp\
-				spooky.bmp\
-				alfred.bmp\
-				rift.bmp\
-				bh.bmp\
-				vent.bmp\
-				bars.bmp\
-				space0.bmp\
-				space1.bmp\
-				space2.bmp\
-				space3.bmp\
-				space4.bmp\
-				space5.bmp\
-				land0.bmp\
-				land1.bmp\
-				land2.bmp\
-				land3.bmp\
-				land4.bmp\
-				land5.bmp\
-				shot1.bmp\
-				shot2.bmp\
-				shot3.bmp\
-				shot4.bmp\
-				shot5.bmp\
-				shot6.bmp\
-				shot7.bmp\
-				shot8.bmp\
-				shot9.bmp\
-				shot10.bmp\
-				shot11.bmp\
-				shot12.bmp\
-				shot13.bmp\
-				shot14.bmp\
-				shot15.bmp\
-				gun1.bmp\
-				gun2.bmp\
-				gun3.bmp\
-				gun4.bmp\
-				gun5.bmp\
-				gun6.bmp\
-				mini1.bmp\
-				mini2.bmp\
-				mini3.bmp\
-				mini4.bmp\
-				mini5.bmp\
-				mini6.bmp\
-				game_over.bmp\
-				pause.bmp
-
-RESOURCES_DIR	= ./resources
-PATH_TO_BMP		= $(RESOURCES_DIR)/BMP
-PATH_TO_BXPM	= $(RESOURCES_DIR)/BXPM
-BMP				= $(addprefix $(PATH_TO_BMP)/,$(RAW_TEXTURES))
-BXPM			= $(addprefix $(PATH_TO_BXPM)/,$(RAW_TEXTURES:.bmp=.bxpm))
 
 RAW_SRC =		doom.c\
 				error.c\
@@ -179,7 +124,7 @@ LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(L
 CFLAGS			= -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
 
 
-all: framework libs resources $(PATH_TO_BXPM) $(BXPM) $(ODIR) $(NAME)
+all: framework libs resources $(ODIR) $(NAME)
 
 -include $(DEP)
 
@@ -194,10 +139,6 @@ $(NAME): $(OBJ)
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(GREEN)"Compiling $<\n"$(RESET)
 	@gcc $(LIBS) $(CFLAGS) -w -c $< -o $@
-
-$(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
-	@./bmp_to_bxpm/converter $<
-	@mv ./resources/BMP/*.bxpm ./resources/BXPM/
 
 $(LIB_DIR):
 	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
