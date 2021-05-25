@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 15:20:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:15:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	t_project	*orb;
 
 	entity->yaw = angle_to_point(entity->where, doom->player.where);
-	if (entity->frame < doom->sheet[entity->type].nb[ATTACK][FRAMES] - 1)
+	if (entity->frame < doom->npc_bxpm[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
 	if (entity->data->attack_style == 2)
 	{

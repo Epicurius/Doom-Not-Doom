@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:26:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:44:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	if (Mix_Init(MIX_INIT_FLAC)&MIX_INIT_FLAC != MIX_INIT_FLAC)
 		error_msg("Could not init MIX: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED,init.display_w, init.display_h, SDL_WINDOW_MOUSE_FOCUS);
+			SDL_WINDOWPOS_CENTERED,init.display_w, init.display_h, 0);
 	//doom->win = SDL_CreateWindow("DOOM", 0, 0, init.display_w, init.display_h, SDL_WINDOW_MOUSE_FOCUS);
 
 	if (!doom->win)
@@ -106,10 +106,10 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	DrawProjectiles(doom);
 	Drawsprite(doom);
 	draw_crosshair(doom);
-	blit_weapon(doom);	
+	draw_hud(doom);
+	draw_weapon(doom);	
 	fps_func(doom);
 	blit_fps(doom);
-	draw_hud(doom);
 	if (doom->key.tab)
 		map(doom);
 	update_screen(doom, doom->surface);

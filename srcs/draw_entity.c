@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 18:00:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:36:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	sprite_threads(t_doom *doom, t_entity *sprite, t_entity_thread *thread)
 		if (y == t - 1)
 			thread[y].render.clamp_end.y = sprite->render.clamp_end.y;
 		thread[y].surface = doom->surface;
-		thread[y].bxpm = &doom->sheet[sprite->type].bxpm;
-		thread[y].pos = doom->sheet[sprite->type].pos[sprite->state][sprite->frame][sprite->angle];
+		thread[y].bxpm = doom->npc_bxpm[sprite->type].bxpm;
+		thread[y].pos = doom->npc_bxpm[sprite->type].pos[sprite->state][sprite->frame][sprite->angle];
 		thread[y].shooting = doom->player.shooting;
 		thread[y].dmg = doom->weapon[doom->player.equiped].damage;
 		thread[y].hp = &sprite->hp;

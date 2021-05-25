@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_pos_struct.c                                :+:      :+:    :+:   */
+/*   malloc_texture_pos.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 11:15:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:13:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int	malloc_state_frames_and_angles(t_texture_sheet *sprite, int state)
+static int	malloc_state_frames_and_angles(t_npc_bxpm *sprite, int state)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ static int	malloc_state_frames_and_angles(t_texture_sheet *sprite, int state)
 	return (1);
 }
 
-int	malloc_texture_pos(t_texture_sheet *sprite)
+int	malloc_texture_pos(t_npc_bxpm *sprite)
 {
 	sprite->pos = (t_rect ***)ft_memalloc(sizeof(t_rect **) * 4);
 	if (!sprite->pos)

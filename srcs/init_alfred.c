@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:31:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_alfred_nb(t_texture_sheet *sprite)
+void	init_alfred_nb(t_npc_bxpm *sprite)
 {
 	sprite->nb[IDLE  ][FRAMES] = 1;
 	sprite->nb[IDLE  ][ANGLES] = 8;
@@ -24,8 +24,9 @@ void	init_alfred_nb(t_texture_sheet *sprite)
 	sprite->nb[DEATH ][ANGLES] = 1;
 }
 
-int	init_alfred(t_texture_sheet *sprite)
+int	init_alfred(t_npc_bxpm *sprite, t_bxpm *bxpm)
 {
+	sprite->bxpm = bxpm;
 	init_alfred_nb(sprite);
 	if (!malloc_texture_pos(sprite))
 		return (0);

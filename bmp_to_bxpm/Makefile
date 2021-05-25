@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/24 15:50:55 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/25 16:34:09 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ RAW_TEXTURES =	DoomScore.bmp\
 				minigun-3.bmp\
 				minigun-4.bmp\
 				minigun-5.bmp\
-				objects_sprites.bmp\
+				objects.bmp\
 				pause.bmp\
 				quit.bmp\
 				rift.bmp\

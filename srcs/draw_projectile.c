@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 15:51:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:28:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void 	DrawProjectiles(t_doom *doom)
 	t_entity_thread	thread;
 
 	thread.hp		= NULL;
-	thread.bxpm		= &doom->sheet[1].bxpm;
+	thread.bxpm		= &doom->sprite_sheets[1];
 	thread.pos		= rect_xy2(810, 76, 856, 119);
 	thread.surface	= doom->surface;
 	curr = doom->orb;

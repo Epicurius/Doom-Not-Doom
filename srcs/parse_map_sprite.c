@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/03 16:03:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:09:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		sprite_type(char *str)
 		return (1);
 	if (ft_strequ(str, "Rift"))
 		return (2);
+	if (ft_strequ(str, "Barrel"))
+		return (3);
 	return (-1);
 }
 

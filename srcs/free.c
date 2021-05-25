@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:27:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:29:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_color_palet(t_bxpm *bxpm)
 	}
 }
 
-void	free_sprite_pos(t_texture_sheet *sprite)
+void	free_sprite_pos(t_npc_bxpm *sprite)
 {
 	int i;
 	int j;
@@ -70,12 +70,12 @@ void	free_sprite_pos(t_texture_sheet *sprite)
 
 void	free_sprites_pos(t_doom *doom)
 {
-	if (doom->sheet[0].pos)
-		free_sprite_pos(&doom->sheet[0]);
-	if (doom->sheet[1].pos)
-		free_sprite_pos(&doom->sheet[1]);
-	if (doom->sheet[2].pos)
-		free_sprite_pos(&doom->sheet[2]);
+	if (doom->npc_bxpm[0].pos)
+		free_sprite_pos(&doom->npc_bxpm[0]);
+	if (doom->npc_bxpm[1].pos)
+		free_sprite_pos(&doom->npc_bxpm[1]);
+	if (doom->npc_bxpm[2].pos)
+		free_sprite_pos(&doom->npc_bxpm[2]);
 }
 
 void	free_sprites(t_doom *doom)
@@ -128,8 +128,8 @@ void	free_textures(t_doom *doom)
 	i = -1;
 	while (++i < 3)
 	{
-		free(doom->sheet[i].bxpm.clr);
-		free(doom->sheet[i].bxpm.pix);
+		free(doom->sprite_sheets[i].clr);
+		free(doom->sprite_sheets[i].pix);
 	}
 }
 

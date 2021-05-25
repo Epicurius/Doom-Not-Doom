@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 18:43:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:43:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	frame_animation(t_doom *doom, t_entity *entity)
 		entity->frame++;
 		entity->time = doom->time.curr;
 	}
-	if (entity->frame >= doom->sheet[entity->type].nb[entity->state][FRAMES])
+	if (entity->frame >= doom->npc_bxpm[entity->type].nb[entity->state][FRAMES])
 	{
 		if (entity->state == DEATH)
 			return (0);
@@ -107,9 +107,9 @@ void	get_entity_render(t_doom *doom, t_entity *entity)
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	screen.x = doom->w2 + (screen.x * doom->cam.scale / -screen.z);
 	screen.y = doom->h2 + (screen.y * doom->cam.scale / -screen.z);
-	size.x = doom->sheet[entity->type].pos[entity->state][entity->frame][entity->angle].w
+	size.x = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame][entity->angle].w
 		* entity->data->scale / screen.z;
-	size.y = doom->sheet[entity->type].pos[entity->state][entity->frame][entity->angle].h
+	size.y = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame][entity->angle].h
 		* entity->data->scale / screen.z;
 	entity->render.z = screen.z;
 	entity->render.start.x			= screen.x - size.x / 2;
@@ -127,7 +127,7 @@ void	get_entity_render(t_doom *doom, t_entity *entity)
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
 
-	if (entity->render.z > 10
+	if (entity->data->animate &&  entity->render.z > 10
 			&& doom->w2 > entity->render.start.x && doom->w2 < entity->render.end.x
 			&& doom->h2 > entity->render.start.y && doom->h2 < entity->render.end.y)
 		entity->danger = 1;
@@ -154,10 +154,10 @@ void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 
 int		get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
-	if (doom->sheet[entity->type].nb[entity->state][FRAMES] > 1 && !frame_animation(doom, entity))
+	if (doom->npc_bxpm[entity->type].nb[entity->state][FRAMES] > 1 && !frame_animation(doom, entity))
 		return (0);
 	entity->angle = orientation(entity->where, doom->player.where,
-		entity->yaw, doom->sheet[entity->type].nb[entity->state][ANGLES]);
+		entity->yaw, doom->npc_bxpm[entity->type].nb[entity->state][ANGLES]);
 	get_entity_render(doom, entity);
 	return (1);
 }

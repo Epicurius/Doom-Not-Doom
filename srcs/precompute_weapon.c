@@ -6,32 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:38:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 14:53:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void	blit_weapon(t_doom *doom)
-{
-	t_rect dstr;
-	t_rect srcr;
-	t_bxpm *bxpm;
-	t_weapon *weapon;
-
-	if (doom->player.equiped < 0)
-		return ;
-	weapon = &doom->weapon[doom->player.equiped];
-	bxpm = &weapon->bxpm[weapon->frame];
-	//blit_bxpm(doom->surface, bxpm, (doom->surface->w - bxpm->w) / 1.5, (doom->surface->h - bxpm->h));
-	//return ;
-	dstr = rect_xy2(doom->w2,
-					doom->surface->h - (float)(bxpm->h * weapon->scale),
-					doom->w2 + (float)(bxpm->w * weapon->scale),
-					doom->surface->h);
-	srcr = rect_xy2(0,	0,	weapon->bxpm[weapon->frame].w,	weapon->bxpm[weapon->frame].h);
-	blit_bxpm_scaled(doom->surface, dstr, &weapon->bxpm[weapon->frame], srcr);
-}
 
 void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 {

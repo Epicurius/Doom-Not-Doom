@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 17:57:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:43:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	hit_enemy(t_entity_thread *thread, int coord)
 	if (thread->hp != NULL && thread->shooting && coord == thread->center)
 	{
 		*thread->hp -= thread->dmg;
-		//ft_printf("{RED}%d %d{RESET}\n", *thread->hp, coord);
 	}
 }
 

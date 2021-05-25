@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:37:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 18:48:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 15:55:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 	draw_crosshair(doom);
 	ce("Croshair");
 	cs();
-	blit_weapon(doom);
+	draw_weapon(doom);
 	ce("Blit_weapon");
 	fps_func(doom);
 	blit_fps(doom);

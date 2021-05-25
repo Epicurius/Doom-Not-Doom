@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/24 14:18:00 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/25 17:17:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,9 @@ RAW_SRC =		doom.c\
 				clock.c\
 				init_player.c\
 				blit_bxpm.c\
+				draw_weapon.c\
 				wave.c\
-				weapon_animation.c\
+				precompute_weapon.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
@@ -99,6 +100,7 @@ RAW_SRC =		doom.c\
 				init_weapons.c\
 				icon.c\
 				update_screen.c\
+				init_barrel.c\
 				random.c
 		
 NAME			= doom

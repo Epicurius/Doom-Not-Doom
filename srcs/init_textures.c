@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 16:25:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:09:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	init_icon(t_doom *doom)
 
 void	init_entity_pos(t_doom *doom)
 {
-	init_alfred(&doom->sheet[0]);
-	init_spooky(&doom->sheet[1]);
-	init_rift(&doom->sheet[2]);
+	init_alfred(&doom->npc_bxpm[0], &doom->sprite_sheets[0]);
+	init_spooky(&doom->npc_bxpm[1], &doom->sprite_sheets[1]);
+	init_rift(&doom->npc_bxpm[2], &doom->sprite_sheets[2]);
+	init_barrel(&doom->npc_bxpm[3], &doom->sprite_sheets[3]);
 }
 
 void	init_textures(t_doom *doom)

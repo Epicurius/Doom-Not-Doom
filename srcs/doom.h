@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:23:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:30:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,12 +353,12 @@ typedef	struct		s_time
 	SDL_Color		clock_bg;
 }					t_time;
 
-typedef struct		s_texture_sheet
+typedef struct		s_npc_bxpm
 {
-	t_bxpm			bxpm;
+	t_bxpm			*bxpm;
 	int				nb[4][2];
 	t_rect			***pos;
-}					t_texture_sheet;
+}					t_npc_bxpm;
 
 typedef struct		s_game_mode
 {
@@ -380,6 +380,7 @@ typedef struct		s_weapon
 
 
 	t_bxpm			*bxpm;
+	float			x_offset;
 	int				frame_rate;
 	int				sound;
 	float			scale;
@@ -449,7 +450,6 @@ typedef struct		s_doom
 	t_list			*sprite;
 	t_list			*rifts;
 
-	t_data			npe_data[3];
 
 	t_list			*orb;
 	t_camera		cam;
@@ -460,7 +460,9 @@ typedef struct		s_doom
 	t_bxpm			mtx[6];
 	t_bxpm			icon[5];
 	t_weapon		weapon[4];
-	t_texture_sheet	sheet[3];
+	t_bxpm			sprite_sheets[4];
+	t_npc_bxpm		npc_bxpm[4];
+	t_data			npe_data[4];
 
 	Mix_Chunk		*sound[7];
 	int				intro[1]; //idk frogga jony
@@ -478,7 +480,7 @@ void	debug_loop(t_doom *doom, SDL_Event *event);
 void	poll_event(t_doom *doom, SDL_Event *event);
 void	game(char *map, t_settings init);
 void	gamemode(t_doom *doom);
-void	blit_weapon(t_doom *doom);
+void	draw_weapon(t_doom *doom);
 void	precompute_weapon(t_doom *doom);
 void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
 void	game_over(t_doom *doom);
@@ -505,9 +507,9 @@ void	init_fps(t_doom *doom);
 void	init_game_entity(t_doom *doom);
 void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
-int		init_alfred(t_texture_sheet *sprite);
-int		init_spooky(t_texture_sheet *sprite);
-int		init_rift(t_texture_sheet *sprite);
+int		init_alfred(t_npc_bxpm *sprite, t_bxpm *bxpm);
+int		init_spooky(t_npc_bxpm *sprite, t_bxpm *bxpm);
+int		init_rift(t_npc_bxpm *sprite, t_bxpm *bxpm);
 void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
@@ -540,7 +542,7 @@ int		blit_game_entity(void *arg);
 int		ai_track_player(t_doom *doom, t_entity *entity);
 int		ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
 int		ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
-int		malloc_texture_pos(t_texture_sheet *sprite);
+int		malloc_texture_pos(t_npc_bxpm *sprite);
 void	get_entity_render(t_doom *doom, t_entity *entity);
 
 //	Projectiles

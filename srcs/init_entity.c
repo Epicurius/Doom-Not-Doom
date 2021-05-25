@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 12:45:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:45:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ static void	rift(t_doom *doom, t_data *rift)
 	rift->frame_rate[DEATH] 	= 8000;
 }
 
+static void	barrel(t_doom *doom, t_data *sprite)
+{
+	sprite->health 				= 20;
+	sprite->scale 				= 5 * (doom->surface->w / 100);
+	sprite->frame_rate[DEATH] 	= 6000;
+}
+
 void	init_game_entity(t_doom *doom)
 {
 	t_list		*new;
@@ -74,6 +81,7 @@ void	init_game_entity(t_doom *doom)
 	alfred(doom, &doom->npe_data[0]);
 	spooky(doom, &doom->npe_data[1]);
 	rift(doom, &doom->npe_data[2]);
+	barrel(doom, &doom->npe_data[3]);
 	curr = doom->sprite;
 	while (curr)
 	{
