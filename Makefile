@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/25 17:17:08 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/26 17:08:28 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,9 @@ RAW_SRC =		doom.c\
 				icon.c\
 				update_screen.c\
 				init_barrel.c\
+				init_lamp.c\
+				init_torch.c\
+				init_meat_hook.c\
 				random.c
 		
 NAME			= doom

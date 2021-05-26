@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/26 14:11:50 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/26 15:44:26 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ RAW_TEXTURES =	DoomScore.bmp\
 				bars.bmp\
 				bh.bmp\
 				game_over.bmp\
+				game_loading.bmp\
 				glock-0.bmp\
 				glock-1.bmp\
 				glock-2.bmp\

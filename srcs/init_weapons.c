@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:06:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:22:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	init_minigun(t_doom *doom, t_weapon *weapon)
 static void	init_kar98(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
-	weapon->damage = 10;
+	weapon->damage = 1000;
 	weapon->mag_size = 7;
 	weapon->mag_ammo = 0;
 	weapon->cur_ammo = 100;

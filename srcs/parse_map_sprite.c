@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:09:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:13:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int		sprite_type(char *str)
 		return (2);
 	if (ft_strequ(str, "Barrel"))
 		return (3);
+	if (ft_strequ(str, "Lamp"))
+		return (4);
+	if (ft_strequ(str, "Torch"))
+		return (5);
+	if (ft_strequ(str, "Meat_Hook"))
+		return (6);
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 15:05:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:12:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,8 +461,8 @@ typedef struct		s_doom
 	t_bxpm			icon[5];
 	t_weapon		weapon[4];
 	t_bxpm			sprite_sheets[4];
-	t_npc_bxpm		npc_bxpm[4];
-	t_data			npe_data[4];
+	t_npc_bxpm		npc_bxpm[7];
+	t_data			npe_data[7];
 
 	Mix_Chunk		*sound[7];
 	int				intro[1]; //idk frogga jony
@@ -518,6 +518,9 @@ void	init_alfred(t_doom *doom);
 void	init_spooky(t_doom *doom);
 void	init_rift(t_doom *doom);
 void	init_barrel(t_doom *doom);
+void	init_lamp(t_doom *doom);
+void	init_torch(t_doom *doom);
+void	init_meat_hook(t_doom *doom);
 
 
 //		Time

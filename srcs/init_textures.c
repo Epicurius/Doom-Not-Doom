@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 15:15:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:09:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	init_entity_pos(t_doom *doom)
 	init_spooky(doom);
 	init_rift(doom);
 	init_barrel(doom);
+	init_lamp(doom);
+	init_torch(doom);
+	init_meat_hook(doom);
 }
 
 void	init_textures(t_doom *doom)

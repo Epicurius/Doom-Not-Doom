@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:45:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:16:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,27 @@ static void	barrel(t_doom *doom, t_data *sprite)
 	sprite->frame_rate[DEATH] 	= 6000;
 }
 
+static void	lamp(t_doom *doom, t_data *sprite)
+{
+	sprite->health 				= 11120;
+	sprite->scale 				= 5 * (doom->surface->w / 100);
+	sprite->frame_rate[IDLE] 	= 3000;
+}
+
+static void	torch(t_doom *doom, t_data *sprite)
+{
+	sprite->health 				= 11120;
+	sprite->scale 				= 5 * (doom->surface->w / 100);
+	sprite->frame_rate[IDLE] 	= 9000;
+}
+
+static void	meat_hook(t_doom *doom, t_data *sprite)
+{
+	sprite->health 				= 11120;
+	sprite->scale 				= 10 * (doom->surface->w / 100);
+	sprite->frame_rate[IDLE] 	= 1000;
+}
+
 void	init_game_entity(t_doom *doom)
 {
 	t_list		*new;
@@ -82,6 +103,9 @@ void	init_game_entity(t_doom *doom)
 	spooky(doom, &doom->npe_data[1]);
 	rift(doom, &doom->npe_data[2]);
 	barrel(doom, &doom->npe_data[3]);
+	lamp(doom, &doom->npe_data[4]);
+	torch(doom, &doom->npe_data[5]);
+	meat_hook(doom, &doom->npe_data[6]);
 	curr = doom->sprite;
 	while (curr)
 	{

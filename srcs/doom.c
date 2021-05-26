@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 15:31:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 16:31:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,22 @@ void	launcher(void)
 	free(&arr[0]);
 }
 
-void	init_doom(t_doom *doom, t_settings init)
+void	game_loading(t_doom *doom)
+{
+	SDL_Event	event;
+	t_bxpm		*bxpm;
+
+	bxpm = malloc(sizeof(t_bxpm));
+	read_bxpm(bxpm, GAME_PATH"resources/BXPM/game_loading.bxpm");
+	blit_bxpm(doom->surface, bxpm, doom->surface->w / 2 - bxpm->w / 2,
+									doom->surface->h / 2 - bxpm->h / 2);
+	update_screen(doom, doom->surface);
+	SDL_PollEvent(&event);
+	SDL_RaiseWindow(doom->win);
+	free_bxpm(bxpm);
+}
+
+void	init_sdl(t_doom *doom, t_settings init)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 		error_msg("Could not init SDL: %s\n", SDL_GetError());
@@ -31,7 +46,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	if (Mix_Init(MIX_INIT_FLAC)&MIX_INIT_FLAC != MIX_INIT_FLAC)
 		error_msg("Could not init MIX: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, init.display_w, init.display_h, SDL_WINDOW_SHOWN);
+			SDL_WINDOWPOS_CENTERED, init.display_w, init.display_h, SDL_WINDOW_ALWAYS_ON_TOP);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
@@ -49,6 +64,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
 	SDL_SetRelativeMouseMode(SDL_TRUE);
+	game_loading(doom);
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
 	doom->font.amaz50 = TTF_OpenFont(GAME_PATH"resources/TTF/AmazDoom.ttf", 50);
@@ -60,7 +76,10 @@ void	init_doom(t_doom *doom, t_settings init)
 	doom->font.digi100 = TTF_OpenFont(GAME_PATH"resources/TTF/Digital.ttf", 100);
 	if (!doom->font.digi100)
 		error_msg("Could not open font: %s\n", TTF_GetError());
+}
 
+void	init_doom(t_doom *doom, t_settings init)
+{
 	doom->w2 = init.display_w * init.render_resolution / 2;
 	doom->h2 = init.display_h * init.render_resolution / 2;
 	doom->c = doom->h2 * doom->surface->w + doom->w2;
@@ -116,7 +135,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		game_quit(doom);
 }
 
-//debug_loop(doom, &event);
+
 void	game(char *map, t_settings init)
 {
 	t_doom		*doom;
@@ -125,6 +144,7 @@ void	game(char *map, t_settings init)
 	doom = ft_memalloc(sizeof(t_doom));
 	if (!doom)
 		error_msg("Doom malloc.\n");
+	init_sdl(doom, init);
 	read_file(doom, map);
 	if (!validate_map(doom))
 		return ;
