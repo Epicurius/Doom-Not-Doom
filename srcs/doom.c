@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:44:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:31:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	if (Mix_Init(MIX_INIT_FLAC)&MIX_INIT_FLAC != MIX_INIT_FLAC)
 		error_msg("Could not init MIX: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED,init.display_w, init.display_h, 0);
-	//doom->win = SDL_CreateWindow("DOOM", 0, 0, init.display_w, init.display_h, SDL_WINDOW_MOUSE_FOCUS);
-
+			SDL_WINDOWPOS_CENTERED, init.display_w, init.display_h, SDL_WINDOW_SHOWN);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
@@ -53,7 +51,6 @@ void	init_doom(t_doom *doom, t_settings init)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
-
 	doom->font.amaz50 = TTF_OpenFont(GAME_PATH"resources/TTF/AmazDoom.ttf", 50);
 	if (!doom->font.amaz50)
 		error_msg("Could not open font: %s\n", TTF_GetError());
@@ -127,7 +124,7 @@ void	game(char *map, t_settings init)
 
 	doom = ft_memalloc(sizeof(t_doom));
 	if (!doom)
-		error_msg(init.flag, "Doom malloc.\n");
+		error_msg("Doom malloc.\n");
 	read_file(doom, map);
 	if (!validate_map(doom))
 		return ;

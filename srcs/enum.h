@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 12:34:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:17:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,13 @@ typedef enum	e_sound_channel
 	CHANNEL_STEPS,
 	CHANNEL_TTS
 }				e_sound_channel;
+
+typedef enum	e_sprites
+{
+	ALFRED,
+	SPOOKY,
+	RIFT,
+	BARREL
+}				e_sprites;
 
 #endif

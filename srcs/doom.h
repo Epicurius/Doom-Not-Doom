@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:30:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:05:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -507,15 +507,18 @@ void	init_fps(t_doom *doom);
 void	init_game_entity(t_doom *doom);
 void	init_scale(t_doom *doom);
 void	init_textures(t_doom *doom);
-int		init_alfred(t_npc_bxpm *sprite, t_bxpm *bxpm);
-int		init_spooky(t_npc_bxpm *sprite, t_bxpm *bxpm);
-int		init_rift(t_npc_bxpm *sprite, t_bxpm *bxpm);
 void	init_minimap(t_doom *doom);
 void	init_skybox(t_doom *doom);
 void	init_camera(t_doom *doom);
 void	init_clock(t_doom *doom);
 void	init_inv(t_doom *doom);
 void	init_gamemode(t_doom *doom);
+
+void	init_alfred(t_doom *doom);
+void	init_spooky(t_doom *doom);
+void	init_rift(t_doom *doom);
+void	init_barrel(t_doom *doom);
+
 
 //		Time
 void	get_time(time_t *t);
@@ -542,7 +545,7 @@ int		blit_game_entity(void *arg);
 int		ai_track_player(t_doom *doom, t_entity *entity);
 int		ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
 int		ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
-int		malloc_texture_pos(t_npc_bxpm *sprite);
+void	malloc_texture_pos(t_npc_bxpm *sprite);
 void	get_entity_render(t_doom *doom, t_entity *entity);
 
 //	Projectiles

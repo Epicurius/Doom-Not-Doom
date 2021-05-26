@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/20 16:57:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:43:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,4 @@
 # define TOP_HALF					4
 # define BOT_HALF					5
 
-typedef enum	e_entities
-{
-	ALFRED,
-	SPOOKY,
-	SPAWNER
-}				t_entities;
 #endif

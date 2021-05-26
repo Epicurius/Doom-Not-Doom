@@ -6,34 +6,40 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 17:39:41 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:06:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:16:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_rift_nb(t_npc_bxpm *sprite)
+static void	idle_pos(t_rect **pos)
 {
-	sprite->nb[IDLE  ][FRAMES] = 1;
-	sprite->nb[IDLE  ][ANGLES] = 1;
-	sprite->nb[MOVE  ][FRAMES] = 0;
-	sprite->nb[MOVE  ][ANGLES] = 0;
-	sprite->nb[ATTACK][FRAMES] = 0;
-	sprite->nb[ATTACK][ANGLES] = 0;
-	sprite->nb[DEATH ][FRAMES] = 4;
-	sprite->nb[DEATH ][ANGLES] = 1;
+	pos[0][0] = rect_xy2(0,		0,	174, 315);
 }
 
-int	init_rift(t_npc_bxpm *sprite, t_bxpm *bxpm)
+static void	death_pos(t_rect **pos)
 {
-	sprite->bxpm = bxpm;
-	init_rift_nb(sprite);
-	if (!malloc_texture_pos(sprite))
-		return (0);
-	sprite->pos[0][0][0] = rect_xy2(0,		0,	174, 315);
-	sprite->pos[3][0][0] = rect_xy2(174,	0,	351, 315);
-	sprite->pos[3][1][0] = rect_xy2(351,	0,	527, 315);
-	sprite->pos[3][2][0] = rect_xy2(527,	0,	689, 315);
-	sprite->pos[3][3][0] = rect_xy2(689,	0,	875, 315);
-	return (1);
+	pos[0][0] = rect_xy2(174,	0,	351, 315);
+	pos[1][0] = rect_xy2(351,	0,	527, 315);
+	pos[2][0] = rect_xy2(527,	0,	689, 315);
+	pos[3][0] = rect_xy2(689,	0,	875, 315);
+}
+
+void	init_rift(t_doom *doom)
+{
+	t_npc_bxpm *img;
+
+	img = &doom->npc_bxpm[RIFT];
+	img->bxpm = &doom->sprite_sheets[2];
+	img->nb[IDLE  ][FRAMES] = 1;
+	img->nb[IDLE  ][ANGLES] = 1;
+	img->nb[MOVE  ][FRAMES] = 0;
+	img->nb[MOVE  ][ANGLES] = 0;
+	img->nb[ATTACK][FRAMES] = 0;
+	img->nb[ATTACK][ANGLES] = 0;
+	img->nb[DEATH ][FRAMES] = 4;
+	img->nb[DEATH ][ANGLES] = 1;
+	malloc_texture_pos(img);
+	idle_pos(img->pos[IDLE]);
+	death_pos(img->pos[DEATH]);
 }

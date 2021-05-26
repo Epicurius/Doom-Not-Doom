@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 16:13:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 14:32:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,17 @@ static int	malloc_state_frames_and_angles(t_npc_bxpm *sprite, int state)
 	return (1);
 }
 
-int	malloc_texture_pos(t_npc_bxpm *sprite)
+void	malloc_texture_pos(t_npc_bxpm *sprite)
 {
 	sprite->pos = (t_rect ***)ft_memalloc(sizeof(t_rect **) * 4);
 	if (!sprite->pos)
-		return (0);
+		error_msg("Malloc img pos\n");
 	if (!malloc_state_frames_and_angles(sprite, IDLE))
-		return (0);
+		error_msg("Malloc img pos IDLE\n");
 	if (!malloc_state_frames_and_angles(sprite, MOVE))
-		return (0);
+		error_msg("Malloc img pos MOVE\n");
 	if (!malloc_state_frames_and_angles(sprite, ATTACK))
-		return (0);
+		error_msg("Malloc img pos ATTACK\n");
 	if (!malloc_state_frames_and_angles(sprite, DEATH))
-		return (0);
-	return (1);
+		error_msg("Malloc img pos DEATH\n");
 }

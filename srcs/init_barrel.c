@@ -6,37 +6,43 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:09:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 17:25:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:07:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	init_nb(t_npc_bxpm *sprite)
+static void	idle_pos(t_rect **pos)
 {
-	sprite->nb[IDLE  ][FRAMES] = 1;
-	sprite->nb[IDLE  ][ANGLES] = 1;
-	sprite->nb[MOVE  ][FRAMES] = 0;
-	sprite->nb[MOVE  ][ANGLES] = 0;
-	sprite->nb[ATTACK][FRAMES] = 0;
-	sprite->nb[ATTACK][ANGLES] = 0;
-	sprite->nb[DEATH ][FRAMES] = 7;
-	sprite->nb[DEATH ][ANGLES] = 1;
+	pos[0][0] = rect_xy2(174, 182, 209, 233);
 }
 
-int	init_barrel(t_npc_bxpm *sprite, t_bxpm *bxpm)
+static void	death_pos(t_rect **pos)
 {
-	sprite->bxpm = bxpm;
-	init_nb(sprite);
-	if (!malloc_texture_pos(sprite))
-		return (0);
-	sprite->pos[0][0][0] = rect_xy2(4,	199, 43, 257);
-	sprite->pos[3][0][0] = rect_xy2(47,	199, 90, 257);
-	sprite->pos[3][1][0] = rect_xy2(93, 199, 141, 257);
-	sprite->pos[3][2][0] = rect_xy2(145, 199, 197, 257);
-	sprite->pos[3][3][0] = rect_xy2(199, 155, 289, 257);
-	sprite->pos[3][4][0] = rect_xy2(291, 167, 377, 257);
-	sprite->pos[3][5][0] = rect_xy2(379, 167, 463, 257);
-	sprite->pos[3][6][0] = rect_xy2(465, 164, 545, 257);
-	return (1);
+	pos[0][0] = rect_xy2(216, 178, 257, 233);
+	pos[1][0] = rect_xy2(262, 178, 307, 233);
+	pos[2][0] = rect_xy2(315, 178, 362, 233);
+	pos[3][0] = rect_xy2(369, 109, 456, 208);
+	pos[4][0] = rect_xy2(464, 109, 544, 208);
+	pos[5][0] = rect_xy2(551, 109, 630, 208);
+	pos[6][0] = rect_xy2(637, 109, 713, 208);
+}
+
+void	init_barrel(t_doom *doom)
+{
+	t_npc_bxpm *img;
+
+	img = &doom->npc_bxpm[BARREL];
+	img->bxpm = &doom->sprite_sheets[3];
+	img->nb[IDLE  ][FRAMES] = 1;
+	img->nb[IDLE  ][ANGLES] = 1;
+	img->nb[MOVE  ][FRAMES] = 0;
+	img->nb[MOVE  ][ANGLES] = 0;
+	img->nb[ATTACK][FRAMES] = 0;
+	img->nb[ATTACK][ANGLES] = 0;
+	img->nb[DEATH ][FRAMES] = 7;
+	img->nb[DEATH ][ANGLES] = 1;
+	malloc_texture_pos(img);
+	idle_pos(img->pos[IDLE]);
+	death_pos(img->pos[DEATH]);
 }
