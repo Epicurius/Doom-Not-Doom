@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:13:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 21:06:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void		screen_x_sector(t_doom *doom, int x, int xend)
 		tmp = (x / (double)(doom->surface->w - 1)) * doom->cam.range + doom->cam.near_left;
 		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
 		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
-		//pos.z = p.where.z + EYE_LVL;
+		pos.z = p.where.z + EYE_LVL;
 		doom->fustrum[x] = find_sector(doom, pos);
 		x++;
 	}

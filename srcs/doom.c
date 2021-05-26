@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 16:31:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 20:58:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	DrawScreen(doom);
 	/* All this has no time requirements */
 	{
-		gamemode(doom);
+		//gamemode(doom);
 		precompute_weapon(doom);
 		precompute_entities(doom);
 		precompute_projectiles(doom);
@@ -161,6 +161,9 @@ int main(int ac, char **av)
 {
 	t_settings init;
 
+
+
+
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
@@ -171,6 +174,8 @@ int main(int ac, char **av)
 		error_msg("No map.\n");
 	if (ac >= 4)
 	{
+		conv();
+		exit(1);
 		init.display_w = ft_atoi(av[2]);
 		init.display_h = ft_atoi(av[3]);
 	}

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 17:42:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/26 20:41:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 	j = i;
 	while (++j < sector->npoints)
 	{
+		//printf("%.2f %.2f  %.2f %.2f\n", v2.x, v2.y, sector->wall[j]->v1.x, sector->wall[j]->v1.y);
 		if (compare_xyz(v2, sector->wall[j]->v1))
 		{
 			temp = sector->wall[i];
@@ -75,6 +76,9 @@ int	fix_wall_order(t_doom *doom, t_sector *sector)
 	v2 = sector->wall[i]->v2;
 	while (++i <= sector->npoints)
 	{
+		//printf("%.2f %.2f  %.2f %.2f\n", v2.x, v2.y,
+		//	sector->wall[i % sector->npoints]->v1.x,
+		//	sector->wall[i % sector->npoints]->v1.y);
 		if (compare_xyz(v2, sector->wall[i % sector->npoints]->v1))
 		{
 			v2 = sector->wall[i % sector->npoints]->v2;
