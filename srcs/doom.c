@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 20:58:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 13:14:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		game_pause(doom);
 	else if (doom->quit == 1)
 		game_quit(doom);
+	//printf("%f\n", doom->player.where.z);
+	//printf("%d\n", doom->player.sector);
 }
 
 
@@ -161,21 +163,16 @@ int main(int ac, char **av)
 {
 	t_settings init;
 
-
-
-
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 1.0f;
+	init.render_resolution = 0.70f;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)
 		error_msg("No map.\n");
 	if (ac >= 4)
 	{
-		conv();
-		exit(1);
 		init.display_w = ft_atoi(av[2]);
 		init.display_h = ft_atoi(av[3]);
 	}

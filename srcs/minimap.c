@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:59:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ void	draw_map(t_doom *doom)
 	{
 		w = -1;
 		sect = &doom->sectors[s];
+		if (sect->floor.y > doom->player.where.z || sect->ceiling.y < doom->player.where.z)
+			continue ;
 		while (++w < sect->npoints)
 		{
-			if (sect->wall[w]->n != -1)
-				continue ; 
+			//if (sect->wall[w]->n != -1)
+			//	continue ; 
 			vec[0].x = doom->w2 + (sect->wall[w]->v1.x - where.x) * MM_SECTORS_SCALE;
 			vec[0].y = doom->h2 + (sect->wall[w]->v1.y - where.y) * MM_SECTORS_SCALE;
 			vec[1].x = doom->w2 + (sect->wall[w]->v2.x - where.x) * MM_SECTORS_SCALE;
 			vec[1].y = doom->h2 + (sect->wall[w]->v2.y - where.y) * MM_SECTORS_SCALE;
 			if (cohen_sutherland(vec, map.size))
-				line(doom->surface, 0xFFFFFFFF, vec);	
+				line(doom->surface, sect->wall[w]->n != -1 ? 0xffff0000 : 0xFFFFFFFF, vec);	
 		}
 		
 	}
