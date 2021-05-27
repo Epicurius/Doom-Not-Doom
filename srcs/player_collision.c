@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:33:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/04/24 15:33:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 18:09:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	player_collision(t_doom *doom)
 	p.entities			= doom->sprite;
 	p.nb_entities		= doom->nb.sprites;
 	p.player			= 1;
-	p.hitbox_height		= PLAYER_HEIGHT;
+	p.hitbox_height		= doom->player.eye_lvl + 1;
 	p.hitbox_radius		= PLAYER_RADIUS;
 	p.step_height		= STEP_HEIGHT;
 	collision_detection(&p);

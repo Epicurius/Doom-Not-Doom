@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 20:10:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 18:18:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 #define PLAYER_HEIGHT 				7
 #define EYE_LVL						6
-#define OVER_HEAD_SPACE				2
+#define OVER_HEAD_SPACE				1
 #define DUCK_HEIGHT					2.5
 #define STEP_HEIGHT					2
 #define CAMERA_RATIO				(16.0/9.0)

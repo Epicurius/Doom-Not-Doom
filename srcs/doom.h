@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 17:12:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 18:08:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct		s_data
 {
 	int				health;
 	int				height;
+	int				hitbox_radius;
 	double			speed;
 	int				flying;
 	int				damage;
@@ -106,6 +107,7 @@ typedef struct		s_player
 {
 	t_xyz			where;
 	t_xyz			velocity;
+	int				eye_lvl;
 	int				sector;
 	double			yaw;
 	double			pitch;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 13:14:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 18:33:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	DrawScreen(doom);
 	/* All this has no time requirements */
 	{
-		//gamemode(doom);
+		gamemode(doom);
 		precompute_weapon(doom);
 		precompute_entities(doom);
 		precompute_projectiles(doom);

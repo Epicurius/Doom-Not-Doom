@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 17:16:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:39:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	alfred(t_doom *doom, t_data *alfred)
 	alfred->hostile 			= 1;
 	alfred->attack_style 		= 2;
 	alfred->scale 				= 4 * (doom->surface->w / 100);
-	alfred->height 				= 4;
+	alfred->height 				= 2;
+	alfred->hitbox_radius 		= 2;
 	alfred->speed 				= 20;
 	alfred->move			 	= 1;
 	alfred->view_distance 		= 200;
@@ -41,7 +42,8 @@ static void	spooky(t_doom *doom, t_data *spooky)
 	spooky->hostile 			= 1;
 	spooky->attack_style 		= 1;
 	spooky->scale 				= 2 * (doom->surface->w / 100);
-	spooky->height 				= 9;
+	spooky->height 				= 7;
+	spooky->hitbox_radius 		= 2;
 	spooky->speed 				= 10;
 	spooky->move			 	= 1;
 	spooky->view_distance 		= 100;

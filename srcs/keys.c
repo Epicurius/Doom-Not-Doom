@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 14:43:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/27 18:23:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	key(t_doom *doom, SDL_Event *event)
 	else if (event->key.keysym.sym == SDLK_SPACE)
 		doom->key.space = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_LCTRL)
-		doom->key.l_ctrl = event->type == SDL_KEYDOWN;
+		doom->key.ctr_l = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_LSHIFT)
-		doom->key.l_shift = event->type == SDL_KEYDOWN;
+		doom->key.shift_l = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_TAB)
 		doom->key.tab = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_q
