@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:44:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:04:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,4 @@ void	draw_neighbor_wall(t_render *render, t_vline *vline)
 
 	render->ybot = ft_clamp(ft_min(vline->curr_n.floor,
 	vline->curr.floor), render->ytop, render->ybot);
-	/*
-	if (render->wall.ptx >= 0)
-	{
-		vline->y1 = render->ytop; 
-		vline->y2 = render->ybot; 
-		draw_portal_texture(render, vline);
-	}*/
 }

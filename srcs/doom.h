@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:08:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:16:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -459,9 +459,9 @@ typedef struct		s_doom
 
 	//	Textures
 	t_bxpm			stx[12];
-	t_bxpm			mtx[6];
+	t_bxpm			mtx[20];
 	t_bxpm			icon[5];
-	t_weapon		weapon[4];
+	t_weapon		weapon[5];
 	t_bxpm			sprite_sheets[4];
 	t_npc_bxpm		npc_bxpm[7];
 	t_data			npe_data[7];

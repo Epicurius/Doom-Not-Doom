@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 15:55:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 17:21:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	draw_weapon(t_doom *doom)
 
 	srcr.x1 = 0;
 	srcr.y1 = 0;
-	srcr.w = weapon->bxpm[weapon->frame].w;
-	srcr.h = weapon->bxpm[weapon->frame].h;
+	srcr.w = bxpm->w;
+	srcr.h = bxpm->h;
 	while (++y < t)
 	{
 		thread[y].src = &weapon->bxpm[weapon->frame];

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/26 15:44:26 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/28 16:18:56 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,26 @@ RAW_TEXTURES =	DoomScore.bmp\
 				space4.bmp\
 				space5.bmp\
 				spooky.bmp\
+				pump-0.bmp\
+				pump-1.bmp\
+				pump-2.bmp\
+				pump-3.bmp\
+				pump-4.bmp\
+				pump-5.bmp\
+				pump-6.bmp\
+				pump-7.bmp\
+				pump-8.bmp\
 				vent.bmp\
+				lava.bmp\
+				metal_wall.bmp\
+				tile_floor.bmp\
+				door.bmp\
+				console.bmp\
+				green_wall.bmp\
+				radar.bmp\
+				steel.bmp\
+				wall_panel.bmp\
+				metal_tile2.bmp\
 				wood.bmp
 
 RESOURCES_DIR	= ../resources

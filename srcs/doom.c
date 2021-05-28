@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:33:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:29:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,28 @@ void	init_doom(t_doom *doom, t_settings init)
 	init_inv(doom);
 }
 
+void	what_vert(t_doom *doom)
+{
+	int i = -1;
+	t_sector *sect = &doom->sectors[doom->player.sector];
+	while (++i < sect->npoints)
+	{
+		if (965 > sect->wall[i]->cx1 && 955 < sect->wall[i]->cx1)
+			printf("%.2f %.2f\n", sect->wall[i]->v1.x, sect->wall[i]->v1.y);
+	}
+}
+
 void	game_loop(t_doom *doom, SDL_Event *event)
 {
+	//SDL_FillRect(doom->surface, NULL, 0xff000000);
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	DrawScreen(doom);
 	/* All this has no time requirements */
 	{
-		gamemode(doom);
+		//what_vert(doom);
+		//gamemode(doom);
 		precompute_weapon(doom);
 		precompute_entities(doom);
 		precompute_projectiles(doom);
@@ -166,7 +179,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 0.70f;
+	init.render_resolution = 0.5;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

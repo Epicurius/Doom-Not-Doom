@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:42:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:39:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 		render->bh->curr += 1;
 		if (render->bh->total < MAX_BH)
 			render->bh->total += 1;
+		ft_printf("%d\n", render->wall.id);
 	}
-
 }

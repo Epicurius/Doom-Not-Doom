@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:23:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 10:25:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	key(t_doom *doom, SDL_Event *event)
 		doom->key.shift_l = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_TAB)
 		doom->key.tab = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == SDLK_q
-			|| event->key.keysym.sym == SDLK_ESCAPE)
+	else if (event->key.keysym.sym == SDLK_q || event->key.keysym.sym == SDLK_ESCAPE)
 		doom->quit = 1;
 	else if (event->key.keysym.sym == SDLK_p)
 		doom->key.p = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_r)
 		doom->key.r = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym >= SDLK_1 &&
-			event->key.keysym.sym <= SDLK_9)
+	else if (event->key.keysym.sym >= SDLK_1 && event->key.keysym.sym <= SDLK_9)
 		doom->key.num = event->key.keysym.sym - 48;
+	else if (event->key.keysym.sym == SDLK_m)
+		doom->key.m = event->type == SDL_KEYDOWN;
 }
 
 void	keys(t_doom *doom, SDL_Event *event)

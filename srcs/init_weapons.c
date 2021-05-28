@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 17:22:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:17:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ static void	init_shotgun(t_doom *doom, t_weapon *weapon)
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
 	weapon->scale = 0.7 * (doom->surface->w / 1000.0);
+	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
+	if (!weapon->bxpm)
+		error_msg(0, "Shotgun malloc.\n");
+}
+
+static void	init_pump(t_doom *doom, t_weapon *weapon)
+{
+	weapon->own = 1;
+	weapon->damage = 100;
+	weapon->mag_size = 8;
+	weapon->mag_ammo = 8;
+	weapon->cur_ammo = 20;
+	weapon->max_ammo = 100;
+	weapon->fire_frames = 9;
+	weapon->reload_frames = 0;
+	weapon->frame = 0;
+	weapon->frame_rate = 100;
+	weapon->x_offset = 1.5;
+	weapon->time = doom->time.curr;
+	weapon->sound = WAV_SHOTGUN;
+	weapon->scale = 0.6 * (doom->surface->w / 1000.0);
 	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
 	if (!weapon->bxpm)
 		error_msg(0, "Shotgun malloc.\n");
@@ -105,4 +126,5 @@ void	init_weapons(t_doom *doom)
 	init_gun(doom, &doom->weapon[1]);
 	init_minigun(doom, &doom->weapon[2]);
 	init_kar98(doom, &doom->weapon[3]);
+	init_pump(doom, &doom->weapon[4]);
 }

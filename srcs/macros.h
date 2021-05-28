@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:18:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:12:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define FOV							90
 #define PLAYER_YAW					45
 #define PLAYER_PITCH				10
-#define PLAYER_RADIUS				1.0
+#define PLAYER_RADIUS				0.5
 #define NEAR_Z						0.1
 #define FAR_Z						1000
 #define RENDER_DISTANCE				200.0
@@ -89,7 +89,7 @@
 /*
 ** Texture
 */
-# define ZBUFFER_COLOR				1
+# define ZBUFFER_COLOR				0
 # define TEXTURE_DISABLED			0
 # define OPAQUE						30
 # define NB_SKYBOX_TEXTURES			6
