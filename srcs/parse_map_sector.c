@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 20:03:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:56:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	parse_sector(t_doom *doom, char **arr)
 	neighbour		= ft_strsplit(arr[2], ' ', NULL);
 	sect->gravity	= ft_atoi(arr[3]) / 1000.0;
 	sect->light		= ft_atoi(arr[4]);
+	sect->wslope	= ft_atoi(arr[5]);
+	sect->slope		= ft_atoi(arr[6]) * CONVERT_RADIANS;
 	complete_wall(sect, doom->walls, walls, neighbour);
 	free(walls);
 	free(neighbour);

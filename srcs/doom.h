@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 16:16:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 17:43:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef	struct		s_fc
 {
 	double			floor;
 	double			ceiling;
+	double			f;
+	double			c;
 }					t_fc;
 
 typedef struct		s_vline
@@ -71,6 +73,9 @@ typedef struct		s_vline
 	t_xyz			texel;
 	t_xyz			texel_nearz;
 	t_xyz			texel_range;
+
+	double			real_floor;
+	double			real_ceiling;
 }					t_vline;
 
 typedef struct		s_project
@@ -219,6 +224,10 @@ typedef struct		s_sector
 	float			gravity;
 	char			visible;
 	t_xyz			center;
+	int				wslope;
+	float			slope;
+	t_xyz			ceiling_normal;
+	t_xyz			floor_normal;
 } 					t_sector;
 
 
@@ -647,6 +656,12 @@ void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 
 int		set_icon(SDL_Window *window, char *dir);
 void	error_msg(const char *restrict format, ...);
+
+
+double		get_floor_at_pos(t_sector *sector, t_xyz pos);
+double		get_ceiling_at_pos(t_sector *sector, t_xyz pos);
+void		precompute_slopes(t_doom *doom);
+
 
 //REMOVE//
 void	cs(void);

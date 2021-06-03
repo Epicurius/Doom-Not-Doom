@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 16:29:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:30:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	init_doom(t_doom *doom, t_settings init)
 	init_gamemode(doom);
 	init_sound(doom);
 	init_inv(doom);
+	precompute_slopes(doom);
 }
 
 void	what_vert(t_doom *doom)
@@ -146,6 +147,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		game_pause(doom);
 	else if (doom->quit == 1)
 		game_quit(doom);
+	//printf("%f %f %f\n", doom->player.where.x, doom->player.where.y, doom->player.where.z);
 	//printf("%f\n", doom->player.where.z);
 	//printf("%d\n", doom->player.sector);
 }
@@ -179,7 +181,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 0.5;
+	init.render_resolution = 0.7;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

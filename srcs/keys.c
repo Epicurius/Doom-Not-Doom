@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 10:25:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/02 16:17:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	key(t_doom *doom, SDL_Event *event)
 	else if (event->key.keysym.sym == SDLK_r)
 		doom->key.r = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym >= SDLK_1 && event->key.keysym.sym <= SDLK_9)
+	{
 		doom->key.num = event->key.keysym.sym - 48;
+		doom->sectors[0].wslope = (event->key.keysym.sym - 48) - 1;
+		precompute_slopes(doom);
+	}
 	else if (event->key.keysym.sym == SDLK_m)
 		doom->key.m = event->type == SDL_KEYDOWN;
 }

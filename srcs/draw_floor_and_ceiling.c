@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:43:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/02 14:10:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 {
-	vline->height.ceiling = vline->max.ceiling - render->ceiling.head;
-	vline->height.floor = render->floor.feet - vline->max.floor;
 
-	if (vline->height.ceiling > render->ytop)
+	if (vline->curr.ceiling > render->ytop)
 	{
+		vline->height.ceiling = vline->max.ceiling - render->ceiling.head;
 		vline->y1 = render->ytop;
 		vline->y2 = ft_min(vline->curr.ceiling, render->ybot);
 		if (render->ceiling.tx == 0 || TEXTURE_DISABLED)
@@ -31,6 +30,7 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 	}
 	if (vline->curr.floor < render->ybot)
 	{
+		vline->height.floor = render->floor.feet - vline->max.floor;
 		vline->y1 = ft_max(0, vline->curr.floor);
 		vline->y2 = render->ybot;
 		if (render->floor.tx == 0 || TEXTURE_DISABLED)

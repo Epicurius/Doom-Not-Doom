@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:12:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 17:43:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,25 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 	double eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eye_lvl;
-	sector->ceiling.correct = sector->ceiling.y - eye_z;
-	sector->floor.correct = sector->floor.y - eye_z;
-	sector->ceiling.head = doom->h2 + sector->ceiling.correct
-				* doom->cam.scale / -doom->cam.near_z;
-	sector->floor.feet = doom->h2 + sector->floor.correct
+	//sector->ceiling.correct = sector->ceiling.y - eye_z;
+	//sector->floor.correct = sector->floor.y - eye_z;
+
+	if (1)
+	{	
+		sector->floor.feet = doom->h2 + (get_floor_at_pos(sector, doom->player.where)
+			- eye_z + doom->cam.near_z * doom->player.pitch)
+			* doom->cam.scale / -doom->cam.near_z;	
+		sector->ceiling.head = doom->h2 + (get_ceiling_at_pos(sector, doom->player.where)
+			- eye_z + doom->cam.near_z * doom->player.pitch)
 			* doom->cam.scale / -doom->cam.near_z;
+	}
+	else
+	{
+	//	sector->floor.feet = doom->h2 + sector->floor.correct
+	//		* doom->cam.scale / -doom->cam.near_z;
+	//	sector->ceiling.head = doom->h2 + sector->ceiling.correct
+	//			* doom->cam.scale / -doom->cam.near_z;
+	}
 }
 
 void	precompute_walls(t_doom *doom)

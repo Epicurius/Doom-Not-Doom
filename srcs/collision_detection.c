@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 11:06:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 18:29:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,47 @@ int	vertical_collision(t_collision *sprite, t_xyz dest)
 	t_wall		*wall;
 	t_sector	*sector;
 
+
+
 	i = -1;
 	sector = &sprite->sectors[*sprite->sector];
+
+	double ceiling_y = get_ceiling_at_pos(sector, dest);
+	double floor_y = get_floor_at_pos(sector, dest);
+
 	// So to not keep on falling through floor.
-	if (sprite->velocity->z < 0 && dest.z < sector->floor.y)
+	if (sprite->velocity->z < 0 && dest.z < floor_y)
 	{
-		sprite->where->z = sector->floor.y;
+		sprite->where->z = floor_y;
 		return (1);
 	}
 	// If player has reached the cealing.
-	else if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > sector->ceiling.y)
+	else if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > ceiling_y)
 		return (1);
-	/*while (++i < sector->npoints)
-	{
-		wall = &sector->wall[i];
-		if (wall->solid && hitbox_collision((t_xyz){dest.x, dest.y, sprite->where->z + sprite->velocity->z},
-					wall, sprite->hitbox_radius))
-		{
-			ft_printf("cant");
-			return (1);
-		}
-	}*/
 	// Let the player keep on rising/falling.
 	sprite->where->z += sprite->velocity->z;
 	return (0);
 }
 
-int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall)
+int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall, t_xyz dest)
 {
 	double portal_top;
 	double portal_bot;
 
-	portal_bot = ft_max(sector->floor.y, sprite->sectors[wall->n].floor.y);
-	portal_top = ft_min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
+
+	// Fix: ge_floor&ceiling at beggining
+	if (!sprite->sectors[wall->n].slope)
+	{
+		portal_bot = ft_max(sector->floor.y, sprite->sectors[wall->n].floor.y);
+		portal_top = ft_min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
+	}
+	else
+	{
+		portal_bot = ft_max(get_floor_at_pos(sector, *sprite->where),
+							get_floor_at_pos(&sprite->sectors[wall->n], dest));
+		portal_top = ft_min(get_ceiling_at_pos(sector, *sprite->where),
+							get_ceiling_at_pos(&sprite->sectors[wall->n], dest));
+	}
 	if (portal_top <= portal_bot + sprite->hitbox_height)
 		return (0);
 	if (portal_top > sprite->where->z + sprite->hitbox_height &&
@@ -94,13 +102,13 @@ int	horizontal_collision(t_collision *sprite, t_xyz dest)
 			if (wall->solid)
 				return (1);
 			// Can fit through portal to next sector.
-			if (!fit_through_portal(sprite, sector, wall))
+			if (!fit_through_portal(sprite, sector, wall, dest))
 				return (1);
 			*sprite->sector = wall->n;
 			break ;
 		}
 		// Dose hitbox collide with solid surface
-		else if ((wall->solid || !fit_through_portal(sprite, sector, wall))
+		else if ((wall->solid || !fit_through_portal(sprite, sector, wall, dest))
 			&& hitbox_collision(dest, wall, sprite->hitbox_radius))
 		{
 			return (1);

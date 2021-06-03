@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 13:02:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 15:59:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 	vline->z = wall.zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
 	vline->max.ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
-				render->ytop, render->ybot);
+	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop, render->ybot);
 	vline->max.floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
-	vline->curr.floor = ft_clamp(vline->max.floor,
-				render->ytop, render->ybot);
-	vline->line_height = (vline->clipped_alpha * wall.range.floor + wall.s1.floor)
-				- (vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling);
+	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
+	vline->real_floor = vline->clipped_alpha * wall.range.f + wall.s1.f; //useless
+	vline->real_ceiling = vline->clipped_alpha * wall.range.c + wall.s1.c;
+	vline->line_height = vline->real_floor - vline->real_ceiling;
+	//render->ceiling_start = render->max_ceiling - render->ceiling_horizon;
+	//render->floor_start = render->max_floor - render->floor_horizon;
 }
 
 void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)

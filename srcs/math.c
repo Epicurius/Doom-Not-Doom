@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/22 15:25:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:11:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int	intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2)
 		return (1);
 	return (0);
 }
-
+//pythagoras
 //	Distance between 2 2d points
 double	point_distance_2d(double x1, double y1, double x2, double y2)
 {
