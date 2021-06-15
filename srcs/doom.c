@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 18:30:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:06:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,12 @@ void	what_vert(t_doom *doom)
 
 void	game_loop(t_doom *doom, SDL_Event *event)
 {
-	//SDL_FillRect(doom->surface, NULL, 0xff000000);
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	DrawScreen(doom);
 	/* All this has no time requirements */
 	{
-		//what_vert(doom);
 		//gamemode(doom);
 		precompute_weapon(doom);
 		precompute_entities(doom);
@@ -147,16 +145,13 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		game_pause(doom);
 	else if (doom->quit == 1)
 		game_quit(doom);
-	//printf("%f %f %f\n", doom->player.where.x, doom->player.where.y, doom->player.where.z);
-	//printf("%f\n", doom->player.where.z);
-	//printf("%d\n", doom->player.sector);
 }
-
 
 void	game(char *map, t_settings init)
 {
 	t_doom		*doom;
     SDL_Event	event;
+	int i = 33;
 
 	doom = ft_memalloc(sizeof(t_doom));
 	if (!doom)
@@ -167,13 +162,14 @@ void	game(char *map, t_settings init)
 		return ;
 	init_doom(doom, init);
     while (!doom->quit && doom->player.hp > 0)
+	{
 		game_loop(doom, &event);
 		//debug_loop(doom, &event);
+	}
 	if (doom->player.hp <= 0)
 		game_over(doom);
 	free_doom(doom);
 }
-
 int main(int ac, char **av)
 {
 	t_settings init;
@@ -181,7 +177,7 @@ int main(int ac, char **av)
 	//2560 1390
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 0.7;
+	init.render_resolution = 1;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

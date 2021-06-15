@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 17:46:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:43:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ void	get_velocity(t_doom *doom, t_xyz move)
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
 	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
 	if (!player->flying)
-		player->velocity.z -= sector->gravity;
+	{
+		if (doom->player.where.z > get_floor_at_pos(sector, player->where))
+			player->velocity.z -= sector->gravity;
+	}
 	else
 		player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
 }

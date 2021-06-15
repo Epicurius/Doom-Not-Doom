@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 11:56:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 17:15:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parse_vertex(t_doom *doom, char **arr)
 {
+	////////////////////////////////// y x
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].z = ft_atof(arr[3]) * doom->map_scale;
@@ -35,18 +36,25 @@ void	parse_wall(t_doom *doom, char **arr)
 void	parse_fc(t_doom *doom, char **arr)
 {
 	int		sect;
+	char	**slope;
 	t_plane	*floor;
 	t_plane	*ceiling;
 
-	sect			= ft_atoi(arr[1]);
+	sect			= ft_atoi(arr[0]);
 	floor			= &doom->sectors[sect].floor;
 	ceiling			= &doom->sectors[sect].ceiling;
-	floor->y		= atof(arr[2]) * doom->map_scale;
-	ceiling->y		= atof(arr[3]) * doom->map_scale;
-	floor->tx		= ft_atoi(arr[4]);
+	floor->y		= atof(arr[1]) * doom->map_scale;
+	ceiling->y		= atof(arr[2]) * doom->map_scale;
+	floor->tx		= ft_atoi(arr[3]);
+	floor->scale	= atof(arr[4]) * doom->map_scale;
 	ceiling->tx		= ft_atoi(arr[5]);
-	floor->scale	= atof(arr[6]) * doom->map_scale;
 	ceiling->scale	= atof(arr[6]) * doom->map_scale;
+	slope = ft_strsplit(arr[7], ' ', NULL);
+	doom->sectors[sect].wall_floor_slope = ft_atoi(slope[0]);
+	doom->sectors[sect].floor_slope = ft_atoi(slope[1]) * CONVERT_RADIANS;
+	doom->sectors[sect].wall_ceiling_slope = ft_atoi(slope[2]);
+	doom->sectors[sect].ceiling_slope = ft_atoi(slope[3]) * CONVERT_RADIANS;
+	free(slope);
 }
 
 void	complete_wall(t_sector *sect, t_wall *walls, char **id, char **neighbour)
@@ -78,10 +86,7 @@ void	parse_sector(t_doom *doom, char **arr)
 	neighbour		= ft_strsplit(arr[2], ' ', NULL);
 	sect->gravity	= ft_atoi(arr[3]) / 1000.0;
 	sect->light		= ft_atoi(arr[4]);
-	sect->wslope	= ft_atoi(arr[5]);
-	sect->slope		= ft_atoi(arr[6]) * CONVERT_RADIANS;
 	complete_wall(sect, doom->walls, walls, neighbour);
 	free(walls);
 	free(neighbour);
 }
-

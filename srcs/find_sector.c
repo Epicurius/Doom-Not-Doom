@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 18:28:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/14 18:57:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,13 @@ int		in_sector(t_sector *sector, t_xyz pos)
 	double p;
 
 	i = -1;
-	//if (!sector->slope)
+	//if (sector->floor.y > pos.z || sector->ceiling.y < pos.z)//Fix
+	if (get_floor_at_pos(sector, pos) > pos.z || get_ceiling_at_pos(sector, pos) < pos.z)
 	{
-		if (sector->floor.y > pos.z || sector->ceiling.y < pos.z)//Fix
-			return (0);
+	//	printf("pos:(%f %f %f | %d)", pos.x, pos.y, pos.z, sector->id);
+	//	printf("\tfc:(%f %f)\n", get_floor_at_pos(sector, pos), get_ceiling_at_pos(sector, pos));
+		return (0);
 	}
-	/*(else
-	{
-		if (get_floor_at_pos(sector, pos) > pos.z
-			|| get_ceiling_at_pos(sector, pos) < pos.z)
-		{
-			ft_printf("pos:(%f %f %f)", pos.x, pos.y, pos.z);
-			ft_printf("\tfc:(%f %f)\n", get_floor_at_pos(sector, pos), get_ceiling_at_pos(sector, pos));
-			return (0);
-		}
-	}*/
 	while (++i < sector->npoints)
 	{
 		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2, pos) < 0)

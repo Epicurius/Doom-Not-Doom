@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 17:43:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:52:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,10 @@ typedef struct		s_sector
 	float			gravity;
 	char			visible;
 	t_xyz			center;
-	int				wslope;
-	float			slope;
+	int				wall_ceiling_slope;
+	float			ceiling_slope;
+	int				wall_floor_slope;
+	float			floor_slope;
 	t_xyz			ceiling_normal;
 	t_xyz			floor_normal;
 } 					t_sector;
@@ -237,6 +239,8 @@ typedef struct		s_collision
 	t_xyz			*velocity;
 	t_sector		*sectors;
 	t_list			*entities;
+
+
 	int				*sector;
 	int				nb_entities;
 	int				player;

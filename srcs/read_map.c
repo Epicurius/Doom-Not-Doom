@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 18:59:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 16:18:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	parse_player(t_doom *doom, char **arr)
 	t_player	*player;
 
 	player = &doom->player;
-	player->where.x = ft_atof(arr[0]) * doom->map_scale;
-	player->where.y = ft_atof(arr[1]) * doom->map_scale;
-	player->where.z = ft_atof(arr[2]) * doom->map_scale;
-	player->yaw = ft_atoi(arr[3]);
+	player->where.x = ft_atof(arr[1]) * doom->map_scale;
+	player->where.y = ft_atof(arr[2]) * doom->map_scale;
+	player->where.z = ft_atof(arr[3]) * doom->map_scale;
+	player->yaw = ft_atoi(arr[4]);
 }
 
 void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
@@ -77,5 +77,6 @@ int	read_file(t_doom *doom, char *file_name)
 	ft_strdel(&line);
 	free(line);
 	close(fd);
+	printf("Read Done!\n");
 	return (1);
 }

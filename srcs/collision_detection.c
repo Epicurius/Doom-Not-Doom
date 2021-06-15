@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 18:29:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:40:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,37 @@ int	vertical_collision(t_collision *sprite, t_xyz dest)
 	t_wall		*wall;
 	t_sector	*sector;
 
-
-
 	i = -1;
 	sector = &sprite->sectors[*sprite->sector];
-
-	double ceiling_y = get_ceiling_at_pos(sector, dest);
-	double floor_y = get_floor_at_pos(sector, dest);
-
-	// So to not keep on falling through floor.
-	if (sprite->velocity->z < 0 && dest.z < floor_y)
+	double c = get_ceiling_at_pos(sector, xyz(sprite->where->x, sprite->where->y, 0)); // <-- this is a issue
+	double f = get_floor_at_pos(sector, xyz(sprite->where->x, sprite->where->y, 0));
+	// Player is walking up a slope
+	if (sprite->velocity->z >= 0 && dest.z < f && f - dest.z <= sprite->step_height) //slope angle
 	{
-		sprite->where->z = floor_y;
+		sprite->where->z = f;
+		sprite->velocity->z = 0.0f;
+		return (1);
+	}
+	// Player is walking down a slope
+	if (sprite->velocity->z == 0 && dest.z > f && dest.z - f <= sprite->step_height)
+	{
+		sprite->where->z = f;
+		sprite->velocity->z = 0.0f;
+		return (1);
+	}
+	// Player falling thru floor fix
+	if (sprite->velocity->z < 0 && dest.z < f)
+	{
+		sprite->where->z = f;
+		sprite->velocity->z = 0.0f;
 		return (1);
 	}
 	// If player has reached the cealing.
-	else if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > ceiling_y)
-		return (1);
+	if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > c)
+	{
+		sprite->velocity->z = 0.0f;
+		return (0);
+	}
 	// Let the player keep on rising/falling.
 	sprite->where->z += sprite->velocity->z;
 	return (0);
@@ -62,20 +76,10 @@ int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall, t_xy
 	double portal_top;
 	double portal_bot;
 
-
-	// Fix: ge_floor&ceiling at beggining
-	if (!sprite->sectors[wall->n].slope)
-	{
-		portal_bot = ft_max(sector->floor.y, sprite->sectors[wall->n].floor.y);
-		portal_top = ft_min(sector->ceiling.y, sprite->sectors[wall->n].ceiling.y);
-	}
-	else
-	{
-		portal_bot = ft_max(get_floor_at_pos(sector, *sprite->where),
-							get_floor_at_pos(&sprite->sectors[wall->n], dest));
-		portal_top = ft_min(get_ceiling_at_pos(sector, *sprite->where),
-							get_ceiling_at_pos(&sprite->sectors[wall->n], dest));
-	}
+	portal_bot = ft_max(get_floor_at_pos(sector, *sprite->where),
+						get_floor_at_pos(&sprite->sectors[wall->n], dest));
+	portal_top = ft_min(get_ceiling_at_pos(sector, *sprite->where),
+						get_ceiling_at_pos(&sprite->sectors[wall->n], dest));
 	if (portal_top <= portal_bot + sprite->hitbox_height)
 		return (0);
 	if (portal_top > sprite->where->z + sprite->hitbox_height &&
@@ -126,17 +130,24 @@ int	collision_detection(t_collision *sprite)
 	dest = sum_xyz(*sprite->where, *sprite->velocity);
 	if (sprite->player && sprite_collision(sprite, dest))
 	{
-		sprite->velocity->x = 0;
-		sprite->velocity->y = 0;
-		sprite->velocity->z = 0;
+		sprite->velocity->x = 0.0f;
+		sprite->velocity->y = 0.0f;
+		sprite->velocity->z = 0.0f;
 		return (1);
 	}
 	if (horizontal_collision(sprite, dest))
 	{
-		sprite->velocity->x = 0;
-		sprite->velocity->y = 0;
+		sprite->velocity->x = 0.0f;
+		sprite->velocity->y = 0.0f;
 	}
+	//printf("%f %f %f | %f %f %f\n",
+	//		sprite->where->x,
+	//		sprite->where->y,
+	//		sprite->where->z,
+	//		sprite->velocity->x,
+	//		sprite->velocity->y,
+	//		sprite->velocity->z);
 	if (vertical_collision(sprite, dest))
-		sprite->velocity->z = 0;
+		sprite->velocity->z = 0.0f;
 	return (1);
 }

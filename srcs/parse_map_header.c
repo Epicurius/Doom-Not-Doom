@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/18 12:02:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/15 16:18:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	parse_header(t_doom *doom, char **arr)
 {
-	doom->map_scale		= ft_atof(arr[1]);
-	doom->nb.vertices	= ft_atoi(arr[2]);
-	doom->nb.walls		= ft_atoi(arr[3]);
-	doom->nb.sectors	= ft_atoi(arr[4]);
+	doom->map_scale		= ft_atof(arr[2]);
+	doom->nb.vertices	= ft_atoi(arr[3]);
+	doom->nb.walls		= ft_atoi(arr[4]);
+	doom->nb.sectors	= ft_atoi(arr[5]);
 	doom->nb.sprites	= 0;
 	doom->nb.projectiles	= 0;
 	doom->nb.rifts	= 0;
@@ -29,4 +29,5 @@ void	parse_header(t_doom *doom, char **arr)
 	doom->rifts = NULL;
 	if (!doom->vert || !doom->walls || !doom->sectors)
 		error_msg("Map malloc.\n");
+	ft_printf("v:%d w:%d s:%d\n", doom->nb.vertices, doom->nb.walls, doom->nb.sectors);
 }
