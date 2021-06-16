@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:12:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
+void	blit_pixel_brightness(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	unsigned short	light;
 	unsigned short	pixel;
@@ -23,7 +23,7 @@ void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_pixel_alpha(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
+void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	unsigned short	pixel;
 	uint8_t			alpha;
@@ -36,7 +36,7 @@ void	blit_pixel_alpha(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 		blend_alpha(bxpm->clr[pixel], ((uint32_t*)render->surface->pixels)[coord], -alpha);
 }
 
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
+void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	unsigned short	light;
 	unsigned short	pixel;
@@ -50,7 +50,7 @@ void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 }
 
 
-void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side)
+void	blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side)
 {
 	t_bxpm *bxpm;
 

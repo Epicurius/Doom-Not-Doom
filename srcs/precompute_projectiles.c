@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 15:25:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:23:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	player_contact(t_doom *doom, t_xyz start, t_xyz dest)
+int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 {
 	if (point_distance_3d(doom->player.where, dest) <= 5)
 	{
@@ -24,7 +24,7 @@ int	player_contact(t_doom *doom, t_xyz start, t_xyz dest)
 	return (0);
 }
 
-static int		vertical_collision(t_doom *doom, t_project *orb, t_xyz dest)
+static int		vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
 {
 	t_sector sector;
 
@@ -35,7 +35,7 @@ static int		vertical_collision(t_doom *doom, t_project *orb, t_xyz dest)
 	return (0);
 }
 
-int		projectile_collision(t_doom *doom, t_project *orb, t_xyz dest)
+int		projectile_collision(t_doom *doom, t_project *orb, t_v3 dest)
 {
 	t_collision o;
 
@@ -55,7 +55,7 @@ int		projectile_collision(t_doom *doom, t_project *orb, t_xyz dest)
 
 void	precompute_projectiles(t_doom *doom)
 {
-	t_xyz dest;
+	t_v3 dest;
 	t_list *curr;
 	t_project *orb;
 
@@ -63,11 +63,10 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
-		dest = sum_xyz(orb->where, orb->velocity);
+		dest = add_vec(orb->where, orb->velocity);
 		if (projectile_collision(doom, orb, dest))
 			curr = ft_dellstnode(&doom->orb, curr);
 		else
 			curr = curr->next;
 	}
-	//ft_printf("%d\n", doom->nb.projectiles);
 }

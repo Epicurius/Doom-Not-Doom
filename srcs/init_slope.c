@@ -6,16 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 15:58:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double	get_ceiling_at_pos(t_sector *sector, t_xyz pos)
+double	get_ceiling_at_pos(t_sector *sector, t_v3 pos)
 {
 	double	peq;
-	t_xyz	v;
+	t_v3	v;
 
 	v = sector->wall[sector->wall_ceiling_slope]->v1;
 	peq = sector->ceiling_normal.x * (pos.x - v.x)
@@ -23,10 +23,10 @@ double	get_ceiling_at_pos(t_sector *sector, t_xyz pos)
 	return (peq * sector->ceiling_slope + sector->ceiling.y);
 }
 
-double	get_floor_at_pos(t_sector *sector, t_xyz pos)
+double	get_floor_at_pos(t_sector *sector, t_v3 pos)
 {
 	double	peq;
-	t_xyz	v;
+	t_v3	v;
 
 	v = sector->wall[sector->wall_floor_slope]->v1;
 	peq = sector->floor_normal.x * (pos.x - v.x)
@@ -35,11 +35,11 @@ double	get_floor_at_pos(t_sector *sector, t_xyz pos)
 }
 
 //			normal of 2 vectors will be the slope direction
-t_xyz	get_slope_normal(t_sector *sector, int wall)
+t_v3	get_slope_normal(t_sector *sector, int wall)
 {
-	t_xyz	v1;
-	t_xyz	v2;
-	t_xyz	normal;
+	t_v3	v1;
+	t_v3	v2;
+	t_v3	normal;
 	double	s;
 
 	v1 = sector->wall[wall]->v1;

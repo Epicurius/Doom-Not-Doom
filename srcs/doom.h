@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 15:52:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 17:01:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "bxpm.h"
 # include "../../path.h"
 # include "./macros.h"
+#include "math.h"
 # include "./enum.h"
 # include "./utils.h"
 # include <math.h>
@@ -70,9 +71,9 @@ typedef struct		s_vline
 	t_fc	curr_n;
 
 	/* Texel */
-	t_xyz			texel;
-	t_xyz			texel_nearz;
-	t_xyz			texel_range;
+	t_v3			texel;
+	t_v3			texel_nearz;
+	t_v3			texel_range;
 
 	double			real_floor;
 	double			real_ceiling;
@@ -80,9 +81,9 @@ typedef struct		s_vline
 
 typedef struct		s_project
 {
-	t_xyz			start;
-	t_xyz			where;
-	t_xyz			velocity;
+	t_v3			start;
+	t_v3			where;
+	t_v3			velocity;
 	double			dist;
 	int				sector;	
 }					t_project;
@@ -110,8 +111,8 @@ typedef struct		s_data
 
 typedef struct		s_player
 {
-	t_xyz			where;
-	t_xyz			velocity;
+	t_v3			where;
+	t_v3			velocity;
 	int				eye_lvl;
 	int				sector;
 	double			yaw;
@@ -133,14 +134,14 @@ typedef struct		s_player
 typedef struct		s_wsprite
 {
 	int				id;
-	t_xyz			where;
+	t_v3			where;
 	int				tx;	
 	double			time;
 	int				frame;
 	t_rect			src;
 	double			scale_w;
 	double			scale_h;
-	t_xyz			tscale;
+	t_v3			tscale;
 	int				ready;
 }					t_wsprite;
 
@@ -165,12 +166,12 @@ typedef struct		s_wall
 	int				id;
 	int				sect;
 	int				visible;
-	t_xyz			v1;
-	t_xyz			v2;
-	t_xyz			sv1;
-	t_xyz			sv2;
-	t_xyz			cv1;
-	t_xyz			cv2;
+	t_v3			v1;
+	t_v3			v2;
+	t_v3			sv1;
+	t_v3			sv2;
+	t_v3			cv1;
+	t_v3			cv2;
 	double			scale_w;
 	double			scale_h;
 	double			width;
@@ -210,7 +211,7 @@ typedef struct		s_wall
 	double			x0z1;
 	double			y1z0;
 	double			y0z1;
-	t_xyz			tscale;
+	t_v3			tscale;
 }					t_wall;
 
 typedef struct		s_sector
@@ -223,20 +224,20 @@ typedef struct		s_sector
 	int				light;
 	float			gravity;
 	char			visible;
-	t_xyz			center;
+	t_v3			center;
 	int				wall_ceiling_slope;
 	float			ceiling_slope;
 	int				wall_floor_slope;
 	float			floor_slope;
-	t_xyz			ceiling_normal;
-	t_xyz			floor_normal;
+	t_v3			ceiling_normal;
+	t_v3			floor_normal;
 } 					t_sector;
 
 
 typedef struct		s_collision
 {
-	t_xyz			*where;
-	t_xyz			*velocity;
+	t_v3			*where;
+	t_v3			*velocity;
 	t_sector		*sectors;
 	t_list			*entities;
 
@@ -270,19 +271,19 @@ typedef struct		s_camera
 typedef struct		s_entity_render
 {
 	float			z;
-	t_i2			start;
-	t_i2			end;
-	t_i2			clamp_start;
-	t_i2			clamp_end;
+	t_point			start;
+	t_point			end;
+	t_point			clamp_start;
+	t_point			clamp_end;
 	double			xrange;
 	double			yrange;
 }					t_entity_render;
 
 typedef struct		s_entity
 {
-	t_xyz			where;
-	t_xyz			dest;
-	t_xyz			velocity;
+	t_v3			where;
+	t_v3			dest;
+	t_v3			velocity;
 	int				sector;
 	double			yaw;
 	int				danger;
@@ -458,7 +459,7 @@ typedef struct		s_doom
 	t_map			map;
 
 	//	Map
-	t_xyz			*vert;
+	t_v3			*vert;
 	t_wall			*walls;
 	t_wall			skybox[4];
 	t_sector		*sectors;
@@ -485,6 +486,8 @@ typedef struct		s_doom
 	pthread_t		t;
 }					t_doom;
 
+void	*ft_pmalloc(size_t size, char *str);
+
 //		Sound
 void	init_sound(t_doom *doom);
 
@@ -501,6 +504,7 @@ void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr);
 void	game_over(t_doom *doom);
 void	game_pause(t_doom *doom);
 void	game_quit(t_doom *doom);
+void	game_loading(t_doom *doom);
 void	update_screen(t_doom *doom, SDL_Surface *surface);
 
 //		Read_file
@@ -515,6 +519,8 @@ void	parse_entity(t_doom *doom, char **arr);
 void	parse_fc(t_doom *doom, char **arr);
 
 //		Init
+void	init(t_doom *doom, t_settings init);
+void	init_sdl(t_doom *doom, t_settings init);
 void	init_weapons(t_doom *doom);
 void	init_player(t_doom *doom);
 void	init_render(t_doom *doom);
@@ -584,14 +590,14 @@ int		animate_entities(t_doom *doom, t_wsprite *sprite);
 
 //	Minimap
 void	map(t_doom *doom);
-int		cohen_sutherland(t_i2 vec[2], t_rect size);
-void	line(SDL_Surface *surf, Uint32 color, t_i2 *p);
+int		cohen_sutherland(t_point vec[2], t_rect size);
+void	line(SDL_Surface *surf, Uint32 color, t_point *p);
 
 //	Movement
 void	movement(t_doom *doom);
-int		horizontal_collision(t_collision *sprite, t_xyz dest);
+int		horizontal_collision(t_collision *sprite, t_v3 dest);
 void	player_collision(t_doom *doom);
-int		sprite_collision(t_collision *entity, t_xyz dest);
+int		sprite_collision(t_collision *entity, t_v3 dest);
 int		collision_detection(t_collision *sprite);
 
 //	Texture
@@ -605,10 +611,10 @@ void	draw_portal_texture1(t_render *render, t_vline *vline);
 void	draw_portal_texture(t_render *render, t_vline *vline);
 
 //	Blit pixels
-void	blit_pixel_brightness(t_render *render, int coord, t_xyz text, t_bxpm *bxpm);
-void	blit_pixel_skybox(t_render *render, int coord, t_xyz text, int side);
-void	blit_pixel_opaque(t_render *render, int coord, t_xyz text, t_bxpm *tx);
-void	blit_pixel_alpha(t_render *render, int coord, t_xyz text, t_bxpm *tx);
+void	blit_pixel_brightness(t_render *render, int coord, t_v3 text, t_bxpm *bxpm);
+void	blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side);
+void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *tx);
+void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *tx);
 
 //	Skybox
 void	draw_skybox(t_render *render, t_vline *vline, int side);
@@ -618,31 +624,25 @@ void	skybox_floor_vline(t_render *render, t_vline, int tx);
 
 
 void	update_camera(t_doom *doom, int x, int y);
-int		orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles);
+int		orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
 void	keys(t_doom *doom, SDL_Event *event);
 
 //Math wiki func
-t_xyz	xyz(double x, double y, double z);
-t_xyz	get_intersection(t_xyz a, t_xyz b, t_xyz c, t_xyz d);
-int		find_sector(t_doom *doom, t_xyz e);
+t_v3	xyz(double x, double y, double z);
+t_v3	get_intersection(t_v3 a, t_v3 b, t_v3 c, t_v3 d);
+int		find_sector(t_doom *doom, t_v3 e);
 int		overlap(double a0, double a1, double b0 , double b);
-int		intersect_box(t_xyz p, t_xyz d, t_xyz vert1, t_xyz vert2);
-double	point_side(t_xyz a, t_xyz b, t_xyz p);
-int		intersect_check(t_xyz w1, t_xyz w2, t_xyz p1, t_xyz p2);
+int		intersect_box(t_v3 p, t_v3 d, t_v3 vert1, t_v3 vert2);
+double	point_side(t_v3 a, t_v3 b, t_v3 p);
+int		intersect_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 double	point_distance_2d(double x1, double y1, double x2, double y2);
-double	point_distance_3d(t_xyz p1, t_xyz p2);
-t_xyz	closest_point_on_segment_2d(t_xyz p, t_xyz a, t_xyz b);
-int		point_on_segment_2d(t_xyz p, t_xyz v1, t_xyz v2, double buffer);
+double	point_distance_3d(t_v3 p1, t_v3 p2);
+t_v3	closest_point_on_segment_2d(t_v3 p, t_v3 a, t_v3 b);
+int		point_on_segment_2d(t_v3 p, t_v3 v1, t_v3 v2, double buffer);
 int		sign(double x);
 void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
-double 	space_diagonal(double x, double y, double z);
-double	angle_to_point(t_xyz p1, t_xyz p2);
-int		compare_xyz(t_xyz a, t_xyz b);
-int		compare_xy(t_xyz a, t_xyz b);
-t_xyz	sum_xyz(t_xyz a, t_xyz b);
-t_rect	rect_xy2(int x1, int y1, int x2, int y2);
-t_rect	rect_xywh(int x1, int y1, int w, int h);
-
+double	angle_to_point(t_v3 p1, t_v3 p2);
+int		comp_vec(t_v3 a, t_v3 b);
 
 
 SDL_Color	hex_to_sdl_color(int hex);
@@ -662,8 +662,8 @@ int		set_icon(SDL_Window *window, char *dir);
 void	error_msg(const char *restrict format, ...);
 
 
-double		get_floor_at_pos(t_sector *sector, t_xyz pos);
-double		get_ceiling_at_pos(t_sector *sector, t_xyz pos);
+double		get_floor_at_pos(t_sector *sector, t_v3 pos);
+double		get_ceiling_at_pos(t_sector *sector, t_v3 pos);
 void		precompute_slopes(t_doom *doom);
 
 

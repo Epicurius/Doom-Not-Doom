@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 20:41:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:32:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sector_center(t_sector *sector)
 {
 	int		i;
-	t_xyz	c;
+	t_v3	c;
 
 	i = -1;
 	while (++i < sector->npoints)
@@ -30,13 +30,14 @@ void	sector_center(t_sector *sector)
 
 void	fix_wall_orientation(t_sector *sector)
 {
-	int i;
-	t_xyz temp;
+	int		i;
+	t_v3	temp;
 
 	i = -1;
 	while (++i < sector->npoints)
 	{
-		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2, sector->center) < 0)
+		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2,
+				sector->center) < 0)
 		{
 			temp = sector->wall[i]->v2;
 			sector->wall[i]->v2 = sector->wall[i]->v1;
@@ -45,7 +46,7 @@ void	fix_wall_orientation(t_sector *sector)
 	}
 }
 
-int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
+int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_v3 v2)
 {
 	int		j;
 	t_wall	*temp;
@@ -53,8 +54,7 @@ int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 	j = i;
 	while (++j < sector->npoints)
 	{
-		//printf("%.2f %.2f  %.2f %.2f\n", v2.x, v2.y, sector->wall[j]->v1.x, sector->wall[j]->v1.y);
-		if (compare_xyz(v2, sector->wall[j]->v1))
+		if (comp_vec(v2, sector->wall[j]->v1))
 		{
 			temp = sector->wall[i];
 			sector->wall[i] = sector->wall[j];
@@ -62,7 +62,8 @@ int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_xyz v2)
 			return (1);
 		}
 	}
-	error_msg("{YELLOW}[INFO]{RESET} Sector %d wall %d coordinates don't match up!\n", sector->id, i);
+	ft_printf("{YELLOW}[INFO]{RESET} Sector %d wall %d \
+			coordinates don't match up!\n", sector->id, i);
 	return (0);
 }
 
@@ -70,16 +71,13 @@ int	fix_wall_order(t_doom *doom, t_sector *sector)
 {
 	int		i;
 	int		j;
-	t_xyz	v2;
+	t_v3	v2;
 
 	i = 0;
 	v2 = sector->wall[i]->v2;
 	while (++i <= sector->npoints)
 	{
-		//printf("%.2f %.2f  %.2f %.2f\n", v2.x, v2.y,
-		//	sector->wall[i % sector->npoints]->v1.x,
-		//	sector->wall[i % sector->npoints]->v1.y);
-		if (compare_xyz(v2, sector->wall[i % sector->npoints]->v1))
+		if (comp_vec(v2, sector->wall[i % sector->npoints]->v1))
 		{
 			v2 = sector->wall[i % sector->npoints]->v2;
 			continue ;
@@ -93,26 +91,27 @@ int	fix_wall_order(t_doom *doom, t_sector *sector)
 
 int	is_convex(t_doom *doom, t_sector *sector)
 {
-	int i;
-	int n;
-	double prev;
-	double curr;
+	int		i;
+	int		n;
+	double	prev;
+	double	curr;
 
-   	i = -1;
+	i = -1;
 	prev = 0;
 	curr = 0;
 	n = sector->npoints;
 	while (++i < sector->npoints)
 	{
-		curr = (sector->wall[(i + 1) % n]->v1.x - sector->wall[i]->v1.x) *
-				(sector->wall[(i + 2) % n]->v1.y - sector->wall[i]->v1.y) -
-				(sector->wall[(i + 1) % n]->v1.y - sector->wall[i]->v1.y) *
-				(sector->wall[(i + 2) % n]->v1.x - sector->wall[i]->v1.x);
+		curr = (sector->wall[(i + 1) % n]->v1.x - sector->wall[i]->v1.x)
+			* (sector->wall[(i + 2) % n]->v1.y - sector->wall[i]->v1.y)
+			- (sector->wall[(i + 1) % n]->v1.y - sector->wall[i]->v1.y)
+			* (sector->wall[(i + 2) % n]->v1.x - sector->wall[i]->v1.x);
 		if (curr != 0)
 		{
 			if (curr * prev < 0)
 			{
-				ft_printf("{YELLOW}[INFO]{RESET} Sector %d is concave, must be convex!\n", sector->id);
+				ft_printf("{YELLOW}[INFO]{RESET} Sector %d is concave, \
+						must be convex!\n", sector->id);
 				return (0);
 			}
 			prev = curr;
@@ -128,11 +127,12 @@ int	check_entities(t_doom *doom)
 	curr = doom->sprite;
 	while (curr)
 	{
-		((t_entity *)curr->content)->sector =
-			find_sector(doom, ((t_entity *)curr->content)->where);
+		((t_entity *)curr->content)->sector
+			= find_sector(doom, ((t_entity *)curr->content)->where);
 		if (((t_entity *)curr->content)->sector < 0)
 		{
-			ft_printf("{YELLOW}[INFO]{RESET} Entity is outside map boundaries!\n");
+			ft_printf("{YELLOW}[INFO]{RESET} Entity is outside \
+					map boundaries!\n");
 			return (0);
 		}
 		curr = curr->next;
@@ -153,7 +153,7 @@ int	check_player(t_doom *doom)
 
 int	check_map(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < doom->nb.sectors)
@@ -168,14 +168,6 @@ int	check_map(t_doom *doom)
 	return (1);
 }
 
-int	file_exists(char *filename, int *i)
-{
-	struct stat	buffer;
-	if (stat (filename, &buffer))
-		return (0);
-	return (1);
-}
-
 int	validate_map(t_doom *doom)
 {
 	if (check_map(doom)
@@ -184,5 +176,4 @@ int	validate_map(t_doom *doom)
 		return (1);
 	free_doom(doom);
 	return (0);
-
 }

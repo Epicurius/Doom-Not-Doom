@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:15:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	frame_animation(t_doom *doom, t_entity *entity)
 
 int		entity_see(t_doom *doom, t_entity *entity)
 {
-	t_xyz	far_left;
-	t_xyz	far_right;
+	t_v3	far_left;
+	t_v3	far_right;
 
 	far_left.z	= entity->yaw + 67.5;
 	far_right.z	= entity->yaw - 67.5;
@@ -95,9 +95,9 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 
 void	get_entity_render(t_doom *doom, t_entity *entity)
 {
-	t_i2	size;
-	t_xyz	dist;
-	t_xyz	screen;
+	t_point	size;
+	t_v3	dist;
+	t_v3	screen;
 
 	dist.x = entity->where.x - doom->player.where.x;
 	dist.y = entity->where.z - doom->player.where.z - doom->player.eye_lvl;

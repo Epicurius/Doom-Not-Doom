@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 14:31:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clip_to_fustrum(t_camera cam, t_wall *wall)
 {
-	t_xyz i;
+	t_v3 i;
 
 	i = get_intersection(	xyz(wall->sv1.x, wall->sv1.z, 0),
 				xyz(wall->sv2.x, wall->sv2.z, 0),

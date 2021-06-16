@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/03 15:59:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 
 void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
 {
-	t_xyz camera_z;
+	t_v3 camera_z;
 
 	camera_z.x = render->player.where.x * vline->z;
 	camera_z.y = render->player.where.y * vline->z;
@@ -134,7 +134,7 @@ int		loop_screen_sector(void	*arg)
 
 void		screen_x_sector(t_doom *doom, int x, int xend)
 {
-	t_xyz pos;
+	t_v3 pos;
 	t_player p;
 	double tmp;
 	

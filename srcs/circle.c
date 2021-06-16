@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:42:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_circle(SDL_Surface *surf, int color, t_ab ab)
     ((int*)surf->pixels)[(ab.a1 - ab.b2) * surf->w + (ab.b1 - ab.a2)] = color;
 }
 
-void				circle(SDL_Surface *surf, Uint32 color, t_xyz xyz)
+void				circle(SDL_Surface *surf, Uint32 color, t_v3 xyz)
 {
 	t_ab ab;
 	int dist;

@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 14:14:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	blit_wsprite_pixels(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
+void	blit_wsprite_pixels(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -25,7 +25,7 @@ void	blit_wsprite_pixels(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
-void	blit_wsprite_pixels2(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
+void	blit_wsprite_pixels2(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -41,7 +41,7 @@ void	blit_wsprite_pixels2(t_render *render, int coord, t_xyz text, t_bxpm *bxpm)
 
 void	vline_wsprite(t_render *render, t_vline *vline, t_wsprite sprite, int x)
 {
-	t_xyz text;
+	t_v3 text;
 	double alpha;
 	double pos;
 	int coord;

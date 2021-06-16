@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 10:22:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:27:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-typedef struct	s_rect
-{
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
-	int	w;
-	int	h;
-	double	ratio;
-}		t_rect;
 
 typedef struct		s_plane
 {

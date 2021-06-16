@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:14:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	rotate_projectile(t_doom *doom, t_project *orb, t_entity_thread thread, t_entity_render *render)
 {
-	t_i2	size;
-	t_xyz	dist;
-	t_xyz	screen;
+	t_point	size;
+	t_v3	dist;
+	t_v3	screen;
 
 	dist.x 		= orb->where.x - doom->player.where.x;
 	dist.y 		= orb->where.z - doom->player.where.z - doom->player.eye_lvl;

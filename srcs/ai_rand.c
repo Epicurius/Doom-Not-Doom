@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:42:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:10:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 17:00:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 	speed = doom->time.delta *  entity->data->speed;
 	if (entity->velocity.x == 0 && entity->velocity.y == 0 && entity->velocity.z == 0)
 		return (1);
-	dist = space_diagonal(entity->velocity.x, entity->velocity.y, entity->velocity.z);
+	dist = space_diagonal(entity->velocity);
 	entity->velocity.x *= speed / dist;
    	entity->velocity.y *= speed / dist;
 	entity->velocity.z *= (entity->data->flying ? speed / dist : 0);
@@ -45,7 +45,7 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 	speed = doom->time.delta *  entity->data->speed;
 	if (entity->velocity.x == 0 && entity->velocity.y == 0 && entity->velocity.z == 0)
 		return (0);
-	dist = space_diagonal(entity->velocity.x, entity->velocity.y, entity->velocity.z);
+	dist = space_diagonal(entity->velocity);
 	entity->velocity.x *= speed / dist;
    	entity->velocity.y *= speed / dist;
 	return (1);
@@ -67,7 +67,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	speed = doom->time.delta *  entity->data->speed;
 	if (entity->velocity.x == 0 && entity->velocity.y == 0 && entity->velocity.z == 0)
 		return (0);
-	dist = space_diagonal(entity->velocity.x, entity->velocity.y, entity->velocity.z);
+	dist = space_diagonal(entity->velocity);
 	entity->velocity.x *= speed / dist;
    	entity->velocity.y *= speed / dist;
 	entity->velocity.z *= (entity->data->flying ? speed / dist : 0);

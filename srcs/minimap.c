@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 10:59:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	map_player(t_doom *doom)
 {
-	t_i2	p[2];
+	t_point	p[2];
 	t_map	map;
 	t_player player;
 
@@ -38,9 +38,9 @@ void	draw_map(t_doom *doom)
 {
 	int s;
 	int w;
-	t_i2 vec[2];
+	t_point vec[2];
 	t_map map = doom->map;
-	t_xyz where = doom->player.where;
+	t_v3 where = doom->player.where;
 	t_sector *sect;
 
 	s = -1;

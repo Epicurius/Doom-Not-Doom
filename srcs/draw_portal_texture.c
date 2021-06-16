@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/05 11:35:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	draw_portal_solid(t_render *render, t_vline *vline)
 {
-	t_xyz text;
+	t_v3 text;
 	double alpha;
 	int	coord;
 	t_bxpm *ptx;
@@ -38,7 +38,7 @@ void	draw_portal_solid(t_render *render, t_vline *vline)
 
 void	draw_portal_alpha(t_render *render, t_vline *vline)
 {
-	t_xyz text;
+	t_v3 text;
 	double alpha;
 	int	coord;
 	t_bxpm *ptx;

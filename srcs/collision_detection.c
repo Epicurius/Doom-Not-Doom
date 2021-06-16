@@ -6,15 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 14:40:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 17:43:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
+int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
 {
-	t_xyz point;
+	t_v3 point;
 
 	//Dose player hitbox collide with vetex 1.
 	if (point_distance_2d(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox_radius)
@@ -29,7 +29,7 @@ int	hitbox_collision(t_xyz dest, t_wall *wall, float hitbox_radius)
 	return (0);
 }
 
-int	vertical_collision(t_collision *sprite, t_xyz dest)
+int	vertical_collision(t_collision *sprite, t_v3 dest)
 {
 	int			i;
 	t_wall		*wall;
@@ -71,7 +71,7 @@ int	vertical_collision(t_collision *sprite, t_xyz dest)
 	return (0);
 }
 
-int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall, t_xyz dest)
+int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall, t_v3 dest)
 {
 	double portal_top;
 	double portal_bot;
@@ -88,7 +88,7 @@ int	fit_through_portal(t_collision *sprite, t_sector *sector, t_wall *wall, t_xy
 	return (0);
 }
 
-int	horizontal_collision(t_collision *sprite, t_xyz dest)
+int	horizontal_collision(t_collision *sprite, t_v3 dest)
 {
 	int i;
 	t_wall *wall;
@@ -125,9 +125,9 @@ int	horizontal_collision(t_collision *sprite, t_xyz dest)
 
 int	collision_detection(t_collision *sprite)
 {
-	t_xyz	dest;
+	t_v3	dest;
 
-	dest = sum_xyz(*sprite->where, *sprite->velocity);
+	dest = add_vec(*sprite->where, *sprite->velocity);
 	if (sprite->player && sprite_collision(sprite, dest))
 	{
 		sprite->velocity->x = 0.0f;

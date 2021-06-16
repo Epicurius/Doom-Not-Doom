@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_wall_sector.c                               :+:      :+:    :+:   */
+/*   wall_to_screen_xz.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 14:31:33 by nneronin          #+#    #+#             */
-/*   Updated: 2020/11/26 13:00:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	wall_to_screen_xz(t_player player, t_wall *wall)
 {
-	t_xyz v1;
-	t_xyz v2;
+	t_v3 v1;
+	t_v3 v2;
 
 	/* Acquire the x,y coordinates of the two endpoints (vertices) of this edge of the sector */
 	/* Rotate correctly hte map into players view */

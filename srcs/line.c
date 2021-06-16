@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:00 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:52:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static inline void		clamp_line(SDL_Surface *surf, Uint32 color, int x, int y)
     		((int*)surf->pixels)[pix] = color;
 }
 
-void	line(SDL_Surface *surf, Uint32 color, t_i2 *p)
+void	line(SDL_Surface *surf, Uint32 color, t_point *p)
 {
 	int			cath_x;
 	int			cath_y;

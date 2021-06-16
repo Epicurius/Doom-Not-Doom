@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 14:43:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_base_speed(t_doom *doom, float *speed)
 }
 
 
-void	get_movement(t_doom *doom, t_player player, float speed, t_xyz *move)
+void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 {
 	*move = xyz(0, 0, 0);
 	if (doom->key.w)
@@ -60,7 +60,7 @@ void	get_movement(t_doom *doom, t_player player, float speed, t_xyz *move)
 	}
 }
 
-void	get_velocity(t_doom *doom, t_xyz move)
+void	get_velocity(t_doom *doom, t_v3 move)
 {
 	t_player *player;
 	t_sector *sector;
@@ -87,7 +87,7 @@ void	movement(t_doom *doom)
 {
 	int x;
 	int y;
-	t_xyz move;
+	t_v3 move;
 	float speed;
 
 	if (doom->player.where.z + doom->player.eye_lvl + 2 < doom->sectors[doom->player.sector].ceiling.y)

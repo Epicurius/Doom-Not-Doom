@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/15 14:26:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->range.c = wall->s2.c - wall->s1.c;
 
 
-	t_xyz			p1;
-	t_xyz			p2;
+	t_v3			p1;
+	t_v3			p2;
 	double			f1_h;
 	double			c1_h;
 	double			f2_h;

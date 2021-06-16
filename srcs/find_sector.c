@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/14 18:57:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		in_sector(t_sector *sector, t_xyz pos)
+int		in_sector(t_sector *sector, t_v3 pos)
 {
 	int i;
 	double p;
@@ -33,7 +33,7 @@ int		in_sector(t_sector *sector, t_xyz pos)
 	return (1);
 }
 
-int		find_sector(t_doom *doom, t_xyz pos)
+int		find_sector(t_doom *doom, t_v3 pos)
 {
 	int	i;
 

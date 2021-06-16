@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clip_line_inside_rectangle.c                       :+:      :+:    :+:   */
+/*   cohen_sutherland.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/12 14:58:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int	compute_outcode(int x, int y, t_rect size)
 	return (i);
 }
 
-unsigned int	cohen_sutherland2(t_i2 *v, t_rect size, t_xyz i)
+unsigned int	cohen_sutherland2(t_point *v, t_rect size, t_v3 i)
 {
 	unsigned int	outcode;
 
@@ -39,8 +39,8 @@ unsigned int	cohen_sutherland2(t_i2 *v, t_rect size, t_xyz i)
 	return (outcode);
 }
 
-void	cohen_sutherland1(t_i2 *v, t_rect size,
-		unsigned int outcode_ex, t_xyz *i)
+void	cohen_sutherland1(t_point *v, t_rect size,
+		unsigned int outcode_ex, t_v3 *i)
 {
 	if (outcode_ex & 0x1)
 	{
@@ -68,9 +68,9 @@ void	cohen_sutherland1(t_i2 *v, t_rect size,
 	}
 }
 
-int	cohen_sutherland(t_i2 v[2], t_rect size)
+int	cohen_sutherland(t_point v[2], t_rect size)
 {
-	t_xyz			i;
+	t_v3			i;
 	unsigned int	outcode_ex;
 	unsigned int	outcode_v1;
 	unsigned int	outcode_v2;

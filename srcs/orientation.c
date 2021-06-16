@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:02 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:53:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	degree_fix(double *degrees)
 		*degrees += 360;
 }
 
-int	orientation(t_xyz p1, t_xyz p2, double yaw, int nb_angles)
+int	orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles)
 {
 	double angle;
 	double a;

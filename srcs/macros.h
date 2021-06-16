@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 13:12:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 17:33:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define FOV							90
 #define PLAYER_YAW					45
 #define PLAYER_PITCH				10
-#define PLAYER_RADIUS				0.5
+#define PLAYER_RADIUS				0.7
 #define NEAR_Z						0.1
 #define FAR_Z						1000
 #define RENDER_DISTANCE				200.0

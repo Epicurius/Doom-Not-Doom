@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:53:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	skybox_floor_vline(t_render *render, t_vline vline, int tx)
 {
-	t_xyz text;
+	t_v3 text;
 	double alpha;
 	int coord;
 

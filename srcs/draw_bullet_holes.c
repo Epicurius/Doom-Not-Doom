@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 14:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	put_bh_pixels(t_render *render, int coord, t_xyz text)
+void	put_bh_pixels(t_render *render, int coord, t_v3 text)
 {
 	uint32_t	clr;
 	unsigned short	pix;
@@ -27,7 +27,7 @@ void	put_bh_pixels(t_render *render, int coord, t_xyz text)
 
 void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
 {
-	t_xyz text;
+	t_v3 text;
 	double alpha;
 	double pos;
 	int coord;

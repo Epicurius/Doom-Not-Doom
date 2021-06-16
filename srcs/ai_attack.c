@@ -6,15 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/27 18:27:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/16 17:00:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
+t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 {
-	t_xyz	move;
+	t_v3	move;
 	double	dist;
 	double	speed;
 
@@ -24,7 +24,7 @@ t_xyz	projectile_movement(t_doom *doom, t_xyz curr, t_xyz dest)
 	move.z = dest.z - curr.z;
 	if (move.x == 0 && move.y == 0 && move.z == 0)
 		return (move);
-	dist = space_diagonal(move.x, move.y, move.z);
+	dist = space_diagonal(move);
 	move.x *= speed / dist;
 	move.y *= speed / dist;
 	move.z *= speed / dist;
