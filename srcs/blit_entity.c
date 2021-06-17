@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	hit_enemy(t_entity_thread *thread, int coord)
+static void	hit_enemy(t_entity_thread *thread, int coord)
 {
 	if (thread->hp != NULL && thread->shooting && coord == thread->center)
 	{
@@ -20,12 +20,12 @@ void	hit_enemy(t_entity_thread *thread, int coord)
 	}
 }
 
-void	blit_game_entity24(t_entity_thread *thread, int coord, t_v3 text)
+static void	blit_entity24(t_entity_thread *thread, int coord, t_v3 text)
 {
-	uint32_t		clr;
+	Uint32		clr;
 	unsigned short	pix;
 
-	if (text.z >= ((double*)thread->surface->userdata)[coord])
+	if (text.z >= ((double *)thread->surface->userdata)[coord])
 		return ;
 	pix = thread->bxpm->pix[(int)text.y * thread->bxpm->w + (int)text.x];
 	clr = thread->bxpm->clr[pix];
@@ -33,50 +33,52 @@ void	blit_game_entity24(t_entity_thread *thread, int coord, t_v3 text)
 		return ;
 	if (thread->hp != NULL)
 		hit_enemy(thread, coord);
-	((Uint32*)thread->surface->pixels)[coord] = clr;
-	((double*)thread->surface->userdata)[coord] = text.z;
+	((Uint32 *)thread->surface->pixels)[coord] = clr;
+	((double *)thread->surface->userdata)[coord] = text.z;
 }
 
-void	blit_game_entity32(t_entity_thread *thread, int coord, t_v3 text)
+static void	blit_entity32(t_entity_thread *thread, int coord, t_v3 text)
 {
-	uint32_t	clr;
+	Uint32		clr;
 	unsigned short	pix;
 
-	if (text.z >= ((double*)thread->surface->userdata)[coord])
+	if (text.z >= ((double *)thread->surface->userdata)[coord])
 		return ;
 	pix = thread->bxpm->pix[(int)text.y * thread->bxpm->w + (int)text.x];
 	clr = thread->bxpm->clr[pix];
 	if (clr == 0x00000000)
 		return ;
 	hit_enemy(thread, coord);
-	((Uint32*)thread->surface->pixels)[coord] =
-		blend_alpha(((uint32_t*)thread->surface->pixels)[coord], clr, clr >> 24 & 0xFF);
-	((double*)thread->surface->userdata)[coord] = text.z;
+	((Uint32 *)thread->surface->pixels)[coord]
+		= blend_alpha(((Uint32 *)thread->surface->pixels)[coord],
+			clr, clr >> 24 & 0xFF);
+	((double *)thread->surface->userdata)[coord] = text.z;
 }
 
-int		blit_game_entity(void *arg)
+int	blit_game_entity(void *arg)
 {
-	double alphax;
-	double alphay;
-	t_v3 text;
-	t_entity_thread *thread;
+	t_v3			text;
+	t_v2			alpha;
+	t_point			p;
+	t_entity_thread	*thread;
 
 	thread = arg;
 	text.z = thread->render.z;
-	int y = thread->render.clamp_start.y - 1;
-	while (++y < thread->render.clamp_end.y)
+	p.y = thread->render.clamp_start.y - 1;
+	while (++p.y < thread->render.clamp_end.y)
 	{
-		alphay = (y - thread->render.start.y) / thread->render.yrange;
-		text.y = (1.0 - alphay) * thread->pos.y1 + alphay * thread->pos.y2;
-		int x = thread->render.clamp_start.x - 1;
-		while (++x < thread->render.clamp_end.x)
+		alpha.y = (p.y - thread->render.start.y) / thread->render.yrange;
+		text.y = (1.0 - alpha.y) * thread->pos.y1 + alpha.y * thread->pos.y2;
+		p.x = thread->render.clamp_start.x - 1;
+		while (++p.x < thread->render.clamp_end.x)
 		{
-			alphax = (x - thread->render.start.x) / thread->render.xrange;
-			text.x = (1.0 - alphax) * thread->pos.x1 + alphax * thread->pos.x2;
+			alpha.x = (p.x - thread->render.start.x) / thread->render.xrange;
+			text.x = (1.0 - alpha.x) * thread->pos.x1 + alpha.x
+				* thread->pos.x2;
 			if (thread->bxpm->bpp == 32)
-				blit_game_entity32(thread, y * thread->surface->w + x, text);
+				blit_entity32(thread, p.y * thread->surface->w + p.x, text);
 			else
-				blit_game_entity24(thread, y * thread->surface->w + x, text);
+				blit_entity24(thread, p.y * thread->surface->w + p.x, text);
 		}
 	}
 	return (1);

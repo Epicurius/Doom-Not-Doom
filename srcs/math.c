@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:22:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int	comp_v3(t_v3 v1, t_v3 v2)
 	return (0);
 }
 
-t_v3	add_v2(t_v3 v1, t_v3 v2)
+t_v3	add_v3(t_v3 v1, t_v3 v2)
 {
 	return (new_v3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z));
 }

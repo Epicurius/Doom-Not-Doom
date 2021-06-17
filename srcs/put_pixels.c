@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	blit_pixel_brightness(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 
 	light = 255 + render->light;
 	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
-	((uint32_t*)render->surface->pixels)[coord] = bxpm->palet[light][pixel];
+	((Uint32*)render->surface->pixels)[coord] = bxpm->palet[light][pixel];
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 
@@ -32,8 +32,8 @@ void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 	alpha = (bxpm->clr[pixel] >> 24 & 0xFF);
 	if (alpha == 0)
 		return ;
-	((uint32_t*)render->surface->pixels)[coord] = 
-		blend_alpha(bxpm->clr[pixel], ((uint32_t*)render->surface->pixels)[coord], -alpha);
+	((Uint32*)render->surface->pixels)[coord] = 
+		blend_alpha(bxpm->clr[pixel], ((Uint32*)render->surface->pixels)[coord], -alpha);
 }
 
 void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
@@ -45,7 +45,7 @@ void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
 	if (bxpm->clr[pixel] == 0xFF800080)
 		return ;
-	((uint32_t*)render->surface->pixels)[coord] = bxpm->clr[pixel];
+	((Uint32*)render->surface->pixels)[coord] = bxpm->clr[pixel];
 	((double*)render->surface->userdata)[coord] = text.z;
 }
 

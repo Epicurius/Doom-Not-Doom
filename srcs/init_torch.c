@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 17:04:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 12:41:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ static void	idle_pos(t_rect **pos)
 
 void	init_torch(t_doom *doom)
 {
-	t_npc_bxpm *img;
+	t_npc_bxpm	*img;
 
 	img = &doom->npc_bxpm[TORCH];
 	img->bxpm = &doom->sprite_sheets[3];
-	img->nb[IDLE  ][FRAMES] = 5;
-	img->nb[IDLE  ][ANGLES] = 1;
-	img->nb[MOVE  ][FRAMES] = 0;
-	img->nb[MOVE  ][ANGLES] = 0;
+	img->nb[IDLE][FRAMES] = 5;
+	img->nb[IDLE][ANGLES] = 1;
+	img->nb[MOVE][FRAMES] = 0;
+	img->nb[MOVE][ANGLES] = 0;
 	img->nb[ATTACK][FRAMES] = 0;
 	img->nb[ATTACK][ANGLES] = 0;
-	img->nb[DEATH ][FRAMES] = 0;
-	img->nb[DEATH ][ANGLES] = 0;
+	img->nb[DEATH][FRAMES] = 0;
+	img->nb[DEATH][ANGLES] = 0;
 	malloc_texture_pos(img);
 	idle_pos(img->pos[IDLE]);
 }

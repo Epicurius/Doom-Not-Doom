@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 14:14:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 SDL_Color	hex_to_sdl_color(int hex)
 {
-	SDL_Color color;
+	SDL_Color	color;
 
 	color.a = hex >> 24;
 	color.r = hex >> 16;
@@ -27,15 +27,14 @@ SDL_Color	hex_to_sdl_color(int hex)
 ** Darkens or brightens a color 
 ** -x darker, 0 nothing, +x lighter obvs -255 to 255
 */
-Uint32		brightness(Uint32 src, int brightness)
+Uint32	brightness(Uint32 src, int light)
 {
-	if (brightness == 0)
+	if (light == 0)
 		return (src);
-	src = ((src >> 24 & 0xFF) << 24) |
-		(int)ft_clamp(((brightness + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16 |
-		(int)ft_clamp(((brightness + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8 |
-		(int)ft_clamp(((brightness + 256) * (src & 0xFF)) / 256, 0, 255);
-	return (src);
+	return (
+		(int)ft_clamp(((light + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16
+		| (int)ft_clamp(((light + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8
+		| (int)ft_clamp(((light + 256) * (src & 0xFF)) / 256, 0, 255));
 }
 
 /*
@@ -43,22 +42,23 @@ Uint32		brightness(Uint32 src, int brightness)
 */
 int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 {
-	int	aalpha;
+	int	a;
 
-	aalpha = 256 - alpha;
-	return (((aalpha * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
-		| ((aalpha * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256) << 8
-		| ((aalpha * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
+	a = 256 - alpha;
+	return (
+		((a * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
+		| ((a * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256) << 8
+		| ((a * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
 }
 
 void	color_palet(t_bxpm *bxpm, int light)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (bxpm->palet[255 + light])
 		return ;
-	bxpm->palet[255 + light] = ft_memalloc(sizeof(uint32_t*) * bxpm->clr_nb);
+	bxpm->palet[255 + light] = ft_memalloc(sizeof(Uint32 *) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
 	{
 		if (bxpm->clr[i] == 0xFF800080)
@@ -69,10 +69,10 @@ void	color_palet(t_bxpm *bxpm, int light)
 
 void	color_palets(t_doom *doom)
 {
-	int s;
-	int w;
-	t_sector *sector;
-	
+	int			s;
+	int			w;
+	t_sector	*sector;
+
 	s = -1;
 	while (++s < doom->nb.sectors)
 	{

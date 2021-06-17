@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:46:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:23:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double	dot_product_v3(t_v3 v1, t_v3 v2);
 double	vectors_angle(t_v3 v1, t_v3 v2);
 t_v3	cross_product_v3(t_v3 v1, t_v3 v2);
 int		comp_v3(t_v3 v1, t_v3 v2);
-t_v3	add_v2(t_v3 v1, t_v3 v2);
+t_v3	add_v3(t_v3 v1, t_v3 v2);
 t_v3	sub_v3(t_v3 v1, t_v3 v2);
 t_v3	mult_v3(t_v3 vec, float scalar);
 void	get_polar_cordinates(double len, double angle, t_v2 *polar);

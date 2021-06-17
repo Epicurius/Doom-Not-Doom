@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 15:04:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
-	Uint32 clr;
-	int x;
-	int y;
+	t_point	p;
+	Uint32	clr;
 
-	y = -1;
-	while (++y < bxpm->h)
+	p.y = -1;
+	while (++p.y < bxpm->h)
 	{
-		x = -1;
-		while (++x < bxpm->w)
+		p.x = -1;
+		while (++p.x < bxpm->w)
 		{
-			clr = bxpm->clr[bxpm->pix[y * bxpm->w + x]];
+			clr = bxpm->clr[bxpm->pix[p.y * bxpm->w + p.x]];
 			if (0 != clr >> 24 & 0xFF)
-				((Uint32*)surface->pixels)[(sy + y) * surface->w + (sx + x)] = clr;
+				((Uint32 *)surface->pixels)[(sy + p.y)
+					* surface->w + (sx + p.x)] = clr;
 		}
 	}
 }
 
-static void		copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
+static void	copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
-	uint32_t clr;
+	Uint32	clr;
 
 	clr = src->clr[src->pix[srcr.y2 * src->w + srcr.x2]];
 	if (0 != clr >> 24 & 0xFF)
-		((Uint32*)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
+		((Uint32 *)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
 }
 
-void		copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
+void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
-	int inc;
-	int pos;
+	int	inc;
+	int	pos;
 
 	pos = 0x10000;
 	inc = (srcr.h << 16) / dstr.h;
@@ -63,11 +63,12 @@ void		copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 	}
 }
 
-void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
+void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
+			t_bxpm *src, t_rect srcr)
 {
-	int pos;
-	int inc;
-	
+	int	pos;
+	int	inc;
+
 	pos = 0x10000;
 	inc = (srcr.w << 16) / dstr.w;
 	srcr.x2 = srcr.x1;

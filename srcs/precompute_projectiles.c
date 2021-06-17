@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:50:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:24:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
-		dest = add_v2(orb->where, orb->velocity);
+		dest = add_v3(orb->where, orb->velocity);
 		if (projectile_collision(doom, orb, dest))
 			curr = ft_dellstnode(&doom->orb, curr);
 		else

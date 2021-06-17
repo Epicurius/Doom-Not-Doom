@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	blit_wsprite_pixels(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
-	uint32_t	clr;
+	Uint32	clr;
 	unsigned short	pix;
 
 	pix = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
@@ -27,7 +27,7 @@ void	blit_wsprite_pixels(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 
 void	blit_wsprite_pixels2(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
-	uint32_t	clr;
+	Uint32	clr;
 	unsigned short	pix;
 
 	pix = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];

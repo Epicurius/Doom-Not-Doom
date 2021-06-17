@@ -6,16 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 12:17:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-uint32_t	set_zbuffer_shade(double z, double max_z)
+Uint32	set_zbuffer_shade(double z, double max_z)
 {
 	double	alpha;
-	uint32_t clr;
+	Uint32 clr;
 
 	alpha = 1 - z / max_z;
 	if (z >= 0 && alpha >= 0 && alpha <= 1)
@@ -32,8 +32,8 @@ uint32_t	set_zbuffer_shade(double z, double max_z)
 void	shade_zbuffer(t_render *render, t_vline vline)
 {
 	int x;
-	uint32_t clr;
-	uint32_t *pix;
+	Uint32 clr;
+	Uint32 *pix;
 
 	x = render->x;
 	pix = (Uint32*)render->surface->pixels;

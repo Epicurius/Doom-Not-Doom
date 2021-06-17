@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:05:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 13:52:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 
 typedef struct	s_settings
 {
-	int	display_h;
-	int	display_w;
-	float render_resolution;
-	float mouse_sens_x;
-	float mouse_sens_y;
-	int difficulty;
-	int fov;
-	int flag;
-}				t_settings;
+	int				display_h;
+	int				display_w;
+	float			render_resolution;
+	float			mouse_sens_x;
+	float			mouse_sens_y;
+	int				difficulty;
+	int				fov;
+	int				flag;
+}					t_settings;
 
 typedef	struct		s_fc
 {
