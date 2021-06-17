@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/28 16:17:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 12:14:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	init_shotgun(t_doom *doom, t_weapon *weapon)
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
 	weapon->scale = 0.7 * (doom->surface->w / 1000.0);
-	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
-	if (!weapon->bxpm)
-		error_msg(0, "Shotgun malloc.\n");
+	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
+			* (weapon->fire_frames + weapon->reload_frames),
+			"Shotgun bxpm");
 }
 
 static void	init_pump(t_doom *doom, t_weapon *weapon)
@@ -49,9 +49,9 @@ static void	init_pump(t_doom *doom, t_weapon *weapon)
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
 	weapon->scale = 0.6 * (doom->surface->w / 1000.0);
-	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
-	if (!weapon->bxpm)
-		error_msg(0, "Shotgun malloc.\n");
+	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
+			* (weapon->fire_frames + weapon->reload_frames),
+			"Pump bxpm");
 }
 
 static void	init_gun(t_doom *doom, t_weapon *weapon)
@@ -64,16 +64,15 @@ static void	init_gun(t_doom *doom, t_weapon *weapon)
 	weapon->max_ammo = 100;
 	weapon->fire_frames = 6;
 	weapon->reload_frames = 0;
-
 	weapon->frame = 0;
 	weapon->frame_rate = 50;
 	weapon->sound = WAV_GUN;
 	weapon->x_offset = 1.5;
 	weapon->time = doom->time.curr;
 	weapon->scale = 0.7 * (doom->surface->w / 1000.0);
-	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
-	if (!weapon->bxpm)
-		error_msg(0, "Glock malloc.\n");
+	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
+			* (weapon->fire_frames + weapon->reload_frames),
+			"Gun bxpm");
 }
 
 static void	init_minigun(t_doom *doom, t_weapon *weapon)
@@ -86,16 +85,15 @@ static void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->max_ammo = 50;
 	weapon->fire_frames = 6;
 	weapon->reload_frames = 0;
-
 	weapon->frame = 0;
 	weapon->frame_rate = 30;
 	weapon->sound = WAV_GUN;
 	weapon->x_offset = 1.2;
 	weapon->time = doom->time.curr;
 	weapon->scale = 1 * (doom->surface->w / 1000.0);
-	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
-	if (!weapon->bxpm)
-		error_msg(0, "Minigun malloc.\n");
+	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
+			* (weapon->fire_frames + weapon->reload_frames),
+			"Minigun bxpm");
 }
 
 static void	init_kar98(t_doom *doom, t_weapon *weapon)
@@ -108,16 +106,15 @@ static void	init_kar98(t_doom *doom, t_weapon *weapon)
 	weapon->max_ammo = 200;
 	weapon->fire_frames = 7;
 	weapon->reload_frames = 31;
-
 	weapon->frame = 0;
 	weapon->frame_rate = 50;
 	weapon->x_offset = 1.3;
 	weapon->sound = WAV_GUN;
 	weapon->time = doom->time.curr;
 	weapon->scale = 1.5 * (doom->surface->w / 1000.0);
-	weapon->bxpm = ft_memalloc(sizeof(t_bxpm) * (weapon->fire_frames + weapon->reload_frames));
-	if (!weapon->bxpm)
-		error_msg(0, "Kar98 malloc.\n");
+	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
+			* (weapon->fire_frames + weapon->reload_frames),
+			"Kar98 bxpm");
 }
 
 void	init_weapons(t_doom *doom)

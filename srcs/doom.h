@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:51:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 12:05:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -665,6 +665,11 @@ void	error_msg(const char *restrict format, ...);
 double		get_floor_at_pos(t_sector *sector, t_v3 pos);
 double		get_ceiling_at_pos(t_sector *sector, t_v3 pos);
 void		precompute_slopes(t_doom *doom);
+
+void	sector_center(t_sector *sector);
+void	fix_wall_orientation(t_sector *sector);
+int	fix_wall_order(t_doom *doom, t_sector *sector);
+int	is_convex(t_doom *doom, t_sector *sector);
 
 
 //REMOVE//

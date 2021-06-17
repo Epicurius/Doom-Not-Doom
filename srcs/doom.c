@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:42:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 12:14:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 	precompute_skybox(doom);
 	DrawScreen(doom);
 	/*All this has no time requirements*/
-	//gamemode(doom);
+	gamemode(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
@@ -76,18 +76,6 @@ void	game(char *map, t_settings init)
 int	main(int ac, char **av)
 {
 	t_settings	init;
-	
-	/*double d;
-	t_v3 a = {9, 2, 7};
-	t_v3 b = {4, 8, 10};
-	t_v3 c;
-
-	d = vectors_angle(a, b);
-	d = dot_product_v3(a, b);
-	d = vectors_angle(a, b);
-	printf("%f %f %f | %f\n", c.x, c.y, c.z, d);
-	exit(1);*/
-
 
 	init.display_w = 1920;
 	init.display_h = 1080;

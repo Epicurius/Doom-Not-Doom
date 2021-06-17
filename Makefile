@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/16 09:19:28 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/17 12:06:14 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,8 @@ RAW_SRC =		doom.c\
 				malloc_texture_pos.c\
 				debug_loop.c\
 				sound.c\
-				validate_map.c\
+				validate_map1.c\
+				validate_map2.c\
 				init_weapons.c\
 				icon.c\
 				update_screen.c\
