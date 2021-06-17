@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:23:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 {
-	if (point_distance_3d(doom->player.where, dest) <= 5)
+	if (point_distance_v3(doom->player.where, dest) <= 5)
 	{
 		doom->player.hp -= 10;
 		return (1);
 	}
-	if (point_distance_3d(start, dest) > PROJECTILE_MAX_RANGE)
+	if (point_distance_v3(start, dest) > PROJECTILE_MAX_RANGE)
 		return (1);
 	return (0);
 }
@@ -63,7 +63,7 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
-		dest = add_vec(orb->where, orb->velocity);
+		dest = add_v2(orb->where, orb->velocity);
 		if (projectile_collision(doom, orb, dest))
 			curr = ft_dellstnode(&doom->orb, curr);
 		else

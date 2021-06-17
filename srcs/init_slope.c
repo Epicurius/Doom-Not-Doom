@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_v3	get_slope_normal(t_sector *sector, int wall)
 
 	v1 = sector->wall[wall]->v1;
 	v2 = sector->wall[wall]->v2;
-	s = point_distance_2d(v1.x, v1.y, v2.x, v2.y);
+	s = point_distance_v2(v1.x, v1.y, v2.x, v2.y);
 	normal.x = -((v2.y - v1.y) / s);
 	normal.y = -((v2.x - v1.x) / s);
 	return (normal);

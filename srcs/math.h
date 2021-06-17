@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:16:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:46:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ typedef struct	s_rect
 	double		ratio;
 }				t_rect;
 
-double	vector_magnitude_2D(t_v3 v);
-double	vector_magnitude(t_v3 v);
+double	vector_magnitude_v2(t_v3 v);
+double	vector_magnitude_v3(t_v3 v);
 double	space_diagonal(t_v3 v);
 t_v3	normalize(t_v3 vec);
-double	dot_product_2D(t_v3 v1, t_v3 v2);
-double	dot_product(t_v3 v1, t_v3 v2);
+double	dot_product_v2(t_v3 v1, t_v3 v2);
+double	dot_product_v3(t_v3 v1, t_v3 v2);
 double	vectors_angle(t_v3 v1, t_v3 v2);
-t_v3	cross_product(t_v3 v1, t_v3 v2);
-int		comp_vec(t_v3 v1, t_v3 v2);
-t_v3	add_vec(t_v3 v1, t_v3 v2);
-t_v3	sub_vec(t_v3 v1, t_v3 v2);
-t_v3	mult_vec(t_v3 vec, float scalar);
-t_v3	get_polar_cordinates(double len, double angle);
+t_v3	cross_product_v3(t_v3 v1, t_v3 v2);
+int		comp_v3(t_v3 v1, t_v3 v2);
+t_v3	add_v2(t_v3 v1, t_v3 v2);
+t_v3	sub_v3(t_v3 v1, t_v3 v2);
+t_v3	mult_v3(t_v3 vec, float scalar);
+void	get_polar_cordinates(double len, double angle, t_v2 *polar);
 void	get_cartesian_cordinates(double x, double y, double *len, double *angle);
 float	to_radians(float degrees);
 float	to_degrees(float radians);

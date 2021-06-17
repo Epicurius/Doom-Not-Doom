@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:43:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
 	t_v3 point;
 
 	//Dose player hitbox collide with vetex 1.
-	if (point_distance_2d(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox_radius)
+	if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox_radius)
 		return (1);
 	//Dose player hitbox collide with vetex 2.
-	if (point_distance_2d(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox_radius)
+	if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox_radius)
 		return (2);
-	point = closest_point_on_segment_2d(dest, wall->v1, wall->v2);
+	point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
 	//Dose player hitbox collide with vertex point closest to the wall.
-	if (point_distance_2d(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
+	if (point_distance_v2(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
 		return (3);
 	return (0);
 }
@@ -37,8 +37,8 @@ int	vertical_collision(t_collision *sprite, t_v3 dest)
 
 	i = -1;
 	sector = &sprite->sectors[*sprite->sector];
-	double c = get_ceiling_at_pos(sector, xyz(sprite->where->x, sprite->where->y, 0)); // <-- this is a issue
-	double f = get_floor_at_pos(sector, xyz(sprite->where->x, sprite->where->y, 0));
+	double c = get_ceiling_at_pos(sector, new_v3(sprite->where->x, sprite->where->y, 0)); // <-- this is a issue
+	double f = get_floor_at_pos(sector, new_v3(sprite->where->x, sprite->where->y, 0));
 	// Player is walking up a slope
 	if (sprite->velocity->z >= 0 && dest.z < f && f - dest.z <= sprite->step_height) //slope angle
 	{
@@ -100,7 +100,7 @@ int	horizontal_collision(t_collision *sprite, t_v3 dest)
 	{
 		wall = sector->wall[i];
 		// Dose path intersecta wall.
-		if (intersect_check(*sprite->where, dest, wall->v1, wall->v2))
+		if (intersect_check_v2(*sprite->where, dest, wall->v1, wall->v2))
 		{
 			// Is wall solid.
 			if (wall->solid)
@@ -127,7 +127,7 @@ int	collision_detection(t_collision *sprite)
 {
 	t_v3	dest;
 
-	dest = add_vec(*sprite->where, *sprite->velocity);
+	dest = add_v2(*sprite->where, *sprite->velocity);
 	if (sprite->player && sprite_collision(sprite, dest))
 	{
 		sprite->velocity->x = 0.0f;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:42:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 	t_v3 c;
 
 	d = vectors_angle(a, b);
-	d = dot_product(a, b);
+	d = dot_product_v3(a, b);
 	d = vectors_angle(a, b);
 	printf("%f %f %f | %f\n", c.x, c.y, c.z, d);
 	exit(1);*/

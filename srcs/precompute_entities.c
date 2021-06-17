@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		entity_see(t_doom *doom, t_entity *entity)
 	far_left.y	= 1000 * sin(far_left.z)  + entity->where.y;
 	far_right.x	= 1000 * cos(far_right.z) + entity->where.x;
 	far_right.y	= 1000 * sin(far_right.z) + entity->where.y;
-	far_left.z	= point_side(far_left, entity->where, doom->player.where);
-	far_right.z	= point_side(entity->where, far_right, doom->player.where);
+	far_left.z	= point_side_v2(far_left, entity->where, doom->player.where);
+	far_right.z	= point_side_v2(entity->where, far_right, doom->player.where);
 	if (far_left.z > 0 && far_right.z > 0)
 		return (1);
 	return (0);
@@ -72,7 +72,7 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 {
 	double dist;
 
-	dist = point_distance_2d(entity->where.x, entity->where.y,doom->player.where.x, doom->player.where.y);
+	dist = point_distance_v2(entity->where.x, entity->where.y,doom->player.where.x, doom->player.where.y);
 	if (doom->player.shooting && dist > entity->data->view_distance && ai_track_player(doom, entity))
 		entity->state = MOVE;
 	else if (entity_line_of_sight(doom, entity, dist))

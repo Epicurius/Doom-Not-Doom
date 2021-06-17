@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	sprite_collision(t_collision *e, t_v3 dest)
 	{
 		entities = curr->content;
 		curr = curr->next;
-		if (point_distance_3d(entities->where, dest) > (e->hitbox_radius + 3))
+		if (point_distance_v3(entities->where, dest) > (e->hitbox_radius + 3))
 			continue ;
 		//if (sprite->entities[i].animate)
 		//	return (1);

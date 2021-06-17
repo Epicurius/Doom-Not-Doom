@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:01:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:51:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -628,21 +628,21 @@ int		orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
 void	keys(t_doom *doom, SDL_Event *event);
 
 //Math wiki func
-t_v3	xyz(double x, double y, double z);
-t_v3	get_intersection(t_v3 a, t_v3 b, t_v3 c, t_v3 d);
+t_v3	new_v3(double x, double y, double z);
+t_v3	get_intersection_v2(t_v3 a, t_v3 b, t_v3 c, t_v3 d);
 int		find_sector(t_doom *doom, t_v3 e);
-int		overlap(double a0, double a1, double b0 , double b);
+int		nb_overlap(double a0, double a1, double b0 , double b);
 int		intersect_box(t_v3 p, t_v3 d, t_v3 vert1, t_v3 vert2);
-double	point_side(t_v3 a, t_v3 b, t_v3 p);
-int		intersect_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
-double	point_distance_2d(double x1, double y1, double x2, double y2);
-double	point_distance_3d(t_v3 p1, t_v3 p2);
-t_v3	closest_point_on_segment_2d(t_v3 p, t_v3 a, t_v3 b);
-int		point_on_segment_2d(t_v3 p, t_v3 v1, t_v3 v2, double buffer);
-int		sign(double x);
+double	point_side_v2(t_v3 a, t_v3 b, t_v3 p);
+int		intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
+double	point_distance_v2(double x1, double y1, double x2, double y2);
+double	point_distance_v3(t_v3 p1, t_v3 p2);
+t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
+int		point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer);
+int		ft_sign(double x);
 void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y);
-double	angle_to_point(t_v3 p1, t_v3 p2);
-int		comp_vec(t_v3 a, t_v3 b);
+double	angle_to_point_v2(t_v3 p1, t_v3 p2);
+int		comp_v3(t_v3 a, t_v3 b);
 
 
 SDL_Color	hex_to_sdl_color(int hex);

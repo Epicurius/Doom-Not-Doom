@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:32:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	fix_wall_orientation(t_sector *sector)
 	i = -1;
 	while (++i < sector->npoints)
 	{
-		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2,
+		if (point_side_v2(sector->wall[i]->v1, sector->wall[i]->v2,
 				sector->center) < 0)
 		{
 			temp = sector->wall[i]->v2;
@@ -54,7 +54,7 @@ int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_v3 v2)
 	j = i;
 	while (++j < sector->npoints)
 	{
-		if (comp_vec(v2, sector->wall[j]->v1))
+		if (comp_v3(v2, sector->wall[j]->v1))
 		{
 			temp = sector->wall[i];
 			sector->wall[i] = sector->wall[j];
@@ -77,7 +77,7 @@ int	fix_wall_order(t_doom *doom, t_sector *sector)
 	v2 = sector->wall[i]->v2;
 	while (++i <= sector->npoints)
 	{
-		if (comp_vec(v2, sector->wall[i % sector->npoints]->v1))
+		if (comp_v3(v2, sector->wall[i % sector->npoints]->v1))
 		{
 			v2 = sector->wall[i % sector->npoints]->v2;
 			continue ;

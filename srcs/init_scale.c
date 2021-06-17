@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/19 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_scale(t_doom *doom)
 	while (++i < doom->nb.walls)
 	{
 		wall = &doom->walls[i];
-		wall->width = point_distance_2d(wall->v1.x, wall->v1.y, wall->v2.x, wall->v2.y);
+		wall->width = point_distance_v2(wall->v1.x, wall->v1.y, wall->v2.x, wall->v2.y);
 		wall->height = (doom->sectors[wall->sect].ceiling.y - doom->sectors[wall->sect].floor.y);
 		wall->scale_w = (doom->mtx[wall->wtx].w / wall->scale) * wall->width;
 		wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;

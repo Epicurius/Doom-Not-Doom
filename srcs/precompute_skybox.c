@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:53:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:37:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	precompute_skybox(t_doom *doom)
 
 void	init_skybox(t_doom *doom)
 {
-	doom->skybox[0].v1 = xyz(0, 0, 0);
-	doom->skybox[1].v1 = xyz(10, 0, 0);
-	doom->skybox[2].v1 = xyz(10, 10, 0);
-	doom->skybox[3].v1 = xyz(0, 10, 0);
+	doom->skybox[0].v1 = new_v3(0, 0, 0);
+	doom->skybox[1].v1 = new_v3(10, 0, 0);
+	doom->skybox[2].v1 = new_v3(10, 10, 0);
+	doom->skybox[3].v1 = new_v3(0, 10, 0);
 	doom->skybox[0].v2 = doom->skybox[1].v1;
 	doom->skybox[1].v2 = doom->skybox[2].v1;
 	doom->skybox[2].v2 = doom->skybox[3].v1;

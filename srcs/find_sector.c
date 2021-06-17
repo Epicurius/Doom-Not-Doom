@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:50:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		in_sector(t_sector *sector, t_v3 pos)
 	}
 	while (++i < sector->npoints)
 	{
-		if (point_side(sector->wall[i]->v1, sector->wall[i]->v2, pos) < 0)
+		if (point_side_v2(sector->wall[i]->v1, sector->wall[i]->v2, pos) < 0)
 			return (0);
 	}
 	return (1);

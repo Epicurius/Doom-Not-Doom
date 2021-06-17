@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:42:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:00:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:51:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 
 	if ((rand() % 1000) > chance)
 		return (0);
-	a = angle_to_point(entity->where, doom->player.where);
+	a = angle_to_point_v2(entity->where, doom->player.where);
 	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_RADIANS;
 
 	entity->velocity.x = (200 * cos(a));

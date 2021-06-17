@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 10:49:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	clip_to_fustrum(t_camera cam, t_wall *wall)
 {
 	t_v3 i;
 
-	i = get_intersection(	xyz(wall->sv1.x, wall->sv1.z, 0),
-				xyz(wall->sv2.x, wall->sv2.z, 0),
-				xyz(cam.near_left, cam.near_z, 0),
-				xyz(cam.near_right, cam.near_z, 0));
+	i = get_intersection_v2(	new_v3(wall->sv1.x, wall->sv1.z, 0),
+				new_v3(wall->sv2.x, wall->sv2.z, 0),
+				new_v3(cam.near_left, cam.near_z, 0),
+				new_v3(cam.near_right, cam.near_z, 0));
 	if (wall->sv1.z < cam.near_z)
-		wall->cv1 = xyz(i.x, 0, i.y);
+		wall->cv1 = new_v3(i.x, 0, i.y);
 	else
-		wall->cv1 = xyz(wall->sv1.x, 0, wall->sv1.z);
+		wall->cv1 = new_v3(wall->sv1.x, 0, wall->sv1.z);
 	if (wall->sv2.z < cam.near_z)
-		wall->cv2 = xyz(i.x, 0, i.y);
+		wall->cv2 = new_v3(i.x, 0, i.y);
 	else
-		wall->cv2 = xyz(wall->sv2.x, 0, wall->sv2.z);
+		wall->cv2 = new_v3(wall->sv2.x, 0, wall->sv2.z);
 }
 
 int	clip_wall(t_camera cam, t_wall *wall)

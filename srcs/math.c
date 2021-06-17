@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:49:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //		Set p1 angle to p2 (DEGREES)
 
-double		angle_to_point(t_v3 p1, t_v3 p2)
+double		angle_to_point_v2(t_v3 p1, t_v3 p2)
 {
 	double angle;
 	
@@ -63,18 +63,18 @@ void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y)
 	if (abs(*x) * rh <= abs(*y) * rw)
 	{
 		*x = cx + rw / 2 * *x / abs(*y);
-		*y = cy + sign(*y) * rh / 2;
+		*y = cy + ft_sign(*y) * rh / 2;
 	}
 	else
 	{
 		*y = cy + rw / 2 * *y / abs(*x);
-		*x = cx + sign(*x) * rw / 2;
+		*x = cx + ft_sign(*x) * rw / 2;
 
 	}
 }
 
 //	Return sign
-int	sign(double x)
+int	ft_sign(double x)
 {
 	if (x > 0)
 		return (1);
@@ -83,14 +83,28 @@ int	sign(double x)
 	return (0);
 }
 
-//	Vectors cross product 2v
-double	vxs(double x0, double y0, double x1, double y1)
+//	Make a new t_point struct and assign values
+t_point	new_point(int x, int y)
 {
-	return (x0 * y1 - x1 * y0);
+	t_point new;
+	
+	new.x = x;
+	new.y = y;
+	return (new);
+}
+
+//	Make a new t_v2 struct and assign values
+t_v2	new_v2(double x, double y)
+{
+	t_v2 new;
+	
+	new.x = x;
+	new.y = y;
+	return (new);
 }
 
 //	Make a new t_v3 struct and assign values
-t_v3	xyz(double x, double y, double z)
+t_v3	new_v3(double x, double y, double z)
 {
 	t_v3 new;
 	
@@ -100,32 +114,26 @@ t_v3	xyz(double x, double y, double z)
 	return (new);
 }
 
-//	Calculate point of intersection between 2 lines.
-t_v3	get_intersection(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
+//	Make a new t_v4 struct and assign values
+t_v4	new_v4(double x, double y, double z, double w)
 {
-	t_v3		point;
-	double		div;
-	double		vxs_a;
-	double		vxs_b;
-
-	div		=	vxs(a1.x - a2.x, a1.y - a2.y, b1.x - b2.x, b1.y - b2.y);
-	vxs_a	=	vxs(a1.x, a1.y, a2.x, a2.y);
-	vxs_b	=	vxs(b1.x, b1.y, b2.x, b2.y);
-	point.x =	vxs(vxs_a, a1.x - a2.x, vxs_b, b1.x - b2.x) / div;
-	point.y =	vxs(vxs_a, a1.y - a2.y, vxs_b, b1.y - b2.y) / div;
-	point.z =	0;
-	return (point);
+	t_v4 new;
+	
+	new.x = x;
+	new.y = y;
+	new.z = z;
+	new.z = w;
+	return (new);
 }
 
-/* ---------------------------------------------------------------------------------------- */
 //		Length of a vector 2D
-double	vector_magnitude_2D(t_v3 v)
+double	vector_magnitude_v2(t_v3 v)
 {
 	return (sqrt((v.x * v.y) + (v.x * v.y)));
 }
 
 //		Length of a vector 3D
-double	vector_magnitude(t_v3 v)
+double	vector_magnitude_v3(t_v3 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -148,16 +156,16 @@ t_v3	normalize(t_v3 vec)
 	float	length;
 
 	length = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	return (xyz(vec.x / length, vec.y / length, vec.z / length));
+	return (new_v3(vec.x / length, vec.y / length, vec.z / length));
 }
 
 //		Return scalar
-double	dot_product_2D(t_v3 v1, t_v3 v2)
+double	dot_product_v2(t_v3 v1, t_v3 v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y);
 }
 
-double	dot_product(t_v3 v1, t_v3 v2)
+double	dot_product_v3(t_v3 v1, t_v3 v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
@@ -165,10 +173,15 @@ double	dot_product(t_v3 v1, t_v3 v2)
 //		Returns Radians
 double	vectors_angle(t_v3 v1, t_v3 v2)
 {
-	return (acos(dot_product(v1, v2) / (space_diagonal(v1) * space_diagonal(v2))));
+	return (acos(dot_product_v3(v1, v2) / (space_diagonal(v1) * space_diagonal(v2))));
 }
 
-t_v3	cross_product(t_v3 v1, t_v3 v2)
+double	cross_product_v2(double x1, double y1, double x2, double y2)
+{
+	return (x1 * y2 - y1 * x2);
+}
+
+t_v3	cross_product_v3(t_v3 v1, t_v3 v2)
 {
 	t_v3 res;
 
@@ -178,32 +191,33 @@ t_v3	cross_product(t_v3 v1, t_v3 v2)
 	return (res);
 }
 
-int	comp_vec(t_v3 v1, t_v3 v2)
+int	comp_v3(t_v3 v1, t_v3 v2)
 {
 	if (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z)
 		return (1);
 	return (0);
 }
 
-t_v3	add_vec(t_v3 v1, t_v3 v2)
+t_v3	add_v2(t_v3 v1, t_v3 v2)
 {
-	return (xyz(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z));
+	return (new_v3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z));
 }
 
-t_v3	sub_vec(t_v3 v1, t_v3 v2)
+t_v3	sub_v3(t_v3 v1, t_v3 v2)
 {
-	return (xyz(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z));
+	return (new_v3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z));
 }
 
-t_v3	mult_vec(t_v3 vec, float scalar)
+t_v3	mult_v3(t_v3 vec, float scalar)
 {
-	return (xyz(vec.x * scalar, vec.y * scalar, vec.z * scalar));
+	return (new_v3(vec.x * scalar, vec.y * scalar, vec.z * scalar));
 }
 
 //		x,y of vector
-t_v3	get_polar_cordinates(double len, double angle)
+void	get_polar_cordinates(double len, double angle, t_v2 *polar)
 {
-	return (xyz(len * cos(angle), len * sin(angle), 0));
+	polar->x = len * cos(angle);
+	polar->y = len * sin(angle);
 }
 
 //		len, angle of vector
@@ -226,7 +240,7 @@ float	to_degrees(float radians)
 }
 
 //	Determine whether the two number ranges overlap.
-int	overlap(double a0, double a1, double b0, double b1)
+int	nb_overlap(double a0, double a1, double b0, double b1)
 {
 	if (ft_min(a0, a1) <= ft_max(b0, b1) && ft_min(b0, b1) <= ft_max(a0, a1))
 		return (1);
@@ -234,33 +248,33 @@ int	overlap(double a0, double a1, double b0, double b1)
 }
 
 //	Determine which side of a line the point is on. Return value: <0, =0 or >0.
-double	point_side(t_v3 v1, t_v3 v2, t_v3 p)
+double	point_side_v2(t_v3 v1, t_v3 v2, t_v3 p)
 {
 	return ((v2.x - v1.x) * (p.y - v1.y) - (v2.y - v1.y) * (p.x - v1.x));
 }
 
 //	Checks if line intersects
-int	intersect_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
+int	intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 {
 	int p1_dir;
 	int w1_dir;
 
-	p1_dir = sign(point_side(w1, w2, p1));
-	w1_dir = sign(point_side(p1, p2, w1));
-	if ((p1_dir == 0 || p1_dir == -1 * sign(point_side(w1, w2, p2)))
-		&& (w1_dir == 0 || w1_dir == -1 * sign(point_side(p1, p2, w2))))
+	p1_dir = ft_sign(point_side_v2(w1, w2, p1));
+	w1_dir = ft_sign(point_side_v2(p1, p2, w1));
+	if ((p1_dir == 0 || p1_dir == -1 * ft_sign(point_side_v2(w1, w2, p2)))
+		&& (w1_dir == 0 || w1_dir == -1 * ft_sign(point_side_v2(p1, p2, w2))))
 		return (1);
 	return (0);
 }
 
 //	Distance between 2 2d points
-double	point_distance_2d(double x1, double y1, double x2, double y2)
+double	point_distance_v2(double x1, double y1, double x2, double y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
 //	Distance between 2 3d points
-double	point_distance_3d(t_v3 p1, t_v3 p2)
+double	point_distance_v3(t_v3 p1, t_v3 p2)
 {
 	t_v3 square;
 
@@ -271,7 +285,7 @@ double	point_distance_3d(t_v3 p1, t_v3 p2)
 }
 
 //	Closest point on a segment to a external point
-t_v3	closest_point_on_segment_2d(t_v3 p, t_v3 a, t_v3 b)
+t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 {
 	t_v2	ab;
 	t_v3	point;
@@ -288,18 +302,33 @@ t_v3	closest_point_on_segment_2d(t_v3 p, t_v3 a, t_v3 b)
 	return (point);
 }
 
-
 //	Is point on segment, optional buffer;
-int	point_on_segment_2d(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
+int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
 {
 	double	pv1;
 	double	pv2;
 	double	len;
 
-	pv1 = point_distance_2d(p.x, p.y, v1.x, v1.y);
-	pv2 = point_distance_2d(p.x, p.y, v2.x, v2.y);
-	len = point_distance_2d(v1.x, v1.y, v2.x, v2.y);
+	pv1 = point_distance_v2(p.x, p.y, v1.x, v1.y);
+	pv2 = point_distance_v2(p.x, p.y, v2.x, v2.y);
+	len = point_distance_v2(v1.x, v1.y, v2.x, v2.y);
 	if (pv1 + pv2 >= len - buffer && pv1 + pv2 <= len + buffer)
 		return (1);
 	return (0);
+}
+
+//	Calculate point of intersection between 2 lines.
+t_v3	get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
+{
+	t_v3		point;
+	double		div;
+	double		vxs_a;
+	double		vxs_b;
+
+	vxs_a = cross_product_v2(a1.x, a1.y, a2.x, a2.y);
+	vxs_b = cross_product_v2(b1.x, b1.y, b2.x, b2.y);
+	div = cross_product_v2(a1.x - a2.x, a1.y - a2.y, b1.x - b2.x, b1.y - b2.y);
+	point.x = cross_product_v2(vxs_a, a1.x - a2.x, vxs_b, b1.x - b2.x) / div;
+	point.y = cross_product_v2(vxs_a, a1.y - a2.y, vxs_b, b1.y - b2.y) / div;
+	return (point);
 }
