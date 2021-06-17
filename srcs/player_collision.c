@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:33:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/14 18:57:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:58:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	player_collision(t_doom *doom)
 	{
 		printf("%d Wrong Sector!\n", doom->player.sector);
 		printf("%f %f %f\n", doom->player.where.x, doom->player.where.y, doom->player.where.z);
-		doom->player.sector = find_sector(doom, doom->player.where);
+		doom->player.sector = find_sector(doom->sectors, doom->nb.sectors, doom->player.where);
 		if (doom->player.sector != -1)
 			ft_printf("%d [ERROR]!\n", doom->player.sector);
 		else

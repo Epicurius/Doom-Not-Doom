@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/17 12:06:14 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/17 15:06:45 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ RAW_SRC =		doom.c\
 				init_sdl.c\
 				init.c\
 				game_loading.c\
+				compute_vline.c\
 				random.c
 		
 NAME			= doom

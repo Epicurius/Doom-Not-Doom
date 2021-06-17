@@ -6,13 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:44:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:14:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	skybox_limits(t_render *render, t_vline *vline, int side, int *limit)
+static void	skybox_limits(t_render *render, t_vline *vline,
+	int side, int *limit)
 {
 	if (side == TOP)
 	{
@@ -41,9 +42,9 @@ void	skybox_limits(t_render *render, t_vline *vline, int side, int *limit)
 	}
 }
 
-void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
+static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 {
-	int i;
+	int	i;
 
 	i = (render->wall.wtx + 1) * (-6);
 	if (limit[0] < skybox.curr.ceiling)
@@ -66,26 +67,27 @@ void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 	}
 }
 
-void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
+static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 {
-	t_wall wall;
+	t_wall	w;
 
-	wall = render->skybox[i];
-	vline->alpha = (render->x - wall.x1) / wall.xrange;
-	vline->clipped_alpha = (render->x - wall.cx1) / (wall.cx2 - wall.cx1);
-	vline->z = 1.0 / ((1.0 - vline->alpha) / wall.sv1.z + vline->alpha / wall.sv2.z);
-	vline->divider = 1 / (wall.sv2.z + vline->alpha * wall.zrange);
-	vline->z = wall.zcomb * vline->divider;
-	vline->texel.x = (wall.x0z1 + vline->alpha * wall.xzrange) * vline->divider;
-	vline->texel.y = (wall.y0z1 + vline->alpha * wall.yzrange) * vline->divider;
-	vline->max.ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling,render->ytop, render->ybot);
-	vline->max.floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
+	w = render->skybox[i];
+	vline->alpha = (render->x - w.x1) / w.xrange;
+	vline->clipped_alpha = (render->x - w.cx1) / (w.cx2 - w.cx1);
+	vline->z = 1.0 / ((1.0 - vline->alpha) / w.sv1.z + vline->alpha / w.sv2.z);
+	vline->divider = 1 / (w.sv2.z + vline->alpha * w.zrange);
+	vline->z = w.zcomb * vline->divider;
+	vline->texel.x = (w.x0z1 + vline->alpha * w.xzrange) * vline->divider;
+	vline->texel.y = (w.y0z1 + vline->alpha * w.yzrange) * vline->divider;
+	vline->max.ceiling = vline->clipped_alpha * w.range.ceiling + w.s1.ceiling;
+	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop,
+			render->ybot);
+	vline->max.floor = vline->clipped_alpha * w.range.floor + w.s1.floor;
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
 	vline->start.ceiling = vline->max.ceiling - render->player.horizon;
 	vline->start.floor = vline->max.floor - render->player.horizon;
-	vline->line_height = (vline->clipped_alpha * wall.range.floor + wall.s1.floor)
-				- (vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling);
+	vline->line_height = (vline->clipped_alpha * w.range.floor + w.s1.floor)
+		- (vline->clipped_alpha * w.range.ceiling + w.s1.ceiling);
 }
 
 void	draw_skybox(t_render *render, t_vline *vline, int side)
@@ -99,9 +101,9 @@ void	draw_skybox(t_render *render, t_vline *vline, int side)
 	{
 		if (!render->skybox[i].visible)
 			continue ;
-		if (render->skybox[i].cx1 >= render->skybox[i].cx2 ||
-			render->skybox[i].cx1 > render->x ||
-			render->skybox[i].cx2 < render->x)
+		if (render->skybox[i].cx1 >= render->skybox[i].cx2
+			|| render->skybox[i].cx1 > render->x
+			|| render->skybox[i].cx2 < render->x)
 			continue ;
 		render->s = i;
 		compute_skybox_vline_data(render, &skybox, i);

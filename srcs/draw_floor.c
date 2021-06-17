@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:04:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	draw_floor_texture(t_render *render, t_vline *vline)
 {
-	t_v3 text;
-	double alpha;
-	double divider;
-	int coord;
-	t_bxpm *ftx;
+	int		coord;
+	t_v3	text;
+	double	alpha;
+	double	divider;
+	t_bxpm	*ftx;
 
 	ftx = &render->mtx[render->floor.tx];
 	while (vline->y1 < vline->y2)
@@ -27,13 +27,10 @@ void	draw_floor_texture(t_render *render, t_vline *vline)
 		alpha = (vline->y1 - vline->max.floor) / vline->height.floor;
 		divider = 1 / (NEAR_Z + alpha * vline->zrange);
 		text.z = vline->z_near_z * divider;
-		text.y = (vline->texel_nearz.y + alpha * vline->texel_range.y)
-				* divider;
-		text.x = (vline->texel_nearz.x + alpha * vline->texel_range.x)
-				* divider;
-		text.y *= render->floor.scale;
-		text.x *= render->floor.scale;
-
+		text.y = ((vline->texel_nearz.y + alpha * vline->texel_range.y)
+				* divider) * render->floor.scale;
+		text.x = ((vline->texel_nearz.x + alpha * vline->texel_range.x)
+				* divider) * render->floor.scale;
 		if (text.y >= ftx->h || text.y < 0)
 			text.y = abs((int)text.y % ftx->h);
 		if (text.x >= ftx->w || text.x < 0)

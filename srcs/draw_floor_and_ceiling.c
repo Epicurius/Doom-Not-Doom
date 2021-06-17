@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/02 14:10:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:03:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 {
-
 	if (vline->curr.ceiling > render->ytop)
 	{
 		vline->height.ceiling = vline->max.ceiling - render->ceiling.head;
@@ -26,7 +25,6 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 			draw_skybox(render, vline, TOP);
 		else
 			draw_ceiling_texture(render, vline);
-
 	}
 	if (vline->curr.floor < render->ybot)
 	{

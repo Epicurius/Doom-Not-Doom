@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:52:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:07:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,10 +316,11 @@ typedef struct		s_render
 {
 	SDL_Surface		*surface;
 	t_sector		*sectors;
-	int 			*fustrum;
+	int				nb_sectors;
 	t_wall			*skybox;
 	t_bxpm			*mtx;
 	t_bxpm			*stx;
+	t_camera		cam;
 	t_player		player;
 	int				ytop;
 	int				ybot;
@@ -558,7 +559,7 @@ void	project_wall(t_doom *doom, t_wall *wall);
 void	vline_monochromic(t_render *render, t_vline *vline);
 int		find_start_sectors(t_doom *doom);
 int		clip_wall(t_camera cam, t_wall *wall);
-void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
+//void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
 
 //	Enteties
 void	Drawsprite(t_doom *doom);
@@ -630,7 +631,7 @@ void	keys(t_doom *doom, SDL_Event *event);
 //Math wiki func
 t_v3	new_v3(double x, double y, double z);
 t_v3	get_intersection_v2(t_v3 a, t_v3 b, t_v3 c, t_v3 d);
-int		find_sector(t_doom *doom, t_v3 e);
+int		find_sector(t_sector *sectors, int nb, t_v3 pos);
 int		nb_overlap(double a0, double a1, double b0 , double b);
 int		intersect_box(t_v3 p, t_v3 d, t_v3 vert1, t_v3 vert2);
 double	point_side_v2(t_v3 a, t_v3 b, t_v3 p);
@@ -670,6 +671,9 @@ void	sector_center(t_sector *sector);
 void	fix_wall_orientation(t_sector *sector);
 int	fix_wall_order(t_doom *doom, t_sector *sector);
 int	is_convex(t_doom *doom, t_sector *sector);
+
+void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
+void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline);
 
 
 //REMOVE//

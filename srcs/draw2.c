@@ -6,52 +6,19 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:08:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
+static t_vline	draw_vline(t_render *render)
 {
-	vline->alpha = (render->x - wall.x1) / wall.xrange;
-	vline->clipped_alpha = (render->x - wall.cx1) / (wall.cx2 - wall.cx1);
-	vline->divider = 1 / (wall.sv2.z + vline->alpha * wall.zrange);
-	vline->z = wall.zcomb * vline->divider;
-	vline->z_near_z = vline->z * NEAR_Z;
-	vline->max.ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop, render->ybot);
-	vline->max.floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
-	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->real_floor = vline->clipped_alpha * wall.range.f + wall.s1.f; //useless
-	vline->real_ceiling = vline->clipped_alpha * wall.range.c + wall.s1.c;
-	vline->line_height = vline->real_floor - vline->real_ceiling;
-	//render->ceiling_start = render->max_ceiling - render->ceiling_horizon;
-	//render->floor_start = render->max_floor - render->floor_horizon;
-}
-
-void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
-{
-	t_v3 camera_z;
-
-	camera_z.x = render->player.where.x * vline->z;
-	camera_z.y = render->player.where.y * vline->z;
-	vline->texel.x = (wall.x0z1 + vline->alpha * wall.xzrange) * vline->divider;
-	vline->texel.y = (wall.y0z1 + vline->alpha * wall.yzrange) * vline->divider;
-	vline->texel_nearz.x = vline->texel.x * NEAR_Z;
-	vline->texel_nearz.y = vline->texel.y * NEAR_Z;
-	vline->texel_range.x = camera_z.x - vline->texel_nearz.x;
-	vline->texel_range.y = camera_z.y - vline->texel_nearz.y;
-	vline->zrange = vline->z - NEAR_Z;
-}
-
-t_vline		draw_vline(t_render *render)
-{
-	t_vline		vline;
+	t_vline	vline;
 
 	compute_vline_data(render, render->wall, &vline);
 	if (vline.curr.ceiling > render->ytop || vline.curr.floor < render->ybot)
-			compute_vline_texels(render, render->wall, &vline);
+		compute_vline_texels(render, render->wall, &vline);
 	draw_floor_and_ceiling(render, &vline);
 	if (render->wall.n != -1)
 		draw_neighbor_wall(render, &vline);
@@ -71,34 +38,30 @@ t_vline		draw_vline(t_render *render)
 	return (vline);
 }
 
-t_vline 	render_wall_vline(t_render *render, t_sector *sector, int s)
+static t_vline 	init_wall_vline(t_render *render, t_sector *sector, int s)
 {
-	t_wall		*wall;
+	t_wall	*wall;
 
 	wall = sector->wall[s];
-	wall->visible 	= 1;
-
-	render->wall		= *wall;
-	render->wsprite		= wall->wsprite;
-	render->floor		= sector->floor;
-	render->ceiling		= sector->ceiling;
-
-	render->bh			= &wall->bh;
-	
-	render->light		= sector->light;
-	render->s			= s;
-	//draw_vline(render);
+	wall->visible = 1;
+	render->wall = *wall;
+	render->wsprite = wall->wsprite;
+	render->floor = sector->floor;
+	render->ceiling = sector->ceiling;
+	render->bh = &wall->bh;
+	render->light = sector->light;
+	render->s = s;
 	return (draw_vline(render));
 }
 
-int		render_vline(t_render render, int sector)
+static int	render_vline(t_render render, int sector)
 {
-	int	s;
-	t_sector *sect;
-	t_vline vline;
+	int			s;
+	t_sector	*sect;
+	t_vline		vline;
 
 	s = -1;
-   	sect = &render.sectors[sector];
+	sect = &render.sectors[sector];
 	while (++s < sect->npoints)
 	{
 		if (!sect->wall[s]->visible)
@@ -106,7 +69,7 @@ int		render_vline(t_render render, int sector)
 		if (render.x < sect->wall[s]->cx1 || render.x > sect->wall[s]->cx2)
 			continue ;
 		sect->visible = 1;
-		vline = render_wall_vline(&render, sect, s);
+		vline = init_wall_vline(&render, sect, s);
 		if (sect->wall[s]->n == -1)
 			return (1);
 		render_vline(render, sect->wall[s]->n);
@@ -117,54 +80,44 @@ int		render_vline(t_render render, int sector)
 	return (1);
 }
 
-int		loop_screen_sector(void	*arg)
+int	loop_screen_sector(void	*arg)
 {
-	t_render *render;
+	t_render	*render;
+	t_v3		pos;
+	double		tmp;
+	t_camera	*cam;
+	t_player	*p;
 
 	render = arg;
+	cam = &render->cam;
+	p = &render->player;
 	while (render->x < render->xend)
 	{
 		render->ytop = 0;
 		render->ybot = render->surface->h;
-		render_vline(*render, render->fustrum[render->x]);
+		tmp = (render->x / (double)(render->surface->w - 1)) * cam->range + cam->near_left;
+		pos.x = tmp * (-p->anglesin) - (-cam->near_z) * p->anglecos + p->where.x;
+		pos.y = tmp * p->anglecos - (-cam->near_z) * p->anglesin + p->where.y;
+		pos.z = p->where.z + p->eye_lvl;
+		render_vline(*render, find_sector(render->sectors, render->nb_sectors, pos));
 		render->x++;
 	}
 	return (1);
 }
 
-void		screen_x_sector(t_doom *doom, int x, int xend)
+void	DrawScreen(t_doom *doom)
 {
-	t_v3 pos;
-	t_player p;
-	double tmp;
-	
-	p = doom->player;
-	while (x < xend)
-	{
-		tmp = (x / (double)(doom->surface->w - 1)) * doom->cam.range + doom->cam.near_left;
-		pos.x = tmp * (-p.anglesin) - (-doom->cam.near_z) * p.anglecos + p.where.x;
-		pos.y = tmp * p.anglecos - (-doom->cam.near_z) * p.anglesin + p.where.y;
-		pos.z = p.where.z + p.eye_lvl;
-		doom->fustrum[x] = find_sector(doom, pos);
-		x++;
-	}
-}
-
-void		DrawScreen(t_doom *doom)
-{
-	int x;
-	int w;
+	int	x;
+	int	w;
 
 	x = -1;
 	w = doom->surface->w;
 	while (++x < doom->nb.threads)
 	{
-		doom->render[x].x = w /(double)doom->nb.threads * x;
-		doom->render[x].xend = ft_min(w /(double)doom->nb.threads * (x + 1), w);
-		screen_x_sector(doom, doom->render[x].x, doom->render[x].xend);
+		doom->render[x].x = w / (double)doom->nb.threads * x;
+		doom->render[x].xend = ft_min(w / (double)doom->nb.threads * (x + 1), w);
 		doom->render[x].player = doom->player;
+		doom->render[x].cam = doom->cam;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
-		//loop_screen_sector(&doom->render[x]);
-		//update_screen(doom, doom->surface);
 	}
 }

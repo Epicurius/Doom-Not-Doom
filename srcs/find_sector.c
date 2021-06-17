@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:50:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:56:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@ int		in_sector(t_sector *sector, t_v3 pos)
 	double p;
 
 	i = -1;
-	//if (sector->floor.y > pos.z || sector->ceiling.y < pos.z)//Fix
 	if (get_floor_at_pos(sector, pos) > pos.z || get_ceiling_at_pos(sector, pos) < pos.z)
-	{
-	//	printf("pos:(%f %f %f | %d)", pos.x, pos.y, pos.z, sector->id);
-	//	printf("\tfc:(%f %f)\n", get_floor_at_pos(sector, pos), get_ceiling_at_pos(sector, pos));
 		return (0);
-	}
 	while (++i < sector->npoints)
 	{
 		if (point_side_v2(sector->wall[i]->v1, sector->wall[i]->v2, pos) < 0)
@@ -33,14 +28,14 @@ int		in_sector(t_sector *sector, t_v3 pos)
 	return (1);
 }
 
-int		find_sector(t_doom *doom, t_v3 pos)
+int		find_sector(t_sector *sectors, int nb, t_v3 pos)
 {
 	int	i;
 
 	i = -1;
-	while (++i < doom->nb.sectors)
+	while (++i < nb)
 	{
-		if (in_sector(&doom->sectors[i], pos))
+		if (in_sector(&sectors[i], pos))
 			return (i);
 	}
 	return (-1);

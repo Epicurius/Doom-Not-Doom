@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 14:07:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	draw_portal_solid(t_render *render, t_vline *vline)
 {
-	t_v3 text;
-	double alpha;
-	int	coord;
-	t_bxpm *ptx;
+	t_v3	text;
+	double	alpha;
+	int		coord;
+	t_bxpm	*ptx;
 
 	ptx = &render->mtx[3];
 	text.z = vline->z;
@@ -38,10 +38,10 @@ void	draw_portal_solid(t_render *render, t_vline *vline)
 
 void	draw_portal_alpha(t_render *render, t_vline *vline)
 {
-	t_v3 text;
-	double alpha;
-	int	coord;
-	t_bxpm *ptx;
+	t_v3	text;
+	double	alpha;
+	int		coord;
+	t_bxpm	*ptx;
 
 	ptx = &render->mtx[3];
 	text.z = vline->z;
@@ -60,13 +60,11 @@ void	draw_portal_alpha(t_render *render, t_vline *vline)
 	}
 }
 
-
 void	draw_portal_texture(t_render *render, t_vline *vline)
 {
 	vline->y1 = render->ytop;
 	vline->y2 = render->ybot;
 	draw_portal_solid(render, vline);
-	//draw_portal_alpha(render, vline);
 	vline->y1 = render->ytop;
 	vline->y2 = render->ybot;
 	draw_wsprites(render, vline);
