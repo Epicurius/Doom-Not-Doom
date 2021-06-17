@@ -6,18 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:59:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	get_time(time_t *t)
+static void	get_time(time_t *t)
 {
 	*t = time(NULL);
 }
 
-void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
+static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
 {
 	int i;
 

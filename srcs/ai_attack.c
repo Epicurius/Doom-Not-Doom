@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:44:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:58:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
+static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 {
 	t_v3	move;
 	double	dist;

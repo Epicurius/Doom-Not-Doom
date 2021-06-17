@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:00 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 17:06:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,3 @@ void	line(SDL_Surface *surf, Uint32 color, t_point *p)
 		}
 	}
 }
-
-/*
-void	ft_line(SDL_Surface *surf, int color, int x1, int y1, int x2, int y2)
-{
-	int			cath_x;
-	int			cath_y;
-	int			overflow_x;
-	int			overflow_y;
-
-	cath_x = abs(y2 - y1);
-	cath_y = abs(x2 - x1);
-	overflow_y = cath_y - cath_x;
-	while (x1 != x2 || y1 != y2)
-	{
-    		clamp_line(surf, x1, y1, color);
-		overflow_x = overflow_y * 2;
-		if (overflow_x > -(cath_x))
-		{
-			overflow_y -= cath_x;
-			x1 += x1 < x2 ? 1 : -1;
-		}
-		else if (overflow_x < cath_x)
-		{
-			overflow_y += cath_y;
-			y1 += y1 < y2 ? 1 : -1;
-		}
-	}
-}*/

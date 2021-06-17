@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                              :+:      :+:    :+:  */
+/*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:23:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:04:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	blit_fps(t_doom *doom)
 	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
 }
 
-void	update_fps_surface(TTF_Font *font, t_time *time)
+static void	update_fps_surface(TTF_Font *font, t_time *time)
 {
 	char	*str;
 

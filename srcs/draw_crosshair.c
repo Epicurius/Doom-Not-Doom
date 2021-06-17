@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/08 10:43:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:01:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	draw_crosshair2(t_doom *doom)
+static void	draw_crosshair2(t_doom *doom)
 {
 	int		y;
 	int		x;

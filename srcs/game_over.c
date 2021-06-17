@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/23 12:30:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:14:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	print_score(t_doom *doom, int *i)
+static void	print_score(t_doom *doom, int *i)
 {
 	char	*name;
 	t_bmp	*bmp;
@@ -29,7 +29,7 @@ void	print_score(t_doom *doom, int *i)
 	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 }
 
-void	blit_game_over(t_doom *doom)
+static void	blit_game_over(t_doom *doom)
 {
 	t_bxpm		*bxpm;
 
@@ -39,7 +39,7 @@ void	blit_game_over(t_doom *doom)
 	free_bxpm(bxpm);
 }
 
-void	blit_game_stats(t_doom *doom)
+static void	blit_game_stats(t_doom *doom)
 {
 	char		*str;
 	SDL_Rect	dstr;
@@ -68,7 +68,7 @@ void	blit_game_stats(t_doom *doom)
 	TTF_CloseFont(amaz);
 }
 
-void	blit_screen_shot(t_doom *doom)
+static void	blit_screen_shot(t_doom *doom)
 {
 	SDL_Rect	dstr;
 	TTF_Font	*amaz;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 16:48:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:14:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	load_wav(t_doom *doom)
 		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
 }
 
-void	intro(void	*arg)
+void	intro(void *arg)
 {
 	t_dialog	*d;
 

@@ -6,19 +6,19 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 11:59:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:06:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	mouse(t_doom *doom, SDL_Event *event)
+static void	mouse(t_doom *doom, SDL_Event *event)
 {
 	if (event->button.button == SDL_BUTTON_LEFT)
 			doom->key.lmouse = event->type == SDL_MOUSEBUTTONDOWN;
 }
 
-void	key(t_doom *doom, SDL_Event *event)
+static void	key(t_doom *doom, SDL_Event *event)
 {
 	if (event->key.keysym.sym == SDLK_w)
 		doom->key.w = event->type == SDL_KEYDOWN;
@@ -53,7 +53,7 @@ void	key(t_doom *doom, SDL_Event *event)
 		doom->key.m = event->type == SDL_KEYDOWN;
 }
 
-void	keys(t_doom *doom, SDL_Event *event)
+static void	keys(t_doom *doom, SDL_Event *event)
 {
 	if (event->type == SDL_QUIT)
 		doom->quit = 1;

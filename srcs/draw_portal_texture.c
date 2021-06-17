@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 14:07:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:02:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	draw_portal_solid(t_render *render, t_vline *vline)
+static void	draw_portal_solid(t_render *render, t_vline *vline)
 {
 	t_v3	text;
 	double	alpha;
@@ -36,7 +36,7 @@ void	draw_portal_solid(t_render *render, t_vline *vline)
 	}
 }
 
-void	draw_portal_alpha(t_render *render, t_vline *vline)
+static void	draw_portal_alpha(t_render *render, t_vline *vline)
 {
 	t_v3	text;
 	double	alpha;

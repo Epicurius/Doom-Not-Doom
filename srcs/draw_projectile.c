@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 14:10:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:02:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	rotate_projectile(t_doom *doom, t_project *orb, t_entity_thread thread,
-	t_entity_render *render)
+static void	rotate_projectile(t_doom *doom, t_project *orb,
+	t_entity_thread thread, t_entity_render *render)
 {
 	t_point	size;
 	t_v3	dist;

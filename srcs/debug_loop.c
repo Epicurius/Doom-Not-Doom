@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:37:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 15:55:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:35:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-struct timespec start, finish;
-double elapsed;
+	struct timespec start, finish;
+	double elapsed;
 #include <time.h>
 
 void	cs(void)

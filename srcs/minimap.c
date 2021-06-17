@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:07:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	map_player(t_doom *doom)
+static void	map_player(t_doom *doom)
 {
 	t_point	p[2];
 	t_map	map;
@@ -34,7 +34,7 @@ void	map_player(t_doom *doom)
 	line(doom->surface, MM_VIEW_COLOR, p);
 }
 
-void	draw_map(t_doom *doom)
+static void	draw_map(t_doom *doom)
 {
 	int s;
 	int w;
@@ -65,7 +65,7 @@ void	draw_map(t_doom *doom)
 	}
 }
 
-void	map_area(t_doom *doom)
+static void	map_area(t_doom *doom)
 {
 	int x;
 	int y;
@@ -88,9 +88,6 @@ void	map_area(t_doom *doom)
 		y++;
 	}
 }
-
-
-
 
 void	map(t_doom *doom)
 {

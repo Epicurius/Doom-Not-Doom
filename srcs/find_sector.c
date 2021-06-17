@@ -6,16 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 14:56:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:04:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		in_sector(t_sector *sector, t_v3 pos)
+int	in_sector(t_sector *sector, t_v3 pos)
 {
-	int i;
-	double p;
+	int		i;
+	double	p;
 
 	i = -1;
 	if (get_floor_at_pos(sector, pos) > pos.z || get_ceiling_at_pos(sector, pos) < pos.z)
@@ -28,7 +28,7 @@ int		in_sector(t_sector *sector, t_v3 pos)
 	return (1);
 }
 
-int		find_sector(t_sector *sectors, int nb, t_v3 pos)
+int	find_sector(t_sector *sectors, int nb, t_v3 pos)
 {
 	int	i;
 

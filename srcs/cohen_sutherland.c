@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:00:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*	Cohen Sutherland clipping line in rectangle algorithm */
-unsigned int	compute_outcode(int x, int y, t_rect size)
+static unsigned int	compute_outcode(int x, int y, t_rect size)
 {
 	unsigned int	i;
 
@@ -29,7 +29,7 @@ unsigned int	compute_outcode(int x, int y, t_rect size)
 	return (i);
 }
 
-unsigned int	cohen_sutherland2(t_point *v, t_rect size, t_v3 i)
+static unsigned int	cohen_sutherland2(t_point *v, t_rect size, t_v3 i)
 {
 	unsigned int	outcode;
 
@@ -39,7 +39,7 @@ unsigned int	cohen_sutherland2(t_point *v, t_rect size, t_v3 i)
 	return (outcode);
 }
 
-void	cohen_sutherland1(t_point *v, t_rect size,
+static void	cohen_sutherland1(t_point *v, t_rect size,
 		unsigned int outcode_ex, t_v3 *i)
 {
 	if (outcode_ex & 0x1)

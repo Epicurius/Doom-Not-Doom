@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:01:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	put_bh_pixels(t_render *render, int coord, t_v3 text)
+static void	put_bh_pixels(t_render *render, int coord, t_v3 text)
 {
 	Uint32		clr;
 	unsigned short	pix;
@@ -25,7 +25,7 @@ void	put_bh_pixels(t_render *render, int coord, t_v3 text)
 	((double *)render->surface->userdata)[coord] = text.z;
 }
 
-void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
+static void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bh, int x)
 {
 	t_v3	text;
 	int		coord;

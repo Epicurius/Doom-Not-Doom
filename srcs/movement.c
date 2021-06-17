@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 10:37:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:07:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	get_base_speed(t_doom *doom, float *speed)
+static void	get_base_speed(t_doom *doom, float *speed)
 {
 	if (doom->key.shift_l)
 		*speed = doom->player.sprint_speed;
@@ -22,7 +22,7 @@ void	get_base_speed(t_doom *doom, float *speed)
 }
 
 
-void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
+static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 {
 	*move = new_v3(0, 0, 0);
 	if (doom->key.w)
@@ -60,7 +60,7 @@ void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 	}
 }
 
-void	get_velocity(t_doom *doom, t_v3 move)
+static void	get_velocity(t_doom *doom, t_v3 move)
 {
 	t_player *player;
 	t_sector *sector;

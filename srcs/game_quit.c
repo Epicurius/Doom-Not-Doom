@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/24 17:00:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:05:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	y_or_n(t_doom *doom, int y)
+static void	y_or_n(t_doom *doom, int y)
 {
 	SDL_Rect	dstr;
 	TTF_Font	*amaz;
@@ -26,7 +26,7 @@ void	y_or_n(t_doom *doom, int y)
 	TTF_CloseFont(amaz);
 }
 
-void	quit_loop(t_doom *doom)
+static void	quit_loop(t_doom *doom)
 {
 	SDL_Event event;
 

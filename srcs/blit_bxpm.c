@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:59:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 		((Uint32 *)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
 }
 
-void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
+static void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
 	int	inc;
 	int	pos;

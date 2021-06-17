@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:08:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 16:03:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	render_vline(t_render render, int sector)
 	return (1);
 }
 
-int	loop_screen_sector(void	*arg)
+static int	loop_screen_sector(void	*arg)
 {
 	t_render	*render;
 	t_v3		pos;

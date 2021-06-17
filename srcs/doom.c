@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 14:46:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/17 15:42:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	launcher(void)
+static void	launcher(void)
 {
 	char	*arr[2];
 
@@ -22,7 +22,7 @@ void	launcher(void)
 	free(&arr[0]);
 }
 
-void	game_loop(t_doom *doom, SDL_Event *event)
+static void	game_loop(t_doom *doom, SDL_Event *event)
 {
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
@@ -54,7 +54,7 @@ void	game_loop(t_doom *doom, SDL_Event *event)
 		game_quit(doom);
 }
 
-void	game(char *map, t_settings init)
+static void	game(char *map, t_settings init)
 {
 	t_doom		*doom;
 	SDL_Event	event;
