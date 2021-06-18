@@ -6,18 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:44:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:22:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:00:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 //		Set p1 angle to p2 (DEGREES)
-
-double		angle_to_point_v2(t_v3 p1, t_v3 p2)
+double	angle_to_point_v2(t_v3 p1, t_v3 p2)
 {
-	double angle;
-	
+	double	angle;
+
 	angle = atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_DEGREES;
 	while (angle > 360)
 		angle -= 360;
@@ -27,9 +26,9 @@ double		angle_to_point_v2(t_v3 p1, t_v3 p2)
 }
 
 //		Make new t_rect struct for texture sheets
-t_rect		rect_xy2(int x1, int y1, int x2, int y2)
+t_rect	rect_xy2(int x1, int y1, int x2, int y2)
 {
-	t_rect new;
+	t_rect	new;
 
 	new.x1 = x1;
 	new.y1 = y1;
@@ -41,9 +40,9 @@ t_rect		rect_xy2(int x1, int y1, int x2, int y2)
 	return (new);
 }
 
-t_rect		rect_xywh(int x1, int y1, int w, int h)
+t_rect	rect_xywh(int x1, int y1, int w, int h)
 {
-	t_rect new;
+	t_rect	new;
 
 	new.x1 = x1;
 	new.y1 = y1;
@@ -53,24 +52,6 @@ t_rect		rect_xywh(int x1, int y1, int w, int h)
 	new.h = h;
 	new.ratio = (double)new.h / (double)new.w;
 	return (new);
-}
-
-//	Clamp point x,y to rectagle border
-void	rect_clamp(int cx, int cy, int rw, int rh, int *x, int *y)
-{
-	*x = *x - cx;
-	*y = *y - cy;
-	if (abs(*x) * rh <= abs(*y) * rw)
-	{
-		*x = cx + rw / 2 * *x / abs(*y);
-		*y = cy + ft_sign(*y) * rh / 2;
-	}
-	else
-	{
-		*y = cy + rw / 2 * *y / abs(*x);
-		*x = cx + ft_sign(*x) * rw / 2;
-
-	}
 }
 
 //	Return sign
@@ -86,8 +67,8 @@ int	ft_sign(double x)
 //	Make a new t_point struct and assign values
 t_point	new_point(int x, int y)
 {
-	t_point new;
-	
+	t_point	new;
+
 	new.x = x;
 	new.y = y;
 	return (new);
@@ -96,8 +77,8 @@ t_point	new_point(int x, int y)
 //	Make a new t_v2 struct and assign values
 t_v2	new_v2(double x, double y)
 {
-	t_v2 new;
-	
+	t_v2	new;
+
 	new.x = x;
 	new.y = y;
 	return (new);
@@ -106,8 +87,8 @@ t_v2	new_v2(double x, double y)
 //	Make a new t_v3 struct and assign values
 t_v3	new_v3(double x, double y, double z)
 {
-	t_v3 new;
-	
+	t_v3	new;
+
 	new.x = x;
 	new.y = y;
 	new.z = z;
@@ -117,8 +98,8 @@ t_v3	new_v3(double x, double y, double z)
 //	Make a new t_v4 struct and assign values
 t_v4	new_v4(double x, double y, double z, double w)
 {
-	t_v4 new;
-	
+	t_v4	new;
+
 	new.x = x;
 	new.y = y;
 	new.z = z;
@@ -173,7 +154,8 @@ double	dot_product_v3(t_v3 v1, t_v3 v2)
 //		Returns Radians
 double	vectors_angle(t_v3 v1, t_v3 v2)
 {
-	return (acos(dot_product_v3(v1, v2) / (space_diagonal(v1) * space_diagonal(v2))));
+	return (acos(dot_product_v3(v1, v2)
+			/ (space_diagonal(v1) * space_diagonal(v2))));
 }
 
 double	cross_product_v2(double x1, double y1, double x2, double y2)
@@ -183,7 +165,7 @@ double	cross_product_v2(double x1, double y1, double x2, double y2)
 
 t_v3	cross_product_v3(t_v3 v1, t_v3 v2)
 {
-	t_v3 res;
+	t_v3	res;
 
 	res.x = v1.y * v2.z - v1.z * v2.y;
 	res.y = v1.z * v2.x - v1.x * v2.z;
@@ -256,8 +238,8 @@ double	point_side_v2(t_v3 v1, t_v3 v2, t_v3 p)
 //	Checks if line intersects
 int	intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 {
-	int p1_dir;
-	int w1_dir;
+	int	p1_dir;
+	int	w1_dir;
 
 	p1_dir = ft_sign(point_side_v2(w1, w2, p1));
 	w1_dir = ft_sign(point_side_v2(p1, p2, w1));
@@ -276,7 +258,7 @@ double	point_distance_v2(double x1, double y1, double x2, double y2)
 //	Distance between 2 3d points
 double	point_distance_v3(t_v3 p1, t_v3 p2)
 {
-	t_v3 square;
+	t_v3	square;
 
 	square.x = (p2.x - p1.x) * (p2.x - p1.x);
 	square.y = (p2.y - p1.y) * (p2.y - p1.y);
@@ -320,10 +302,10 @@ int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
 //	Calculate point of intersection between 2 lines.
 t_v3	get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
 {
-	t_v3		point;
-	double		div;
-	double		vxs_a;
-	double		vxs_b;
+	t_v3	point;
+	double	div;
+	double	vxs_a;
+	double	vxs_b;
 
 	vxs_a = cross_product_v2(a1.x, a1.y, a2.x, a2.y);
 	vxs_b = cross_product_v2(b1.x, b1.y, b2.x, b2.y);

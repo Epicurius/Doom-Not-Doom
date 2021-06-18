@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:07:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 10:09:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
 			&& player.where.z == doom->sectors[player.sector].floor.y)
 	{
-		//if (!Mix_Playing(CHANNEL_STEPS))
-			//Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
+		if (!Mix_Playing(CHANNEL_STEPS))
+			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
 	}
 	else if (Mix_Playing(CHANNEL_STEPS))
 	{
 		Mix_FadeOutChannel(CHANNEL_STEPS, 600);
-		//Mix_HaltChannel(2);
+		Mix_HaltChannel(2);
 	}
 }
 
@@ -69,7 +69,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	sector = &doom->sectors[player->sector];
 	if (doom->key.space && player->where.z == get_floor_at_pos(sector, player->where))
 	{
-		//Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_JUMP], 0);
+		Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);
 	}
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;

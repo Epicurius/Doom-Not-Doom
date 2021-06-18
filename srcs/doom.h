@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 17:29:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 10:42:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,6 +447,7 @@ typedef struct s_doom
 	t_bxpm			sprite_sheets[4];
 	t_npc_bxpm		npc_bxpm[7];
 	t_data			npe_data[7];
+	int				volume;
 	Mix_Chunk		*sound[7];
 	int				intro[1];
 	t_dialog		d;
@@ -518,6 +519,8 @@ void				Drawsprite(t_doom *doom);
 void				draw_floor_texture(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_floor_and_ceiling.c */
 void				draw_floor_and_ceiling(t_render *render, t_vline *vline);
+/* File:			srcs/draw_hud.c */
+void				draw_hud(t_doom *doom);
 /* File:			./srcs/draw_neighbor_wall.c */
 void				draw_neighbor_wall(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_portal_texture.c */
@@ -565,9 +568,12 @@ void				game_over(t_doom *doom);
 void				game_pause(t_doom *doom);
 /* File:			./srcs/game_quit.c */
 void				game_quit(t_doom *doom);
-/* File:			./srcs/hud.c */
-void				health(t_doom *doom);
-void				draw_hud(t_doom *doom);
+/* File:			srcs/hud_utils.c */
+void				hud_health(t_doom *doom);
+void				hud_armour(t_doom *doom);
+void				hud_currammo(t_doom *doom);
+void				hud_magammo(t_doom *doom);
+void				hud_dosh(t_doom *doom);
 /* File:			./srcs/icon.c */
 int					set_icon(SDL_Window *window, char *dir);
 /* File:			./srcs/init.c */
@@ -703,6 +709,7 @@ void				skybox_floor_vline(t_render *render, t_vline vline, int tx);
 /* File:			./srcs/skybox_wall_vline.c */
 void				skybox_wall_vline(t_render *render, t_vline vline, int tx);
 /* File:			./srcs/sound.c */
+void				mute(int i);
 void				load_wav(t_doom *doom);
 void				intro(void *arg);
 void				init_sound(t_doom *doom);

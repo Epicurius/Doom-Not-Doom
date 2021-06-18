@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:06:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 10:11:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ static void	key(t_doom *doom, SDL_Event *event)
 	else if (event->key.keysym.sym >= SDLK_1 && event->key.keysym.sym <= SDLK_9)
 	{
 		doom->key.num = event->key.keysym.sym - 48;
-		doom->player.where = doom->sectors[doom->player.sector].center;
-		//doom->sectors[0].wslope = (event->key.keysym.sym - 48) - 1;
-		//precompute_slopes(doom);
+		//doom->player.where = doom->sectors[doom->player.sector].center;
 	}
-	else if (event->key.keysym.sym == SDLK_m)
-		doom->key.m = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym == SDLK_m && event->type == SDL_KEYDOWN)
+	{
+		doom->key.m = doom->key.m == 0;
+		mute(doom->key.m);
+	}
 }
 
 static void	keys(t_doom *doom, SDL_Event *event)

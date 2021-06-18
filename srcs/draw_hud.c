@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   icon.c                                             :+:      :+:    :+:   */
+/*   draw_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 13:29:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:42:41 by nneronin         ###   ########.fr       */
+/*   Created: 2021/06/18 10:37:51 by nneronin          #+#    #+#             */
+/*   Updated: 2021/06/18 10:38:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	set_icon(SDL_Window *window, char *dir)
+void	draw_hud(t_doom *doom)
 {
-	SDL_Surface	*icon;
-
-	icon = SDL_LoadBMP(dir);
-	if (icon == NULL)
-		return (0);
-	SDL_SetWindowIcon(window, icon);
-	SDL_FreeSurface(icon);
-	return (1);
+	hud_health(doom);
+	hud_armour(doom);
+	hud_currammo(doom);
+	hud_magammo(doom);
+	hud_dosh(doom);
 }
