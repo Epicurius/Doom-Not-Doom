@@ -6,22 +6,22 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/26 17:10:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:58:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
 
-typedef enum	e_weapons
+typedef enum e_enum_weapons
 {
 	WEAPON_SHOTGUN,
 	WEAPON_GUN,
 	WEAPON_MINIGUN,
 	WEAPON_KAR
-}				e_weapons;
+}				t_enum_weapons;
 
-typedef enum	e_sounds
+typedef enum e_enum_sounds
 {
 	WAV_MAIN_THEME,
 	WAV_SHOTGUN,
@@ -30,17 +30,17 @@ typedef enum	e_sounds
 	WAV_FOOT_STEPS,
 	WAV_JUMP,
 	WAV_GUN
-}				e_sounds;
+}				t_enum_sounds;
 
-typedef enum	e_sound_channel
+typedef enum e_enum_sound_channel
 {
 	CHANNEL_MUSIC,
 	CHANNEL_WEAPON,
 	CHANNEL_STEPS,
 	CHANNEL_TTS
-}				e_sound_channel;
+}				t_enum_sound_channel;
 
-typedef enum	e_sprites
+typedef enum e_enum_sprites
 {
 	ALFRED,
 	SPOOKY,
@@ -49,6 +49,6 @@ typedef enum	e_sprites
 	LAMP,
 	TORCH,
 	MEAT_HOOK
-}				e_sprites;
+}				t_enum_sprites;
 
 #endif

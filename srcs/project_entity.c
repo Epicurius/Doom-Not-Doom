@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:06:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:43:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	project_entity(t_doom *doom, t_entity *entity)
+void	project_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 {
 	t_point	size;
 	t_v3	dist;
@@ -26,17 +26,17 @@ void	project_entity(t_doom *doom, t_entity *entity)
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	screen.x = doom->w2 + (screen.x * doom->cam.scale / -screen.z);
 	screen.y = doom->h2 + (screen.y * doom->cam.scale / -screen.z);
-	size.x = doom->npc_bxpm[entity->type].pos
-	[entity->state][entity->frame][entity->angle].w * entity->data->scale / screen.z;
-	size.y = doom->npc_bxpm[entity->type].pos
-	[entity->state][entity->frame][entity->angle].h * entity->data->scale / screen.z;
-	entity->render.z = screen.z;
-	entity->render.start = new_point(screen.x - size.x / 2, screen.y - size.y);
-	entity->render.end = new_point(screen.x + size.x / 2, screen.y);
-	entity->render.clamp_start.x = ft_clamp(entity->render.start.x, 0, doom->surface->w - 1);
-	entity->render.clamp_end.x = ft_clamp(entity->render.end.x, 0, doom->surface->w - 1);
-	entity->render.clamp_start.y = ft_clamp(entity->render.start.y, 0, doom->surface->h - 1);
-	entity->render.clamp_end.y = ft_clamp(entity->render.end.y, 0, doom->surface->h - 1);
-	entity->render.xrange = entity->render.end.x - entity->render.start.x;
-	entity->render.yrange = entity->render.end.y - entity->render.start.y;
+	size.x = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
+	[entity->angle].w * entity->data->scale / screen.z;
+	size.y = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
+	[entity->angle].h * entity->data->scale / screen.z;
+	render->z = screen.z;
+	render->start = new_point(screen.x - size.x / 2, screen.y - size.y);
+	render->end = new_point(screen.x + size.x / 2, screen.y);
+	render->clamp_start.x = ft_clamp(render->start.x, 0, doom->surface->w - 1);
+	render->clamp_end.x = ft_clamp(render->end.x, 0, doom->surface->w - 1);
+	render->clamp_start.y = ft_clamp(render->start.y, 0, doom->surface->h - 1);
+	render->clamp_end.y = ft_clamp(render->end.y, 0, doom->surface->h - 1);
+	render->xrange = render->end.x - render->start.x;
+	render->yrange = render->end.y - render->start.y;
 }

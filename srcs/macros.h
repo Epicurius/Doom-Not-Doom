@@ -6,14 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 17:33:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 17:01:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
-
-# define LAUNCH						doom->settings.flag
 
 /*
 ** Screen info
@@ -23,19 +21,19 @@
 /*
 **	Vision
 */
-#define PLAYER_HEIGHT 				7
-#define EYE_LVL						6
-#define OVER_HEAD_SPACE				1
-#define DUCK_HEIGHT					2.5
-#define STEP_HEIGHT					2
-#define CAMERA_RATIO				(16.0/9.0)
-#define FOV							90
-#define PLAYER_YAW					45
-#define PLAYER_PITCH				10
-#define PLAYER_RADIUS				0.7
-#define NEAR_Z						0.1
-#define FAR_Z						1000
-#define RENDER_DISTANCE				200.0
+# define PLAYER_HEIGHT 				7
+# define EYE_LVL					6
+# define OVER_HEAD_SPACE			1
+# define DUCK_HEIGHT				2.5
+# define STEP_HEIGHT				2
+# define CAMERA_RATIO				1.77777777778
+# define FOV						90
+# define PLAYER_YAW					45
+# define PLAYER_PITCH				10
+# define PLAYER_RADIUS				0.7
+# define NEAR_Z						0.1
+# define FAR_Z						1000
+# define RENDER_DISTANCE			200.0
 
 /*
 ** Entities
@@ -55,31 +53,30 @@
 /*
 ** FPS
 */
-# define FPS_FONT					"./bmp/Minecraft.ttf"
 # define FPS_FONT_SIZE				20
 # define FPS_COLOR					0xff00ffff
 
 /*
 ** Bullet Holes
 */
-#define ENABLE_BH					1
-#define MAX_BH						20
+# define ENABLE_BH					1
+# define MAX_BH						20
 
 /*
 ** Values !!DONT TOUCH!!
 */
-#define CONVERT_RADIANS				0.0174532925199432955
-#define CONVERT_DEGREES				57.2957795130823228647
+# define CONVERT_RADIANS				0.0174532925199432955
+# define CONVERT_DEGREES				57.2957795130823228647
 
 /*
 **	Movement
 */
-#define WALK_SPEED					10
-#define SPRINT_SPEED				20
-#define CROUCH_SPEED				0.006f
-#define MOUSE_X						0.005f
-#define MOUSE_Y						0.005f
-#define	ACCELERATION				0.7
+# define WALK_SPEED					10
+# define SPRINT_SPEED				20
+# define CROUCH_SPEED				0.006f
+# define MOUSE_X					0.005f
+# define MOUSE_Y					0.005f
+# define ACCELERATION			0.7
 
 /*
 ** Map Rendering

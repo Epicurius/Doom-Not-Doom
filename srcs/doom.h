@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:43:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 17:08:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "./macros.h"
 # include "math.h"
 # include "./enum.h"
-# include "./utils.h"
 # include <math.h>
 # include <fcntl.h>
 
@@ -40,10 +39,40 @@ typedef struct s_settings
 	int				flag;
 }					t_settings;
 
+typedef struct s_plane
+{
+	int				tx;
+	double			y;
+	double			correct;
+	double			head;
+	double			feet;
+	double			scale;
+}					t_plane;
+
+typedef	struct s_keys
+{
+	int				chr;
+	int				fnc;
+	int				w;
+	int				a;
+	int				s;
+	int				d;
+	int				t;
+	int				p;
+	int				r;
+	int				m;
+	int				space;
+	int				ctr_l;
+	int				shift_l;
+	int				lmouse;
+	int				tab;
+	int				num;
+}					t_keys;
+
 typedef struct s_fc
 {
 	double			floor;
-	double			ceiling
+	double			ceiling;
 }					t_fc;
 
 typedef struct s_vline
@@ -737,8 +766,8 @@ void				rift_spawn(t_doom *doom);
 int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 void				gamemode(t_doom *doom);
-
-void	project_entity(t_doom *doom, t_entity *entity);
-void	animated_entity_state(t_doom *doom, t_entity *entity);
+void				project_entity(t_doom *doom, t_entity *entity,
+						t_entity_render *render);
+void				animated_entity_state(t_doom *doom, t_entity *entity);
 
 #endif

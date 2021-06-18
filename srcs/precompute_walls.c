@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:58:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:37:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 {
 	int	i;
 
+	wall->tscale.x = wall->scale_w / wall->cv2.z;
 	if (wall->sv2.z)
 		wall->tscale.x = wall->scale_w / wall->sv2.z;
-	else
-		wall->tscale.x = wall->scale_w / wall->cv2.z;
 	wall->tscale.y = wall->scale_h;
 	i = -1;
 	while (++i < wall->bh.total)
@@ -68,7 +67,8 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 			clock_wsprite(doom, wall, i);
 		else if (wall->wsprite.num[i].tx == 1)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
-		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w / wall->sv2.z;
+		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w
+			/ wall->sv2.z;
 		wall->wsprite.num[i].tscale.y = wall->wsprite.num[i].scale_h;
 		wall->wsprite.num[i].ready = 1;
 	}
@@ -76,20 +76,22 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 
 void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 {
-	double eye_z;
+	double	eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eye_lvl;
-	sector->floor.feet = doom->h2 + (get_floor_at_pos(sector, doom->player.where)
-		- eye_z + doom->cam.near_z * doom->player.pitch)
-		* doom->cam.scale / -doom->cam.near_z;	
-	sector->ceiling.head = doom->h2 + (get_ceiling_at_pos(sector, doom->player.where)
-		- eye_z + doom->cam.near_z * doom->player.pitch)
+	sector->floor.feet = doom->h2
+		+ (get_floor_at_pos(sector, doom->player.where)
+			- eye_z + doom->cam.near_z * doom->player.pitch)
+		* doom->cam.scale / -doom->cam.near_z;
+	sector->ceiling.head = doom->h2
+		+ (get_ceiling_at_pos(sector, doom->player.where)
+			- eye_z + doom->cam.near_z * doom->player.pitch)
 		* doom->cam.scale / -doom->cam.near_z;
 }
 
 void	precompute_walls(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < doom->nb.sectors)

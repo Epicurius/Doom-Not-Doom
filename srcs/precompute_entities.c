@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:16:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:41:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 		return (0);
 	entity->angle = orientation(entity->where, doom->player.where, entity->yaw,
 			doom->npc_bxpm[entity->type].nb[entity->state][ANGLES]);
-	project_entity(doom, entity);
+	project_entity(doom, entity, &entity->render);
 	return (1);
 }
 
