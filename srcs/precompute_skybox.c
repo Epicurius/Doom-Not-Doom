@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:42:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 12:47:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void		project_skybox(t_doom *doom, t_wall *wall)
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
 
-	wall->s1.ceiling = doom->h2 + (5 + wall->angle_z1) * wall->scale_v1;
-	wall->s2.ceiling = doom->h2 + (5 + wall->angle_z2) * wall->scale_v2;
-	wall->s1.floor = doom->h2 + (-5 + wall->angle_z1) * wall->scale_v1;
-	wall->s2.floor = doom->h2 + (-5 + wall->angle_z2) * wall->scale_v2;
+	wall->slope1.ceiling = doom->h2 + (5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope2.ceiling = doom->h2 + (5 + wall->angle_z2) * wall->scale_v2;
+	wall->slope1.floor = doom->h2 + (-5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope2.floor = doom->h2 + (-5 + wall->angle_z2) * wall->scale_v2;
 
         wall->xrange		= wall->x2 - wall->x1;
-	wall->range.floor	= wall->s2.floor - wall->s1.floor;
-	wall->range.ceiling	= wall->s2.ceiling - wall->s1.ceiling;
+	wall->slope_range.floor	= wall->slope2.floor - wall->slope1.floor;
+	wall->slope_range.ceiling	= wall->slope2.ceiling - wall->slope1.ceiling;
 	wall->zrange		= wall->sv1.z - wall->sv2.z;
         wall->zcomb		= wall->sv2.z * wall->sv1.z;
         wall->x0z1		= wall->v1.x * wall->sv2.z;//

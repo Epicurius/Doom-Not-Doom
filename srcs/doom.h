@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:40:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:18:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef struct s_fc
 {
 	double			floor;
 	double			ceiling;
-	double			f;
-	double			c;
 }					t_fc;
 
 typedef struct s_vline
@@ -181,15 +179,15 @@ typedef struct s_wall
 	double			x2;
 	double			cx1;
 	double			cx2;
+	t_fc			slope1;
+	t_fc			slope2;
+	t_fc			slope_range;
 	t_fc			s1;
 	t_fc			s2;
 	t_fc			range;
-	//t_fc			no_slope1;
-	//t_fc			no_slope2;
-	//t_fc			no_slope_range;
-	t_fc			s1_n;
-	t_fc			s2_n;
-	t_fc			range_n;
+	t_fc			nslope1;
+	t_fc			nslope2;
+	t_fc			nslope_range;
 	double			xrange;
 	double			zrange;
 	double			zcomb;
