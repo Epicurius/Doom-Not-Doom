@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:42:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:56:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:26:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 	entity->velocity.x *= speed / dist;
 	entity->velocity.y *= speed / dist;
 	entity->velocity.z *= speed / dist;
-	if (entity->data->flying)
+	if (!entity->data->flying)
 		entity->velocity.z = 0;
 	return (1);
 }
@@ -71,7 +71,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	entity->velocity.x *= speed / dist;
 	entity->velocity.y *= speed / dist;
 	entity->velocity.z *= speed / dist;
-	if (entity->data->flying)
+	if (!entity->data->flying)
 		entity->velocity.z = 0;
 	return (1);
 }

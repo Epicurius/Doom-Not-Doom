@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:09:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:35:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,36 @@ static void	get_base_speed(t_doom *doom, float *speed)
 	*speed *= doom->time.delta;
 }
 
+static inline void	foot_steps(t_doom *doom, t_player player, t_v3 *move)
+{
+	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
+		&& player.where.z == doom->sectors[player.sector].floor.y)
+	{
+		if (!Mix_Playing(CHANNEL_STEPS))
+			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
+	}
+	else if (Mix_Playing(CHANNEL_STEPS))
+	{
+		Mix_FadeOutChannel(CHANNEL_STEPS, 600);
+		Mix_HaltChannel(2);
+	}	
+}
 
 static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 {
-	*move = new_v3(0, 0, 0);
 	if (doom->key.w)
 	{
 		move->x += player.anglecos * speed;
 		move->y += player.anglesin * speed;
-		move->z += player.flying ? -player.pitch * speed : 0;
+		if (player.flying)
+			move->z += -player.pitch * speed;
 	}
 	if (doom->key.s)
 	{
 		move->x += player.anglecos * -speed;
 		move->y += player.anglesin * -speed;
-		move->z += player.flying ? player.pitch * speed : 0;
+		if (player.flying)
+			move->z += player.pitch * speed;
 	}
 	if (doom->key.a)
 	{
@@ -47,27 +62,18 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 		move->x += player.anglesin * -speed;
 		move->y += player.anglecos * speed;
 	}
-	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
-			&& player.where.z == doom->sectors[player.sector].floor.y)
-	{
-		if (!Mix_Playing(CHANNEL_STEPS))
-			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
-	}
-	else if (Mix_Playing(CHANNEL_STEPS))
-	{
-		Mix_FadeOutChannel(CHANNEL_STEPS, 600);
-		Mix_HaltChannel(2);
-	}
+	foot_steps(doom, player, move);
 }
 
 static void	get_velocity(t_doom *doom, t_v3 move)
 {
-	t_player *player;
-	t_sector *sector;
+	t_player	*player;
+	t_sector	*sector;
 
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
-	if (doom->key.space && player->where.z == get_floor_at_pos(sector, player->where))
+	if (doom->key.space
+		&& player->where.z == get_floor_at_pos(sector, player->where))
 	{
 		Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);
@@ -85,18 +91,20 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 
 void	movement(t_doom *doom)
 {
-	int x;
-	int y;
-	t_v3 move;
-	float speed;
+	int		x;
+	int		y;
+	t_v3	move;
+	float	speed;
 
-	if (doom->player.where.z + doom->player.eye_lvl + 2 < doom->sectors[doom->player.sector].ceiling.y)
+	if (doom->player.where.z + doom->player.eye_lvl + 2
+		< doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eye_lvl = EYE_LVL;
 	if (doom->key.ctr_l)
 		doom->player.eye_lvl = 4;
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);
 	get_base_speed(doom, &speed);
+	move = new_v3(0, 0, 0);
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);
 }

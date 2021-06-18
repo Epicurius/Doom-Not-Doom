@@ -6,17 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 11:17:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:38:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+//		doom->vert[ft_atoi(arr[0])].z = ft_atof(arr[3]) * doom->map_scale;
 void	parse_vertex(t_doom *doom, char **arr)
 {
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
-	//doom->vert[ft_atoi(arr[0])].z = ft_atof(arr[3]) * doom->map_scale;
 }
 
 void	parse_wall(t_doom *doom, char **arr)

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/18 09:41:16 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/18 12:10:20 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ RESET			:= "\e[0m"
 RAW_SRC =	ai_attack.c\
 			ai_movement.c\
 			ai_rand.c\
-			animate_wsprites.c\
+			animate.c\
 			blit_bxpm.c\
 			blit_entity.c\
 			camera.c\
@@ -44,6 +44,7 @@ RAW_SRC =	ai_attack.c\
 			draw_entity.c\
 			draw_floor.c\
 			draw_floor_and_ceiling.c\
+			draw_hud.c\
 			draw_neighbor_wall.c\
 			draw_portal_texture.c\
 			draw_projectile.c\
@@ -59,7 +60,7 @@ RAW_SRC =	ai_attack.c\
 			game_over.c\
 			game_pause.c\
 			game_quit.c\
-			hud.c\
+			hud_utils.c\
 			icon.c\
 			init.c\
 			init_alfred.c\
@@ -109,7 +110,8 @@ RAW_SRC =	ai_attack.c\
 			validate_map2.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
-			wave.c
+			wave.c\
+			project_entity.c
 		
 NAME			= doom
 CDIR			= srcs

@@ -6,11 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 12:43:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	neighbour_floor_and_ceiling(t_doom *doom, t_wall *wall, t_v3 p1, t_v3 p2);
 
 void		project_wall(t_doom *doom, t_wall *wall)
 {
@@ -18,7 +20,6 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	t_sector *sector;
 
 	sector = &doom->sectors[wall->sect];
-
 	cam = doom->cam;
 
 	/* Do perspective transformation */
@@ -39,12 +40,12 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->y1z0		= wall->v2.y * wall->sv1.z;
 	wall->yzrange	= wall->y1z0 - wall->y0z1;
 
-	/*Y for wall 4 corners*/
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
 	
 	double eye_z = doom->player.where.z + doom->player.eye_lvl;
-
+	
+	/* Floor and Ceiling for nonslope*/
 	wall->s1.c = doom->h2 + (sector->ceiling.y - eye_z + wall->angle_z1) * wall->scale_v1;
 	wall->s1.f = doom->h2 + (sector->floor.y - eye_z + wall->angle_z1) * wall->scale_v1;
 	wall->s2.c = doom->h2 + (sector->ceiling.y - eye_z + wall->angle_z2) * wall->scale_v2;
@@ -86,13 +87,23 @@ void		project_wall(t_doom *doom, t_wall *wall)
 
 	if (wall->n == -1)
 		return ;
+	neighbour_floor_and_ceiling(doom, wall, p1, p2);
 
+}
+
+void	neighbour_floor_and_ceiling(t_doom *doom, t_wall *wall, t_v3 p1, t_v3 p2)
+{
+	double			f1_h;
+	double			c1_h;
+	double			f2_h;
+	double			c2_h;
+	double eye_z = doom->player.where.z + doom->player.eye_lvl;
+	
 	//z of floor and ceiling with slope
-	sector = &doom->sectors[wall->n];
-	f1_h = get_floor_at_pos(sector, p1);
-	c1_h = get_ceiling_at_pos(sector, p1);
-	f2_h = get_floor_at_pos(sector, p2);
-	c2_h = get_ceiling_at_pos(sector, p2);
+	f1_h = get_floor_at_pos(&doom->sectors[wall->n], p1);
+	c1_h = get_ceiling_at_pos(&doom->sectors[wall->n], p1);
+	f2_h = get_floor_at_pos(&doom->sectors[wall->n], p2);
+	c2_h = get_ceiling_at_pos(&doom->sectors[wall->n], p2);
 
 	// screen y for floor and ceiling vertex
 	wall->s1_n.floor = doom->h2 + (f1_h - eye_z + wall->angle_z1) * wall->scale_v1;
@@ -100,5 +111,5 @@ void		project_wall(t_doom *doom, t_wall *wall)
 	wall->s2_n.floor = doom->h2 + (f2_h - eye_z + wall->angle_z2) * wall->scale_v2;
 	wall->s2_n.ceiling = doom->h2 + (c2_h - eye_z + wall->angle_z2) * wall->scale_v2;
 	wall->range_n.floor = wall->s2_n.floor - wall->s1_n.floor;
-	wall->range_n.ceiling = wall->s2_n.ceiling - wall->s1_n.ceiling;
+	wall->range_n.ceiling = wall->s2_n.ceiling - wall->s1_n.ceiling;	
 }

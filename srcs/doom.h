@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:42:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 12:40:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ typedef struct s_wall
 	t_fc			s1;
 	t_fc			s2;
 	t_fc			range;
+	//t_fc			no_slope1;
+	//t_fc			no_slope2;
+	//t_fc			no_slope_range;
 	t_fc			s1_n;
 	t_fc			s2_n;
 	t_fc			range_n;
@@ -649,9 +652,6 @@ void				parse_entity(t_doom *doom, char **arr);
 void				player_collision(t_doom *doom);
 /* File:			./srcs/precompute_entities.c */
 int					frame_animation(t_doom *doom, t_entity *entity);
-int					entity_see(t_doom *doom, t_entity *entity);
-int					entity_line_of_sight(t_doom *doom, t_entity *entity,
-						double dist);
 int					ai_track_player(t_doom *doom, t_entity *entity);
 void				animated_entity_state(t_doom *doom, t_entity *entity);
 void				get_entity_render(t_doom *doom, t_entity *entity);
@@ -739,5 +739,8 @@ void				rift_spawn(t_doom *doom);
 int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 void				gamemode(t_doom *doom);
+
+void	project_entity(t_doom *doom, t_entity *entity);
+void	animated_entity_state(t_doom *doom, t_entity *entity);
 
 #endif
