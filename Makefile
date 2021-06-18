@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/17 17:35:32 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/18 09:41:16 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,8 @@ LIBTP			:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
 LIBBXPM			:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
 
 LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
-CFLAGS			= -Wall -Wextra -Werror -Wunused-variable -Wno-unused-result
+CFLAGS			= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
+				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
 
 
 all: framework libs resources $(ODIR) $(NAME)

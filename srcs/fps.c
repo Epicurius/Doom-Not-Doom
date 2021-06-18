@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:04:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 09:42:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	update_fps_surface(TTF_Font *font, t_time *time)
 	free(str);
 }
 
-void				fps_func(t_doom *doom)
+void	fps_func(t_doom *doom)
 {
 	t_time		*time;
 	double		prev;

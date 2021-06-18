@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:14:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 09:47:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static void	print_score(t_doom *doom, int *i)
 	char	*name;
 	t_bmp	*bmp;
 
-	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH, doom->time.date.tm_mon + 1,
-			doom->time.date.tm_mday, doom->time.date.tm_min);
+	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH,
+			doom->time.date.tm_mon + 1, doom->time.date.tm_mday,
+			doom->time.date.tm_min);
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	write_bmp(name, bmp);
@@ -31,9 +32,9 @@ static void	print_score(t_doom *doom, int *i)
 
 static void	blit_game_over(t_doom *doom)
 {
-	t_bxpm		*bxpm;
+	t_bxpm	*bxpm;
 
-	bxpm = malloc(sizeof(t_bxpm));
+	bxpm = ft_pmalloc(sizeof(t_bxpm), "Game_over bxpm");
 	read_bxpm(bxpm, GAME_PATH"resources/BXPM/game_over.bxpm");
 	blit_bxpm(doom->surface, bxpm, doom->surface->w * 0.05, doom->surface->h * 0.05);
 	free_bxpm(bxpm);

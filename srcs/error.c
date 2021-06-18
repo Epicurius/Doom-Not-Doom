@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 09:12:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 09:42:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_pmalloc(size_t size, char *str)
 {
-	void *mem;
+	void	*mem;
 
 	mem = malloc(sizeof(*mem) * size);
 	if (mem)
@@ -48,6 +48,5 @@ void	error_msg(const char *restrict format, ...)
 	}
 	else
 		write(1, "\n", 1);
-	//launcher();
 	exit(1);
 }

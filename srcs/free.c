@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/25 16:29:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 09:45:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	free_map(t_doom *doom)
 {
-	int i;
+	int	i;
 
-	ft_memdel((void*)&doom->vert);
+	ft_memdel((void *)&doom->vert);
 	i = -1;
 	while (++i < doom->nb.walls)
-		ft_memdel((void*)&doom->walls[i].wsprite);
-	ft_memdel((void*)&doom->walls);
+		ft_memdel((void *)&doom->walls[i].wsprite);
+	ft_memdel((void *)&doom->walls);
 	i = -1;
 	while (++i < doom->nb.sectors)
-		ft_memdel((void*)&doom->sectors[i].wall);
-	ft_memdel((void*)&doom->sectors);
+		ft_memdel((void *)&doom->sectors[i].wall);
+	ft_memdel((void *)&doom->sectors);
 }
 
 void	free_render_utils(t_doom *doom)
@@ -42,7 +42,7 @@ void	free_font(t_doom *doom)
 
 void	free_color_palet(t_bxpm *bxpm)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 512)
@@ -54,8 +54,8 @@ void	free_color_palet(t_bxpm *bxpm)
 
 void	free_sprite_pos(t_npc_bxpm *sprite)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < 4)
@@ -80,8 +80,8 @@ void	free_sprites_pos(t_doom *doom)
 
 void	free_sprites(t_doom *doom)
 {
-	t_list *tmp;
-	t_list *curr;
+	t_list	*tmp;
+	t_list	*curr;
 
 	curr = doom->sprite;
 	while (curr)
@@ -95,8 +95,8 @@ void	free_sprites(t_doom *doom)
 
 void	free_rifts(t_doom *doom)
 {
-	t_list *tmp;
-	t_list *curr;
+	t_list	*tmp;
+	t_list	*curr;
 
 	curr = doom->rifts;
 	while (curr)
@@ -110,7 +110,7 @@ void	free_rifts(t_doom *doom)
 
 void	free_textures(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 6)
@@ -135,8 +135,9 @@ void	free_textures(t_doom *doom)
 
 void	free_projectiles(t_doom *doom)
 {
-	t_list *curr;
-	t_list *del;
+	t_list	*curr;
+	t_list	*del;
+
 	curr = doom->orb;
 	while (curr)
 	{
@@ -149,14 +150,15 @@ void	free_projectiles(t_doom *doom)
 
 void	free_weapons(t_doom *doom)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < 4)
 	{
 		j = -1;
-		while (++j < (doom->weapon[i].reload_frames + doom->weapon[i].fire_frames))
+		while (++j < (doom->weapon[i].reload_frames
+				+ doom->weapon[i].fire_frames))
 		{
 			free(doom->weapon[i].bxpm[j].pix);
 			free(doom->weapon[i].bxpm[j].clr);
@@ -167,7 +169,7 @@ void	free_weapons(t_doom *doom)
 
 void	free_sounds(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 7)
@@ -176,7 +178,7 @@ void	free_sounds(t_doom *doom)
 
 void	free_icon(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 5)
@@ -184,7 +186,6 @@ void	free_icon(t_doom *doom)
 		free(doom->icon[i].clr);
 		free(doom->icon[i].pix);
 	}
-
 }
 
 void	free_doom(t_doom *doom)
