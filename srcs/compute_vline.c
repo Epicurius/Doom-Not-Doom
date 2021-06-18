@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 14:18:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:39:26by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 	vline->divider = 1 / (wall.sv2.z + vline->alpha * wall.zrange);
 	vline->z = wall.zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
-	vline->max.ceiling = vline->clipped_alpha * wall.slope_range.ceiling + wall.slope1.ceiling;
+	vline->max.ceiling = vline->clipped_alpha * wall.slope_range.ceiling + wall.slope_v1.ceiling;
+	vline->max.floor = vline->clipped_alpha * wall.slope_range.floor + wall.slope_v1.floor;
 	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop, render->ybot);
-	vline->max.floor = vline->clipped_alpha * wall.slope_range.floor + wall.slope1.floor;
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->real_floor = vline->clipped_alpha * wall.range.floor + wall.s1.floor;
-	vline->real_ceiling = vline->clipped_alpha * wall.range.ceiling + wall.s1.ceiling;
+	vline->real_floor = vline->clipped_alpha * wall.static_range.floor + wall.static_v1.floor;
+	vline->real_ceiling = vline->clipped_alpha * wall.static_range.ceiling + wall.static_v1.ceiling;
 	vline->line_height = vline->real_floor - vline->real_ceiling;
 }
 

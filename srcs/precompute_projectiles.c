@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:24:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:54:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 	return (0);
 }
 
-static int		vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
+static int	vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
 {
-	t_sector sector;
+	t_sector	sector;
 
 	sector = doom->sectors[orb->sector];
 	if (dest.z < sector.floor.y || dest.z > sector.ceiling.y)
@@ -35,29 +35,29 @@ static int		vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
 	return (0);
 }
 
-int		projectile_collision(t_doom *doom, t_project *orb, t_v3 dest)
+int	projectile_collision(t_doom *doom, t_project *orb, t_v3 dest)
 {
-	t_collision o;
+	t_collision	projectile;
 
-	o.where				= &orb->where;
-	o.velocity			= &orb->velocity;
-	o.sector			= &orb->sector;
-	o.sectors			= doom->sectors;
-	o.hitbox_height		= 5;
-	o.hitbox_radius		= 5;
-	o.step_height		= 0;
-	if (player_contact(doom, orb->start, dest) ||
-		vertical_collision(doom, orb, dest) ||
-		horizontal_collision(&o, dest))
+	projectile.where = &orb->where;
+	projectile.velocity = &orb->velocity;
+	projectile.sector = &orb->sector;
+	projectile.sectors = doom->sectors;
+	projectile.hitbox_height = 5;
+	projectile.hitbox_radius = 5;
+	projectile.step_height = 0;
+	if (player_contact(doom, orb->start, dest)
+		|| vertical_collision(doom, orb, dest)
+		|| horizontal_collision(&projectile, dest))
 		return (1);
 	return (0);
 }
 
 void	precompute_projectiles(t_doom *doom)
 {
-	t_v3 dest;
-	t_list *curr;
-	t_project *orb;
+	t_v3		dest;
+	t_list		*curr;
+	t_project	*orb;
 
 	curr = doom->orb;
 	while (curr)

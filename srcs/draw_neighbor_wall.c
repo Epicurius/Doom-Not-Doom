@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:51:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:51:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 void	draw_neighbor_wall(t_render *render, t_vline *vline)
 {
 	vline->max_n.ceiling = vline->clipped_alpha
-		* render->wall.nslope_range.ceiling + render->wall.nslope1.ceiling;
+		* render->wall.nslope_range.ceiling + render->wall.nslope_v1.ceiling;
 	vline->max_n.floor = vline->clipped_alpha
-		* render->wall.nslope_range.floor + render->wall.nslope1.floor;
+		* render->wall.nslope_range.floor + render->wall.nslope_v1.floor;
 	vline->curr_n.ceiling = ft_clamp(vline->max_n.ceiling,
 			render->ytop, render->ybot);
 	vline->curr_n.floor = ft_clamp(vline->max_n.floor,

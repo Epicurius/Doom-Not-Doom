@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rift_spawn.c                                       :+:      :+:    :+:   */
+/*   wave.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:07:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:51:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_gamemode(t_doom *doom)
 
 void	spawn_mob(t_doom *doom, t_entity *rift)
 {
-	t_entity *mob;
+	t_entity	*mob;
 
 	mob = ft_memalloc(sizeof(t_entity));
 	mob->type = rand() % 2;
@@ -49,13 +49,13 @@ void	rift_spawn(t_doom *doom)
 	curr = doom->sprite;
 	while (curr)
 	{
-		if (((t_entity*)curr->content)->type == 2)
+		if (((t_entity *)curr->content)->type == 2)
 			spawn_mob(doom, curr->content);
 		curr = curr->next;
 	}
 }
 
-int		eternal_round(t_doom *doom)
+int	eternal_round(t_doom *doom)
 {
 	if (doom->game.spawns == 0)
 	{
@@ -74,10 +74,9 @@ int		eternal_round(t_doom *doom)
 
 void	respawn_rifts(t_doom *doom)
 {
-	t_list *new;
-	t_list *curr;
+	t_list	*new;
+	t_list	*curr;
 
-	ft_printf("Respawn Rifts\n");
 	curr = doom->rifts;
 	while (curr != NULL)
 	{
@@ -86,7 +85,6 @@ void	respawn_rifts(t_doom *doom)
 		doom->game.spawns += 1;
 		curr = curr->next;
 	}
-	ft_printf("Respawn Rifts Done\n");
 }
 
 void	gamemode(t_doom *doom)

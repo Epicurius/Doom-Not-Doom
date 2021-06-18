@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:42:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	shade_zbuffer(t_render *render, t_vline vline)
 	Uint32 *pix;
 
 	x = render->x;
-	pix = (Uint32*)render->surface->pixels;
+	pix = (Uint32 *)render->surface->pixels;
 	clr = set_zbuffer_shade(vline.z, 500);
 	while (vline.y1 < vline.y2)
 	{
@@ -53,7 +53,7 @@ void	vline_color(t_render *render, t_vline *vline)
 	coord = vline->y1 * render->surface->w + render->x;
 	if (vline->y1 < vline->y2)
 	{
-        ((Uint32*)render->surface->pixels)[coord] = 0xFF00FF00;
+        ((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
 		//((double*)render->surface->userdata)[coord] = 200;//vline->z;
 		vline->y1 += 1;
 		while (vline->y1 < vline->y2 - 1)
@@ -61,15 +61,15 @@ void	vline_color(t_render *render, t_vline *vline)
 			//if (render->x == render->wall.cx1 || render->x == render->wall.cx2)
 			if ((render->x - 1 < render->wall.cx1 || render->x + 1 > render->wall.cx2)
 					&& vline->y1 < vline->curr.floor && vline->y1 > vline->curr.ceiling)
-				((Uint32*)render->surface->pixels)[coord] = 0xFFFF0000;
+				((Uint32 *)render->surface->pixels)[coord] = 0xFFFF0000;
 			//else
-				//((Uint32*)render->surface->pixels)[coord] = 0xFF888888;
+				//((Uint32 *)render->surface->pixels)[coord] = 0xFF888888;
 			coord += render->surface->w;
 			//((double*)render->surface->userdata)[coord] = 200;//vline->z;
 			vline->y1 += 1;
 		}
 		coord += render->surface->w;
-		((Uint32*)render->surface->pixels)[coord] = 0xFF00FF00;
+		((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
 		//((double*)render->surface->userdata)[coord] = 200;//vline->z;
 		vline->y1 += 1;
 	}

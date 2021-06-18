@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 14:18:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:43:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_settings
 typedef struct s_fc
 {
 	double			floor;
-	double			ceiling;
+	double			ceiling
 }					t_fc;
 
 typedef struct s_vline
@@ -131,7 +131,7 @@ typedef struct s_wsprite
 	t_rect			src;
 	double			scale_w;
 	double			scale_h;
-	t_v3			tscale;
+	t_v2			tscale;
 	int				ready;
 }					t_wsprite;
 
@@ -179,14 +179,14 @@ typedef struct s_wall
 	double			x2;
 	double			cx1;
 	double			cx2;
-	t_fc			slope1;
-	t_fc			slope2;
+	t_fc			static_v1;
+	t_fc			static_v2;
+	t_fc			static_range;
+	t_fc			slope_v1;
+	t_fc			slope_v2;
 	t_fc			slope_range;
-	t_fc			s1;
-	t_fc			s2;
-	t_fc			range;
-	t_fc			nslope1;
-	t_fc			nslope2;
+	t_fc			nslope_v1;
+	t_fc			nslope_v2;
 	t_fc			nslope_range;
 	double			xrange;
 	double			zrange;
@@ -197,7 +197,7 @@ typedef struct s_wall
 	double			x0z1;
 	double			y1z0;
 	double			y0z1;
-	t_v3			tscale;
+	t_v2			tscale;
 }					t_wall;
 
 typedef struct s_sector

@@ -6,18 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:47:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 15:57:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+//		(coord - 5)
 void	compute_skybox(t_doom *doom)
 {
-	t_player player;
+	t_player	player;
 
 	player = doom->player;
-	// (coord - 5)
 	doom->skybox[0].sv1.x = (-5) * player.anglesin - (-5) * player.anglecos;
 	doom->skybox[0].sv1.z = (-5) * player.anglecos + (-5) * player.anglesin;
 	doom->skybox[1].sv1.x = (5) * player.anglesin - (-5) * player.anglecos;
@@ -32,41 +32,32 @@ void	compute_skybox(t_doom *doom)
 	doom->skybox[3].sv2 = doom->skybox[0].sv1;
 }
 
-
-void		project_skybox(t_doom *doom, t_wall *wall)
+void	project_skybox(t_doom *doom, t_wall *wall)
 {
-	t_camera cam;
-
-	cam = doom->cam;
-	/* Do perspective transformation */
-	wall->scale_v1 = cam.scale / -wall->cv1.z;
-	wall->scale_v2 = cam.scale / -wall->cv2.z;
+	wall->scale_v1 = doom->cam.scale / -wall->cv1.z;
+	wall->scale_v2 = doom->cam.scale / -wall->cv2.z;
 	wall->cx1 = doom->w2 + (wall->cv1.x * wall->scale_v1);
 	wall->cx2 = doom->w2 + (wall->cv2.x * wall->scale_v2);
 	wall->cx1 = ceil(wall->cx1);
-	wall->x1 = doom->w2 + wall->sv1.x * cam.scale / -wall->sv1.z;
-	wall->x2 = doom->w2 + wall->sv2.x * cam.scale / -wall->sv2.z;
-
-	/*Y for wall 4 corners*/
+	wall->x1 = doom->w2 + wall->sv1.x * doom->cam.scale / -wall->sv1.z;
+	wall->x2 = doom->w2 + wall->sv2.x * doom->cam.scale / -wall->sv2.z;
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
-
-	wall->slope1.ceiling = doom->h2 + (5 + wall->angle_z1) * wall->scale_v1;
-	wall->slope2.ceiling = doom->h2 + (5 + wall->angle_z2) * wall->scale_v2;
-	wall->slope1.floor = doom->h2 + (-5 + wall->angle_z1) * wall->scale_v1;
-	wall->slope2.floor = doom->h2 + (-5 + wall->angle_z2) * wall->scale_v2;
-
-        wall->xrange		= wall->x2 - wall->x1;
-	wall->slope_range.floor	= wall->slope2.floor - wall->slope1.floor;
-	wall->slope_range.ceiling	= wall->slope2.ceiling - wall->slope1.ceiling;
-	wall->zrange		= wall->sv1.z - wall->sv2.z;
-        wall->zcomb		= wall->sv2.z * wall->sv1.z;
-        wall->x0z1		= wall->v1.x * wall->sv2.z;//
-        wall->x1z0		= wall->v2.x * wall->sv1.z;//
-        wall->xzrange		= wall->x1z0 - wall->x0z1;
-        wall->y0z1		= wall->v1.y * wall->sv2.z;//
-	wall->y1z0		= wall->v2.y * wall->sv1.z;//
-	wall->yzrange		= wall->y1z0 - wall->y0z1;
+	wall->slope_v1.ceiling = doom->h2 + (5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope_v2.ceiling = doom->h2 + (5 + wall->angle_z2) * wall->scale_v2;
+	wall->slope_v1.floor = doom->h2 + (-5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope_v2.floor = doom->h2 + (-5 + wall->angle_z2) * wall->scale_v2;
+	wall->xrange = wall->x2 - wall->x1;
+	wall->slope_range.floor = wall->slope_v2.floor - wall->slope_v1.floor;
+	wall->slope_range.ceiling = wall->slope_v2.ceiling - wall->slope_v1.ceiling;
+	wall->zrange = wall->sv1.z - wall->sv2.z;
+	wall->zcomb = wall->sv2.z * wall->sv1.z;
+	wall->x0z1 = wall->v1.x * wall->sv2.z;
+	wall->x1z0 = wall->v2.x * wall->sv1.z;
+	wall->xzrange = wall->x1z0 - wall->x0z1;
+	wall->y0z1 = wall->v1.y * wall->sv2.z;
+	wall->y1z0 = wall->v2.y * wall->sv1.z;
+	wall->yzrange = wall->y1z0 - wall->y0z1;
 }
 
 void	precompute_skybox(t_doom *doom)

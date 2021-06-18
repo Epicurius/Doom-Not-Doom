@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:47:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:50:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	vline->z = w.zcomb * vline->divider;
 	vline->texel.x = (w.x0z1 + vline->alpha * w.xzrange) * vline->divider;
 	vline->texel.y = (w.y0z1 + vline->alpha * w.yzrange) * vline->divider;
-	vline->max.ceiling = vline->clipped_alpha * w.slope_range.ceiling + w.slope1.ceiling;
+	vline->max.ceiling = vline->clipped_alpha * w.slope_range.ceiling + w.slope_v1.ceiling;
 	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop,
 			render->ybot);
-	vline->max.floor = vline->clipped_alpha * w.slope_range.floor + w.slope1.floor;
+	vline->max.floor = vline->clipped_alpha * w.slope_range.floor + w.slope_v1.floor;
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
 	vline->start.ceiling = vline->max.ceiling - render->player.horizon;
 	vline->start.floor = vline->max.floor - render->player.horizon;
-	vline->line_height = (vline->clipped_alpha * w.slope_range.floor + w.slope1.floor)
-		- (vline->clipped_alpha * w.slope_range.ceiling + w.slope1.ceiling);
+	vline->line_height = (vline->clipped_alpha * w.slope_range.floor + w.slope_v1.floor)
+		- (vline->clipped_alpha * w.slope_range.ceiling + w.slope_v1.ceiling);
 }
 
 void	draw_skybox(t_render *render, t_vline *vline, int side)
