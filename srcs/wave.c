@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:41:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:33:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	respawn_rifts(t_doom *doom)
 	}
 }
 
-void	gamemode(t_doom *doom)
+void	game_mode(t_doom *doom)
 {
 	if (doom->game.cool_down)
 	{

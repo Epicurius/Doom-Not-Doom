@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 11:43:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:13:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_plane
 	double			scale;
 }					t_plane;
 
-typedef	struct s_keys
+typedef struct s_keys
 {
 	int				chr;
 	int				fnc;
@@ -510,7 +510,7 @@ int					blit_game_entity(void *arg);
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom, int x, int y);
 /* File:			./srcs/clock.c */
-void				init_clock(t_doom *doom);
+void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File:			./srcs/cohen_sutherland.c */
 int					cohen_sutherland(t_point v[2], t_rect size);
@@ -537,7 +537,7 @@ void				cs(void);
 void				ce(char *str);
 void				debug_loop(t_doom *doom, SDL_Event *event);
 /* File:			./srcs/draw2.c */
-void				DrawScreen(t_doom *doom);
+void				draw_screen(t_doom *doom);
 /* File:			./srcs/draw_bullet_holes.c */
 void				draw_wall_bh(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_ceiling.c */
@@ -545,7 +545,7 @@ void				draw_ceiling_texture(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_crosshair.c */
 void				draw_crosshair(t_doom *doom);
 /* File:			./srcs/draw_entity.c */
-void				Drawsprite(t_doom *doom);
+void				draw_sprites(t_doom *doom);
 /* File:			./srcs/draw_floor.c */
 void				draw_floor_texture(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_floor_and_ceiling.c */
@@ -557,7 +557,7 @@ void				draw_neighbor_wall(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_portal_texture.c */
 void				draw_portal_texture(t_render *render, t_vline *vline);
 /* File:			./srcs/draw_projectile.c */
-void				DrawProjectiles(t_doom *doom);
+void				draw_projectiles(t_doom *doom);
 /* File:			./srcs/draw_skybox.c */
 void				draw_skybox(t_render *render, t_vline *vline, int side);
 /* File:			./srcs/draw_wall.c */
@@ -757,7 +757,8 @@ int					is_convex(t_doom *doom, t_sector *sector);
 Uint32				z_clr(double z, double max_z);
 void				shade_zbuffer(t_render *render, t_vline *vline, int side);
 void				vline_color(t_render *render, t_vline *vline, int side);
-void				vline_monochromic(t_render *render, t_vline *vline, int side);
+void				vline_monochromic(t_render *render, t_vline *vline,
+						int side);
 /* File:			./srcs/wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			./srcs/wave.c */
@@ -766,9 +767,26 @@ void				spawn_mob(t_doom *doom, t_entity *rift);
 void				rift_spawn(t_doom *doom);
 int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
-void				gamemode(t_doom *doom);
+void				game_mode(t_doom *doom);
 void				project_entity(t_doom *doom, t_entity *entity,
 						t_entity_render *render);
 void				animated_entity_state(t_doom *doom, t_entity *entity);
+void				load_shotgun(t_weapon *weapon);
+void				load_gun(t_weapon *weapon);
+void				load_mini(t_weapon *weapon);
+void				load_kar(t_weapon *weapon);
+void				load_pump(t_weapon *weapon);
+void				init_shotgun(t_doom *doom, t_weapon *weapon);
+void				init_pump(t_doom *doom, t_weapon *weapon);
+void				init_gun(t_doom *doom, t_weapon *weapon);
+void				init_minigun(t_doom *doom, t_weapon *weapon);
+void				init_kar98(t_doom *doom, t_weapon *weapon);
+void				alfred(t_doom *doom, t_data *alfred);
+void				spooky(t_doom *doom, t_data *spooky);
+void				rift(t_doom *doom, t_data *rift);
+void				barrel(t_doom *doom, t_data *sprite);
+void				lamp(t_doom *doom, t_data *sprite);
+void				torch(t_doom *doom, t_data *sprite);
+void				meat_hook(t_doom *doom, t_data *sprite);
 
 #endif

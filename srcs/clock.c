@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:59:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:29:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ static void	get_time(time_t *t)
 
 static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < bxpm->pix_nb)
 	{
-		if (((Uint8*)surf->pixels)[i] == 0xFF)
+		if (((Uint8 *)surf->pixels)[i] == 0xFF)
 			bxpm->pix[i] = 0;
 		else
 			bxpm->pix[i] = 1;
 	}
 }
 
-void	init_clock(t_doom *doom)
+void	init_clock(t_doom *doom, t_bxpm *bxpm)
 {
-	char		*str;
 	time_t		t;
+	char		*str;
 	t_time		*time;
 	SDL_Surface	*tmp;
 
@@ -43,17 +43,19 @@ void	init_clock(t_doom *doom)
 	time->clock_fg = hex_to_sdl_color(CLOCK_FG_COLOR);
 	time->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);
 	time->date = *localtime(&t);
-	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour, time->date.tm_min, time->date.tm_sec);
-	tmp = TTF_RenderText_Shaded(doom->font.digi100, str, time->clock_fg, time->clock_bg);
-	doom->mtx[4].w = tmp->w;
-	doom->mtx[4].h = tmp->h;
-	doom->mtx[4].clr_nb = 2;
-	doom->mtx[4].pix_nb = tmp->w * tmp->h;
-	doom->mtx[4].clr = ft_memalloc(sizeof(Uint32) * 2);
-	doom->mtx[4].pix = ft_memalloc(sizeof(unsigned short) * (tmp->w * tmp->h));
-	doom->mtx[4].clr[0] = CLOCK_FG_COLOR;
-	doom->mtx[4].clr[1] = CLOCK_BG_COLOR;
-	clock_to_bxpm(tmp, &doom->mtx[4]);
+	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour,
+			time->date.tm_min, time->date.tm_sec);
+	tmp = TTF_RenderText_Shaded(doom->font.digi100, str,
+			time->clock_fg, time->clock_bg);
+	bxpm->w = tmp->w;
+	bxpm->h = tmp->h;
+	bxpm->clr_nb = 2;
+	bxpm->pix_nb = tmp->w * tmp->h;
+	bxpm->clr = ft_memalloc(sizeof(Uint32) * 2);
+	bxpm->pix = ft_memalloc(sizeof(unsigned short) * (tmp->w * tmp->h));
+	bxpm->clr[0] = CLOCK_FG_COLOR;
+	bxpm->clr[1] = CLOCK_BG_COLOR;
+	clock_to_bxpm(tmp, bxpm);
 	SDL_FreeSurface(tmp);
 	free(str);
 }
@@ -70,9 +72,11 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	time->date = *localtime(&t);
 	if (wall->wsprite.num[x].time == time->date.tm_sec)
 		return (1);
-	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour, time->date.tm_min, time->date.tm_sec);
+	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour,
+			time->date.tm_min, time->date.tm_sec);
 	wall->wsprite.num[x].time = time->date.tm_sec;
-	tmp = TTF_RenderText_Shaded(doom->font.digi100, str, time->clock_fg, time->clock_bg);
+	tmp = TTF_RenderText_Shaded(doom->font.digi100, str,
+			time->clock_fg, time->clock_bg);
 	clock_to_bxpm(tmp, &doom->mtx[4]);
 	SDL_FreeSurface(tmp);
 	free(str);

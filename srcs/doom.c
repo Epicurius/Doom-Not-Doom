@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:42:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:57:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,20 @@ static void	game_loop(t_doom *doom, SDL_Event *event)
 	update_camera(doom, 0, 0);
 	precompute_walls(doom);
 	precompute_skybox(doom);
-	DrawScreen(doom);
-	/*All this has no time requirements*/
-	gamemode(doom);
+	draw_screen(doom);
+	game_mode(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
 	movement(doom);
-	player_collision(doom);
 	poll_event(doom, event);
-	/*--------------------------------*/
 	tpool_wait(&doom->tpool);
-	DrawProjectiles(doom);
-	Drawsprite(doom);
+	draw_projectiles(doom);
+	draw_sprites(doom);
 	draw_crosshair(doom);
 	draw_hud(doom);
 	draw_weapon(doom);
 	fps_func(doom);
-	blit_fps(doom);
 	if (doom->key.tab)
 		map(doom);
 	update_screen(doom, doom->surface);

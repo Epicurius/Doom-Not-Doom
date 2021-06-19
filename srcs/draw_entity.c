@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 14:02:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:32:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	sprite_threads(t_doom *doom, t_entity *sprite,
 	}
 }
 
-void	Drawsprite(t_doom *doom)
+void	draw_sprites(t_doom *doom)
 {
 	t_list			*curr;
 	t_entity		*sprite;

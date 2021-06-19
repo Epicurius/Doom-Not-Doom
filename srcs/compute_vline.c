@@ -19,12 +19,17 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 	vline->divider = 1 / (wall.sv2.z + vline->alpha * wall.zrange);
 	vline->z = wall.zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
-	vline->max.ceiling = vline->clipped_alpha * wall.slope_range.ceiling + wall.slope_v1.ceiling;
-	vline->max.floor = vline->clipped_alpha * wall.slope_range.floor + wall.slope_v1.floor;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop, render->ybot);
+	vline->max.ceiling = vline->clipped_alpha
+		* wall.slope_range.ceiling + wall.slope_v1.ceiling;
+	vline->max.floor = vline->clipped_alpha
+		* wall.slope_range.floor + wall.slope_v1.floor;
+	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
+			render->ytop, render->ybot);
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->real_floor = vline->clipped_alpha * wall.static_range.floor + wall.static_v1.floor;
-	vline->real_ceiling = vline->clipped_alpha * wall.static_range.ceiling + wall.static_v1.ceiling;
+	vline->real_floor = vline->clipped_alpha
+		* wall.static_range.floor + wall.static_v1.floor;
+	vline->real_ceiling = vline->clipped_alpha
+		* wall.static_range.ceiling + wall.static_v1.ceiling;
 	vline->line_height = vline->real_floor - vline->real_ceiling;
 }
 

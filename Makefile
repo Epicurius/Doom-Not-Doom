@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/19 15:45:48 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/19 17:40:31 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,9 +83,7 @@ RAW_SRC =	ai_attack.c\
 			init_weapons.c\
 			keys.c\
 			line.c\
-			load_bxpm.c\
 			malloc_texture_pos.c\
-			math.c\
 			minimap.c\
 			movement.c\
 			object_collision.c\
@@ -113,7 +111,18 @@ RAW_SRC =	ai_attack.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
 			wave.c\
-			project_entity.c
+			project_entity.c\
+			bxpm_weapons.c\
+			stats_weapons.c\
+			entity_stats1.c\
+			entity_stats2.c\
+			math1.c\
+			math2.c\
+			math3.c\
+			math4.c\
+			math5.c\
+			math6.c\
+			math7.c\
 		
 NAME			= doom
 CDIR			= srcs

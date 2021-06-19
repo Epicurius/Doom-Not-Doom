@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 11:35:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:33:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void	movement(t_doom *doom)
 	move = new_v3(0, 0, 0);
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);
+	player_collision(doom);
 }

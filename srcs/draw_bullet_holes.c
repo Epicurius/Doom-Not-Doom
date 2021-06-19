@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:01:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:42:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	put_bh_pixels(t_render *render, int coord, t_v3 text)
 {
-	Uint32		clr;
+	Uint32			clr;
 	unsigned short	pix;
 
 	pix = render->mtx[0].pix[(int)text.y * 128 + (int)text.x];

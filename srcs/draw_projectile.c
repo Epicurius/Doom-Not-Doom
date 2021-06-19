@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:02:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:32:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	rotate_projectile(t_doom *doom, t_project *orb,
 	render->yrange = render->end.y - render->start.y;
 }
 
-void 	DrawProjectiles(t_doom *doom)
+void 	draw_projectiles(t_doom *doom)
 {
 	t_list			*curr;
 	t_project		*orb;

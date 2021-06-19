@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:59:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:23:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 			clr = bxpm->clr[bxpm->pix[p.y * bxpm->w + p.x]];
 			if (0 != clr >> 24 & 0xFF)
 				((Uint32 *)surface->pixels)[(sy + p.y)
-					* surface->w + (sx + p.x)] = clr;
+					*surface->w + (sx + p.x)] = clr;
 		}
 	}
 }

@@ -6,93 +6,32 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:15:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	alfred(t_doom *doom, t_data *alfred)
+static void	init_entity_pos(t_doom *doom)
 {
-	alfred->health = 1;
-	alfred->damage = 100;
-	alfred->animate = 1;
-	alfred->hostile = 1;
-	alfred->attack_style = 2;
-	alfred->scale = 4 * (doom->surface->w / 100);
-	alfred->height = 2;
-	alfred->hitbox_radius = 2;
-	alfred->speed = 20;
-	alfred->move = 1;
-	alfred->view_distance = 200;
-	alfred->detection_radius = 40;
-	alfred->attack_range = 7;
-	alfred->frame_rate[IDLE] = 2000;
-	alfred->frame_rate[MOVE] = 4000;
-	alfred->frame_rate[ATTACK] = 6000;
-	alfred->frame_rate[DEATH] = 6000;
-	alfred->flying = 1;
+	init_alfred(doom);
+	init_spooky(doom);
+	init_rift(doom);
+	init_barrel(doom);
+	init_lamp(doom);
+	init_torch(doom);
+	init_meat_hook(doom);
 }
 
-static void	spooky(t_doom *doom, t_data *spooky)
+static void	init_entity_stats(t_doom *doom)
 {
-	spooky->health = 1;
-	spooky->damage = 30;
-	spooky->animate = 1;
-	spooky->hostile = 1;
-	spooky->attack_style = 1;
-	spooky->scale = 2 * (doom->surface->w / 100);
-	spooky->height = 7;
-	spooky->hitbox_radius = 2;
-	spooky->speed = 10;
-	spooky->move = 1;
-	spooky->view_distance = 100;
-	spooky->detection_radius = 40;
-	spooky->attack_range = 20;
-	spooky->frame_rate[IDLE] = 2000;
-	spooky->frame_rate[MOVE] = 6000;
-	spooky->frame_rate[ATTACK] = 18000;
-	spooky->frame_rate[DEATH] = 12000;
-	spooky->flying = 0;
-}
-
-static void	rift(t_doom *doom, t_data *rift)
-{
-	rift->health = 1;
-	rift->damage = 200;
-	rift->attack_style = 2;
-	rift->scale = 2 * (doom->surface->w / 100);
-	rift->height = 9;
-	rift->frame_rate[IDLE] = 2000;
-	rift->frame_rate[DEATH] = 8000;
-}
-
-static void	barrel(t_doom *doom, t_data *sprite)
-{
-	sprite->health = 20;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[DEATH] = 6000;
-}
-
-static void	lamp(t_doom *doom, t_data *sprite)
-{
-	sprite->health = 11120;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 3000;
-}
-
-static void	torch(t_doom *doom, t_data *sprite)
-{
-	sprite->health = 11120;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 9000;
-}
-
-static void	meat_hook(t_doom *doom, t_data *sprite)
-{
-	sprite->health = 11120;
-	sprite->scale = 10 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 1000;
+	alfred(doom, &doom->npe_data[0]);
+	spooky(doom, &doom->npe_data[1]);
+	rift(doom, &doom->npe_data[2]);
+	barrel(doom, &doom->npe_data[3]);
+	lamp(doom, &doom->npe_data[4]);
+	torch(doom, &doom->npe_data[5]);
+	meat_hook(doom, &doom->npe_data[6]);
 }
 
 void	init_game_entity(t_doom *doom)
@@ -101,13 +40,8 @@ void	init_game_entity(t_doom *doom)
 	t_list		*curr;
 	t_entity	*sprite;
 
-	alfred(doom, &doom->npe_data[0]);
-	spooky(doom, &doom->npe_data[1]);
-	rift(doom, &doom->npe_data[2]);
-	barrel(doom, &doom->npe_data[3]);
-	lamp(doom, &doom->npe_data[4]);
-	torch(doom, &doom->npe_data[5]);
-	meat_hook(doom, &doom->npe_data[6]);
+	init_entity_pos(doom);
+	init_entity_stats(doom);
 	curr = doom->sprite;
 	while (curr)
 	{

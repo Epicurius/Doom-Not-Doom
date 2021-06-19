@@ -6,12 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:05:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:30:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+//		sector->center.z = (sector->ceiling.y - sector->floor.y) / 2.0;
 void	sector_center(t_sector *sector)
 {
 	int		i;
@@ -25,7 +26,7 @@ void	sector_center(t_sector *sector)
 	}
 	sector->center.x /= sector->npoints;
 	sector->center.y /= sector->npoints;
-	sector->center.z = (sector->ceiling.y - sector->floor.y) / 2.0;
+	sector->center.z = get_floor_at_pos(sector, sector->center);
 }
 
 void	fix_wall_orientation(t_sector *sector)

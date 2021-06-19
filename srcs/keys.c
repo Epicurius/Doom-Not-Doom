@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:11:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:19:59by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,27 @@
 static void	mouse(t_doom *doom, SDL_Event *event)
 {
 	if (event->button.button == SDL_BUTTON_LEFT)
-			doom->key.lmouse = event->type == SDL_MOUSEBUTTONDOWN;
+		doom->key.lmouse = event->type == SDL_MOUSEBUTTONDOWN;
 }
 
-static void	key(t_doom *doom, SDL_Event *event)
+static void	key2(t_doom *doom, SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_p)
+		doom->key.p = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym == SDLK_r)
+		doom->key.r = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym >= SDLK_1 && event->key.keysym.sym <= SDLK_9)
+		doom->key.num = event->key.keysym.sym - 48;
+	else if (event->key.keysym.sym == SDLK_m && event->type == SDL_KEYDOWN)
+	{
+		doom->key.m = doom->key.m == 0;
+		mute(doom->key.m);
+	}
+	else if (event->key.keysym.sym == SDLK_BACKQUOTE)
+		doom->player.where = doom->sectors[doom->player.sector].center;
+}
+
+static void	key1(t_doom *doom, SDL_Event *event)
 {
 	if (event->key.keysym.sym == SDLK_w)
 		doom->key.w = event->type == SDL_KEYDOWN;
@@ -30,28 +47,17 @@ static void	key(t_doom *doom, SDL_Event *event)
 		doom->key.d = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_SPACE)
 		doom->key.space = event->type == SDL_KEYDOWN;
+	else if (event->key.keysym.sym == SDLK_q
+		|| event->key.keysym.sym == SDLK_ESCAPE)
+		doom->quit = 1;
 	else if (event->key.keysym.sym == SDLK_LCTRL)
 		doom->key.ctr_l = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_LSHIFT)
 		doom->key.shift_l = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_TAB)
 		doom->key.tab = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == SDLK_q || event->key.keysym.sym == SDLK_ESCAPE)
-		doom->quit = 1;
-	else if (event->key.keysym.sym == SDLK_p)
-		doom->key.p = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym == SDLK_r)
-		doom->key.r = event->type == SDL_KEYDOWN;
-	else if (event->key.keysym.sym >= SDLK_1 && event->key.keysym.sym <= SDLK_9)
-	{
-		doom->key.num = event->key.keysym.sym - 48;
-		//doom->player.where = doom->sectors[doom->player.sector].center;
-	}
-	else if (event->key.keysym.sym == SDLK_m && event->type == SDL_KEYDOWN)
-	{
-		doom->key.m = doom->key.m == 0;
-		mute(doom->key.m);
-	}
+	else
+		key2(doom, event);
 }
 
 static void	keys(t_doom *doom, SDL_Event *event)
@@ -59,7 +65,7 @@ static void	keys(t_doom *doom, SDL_Event *event)
 	if (event->type == SDL_QUIT)
 		doom->quit = 1;
 	if (event->type == SDL_KEYDOWN || event->type == SDL_KEYUP)
-		key(doom, event);
+		key1(doom, event);
 	if (event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEBUTTONDOWN)
 		mouse(doom, event);
 }

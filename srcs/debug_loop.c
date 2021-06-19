@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:37:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 11:16:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:34:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 	precompute_skybox(doom);
 	ce("precompute_skybox");
 	cs();
-	DrawScreen(doom);
+	draw_screen(doom);
 	ce("DRAW_SCREEN");
 	{
 		cs();
-		gamemode(doom);
-		ce("gamemode");
+		game_mode(doom);
+		ce("game_mode");
 		precompute_weapon(doom);
 		cs();
 		precompute_entities(doom);
@@ -68,10 +68,10 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 	tpool_wait(&doom->tpool);
 	ce("DRAW_WAIT");
 	cs();
-	DrawProjectiles(doom);
+	draw_projectiles(doom);
 	ce("draw_project");
 	cs();
-	Drawsprite(doom);//
+	draw_sprites(doom);//
 	ce("draw_sprite");
 	cs();
 	draw_crosshair(doom);

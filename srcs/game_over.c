@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 15:15:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:56:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static void	blit_game_over(t_doom *doom)
 	free_bxpm(bxpm);
 }
 
-static void	blit_game_stats(t_doom *doom)
+static void	blit_game_stats(t_doom *doom, char *str)
 {
-	char		*str;
 	SDL_Rect	dstr;
 	SDL_Surface	*surface;
 
@@ -94,7 +93,7 @@ void	game_over(t_doom *doom)
 
 	screen_shot = 0;
 	blit_game_over(doom);
-	blit_game_stats(doom);
+	blit_game_stats(doom, NULL);
 	blit_screen_shot(doom);
 	update_screen(doom, doom->surface);
 	while (1)

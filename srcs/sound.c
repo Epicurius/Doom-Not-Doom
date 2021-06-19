@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 12:04:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:20:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	load_wav(t_doom *doom)
 	doom->sound[WAV_FOOT_STEPS] = Mix_LoadWAV(WAV_PATH"footstep.wav");
 	doom->sound[WAV_JUMP] = Mix_LoadWAV(WAV_PATH"jump.wav");
 	doom->sound[WAV_GUN] = Mix_LoadWAV(WAV_PATH"gun.wav");
-
 	if (!doom->sound[WAV_MAIN_THEME] || !doom->sound[WAV_SHOTGUN]
-			|| !doom->sound[WAV_SCREEN_SHOT] || !doom->sound[WAV_INTRO]
-			|| !doom->sound[WAV_FOOT_STEPS] || !doom->sound[WAV_JUMP]
-			|| !doom->sound[WAV_GUN])
+		|| !doom->sound[WAV_SCREEN_SHOT] || !doom->sound[WAV_INTRO]
+		|| !doom->sound[WAV_FOOT_STEPS] || !doom->sound[WAV_JUMP]
+		|| !doom->sound[WAV_GUN])
 		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
 }
 
@@ -43,7 +42,7 @@ void	intro(void *arg)
 
 	d = arg;
 	Mix_PlayChannel(1, d->sound1, 0);
-    while (Mix_Playing(1) != 0)
+	while (Mix_Playing(1) != 0)
 		SDL_Delay(200);
 	Mix_PlayChannel(1, d->sound2, -1);
 	SDL_Delay(1300);
@@ -57,15 +56,8 @@ void	init_sound(t_doom *doom)
 	Mix_AllocateChannels(7);
 	load_wav(doom);
 	Mix_Volume(-1, 0);
-
-
-	/* Intro */
-	//doom->d.sound1 = doom->sound[INTRO];
-	//doom->d.sound2 = doom->sound[MAIN_THEME];
-	//doom->d.done = &doom->intro;
-	//pthread_create(&doom->t, NULL, intro, &doom->d);
-	
-	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-	//Mix_Volume(CHANNEL_MUSIC, 5);
-	doom->intro[1] = 1;
+	doom->d.sound1 = doom->sound[WAV_INTRO];
+	doom->d.sound2 = doom->sound[WAV_MAIN_THEME];
+	doom->d.done = &doom->intro;
+	pthread_create(&doom->t, NULL, intro, &doom->d);
 }

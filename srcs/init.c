@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 11:33:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:57:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_doom(t_doom *doom, t_settings init)
 {
-	//doom->root = realpath("./", NULL);
 	doom->w2 = init.display_w * init.render_resolution / 2;
 	doom->h2 = init.display_h * init.render_resolution / 2;
 	doom->c = doom->h2 * doom->surface->w + doom->w2;

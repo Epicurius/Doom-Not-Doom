@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:42:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:23:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	curr_floor_and_ceiling(t_doom *doom, t_wall *w)
+static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 {
 	t_fc		v1;
 	t_fc		v2;
@@ -31,7 +31,7 @@ static void	curr_floor_and_ceiling(t_doom *doom, t_wall *w)
 	w->static_range.ceiling = w->static_v2.ceiling - w->static_v1.ceiling;
 }
 
-static void	slope_curr_floor_and_ceiling(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
+static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
 	t_fc		v2;
@@ -52,7 +52,7 @@ static void	slope_curr_floor_and_ceiling(t_doom *doom, t_wall *w, t_v3 p1, t_v3 
 
 //		screen y for floor and ceiling vertex
 //		z of floor and ceiling with slope
-static void	neighbour_floor_and_ceiling(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
+static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
 	t_fc		v2;
@@ -71,7 +71,7 @@ static void	neighbour_floor_and_ceiling(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p
 	w->nslope_range.ceiling = w->nslope_v2.ceiling - w->nslope_v1.ceiling;
 }
 
-static void	vertex_relative_position(t_doom *doom, t_wall *wall, t_v3 *p1, t_v3 *p2)
+static void	vertex_relative_pos(t_doom *doom, t_wall *wall, t_v3 *p1, t_v3 *p2)
 {
 	t_player	*p;
 
@@ -105,9 +105,9 @@ void	project_wall(t_doom *doom, t_wall *wall)
 	wall->yzrange = wall->y1z0 - wall->y0z1;
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
-	curr_floor_and_ceiling(doom, wall);
-	vertex_relative_position(doom, wall, &p1, &p2);
-	slope_curr_floor_and_ceiling(doom, wall, p1, p2);
+	curr_floor_and_ceil(doom, wall);
+	vertex_relative_pos(doom, wall, &p1, &p2);
+	slope_curr_floor_and_ceil(doom, wall, p1, p2);
 	if (wall->n != -1)
-		neighbour_floor_and_ceiling(doom, wall, p1, p2);
+		neighbour_floor_and_ceil(doom, wall, p1, p2);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 10:26:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:42:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static int	render_vline(t_render render, int sector)
 		if (sect->wall[s]->n == -1)
 			return (1);
 		render_vline(render, sect->wall[s]->n);
-		//if (sect->wall[s]->ptx != -1)
-		//	draw_portal_texture(&render, &vline);
+		if (sect->wall[s]->ptx != -1)
+			draw_portal_texture(&render, &vline);
 		return (1);
 	}
 	return (1);
@@ -95,17 +95,21 @@ static int	loop_screen_sector(void	*arg)
 	{
 		render->ytop = 0;
 		render->ybot = render->surface->h;
-		tmp = (render->x / (double)(render->surface->w - 1)) * cam->range + cam->near_left;
-		pos.x = tmp * (-p->anglesin) - (-cam->near_z) * p->anglecos + p->where.x;
-		pos.y = tmp * p->anglecos - (-cam->near_z) * p->anglesin + p->where.y;
+		tmp = (render->x / (double)(render->surface->w - 1))
+			* cam->range + cam->near_left;
+		pos.x = tmp * (-p->anglesin) - (-cam->near_z)
+			* p->anglecos + p->where.x;
+		pos.y = tmp * p->anglecos - (-cam->near_z)
+			* p->anglesin + p->where.y;
 		pos.z = p->where.z + p->eye_lvl;
-		render_vline(*render, find_sector(render->sectors, render->nb_sectors, pos));
+		render_vline(*render, find_sector(render->sectors,
+				render->nb_sectors, pos));
 		render->x++;
 	}
 	return (1);
 }
 
-void	DrawScreen(t_doom *doom)
+void	draw_screen(t_doom *doom)
 {
 	int	x;
 	int	w;
@@ -115,7 +119,8 @@ void	DrawScreen(t_doom *doom)
 	while (++x < doom->nb.threads)
 	{
 		doom->render[x].x = w / (double)doom->nb.threads * x;
-		doom->render[x].xend = ft_min(w / (double)doom->nb.threads * (x + 1), w);
+		doom->render[x].xend
+			= ft_min(w / (double)doom->nb.threads * (x + 1), w);
 		doom->render[x].player = doom->player;
 		doom->render[x].cam = doom->cam;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);

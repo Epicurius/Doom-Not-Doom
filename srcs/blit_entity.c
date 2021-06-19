@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:07 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 16:24:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	hit_enemy(t_entity_thread *thread, int coord)
 
 static void	blit_entity24(t_entity_thread *thread, int coord, t_v3 text)
 {
-	Uint32		clr;
+	Uint32			clr;
 	unsigned short	pix;
 
 	if (text.z >= ((double *)thread->surface->userdata)[coord])
@@ -39,7 +39,7 @@ static void	blit_entity24(t_entity_thread *thread, int coord, t_v3 text)
 
 static void	blit_entity32(t_entity_thread *thread, int coord, t_v3 text)
 {
-	Uint32		clr;
+	Uint32			clr;
 	unsigned short	pix;
 
 	if (text.z >= ((double *)thread->surface->userdata)[coord])
