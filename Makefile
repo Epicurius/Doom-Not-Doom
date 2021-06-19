@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/18 12:10:20 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/19 12:02:36 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,8 +136,9 @@ LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(L
 CFLAGS			= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
 				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
 
+PATH_H			= ./path.h
 
-all: framework libs resources $(ODIR) $(NAME)
+all: framework libs resources $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
 
@@ -177,6 +178,12 @@ resources: $(RESOURCES)
 	@./google_drive.sh
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
+
+$(PATH_H):
+	@printf $(CYAN)"[INFO]	Creating path.h\n"$(RESET)
+	@gcc -o find_path ./Get_Path/path.c
+	@./find_path
+	@/bin/rm -f find_path
 
 framework:
 ifeq ($(SHELL_NAME), Darwin)

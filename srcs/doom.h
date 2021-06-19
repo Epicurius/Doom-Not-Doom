@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 11:07:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 11:43:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "libpf.h"
 # include "tpool.h"
 # include "bxpm.h"
-# include "../../path.h"
+# include "../path.h"
 # include "./macros.h"
 # include "math.h"
 # include "./enum.h"
@@ -440,6 +440,7 @@ typedef struct s_fonts
 
 typedef struct s_doom
 {
+	char			*root;
 	int				quit;
 	SDL_Window		*win;
 	int				*fustrum;

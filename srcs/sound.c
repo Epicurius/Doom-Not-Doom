@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:12:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 12:04:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	mute(int i)
 
 void	load_wav(t_doom *doom)
 {
-	doom->sound[WAV_MAIN_THEME] = Mix_LoadWAV(GAME_PATH"resources/WAV/at_dooms_gate.wav");
-	doom->sound[WAV_SHOTGUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/shotgun.wav");
-	doom->sound[WAV_SCREEN_SHOT] = Mix_LoadWAV(GAME_PATH"resources/WAV/ss_saved.wav");
-	doom->sound[WAV_INTRO] = Mix_LoadWAV(GAME_PATH"resources/WAV/Intro.wav");
-	doom->sound[WAV_FOOT_STEPS] = Mix_LoadWAV(GAME_PATH"resources/WAV/footstep.wav");
-	doom->sound[WAV_JUMP] = Mix_LoadWAV(GAME_PATH"resources/WAV/jump.wav");
-	doom->sound[WAV_GUN] = Mix_LoadWAV(GAME_PATH"resources/WAV/gun.wav");
+	doom->sound[WAV_MAIN_THEME] = Mix_LoadWAV(WAV_PATH"at_dooms_gate.wav");
+	doom->sound[WAV_SHOTGUN] = Mix_LoadWAV(WAV_PATH"shotgun.wav");
+	doom->sound[WAV_SCREEN_SHOT] = Mix_LoadWAV(WAV_PATH"ss_saved.wav");
+	doom->sound[WAV_INTRO] = Mix_LoadWAV(WAV_PATH"Intro.wav");
+	doom->sound[WAV_FOOT_STEPS] = Mix_LoadWAV(WAV_PATH"footstep.wav");
+	doom->sound[WAV_JUMP] = Mix_LoadWAV(WAV_PATH"jump.wav");
+	doom->sound[WAV_GUN] = Mix_LoadWAV(WAV_PATH"gun.wav");
 
 	if (!doom->sound[WAV_MAIN_THEME] || !doom->sound[WAV_SHOTGUN]
 			|| !doom->sound[WAV_SCREEN_SHOT] || !doom->sound[WAV_INTRO]
