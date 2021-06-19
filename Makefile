@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/19 17:40:31 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/19 17:52:07 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,15 @@
 
 SHELL_NAME	:= $(shell uname -s)
 
-RED				:= "\e[0;31m"
-GREEN			:= "\x1b[38;5;119m"
-ORANGE			:= "\x1b[38;5;208m"
-YELLOW			:= "\e[0;33m"
-BLUE			:= "\e[0;34m"
-MAGENTA			:= "\e[0;35m"
-CYAN			:= "\e[0;36m"
-UNDERLINE		:= "\x1b[4m"
-RESET			:= "\e[0m"
+RED			:= "\e[0;31m"
+GREEN		:= "\x1b[38;5;119m"
+ORANGE		:= "\x1b[38;5;208m"
+YELLOW		:= "\e[0;33m"
+BLUE		:= "\e[0;34m"
+MAGENTA		:= "\e[0;35m"
+CYAN		:= "\e[0;36m"
+UNDERLINE	:= "\x1b[4m"
+RESET		:= "\e[0m"
 
 RAW_SRC =	ai_attack.c\
 			ai_movement.c\
@@ -30,6 +30,7 @@ RAW_SRC =	ai_attack.c\
 			animate.c\
 			blit_bxpm.c\
 			blit_entity.c\
+			bxpm_weapons.c\
 			camera.c\
 			clock.c\
 			cohen_sutherland.c\
@@ -54,10 +55,15 @@ RAW_SRC =	ai_attack.c\
 			draw_wall.c\
 			draw_weapon.c\
 			draw_wsprites.c\
+			entity_stats1.c\
+			entity_stats2.c\
 			error.c\
 			find_sector.c\
 			fps.c\
 			free.c\
+			free1.c\
+			free2.c\
+			free3.c\
 			game_loading.c\
 			game_over.c\
 			game_pause.c\
@@ -84,6 +90,13 @@ RAW_SRC =	ai_attack.c\
 			keys.c\
 			line.c\
 			malloc_texture_pos.c\
+			math1.c\
+			math2.c\
+			math3.c\
+			math4.c\
+			math5.c\
+			math6.c\
+			math7.c\
 			minimap.c\
 			movement.c\
 			object_collision.c\
@@ -97,6 +110,7 @@ RAW_SRC =	ai_attack.c\
 			precompute_skybox.c\
 			precompute_walls.c\
 			precompute_weapon.c\
+			project_entity.c\
 			project_wall.c\
 			put_pixels.c\
 			random.c\
@@ -105,49 +119,38 @@ RAW_SRC =	ai_attack.c\
 			skybox_floor_vline.c\
 			skybox_wall_vline.c\
 			sound.c\
+			stats_weapons.c\
 			update_screen.c\
 			validate_map1.c\
 			validate_map2.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
 			wave.c\
-			project_entity.c\
-			bxpm_weapons.c\
-			stats_weapons.c\
-			entity_stats1.c\
-			entity_stats2.c\
-			math1.c\
-			math2.c\
-			math3.c\
-			math4.c\
-			math5.c\
-			math6.c\
-			math7.c\
 		
-NAME			= doom
-CDIR			= srcs
-ODIR			= obj
-SRCS			= $(addprefix $(CDIR)/,$(RAW_SRC))
-OBJ				= $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
-DEP				:= $(OBJ:.o=.d)
+NAME		= doom
+CDIR		= srcs
+ODIR		= obj
+SRCS		= $(addprefix $(CDIR)/,$(RAW_SRC))
+OBJ			= $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
+DEP			:= $(OBJ:.o=.d)
 
-SDL_DIR			:= ./SDL
-SDL_MAIN		:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
-SDL_IMAGE		:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
-SDL_MIXER		:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
-SDL_TTF			:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
+SDL_DIR		:= ./SDL
+SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
+SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
+SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
+SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
 
-LIB_DIR			:= ./lib
-LIBFT			:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
-LIBPF			:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
-LIBTP			:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
-LIBBXPM			:= -I ./libbxpm ./libbxpm/libbxpm.a
+LIB_DIR		:= ./lib
+LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
+LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
+LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
+LIBBXPM		:= -I ./libbxpm ./libbxpm/libbxpm.a
 
-LIBS			+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
-CFLAGS			= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
+LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
+CFLAGS		= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
 				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
 
-PATH_H			= ./path.h
+PATH_H		= ./path.h
 
 all: framework libs resources $(PATH_H) $(ODIR) $(NAME)
 
