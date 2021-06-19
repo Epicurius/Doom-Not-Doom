@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cohen_sutherland.c                                 :+:      :+:    :+:   */
+/*   math8.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 17:16:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:56:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom.h"
+#include "math.h"
 
 /*	Cohen Sutherland clipping line in rectangle algorithm */
 static unsigned int	compute_outcode(int x, int y, t_rect size)

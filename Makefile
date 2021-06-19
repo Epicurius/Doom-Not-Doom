@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/19 17:52:07 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/19 17:57:17 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ RAW_SRC =	ai_attack.c\
 			bxpm_weapons.c\
 			camera.c\
 			clock.c\
-			cohen_sutherland.c\
 			collision_detection.c\
 			color_and_brightness.c\
 			compute_vline.c\
@@ -97,6 +96,7 @@ RAW_SRC =	ai_attack.c\
 			math5.c\
 			math6.c\
 			math7.c\
+			math8.c\
 			minimap.c\
 			movement.c\
 			object_collision.c\

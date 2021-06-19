@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 12:07:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 18:00:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,7 @@
 /*
 ** Bullet Holes
 */
-# define ENABLE_BH					1
 # define MAX_BH						20
-
-/*
-** Values !!DONT TOUCH!!
-*/
-# define CONVERT_RADIANS				0.0174532925199432955
-# define CONVERT_DEGREES				57.2957795130823228647
 
 /*
 **	Movement

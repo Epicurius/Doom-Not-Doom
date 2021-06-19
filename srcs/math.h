@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:46:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:59:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATH_H
 # define MATH_H
+
+# include <math.h>
+# define CONVERT_RADIANS	0.0174532925199432955
+# define CONVERT_DEGREES	57.295779513082322864
 
 typedef struct s_point
 {

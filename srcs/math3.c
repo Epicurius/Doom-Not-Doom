@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:41:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:56:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom.h"
+#include "math.h"
 
 //	Checks if line intersects
 int	intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)

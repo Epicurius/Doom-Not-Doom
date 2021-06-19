@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:39:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 17:56:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom.h"
+#include "math.h"
 
 //		Set p1 angle to p2 (DEGREES)
 double	angle_to_point_v2(t_v3 p1, t_v3 p2)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:48:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 18:13:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,13 +493,16 @@ void				ai_attack(t_doom *doom, t_entity *entity);
 void				ai_movement(t_doom *doom, t_entity *entity);
 /* File:			srcs/ai_rand.c */
 int					ai_track_player(t_doom *doom, t_entity *entity);
-int					ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
-int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
+int					ai_rand_move(t_doom *doom, t_entity *entity,
+						int chance, int angle);
+int					ai_rand_dodge(t_doom *doom, t_entity *entity,
+						int chance, int angle);
 /* File:			srcs/animate.c */
 int					animate_wsprite(t_doom *doom, t_wsprite *sprite);
 void				animated_entity_state(t_doom *doom, t_entity *entity);
 /* File:			srcs/blit_bxpm.c */
-void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
+void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm,
+						int sx, int sy);
 void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 						t_bxpm *src, t_rect srcr);
 /* File:			srcs/blit_entity.c */
@@ -524,14 +527,18 @@ int					collision_detection(t_collision *sprite);
 /* File:			srcs/color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
-int					blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
+int					blend_alpha(unsigned int src, unsigned int dest,
+						uint8_t alpha);
 void				color_palet(t_bxpm *bxpm, int light);
 void				color_palets(t_doom *doom);
 /* File:			srcs/compute_vline.c */
-void				compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
-void				compute_vline_texels(t_render *render, t_wall wall, t_vline *vline);
+void				compute_vline_data(t_render *render, t_wall wall,
+						t_vline *vline);
+void				compute_vline_texels(t_render *render, t_wall wall,
+						t_vline *vline);
 /* File:			srcs/crosshair_position.c */
-void				crosshair_position(t_render *render, t_vline *vline, double alpha);
+void				crosshair_position(t_render *render, t_vline *vline,
+						double alpha);
 /* File:			srcs/debug_loop.c */
 void				cs(void);
 void				ce(char *str);
@@ -678,7 +685,8 @@ t_v3				mult_v3(t_v3 vec, float scalar);
 int					intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 double				point_distance_v3(t_v3 p1, t_v3 p2);
 t_v3				closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
-int					point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer);
+int					point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2,
+						double buffer);
 t_v3				get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2);
 /* File:			srcs/math4.c */
 double				vector_magnitude_v2(t_v3 v);
@@ -690,11 +698,13 @@ t_v3				normalize(t_v3 vec);
 double				dot_product_v2(t_v3 v1, t_v3 v2);
 double				dot_product_v3(t_v3 v1, t_v3 v2);
 double				vectors_angle(t_v3 v1, t_v3 v2);
-double				cross_product_v2(double x1, double y1, double x2, double y2);
+double				cross_product_v2(double x1, double y1, double x2,
+						double y2);
 t_v3				cross_product_v3(t_v3 v1, t_v3 v2);
 /* File:			srcs/math6.c */
 void				get_polar_cordinates(double len, double angle, t_v2 *polar);
-void				get_cartesian_cordinates(double x, double y, double *len, double *angle);
+void				get_cartesian_cordinates(double x, double y,
+						double *len, double *angle);
 float				to_radians(float degrees);
 float				to_degrees(float radians);
 /* File:			srcs/math7.c */
@@ -702,7 +712,8 @@ double				angle_to_point_v2(t_v3 p1, t_v3 p2);
 int					ft_sign(double x);
 int					nb_overlap(double a0, double a1, double b0, double b1);
 double				point_side_v2(t_v3 v1, t_v3 v2, t_v3 p);
-double				point_distance_v2(double x1, double y1, double x2, double y2);
+double				point_distance_v2(double x1, double y1,
+						double x2, double y2);
 /* File:			srcs/minimap.c */
 void				map(t_doom *doom);
 void				init_minimap(t_doom *doom);
@@ -732,12 +743,15 @@ void				player_collision(t_doom *doom);
 /* File:			srcs/precompute_entities.c */
 int					frame_animation(t_doom *doom, t_entity *entity);
 void				get_entity_state(t_doom *doom, t_entity *entity);
-void				preforme_entity_state_fuction(t_doom *doom, t_entity *entity);
-int					get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity);
+void				preforme_entity_state_fuction(t_doom *doom,
+						t_entity *entity);
+int					get_coresponding_entity_state_frame(t_doom *doom,
+						t_entity *entity);
 void				precompute_entities(t_doom *doom);
 /* File:			srcs/precompute_projectiles.c */
 int					player_contact(t_doom *doom, t_v3 start, t_v3 dest);
-int					projectile_collision(t_doom *doom, t_project *orb, t_v3 dest);
+int					projectile_collision(t_doom *doom, t_project *orb,
+						t_v3 dest);
 void				precompute_projectiles(t_doom *doom);
 /* File:			srcs/precompute_skybox.c */
 void				compute_skybox(t_doom *doom);
@@ -756,15 +770,19 @@ void				weapon_reload_animate(t_doom *doom, t_weapon *weapon);
 void				equip_weapon(t_doom *doom);
 void				precompute_weapon(t_doom *doom);
 /* File:			srcs/project_entity.c */
-void				project_entity(t_doom *doom, t_entity *entity, t_entity_render *render);
+void				project_entity(t_doom *doom, t_entity *entity,
+						t_entity_render *render);
 /* File:			srcs/project_wall.c */
 void				project_wall(t_doom *doom, t_wall *wall);
 /* File:			srcs/put_pixels.c */
-void				blit_pixel_brightness(t_render *render, int coord, t_v3 text,
-						t_bxpm *bxpm);
-void				blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side);
+void				blit_pixel_brightness(t_render *render, int coord,
+						t_v3 text, t_bxpm *bxpm);
+void				blit_pixel_alpha(t_render *render, int coord,
+						t_v3 text, t_bxpm *bxpm);
+void				blit_pixel_opaque(t_render *render, int coord,
+						t_v3 text, t_bxpm *bxpm);
+void				blit_pixel_skybox(t_render *render, int coord,
+						t_v3 text, int side);
 /* File:			srcs/random.c */
 void				get_entity_state_name(t_entity *entity);
 void				what_vert(t_doom *doom);
@@ -774,7 +792,8 @@ void				read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**));
 void				read_type(t_doom *doom, int fd, char *line);
 int					read_file(t_doom *doom, char *file_name);
 /* File:			srcs/skybox_ceiling_vline.c */
-void				skybox_ceiling_vline(t_render *render, t_vline vline, int tx);
+void				skybox_ceiling_vline(t_render *render, t_vline vline,
+						int tx);
 /* File:			srcs/skybox_floor_vline.c */
 void				skybox_floor_vline(t_render *render, t_vline vline, int tx);
 /* File:			srcs/skybox_wall_vline.c */
@@ -805,9 +824,11 @@ int					is_convex(t_doom *doom, t_sector *sector);
 /* File:			srcs/vertical_line.c */
 Uint32				z_clr(double z, double max_z);
 void				shade_zbuffer(t_render *render, t_vline *vline, int side);
-void				vline_color_bot_top(t_render *render, t_vline *vline, int side);
+void				vline_color_bot_top(t_render *render, t_vline *vline,
+						int side);
 void				vline_color_walls(t_render *render, t_vline *vline);
-void				vline_monochromic(t_render *render, t_vline *vline, int side);
+void				vline_monochromic(t_render *render, t_vline *vline,
+						int side);
 /* File:			srcs/wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			srcs/wave.c */
