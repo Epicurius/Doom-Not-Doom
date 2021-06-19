@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:35:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 15:15:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	s_to_save_screen_shot(t_doom *doom)
 	TTF_Font	*amaz;
 	SDL_Surface	*surface;
 
-	amaz = TTF_OpenFont(GAME_PATH"resources/TTF/AmazDoom.ttf", 25);
+	amaz = TTF_OpenFont(TTF_PATH"AmazDoom.ttf", 25);
 	surface = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot",
 			hex_to_sdl_color(0xFFFFFFFF));
 	dstr = (SDL_Rect){doom->surface->w - surface->w,
@@ -78,7 +78,7 @@ void	game_pause(t_doom *doom)
 			doom->surface->pixels);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	bxpm = ft_pmalloc(sizeof(t_bxpm), "game_pause bxpm.");
-	read_bxpm(bxpm, GAME_PATH"resources/BXPM/pause.bxpm");
+	read_bxpm(bxpm, BXPM_PATH"pause.bxpm");
 	blit_bxpm(doom->surface, bxpm,
 		doom->w2 - bxpm->w / 2, doom->h2 - bxpm->h / 2);
 	s_to_save_screen_shot(doom);

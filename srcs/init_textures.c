@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:06:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 15:14:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	init_icon(t_doom *doom)
 {
-	if (!read_bxpm(&doom->icon[0], GAME_PATH"resources/ICON/health_heart.bxpm")
-		|| !read_bxpm(&doom->icon[1], GAME_PATH"resources/ICON/armour_shield.bxpm")
-		|| !read_bxpm(&doom->icon[2], GAME_PATH"resources/ICON/ammo_patrons.bxpm")
-		|| !read_bxpm(&doom->icon[3], GAME_PATH"resources/ICON/mag_ammo.bxpm")
-		|| !read_bxpm(&doom->icon[4], GAME_PATH"resources/ICON/cash_dosh.bxpm"))
+	if (!read_bxpm(&doom->icon[0], ICON_PATH"health_heart.bxpm")
+		|| !read_bxpm(&doom->icon[1], ICON_PATH"armour_shield.bxpm")
+		|| !read_bxpm(&doom->icon[2], ICON_PATH"ammo_patrons.bxpm")
+		|| !read_bxpm(&doom->icon[3], ICON_PATH"mag_ammo.bxpm")
+		|| !read_bxpm(&doom->icon[4], ICON_PATH"cash_dosh.bxpm"))
 		error_msg("Loading icon. (weapons)\n");
 }
 
