@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 17:08:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 11:07:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -753,10 +753,10 @@ void				fix_wall_orientation(t_sector *sector);
 int					fix_wall_order(t_doom *doom, t_sector *sector);
 int					is_convex(t_doom *doom, t_sector *sector);
 /* File:			./srcs/vertical_line.c */
-Uint32				set_zbuffer_shade(double z, double max_z);
-void				shade_zbuffer(t_render *render, t_vline vline);
-void				vline_color(t_render *render, t_vline *vline);
-void				vline_monochromic(t_render *render, t_vline *vline);
+Uint32				z_clr(double z, double max_z);
+void				shade_zbuffer(t_render *render, t_vline *vline, int side);
+void				vline_color(t_render *render, t_vline *vline, int side);
+void				vline_monochromic(t_render *render, t_vline *vline, int side);
 /* File:			./srcs/wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			./srcs/wave.c */

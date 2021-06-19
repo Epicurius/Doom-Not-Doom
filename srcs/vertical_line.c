@@ -6,82 +6,111 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:42:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 11:14:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-Uint32	set_zbuffer_shade(double z, double max_z)
+Uint32	z_clr(double z, double max_z)
 {
+	Uint32	clr;
 	double	alpha;
-	Uint32 clr;
 
 	alpha = 1 - z / max_z;
 	if (z >= 0 && alpha >= 0 && alpha <= 1)
-		clr = (int)(alpha * 0xFF) << 24 |
-				(int)(alpha * 0xFF) << 16 |
-				(int)(alpha * 0xFF) << 8 |
-				(int)(alpha * 0xFF);
+		clr = (int)(alpha * 0xFF) << 24
+			| (int)(alpha * 0xFF) << 16
+			| (int)(alpha * 0xFF) << 8
+			| (int)(alpha * 0xFF);
 	else
 		clr = 0;
 	return (clr);
 }
 
-
-void	shade_zbuffer(t_render *render, t_vline vline)
+void	shade_zbuffer(t_render *render, t_vline *vline, int side)
 {
-	int x;
-	Uint32 clr;
-	Uint32 *pix;
+	int		coord;
+	double	z;
 
-	x = render->x;
-	pix = (Uint32 *)render->surface->pixels;
-	clr = set_zbuffer_shade(vline.z, 500);
-	while (vline.y1 < vline.y2)
+	coord = vline->y1 * render->surface->w + render->x;
+	while (vline->y1 < vline->y2)
 	{
-		pix[vline.y1 * render->surface->w + x] = clr;
-		((double*)render->surface->userdata)[vline.y1 * render->surface->w + x] = vline.z;
-		vline.y1++;
+		if (side == BOT || side == TOP)
+		{
+			if (side == BOT)
+				z = (vline->y1 - vline->max.floor) / vline->height.floor;
+			else if (side == TOP)
+				z = (vline->max.ceiling - vline->y1) / vline->height.ceiling;
+			z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
+			((Uint32 *)render->surface->pixels)[coord] = z_clr(z, 200);
+			((double *)render->surface->userdata)[coord] = z;
+		}
+		else
+		{
+			((Uint32 *)render->surface->pixels)[coord] = z_clr(vline->z, 200);
+			((double *)render->surface->userdata)[coord] = vline->z;
+		}
+		coord += render->surface->w;
+		vline->y1++;
 	}
 }
 
-void	vline_color(t_render *render, t_vline *vline)
+void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 {
 	int		coord;
+	double	z;
+
+	coord = vline->y1 * render->surface->w + render->x;
+	while (vline->y1 < vline->y2)
+	{
+		if (side == BOT)
+			z = (vline->y1 - vline->max.floor) / vline->height.floor;
+		else if (side == TOP)
+			z = (vline->max.ceiling - vline->y1) / vline->height.ceiling;
+		z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
+		((Uint32 *)render->surface->pixels)[coord] = 0xFFAA8888;
+		((double *)render->surface->userdata)[coord] = z;
+		coord += render->surface->w;
+		vline->y1++;
+	}
+}
+
+void	vline_color_walls(t_render *render, t_vline *vline)
+{
+	int	coord;
 
 	coord = vline->y1 * render->surface->w + render->x;
 	if (vline->y1 < vline->y2)
 	{
-        ((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
-		//((double*)render->surface->userdata)[coord] = 200;//vline->z;
-		vline->y1 += 1;
-		while (vline->y1 < vline->y2 - 1)
+		((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
+		((double *)render->surface->userdata)[coord] = vline->z;
+		coord += render->surface->w;
+		while (++vline->y1 < vline->y2 - 1)
 		{
-			//if (render->x == render->wall.cx1 || render->x == render->wall.cx2)
-			if ((render->x - 1 < render->wall.cx1 || render->x + 1 > render->wall.cx2)
-					&& vline->y1 < vline->curr.floor && vline->y1 > vline->curr.ceiling)
-				((Uint32 *)render->surface->pixels)[coord] = 0xFFFF0000;
-			//else
-				//((Uint32 *)render->surface->pixels)[coord] = 0xFF888888;
+			if (render->x - 1 < render->wall.cx1
+				|| render->x + 1 > render->wall.cx2)
+				((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
+			else
+				((Uint32 *)render->surface->pixels)[coord] = 0xFF888888;
+			((double *)render->surface->userdata)[coord] = vline->z;
 			coord += render->surface->w;
-			//((double*)render->surface->userdata)[coord] = 200;//vline->z;
+		}
+		if (vline->y1 < vline->y2)
+		{
+			((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
+			((double *)render->surface->userdata)[coord] = vline->z;
 			vline->y1 += 1;
 		}
-		coord += render->surface->w;
-		((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
-		//((double*)render->surface->userdata)[coord] = 200;//vline->z;
-		vline->y1 += 1;
 	}
 }
 
-void	vline_monochromic(t_render *render, t_vline *vline)
+void	vline_monochromic(t_render *render, t_vline *vline, int side)
 {
-	//vline->y1 = ft_clamp(vline->curr.ceiling, 0, render->surface->h);
-	//vline->y2 = ft_clamp(vline->curr.floor, 0, render->surface->h);
-	//if (ZBUFFER_COLOR)
-	//	shade_zbuffer(render, *vline);
-	//else
-		vline_color(render, vline);
-
+	if (ZBUFFER_COLOR)
+		shade_zbuffer(render, vline, side);
+	else if (side == TOP || side == BOT)
+		vline_color_bot_top(render, vline, side);
+	else
+		vline_color_walls(render, vline);
 }

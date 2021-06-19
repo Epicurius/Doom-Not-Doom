@@ -6,12 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:37:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:35:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 11:16:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "doom.h"
-
 	struct timespec start, finish;
 	double elapsed;
 #include <time.h>
@@ -43,7 +43,6 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 	cs();
 	DrawScreen(doom);
 	ce("DRAW_SCREEN");
-	/* All this has no time requirements */
 	{
 		cs();
 		gamemode(doom);
@@ -97,3 +96,4 @@ void	debug_loop(t_doom *doom, SDL_Event *event)
 		game_quit(doom);
 	ce("exit");
 }
+*/

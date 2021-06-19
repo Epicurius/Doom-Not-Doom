@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:00:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/18 17:16:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,26 @@ static void	cohen_sutherland1(t_point *v, t_rect size,
 {
 	if (outcode_ex & 0x1)
 	{
-		i->x = v[0].x + (v[1].x - v[0].x) * \
-			(size.y2 - v[0].y) / (v[1].y - v[0].y);
+		i->x = v[0].x + (v[1].x - v[0].x)
+			* (size.y2 - v[0].y) / (v[1].y - v[0].y);
 		i->y = size.y2;
 	}
 	else if (outcode_ex & 0x2)
 	{
-		i->x = v[0].x + (v[1].x - v[0].x) * \
-			   (size.y1 - v[0].y) / (v[1].y - v[0].y);
+		i->x = v[0].x + (v[1].x - v[0].x)
+			* (size.y1 - v[0].y) / (v[1].y - v[0].y);
 		i->y = size.y1;
 	}
 	else if (outcode_ex & 0x4)
 	{
-		i->y = v[0].y + (v[1].y - v[0].y) * \
-			   (size.x2 - v[0].x) / (v[1].x - v[0].x);
+		i->y = v[0].y + (v[1].y - v[0].y)
+			* (size.x2 - v[0].x) / (v[1].x - v[0].x);
 		i->x = size.x2;
 	}
 	else
 	{
-		i->y = v[0].y + (v[1].y - v[0].y) * \
-			   (size.x1 - v[0].x) / (v[1].x - v[0].x);
+		i->y = v[0].y + (v[1].y - v[0].y)
+			* (size.x1 - v[0].x) / (v[1].x - v[0].x);
 		i->x = size.x1;
 	}
 }

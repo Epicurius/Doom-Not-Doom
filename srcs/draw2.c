@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:03:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 10:26:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_vline	draw_vline(t_render *render)
 		vline.y1 = vline.curr.ceiling;
 		vline.y2 = vline.curr.floor;
 		if (render->wall.wtx == 0 || TEXTURE_DISABLED)
-			vline_monochromic(render, &vline);
+			vline_monochromic(render, &vline, SIDES);
 		else if (render->wall.wtx < 0)
 			draw_skybox(render, &vline, SIDES);
 		else
@@ -73,8 +73,8 @@ static int	render_vline(t_render render, int sector)
 		if (sect->wall[s]->n == -1)
 			return (1);
 		render_vline(render, sect->wall[s]->n);
-		if (sect->wall[s]->ptx != -1)
-			draw_portal_texture(&render, &vline);
+		//if (sect->wall[s]->ptx != -1)
+		//	draw_portal_texture(&render, &vline);
 		return (1);
 	}
 	return (1);

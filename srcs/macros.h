@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 17:01:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/19 10:17:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@
 /*
 ** Texture
 */
-# define ZBUFFER_COLOR				0
-# define TEXTURE_DISABLED			0
+# define ZBUFFER_COLOR				1
+# define TEXTURE_DISABLED			1
 # define OPAQUE						30
 # define NB_SKYBOX_TEXTURES			6
 # define NB_WALL_TEXTURES			5
