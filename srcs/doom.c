@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:57:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:53:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,11 @@ int	main(int ac, char **av)
 		launcher();
 	return (1);
 }
+/*
+int	main(int ac, char **av)
+{
+	main1(ac, av);
+	while(1)
+		;
+	return (1);
+}*/

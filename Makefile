@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/19 17:57:17 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/20 11:33:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ RAW_SRC =	ai_attack.c\
 			animate.c\
 			blit_bxpm.c\
 			blit_entity.c\
-			bxpm_weapons.c\
+			bxpm_weapons1.c\
+			bxpm_weapons2.c\
 			camera.c\
 			clock.c\
 			collision_detection.c\
@@ -70,21 +71,25 @@ RAW_SRC =	ai_attack.c\
 			hud_utils.c\
 			icon.c\
 			init.c\
-			init_alfred.c\
+			init_alfred1.c\
+			init_alfred2.c\
 			init_barrel.c\
 			init_entity.c\
 			init_inv.c\
 			init_lamp.c\
 			init_meat_hook.c\
+			init_minimap.c\
 			init_player.c\
 			init_render.c\
 			init_rift.c\
 			init_scale.c\
 			init_sdl.c\
 			init_slope.c\
-			init_spooky.c\
+			init_spooky1.c\
+			init_spooky2.c\
 			init_textures.c\
 			init_torch.c\
+			init_wave_mode.c\
 			init_weapons.c\
 			keys.c\
 			line.c\

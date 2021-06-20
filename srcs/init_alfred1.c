@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_alfred.c                                      :+:      :+:    :+:   */
+/*   init_alfred1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:18:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:30:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	idle_pos(t_rect **pos)
+static void	idle_pos_alfred(t_rect **pos)
 {
 	pos[0][4] = rect_xy2(0, 0, 43, 47);
 	pos[0][5] = rect_xy2(88, 0, 120, 47);
@@ -24,7 +24,7 @@ static void	idle_pos(t_rect **pos)
 	pos[0][3] = rect_xy2(531, 0, 562, 47);
 }
 
-static void	move_pos(t_rect **pos)
+static void	move_pos_alfred1(t_rect **pos)
 {
 	pos[0][4] = rect_xy2(0, 55, 44, 98);
 	pos[0][5] = rect_xy2(48, 55, 107, 91);
@@ -42,25 +42,10 @@ static void	move_pos(t_rect **pos)
 	pos[1][1] = pos[0][1];
 	pos[1][2] = pos[0][2];
 	pos[1][3] = pos[0][3];
-	pos[2][4] = pos[0][4];
-	pos[2][5] = pos[0][5];
-	pos[2][6] = pos[0][6];
-	pos[2][7] = pos[0][7];
-	pos[2][0] = pos[0][0];
-	pos[2][1] = pos[0][1];
-	pos[2][2] = pos[0][2];
-	pos[2][3] = pos[0][3];
-	pos[3][4] = pos[0][4];
-	pos[3][5] = pos[0][5];
-	pos[3][6] = pos[0][6];
-	pos[3][7] = pos[0][7];
-	pos[3][0] = pos[0][0];
-	pos[3][1] = pos[0][1];
-	pos[3][2] = pos[0][2];
-	pos[3][3] = pos[0][3];
+	move_pos_alfred2(pos);
 }
 
-static void	attack_pos(t_rect **pos)
+static void	attack_pos_alfred(t_rect **pos)
 {
 	pos[0][0] = rect_xy2(0, 103, 33, 153);
 	pos[1][0] = rect_xy2(78, 103, 114, 155);
@@ -70,7 +55,7 @@ static void	attack_pos(t_rect **pos)
 	pos[5][0] = rect_xy2(491, 103, 594, 192);
 }
 
-static void	death_pos(t_rect **pos)
+static void	death_pos_alfred(t_rect **pos)
 {
 	pos[0][0] = rect_xy2(0, 103, 33, 153);
 	pos[1][0] = rect_xy2(78, 103, 114, 155);
@@ -95,8 +80,8 @@ void	init_alfred(t_doom *doom)
 	img->nb[DEATH][FRAMES] = 6;
 	img->nb[DEATH][ANGLES] = 1;
 	malloc_texture_pos(img);
-	idle_pos(img->pos[IDLE]);
-	move_pos(img->pos[MOVE]);
-	attack_pos(img->pos[ATTACK]);
-	death_pos(img->pos[DEATH]);
+	idle_pos_alfred(img->pos[IDLE]);
+	move_pos_alfred1(img->pos[MOVE]);
+	attack_pos_alfred(img->pos[ATTACK]);
+	death_pos_alfred(img->pos[DEATH]);
 }

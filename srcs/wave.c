@@ -6,20 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:33:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:10:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void	init_gamemode(t_doom *doom)
-{
-	doom->game.round = 0;
-	doom->game.spawns = doom->nb.sprites;
-	doom->game.time = doom->time.curr;
-	doom->game.spawn_rate = 5000;
-	doom->game.cool_down = 0;
-}
 
 void	spawn_mob(t_doom *doom, t_entity *rift)
 {
@@ -61,7 +52,6 @@ int	eternal_round(t_doom *doom)
 	{
 		doom->game.round++;
 		doom->game.spawn_rate -= 200;
-		ft_printf("Round: %d\n", doom->game.round);
 		return (1);
 	}
 	else if (doom->game.time - doom->time.curr < -(doom->game.spawn_rate))
@@ -87,14 +77,15 @@ void	respawn_rifts(t_doom *doom)
 	}
 }
 
+//	else if (doom->intro[0] && eternal_round(doom))
 void	game_mode(t_doom *doom)
 {
 	if (doom->game.cool_down)
 	{
-		doom->game.cool_down -= 1;
+		doom->game.cool_down -= doom->time.delta;
 		if (doom->game.cool_down <= 0)
 			respawn_rifts(doom);
 	}
-	else if (doom->intro && eternal_round(doom))
+	else if (eternal_round(doom))
 		doom->game.cool_down = 1000;
 }

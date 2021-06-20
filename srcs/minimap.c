@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 11:19:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:03:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,4 @@ void	map(t_doom *doom)
 	map_area(doom);
 	draw_map(doom);
 	map_player(doom);
-}
-
-void	init_minimap(t_doom *doom)
-{
-	int		h;
-	t_map	*map;
-
-	map = &doom->map;
-	h = doom->surface->h * (float)MM_SCALE;
-	map->size = rect_xy2(doom->w2 - h / 2, doom->h2 - h / 2,
-			doom->w2 + h / 2, doom->h2 + h / 2);
-	map->pos_x = doom->w2;
-	map->pos_y = doom->h2;
 }

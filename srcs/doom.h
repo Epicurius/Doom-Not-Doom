@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 18:13:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:42:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -471,8 +471,8 @@ typedef struct s_doom
 	t_list			*orb;
 	t_camera		cam;
 	t_player		player;
+	t_bxpm			mtx[15];
 	t_bxpm			stx[12];
-	t_bxpm			mtx[20];
 	t_bxpm			icon[5];
 	t_weapon		weapon[5];
 	t_bxpm			sprite_sheets[4];
@@ -631,6 +631,8 @@ int					set_icon(SDL_Window *window, char *dir);
 void				init_doom(t_doom *doom, t_settings init);
 /* File:			srcs/init_alfred.c */
 void				init_alfred(t_doom *doom);
+/* File:			./srcs/init_alfred2.c */
+void				move_pos_alfred2(t_rect **pos);
 /* File:			srcs/init_barrel.c */
 void				init_barrel(t_doom *doom);
 /* File:			srcs/init_entity.c */
@@ -658,6 +660,8 @@ t_v3				get_slope_normal(t_sector *sector, int wall);
 void				precompute_slopes(t_doom *doom);
 /* File:			srcs/init_spooky.c */
 void				init_spooky(t_doom *doom);
+/* File:			./srcs/init_spooky2.c */
+void				move_pos_spooky2(t_rect **pos);
 /* File:			srcs/init_textures.c */
 void				init_textures(t_doom *doom);
 /* File:			srcs/init_torch.c */

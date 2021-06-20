@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:43:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:47:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ void	free_sprites_pos(t_doom *doom)
 		free_sprite_pos(&doom->npc_bxpm[1]);
 	if (doom->npc_bxpm[2].pos)
 		free_sprite_pos(&doom->npc_bxpm[2]);
+	if (doom->npc_bxpm[3].pos)
+		free_sprite_pos(&doom->npc_bxpm[3]);
+	if (doom->npc_bxpm[4].pos)
+		free_sprite_pos(&doom->npc_bxpm[4]);
+	if (doom->npc_bxpm[5].pos)
+		free_sprite_pos(&doom->npc_bxpm[5]);
+	if (doom->npc_bxpm[6].pos)
+		free_sprite_pos(&doom->npc_bxpm[6]);
 }
 
 void	free_sprites(t_doom *doom)
@@ -28,13 +36,14 @@ void	free_sprites(t_doom *doom)
 	t_list	*curr;
 
 	curr = doom->sprite;
-	while (curr)
+	while (curr != NULL)
 	{
-		free(curr->content);
 		tmp = curr;
 		curr = curr->next;
+		free(tmp->content);
 		free(tmp);
 	}
+	doom->sprite = NULL;
 }
 
 void	free_rifts(t_doom *doom)
@@ -43,13 +52,14 @@ void	free_rifts(t_doom *doom)
 	t_list	*curr;
 
 	curr = doom->rifts;
-	while (curr)
+	while (curr != NULL)
 	{
-		free(curr->content);
 		tmp = curr;
 		curr = curr->next;
+		free(tmp->content);
 		free(tmp);
 	}
+	doom->rifts = NULL;
 }
 
 void	free_textures(t_doom *doom)
@@ -57,7 +67,7 @@ void	free_textures(t_doom *doom)
 	int	i;
 
 	i = -1;
-	while (++i < 6)
+	while (++i < 15)
 	{
 		free(doom->mtx[i].clr);
 		free(doom->mtx[i].pix);
@@ -70,7 +80,7 @@ void	free_textures(t_doom *doom)
 		free(doom->stx[i].pix);
 	}
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
 	{
 		free(doom->sprite_sheets[i].clr);
 		free(doom->sprite_sheets[i].pix);

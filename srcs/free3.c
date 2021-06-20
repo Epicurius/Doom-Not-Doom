@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:44:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:44:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:44:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_weapons(t_doom *doom)
 	int	j;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		j = -1;
 		while (++j < (doom->weapon[i].reload_frames

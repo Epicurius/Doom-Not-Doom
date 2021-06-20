@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:43:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:41:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	free_map(t_doom *doom)
 void	free_render_utils(t_doom *doom)
 {
 	free(doom->zbuffer);
-	free(doom->fustrum);
 	free(doom->render);
 }
 
 void	free_font(t_doom *doom)
 {
 	TTF_CloseFont(doom->font.amaz50);
+	TTF_CloseFont(doom->font.digi50);
 	TTF_CloseFont(doom->font.digi100);
 }
 

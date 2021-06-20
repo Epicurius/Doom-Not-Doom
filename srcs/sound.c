@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:20:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 12:45:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	init_sound(t_doom *doom)
 	Mix_AllocateChannels(7);
 	load_wav(doom);
 	Mix_Volume(-1, 0);
-	doom->d.sound1 = doom->sound[WAV_INTRO];
-	doom->d.sound2 = doom->sound[WAV_MAIN_THEME];
-	doom->d.done = &doom->intro;
-	pthread_create(&doom->t, NULL, intro, &doom->d);
+	//doom->d.sound1 = doom->sound[WAV_INTRO];
+	//doom->d.sound2 = doom->sound[WAV_MAIN_THEME];
+	//doom->d.done = &doom->intro;
+	//pthread_create(&doom->t, NULL, intro, &doom->d);
+	doom->intro[0] = 1;
 }
