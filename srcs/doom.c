@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 12:53:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:53:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static void	launcher(void)
 	free(&arr[0]);
 }
 
+static void	sound_board(t_doom *doom)
+{
+	if (!Mix_Playing(CHANNEL_TTS) && !Mix_Playing(CHANNEL_MUSIC))
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
+}
+
 static void	game_loop(t_doom *doom, SDL_Event *event)
 {
 	update_camera(doom, 0, 0);
@@ -29,6 +35,7 @@ static void	game_loop(t_doom *doom, SDL_Event *event)
 	precompute_skybox(doom);
 	draw_screen(doom);
 	game_mode(doom);
+	sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
@@ -48,6 +55,7 @@ static void	game_loop(t_doom *doom, SDL_Event *event)
 		game_pause(doom);
 	else if (doom->quit == 1)
 		game_quit(doom);
+
 }
 
 static void	game(char *map, t_settings init)

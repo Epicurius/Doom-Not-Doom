@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:58:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:55:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ typedef enum e_enum_sound_channel
 	CHANNEL_MUSIC,
 	CHANNEL_WEAPON,
 	CHANNEL_STEPS,
-	CHANNEL_TTS
+	CHANNEL_TTS,
+	CHANNEL_ALFRED,
+	CHANNEL_SPOOKY,
+	CHANNEL_EXPLOSION
 }				t_enum_sound_channel;
 
 typedef enum e_enum_sprites

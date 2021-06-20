@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 12:45:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:31:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	load_wav(t_doom *doom)
 		|| !doom->sound[WAV_GUN])
 		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
 }
-
+/*
 void	intro(void *arg)
 {
 	t_dialog	*d;
@@ -48,17 +48,13 @@ void	intro(void *arg)
 	SDL_Delay(1300);
 	d->done[0] = 1;
 }
-
+*/
 void	init_sound(t_doom *doom)
 {
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(7);
 	load_wav(doom);
-	Mix_Volume(-1, 0);
-	//doom->d.sound1 = doom->sound[WAV_INTRO];
-	//doom->d.sound2 = doom->sound[WAV_MAIN_THEME];
-	//doom->d.done = &doom->intro;
-	//pthread_create(&doom->t, NULL, intro, &doom->d);
-	doom->intro[0] = 1;
+	//Mix_Volume(-1, 0);
+	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:56:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:53:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_score(t_doom *doom, int *i)
 	free_bmp(bmp);
 	free(name);
 	*i = 1;
-	Mix_PlayChannel(-1, doom->sound[WAV_SCREEN_SHOT], 0);
+	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);
 	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 }
 

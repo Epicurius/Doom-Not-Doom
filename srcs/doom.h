@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 12:42:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/20 13:56:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -478,11 +478,7 @@ typedef struct s_doom
 	t_bxpm			sprite_sheets[4];
 	t_npc_bxpm		npc_bxpm[7];
 	t_data			npe_data[7];
-	int				volume;
 	Mix_Chunk		*sound[7];
-	int				intro[1];
-	t_dialog		d;
-	pthread_t		t;
 }					t_doom;
 
 //	Command + z
