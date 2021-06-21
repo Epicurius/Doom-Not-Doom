@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/20 20:21:07 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/21 15:32:31 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,6 +135,7 @@ RAW_SRC =	ai_attack.c\
 NAME		= doom
 CDIR		= srcs
 ODIR		= obj
+INC			= ./includes
 SRCS		= $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			= $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:= $(OBJ:.o=.d)
@@ -153,7 +154,7 @@ LIBBXPM		:= -I ./libbxpm ./libbxpm/libbxpm.a
 
 LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
 CFLAGS		= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
-				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
+				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation -I $(INC)
 
 PATH_H		= ./path.h
 

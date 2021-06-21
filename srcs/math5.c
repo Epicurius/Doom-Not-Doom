@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:56:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 15:34:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include "MyMath.h"
 
 //		Return scalar
 double	dot_product_v2(t_v3 v1, t_v3 v2)

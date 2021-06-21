@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:56:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 15:34:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include "MyMath.h"
 
 /*	Cohen Sutherland clipping line in rectangle algorithm */
 static unsigned int	compute_outcode(int x, int y, t_rect size)
