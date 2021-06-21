@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:02:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 13:05:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:16:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_shotgun(t_doom *doom, t_weapon *weapon)
 	weapon->sound = WAV_SHOTGUN;
 	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
 			* (weapon->fire_frames + weapon->reload_frames), "Shotgun bxpm");
-	load_shotgun(weapon);
+	bxpm_shotgun(weapon);
 	weapon->scale = 0.25 * (doom->surface->w / weapon->bxpm[0].w);
 }
 
@@ -49,8 +49,8 @@ void	init_glock(t_doom *doom, t_weapon *weapon)
 	weapon->x_offset = 1.5;
 	weapon->time = doom->time.curr;
 	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Gun bxpm");
-	load_gun(weapon);
+			* (weapon->fire_frames + weapon->reload_frames), "Glock bxpm");
+	bxpm_glock(weapon);
 	weapon->scale = 0.17 * (doom->surface->w / weapon->bxpm[0].w);
 }
 
@@ -71,9 +71,8 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->time = doom->time.curr;
 	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
 			* (weapon->fire_frames + weapon->reload_frames), "Minigun bxpm");
-	load_mini(weapon);
-	weapon->scale = 0.4 *
-		(doom->surface->w / weapon->bxpm[0].w);
+	bxpm_minigun(weapon);
+	weapon->scale = 0.4 * (doom->surface->w / weapon->bxpm[0].w);
 }
 
 void	init_kar98(t_doom *doom, t_weapon *weapon)
@@ -93,7 +92,7 @@ void	init_kar98(t_doom *doom, t_weapon *weapon)
 	weapon->time = doom->time.curr;
 	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
 			* (weapon->fire_frames + weapon->reload_frames), "Kar98 bxpm");
-	load_kar(weapon);
+	bxpm_kar98(weapon);
 	weapon->scale = 0.35 * (doom->surface->w / weapon->bxpm[0].w);
 }
 
@@ -114,6 +113,6 @@ void	init_pump(t_doom *doom, t_weapon *weapon)
 	weapon->sound = WAV_SHOTGUN;
 	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
 			* (weapon->fire_frames + weapon->reload_frames), "Pump bxpm");
-	load_pump(weapon);
+	bxpm_pump(weapon);
 	weapon->scale = 0.3 * (doom->surface->w / weapon->bxpm[0].w);
 }

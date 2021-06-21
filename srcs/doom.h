@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 13:05:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:11:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,8 +480,6 @@ typedef struct s_doom
 	Mix_Chunk		*sound[7];
 }					t_doom;
 
-t_doom	*get_master(void);
-
 //	Command + z
 
 /* File:			srcs/ai_attack.c */
@@ -505,11 +503,11 @@ void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 /* File:			srcs/blit_entity.c */
 int					blit_game_entity(void *arg);
 /* File:			srcs/bxpm_weapons.c */
-void				load_shotgun(t_weapon *weapon);
-void				load_gun(t_weapon *weapon);
-void				load_mini(t_weapon *weapon);
-void				load_kar(t_weapon *weapon);
-void				load_pump(t_weapon *weapon);
+void				bxpm_shotgun(t_weapon *weapon);
+void				bxpm_glock(t_weapon *weapon);
+void				bxpm_minigun(t_weapon *weapon);
+void				bxpm_kar98(t_weapon *weapon);
+void				bxpm_pump(t_weapon *weapon);
 /* File:			srcs/camera.c */
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom, int x, int y);

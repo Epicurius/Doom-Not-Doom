@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 18:48:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:15:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,7 @@ void	load_wav(t_doom *doom)
 		|| !doom->sound[WAV_GUN])
 		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
 }
-/*
-void	intro(void *arg)
-{
-	t_dialog	*d;
 
-	d = arg;
-	Mix_PlayChannel(1, d->sound1, 0);
-	while (Mix_Playing(1) != 0)
-		SDL_Delay(200);
-	Mix_PlayChannel(1, d->sound2, -1);
-	SDL_Delay(1300);
-	d->done[0] = 1;
-}
-*/
 void	init_sound(t_doom *doom)
 {
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)

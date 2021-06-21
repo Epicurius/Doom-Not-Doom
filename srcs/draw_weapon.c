@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 12:33:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:43:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,17 @@ static void	draw_weapon2(t_doom *doom, t_rect *srcr, t_rect *dstr)
 	bxpm = &weapon->bxpm[weapon->frame];
 	dstr->w = bxpm->w * weapon->scale;
 	dstr->h = bxpm->h * weapon->scale;
-	//dstr->w -= dstr->w % 10;
-	//dstr->h -= dstr->h % 10;
+	dstr->w -= dstr->w % 10;
+	dstr->h -= dstr->h % 10;
 	dstr->x1 = (doom->surface->w - dstr->w) / weapon->x_offset;
 	dstr->y1 = doom->surface->h - dstr->h;
 	srcr->x1 = 0;
 	srcr->y1 = 0;
 	srcr->w = bxpm->w;
 	srcr->h = bxpm->h;
-	//srcr->w -= srcr->w % 10;
-	//srcr->h -= srcr->h % 10;
-	//printf("%d %d %d %d\n", srcr->w, srcr->h, dstr->w, dstr->h);
+	srcr->w -= srcr->w % 10;
+	srcr->h -= srcr->h % 10;
 }
-
-# define TESST 10
 
 void	draw_weapon(t_doom *doom)
 {
@@ -63,11 +60,13 @@ void	draw_weapon(t_doom *doom)
 	y = -1;
 	while (++y < 10)
 	{
-		thread[y].src = &doom->weapon[doom->player.equiped].bxpm[doom->weapon[doom->player.equiped].frame];
-
-		thread[y].srcr = rect_xywh(srcr.x1, srcr.y1 + (y * (srcr.h / TESST)), srcr.w, srcr.h / TESST);
+		thread[y].src = &doom->weapon[doom->player.equiped].bxpm
+		[doom->weapon[doom->player.equiped].frame];
+		thread[y].srcr = rect_xywh(srcr.x1, srcr.y1 + (y * (srcr.h / 10)),
+				srcr.w, srcr.h / 10);
 		thread[y].dst = doom->surface;
-		thread[y].dstr = rect_xywh(dstr.x1, dstr.y1 + (y * (dstr.h / TESST)), dstr.w, dstr.h / TESST);
+		thread[y].dstr = rect_xywh(dstr.x1, dstr.y1 + (y * (dstr.h / 10)),
+				dstr.w, dstr.h / 10);
 		tpool_add(&doom->tpool, weapon_thread, &thread[y]);
 	}
 	tpool_wait(&doom->tpool);

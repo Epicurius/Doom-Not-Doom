@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:09:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:12:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:50:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	spooky(t_doom *doom, t_data *spooky)
 	spooky->move = 1;
 	spooky->view_distance = 100;
 	spooky->detection_radius = 40;
-	spooky->attack_range = 20;
+	spooky->attack_range = 50;
 	spooky->frame_rate[IDLE] = 2000;
 	spooky->frame_rate[MOVE] = 6000;
 	spooky->frame_rate[ATTACK] = 18000;

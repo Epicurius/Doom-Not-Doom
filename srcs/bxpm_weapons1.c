@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:00:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 12:51:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:09:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	load_shotgun(t_weapon *weapon)
+void	bxpm_shotgun(t_weapon *weapon)
 {
 	if (!read_bxpm(&weapon->bxpm[0], BXPM_PATH"shotgun-0.bxpm")
 		|| !read_bxpm(&weapon->bxpm[1], BXPM_PATH"shotgun-1.bxpm")
@@ -31,7 +31,7 @@ void	load_shotgun(t_weapon *weapon)
 		error_msg("Loading bxpm. (weapons)\n");
 }
 
-void	load_gun(t_weapon *weapon)
+void	bxpm_glock(t_weapon *weapon)
 {
 	if (!read_bxpm(&weapon->bxpm[0], BXPM_PATH"glock-0.bxpm")
 		|| !read_bxpm(&weapon->bxpm[1], BXPM_PATH"glock-1.bxpm")
@@ -42,7 +42,7 @@ void	load_gun(t_weapon *weapon)
 		error_msg("Loading bxpm. (weapons)\n");
 }
 
-void	load_mini(t_weapon *weapon)
+void	bxpm_minigun(t_weapon *weapon)
 {
 	if (!read_bxpm(&weapon->bxpm[0], BXPM_PATH"minigun-0.bxpm")
 		|| !read_bxpm(&weapon->bxpm[1], BXPM_PATH"minigun-1.bxpm")

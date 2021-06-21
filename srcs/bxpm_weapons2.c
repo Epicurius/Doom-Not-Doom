@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:00:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 12:54:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:09:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	load_kar2(t_weapon *weapon)
 		error_msg("Loading bxpm. (weapons)\n");
 }
 
-void	load_kar(t_weapon *weapon)
+void	bxpm_kar98(t_weapon *weapon)
 {
 	if (!read_bxpm(&weapon->bxpm[0], BXPM_PATH"kar-0.bxpm")
 		|| !read_bxpm(&weapon->bxpm[1], BXPM_PATH"kar-1.bxpm")
@@ -61,7 +61,7 @@ void	load_kar(t_weapon *weapon)
 	load_kar2(weapon);
 }
 
-void	load_pump(t_weapon *weapon)
+void	bxpm_pump(t_weapon *weapon)
 {
 	if (!read_bxpm(&weapon->bxpm[0], BXPM_PATH"pump-0.bxpm")
 		|| !read_bxpm(&weapon->bxpm[1], BXPM_PATH"pump-1.bxpm")
