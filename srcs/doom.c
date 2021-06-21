@@ -6,11 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:53:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 11:50:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+t_doom	*get_master(void)
+{
+	static t_doom	*master;
+
+	if (!master)
+	{
+		master = (t_doom *)ft_memalloc(sizeof(t_doom));
+		if (!master)
+			error_msg("ASDASD");
+	}
+	return (master);
+}
 
 static void	launcher(void)
 {
@@ -55,7 +68,6 @@ static void	game_loop(t_doom *doom, SDL_Event *event)
 		game_pause(doom);
 	else if (doom->quit == 1)
 		game_quit(doom);
-
 }
 
 static void	game(char *map, t_settings init)
@@ -64,6 +76,7 @@ static void	game(char *map, t_settings init)
 	SDL_Event	event;
 
 	doom = ft_pmalloc(sizeof(t_doom), "Doom");
+	//doom = get_master();
 	init_sdl(doom, init);
 	game_loading(doom);
 	read_file(doom, map);
@@ -109,4 +122,4 @@ int	main(int ac, char **av)
 	while(1)
 		;
 	return (1);
-}*/
+*/

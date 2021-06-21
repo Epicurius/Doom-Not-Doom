@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:56:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:05:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,7 +440,6 @@ typedef struct s_fonts
 
 typedef struct s_doom
 {
-	char			*root;
 	int				quit;
 	SDL_Window		*win;
 	int				*fustrum;
@@ -480,6 +479,8 @@ typedef struct s_doom
 	t_data			npe_data[7];
 	Mix_Chunk		*sound[7];
 }					t_doom;
+
+t_doom	*get_master(void);
 
 //	Command + z
 
@@ -806,7 +807,7 @@ void				init_sound(t_doom *doom);
 /* File:			srcs/stats_weapons.c */
 void				init_shotgun(t_doom *doom, t_weapon *weapon);
 void				init_pump(t_doom *doom, t_weapon *weapon);
-void				init_gun(t_doom *doom, t_weapon *weapon);
+void				init_glock(t_doom *doom, t_weapon *weapon);
 void				init_minigun(t_doom *doom, t_weapon *weapon);
 void				init_kar98(t_doom *doom, t_weapon *weapon);
 /* File:			srcs/update_screen.c */
