@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:54:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:29:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 	return (0);
 }
 
-static int	vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
+static int	vertical_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
 {
 	t_sector	sector;
 
@@ -35,7 +35,7 @@ static int	vertical_collision(t_doom *doom, t_project *orb, t_v3 dest)
 	return (0);
 }
 
-int	projectile_collision(t_doom *doom, t_project *orb, t_v3 dest)
+int	projectile_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
 {
 	t_collision	projectile;
 
@@ -55,9 +55,9 @@ int	projectile_collision(t_doom *doom, t_project *orb, t_v3 dest)
 
 void	precompute_projectiles(t_doom *doom)
 {
-	t_v3		dest;
-	t_list		*curr;
-	t_project	*orb;
+	t_v3			dest;
+	t_list			*curr;
+	t_projectile	*orb;
 
 	curr = doom->orb;
 	while (curr)

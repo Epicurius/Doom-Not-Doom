@@ -6,19 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 13:43:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:22:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-typedef struct s_weapon_thread
-{
-	SDL_Surface	*dst;
-	t_rect		dstr;
-	t_bxpm		*src;
-	t_rect		srcr;	
-}				t_weapon_thread;
 
 static int	weapon_thread(t_weapon_thread *thread)
 {

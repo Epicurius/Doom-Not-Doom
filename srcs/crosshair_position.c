@@ -6,13 +6,21 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 16:58:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:09:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		ft_printf("%d\n", render->wall.id);
+static void	debug(t_render *render, t_wall *wall)
+{
+	ft_printf("{CLR:204}Wall:\t%d Sector: %d Neighbour: %d\n", wall->id,
+		wall->sect, wall->n);
+	ft_printf("Player:\t%d [%.1f][%.1f][%.1f]{RESET}\n",
+		render->player.sector, render->player.where.x,
+		render->player.where.y, render->player.where.z);
+}
+
 void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 {
 	t_wall		*wall;
@@ -35,6 +43,7 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 		render->bh->curr += 1;
 		if (render->bh->total < MAX_BH)
 			render->bh->total += 1;
-		ft_printf("%d\n", render->wall.id);
+		if (render->player.debug)
+			debug(render, wall);
 	}
 }

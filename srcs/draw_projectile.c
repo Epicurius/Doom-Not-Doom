@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:32:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:29:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	rotate_projectile(t_doom *doom, t_project *orb,
+static void	project_projectile(t_doom *doom, t_projectile *orb,
 	t_entity_thread thread, t_entity_render *render)
 {
 	t_point	size;
@@ -45,7 +45,7 @@ static void	rotate_projectile(t_doom *doom, t_project *orb,
 void 	draw_projectiles(t_doom *doom)
 {
 	t_list			*curr;
-	t_project		*orb;
+	t_projectile	*orb;
 	t_entity_thread	thread;
 
 	thread.hp = NULL;
@@ -58,7 +58,7 @@ void 	draw_projectiles(t_doom *doom)
 		orb = curr->content;
 		if (doom->sectors[orb->sector].visible)
 		{
-			rotate_projectile(doom, orb, thread, &thread.render);
+			project_projectile(doom, orb, thread, &thread.render);
 			if (thread.render.z > 0.5)
 				blit_game_entity(&thread);
 		}

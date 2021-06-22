@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 18:10:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:02:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	sound_board(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
-//ft_printf("%d\n", doom->player.sector);
-//ft_printf("%f %f\n", doom->player.where.x, doom->player.where.y);
 static void	game_loop(t_doom *doom, SDL_Event *event)
 {
 	update_camera(doom, 0, 0);
@@ -80,7 +78,11 @@ static void	game(char *map, t_settings init)
 		return ;
 	init_doom(doom, init);
 	while (!doom->quit && doom->player.hp > 0)
+	{
 		game_loop(doom, &event);
+		if (doom->key.equal)
+			reload_map(doom, map);
+	}
 	if (doom->player.hp <= 0)
 		game_over(doom);
 	free_doom(doom);
@@ -92,7 +94,7 @@ int	main(int ac, char **av)
 
 	init.display_w = 1920;
 	init.display_h = 1080;
-	init.render_resolution = 1;
+	init.render_resolution = 0.8;
 	init.difficulty = 0;
 	init.flag = 0;
 	if (ac <= 1)

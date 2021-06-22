@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 14:16:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:34:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ double	get_floor_at_pos(t_sector *sector, t_v3 pos)
 }
 
 //		normal of 2 vectors will be the slope direction (unit vectort normal)
-static t_v3	get_unit_normal_vector(t_sector *sector, int wall)
+static t_v2	get_unit_normal_vector(t_sector *sector, int wall)
 {
 	t_v3	v1;
 	t_v3	v2;
-	t_v3	normal;
+	t_v2	normal;
 	double	m;
 
 	v1 = sector->wall[wall]->v1;
@@ -50,7 +50,7 @@ static t_v3	get_unit_normal_vector(t_sector *sector, int wall)
 	return (normal);
 }
 
-void	precompute_slopes(t_doom *doom)
+void	init_slope_normal(t_doom *doom)
 {
 	int	i;
 

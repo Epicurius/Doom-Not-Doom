@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:10:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:18:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_gamemode(t_doom *doom)
+void	init_wave_mode(t_doom *doom)
 {
 	t_list	*curr;
 

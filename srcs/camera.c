@@ -6,12 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:44:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:36:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+//cam->hscale = doom->w2 / (cam->near_up / cam->near_z);
+//cam->vscale = doom->h2 / (cam->near_down / cam->near_z);
 void	init_camera(t_doom *doom)
 {
 	t_camera	*cam;
@@ -29,9 +31,7 @@ void	init_camera(t_doom *doom)
 	cam->near_up = -tan(CONVERT_RADIANS * cam->vfov / 2) * cam->near_z;
 	cam->near_down = tan(CONVERT_RADIANS * cam->vfov / 2) * cam->near_z;
 	cam->range = cam->near_right - cam->near_left;
-	cam->hscale = doom->w2 / (cam->near_up / cam->near_z);
-	cam->vscale = doom->h2 / (cam->near_down / cam->near_z);
-	cam->scale = cam->vscale;
+	cam->scale = doom->h2 / (cam->near_down / cam->near_z);
 	update_camera(doom, 10, 10);
 }
 

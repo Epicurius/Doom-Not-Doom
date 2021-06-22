@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:02:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:18:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_entity_stats(t_doom *doom)
 	meat_hook(doom, &doom->npe_data[6]);
 }
 
-void	init_game_entity(t_doom *doom)
+void	init_entities(t_doom *doom)
 {
 	t_list		*new;
 	t_list		*curr;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 20:15:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:44:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_doom(t_doom *doom, t_settings init)
 {
 	doom->w2 = init.display_w * init.render_resolution / 2;
 	doom->h2 = init.display_h * init.render_resolution / 2;
-	doom->c = doom->h2 * doom->surface->w + doom->w2;
+	doom->surface_center = doom->h2 * doom->surface->w + doom->w2;
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
@@ -29,10 +29,10 @@ void	init_doom(t_doom *doom, t_settings init)
 	init_textures(doom);
 	init_scale(doom);
 	init_player(doom);
-	init_game_entity(doom);
+	init_entities(doom);
 	init_render(doom);
-	init_gamemode(doom);
+	init_wave_mode(doom);
 	init_sound(doom);
-	init_inv(doom);
-	precompute_slopes(doom);
+	init_inventory(doom);
+	init_slope_normal(doom);
 }

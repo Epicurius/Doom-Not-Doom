@@ -1,44 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   reload_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:15:07 by nneronin         ###   ########.fr       */
+/*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
+/*   Updated: 2021/06/22 12:18:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	parse_player(t_doom *doom, char **arr)
+static void	init_wavemode(t_doom *doom)
 {
-	t_player	*player;
+	t_list		*new;
+	t_list		*curr;
+	t_entity	*sprite;
 
-	player = &doom->player;
-	player->where.x = ft_atof(arr[1]) * doom->map_scale;
-	player->where.y = ft_atof(arr[2]) * doom->map_scale;
-	player->where.z = ft_atof(arr[3]) * doom->map_scale;
-	player->yaw = ft_atoi(arr[4]);
+	curr = doom->sprite;
+	while (curr)
+	{
+		sprite = curr->content;
+		sprite->data = &doom->npe_data[sprite->type];
+		sprite->hp = sprite->data->health;
+		sprite->dest = sprite->where;
+		sprite->state = IDLE;
+		if (sprite->type == 2)
+		{
+			new = ft_lstnew(curr->content, sizeof(t_entity));
+			ft_lstadd(&doom->rifts, new);
+			doom->nb.rifts += 1;
+		}
+		curr = curr->next;
+	}
 }
 
-void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
+static void	re_init(t_doom *doom)
 {
-	char	*line;
-	char	**arr;
+	int	x;
 
-	while (get_next_line(fd, &line))
+	init_camera(doom);
+	init_scale(doom);
+	init_player(doom);
+	init_wavemode(doom);
+	init_wave_mode(doom);
+	init_slope_normal(doom);
+	color_palets(doom);
+	x = -1;
+	while (++x < doom->nb.threads)
 	{
-		if (line[0] == '-')
-			break ;
-		arr = ft_strsplit(line, '\t', NULL);
-		f(doom, arr);
-		free(arr);
-		ft_strdel(&line);
+		doom->render[x].sectors = doom->sectors;
+		doom->render[x].nb_sectors = doom->nb.sectors;
 	}
-	ft_strdel(&line);
-	free(line);
 }
 
 static void	read_type(t_doom *doom, int fd, char *line)
@@ -49,8 +63,6 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_vertex);
 	else if (ft_strnequ(line, "type:wall", 8))
 		read_line(doom, fd, parse_wall);
-	else if (ft_strnequ(line, "type:spawn", 10))
-		read_line(doom, fd, parse_player);
 	else if (ft_strnequ(line, "type:sector", 11))
 		read_line(doom, fd, parse_sector);
 	else if (ft_strnequ(line, "type:entity", 11))
@@ -61,11 +73,28 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_wsprite);
 }
 
-int	read_file(t_doom *doom, char *file_name)
+static void	free_file(t_doom *doom)
+{
+	free_map(doom);
+	free_sprites(doom);
+	free_rifts(doom);
+	free_projectiles(doom);
+	doom->nb.walls = 0;
+	doom->nb.sectors = 0;
+	doom->nb.vertices = 0;
+	doom->nb.projectiles = 0;
+	doom->nb.sprites = 0;
+	doom->nb.rifts = 0;
+	doom->nb.kills = 0;
+	doom->player.velocity = new_v3(0, 0, 0);
+}
+
+void	reload_map(t_doom *doom, char *file_name)
 {
 	int		fd;
 	char	*line;
 
+	free_file(doom);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		error_msg("File does not exist or could not be opened.\n");
@@ -77,6 +106,8 @@ int	read_file(t_doom *doom, char *file_name)
 	ft_strdel(&line);
 	free(line);
 	close(fd);
-	printf("Read Done!\n");
-	return (1);
+	validate_map(doom);
+	re_init(doom);
+	doom->key.equal = 0;
+	ft_printf("{CLR:41}[INFO] Map ReLoaded!{RESET}\n");
 }

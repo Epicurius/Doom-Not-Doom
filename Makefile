@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/21 15:32:31 by nneronin         ###   ########.fr        #
+#    Updated: 2021/06/22 12:49:10 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ RAW_SRC =	ai_attack.c\
 			color_and_brightness.c\
 			compute_vline.c\
 			crosshair_position.c\
-			debug_loop.c\
 			doom.c\
 			draw2.c\
 			draw_bullet_holes.c\
@@ -75,7 +74,7 @@ RAW_SRC =	ai_attack.c\
 			init_alfred2.c\
 			init_barrel.c\
 			init_entity.c\
-			init_inv.c\
+			init_inventory.c\
 			init_lamp.c\
 			init_meat_hook.c\
 			init_minimap.c\
@@ -120,6 +119,7 @@ RAW_SRC =	ai_attack.c\
 			put_pixels.c\
 			random.c\
 			read_map.c\
+			reload_map.c\
 			skybox_ceiling_vline.c\
 			skybox_floor_vline.c\
 			skybox_wall_vline.c\
@@ -135,7 +135,7 @@ RAW_SRC =	ai_attack.c\
 NAME		= doom
 CDIR		= srcs
 ODIR		= obj
-INC			= ./includes
+INC			= ./inc
 SRCS		= $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			= $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:= $(OBJ:.o=.d)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:33:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:27:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	get_base_speed(t_doom *doom, float *speed)
 {
-	if (doom->key.shift_l)
+	if (doom->key.lshift)
 		*speed = doom->player.sprint_speed;
 	else
 		*speed = doom->player.walk_speed;
@@ -99,7 +99,7 @@ void	movement(t_doom *doom)
 	if (doom->player.where.z + doom->player.eye_lvl + 2
 		< doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eye_lvl = EYE_LVL;
-	if (doom->key.ctr_l)
+	if (doom->key.lctr)
 		doom->player.eye_lvl = 4;
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);

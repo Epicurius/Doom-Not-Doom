@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hud.c                                              :+:      :+:    :+:   */
+/*   hud_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 10:38:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:21:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	hud_armour(t_doom *doom)
 	SDL_FreeSurface(surf);
 }
 
-void	hud_currammo(t_doom *doom)
+void	hud_curr_ammo(t_doom *doom)
 {
 	char		*str;
 	SDL_Rect	dstr;
@@ -67,7 +67,7 @@ void	hud_currammo(t_doom *doom)
 	SDL_FreeSurface(surf);
 }
 
-void	hud_magammo(t_doom *doom)
+void	hud_mag_ammo(t_doom *doom)
 {
 	char		*str;
 	SDL_Rect	dstr;

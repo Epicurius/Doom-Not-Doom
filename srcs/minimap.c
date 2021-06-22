@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 18:10:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:40:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,18 @@ static void	map_player(t_doom *doom)
 
 	map = doom->map;
 	player = doom->player;
-	p[0].x = map.pos_x;
-	p[0].y = map.pos_y;
+	p[0] = map.pos;
 	p[1].x = (player.anglecos * FAR_Z - player.anglesin * doom->cam.far_left)
-		+ map.pos_x;
+		+ map.pos.x;
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_left)
-		+ map.pos_y;
+		+ map.pos.y;
 	cohen_sutherland(p, map.size);
 	line(doom->surface, MM_VIEW_COLOR, p);
-	p[0].x = map.pos_x;
-	p[0].y = map.pos_y;
+	p[0] = map.pos;
 	p[1].x = (player.anglecos * FAR_Z - player.anglesin * doom->cam.far_right)
-		+ map.pos_x;
+		+ map.pos.x;
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_right)
-		+ map.pos_y;
+		+ map.pos.y;
 	cohen_sutherland(p, map.size);
 	line(doom->surface, MM_VIEW_COLOR, p);
 }

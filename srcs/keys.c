@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:19:59by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:27:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	key2(t_doom *doom, SDL_Event *event)
 	}
 	else if (event->key.keysym.sym == SDLK_BACKQUOTE)
 		doom->player.where = doom->sectors[doom->player.sector].center;
+	else if (event->key.keysym.sym == SDLK_EQUALS && event->type == SDL_KEYDOWN)
+		doom->key.equal = 1;
 }
 
 static void	key1(t_doom *doom, SDL_Event *event)
@@ -51,9 +53,9 @@ static void	key1(t_doom *doom, SDL_Event *event)
 		|| event->key.keysym.sym == SDLK_ESCAPE)
 		doom->quit = 1;
 	else if (event->key.keysym.sym == SDLK_LCTRL)
-		doom->key.ctr_l = event->type == SDL_KEYDOWN;
+		doom->key.lctr = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_LSHIFT)
-		doom->key.shift_l = event->type == SDL_KEYDOWN;
+		doom->key.lshift = event->type == SDL_KEYDOWN;
 	else if (event->key.keysym.sym == SDLK_TAB)
 		doom->key.tab = event->type == SDL_KEYDOWN;
 	else

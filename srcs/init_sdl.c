@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 15:15:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/22 11:43:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	init_sdl2(t_doom *doom, t_settings init)
 		error_msg("Could not init SDL: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED, init.display_w, init.display_h,
-			SDL_WINDOW_ALWAYS_ON_TOP);
+			SDL_WINDOW_SHOWN);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
