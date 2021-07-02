@@ -6,20 +6,12 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/28 14:35:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/02 14:28:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//t_doom	*get_master(void)
-//{
-//	static t_doom	*master;
-//
-//	if (!master)
-//		master = (t_doom *)ft_pmalloc(sizeof(t_doom), "Doom");
-//	return (master);
-//}
 static void	launcher(void)
 {
 	char	*arr[2];
@@ -92,8 +84,6 @@ int	main(int ac, char **av)
 {
 	t_settings	init;
 
-	//asd(av[1]);
-	//exit(1);
 	init.display_w = 1920;
 	init.display_h = 1080;
 	init.render_resolution = 0.8;
