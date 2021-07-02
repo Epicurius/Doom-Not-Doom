@@ -6,3 +6,8 @@ obj
 bmp_to_bxpm/converter
 old
 README
+Trash
+path.h
+run.sh
+.vscode
+SDL/*

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:48:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/02 14:21:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	check_entities(t_doom *doom)
 
 int	check_player(t_doom *doom)
 {
+	//ft_printf("%f %f %f\n", doom->player.where.x, doom->player.where.y, doom->player.where.z);
 	doom->player.sector = find_sector(doom->sectors,
 			doom->nb.sectors, doom->player.where);
 	if (doom->player.sector < 0)

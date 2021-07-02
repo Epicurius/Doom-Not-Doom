@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:49:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/23 14:05:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -483,6 +483,8 @@ typedef struct s_doom
 	Mix_Chunk		*sound[7];
 }					t_doom;
 
+
+void	asd(char *file);
 void				reload_map(t_doom *doom, char *file_name);
 /* File:			srcs/ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);

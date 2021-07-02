@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:02:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/06/28 14:35:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	main(int ac, char **av)
 {
 	t_settings	init;
 
+	//asd(av[1]);
+	//exit(1);
 	init.display_w = 1920;
 	init.display_h = 1080;
 	init.render_resolution = 0.8;
