@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:41:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 14:35:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,18 @@ int	frame_animation(t_doom *doom, t_entity *entity)
 	return (1);
 }
 
-void	get_entity_state(t_doom *doom, t_entity *entity)
-{
-	if (entity->data->animate && entity->render.z > 10
-		&& doom->w2 > entity->render.start.x && doom->w2 < entity->render.end.x
-		&& doom->h2 > entity->render.start.y && doom->h2 < entity->render.end.y)
-		entity->danger = 1;
-	if (entity->hp <= 0 && entity->state != DEATH)
-	{
-		entity->state = DEATH;
-		entity->frame = 0;
-		entity->time = 0;
-	}
-	else if (!entity->data->animate || entity->state == DEATH || entity->frame)
-		return ;
-	else
-		animated_entity_state(doom, entity);
-	entity->danger = 0;
-}
-
 void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 {
-	if (entity->state == MOVE)
-		ai_movement(doom, entity);
-	else if (entity->state == ATTACK)
+	if (entity->state != MOVE)
+		entity->velocity = new_v3(0, 0, entity->velocity.z);
+	if (!entity->data->flying)
+	{
+		if (entity->where.z > get_floor_at_pos(&doom->sectors[entity->sector],
+				entity->where))
+			entity->velocity.z -= doom->sectors[entity->sector].gravity;
+	}
+	ai_movement(doom, entity);
+	if (entity->state == ATTACK)
 		ai_attack(doom, entity);
 }
 

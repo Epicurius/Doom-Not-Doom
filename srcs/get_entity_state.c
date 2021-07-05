@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animate.c                                          :+:      :+:    :+:   */
+/*   get_entity_state.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 10:41:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 12:14:02 by nneronin         ###   ########.fr       */
+/*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
+/*   Updated: 2021/07/05 14:31:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
-{
-	if (sprite->time - doom->time.curr < -100)
-	{
-		sprite->src.x1 += 64;
-		sprite->frame += 1;
-		if (sprite->src.x1 >= doom->mtx[sprite->tx].w)
-		{
-			sprite->src.x1 = 0;
-			sprite->src.y1 += 64;
-		}
-		if (sprite->frame >= 3 || sprite->src.y1 >= doom->mtx[sprite->tx].h)
-		{
-			sprite->src.x1 = 0;
-			sprite->src.y1 = 0;
-			sprite->frame = 0;
-		}
-		sprite->src.x2 = sprite->src.x1 + 64;
-		sprite->src.y2 = sprite->src.y1 + 64;
-		sprite->time = doom->time.curr;
-	}
-	return (1);
-}
 
 static int	entity_see(t_doom *doom, t_entity *entity)
 {
@@ -69,7 +45,7 @@ static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 	return (0);
 }
 
-void	animated_entity_state(t_doom *doom, t_entity *entity)
+void	get_entity_state2(t_doom *doom, t_entity *entity)
 {
 	double	dist;
 
@@ -94,4 +70,23 @@ void	animated_entity_state(t_doom *doom, t_entity *entity)
 		else
 			entity->state = IDLE;
 	}
+}
+
+void	get_entity_state(t_doom *doom, t_entity *entity)
+{
+	if (entity->data->animate && entity->render.z > 10
+		&& doom->w2 > entity->render.start.x && doom->w2 < entity->render.end.x
+		&& doom->h2 > entity->render.start.y && doom->h2 < entity->render.end.y)
+		entity->danger = 1;
+	if (entity->hp <= 0 && entity->state != DEATH)
+	{
+		entity->state = DEATH;
+		entity->frame = 0;
+		entity->time = 0;
+	}
+	else if (!entity->data->animate || entity->state == DEATH || entity->frame)
+		return ;
+	else
+		get_entity_state2(doom, entity);
+	entity->danger = 0;
 }

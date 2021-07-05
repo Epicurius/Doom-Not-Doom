@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/05 09:50:40 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/05 14:29:43 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ RESET		:= "\e[0m"
 RAW_SRC =	ai_attack.c\
 			ai_movement.c\
 			ai_rand.c\
-			animate.c\
+			animate_wsprite.c\
+			get_entity_state.c\
 			blit_bxpm.c\
 			blit_entity.c\
 			bxpm_weapons1.c\
