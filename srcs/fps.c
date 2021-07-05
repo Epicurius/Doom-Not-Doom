@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 18:49:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:35:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@ void	blit_fps(t_doom *doom)
 	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
 }
 
-static void	update_fps_surface(TTF_Font *font, t_time *time)
+static void	update_fps_surface(char *str, TTF_Font *font, t_time *time)
 {
-	char	*str;
-
-	str = ft_itoa(time->fps);
 	if (time->surf != NULL)
 		SDL_FreeSurface(time->surf);
 	time->surf = TTF_RenderText_Blended(font, str, time->color);
-	free(str);
 }
 
 void	fps_func(t_doom *doom)
 {
 	t_time		*time;
 	double		prev;
+	char		*str;
 
 	time = &doom->time;
 	prev = time->curr;
@@ -43,10 +40,11 @@ void	fps_func(t_doom *doom)
 	if (time->curr - time->prev >= 1000)
 	{
 		time->prev = time->curr;
-		update_fps_surface(doom->font.digi50, &doom->time);
+		str = ft_sprintf("FPS: [%d]", time->fps);
+		SDL_SetWindowTitle(doom->win, str);
+		free(str);
 		time->fps = 0;
 	}
-	blit_fps(doom);
 }
 
 void	init_fps(t_doom *doom)
