@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/02 14:25:13 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/05 09:50:40 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,6 +131,8 @@ RAW_SRC =	ai_attack.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
 			wave.c\
+			parse_map_events.c\
+			map_events.c\
 		
 NAME		= doom
 CDIR		= srcs

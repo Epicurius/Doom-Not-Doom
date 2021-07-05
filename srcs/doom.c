@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/02 14:28:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:09:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	game(char *map, t_settings init)
 	while (!doom->quit && doom->player.hp > 0)
 	{
 		game_loop(doom, &event);
+		map_events(doom);
 		if (doom->key.equal)
 			reload_map(doom, map);
 	}

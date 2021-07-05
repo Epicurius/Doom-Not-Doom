@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:15:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 09:23:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_header);
 	else if (ft_strnequ(line, "type:vertex", 11))
 		read_line(doom, fd, parse_vertex);
-	else if (ft_strnequ(line, "type:wall", 8))
+	else if (ft_strnequ(line, "type:wall", 9))
 		read_line(doom, fd, parse_wall);
 	else if (ft_strnequ(line, "type:spawn", 10))
 		read_line(doom, fd, parse_player);
@@ -59,6 +59,8 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_fc);
 	else if (ft_strnequ(line, "type:wsprite", 12))
 		read_line(doom, fd, parse_wsprite);
+	else if (ft_strnequ(line, "type:event", 10))
+		read_line(doom, fd, parse_events);
 }
 
 int	read_file(t_doom *doom, char *file_name)

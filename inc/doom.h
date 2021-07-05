@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/02 14:27:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:56:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,7 @@ typedef struct s_nb
 	int				sprites;
 	int				rifts;
 	int				kills;
+	int				events;
 }					t_nb;
 
 typedef struct s_time
@@ -443,6 +444,18 @@ typedef struct s_fonts
 	TTF_Font		*digi100;
 }					t_fonts;
 
+typedef struct s_event
+{
+	int			sector;
+	int			type;
+	float		min;
+	float		max;
+	float		amount;
+	float		speed;
+	float		time;
+	int			dir;
+}				t_event;
+
 typedef struct s_doom
 {
 	int				quit;
@@ -481,6 +494,7 @@ typedef struct s_doom
 	t_npc_bxpm		npc_bxpm[7];
 	t_data			npe_data[7];
 	Mix_Chunk		*sound[7];
+	t_event			*events;
 }					t_doom;
 
 void				reload_map(t_doom *doom, char *file_name);
@@ -789,5 +803,8 @@ void				rift_spawn(t_doom *doom);
 int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 void				game_mode(t_doom *doom);
+void				parse_events(t_doom *doom, char **arr);
+void				map_events(t_doom *doom);
+void				scale_wall_height(t_doom *doom, t_wall *wall);
 
 #endif

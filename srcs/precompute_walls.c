@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 18:11:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:55:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	precompute_walls(t_doom *doom)
 		clip_wall(doom->cam, &doom->walls[i]);
 		if (!doom->walls[i].visible)
 			continue ;
+		scale_wall_height(doom, &doom->walls[i]);
 		project_wall(doom, &doom->walls[i]);
 		precompute_texture(doom, &doom->walls[i]);
 	}

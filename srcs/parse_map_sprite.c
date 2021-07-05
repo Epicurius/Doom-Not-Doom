@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map_entity.c                                  :+:      :+:    :+:   */
+/*   parse_map_sprite.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 10:24:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:10:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	parse_wsprite(t_doom *doom, char **arr)
 	t_wsprite	*sprite;
 
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
-	wsprite->total += 1;
-	wsprite->num = ft_realloc(wsprite->num, sizeof(t_wsprite) * wsprite->total);
+	wsprite->num = ft_realloc2(wsprite->num, sizeof(t_wsprite) * wsprite->total,
+			sizeof(t_wsprite) * ++wsprite->total);
 	sprite = &wsprite->num[wsprite->total - 1];
 	sprite->id = ft_atoi(arr[0]);
 	sprite->where.x = ft_atof(arr[2]) * doom->map_scale;
