@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/05 14:29:43 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/05 15:25:42 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,7 @@ RESET		:= "\e[0m"
 
 RAW_SRC =	ai_attack.c\
 			ai_movement.c\
-			ai_rand.c\
 			animate_wsprite.c\
-			get_entity_state.c\
 			blit_bxpm.c\
 			blit_entity.c\
 			bxpm_weapons1.c\
@@ -68,6 +66,7 @@ RAW_SRC =	ai_attack.c\
 			game_over.c\
 			game_pause.c\
 			game_quit.c\
+			get_entity_state.c\
 			hud_utils.c\
 			icon.c\
 			init.c\
@@ -94,6 +93,7 @@ RAW_SRC =	ai_attack.c\
 			keys.c\
 			line.c\
 			malloc_texture_pos.c\
+			map_events.c\
 			math1.c\
 			math2.c\
 			math3.c\
@@ -106,6 +106,7 @@ RAW_SRC =	ai_attack.c\
 			movement.c\
 			object_collision.c\
 			orientation.c\
+			parse_map_events.c\
 			parse_map_header.c\
 			parse_map_sector.c\
 			parse_map_sprite.c\
@@ -132,8 +133,6 @@ RAW_SRC =	ai_attack.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
 			wave.c\
-			parse_map_events.c\
-			map_events.c\
 		
 NAME		= doom
 CDIR		= srcs
