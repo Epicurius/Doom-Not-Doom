@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 15:22:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/06 15:13:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -588,7 +588,6 @@ void				torch(t_doom *doom, t_data *sprite);
 void				meat_hook(t_doom *doom, t_data *sprite);
 /* File:			../srcs/error.c */
 void				*ft_pmalloc(size_t size, char *str);
-void				error_msg(const char *restrict format, ...);
 /* File:			../srcs/find_sector.c */
 int					in_sector(t_sector *sector, t_v3 pos);
 int					find_sector(t_sector *sectors, int nb, t_v3 pos);
