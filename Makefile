@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/07 11:06:16 by jsalmi           ###   ########.fr        #
+#    Updated: 2021/07/07 20:39:22 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,15 +154,16 @@ LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
 LIBBXPM		:= -I ./libbxpm ./libbxpm/libbxpm.a
-LIBUI		:= -I../better_libui -L../better_libui -lui -I../ft_printf
-LIBFT_J		:= -I../libft -L../libft -lft
-LIBGFX		:= -I../libgfx -L../libgfx -lgfx
+LIBUI		:= -I ../better_libui -L../better_libui -lui -I../ft_printf
+LIBFT_J		:= -I ../libft -L ../libft -lft
+LIBGFX		:= -I ../libgfx -L ../libgfx -lgfx
 
-LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX) $(LIBFT_J)
-CFLAGS		= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
-				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation -I $(INC)
+LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)
+CFLAGS		=	-Wall -Wextra -Werror -I $(INC)\
+				#-Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
+				-Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
 
-PATH_H		= ./path.h
+PATH_H		= ./inc/path.h
 
 all: framework libs resources $(PATH_H) $(ODIR) $(NAME)
 
@@ -209,6 +210,7 @@ $(PATH_H):
 	@printf $(CYAN)"[INFO]	Creating path.h\n"$(RESET)
 	@gcc -o find_path ./Get_Path/path.c
 	@./find_path
+	@mv path.h ./inc/
 	@/bin/rm -f find_path
 
 framework:

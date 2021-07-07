@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/07 11:12:05 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:57:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "macros.h"
 # include "MyMath.h"
 # include "enum.h"
-# include "../path.h"
+# include "path.h"
 # include <math.h>
 # include <fcntl.h>
 
