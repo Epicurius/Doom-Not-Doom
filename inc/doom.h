@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/06 15:13:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/07 11:12:05 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -404,6 +404,11 @@ typedef struct s_game_mode
 typedef struct s_weapon
 {
 	int				own;
+	int				price;
+	int				ammo_price;
+	int				damage_price;
+	int				firerate_price;
+	int				max_ammo_price;
 	int				damage;
 	int				mag_size;
 	int				cur_ammo;
@@ -432,6 +437,11 @@ typedef struct s_inv
 	int				dosh;
 	int				*hp;
 	int				*armour;
+	int				max_armour;
+	int				max_armour_price;
+	int				speed_price;
+	int				jump_price;
+	int				armour_price;
 	t_weapon		*weapon;
 	float			*speed;
 	float			*jump;

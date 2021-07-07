@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:02:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 14:16:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/07 11:09:39 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 void	init_shotgun(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
+	weapon->price = 100;
 	weapon->damage = 100;
+	weapon->ammo_price = 101;
+	weapon->damage_price = 102;
+	weapon->firerate_price = 103;
+	weapon->max_ammo_price = 104;
 	weapon->mag_size = 2;
 	weapon->mag_ammo = 2;
 	weapon->cur_ammo = 20;
@@ -36,7 +41,12 @@ void	init_shotgun(t_doom *doom, t_weapon *weapon)
 void	init_glock(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
+	weapon->price = 200;
 	weapon->damage = 10;
+	weapon->ammo_price = 101;
+	weapon->damage_price = 102;
+	weapon->firerate_price = 103;
+	weapon->max_ammo_price = 104;
 	weapon->mag_size = 10;
 	weapon->mag_ammo = 2;
 	weapon->cur_ammo = 100;
@@ -57,7 +67,12 @@ void	init_glock(t_doom *doom, t_weapon *weapon)
 void	init_minigun(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
+	weapon->price = 300;
 	weapon->damage = 10;
+	weapon->ammo_price = 101;
+	weapon->damage_price = 102;
+	weapon->firerate_price = 103;
+	weapon->max_ammo_price = 104;
 	weapon->mag_size = MAX_INT;
 	weapon->mag_ammo = 0;
 	weapon->cur_ammo = 1000;
@@ -78,7 +93,12 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 void	init_kar98(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
+	weapon->price = 400;
 	weapon->damage = 1000;
+	weapon->ammo_price = 101;
+	weapon->damage_price = 102;
+	weapon->firerate_price = 103;
+	weapon->max_ammo_price = 104;
 	weapon->mag_size = 7;
 	weapon->mag_ammo = 0;
 	weapon->cur_ammo = 100;
@@ -99,7 +119,12 @@ void	init_kar98(t_doom *doom, t_weapon *weapon)
 void	init_pump(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 1;
+	weapon->price = 500;
 	weapon->damage = 100;
+	weapon->ammo_price = 101;
+	weapon->damage_price = 102;
+	weapon->firerate_price = 103;
+	weapon->max_ammo_price = 104;
 	weapon->mag_size = 8;
 	weapon->mag_ammo = 8;
 	weapon->cur_ammo = 20;

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/05 15:25:42 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/07 11:06:16 by jsalmi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,7 @@ RAW_SRC =	ai_attack.c\
 			vertical_line.c\
 			wall_to_screen_xz.c\
 			wave.c\
+			buy_menu.c\
 		
 NAME		= doom
 CDIR		= srcs
@@ -153,8 +154,11 @@ LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
 LIBBXPM		:= -I ./libbxpm ./libbxpm/libbxpm.a
+LIBUI		:= -I../better_libui -L../better_libui -lui -I../ft_printf
+LIBFT_J		:= -I../libft -L../libft -lft
+LIBGFX		:= -I../libgfx -L../libgfx -lgfx
 
-LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM)
+LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX) $(LIBFT_J)
 CFLAGS		= -Wall -Wextra -Werror -Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
 				  -Wunused-parameter -Wno-unused-result -Wno-misleading-indentation -I $(INC)
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/06 15:14:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/07 11:27:36 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void	game_loop(t_doom *doom, SDL_Event *event)
 	draw_weapon(doom);
 	fps_func(doom);
 	if (doom->key.tab)
-		map(doom);
+		buymenu_new(doom->win, doom->surface, doom->inv);
+		//map(doom);
 	update_screen(doom, doom->surface);
 	if (doom->key.p)
 		game_pause(doom);
