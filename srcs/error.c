@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/06 15:13:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/10 13:49:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ void	*ft_pmalloc(size_t size, char *str)
 		write(1, "\n", 1);
 	exit(1);
 }
-

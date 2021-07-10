@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:00:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 13:09:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/10 13:39:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	load_kar2(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[35], BXPM_PATH"kar-35.bxpm")
 		|| !read_bxpm(&weapon->bxpm[36], BXPM_PATH"kar-36.bxpm")
 		|| !read_bxpm(&weapon->bxpm[37], BXPM_PATH"kar-37.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (kar-2)\n");
 }
 
 void	bxpm_kar98(t_weapon *weapon)
@@ -57,7 +57,7 @@ void	bxpm_kar98(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[18], BXPM_PATH"kar-18.bxpm")
 		|| !read_bxpm(&weapon->bxpm[19], BXPM_PATH"kar-19.bxpm")
 		|| !read_bxpm(&weapon->bxpm[20], BXPM_PATH"kar-20.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (kar-1)\n");
 	load_kar2(weapon);
 }
 
@@ -72,5 +72,5 @@ void	bxpm_pump(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[6], BXPM_PATH"pump-6.bxpm")
 		|| !read_bxpm(&weapon->bxpm[7], BXPM_PATH"pump-7.bxpm")
 		|| !read_bxpm(&weapon->bxpm[8], BXPM_PATH"pump-8.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (pump)\n");
 }

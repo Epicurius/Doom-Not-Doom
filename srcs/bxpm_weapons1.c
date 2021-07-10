@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:00:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 13:09:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/10 13:38:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	bxpm_shotgun(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[11], BXPM_PATH"shotgun-11.bxpm")
 		|| !read_bxpm(&weapon->bxpm[12], BXPM_PATH"shotgun-12.bxpm")
 		|| !read_bxpm(&weapon->bxpm[13], BXPM_PATH"shotgun-13.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (shotgun)\n");
 }
 
 void	bxpm_glock(t_weapon *weapon)
@@ -39,7 +39,7 @@ void	bxpm_glock(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[3], BXPM_PATH"glock-3.bxpm")
 		|| !read_bxpm(&weapon->bxpm[4], BXPM_PATH"glock-4.bxpm")
 		|| !read_bxpm(&weapon->bxpm[5], BXPM_PATH"glock-5.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (glock)\n");
 }
 
 void	bxpm_minigun(t_weapon *weapon)
@@ -50,5 +50,5 @@ void	bxpm_minigun(t_weapon *weapon)
 		|| !read_bxpm(&weapon->bxpm[3], BXPM_PATH"minigun-3.bxpm")
 		|| !read_bxpm(&weapon->bxpm[4], BXPM_PATH"minigun-4.bxpm")
 		|| !read_bxpm(&weapon->bxpm[5], BXPM_PATH"minigun-5.bxpm"))
-		error_msg("Loading bxpm. (weapons)\n");
+		error_msg("Loading bxpm. (minigun)\n");
 }
