@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/07 19:57:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 12:33:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "MyMath.h"
 # include "enum.h"
 # include "path.h"
+# include "resources.h"
 # include <math.h>
 # include <fcntl.h>
 
@@ -496,11 +497,11 @@ typedef struct s_doom
 	t_list			*orb;
 	t_camera		cam;
 	t_player		player;
-	t_bxpm			mtx[15];
-	t_bxpm			stx[12];
-	t_bxpm			icon[5];
+	t_bxpm			mtx[MAP_TEXTURE_AMOUNT];
+	t_bxpm			stx[SKYBOX_TEXTURE_AMOUNT];
+	t_bxpm			icon[ICON_TEXTURE_AMOUNT];
 	t_weapon		weapon[5];
-	t_bxpm			sprite_sheets[4];
+	t_bxpm			sprite_sheets[ENTITY_TEXTURE_AMOUNT];
 	t_npc_bxpm		npc_bxpm[7];
 	t_data			npe_data[7];
 	Mix_Chunk		*sound[7];
@@ -525,13 +526,6 @@ void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 						t_bxpm *src, t_rect srcr);
 /* File:			../srcs/blit_entity.c */
 int					blit_game_entity(void *arg);
-/* File:			../srcs/bxpm_weapons1.c */
-void				bxpm_shotgun(t_weapon *weapon);
-void				bxpm_glock(t_weapon *weapon);
-void				bxpm_minigun(t_weapon *weapon);
-/* File:			../srcs/bxpm_weapons2.c */
-void				bxpm_kar98(t_weapon *weapon);
-void				bxpm_pump(t_weapon *weapon);
 /* File:			../srcs/camera.c */
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom, int x, int y);

@@ -6,75 +6,37 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/07 20:37:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 12:31:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	init_icon(t_doom *doom)
+static void	parse_textures(int amount, t_bxpm *dest, t_id_and_path *src)
 {
-	if (!read_bxpm(&doom->icon[0], ICON_PATH"health_heart.bxpm")
-		|| !read_bxpm(&doom->icon[1], ICON_PATH"armour_shield.bxpm")
-		|| !read_bxpm(&doom->icon[2], ICON_PATH"ammo_patrons.bxpm")
-		|| !read_bxpm(&doom->icon[3], ICON_PATH"mag_ammo.bxpm")
-		|| !read_bxpm(&doom->icon[4], ICON_PATH"cash_dosh.bxpm"))
-		error_msg("Loading icon. (weapons)\n");
-}
+	int	i;
 
-/* mtx[4] = clock */
-static void	load_mtx(t_bxpm *mtx)
-{
-	if (!read_bxpm(&mtx[0], BXPM_PATH"bh.bxpm")
-		|| !read_bxpm(&mtx[1], BXPM_PATH"vent.bxpm")
-		|| !read_bxpm(&mtx[2], BXPM_PATH"tile_floor.bxpm")
-		|| !read_bxpm(&mtx[3], BXPM_PATH"bars.bxpm")
-		|| !read_bxpm(&mtx[5], BXPM_PATH"DoomScore.bxpm")
-		|| !read_bxpm(&mtx[6], BXPM_PATH"lava.bxpm")
-		|| !read_bxpm(&mtx[7], BXPM_PATH"metal_wall.bxpm")
-		|| !read_bxpm(&mtx[8], BXPM_PATH"door.bxpm")
-		|| !read_bxpm(&mtx[9], BXPM_PATH"console.bxpm")
-		|| !read_bxpm(&mtx[10], BXPM_PATH"green_wall.bxpm")
-		|| !read_bxpm(&mtx[11], BXPM_PATH"radar.bxpm")
-		|| !read_bxpm(&mtx[12], BXPM_PATH"steel.bxpm")
-		|| !read_bxpm(&mtx[13], BXPM_PATH"wall_panel.bxpm")
-		|| !read_bxpm(&mtx[14], BXPM_PATH"metal_tile2.bxpm"))
-		error_msg("Loading bxpm. (mtx)\n");
-}
-
-static void	load_stx(t_bxpm *stx)
-{
-	if (!read_bxpm(&stx[0], BXPM_PATH"space3.bxpm")
-		|| !read_bxpm(&stx[1], BXPM_PATH"space0.bxpm")
-		|| !read_bxpm(&stx[2], BXPM_PATH"space1.bxpm")
-		|| !read_bxpm(&stx[3], BXPM_PATH"space2.bxpm")
-		|| !read_bxpm(&stx[4], BXPM_PATH"space4.bxpm")
-		|| !read_bxpm(&stx[5], BXPM_PATH"space5.bxpm"))
-		error_msg("Loading bxpm. (stx1)\n");
-	if (!read_bxpm(&stx[6], BXPM_PATH"land4.bxpm")
-		|| !read_bxpm(&stx[7], BXPM_PATH"land1.bxpm")
-		|| !read_bxpm(&stx[8], BXPM_PATH"land2.bxpm")
-		|| !read_bxpm(&stx[9], BXPM_PATH"land3.bxpm")
-		|| !read_bxpm(&stx[10], BXPM_PATH"land0.bxpm")
-		|| !read_bxpm(&stx[11], BXPM_PATH"land5.bxpm"))
-		error_msg("Loading bxpm. (stx2)\n");
-}
-
-static void	load_sheet(t_bxpm *bxpm)
-{
-	if (!read_bxpm(&bxpm[0], BXPM_PATH"alfred.bxpm")
-		|| !read_bxpm(&bxpm[1], BXPM_PATH"spooky.bxpm")
-		|| !read_bxpm(&bxpm[2], BXPM_PATH"rift.bxpm")
-		|| !read_bxpm(&bxpm[3], BXPM_PATH"objects.bxpm"))
-		error_msg("Loading bxpm. (etitity)\n");
+	i = -1;
+	while (++i < amount)
+	{
+		if (ft_strequ(src[i].path, "NULL"))
+			continue ;
+		if (!read_bxpm(&dest[src[i].id], src[i].path))
+			error_msg("Reading[%d]: %s", src[i].id, src[i].path);
+	}
 }
 
 void	init_textures(t_doom *doom)
 {
 	init_clock(doom, &doom->mtx[4]);
-	load_mtx(doom->mtx);
-	load_stx(doom->stx);
-	load_sheet(doom->sprite_sheets);
+	parse_textures(MAP_TEXTURE_AMOUNT, doom->mtx, g_map_textures);
+	parse_textures(SKYBOX_TEXTURE_AMOUNT, doom->stx, g_skybox_textures);
+	parse_textures(ENTITY_TEXTURE_AMOUNT, doom->sprite_sheets, g_entity_textures);
+	parse_textures(ICON_TEXTURE_AMOUNT, doom->icon, g_icon_textures);
+	parse_textures(SHOTGUN_TEXTURE_AMOUNT, doom->weapon[0].bxpm, g_shotgun_textures);
+	parse_textures(GLOCK_TEXTURE_AMOUNT, doom->weapon[1].bxpm, g_glock_textures);
+	parse_textures(MINIGUN_TEXTURE_AMOUNT, doom->weapon[2].bxpm, g_minigun_textures);
+	parse_textures(KAR_TEXTURE_AMOUNT, doom->weapon[3].bxpm, g_kar_textures);
+	parse_textures(PUMP_TEXTURE_AMOUNT, doom->weapon[4].bxpm, g_pump_textures);
 	color_palets(doom);
-	init_icon(doom);
 }

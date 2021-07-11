@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/10 13:11:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 12:36:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	main(int ac, char **av)
 {
 	t_settings	init;
 
-
 	init.display_w = 1920;
 	init.display_h = 1080;
 	init.render_resolution = 0.8;
@@ -106,6 +105,6 @@ int	main(int ac, char **av)
 	game(av[1], init);
 	if (init.flag == 1)
 		launcher();
-	//system("leaks doom");
+//	system("leaks doom");
 	return (1);
 }

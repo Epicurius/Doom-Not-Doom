@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/07 20:39:22 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/11 12:32:45 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ RAW_SRC =	ai_attack.c\
 			animate_wsprite.c\
 			blit_bxpm.c\
 			blit_entity.c\
-			bxpm_weapons1.c\
-			bxpm_weapons2.c\
 			camera.c\
 			clock.c\
 			collision_detection.c\
