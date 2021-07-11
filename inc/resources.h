@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 12:35:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:14:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 # define RESOURCES_H
 
 # include "path.h"
+# include "enum.h"
 
 typedef struct s_id_and_path
 {
 	int			id;
 	char		*path;
 }				t_id_and_path;
+
+# define WAV_AMOUNT	7
+static const t_id_and_path	g_sounds[WAV_AMOUNT] =
+{
+	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
+	{WAV_SHOTGUN, WAV_PATH"shotgun.wav"},
+	{WAV_SCREEN_SHOT, WAV_PATH"tts_saved.wav"},
+	{WAV_INTRO, WAV_PATH"intro.wav"},
+	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
+	{WAV_JUMP, WAV_PATH"jump.wav"},
+	{WAV_GUN, WAV_PATH"gun.wav"},
+};
 
 # define MAP_TEXTURE_AMOUNT	15
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
@@ -174,5 +187,277 @@ static const t_id_and_path	g_pump_textures[PUMP_TEXTURE_AMOUNT] =
 	{7, BXPM_PATH"pump-7.bxpm"},
 	{8, BXPM_PATH"pump-8.bxpm"}
 };
+
+typedef struct s_entity_data
+{
+	int				health;
+	int				height;
+	int				hitbox_radius;
+	double			speed;
+	int				flying;
+	int				damage;
+	int				animate;
+	int				hostile;
+	int				attack_style;
+	double			scale;
+	int				move;
+	int				view_distance;
+	int				detection_radius;
+	int				attack_range;
+	int				frame_rate[4];
+	double			attack_speed;
+	int				head_y;
+}					t_entity_data;
+
+
+static const t_entity_data	g_entity_data[7] = 
+{
+	{
+		.health = 1,
+		.damage = 100,
+		.animate = 1,
+		.hostile = 1,
+		.attack_style = 2,
+		.scale = 4,
+		.height = 2,
+		.hitbox_radius = 2,
+		.speed = 20,
+		.move = 1,
+		.view_distance = 200,
+		.detection_radius = 40,
+		.attack_range = 7,
+		.frame_rate[IDLE] = 2000,
+		.frame_rate[MOVE] = 4000,
+		.frame_rate[ATTACK] = 6000,
+		.frame_rate[DEATH] = 6000,
+		.flying = 1},
+	{
+		.health = 1,
+		.damage = 30,
+		.animate = 1,
+		.hostile = 1,
+		.attack_style = 1,
+		.scale = 2,
+		.height = 7,
+		.hitbox_radius = 2,
+		.speed = 10,
+		.move = 1,
+		.view_distance = 100,
+		.detection_radius = 40,
+		.attack_range = 50,
+		.frame_rate[IDLE] = 2000,
+		.frame_rate[MOVE] = 6000,
+		.frame_rate[ATTACK] = 18000,
+		.frame_rate[DEATH] = 12000,
+		.flying = 0},
+	{
+		.health = 1,
+		.damage = 200,
+		.animate = 0,
+		.hostile = 0,
+		.attack_style = 2,
+		.scale = 2,
+		.height = 9,
+		.hitbox_radius = 0,
+		.speed = 0,
+		.move = 0,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.attack_range = 0,
+		.flying = 0,
+		.frame_rate[IDLE] = 2000,
+		.frame_rate[MOVE] = 8000,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0},
+	{
+		.health = 20,
+		.damage = 0,
+		.animate = 0,
+		.hostile = 0,
+		.attack_style = 0,
+		.scale = 5,
+		.height = 0,
+		.hitbox_radius = 0,
+		.speed = 0,
+		.move = 0,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.attack_range = 0,
+		.flying = 0,
+		.frame_rate[IDLE] = 6000,
+		.frame_rate[MOVE] = 0,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0},
+	{
+		.health = 11120,
+		.damage = 0,
+		.animate = 0,
+		.hostile = 0,
+		.attack_style = 0,
+		.scale = 5,
+		.height = 0,
+		.hitbox_radius = 0,
+		.speed = 0,
+		.move = 0,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.attack_range = 0,
+		.frame_rate[IDLE] = 3000,
+		.frame_rate[MOVE] = 0,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0,
+		.flying = 0},
+	{
+		.health = 11120,
+		.damage = 0,
+		.animate = 0,
+		.hostile = 0,
+		.attack_style = 0,
+		.scale = 10,
+		.height = 0,
+		.hitbox_radius = 0,
+		.speed = 0,
+		.move = 0,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.attack_range = 0,
+		.frame_rate[IDLE] = 1000,
+		.frame_rate[MOVE] = 0,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0,
+		.flying = 0}
+};
+/*
+static const t_entity_data	g_alfred =
+{
+	.health = 1,
+	.damage = 100,
+	.animate = 1,
+	.hostile = 1,
+	.attack_style = 2,
+	.scale = 4,// * (doom->surface->w / 100),
+	.height = 2,
+	.hitbox_radius = 2,
+	.speed = 20,
+	.move = 1,
+	.view_distance = 200,
+	.detection_radius = 40,
+	.attack_range = 7,
+	.frame_rate[IDLE] = 2000,
+	.frame_rate[MOVE] = 4000,
+	.frame_rate[ATTACK] = 6000,
+	.frame_rate[DEATH] = 6000,
+	.flying = 1
+};
+
+static const t_entity_data	g_spooky =
+{
+	.health = 1,
+	.damage = 30,
+	.animate = 1,
+	.hostile = 1,
+	.attack_style = 1,
+	.scale = 2,
+	.height = 7,
+	.hitbox_radius = 2,
+	.speed = 10,
+	.move = 1,
+	.view_distance = 100,
+	.detection_radius = 40,
+	.attack_range = 50,
+	.frame_rate[IDLE] = 2000,
+	.frame_rate[MOVE] = 6000,
+	.frame_rate[ATTACK] = 18000,
+	.frame_rate[DEATH] = 12000,
+	.flying = 0
+};
+
+static const t_entity_data	g_rift =
+{
+	.health = 1,
+	.damage = 200,
+	.animate = 0,
+	.hostile = 0,
+	.attack_style = 2,
+	.scale = 2,
+	.height = 9,
+	.hitbox_radius = 0,
+	.speed = 0,
+	.move = 0,
+	.view_distance = 0,
+	.detection_radius = 0,
+	.attack_range = 0,
+	.flying = 0,
+	.frame_rate[IDLE] = 2000,
+	.frame_rate[MOVE] = 8000,
+	.frame_rate[ATTACK] = 0,
+	.frame_rate[DEATH] = 0
+};
+
+static const t_entity_data	g_barrel =
+{
+	.health = 20,
+	.damage = 0,
+	.animate = 0,
+	.hostile = 0,
+	.attack_style = 0,
+	.scale = 5,
+	.height = 0,
+	.hitbox_radius = 0,
+	.speed = 0,
+	.move = 0,
+	.view_distance = 0,
+	.detection_radius = 0,
+	.attack_range = 0,
+	.flying = 0,
+	.frame_rate[IDLE] = 6000,
+	.frame_rate[MOVE] = 0,
+	.frame_rate[ATTACK] = 0,
+	.frame_rate[DEATH] = 0
+};
+
+static const t_entity_data	g_lamp =
+{
+	.health = 11120,
+	.damage = 0,
+	.animate = 0,
+	.hostile = 0,
+	.attack_style = 0,
+	.scale = 5,
+	.height = 0,
+	.hitbox_radius = 0,
+	.speed = 0,
+	.move = 0,
+	.view_distance = 0,
+	.detection_radius = 0,
+	.attack_range = 0,
+	.frame_rate[IDLE] = 3000,
+	.frame_rate[MOVE] = 0,
+	.frame_rate[ATTACK] = 0,
+	.frame_rate[DEATH] = 0,
+	.flying = 0
+};
+
+static const t_entity_data	g_torch =
+{
+	.health = 11120,
+	.damage = 0,
+	.animate = 0,
+	.hostile = 0,
+	.attack_style = 0,
+	.scale = 10,
+	.height = 0,
+	.hitbox_radius = 0,
+	.speed = 0,
+	.move = 0,
+	.view_distance = 0,
+	.detection_radius = 0,
+	.attack_range = 0,
+	.frame_rate[IDLE] = 1000,
+	.frame_rate[MOVE] = 0,
+	.frame_rate[ATTACK] = 0,
+	.frame_rate[DEATH] = 0,
+	.flying = 0
+};*/
 
 #endif

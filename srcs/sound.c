@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 14:15:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 13:13:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,19 @@ void	mute(int i)
 		Mix_Volume(-1, 0);
 }
 
-void	load_wav(t_doom *doom)
+static void	parse_wav(int amount, Mix_Chunk **dest, t_id_and_path *src)
 {
-	doom->sound[WAV_MAIN_THEME] = Mix_LoadWAV(WAV_PATH"at_dooms_gate.wav");
-	doom->sound[WAV_SHOTGUN] = Mix_LoadWAV(WAV_PATH"shotgun.wav");
-	doom->sound[WAV_SCREEN_SHOT] = Mix_LoadWAV(WAV_PATH"ss_saved.wav");
-	doom->sound[WAV_INTRO] = Mix_LoadWAV(WAV_PATH"Intro.wav");
-	doom->sound[WAV_FOOT_STEPS] = Mix_LoadWAV(WAV_PATH"footstep.wav");
-	doom->sound[WAV_JUMP] = Mix_LoadWAV(WAV_PATH"jump.wav");
-	doom->sound[WAV_GUN] = Mix_LoadWAV(WAV_PATH"gun.wav");
-	if (!doom->sound[WAV_MAIN_THEME] || !doom->sound[WAV_SHOTGUN]
-		|| !doom->sound[WAV_SCREEN_SHOT] || !doom->sound[WAV_INTRO]
-		|| !doom->sound[WAV_FOOT_STEPS] || !doom->sound[WAV_JUMP]
-		|| !doom->sound[WAV_GUN])
-		error_msg("Mix_LoadWAV: %s\n", Mix_GetError());
+	int	i;
+
+	i = -1;
+	while (++i < amount)
+	{
+		if (ft_strequ(src[i].path, "NULL"))
+			continue ;
+		dest[src[i].id] = Mix_LoadWAV(src[i].path);
+		if (dest == NULL)
+			error_msg("Reading[%d]: %s", src[i].id, src[i].path);
+	}
 }
 
 void	init_sound(t_doom *doom)
@@ -41,7 +40,7 @@ void	init_sound(t_doom *doom)
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(7);
-	load_wav(doom);
+	parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
 	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	Mix_Volume(-1, 0);
 }
