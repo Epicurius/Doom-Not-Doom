@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:09:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:12:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,30 @@ void	rift(t_doom *doom, t_data *rift)
 	rift->frame_rate[DEATH] = 8000;
 }
 
-void	barrel(t_doom *doom, t_data *sprite)
+void	barrel(t_doom *doom, t_data *entity)
 {
-	sprite->health = 20;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[DEATH] = 6000;
+	entity->health = 20;
+	entity->scale = 5 * (doom->surface->w / 100);
+	entity->frame_rate[DEATH] = 6000;
 }
 
-void	lamp(t_doom *doom, t_data *sprite)
+void	lamp(t_doom *doom, t_data *entity)
 {
-	sprite->health = 11120;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 3000;
+	entity->health = 11120;
+	entity->scale = 5 * (doom->surface->w / 100);
+	entity->frame_rate[IDLE] = 3000;
 }
 
-void	torch(t_doom *doom, t_data *sprite)
+void	torch(t_doom *doom, t_data *entity)
 {
-	sprite->health = 11120;
-	sprite->scale = 5 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 9000;
+	entity->health = 11120;
+	entity->scale = 5 * (doom->surface->w / 100);
+	entity->frame_rate[IDLE] = 9000;
 }
 
-void	meat_hook(t_doom *doom, t_data *sprite)
+void	meat_hook(t_doom *doom, t_data *entity)
 {
-	sprite->health = 11120;
-	sprite->scale = 10 * (doom->surface->w / 100);
-	sprite->frame_rate[IDLE] = 1000;
+	entity->health = 11120;
+	entity->scale = 10 * (doom->surface->w / 100);
+	entity->frame_rate[IDLE] = 1000;
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:18:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_wave_mode(t_doom *doom)
 	doom->game.spawn_rate = 5000;
 	doom->game.cool_down = 0;
 	doom->game.spawns = 0;
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr)
 	{
 		if (((t_entity *)curr->content)->type == 0

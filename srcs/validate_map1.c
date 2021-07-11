@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/02 14:29:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_entities(t_doom *doom)
 {
 	t_list		*curr;
 
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr)
 	{
 		((t_entity *)curr->content)->sector

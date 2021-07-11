@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/16 16:21:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_header(t_doom *doom, char **arr)
 	doom->nb.projectiles = 0;
 	doom->nb.rifts = 0;
 	doom->orb = NULL;
-	doom->sprite = NULL;
+	doom->entity = NULL;
 	doom->rifts = NULL;
 	doom->vert = ft_pmalloc(sizeof(t_v3)
 			* doom->nb.vertices, "doom->vert");

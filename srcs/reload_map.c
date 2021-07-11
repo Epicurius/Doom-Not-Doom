@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:26:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	init_wavemode(t_doom *doom)
 {
 	t_list		*new;
 	t_list		*curr;
-	t_entity	*sprite;
+	t_entity	*entity;
 
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr)
 	{
-		sprite = curr->content;
-		sprite->hp = g_entity_data[sprite->type].health;
-		sprite->dest = sprite->where;
-		sprite->state = IDLE;
-		if (sprite->type == 2)
+		entity = curr->content;
+		entity->hp = g_entity_data[entity->type].health;
+		entity->dest = entity->where;
+		entity->state = IDLE;
+		if (entity->type == 2)
 		{
 			new = ft_lstnew(curr->content, sizeof(t_entity));
 			ft_lstadd(&doom->rifts, new);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:45:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	precompute_entities(t_doom *doom)
 {
 	t_list		*curr;
 
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr != NULL)
 	{
 		get_entity_state(doom, curr->content);
 		preforme_entity_state_fuction(doom, curr->content);
 		if (!get_coresponding_entity_state_frame(doom, curr->content))
 		{
-			curr = ft_dellstnode(&doom->sprite, curr);
+			curr = ft_dellstnode(&doom->entity, curr);
 			doom->nb.kills += 1;
 			doom->nb.sprites -= 1;
 			doom->game.spawns -= 1;

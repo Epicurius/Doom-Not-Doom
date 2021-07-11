@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:43:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:50:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,6 @@ typedef struct s_entity_data
 	int				detection_radius;
 	int				attack_range;
 	int				frame_rate[4];
-	//double			attack_speed;
 }					t_entity_data;
 
 # define ENTITY_AMOUNT	7

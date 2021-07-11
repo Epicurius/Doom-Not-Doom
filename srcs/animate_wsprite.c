@@ -6,32 +6,32 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:28:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 14:34:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	animate_wsprite(t_doom *doom, t_wsprite *sprite)
+int	animate_wsprite(t_doom *doom, t_wsprite *entity)
 {
-	if (sprite->time - doom->time.curr < -100)
+	if (entity->time - doom->time.curr < -100)
 	{
-		sprite->src.x1 += 64;
-		sprite->frame += 1;
-		if (sprite->src.x1 >= doom->mtx[sprite->tx].w)
+		entity->src.x1 += 64;
+		entity->frame += 1;
+		if (entity->src.x1 >= doom->mtx[entity->tx].w)
 		{
-			sprite->src.x1 = 0;
-			sprite->src.y1 += 64;
+			entity->src.x1 = 0;
+			entity->src.y1 += 64;
 		}
-		if (sprite->frame >= 3 || sprite->src.y1 >= doom->mtx[sprite->tx].h)
+		if (entity->frame >= 3 || entity->src.y1 >= doom->mtx[entity->tx].h)
 		{
-			sprite->src.x1 = 0;
-			sprite->src.y1 = 0;
-			sprite->frame = 0;
+			entity->src.x1 = 0;
+			entity->src.y1 = 0;
+			entity->frame = 0;
 		}
-		sprite->src.x2 = sprite->src.x1 + 64;
-		sprite->src.y2 = sprite->src.y1 + 64;
-		sprite->time = doom->time.curr;
+		entity->src.x2 = entity->src.x1 + 64;
+		entity->src.y2 = entity->src.y1 + 64;
+		entity->time = doom->time.curr;
 	}
 	return (1);
 }

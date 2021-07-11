@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -470,7 +470,7 @@ typedef struct s_doom
 	t_wall			*walls;
 	t_wall			skybox[4];
 	t_sector		*sectors;
-	t_list			*sprite;
+	t_list			*entity;
 	t_list			*rifts;
 	t_list			*orb;
 	t_camera		cam;
@@ -495,7 +495,7 @@ int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance,
 						int angle);
 void				ai_movement(t_doom *doom, t_entity *entity);
 /* File:			../srcs/animate_wsprite.c */
-int					animate_wsprite(t_doom *doom, t_wsprite *sprite);
+int					animate_wsprite(t_doom *doom, t_wsprite *entity);
 /* File:			../srcs/blit_bxpm.c */
 void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx,
 						int sy);
@@ -510,8 +510,8 @@ void				update_camera(t_doom *doom, int x, int y);
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File:			../srcs/collision_detection.c */
-int					horizontal_collision(t_collision *sprite, t_v3 dest);
-int					collision_detection(t_collision *sprite);
+int					horizontal_collision(t_collision *entity, t_v3 dest);
+int					collision_detection(t_collision *entity);
 /* File:			../srcs/color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
@@ -574,7 +574,7 @@ void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
 void				free_color_palet(t_bxpm *bxpm);
-void				free_sprite_pos(t_npc_bxpm *sprite);
+void				free_sprite_pos(t_npc_bxpm *entity);
 /* File:			../srcs/free2.c */
 void				free_sprites_pos(t_doom *doom);
 void				free_sprites(t_doom *doom);
@@ -654,7 +654,7 @@ void				poll_event(t_doom *doom, SDL_Event *event);
 /* File:			../srcs/line.c */
 void				line(SDL_Surface *surf, Uint32 color, t_point *p);
 /* File:			../srcs/malloc_texture_pos.c */
-void				malloc_texture_pos(t_npc_bxpm *sprite);
+void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File:			../srcs/map_events.c */
 void				move_ceiling(t_doom *doom, t_event *event);
 void				move_floor(t_doom *doom, t_event *event);

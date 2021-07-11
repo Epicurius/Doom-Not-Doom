@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_sprites(t_doom *doom)
 	t_list	*tmp;
 	t_list	*curr;
 
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr != NULL)
 	{
 		tmp = curr;
@@ -43,7 +43,7 @@ void	free_sprites(t_doom *doom)
 		free(tmp->content);
 		free(tmp);
 	}
-	doom->sprite = NULL;
+	doom->entity = NULL;
 }
 
 void	free_rifts(t_doom *doom)

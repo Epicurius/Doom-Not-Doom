@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:31:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	spawn_mob(t_doom *doom, t_entity *rift)
 		mob->where.z += 5;
 	mob->hp = g_entity_data[mob->type].health;
 	project_entity(doom, mob, &mob->render);
-	ft_lstadd_new(&doom->sprite, mob, sizeof(mob));
+	ft_lstadd_new(&doom->entity, mob, sizeof(mob));
 	doom->nb.sprites += 1;
 	doom->game.spawns += 1;
 }
@@ -36,7 +36,7 @@ void	rift_spawn(t_doom *doom)
 {
 	t_list	*curr;
 
-	curr = doom->sprite;
+	curr = doom->entity;
 	while (curr)
 	{
 		if (((t_entity *)curr->content)->type == 2)
@@ -70,7 +70,7 @@ void	respawn_rifts(t_doom *doom)
 	while (curr != NULL)
 	{
 		new = ft_lstnew(curr->content, curr->content_size);
-		ft_lstadd(&doom->sprite, new);
+		ft_lstadd(&doom->entity, new);
 		doom->game.spawns += 1;
 		curr = curr->next;
 	}

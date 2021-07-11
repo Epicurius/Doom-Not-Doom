@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:15:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,47 @@ static int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
 // Player falling thru floor fix
 // If player has reached the cealing.
 // Let the player keep on rising/falling.
-static int	vertical_collision(t_collision *sprite, t_v3 dest)
+static int	vertical_collision(t_collision *entity, t_v3 dest)
 {
 	double		f;
 	double		c;
 	t_wall		*wall;
 	t_sector	*sector;
 
-	sector = &sprite->sectors[*sprite->sector];
+	sector = &entity->sectors[*entity->sector];
 	c = get_ceiling_at_pos(sector,
-			new_v3(sprite->where->x, sprite->where->y, 0));
+			new_v3(entity->where->x, entity->where->y, 0));
 	f = get_floor_at_pos(sector,
-			new_v3(sprite->where->x, sprite->where->y, 0));
-	if ((sprite->velocity->z >= 0 && dest.z < f && f - dest.z
-			<= sprite->step_height)
-		|| (sprite->velocity->z == 0 && dest.z > f && dest.z - f
-			<= sprite->step_height)
-		|| (sprite->velocity->z < 0 && dest.z < f))
+			new_v3(entity->where->x, entity->where->y, 0));
+	if ((entity->velocity->z >= 0 && dest.z < f && f - dest.z
+			<= entity->step_height)
+		|| (entity->velocity->z == 0 && dest.z > f && dest.z - f
+			<= entity->step_height)
+		|| (entity->velocity->z < 0 && dest.z < f))
 	{
-		sprite->where->z = f;
+		entity->where->z = f;
 		return (1);
 	}
-	else if (sprite->velocity->z > 0 && dest.z + sprite->hitbox_height > c)
+	else if (entity->velocity->z > 0 && dest.z + entity->hitbox_height > c)
 		return (1);
-	sprite->where->z += sprite->velocity->z;
+	entity->where->z += entity->velocity->z;
 	return (0);
 }
 
-static int	fit_in_portal(t_collision *sprite, t_sector *sector,
+static int	fit_in_portal(t_collision *entity, t_sector *sector,
 	t_wall *wall, t_v3 dest)
 {
 	double	portal_top;
 	double	portal_bot;
 
-	portal_bot = ft_max(get_floor_at_pos(sector, *sprite->where),
-			get_floor_at_pos(&sprite->sectors[wall->n], dest));
-	portal_top = ft_min(get_ceiling_at_pos(sector, *sprite->where),
-			get_ceiling_at_pos(&sprite->sectors[wall->n], dest));
-	if (portal_top <= portal_bot + sprite->hitbox_height)
+	portal_bot = ft_max(get_floor_at_pos(sector, *entity->where),
+			get_floor_at_pos(&entity->sectors[wall->n], dest));
+	portal_top = ft_min(get_ceiling_at_pos(sector, *entity->where),
+			get_ceiling_at_pos(&entity->sectors[wall->n], dest));
+	if (portal_top <= portal_bot + entity->hitbox_height)
 		return (0);
-	if (portal_top > sprite->where->z + sprite->hitbox_height
-		&& portal_bot <= sprite->where->z + sprite->step_height)
+	if (portal_top > entity->where->z + entity->hitbox_height
+		&& portal_bot <= entity->where->z + entity->step_height)
 		return (1);
 	return (0);
 }
@@ -84,53 +84,53 @@ static int	fit_in_portal(t_collision *sprite, t_sector *sector,
 // Dose path intersecta wall.
 // Is wall solid || or cant fit through portal to next sector.
 // Dose hitbox collide with solid surface
-int	horizontal_collision(t_collision *sprite, t_v3 dest)
+int	horizontal_collision(t_collision *entity, t_v3 dest)
 {
 	int			i;
 	t_wall		*wall;
 	t_sector	*sector;
 
 	i = -1;
-	sector = &sprite->sectors[*sprite->sector];
+	sector = &entity->sectors[*entity->sector];
 	while (++i < sector->npoints)
 	{
 		wall = sector->wall[i];
-		if (intersect_check_v2(*sprite->where, dest, wall->v1, wall->v2))
+		if (intersect_check_v2(*entity->where, dest, wall->v1, wall->v2))
 		{
-			if (wall->solid || !fit_in_portal(sprite, sector, wall, dest))
+			if (wall->solid || !fit_in_portal(entity, sector, wall, dest))
 				return (1);
-			*sprite->sector = wall->n;
+			*entity->sector = wall->n;
 			break ;
 		}
-		else if ((wall->solid || !fit_in_portal(sprite, sector, wall, dest))
-			&& hitbox_collision(dest, wall, sprite->hitbox_radius))
+		else if ((wall->solid || !fit_in_portal(entity, sector, wall, dest))
+			&& hitbox_collision(dest, wall, entity->hitbox_radius))
 		{
 			return (1);
 		}
 	}
-	sprite->where->x += sprite->velocity->x;
-	sprite->where->y += sprite->velocity->y;
+	entity->where->x += entity->velocity->x;
+	entity->where->y += entity->velocity->y;
 	return (0);
 }
 
-int	collision_detection(t_collision *sprite)
+int	collision_detection(t_collision *entity)
 {
 	t_v3	dest;
 
-	dest = add_v3(*sprite->where, *sprite->velocity);
-	if (sprite->player && sprite_collision(sprite, dest))
+	dest = add_v3(*entity->where, *entity->velocity);
+	if (entity->player && sprite_collision(entity, dest))
 	{
-		sprite->velocity->x = 0.0f;
-		sprite->velocity->y = 0.0f;
-		sprite->velocity->z = 0.0f;
+		entity->velocity->x = 0.0f;
+		entity->velocity->y = 0.0f;
+		entity->velocity->z = 0.0f;
 		return (1);
 	}
-	if (horizontal_collision(sprite, dest))
+	if (horizontal_collision(entity, dest))
 	{
-		sprite->velocity->x = 0.0f;
-		sprite->velocity->y = 0.0f;
+		entity->velocity->x = 0.0f;
+		entity->velocity->y = 0.0f;
 	}
-	if (vertical_collision(sprite, dest))
-		sprite->velocity->z = 0.0f;
+	if (vertical_collision(entity, dest))
+		entity->velocity->z = 0.0f;
 	return (1);
 }

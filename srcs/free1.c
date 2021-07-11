@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 11:41:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_color_palet(t_bxpm *bxpm)
 	}
 }
 
-void	free_sprite_pos(t_npc_bxpm *sprite)
+void	free_sprite_pos(t_npc_bxpm *entity)
 {
 	int	i;
 	int	j;
@@ -61,9 +61,9 @@ void	free_sprite_pos(t_npc_bxpm *sprite)
 	while (++i < 4)
 	{
 		j = -1;
-		while (++j < sprite->nb[i][FRAMES])
-			free(sprite->pos[i][j]);
-		free(sprite->pos[i]);
+		while (++j < entity->nb[i][FRAMES])
+			free(entity->pos[i][j]);
+		free(entity->pos[i]);
 	}
-	free(sprite->pos);
+	free(entity->pos);
 }

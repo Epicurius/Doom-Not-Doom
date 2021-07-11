@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:32:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 /*
 void	object_collision(t_doom *doom, t_player *player)
 {
-	if (sprite->type == AMMO)
+	if (entity->type == AMMO)
 		doom->player.ammo += 50;
 	else if (object->type == HEALTH)
 		doom->player.hp += 50;
 	else
 		return ;
-	sprite->render = 0;	
+	entity->render = 0;	
 }
 */
 
