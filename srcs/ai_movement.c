@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	collision.sector = &entity->sector;
 	collision.sectors = doom->sectors;
 	collision.entities = doom->entity;
-	collision.nb_entities = doom->nb.sprites;
+	collision.nb_entities = doom->nb.entities;
 	collision.player = 0;
 	collision.hitbox_height = g_entity_data[entity->type].height;
 	collision.hitbox_radius = g_entity_data[entity->type].hitbox_radius;

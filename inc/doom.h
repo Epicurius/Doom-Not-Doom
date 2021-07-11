@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,7 +345,7 @@ typedef struct s_nb
 	int				processors;
 	int				projectiles;
 	int				threads;
-	int				sprites;
+	int				entities;
 	int				rifts;
 	int				kills;
 	int				events;

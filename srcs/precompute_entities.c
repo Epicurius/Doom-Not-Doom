@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	precompute_entities(t_doom *doom)
 		{
 			curr = ft_dellstnode(&doom->entity, curr);
 			doom->nb.kills += 1;
-			doom->nb.sprites -= 1;
+			doom->nb.entities -= 1;
 			doom->game.spawns -= 1;
 		}
 		else

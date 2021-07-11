@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	free_file(t_doom *doom)
 	doom->nb.sectors = 0;
 	doom->nb.vertices = 0;
 	doom->nb.projectiles = 0;
-	doom->nb.sprites = 0;
+	doom->nb.entities = 0;
 	doom->nb.rifts = 0;
 	doom->nb.kills = 0;
 	doom->player.velocity = new_v3(0, 0, 0);
