@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 12:54:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "tpool.h"
 # include "bxpm.h"
 # include "macros.h"
-# include "MyMath.h"
+# include "libm.h"
 # include "enum.h"
 # include "path.h"
 # include "resources.h"
@@ -107,27 +107,6 @@ typedef struct s_projectile
 	double			dist;
 	int				sector;	
 }					t_projectile;
-
-typedef struct s_data
-{
-	int				health;
-	int				height;
-	int				hitbox_radius;
-	double			speed;
-	int				flying;
-	int				damage;
-	int				animate;
-	int				hostile;
-	int				attack_style;
-	double			scale;
-	int				move;
-	int				view_distance;
-	int				detection_radius;
-	int				attack_range;
-	int				frame_rate[4];
-	double			attack_speed;
-	int				head_y;
-}					t_data;
 
 typedef struct s_weapon_thread
 {
@@ -315,7 +294,6 @@ typedef struct s_entity
 	int				type;
 	double			scale;
 	double			time;
-	t_data			*data;
 }					t_entity;
 
 typedef struct s_entity_thread
@@ -499,12 +477,11 @@ typedef struct s_doom
 	t_player		player;
 	t_bxpm			mtx[MAP_TEXTURE_AMOUNT];
 	t_bxpm			stx[SKYBOX_TEXTURE_AMOUNT];
-	t_bxpm			icon[ICON_TEXTURE_AMOUNT];
-	t_weapon		weapon[5];
-	t_bxpm			sprite_sheets[ENTITY_TEXTURE_AMOUNT];
-	t_npc_bxpm		npc_bxpm[7];
-	t_data			npe_data[7];
+	t_bxpm			itx[ICON_TEXTURE_AMOUNT];
+	t_bxpm			etx[ENTITY_TEXTURE_AMOUNT];
 	Mix_Chunk		*sound[WAV_AMOUNT];
+	t_weapon		weapon[5];
+	t_npc_bxpm		npc_bxpm[7]; //Should be 5 but does not work
 	t_event			*events;
 }					t_doom;
 
@@ -581,15 +558,6 @@ void				draw_wall_texture(t_render *render, t_vline *vline);
 void				draw_weapon(t_doom *doom);
 /* File:			../srcs/draw_wsprites.c */
 void				draw_wsprites(t_render *render, t_vline *vline);
-/* File:			../srcs/entity_stats1.c */
-void				alfred(t_doom *doom, t_data *alfred);
-void				spooky(t_doom *doom, t_data *spooky);
-/* File:			../srcs/entity_stats2.c */
-void				rift(t_doom *doom, t_data *rift);
-void				barrel(t_doom *doom, t_data *sprite);
-void				lamp(t_doom *doom, t_data *sprite);
-void				torch(t_doom *doom, t_data *sprite);
-void				meat_hook(t_doom *doom, t_data *sprite);
 /* File:			../srcs/error.c */
 void				*ft_pmalloc(size_t size, char *str);
 /* File:			../srcs/find_sector.c */

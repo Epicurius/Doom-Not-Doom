@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:28:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:20:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	entity->yaw = angle_to_point_v2(entity->where, doom->player.where);
 	if (entity->frame < doom->npc_bxpm[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
-	if (entity->data->attack_style == 2)
+	if (g_entity_data[entity->type].attack_style == 2)
 	{
-		doom->player.hp -= entity->data->damage;
+		doom->player.hp -= g_entity_data[entity->type].damage;
 		entity->hp = 0;
 		entity->state = DEATH;
 	}
-	else if (entity->data->attack_style == 1)
+	else if (g_entity_data[entity->type].attack_style == 1)
 	{
 		orb = ft_memalloc(sizeof(t_projectile));
 		orb->velocity = projectile_movement(doom, entity->where,

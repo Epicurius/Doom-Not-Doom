@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 14:31:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:20:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	entity_see(t_doom *doom, t_entity *entity)
 
 static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 {
-	if (dist > entity->data->view_distance)
+	if (dist > g_entity_data[entity->type].view_distance)
 		return (0);
-	if (dist < entity->data->detection_radius)
+	if (dist < g_entity_data[entity->type].detection_radius)
 		return (1);
 	if (entity_see(doom, entity))
 		return (2);
@@ -51,21 +51,21 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
-	if (doom->player.shooting && dist > entity->data->view_distance
+	if (doom->player.shooting && dist > g_entity_data[entity->type].view_distance
 		&& ai_track_player(doom, entity))
 		entity->state = MOVE;
 	else if (entity_line_of_sight(doom, entity, dist))
 	{
 		if (entity->danger && ai_rand_dodge(doom, entity, 900, 110))
 			entity->state = MOVE;
-		else if (entity->data->attack_range > dist)
+		else if (g_entity_data[entity->type].attack_range > dist)
 			entity->state = ATTACK;
 		else if (ai_track_player(doom, entity))
 			entity->state = MOVE;
 	}
 	else
 	{
-		if (entity->data->move && ai_rand_move(doom, entity, 10, 360))
+		if (g_entity_data[entity->type].move && ai_rand_move(doom, entity, 10, 360))
 			entity->state = MOVE;
 		else
 			entity->state = IDLE;
@@ -74,7 +74,7 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
-	if (entity->data->animate && entity->render.z > 10
+	if (g_entity_data[entity->type].animate && entity->render.z > 10
 		&& doom->w2 > entity->render.start.x && doom->w2 < entity->render.end.x
 		&& doom->h2 > entity->render.start.y && doom->h2 < entity->render.end.y)
 		entity->danger = 1;
@@ -84,7 +84,7 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		entity->frame = 0;
 		entity->time = 0;
 	}
-	else if (!entity->data->animate || entity->state == DEATH || entity->frame)
+	else if (!g_entity_data[entity->type].animate || entity->state == DEATH || entity->frame)
 		return ;
 	else
 		get_entity_state2(doom, entity);

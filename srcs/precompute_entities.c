@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 14:35:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:45:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	frame_animation(t_doom *doom, t_entity *entity)
 {
-	if (entity->data->frame_rate[entity->state] * doom->time.delta
+	if (g_entity_data[entity->type].frame_rate[entity->state] * doom->time.delta
 		< doom->time.curr - entity->time)
 	{
 		entity->frame++;
@@ -31,9 +31,11 @@ int	frame_animation(t_doom *doom, t_entity *entity)
 
 void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 {
+	if (!g_entity_data[entity->type].animate)
+		return ;
 	if (entity->state != MOVE)
 		entity->velocity = new_v3(0, 0, entity->velocity.z);
-	if (!entity->data->flying)
+	if (!g_entity_data[entity->type].flying)
 	{
 		if (entity->where.z > get_floor_at_pos(&doom->sectors[entity->sector],
 				entity->where))

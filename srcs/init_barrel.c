@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:09:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:19:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_barrel(t_doom *doom)
 	t_npc_bxpm	*img;
 
 	img = &doom->npc_bxpm[BARREL];
-	img->bxpm = &doom->sprite_sheets[3];
+	img->bxpm = &doom->etx[3];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 1;
 	img->nb[MOVE][FRAMES] = 0;

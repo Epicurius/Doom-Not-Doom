@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:53 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 11:31:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	init_spooky(t_doom *doom)
 	t_npc_bxpm	*img;
 
 	img = &doom->npc_bxpm[SPOOKY];
-	img->bxpm = &doom->sprite_sheets[1];
+	img->bxpm = &doom->etx[1];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 8;
 	img->nb[MOVE][FRAMES] = 6;

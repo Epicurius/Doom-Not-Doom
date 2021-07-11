@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:44:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 11:44:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_icon(t_doom *doom)
 	i = -1;
 	while (++i < 5)
 	{
-		free(doom->icon[i].clr);
-		free(doom->icon[i].pix);
+		free(doom->itx[i].clr);
+		free(doom->itx[i].pix);
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 15:34:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MyMath.h"
+#include "libm.h"
 
 //		x,y of vector
 void	get_polar_cordinates(double len, double angle, t_v2 *polar)

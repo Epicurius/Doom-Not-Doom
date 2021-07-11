@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:14:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:43:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_INTRO, WAV_PATH"intro.wav"},
 	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
 	{WAV_JUMP, WAV_PATH"jump.wav"},
-	{WAV_GUN, WAV_PATH"gun.wav"},
+	{WAV_GUN, WAV_PATH"gun.wav"}
 };
 
 # define MAP_TEXTURE_AMOUNT	15
@@ -205,14 +205,13 @@ typedef struct s_entity_data
 	int				detection_radius;
 	int				attack_range;
 	int				frame_rate[4];
-	double			attack_speed;
-	int				head_y;
+	//double			attack_speed;
 }					t_entity_data;
 
-
-static const t_entity_data	g_entity_data[7] = 
+# define ENTITY_AMOUNT	7
+static const t_entity_data	g_entity_data[ENTITY_AMOUNT] = 
 {
-	{
+	{//	Alferd
 		.health = 1,
 		.damage = 100,
 		.animate = 1,
@@ -226,12 +225,13 @@ static const t_entity_data	g_entity_data[7] =
 		.view_distance = 200,
 		.detection_radius = 40,
 		.attack_range = 7,
+		.flying = 1,
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 4000,
 		.frame_rate[ATTACK] = 6000,
-		.frame_rate[DEATH] = 6000,
-		.flying = 1},
-	{
+		.frame_rate[DEATH] = 6000
+	},
+	{//	Spooky
 		.health = 1,
 		.damage = 30,
 		.animate = 1,
@@ -245,12 +245,13 @@ static const t_entity_data	g_entity_data[7] =
 		.view_distance = 100,
 		.detection_radius = 40,
 		.attack_range = 50,
+		.flying = 0,
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 6000,
 		.frame_rate[ATTACK] = 18000,
-		.frame_rate[DEATH] = 12000,
-		.flying = 0},
-	{
+		.frame_rate[DEATH] = 12000
+	},
+	{//	Rift
 		.health = 1,
 		.damage = 200,
 		.animate = 0,
@@ -268,8 +269,9 @@ static const t_entity_data	g_entity_data[7] =
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 8000,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0},
-	{
+		.frame_rate[DEATH] = 0
+	},
+	{//	Barrel
 		.health = 20,
 		.damage = 0,
 		.animate = 0,
@@ -287,8 +289,9 @@ static const t_entity_data	g_entity_data[7] =
 		.frame_rate[IDLE] = 6000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0},
-	{
+		.frame_rate[DEATH] = 0
+	},
+	{//	Lamp
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
@@ -302,12 +305,33 @@ static const t_entity_data	g_entity_data[7] =
 		.view_distance = 0,
 		.detection_radius = 0,
 		.attack_range = 0,
+		.flying = 0,
 		.frame_rate[IDLE] = 3000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.flying = 0},
-	{
+		.frame_rate[DEATH] = 0
+	},
+	{//	Torch
+		.health = 11120,
+		.damage = 0,
+		.animate = 0,
+		.hostile = 0,
+		.attack_style = 0,
+		.scale = 5,
+		.height = 0,
+		.hitbox_radius = 0,
+		.speed = 0,
+		.move = 0,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.attack_range = 0,
+		.flying = 0,
+		.frame_rate[IDLE] = 9000,
+		.frame_rate[MOVE] = 0,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0
+	},
+	{//	Meat_Hook
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
@@ -321,143 +345,12 @@ static const t_entity_data	g_entity_data[7] =
 		.view_distance = 0,
 		.detection_radius = 0,
 		.attack_range = 0,
+		.flying = 0,
 		.frame_rate[IDLE] = 1000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.flying = 0}
+		.frame_rate[DEATH] = 0
+	}
 };
-/*
-static const t_entity_data	g_alfred =
-{
-	.health = 1,
-	.damage = 100,
-	.animate = 1,
-	.hostile = 1,
-	.attack_style = 2,
-	.scale = 4,// * (doom->surface->w / 100),
-	.height = 2,
-	.hitbox_radius = 2,
-	.speed = 20,
-	.move = 1,
-	.view_distance = 200,
-	.detection_radius = 40,
-	.attack_range = 7,
-	.frame_rate[IDLE] = 2000,
-	.frame_rate[MOVE] = 4000,
-	.frame_rate[ATTACK] = 6000,
-	.frame_rate[DEATH] = 6000,
-	.flying = 1
-};
-
-static const t_entity_data	g_spooky =
-{
-	.health = 1,
-	.damage = 30,
-	.animate = 1,
-	.hostile = 1,
-	.attack_style = 1,
-	.scale = 2,
-	.height = 7,
-	.hitbox_radius = 2,
-	.speed = 10,
-	.move = 1,
-	.view_distance = 100,
-	.detection_radius = 40,
-	.attack_range = 50,
-	.frame_rate[IDLE] = 2000,
-	.frame_rate[MOVE] = 6000,
-	.frame_rate[ATTACK] = 18000,
-	.frame_rate[DEATH] = 12000,
-	.flying = 0
-};
-
-static const t_entity_data	g_rift =
-{
-	.health = 1,
-	.damage = 200,
-	.animate = 0,
-	.hostile = 0,
-	.attack_style = 2,
-	.scale = 2,
-	.height = 9,
-	.hitbox_radius = 0,
-	.speed = 0,
-	.move = 0,
-	.view_distance = 0,
-	.detection_radius = 0,
-	.attack_range = 0,
-	.flying = 0,
-	.frame_rate[IDLE] = 2000,
-	.frame_rate[MOVE] = 8000,
-	.frame_rate[ATTACK] = 0,
-	.frame_rate[DEATH] = 0
-};
-
-static const t_entity_data	g_barrel =
-{
-	.health = 20,
-	.damage = 0,
-	.animate = 0,
-	.hostile = 0,
-	.attack_style = 0,
-	.scale = 5,
-	.height = 0,
-	.hitbox_radius = 0,
-	.speed = 0,
-	.move = 0,
-	.view_distance = 0,
-	.detection_radius = 0,
-	.attack_range = 0,
-	.flying = 0,
-	.frame_rate[IDLE] = 6000,
-	.frame_rate[MOVE] = 0,
-	.frame_rate[ATTACK] = 0,
-	.frame_rate[DEATH] = 0
-};
-
-static const t_entity_data	g_lamp =
-{
-	.health = 11120,
-	.damage = 0,
-	.animate = 0,
-	.hostile = 0,
-	.attack_style = 0,
-	.scale = 5,
-	.height = 0,
-	.hitbox_radius = 0,
-	.speed = 0,
-	.move = 0,
-	.view_distance = 0,
-	.detection_radius = 0,
-	.attack_range = 0,
-	.frame_rate[IDLE] = 3000,
-	.frame_rate[MOVE] = 0,
-	.frame_rate[ATTACK] = 0,
-	.frame_rate[DEATH] = 0,
-	.flying = 0
-};
-
-static const t_entity_data	g_torch =
-{
-	.health = 11120,
-	.damage = 0,
-	.animate = 0,
-	.hostile = 0,
-	.attack_style = 0,
-	.scale = 10,
-	.height = 0,
-	.hitbox_radius = 0,
-	.speed = 0,
-	.move = 0,
-	.view_distance = 0,
-	.detection_radius = 0,
-	.attack_range = 0,
-	.frame_rate[IDLE] = 1000,
-	.frame_rate[MOVE] = 0,
-	.frame_rate[ATTACK] = 0,
-	.frame_rate[DEATH] = 0,
-	.flying = 0
-};*/
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:18:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:26:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	init_wavemode(t_doom *doom)
 	while (curr)
 	{
 		sprite = curr->content;
-		sprite->data = &doom->npe_data[sprite->type];
-		sprite->hp = sprite->data->health;
+		sprite->hp = g_entity_data[sprite->type].health;
 		sprite->dest = sprite->where;
 		sprite->state = IDLE;
 		if (sprite->type == 2)

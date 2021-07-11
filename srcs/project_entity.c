@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:43:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:35:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	project_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
 	screen.x = doom->w2 + (screen.x * doom->cam.scale / -screen.z);
 	screen.y = doom->h2 + (screen.y * doom->cam.scale / -screen.z);
 	size.x = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
-	[entity->angle].w * entity->data->scale / screen.z;
+	[entity->angle].w * (g_entity_data[entity->type].scale * (doom->surface->w / 100)) / screen.z;
 	size.y = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
-	[entity->angle].h * entity->data->scale / screen.z;
+	[entity->angle].h * (g_entity_data[entity->type].scale * (doom->surface->w / 100)) / screen.z;
 	render->z = screen.z;
 	render->start = new_point(screen.x - size.x / 2, screen.y - size.y);
 	render->end = new_point(screen.x + size.x / 2, screen.y);

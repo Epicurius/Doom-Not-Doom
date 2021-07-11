@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/11 12:32:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/11 14:25:07 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,6 @@ RAW_SRC =	ai_attack.c\
 			draw_wall.c\
 			draw_weapon.c\
 			draw_wsprites.c\
-			entity_stats1.c\
-			entity_stats2.c\
 			error.c\
 			find_sector.c\
 			fps.c\

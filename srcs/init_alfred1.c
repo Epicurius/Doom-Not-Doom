@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 11:30:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_alfred(t_doom *doom)
 	t_npc_bxpm	*img;
 
 	img = &doom->npc_bxpm[ALFRED];
-	img->bxpm = &doom->sprite_sheets[0];
+	img->bxpm = &doom->etx[0];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 8;
 	img->nb[MOVE][FRAMES] = 4;

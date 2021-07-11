@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:18:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:22:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@ static void	init_entity_pos(t_doom *doom)
 	init_meat_hook(doom);
 }
 
-static void	init_entity_stats(t_doom *doom)
-{
-	alfred(doom, &doom->npe_data[0]);
-	spooky(doom, &doom->npe_data[1]);
-	rift(doom, &doom->npe_data[2]);
-	barrel(doom, &doom->npe_data[3]);
-	lamp(doom, &doom->npe_data[4]);
-	torch(doom, &doom->npe_data[5]);
-	meat_hook(doom, &doom->npe_data[6]);
-}
-
 void	init_entities(t_doom *doom)
 {
 	t_list		*new;
@@ -41,13 +30,11 @@ void	init_entities(t_doom *doom)
 	t_entity	*sprite;
 
 	init_entity_pos(doom);
-	init_entity_stats(doom);
 	curr = doom->sprite;
 	while (curr)
 	{
 		sprite = curr->content;
-		sprite->data = &doom->npe_data[sprite->type];
-		sprite->hp = sprite->data->health;
+		sprite->hp = g_entity_data[sprite->type].health;
 		sprite->dest = sprite->where;
 		sprite->state = IDLE;
 		if (sprite->type == 2)

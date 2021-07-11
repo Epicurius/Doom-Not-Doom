@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 12:31:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_textures(t_doom *doom)
 	init_clock(doom, &doom->mtx[4]);
 	parse_textures(MAP_TEXTURE_AMOUNT, doom->mtx, g_map_textures);
 	parse_textures(SKYBOX_TEXTURE_AMOUNT, doom->stx, g_skybox_textures);
-	parse_textures(ENTITY_TEXTURE_AMOUNT, doom->sprite_sheets, g_entity_textures);
-	parse_textures(ICON_TEXTURE_AMOUNT, doom->icon, g_icon_textures);
+	parse_textures(ENTITY_TEXTURE_AMOUNT, doom->etx, g_entity_textures);
+	parse_textures(ICON_TEXTURE_AMOUNT, doom->itx, g_icon_textures);
 	parse_textures(SHOTGUN_TEXTURE_AMOUNT, doom->weapon[0].bxpm, g_shotgun_textures);
 	parse_textures(GLOCK_TEXTURE_AMOUNT, doom->weapon[1].bxpm, g_glock_textures);
 	parse_textures(MINIGUN_TEXTURE_AMOUNT, doom->weapon[2].bxpm, g_minigun_textures);

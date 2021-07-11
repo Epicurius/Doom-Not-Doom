@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 17:39:41 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 12:30:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_rift(t_doom *doom)
 	t_npc_bxpm	*img;
 
 	img = &doom->npc_bxpm[RIFT];
-	img->bxpm = &doom->sprite_sheets[2];
+	img->bxpm = &doom->etx[2];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 1;
 	img->nb[MOVE][FRAMES] = 0;

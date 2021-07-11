@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 12:47:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	free_textures(t_doom *doom)
 	i = -1;
 	while (++i < 4)
 	{
-		free(doom->sprite_sheets[i].clr);
-		free(doom->sprite_sheets[i].pix);
+		free(doom->etx[i].clr);
+		free(doom->etx[i].pix);
 	}
 }
 

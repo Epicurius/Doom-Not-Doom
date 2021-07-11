@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 15:34:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MyMath.h"
+#include "libm.h"
 
 //	Checks if line intersects
 int	intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
