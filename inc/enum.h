@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:55:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/12 11:46:55 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ typedef enum e_enum_sprites
 	TORCH,
 	MEAT_HOOK
 }				t_enum_sprites;
+# define IDLE 0
+# define ATTACK 2
+# define MOVE 1
+# define DEATH 3
 
 #endif

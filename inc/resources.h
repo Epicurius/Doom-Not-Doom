@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:50:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/12 13:00:39 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ static const t_id_and_path	g_pump_textures[PUMP_TEXTURE_AMOUNT] =
 
 typedef struct s_entity_data
 {
+	char			*name;
 	int				health;
 	int				height;
 	int				hitbox_radius;
@@ -205,12 +206,15 @@ typedef struct s_entity_data
 	int				detection_radius;
 	int				attack_range;
 	int				frame_rate[4];
+	char			*path;
+	int				tc[4];
 }					t_entity_data;
 
 # define ENTITY_AMOUNT	7
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] = 
 {
 	{//	Alferd
+		.name = "Alfred",
 		.health = 1,
 		.damage = 100,
 		.animate = 1,
@@ -228,9 +232,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 4000,
 		.frame_rate[ATTACK] = 6000,
-		.frame_rate[DEATH] = 6000
+		.frame_rate[DEATH] = 6000,
+		.path = BXPM_PATH"alfred.bxpm",
+		.tc = {0, 0, 43, 47}
 	},
 	{//	Spooky
+		.name = "Spooky",
 		.health = 1,
 		.damage = 30,
 		.animate = 1,
@@ -248,9 +255,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 6000,
 		.frame_rate[ATTACK] = 18000,
-		.frame_rate[DEATH] = 12000
+		.frame_rate[DEATH] = 12000,
+		.path = BXPM_PATH"spooky.bxpm",
+		.tc = {25, 193, 139 - 25, 377 - 193}
 	},
 	{//	Rift
+		.name = "Rift",
 		.health = 1,
 		.damage = 200,
 		.animate = 0,
@@ -268,9 +278,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 2000,
 		.frame_rate[MOVE] = 8000,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"rift.bxpm",
+		.tc = {0, 0, 174, 315}
 	},
 	{//	Barrel
+		.name = "Barrel",
 		.health = 20,
 		.damage = 0,
 		.animate = 0,
@@ -288,9 +301,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 6000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"objects.bxpm",
+		.tc = {174, 182, 209 - 174, 233 - 182}
 	},
 	{//	Lamp
+		.name = "Lamp",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
@@ -308,9 +324,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 3000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"objects.bxpm",
+		.tc = {174, 7, 197 - 174, 91 - 7}
 	},
 	{//	Torch
+		.name = "Torch",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
@@ -328,9 +347,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 9000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"objects.bxpm",
+		.tc = {371, 209, 381 - 371, 256 - 209}
 	},
 	{//	Meat_Hook
+		.name = "Meat Hook",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
@@ -348,7 +370,9 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 1000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"objects.bxpm",
+		.tc = {543, 5, 579 - 543, 104 - 5}
 	}
 };
 
