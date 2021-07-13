@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 12:14:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	attack_pos_alfred(t_rect **pos)
 
 static void	death_pos_alfred(t_rect **pos)
 {
-	pos[0][0] = rect_xy2(0, 103, 33, 153);
-	pos[1][0] = rect_xy2(78, 103, 114, 155);
+	pos[0][0] = rect_xy2(0,   103, 33,  153);
+	pos[1][0] = rect_xy2(78,  103, 114, 155);
 	pos[2][0] = rect_xy2(158, 103, 202, 150);
 	pos[3][0] = rect_xy2(247, 103, 315, 161);
 	pos[4][0] = rect_xy2(359, 103, 447, 174);

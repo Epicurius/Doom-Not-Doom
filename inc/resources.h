@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/12 13:00:39 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/07/13 12:21:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,14 +213,14 @@ typedef struct s_entity_data
 # define ENTITY_AMOUNT	7
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] = 
 {
-	{//	Alferd
+	{
 		.name = "Alfred",
 		.health = 1,
 		.damage = 100,
 		.animate = 1,
 		.hostile = 1,
 		.attack_style = 2,
-		.scale = 4,
+		.scale = 0.04,
 		.height = 2,
 		.hitbox_radius = 2,
 		.speed = 20,
@@ -236,14 +236,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"alfred.bxpm",
 		.tc = {0, 0, 43, 47}
 	},
-	{//	Spooky
+	{
 		.name = "Spooky",
 		.health = 1,
 		.damage = 30,
 		.animate = 1,
 		.hostile = 1,
 		.attack_style = 1,
-		.scale = 2,
+		.scale = 0.02,
 		.height = 7,
 		.hitbox_radius = 2,
 		.speed = 10,
@@ -259,14 +259,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"spooky.bxpm",
 		.tc = {25, 193, 139 - 25, 377 - 193}
 	},
-	{//	Rift
+	{
 		.name = "Rift",
 		.health = 1,
 		.damage = 200,
 		.animate = 0,
 		.hostile = 0,
 		.attack_style = 2,
-		.scale = 2,
+		.scale = 0.02,
 		.height = 9,
 		.hitbox_radius = 0,
 		.speed = 0,
@@ -282,14 +282,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"rift.bxpm",
 		.tc = {0, 0, 174, 315}
 	},
-	{//	Barrel
+	{
 		.name = "Barrel",
 		.health = 20,
 		.damage = 0,
 		.animate = 0,
 		.hostile = 0,
 		.attack_style = 0,
-		.scale = 5,
+		.scale = 0.05,
 		.height = 0,
 		.hitbox_radius = 0,
 		.speed = 0,
@@ -305,14 +305,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {174, 182, 209 - 174, 233 - 182}
 	},
-	{//	Lamp
+	{
 		.name = "Lamp",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
 		.hostile = 0,
 		.attack_style = 0,
-		.scale = 5,
+		.scale = 0.05,
 		.height = 0,
 		.hitbox_radius = 0,
 		.speed = 0,
@@ -328,14 +328,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {174, 7, 197 - 174, 91 - 7}
 	},
-	{//	Torch
+	{
 		.name = "Torch",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
 		.hostile = 0,
 		.attack_style = 0,
-		.scale = 5,
+		.scale = 0.05,
 		.height = 0,
 		.hitbox_radius = 0,
 		.speed = 0,
@@ -351,14 +351,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {371, 209, 381 - 371, 256 - 209}
 	},
-	{//	Meat_Hook
+	{
 		.name = "Meat Hook",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
 		.hostile = 0,
 		.attack_style = 0,
-		.scale = 10,
+		.scale = 0.10,
 		.height = 0,
 		.hitbox_radius = 0,
 		.speed = 0,

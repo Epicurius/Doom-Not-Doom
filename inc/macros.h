@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 15:34:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 12:20:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@
 ** Entities
 */
 # define MAX_ENTITIES_RENDERED		20
-# define IDLE						0
-# define MOVE						1
-# define ATTACK						2
-# define DEATH						3
 # define FRAMES						0
 # define ANGLES						1
 # define STYLE_MELEE				0
@@ -98,14 +94,5 @@
 # define MM_BEZEL_COLOR				0x222222
 # define MM_VIEW_COLOR				0xFFD700
 # define MM_ALPHA					100
-
-/*
-** Skybox
-*/
-# define TOP						1
-# define BOT						2
-# define SIDES						3
-# define TOP_HALF					4
-# define BOT_HALF					5
 
 #endif
