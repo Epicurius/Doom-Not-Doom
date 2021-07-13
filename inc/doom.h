@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:20:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -481,7 +481,7 @@ typedef struct s_doom
 	t_bxpm			etx[ENTITY_TEXTURE_AMOUNT];
 	Mix_Chunk		*sound[WAV_AMOUNT];
 	t_weapon		weapon[5];
-	t_npc_bxpm		npc_bxpm[7]; //Should be 5 but does not work
+	t_npc_bxpm		npc_bxpm[7];
 	t_event			*events;
 }					t_doom;
 

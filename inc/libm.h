@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MyMath.h                                           :+:      :+:    :+:   */
+/*   libm.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/21 15:42:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:19:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYMATH_H
-# define MYMATH_H
+#ifndef LIBM_H
+# define LIBM_H
 
 # include <math.h>
 # define CONVERT_RADIANS	0.0174532925199432955

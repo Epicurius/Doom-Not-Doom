@@ -6,30 +6,30 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/12 08:53:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:23:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	project_entity(t_doom *doom, t_entity *entity, t_entity_render *render)
+void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 {
 	t_point	size;
 	t_v3	dist;
 	t_v3	screen;
 
-	dist.x = entity->where.x - doom->player.where.x;
-	dist.y = entity->where.z - doom->player.where.z - doom->player.eye_lvl;
-	dist.z = entity->where.y - doom->player.where.y;
+	dist.x = ent->where.x - doom->player.where.x;
+	dist.y = ent->where.z - doom->player.where.z - doom->player.eye_lvl;
+	dist.z = ent->where.y - doom->player.where.y;
 	screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	screen.x = doom->w2 + (screen.x * doom->cam.scale / -screen.z);
 	screen.y = doom->h2 + (screen.y * doom->cam.scale / -screen.z);
-	size.x = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
-	[entity->angle].w * (g_entity_data[entity->type].scale * doom->surface->w) / screen.z;
-	size.y = doom->npc_bxpm[entity->type].pos[entity->state][entity->frame]
-	[entity->angle].h * (g_entity_data[entity->type].scale * doom->surface->w) / screen.z;
+	size.x = doom->npc_bxpm[ent->type].pos[ent->state][ent->frame][ent->angle].w
+		* (g_entity_data[ent->type].scale * doom->surface->w) / screen.z;
+	size.y = doom->npc_bxpm[ent->type].pos[ent->state][ent->frame][ent->angle].h
+		* (g_entity_data[ent->type].scale * doom->surface->w) / screen.z;
 	render->z = screen.z;
 	render->start = new_point(screen.x - size.x / 2, screen.y - size.y);
 	render->end = new_point(screen.x + size.x / 2, screen.y);

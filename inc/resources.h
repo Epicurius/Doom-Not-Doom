@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 12:21:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:20:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ typedef struct s_entity_data
 }					t_entity_data;
 
 # define ENTITY_AMOUNT	7
-static const t_entity_data	g_entity_data[ENTITY_AMOUNT] = 
+static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 {
 	{
 		.name = "Alfred",

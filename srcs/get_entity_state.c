@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:20:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/13 17:26:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
-	if (doom->player.shooting && dist > g_entity_data[entity->type].view_distance
-		&& ai_track_player(doom, entity))
+	if (doom->player.shooting && dist > g_entity_data[entity->type]
+		.view_distance && ai_track_player(doom, entity))
 		entity->state = MOVE;
 	else if (entity_line_of_sight(doom, entity, dist))
 	{
@@ -65,7 +65,8 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 	}
 	else
 	{
-		if (g_entity_data[entity->type].move && ai_rand_move(doom, entity, 10, 360))
+		if (g_entity_data[entity->type].move
+			&& ai_rand_move(doom, entity, 10, 360))
 			entity->state = MOVE;
 		else
 			entity->state = IDLE;
@@ -84,7 +85,8 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		entity->frame = 0;
 		entity->time = 0;
 	}
-	else if (!g_entity_data[entity->type].animate || entity->state == DEATH || entity->frame)
+	else if (!g_entity_data[entity->type].animate
+		|| entity->state == DEATH || entity->frame)
 		return ;
 	else
 		get_entity_state2(doom, entity);
