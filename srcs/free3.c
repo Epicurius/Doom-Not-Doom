@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:44:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:22:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_weapons(t_doom *doom)
 	int	j;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < WEAPON_AMOUNT)
 	{
 		j = -1;
 		while (++j < (doom->weapon[i].reload_frames
@@ -36,7 +36,7 @@ void	free_sounds(t_doom *doom)
 	int	i;
 
 	i = -1;
-	while (++i < 7)
+	while (++i < WAV_AMOUNT)
 		Mix_FreeChunk(doom->sound[i]);
 }
 
@@ -45,7 +45,7 @@ void	free_icon(t_doom *doom)
 	int	i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < ICON_TEXTURE_AMOUNT)
 	{
 		free(doom->itx[i].clr);
 		free(doom->itx[i].pix);

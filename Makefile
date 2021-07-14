@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/14 11:54:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/14 12:02:41 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,7 @@ RAW_SRC		=	ai_attack.c\
 				init_scale.c\
 				init_sdl.c\
 				init_slope.c\
-				init_spooky1.c\
-				init_spooky2.c\
+				init_spooky.c\
 				init_textures.c\
 				init_torch.c\
 				init_wave_mode.c\

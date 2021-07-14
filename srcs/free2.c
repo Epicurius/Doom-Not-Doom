@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:21:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 void	free_sprites_pos(t_doom *doom)
 {
-	if (doom->npc_bxpm[0].pos)
-		free_sprite_pos(&doom->npc_bxpm[0]);
-	if (doom->npc_bxpm[1].pos)
-		free_sprite_pos(&doom->npc_bxpm[1]);
-	if (doom->npc_bxpm[2].pos)
-		free_sprite_pos(&doom->npc_bxpm[2]);
-	if (doom->npc_bxpm[3].pos)
-		free_sprite_pos(&doom->npc_bxpm[3]);
-	if (doom->npc_bxpm[4].pos)
-		free_sprite_pos(&doom->npc_bxpm[4]);
-	if (doom->npc_bxpm[5].pos)
-		free_sprite_pos(&doom->npc_bxpm[5]);
-	if (doom->npc_bxpm[6].pos)
-		free_sprite_pos(&doom->npc_bxpm[6]);
+	int	i;
+
+	i = -1;
+	while (++i < ENTITY_AMOUNT)
+	{
+		if (doom->npc_bxpm[i].pos)
+			free_sprite_pos(&doom->npc_bxpm[i]);
+	}
 }
 
 void	free_sprites(t_doom *doom)
@@ -67,20 +61,20 @@ void	free_textures(t_doom *doom)
 	int	i;
 
 	i = -1;
-	while (++i < 15)
+	while (++i < MAP_TEXTURE_AMOUNT)
 	{
 		free(doom->mtx[i].clr);
 		free(doom->mtx[i].pix);
 		free_color_palet(&doom->mtx[i]);
 	}
 	i = -1;
-	while (++i < 12)
+	while (++i < SKYBOX_TEXTURE_AMOUNT)
 	{
 		free(doom->stx[i].clr);
 		free(doom->stx[i].pix);
 	}
 	i = -1;
-	while (++i < 4)
+	while (++i < ENTITY_TEXTURE_AMOUNT)
 	{
 		free(doom->etx[i].clr);
 		free(doom->etx[i].pix);

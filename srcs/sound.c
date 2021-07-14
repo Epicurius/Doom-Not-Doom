@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 09:53:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:07:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	init_sound(t_doom *doom)
 		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(7);
 	parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
-	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
+	//Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	Mix_Volume(-1, 0);
 }

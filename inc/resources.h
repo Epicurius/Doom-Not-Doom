@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 17:20:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:21:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,5 +375,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.tc = {543, 5, 579 - 543, 104 - 5}
 	}
 };
+
+# define WEAPON_AMOUNT 5
 
 #endif
