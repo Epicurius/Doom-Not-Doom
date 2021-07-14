@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/11 14:25:07 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/14 10:58:54 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,7 @@ RAW_SRC =	ai_attack.c\
 			hud_utils.c\
 			icon.c\
 			init.c\
-			init_alfred1.c\
-			init_alfred2.c\
+			init_alfred.c\
 			init_barrel.c\
 			init_entity.c\
 			init_inventory.c\
@@ -139,11 +138,14 @@ SRCS		= $(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			= $(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:= $(OBJ:.o=.d)
 
-SDL_DIR		:= ./SDL
-SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
-SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
-SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
-SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
+#SDL_DIR		:= ./SDL
+#SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
+#SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
+#SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
+#SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
+
+SDL_DIR		:= ./SDL2
+SDL			:= -I $(SDL_DIR)/includes -L $(SDL_DIR)/lib/ -lSDL2 -L $(SDL_DIR)/lib/ -lSDL2_ttf -L $(SDL_DIR)/lib/ -lSDL2_mixer -L $(SDL_DIR)/lib/ -lSDL2_image
 
 LIB_DIR		:= ./lib
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
@@ -154,14 +156,14 @@ LIBUI		:= -I ../better_libui -L../better_libui -lui -I../ft_printf
 LIBFT_J		:= -I ../libft -L ../libft -lft
 LIBGFX		:= -I ../libgfx -L ../libgfx -lgfx
 
-LIBS		+= $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)
+LIBS		+= $(SDL) $(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)
 CFLAGS		=	-Wall -Wextra -Werror -I $(INC)\
 				#-Wunused-but-set-parameter -Wunused-but-set-variable -Wuninitialized\
 				-Wunused-parameter -Wno-unused-result -Wno-misleading-indentation
 
 PATH_H		= ./inc/path.h
 
-all: framework libs resources $(PATH_H) $(ODIR) $(NAME)
+all: libs resources $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
 
@@ -209,31 +211,31 @@ $(PATH_H):
 	@mv path.h ./inc/
 	@/bin/rm -f find_path
 
-framework:
-ifeq ($(SHELL_NAME), Darwin)
-	@mkdir -p ~/Library/Frameworks	
-ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
-else
-	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
-endif
-endif
+#framework:
+#ifeq ($(SHELL_NAME), Darwin)
+#	@mkdir -p ~/Library/Frameworks	
+#ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
+#	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
+#	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
+#else
+#	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
+#endif
+#endif
+#
+#framework_del:
+#	@rm -rf ~/Library/Frameworks/SDL2*.framework
+#	@/bin/rm -f $(NAME)
+#	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
-framework_del:
-	@rm -rf ~/Library/Frameworks/SDL2*.framework
-	@/bin/rm -f $(NAME)
-	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
-
-framework_re: framework_del
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
+#framework_re: framework_del
+#	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
+#	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
+#	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
 
 re: fclean all
 

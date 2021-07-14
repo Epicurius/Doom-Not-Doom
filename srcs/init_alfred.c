@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_alfred1.c                                     :+:      :+:    :+:   */
+/*   init_alfred.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 17:21:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 10:00:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,50 @@
 
 static void	idle_pos_alfred(t_rect **pos)
 {
-	pos[0][4] = rect_xy2(0, 0, 43, 47);
-	pos[0][5] = rect_xy2(88, 0, 120, 47);
-	pos[0][6] = rect_xy2(164, 0, 195, 52);
-	pos[0][7] = rect_xy2(239, 0, 274, 52);
 	pos[0][0] = rect_xy2(318, 0, 362, 46);
 	pos[0][1] = rect_xy2(377, 0, 412, 51);
 	pos[0][2] = rect_xy2(456, 0, 487, 54);
 	pos[0][3] = rect_xy2(531, 0, 562, 47);
+	pos[0][4] = rect_xy2(0, 0, 43, 47);
+	pos[0][5] = rect_xy2(88, 0, 120, 47);
+	pos[0][6] = rect_xy2(164, 0, 195, 52);
+	pos[0][7] = rect_xy2(239, 0, 274, 52);
 }
 
-static void	move_pos_alfred1(t_rect **pos)
+static void	move_pos_alfred(t_rect **pos)
 {
-	pos[0][4] = rect_xy2(0, 55, 44, 98);
-	pos[0][5] = rect_xy2(48, 55, 107, 91);
-	pos[0][6] = rect_xy2(123, 55, 188, 89);
-	pos[0][7] = rect_xy2(196, 55, 251, 87);
 	pos[0][0] = rect_xy2(260, 55, 303, 80);
 	pos[0][1] = rect_xy2(308, 55, 362, 86);
 	pos[0][2] = rect_xy2(369, 55, 436, 88);
 	pos[0][3] = rect_xy2(451, 55, 511, 90);
-	pos[1][4] = pos[0][4];
-	pos[1][5] = pos[0][5];
-	pos[1][6] = pos[0][6];
-	pos[1][7] = pos[0][7];
-	pos[1][0] = pos[0][0];
-	pos[1][1] = pos[0][1];
-	pos[1][2] = pos[0][2];
-	pos[1][3] = pos[0][3];
-	move_pos_alfred2(pos);
+	pos[0][4] = rect_xy2(0, 55, 44, 98);
+	pos[0][5] = rect_xy2(48, 55, 107, 91);
+	pos[0][6] = rect_xy2(123, 55, 188, 89);
+	pos[0][7] = rect_xy2(196, 55, 251, 87);
+	pos[1][0] = rect_xy2(260, 55, 303, 80);
+	pos[1][1] = rect_xy2(308, 55, 362, 86);
+	pos[1][2] = rect_xy2(369, 55, 436, 88);
+	pos[1][3] = rect_xy2(451, 55, 511, 90);
+	pos[1][4] = rect_xy2(0, 55, 44, 98);
+	pos[1][5] = rect_xy2(48, 55, 107, 91);
+	pos[1][6] = rect_xy2(123, 55, 188, 89);
+	pos[1][7] = rect_xy2(196, 55, 251, 87);
+	pos[2][0] = rect_xy2(260, 55, 303, 80);
+	pos[2][1] = rect_xy2(308, 55, 362, 86);
+	pos[2][2] = rect_xy2(369, 55, 436, 88);
+	pos[2][3] = rect_xy2(451, 55, 511, 90);
+	pos[2][4] = rect_xy2(0, 55, 44, 98);
+	pos[2][5] = rect_xy2(48, 55, 107, 91);
+	pos[2][6] = rect_xy2(123, 55, 188, 89);
+	pos[2][7] = rect_xy2(196, 55, 251, 87);
+	pos[3][0] = rect_xy2(260, 55, 303, 80);
+	pos[3][1] = rect_xy2(308, 55, 362, 86);
+	pos[3][2] = rect_xy2(369, 55, 436, 88);
+	pos[3][3] = rect_xy2(451, 55, 511, 90);
+	pos[3][4] = rect_xy2(0, 55, 44, 98);
+	pos[3][5] = rect_xy2(48, 55, 107, 91);
+	pos[3][6] = rect_xy2(123, 55, 188, 89);
+	pos[3][7] = rect_xy2(196, 55, 251, 87);
 }
 
 static void	attack_pos_alfred(t_rect **pos)
@@ -81,7 +96,7 @@ void	init_alfred(t_doom *doom)
 	img->nb[DEATH][ANGLES] = 1;
 	malloc_texture_pos(img);
 	idle_pos_alfred(img->pos[IDLE]);
-	move_pos_alfred1(img->pos[MOVE]);
+	move_pos_alfred(img->pos[MOVE]);
 	attack_pos_alfred(img->pos[ATTACK]);
 	death_pos_alfred(img->pos[DEATH]);
 }
