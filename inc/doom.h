@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 12:22:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:28:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@
 
 typedef struct s_settings
 {
-	int				display_h;
-	int				display_w;
+	t_point			size;
 	float			render_resolution;
-	float			mouse_sens_x;
-	float			mouse_sens_y;
+	t_v2			mouse;
 	int				difficulty;
 	int				fov;
-	int				flag;
+	int				debug;
+	int				launcher;
 }					t_settings;
 
 typedef struct s_plane
@@ -447,6 +446,7 @@ typedef struct s_event
 
 typedef struct s_doom
 {
+	t_settings		settings;
 	int				quit;
 	SDL_Window		*win;
 	SDL_Surface		*surface;
@@ -605,7 +605,7 @@ void				hud_dosh(t_doom *doom);
 /* File:			../srcs/icon.c */
 int					set_icon(SDL_Window *window, char *dir);
 /* File:			../srcs/init.c */
-void				init_doom(t_doom *doom, t_settings init);
+void				init_doom(t_doom *doom);
 /* File:			../srcs/init_alfred1.c */
 void				init_alfred(t_doom *doom);
 /* File:			../srcs/init_alfred2.c */
@@ -632,7 +632,7 @@ void				init_rift(t_doom *doom);
 void				scale_wall_height(t_doom *doom, t_wall *wall);
 void				init_scale(t_doom *doom);
 /* File:			../srcs/init_sdl.c */
-void				init_sdl(t_doom *doom, t_settings init);
+void				init_sdl(t_doom *doom);
 /* File:			../srcs/init_slope.c */
 double				get_ceiling_at_pos(t_sector *sector, t_v3 pos);
 double				get_floor_at_pos(t_sector *sector, t_v3 pos);
@@ -782,5 +782,6 @@ void				rift_spawn(t_doom *doom);
 int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 void				game_mode(t_doom *doom);
+void				args(int ac, char **av, t_settings *init);
 
 #endif

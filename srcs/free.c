@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 12:44:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:17:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ void	free_doom(t_doom *doom)
 	SDL_Quit();
 	Mix_Quit();
 	TTF_Quit();
-	free(doom);
 	ft_printf("{GREEN}Done FREE!\n{RESET}");
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/20 13:54:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:19:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	game_pause(t_doom *doom)
 	t_bxpm		*bxpm;
 	t_bmp		*bmp;
 
+	if (!doom->key.p)
+		return ;
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	SDL_SetRelativeMouseMode(SDL_FALSE);

@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 11:43:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:27:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	init_ttf(t_doom *doom, t_settings init)
+static void	init_ttf(t_doom *doom)
 {
 	if (TTF_Init())
 		error_msg("Could not init TTF: %s\n", SDL_GetError());
@@ -28,24 +28,24 @@ static void	init_ttf(t_doom *doom, t_settings init)
 		error_msg("Could not open font: %s\n", TTF_GetError());
 }
 
-static void	init_mix(t_doom *doom, t_settings init)
+static void	init_mix(t_doom *doom)
 {
 	if (Mix_Init(MIX_INIT_FLAC) & MIX_INIT_FLAC != MIX_INIT_FLAC)
 		error_msg("Could not init MIX: %s\n", SDL_GetError());
 }
 
-static void	init_sdl2(t_doom *doom, t_settings init)
+static void	init_sdl2(t_doom *doom)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 		error_msg("Could not init SDL: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, init.display_w, init.display_h,
-			SDL_WINDOW_SHOWN);
+			SDL_WINDOWPOS_CENTERED, doom->settings.size.x,
+			doom->settings.size.y, SDL_WINDOW_SHOWN);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
-			init.display_w * init.render_resolution,
-			init.display_h * init.render_resolution,
+			doom->settings.size.x * doom->settings.render_resolution,
+			doom->settings.size.y * doom->settings.render_resolution,
 			32, SDL_PIXELFORMAT_ARGB8888);
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
@@ -58,13 +58,13 @@ static void	init_sdl2(t_doom *doom, t_settings init)
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
+	if (!set_icon(doom->win, GAME_PATH"resources/ICON/DnD_v2.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
 }
 
-void	init_sdl(t_doom *doom, t_settings init)
+void	init_sdl(t_doom *doom)
 {
-	init_sdl2(doom, init);
-	init_ttf(doom, init);
-	init_mix(doom, init);
+	init_sdl2(doom);
+	init_ttf(doom);
+	init_mix(doom);
 }

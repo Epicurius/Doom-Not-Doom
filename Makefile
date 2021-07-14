@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/14 12:02:41 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/14 14:13:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,7 @@ RAW_SRC		=	ai_attack.c\
 				vertical_line.c\
 				wall_to_screen_xz.c\
 				wave.c\
+				args.c\
 				buy_menu.c
 		
 NAME		=	doom

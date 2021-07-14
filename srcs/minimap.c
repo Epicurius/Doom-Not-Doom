@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/02 14:28:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:21:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ static void	map_area(t_doom *doom)
 
 void	map(t_doom *doom)
 {
-	map_area(doom);
-	draw_map(doom);
-	map_player(doom);
+	if (doom->key.tab)
+	{
+		map_area(doom);
+		draw_map(doom);
+		map_player(doom);
+	}
 }
