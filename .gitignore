@@ -3,12 +3,14 @@ lib
 *.a
 doom
 obj
-/resources
-bmp_to_bxpm/converter
+/resources/*
 old
 README
 Trash
 path.h
 run.sh
 .vscode
-SDL/*
+libSDL/*
+bmp_to_bxpm/converter
+code_len.sh
+cookie
