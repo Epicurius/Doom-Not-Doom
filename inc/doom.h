@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 14:28:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:53:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -783,5 +783,6 @@ int					eternal_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 void				game_mode(t_doom *doom);
 void				args(int ac, char **av, t_settings *init);
+void				print_help_msg(void);
 
 #endif

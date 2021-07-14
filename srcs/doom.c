@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 14:37:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 15:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	sound_board(t_doom *doom)
 }
 
 //buymenu_new(doom->win, doom->surface, doom->inv);
-static void	game_loop(t_doom *doom, SDL_Event *event)
+static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
 	update_camera(doom, 0, 0);
 	map_events(doom);
@@ -84,6 +84,8 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
+	if (ac == 1)
+		print_help_msg();
 	args(ac, av, &settings);
 	game(av[1], settings);
 	if (settings.launcher)
