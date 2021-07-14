@@ -6,16 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:17:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:25:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_doom(t_doom *doom, t_settings init)
+void	init_doom(t_doom *doom)
 {
-	doom->w2 = init.display_w * init.render_resolution / 2;
-	doom->h2 = init.display_h * init.render_resolution / 2;
+	doom->w2 = doom->settings.size.x * doom->settings.render_resolution / 2;
+	doom->h2 = doom->settings.size.y * doom->settings.render_resolution / 2;
 	doom->surface_center = doom->h2 * doom->surface->w + doom->w2;
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;

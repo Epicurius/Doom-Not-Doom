@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:25:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	re_init(t_doom *doom)
 {
 	int	x;
 
-	init_camera(doom);
+	//init_camera(doom);
 	init_scale(doom);
 	init_player(doom);
 	init_wavemode(doom);
@@ -93,6 +93,8 @@ void	reload_map(t_doom *doom, char *file_name)
 	int		fd;
 	char	*line;
 
+	if (!doom->key.equal)
+		return ;
 	free_file(doom);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)

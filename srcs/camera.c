@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:36:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:32:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_camera(t_doom *doom)
 	t_camera	*cam;
 
 	cam = &doom->cam;
-	cam->hfov = FOV;
+	cam->hfov = doom->settings.fov;
 	cam->vfov = (180.0 / M_PI)
 		* atan(tan((CONVERT_RADIANS * cam->hfov / 2)) / CAMERA_RATIO) * 2;
 	cam->near_z = NEAR_Z;
@@ -38,8 +38,9 @@ void	init_camera(t_doom *doom)
 void	update_camera(t_doom *doom, int x, int y)
 {
 	doom->player.yaw *= CONVERT_RADIANS;
-	doom->player.yaw += x * MOUSE_X;
-	doom->player.pitch = ft_clamp(doom->player.pitch + y * MOUSE_Y, -1, 1);
+	doom->player.yaw += x * doom->settings.mouse.x;
+	doom->player.pitch = ft_clamp(doom->player.pitch + y
+			* doom->settings.mouse.y, -1, 1);
 	doom->player.horizon = doom->h2 - doom->player.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);
 	doom->player.anglecos = cos(doom->player.yaw);
