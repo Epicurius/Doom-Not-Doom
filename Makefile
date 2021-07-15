@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/15 10:46:38 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/15 10:55:14 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ PATH_H		=	./inc/path.h
 
 RESOURCES	= ./resources
 
-all: libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
+all: framework libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
 
