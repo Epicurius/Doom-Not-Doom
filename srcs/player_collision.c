@@ -6,11 +6,26 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:33:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/15 09:51:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+static inline void	fix_sector_bug(t_doom *doom)
+{
+	if (doom->settings.debug)
+		printf("%d Wrong Sector!\n", doom->player.sector);
+	doom->player.sector = find_sector(doom->sectors, doom->nb.sectors,
+		doom->player.where);
+	if (doom->settings.debug)
+	{
+		if (doom->player.sector != -1)
+			ft_printf("%d [ERROR]!\n", doom->player.sector);
+		else
+			ft_printf("%d Found Sector!\n", doom->player.sector);
+	}
+}
 
 //		printf("%f %f %f\n", doom->player.where.x,
 //			doom->player.where.y, doom->player.where.z);
@@ -30,13 +45,5 @@ void	player_collision(t_doom *doom)
 	p.step_height = STEP_HEIGHT;
 	collision_detection(&p);
 	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
-	{
-		printf("%d Wrong Sector!\n", doom->player.sector);
-		doom->player.sector = find_sector(doom->sectors,
-				doom->nb.sectors, doom->player.where);
-		if (doom->player.sector != -1)
-			ft_printf("%d [ERROR]!\n", doom->player.sector);
-		else
-			ft_printf("%d Found Sector!\n", doom->player.sector);
-	}
+		fix_sector_bug(doom);
 }

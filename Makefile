@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/14 14:52:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/15 10:15:17 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,10 +136,10 @@ OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:=	$(OBJ:.o=.d)
 
 SDL			:=	-I ./libSDL/includes\
-				-L ./libSDL/lib/ -lSDL2\
-				-L ./libSDL/lib/ -lSDL2_ttf\
-				-L ./libSDL/lib/ -lSDL2_mixer\
-				-L ./libSDL/lib/ -lSDL2_image
+				./libSDL/lib/libSDL2.dylib\
+				./libSDL/lib/libSDL2_ttf.dylib\
+				./libSDL/lib/libSDL2_mixer.dylib\
+				./libSDL/lib/libSDL2_image.dylib
 
 LIB_DIR		:=	./lib
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
