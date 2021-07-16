@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/15 10:55:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 11:29:21 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_sprites(doom);
+	if (doom->key.tab)
+	{
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
+	}
 	draw_crosshair(doom);
 	draw_hud(doom);
 	draw_weapon(doom);
 	fps_func(doom);
-	if (doom->key.tab)
-		buymenu_new(doom->win, doom->surface, doom->inv);
 	//map(doom);
 	update_screen(doom, doom->surface);
 	game_pause(doom);
