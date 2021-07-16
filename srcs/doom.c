@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:31:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:43:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ static void	sound_board(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
+void	buy_menu(t_doom *doom)
+{
+	if (doom->key.tab)
+	{
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
+		ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+		doom->time.curr = SDL_GetTicks();
+		ft_bzero(&doom->key, sizeof(doom->key));
+	}	
+}
+
 //buymenu_new(doom->win, doom->surface, doom->inv);
 static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
@@ -46,18 +59,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_entities(doom);
-	if (doom->key.tab)
-	{
-		tpool_wait(&doom->tpool);
-		//update_screen(doom, doom->surface);
-		//SDL_Delay(10000);
-		SDL_SetRelativeMouseMode(SDL_FALSE);
-		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
-		ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
-		SDL_SetRelativeMouseMode(SDL_TRUE);
-		doom->time.curr = SDL_GetTicks();
-		ft_bzero(&doom->key, sizeof(doom->key));
-	}
+	buy_menu(doom);
 	draw_crosshair(doom);
 	draw_hud(doom);
 	draw_weapon(doom);
@@ -66,6 +68,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	update_screen(doom, doom->surface);
 	game_pause(doom);
 	game_quit(doom);
+	//SDL_memset(doom->surface->pixels, 0, doom->surface->h * doom->surface->pitch);
 }
 
 static void	game(char *map, t_settings settings)

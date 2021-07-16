@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 14:21:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:38:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	args(int ac, char **av, t_settings *init)
 	int	i;
 
 	i = 1;
+	ft_bzero(init, sizeof(init));
 	init->size = (t_point){1920, 1080};
-	init->render_resolution = 0.8;
+	init->render_resolution = 1;
 	init->mouse = (t_v2){MOUSE_X, MOUSE_Y};
-	init->difficulty = 0;
 	init->fov = FOV;
-	init->debug = 0;
-	init->launcher = 0;
 	while (++i < ac)
 		read_args1(init, av, &i);
 	if (init->debug)

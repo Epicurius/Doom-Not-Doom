@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 12:20:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:45:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@
 /*
 **	Movement
 */
-# define WALK_SPEED					10
-# define SPRINT_SPEED				20
+# define WALK_SPEED					10.0f
+# define SPRINT_SPEED				20.0f
+# define JUMP_HEIGHT				0.01f
 # define CROUCH_SPEED				0.006f
 # define MOUSE_X					0.005f
 # define MOUSE_Y					0.005f

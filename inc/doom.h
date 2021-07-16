@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:06:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:42:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,7 +392,6 @@ typedef struct s_weapon
 	int				cur_ammo;
 	int				mag_ammo;				
 	int				max_ammo;
-	t_bxpm			*bxpm;
 	float			x_offset;
 	int				frame_rate;
 	int				sound;
@@ -401,6 +400,7 @@ typedef struct s_weapon
 	int				frame;
 	int				fire_frames;
 	int				reload_frames;
+	t_bxpm			*bxpm;
 }					t_weapon;
 
 typedef struct s_dialog
@@ -784,5 +784,6 @@ void				respawn_rifts(t_doom *doom);
 void				game_mode(t_doom *doom);
 void				args(int ac, char **av, t_settings *init);
 void				print_help_msg(void);
+void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface *surface, t_inv *inv);
 
 #endif
