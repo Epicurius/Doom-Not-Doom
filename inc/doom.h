@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 14:53:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:06:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -537,7 +537,7 @@ void				draw_ceiling_texture(t_render *render, t_vline *vline);
 /* File:			../srcs/draw_crosshair.c */
 void				draw_crosshair(t_doom *doom);
 /* File:			../srcs/draw_entity.c */
-void				draw_sprites(t_doom *doom);
+void				draw_entities(t_doom *doom);
 /* File:			../srcs/draw_floor.c */
 void				draw_floor_texture(t_render *render, t_vline *vline);
 /* File:			../srcs/draw_floor_and_ceiling.c */

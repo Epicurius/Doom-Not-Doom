@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 12:50:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:15:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);
-	//game_mode(doom);
+	game_mode(doom);
 	sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
@@ -45,19 +45,18 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	poll_event(doom, event);
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
-	draw_sprites(doom);
+	draw_entities(doom);
 	if (doom->key.tab)
 	{
-		float curr;
-		float prev;
-
-		curr = doom->time.curr;
-		prev = doom->time.prev;
+		tpool_wait(&doom->tpool);
+		update_screen(doom, doom->surface);
+		//SDL_Delay(10000);
 		SDL_SetRelativeMouseMode(SDL_FALSE);
 		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
-		doom->key.tab = 0;
-		ft_printf("{CLR:123}Aniem e best{RESET}\n");
+		ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
 		SDL_SetRelativeMouseMode(SDL_TRUE);
+		doom->time.curr = SDL_GetTicks();
+		ft_bzero(&doom->key, sizeof(doom->key));
 	}
 	draw_crosshair(doom);
 	draw_hud(doom);

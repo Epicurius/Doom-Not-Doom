@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 12:20:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 12:56:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ typedef enum e_enum_weapons
 {
 	WEAPON_SHOTGUN,
 	WEAPON_GUN,
-	WEAPON_MINIGUN,
-	WEAPON_KAR
+	WEAPON_KAR,
+	WEAPON_PUMP,
+	WEAPON_MINIGUN
 }				t_enum_weapons;
 
 typedef enum e_enum_sounds

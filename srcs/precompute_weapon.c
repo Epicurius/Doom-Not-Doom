@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 16:38:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 12:55:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->key.num >= 1 && doom->key.num <= 5
+	if (doom->key.num >= 1 && doom->key.num <= WEAPON_AMOUNT + 1
 		&& doom->weapon[doom->key.num - 1].own)
 		doom->player.equiped = doom->key.num - 1;
 }

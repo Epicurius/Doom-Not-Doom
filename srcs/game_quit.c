@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 13:20:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:17:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	game_quit(t_doom *doom)
 	update_screen(doom, doom->surface);
 	quit_loop(doom);
 	free_bxpm(bxpm);
+	ft_bzero(&doom->key, sizeof(doom->key));
+	doom->time.curr = SDL_GetTicks();
 }
