@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 15:07:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:55:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,5 +377,14 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 };
 
 # define WEAPON_AMOUNT 5
+
+static const char	*g_weapon_icon[WEAPON_AMOUNT] =
+{
+	BXPM_PATH"pump-0.bxpm",
+	BXPM_PATH"pump-1.bxpm",
+	BXPM_PATH"pump-2.bxpm",
+	BXPM_PATH"pump-3.bxpm",
+	BXPM_PATH"pump-4.bxpm"
+};
 
 #endif
