@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:02:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 12:33:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 11:56:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_shotgun(t_doom *doom, t_weapon *weapon)
 
 void	init_glock(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 1;
+	weapon->own = 0;
 	weapon->price = 200;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;
@@ -64,7 +64,7 @@ void	init_glock(t_doom *doom, t_weapon *weapon)
 
 void	init_minigun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 1;
+	weapon->own = 0;
 	weapon->price = 300;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;
@@ -89,7 +89,7 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 
 void	init_kar98(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 1;
+	weapon->own = 0;
 	weapon->price = 400;
 	weapon->damage = 1000;
 	weapon->ammo_price = 101;
@@ -114,7 +114,7 @@ void	init_kar98(t_doom *doom, t_weapon *weapon)
 
 void	init_pump(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 1;
+	weapon->own = 0;
 	weapon->price = 500;
 	weapon->damage = 100;
 	weapon->ammo_price = 101;
