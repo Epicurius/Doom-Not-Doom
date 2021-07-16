@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 16:42:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:57:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,6 +392,10 @@ typedef struct s_weapon
 	int				cur_ammo;
 	int				mag_ammo;				
 	int				max_ammo;
+	int				ammo_increase;
+	int				damage_increase;
+	int				firerate_increase;
+	int				max_ammo_increase;
 	float			x_offset;
 	int				frame_rate;
 	int				sound;

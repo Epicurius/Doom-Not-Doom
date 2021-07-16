@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:06:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 17:21:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	sprite_threads(t_doom *doom, t_entity *entity,
+static void	entity_threads(t_doom *doom, t_entity *entity,
 	t_entity_thread *thread)
 {
 	int	y;
@@ -52,7 +52,7 @@ void	draw_entities(t_doom *doom)
 		if (doom->sectors[entity->sector].visible && entity->render.z > 0.3)
 		{
 			tpool_wait(&doom->tpool);
-			sprite_threads(doom, entity, thread);
+			entity_threads(doom, entity, thread);
 		}
 		curr = curr->next;
 	}

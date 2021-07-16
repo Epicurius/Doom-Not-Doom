@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:02:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 11:56:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 18:00:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	init_shotgun(t_doom *doom, t_weapon *weapon)
 	weapon->x_offset = 1.5;
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
-	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Shotgun bxpm");
 	weapon->scale = 0.25 * (doom->surface->w / 350);
+	weapon->ammo_increase = 4;
+	weapon->damage_increase = 5;
+	weapon->firerate_increase = -5;
+	weapon->max_ammo_increase = 4;
 }
 
 void	init_glock(t_doom *doom, t_weapon *weapon)
@@ -57,9 +59,11 @@ void	init_glock(t_doom *doom, t_weapon *weapon)
 	weapon->sound = WAV_GUN;
 	weapon->x_offset = 1.5;
 	weapon->time = doom->time.curr;
-	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Glock bxpm");
 	weapon->scale = 0.17 * (doom->surface->w / 309);
+	weapon->ammo_increase = 10;
+	weapon->damage_increase = 5;
+	weapon->firerate_increase = -2;
+	weapon->max_ammo_increase = 10;
 }
 
 void	init_minigun(t_doom *doom, t_weapon *weapon)
@@ -82,9 +86,11 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->sound = WAV_GUN;
 	weapon->x_offset = 1.2;
 	weapon->time = doom->time.curr;
-	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Minigun bxpm");
 	weapon->scale = 0.4 * (doom->surface->w / 350);
+	weapon->ammo_increase = 20;
+	weapon->damage_increase = 5;
+	weapon->firerate_increase = -1;
+	weapon->max_ammo_increase = 20;
 }
 
 void	init_kar98(t_doom *doom, t_weapon *weapon)
@@ -107,9 +113,11 @@ void	init_kar98(t_doom *doom, t_weapon *weapon)
 	weapon->x_offset = 1.3;
 	weapon->sound = WAV_GUN;
 	weapon->time = doom->time.curr;
-	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Kar98 bxpm");
 	weapon->scale = 0.35 * (doom->surface->w / 212);
+	weapon->ammo_increase = 10;
+	weapon->damage_increase = 2;
+	weapon->firerate_increase = -4;
+	weapon->max_ammo_increase = 10;
 }
 
 void	init_pump(t_doom *doom, t_weapon *weapon)
@@ -132,7 +140,9 @@ void	init_pump(t_doom *doom, t_weapon *weapon)
 	weapon->x_offset = 1.5;
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
-	weapon->bxpm = ft_pmalloc(sizeof(t_bxpm)
-			* (weapon->fire_frames + weapon->reload_frames), "Pump bxpm");
 	weapon->scale = 0.3 * (doom->surface->w / 457);
+	weapon->ammo_increase = 10;
+	weapon->damage_increase = 2;
+	weapon->firerate_increase = -1;
+	weapon->max_ammo_increase = 10;
 }
