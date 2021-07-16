@@ -1,0 +1,16 @@
+.DS_Store
+*.a
+doom
+obj
+/resources/*
+old
+README
+Trash
+path.h
+run.sh
+.vscode
+libSDL/*
+bmp_to_bxpm/converter
+code_len.sh
+cookie
+/lib/*
