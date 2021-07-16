@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 16:43:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:03:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ void	buy_menu(t_doom *doom)
 {
 	if (doom->key.tab)
 	{
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
 		SDL_SetRelativeMouseMode(SDL_FALSE);
 		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
 		ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 		doom->time.curr = SDL_GetTicks();
 		ft_bzero(&doom->key, sizeof(doom->key));
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 	}	
 }
 
@@ -50,7 +52,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	precompute_skybox(doom);
 	draw_screen(doom);
 	game_mode(doom);
-	sound_board(doom);
+	//sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);

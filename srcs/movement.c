@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 14:37:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:24:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_base_speed(t_doom *doom, float *speed)
 static inline void	foot_steps(t_doom *doom, t_player player, t_v3 *move)
 {
 	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
-		&& player.where.z == doom->sectors[player.sector].floor.y)
+		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector], player.where))
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
 			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
@@ -32,7 +32,7 @@ static inline void	foot_steps(t_doom *doom, t_player player, t_v3 *move)
 	else if (Mix_Playing(CHANNEL_STEPS))
 	{
 		Mix_FadeOutChannel(CHANNEL_STEPS, 600);
-		Mix_HaltChannel(2);
+		Mix_HaltChannel(CHANNEL_STEPS);
 	}	
 }
 
@@ -75,7 +75,9 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	if (doom->key.space
 		&& player->where.z <= get_floor_at_pos(sector, player->where) + 0.1)
 	{
-		Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_JUMP], 0);
+		if (Mix_Playing(CHANNEL_STEPS))
+			ft_printf("asdasdasd\n");
+		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);
 	}
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;

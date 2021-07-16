@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 15:07:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:16:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ typedef enum e_enum_sounds
 	WAV_INTRO,
 	WAV_FOOT_STEPS,
 	WAV_JUMP,
-	WAV_GUN
+	WAV_GUN,
+	WAV_ELEVATOR_MUSIC
 }				t_enum_sounds;
+
+#define CHANNEL_AMOUNT	7
 
 typedef enum e_enum_sound_channel
 {

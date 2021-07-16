@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 17:56:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:16:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_id_and_path
 	char		*path;
 }				t_id_and_path;
 
-# define WAV_AMOUNT	7
+# define WAV_AMOUNT	8
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 {
 	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
@@ -31,7 +31,8 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_INTRO, WAV_PATH"intro.wav"},
 	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
 	{WAV_JUMP, WAV_PATH"jump.wav"},
-	{WAV_GUN, WAV_PATH"gun.wav"}
+	{WAV_GUN, WAV_PATH"gun.wav"},
+	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"}	
 };
 
 # define MAP_TEXTURE_AMOUNT	15

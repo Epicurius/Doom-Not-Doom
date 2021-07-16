@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 17:57:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:32:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "SDL.h"
 # include "SDL_ttf.h"
 # include "SDL_mixer.h"
+# include "SDL_image.h"
 # include "libft.h"
 # include "libpf.h"
 # include "tpool.h"
