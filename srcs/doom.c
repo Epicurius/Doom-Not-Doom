@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:15:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:31:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	if (doom->key.tab)
 	{
 		tpool_wait(&doom->tpool);
-		update_screen(doom, doom->surface);
+		//update_screen(doom, doom->surface);
 		//SDL_Delay(10000);
 		SDL_SetRelativeMouseMode(SDL_FALSE);
 		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
