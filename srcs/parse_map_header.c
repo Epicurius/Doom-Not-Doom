@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:07:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_header(t_doom *doom, char **arr)
 {
-	doom->map_scale = ft_atof(arr[2]);
+	doom->map_scale = ft_atoi(arr[2]);
 	doom->nb.vertices = ft_atoi(arr[3]);
 	doom->nb.walls = ft_atoi(arr[4]);
 	doom->nb.sectors = ft_atoi(arr[5]);

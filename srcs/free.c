@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 13:17:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:26:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_doom(t_doom *doom)
 {
 	ft_printf("{CLR:142}In FREE!\n{RESET}");
 	free_map(doom);
-	free_sprites(doom);
+	free_entities(doom);
 	free_rifts(doom);
 	free_sprites_pos(doom);
 	free_projectiles(doom);

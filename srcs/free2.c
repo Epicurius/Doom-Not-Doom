@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 12:21:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:40:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	free_sprites_pos(t_doom *doom)
 	while (++i < ENTITY_AMOUNT)
 	{
 		if (doom->npc_bxpm[i].pos)
-			free_sprite_pos(&doom->npc_bxpm[i]);
+			free_entity_pos(&doom->npc_bxpm[i]);
 	}
 }
 
-void	free_sprites(t_doom *doom)
+void	free_entities(t_doom *doom)
 {
 	t_list	*tmp;
 	t_list	*curr;

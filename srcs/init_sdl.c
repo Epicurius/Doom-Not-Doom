@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 21:06:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:03:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	init_sdl2(t_doom *doom)
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	if (!set_icon(doom->win, GAME_PATH"resources/ICON/SpaceStudio.bmp"))
+	if (!set_icon(doom->win, GAME_PATH"resources/ICON/DND.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
 }
 

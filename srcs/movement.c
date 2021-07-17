@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 20:24:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:23:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	if (doom->key.space
 		&& player->where.z <= get_floor_at_pos(sector, player->where) + 0.1)
 	{
-		if (Mix_Playing(CHANNEL_STEPS))
-			ft_printf("asdasdasd\n");
-		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_JUMP], 0);
+		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);
 	}
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 20:32:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:40:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "SDL.h"
 # include "SDL_ttf.h"
 # include "SDL_mixer.h"
-# include "SDL_image.h"
 # include "libft.h"
 # include "libpf.h"
 # include "tpool.h"
@@ -579,10 +578,10 @@ void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
 void				free_color_palet(t_bxpm *bxpm);
-void				free_sprite_pos(t_npc_bxpm *entity);
+void				free_entity_pos(t_npc_bxpm *entity);
 /* File:			../srcs/free2.c */
 void				free_sprites_pos(t_doom *doom);
-void				free_sprites(t_doom *doom);
+void				free_entities(t_doom *doom);
 void				free_rifts(t_doom *doom);
 void				free_textures(t_doom *doom);
 void				free_projectiles(t_doom *doom);

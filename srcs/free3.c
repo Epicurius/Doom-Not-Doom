@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:44:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 12:22:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:41:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_weapons(t_doom *doom)
 	{
 		j = -1;
 		while (++j < (doom->weapon[i].reload_frames
-				+ doom->weapon[i].fire_frames))
+			+ doom->weapon[i].fire_frames))
 		{
 			free(doom->weapon[i].bxpm[j].pix);
 			free(doom->weapon[i].bxpm[j].clr);

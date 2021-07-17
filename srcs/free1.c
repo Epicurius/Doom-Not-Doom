@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:24:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_map(t_doom *doom)
 	while (++i < doom->nb.sectors)
 		ft_memdel((void *)&doom->sectors[i].wall);
 	ft_memdel((void *)&doom->sectors);
+	ft_memdel((void *)&doom->events);
 }
 
 void	free_render_utils(t_doom *doom)
@@ -52,7 +53,7 @@ void	free_color_palet(t_bxpm *bxpm)
 	}
 }
 
-void	free_sprite_pos(t_npc_bxpm *entity)
+void	free_entity_pos(t_npc_bxpm *entity)
 {
 	int	i;
 	int	j;

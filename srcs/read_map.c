@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 09:23:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:17:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int	read_file(t_doom *doom, char *file_name)
 	ft_strdel(&line);
 	free(line);
 	close(fd);
-	printf("Read Done!\n");
 	return (1);
 }

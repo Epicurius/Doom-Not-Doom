@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 13:25:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:40:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	read_type(t_doom *doom, int fd, char *line)
 static void	free_file(t_doom *doom)
 {
 	free_map(doom);
-	free_sprites(doom);
+	free_entities(doom);
 	free_rifts(doom);
 	free_projectiles(doom);
 	doom->nb.walls = 0;
