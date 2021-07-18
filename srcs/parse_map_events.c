@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 12:10:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/18 15:46:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	parse_events(t_doom *doom, char **arr)
 	event.speed = ft_atof(arr[5]) * 10.0f;
 	event.time = 0;
 	event.dir = 1;
-	doom->events = ft_realloc2(doom->events, sizeof(t_event) * doom->nb.events,
+	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
 	doom->events[doom->nb.events - 1] = event;
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 19:27:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/18 14:26:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	launcher(void)
 {
 	char	*arr[2];
 
-	arr[0] = ft_strdup(ROOT_PATH"ui/dialog");
+	arr[0] = ft_strdup(ROOT_PATH"ui/menu");
 	arr[1] = NULL;
 	execv(arr[0], arr);
 	free(&arr[0]);

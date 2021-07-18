@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:55:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/18 15:46:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parse_wsprite(t_doom *doom, char **arr)
 	t_wsprite	*entity;
 
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
-	wsprite->num = ft_realloc2(wsprite->num, sizeof(t_wsprite) * wsprite->total,
+	wsprite->num = ft_realloc(wsprite->num, sizeof(t_wsprite) * wsprite->total,
 			sizeof(t_wsprite) * ++wsprite->total);
 	entity = &wsprite->num[wsprite->total - 1];
 	entity->id = ft_atoi(arr[0]);

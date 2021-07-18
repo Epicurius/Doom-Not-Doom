@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:45:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/18 14:17:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # define CROUCH_SPEED				0.006f
 # define MOUSE_X					0.005f
 # define MOUSE_Y					0.005f
-# define ACCELERATION			0.7
+# define ACCELERATION				0.7
 
 /*
 ** Map Rendering

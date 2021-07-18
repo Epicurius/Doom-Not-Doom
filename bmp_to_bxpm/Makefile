@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/06/19 18:02:50 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/18 14:45:46 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,12 +68,12 @@ RAW_TEXTURES =	DoomScore.bmp\
 				kar-7.bmp\
 				kar-8.bmp\
 				kar-9.bmp\
-				land0.bmp\
-				land1.bmp\
-				land2.bmp\
-				land3.bmp\
-				land4.bmp\
-				land5.bmp\
+				land-0.bmp\
+				land-1.bmp\
+				land-2.bmp\
+				land-3.bmp\
+				land-4.bmp\
+				land-5.bmp\
 				minigun-0.bmp\
 				minigun-1.bmp\
 				minigun-2.bmp\
@@ -98,12 +98,12 @@ RAW_TEXTURES =	DoomScore.bmp\
 				shotgun-11.bmp\
 				shotgun-12.bmp\
 				shotgun-13.bmp\
-				space0.bmp\
-				space1.bmp\
-				space2.bmp\
-				space3.bmp\
-				space4.bmp\
-				space5.bmp\
+				space-0.bmp\
+				space-1.bmp\
+				space-2.bmp\
+				space-3.bmp\
+				space-4.bmp\
+				space-5.bmp\
 				spooky.bmp\
 				pump-0.bmp\
 				pump-1.bmp\
@@ -114,6 +114,12 @@ RAW_TEXTURES =	DoomScore.bmp\
 				pump-6.bmp\
 				pump-7.bmp\
 				pump-8.bmp\
+				cosmos-0.bmp\
+				cosmos-1.bmp\
+				cosmos-2.bmp\
+				cosmos-3.bmp\
+				cosmos-4.bmp\
+				cosmos-5.bmp\
 				vent.bmp\
 				lava.bmp\
 				metal_wall.bmp\

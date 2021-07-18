@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 20:16:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/18 15:42:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,27 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{14, BXPM_PATH"metal_tile2.bxpm"}
 };
 
-# define SKYBOX_TEXTURE_AMOUNT	12
+# define SKYBOX_TEXTURE_AMOUNT	18
 static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"space3.bxpm"},
-	{1, BXPM_PATH"space0.bxpm"},
-	{2, BXPM_PATH"space1.bxpm"},
-	{3, BXPM_PATH"space2.bxpm"},
-	{4, BXPM_PATH"space4.bxpm"},
-	{5, BXPM_PATH"space5.bxpm"},
-	{6, BXPM_PATH"land4.bxpm"},
-	{7, BXPM_PATH"land1.bxpm"},
-	{8, BXPM_PATH"land2.bxpm"},
-	{9, BXPM_PATH"land3.bxpm"},
-	{10, BXPM_PATH"land0.bxpm"},
-	{11, BXPM_PATH"land5.bxpm"}
+	{0, BXPM_PATH"space-3.bxpm"},
+	{1, BXPM_PATH"space-0.bxpm"},
+	{2, BXPM_PATH"space-1.bxpm"},
+	{3, BXPM_PATH"space-2.bxpm"},
+	{4, BXPM_PATH"space-4.bxpm"},
+	{5, BXPM_PATH"space-5.bxpm"},
+	{6, BXPM_PATH"land-4.bxpm"},
+	{7, BXPM_PATH"land-1.bxpm"},
+	{8, BXPM_PATH"land-2.bxpm"},
+	{9, BXPM_PATH"land-3.bxpm"},
+	{10, BXPM_PATH"land-0.bxpm"},
+	{11, BXPM_PATH"land-5.bxpm"},
+	{12, BXPM_PATH"cosmos-4.bxpm"},
+	{13, BXPM_PATH"cosmos-1.bxpm"},
+	{14, BXPM_PATH"cosmos-2.bxpm"},
+	{15, BXPM_PATH"cosmos-3.bxpm"},
+	{16, BXPM_PATH"cosmos-0.bxpm"},
+	{17, BXPM_PATH"cosmos-5.bxpm"}
 };
 
 # define ICON_TEXTURE_AMOUNT	5
