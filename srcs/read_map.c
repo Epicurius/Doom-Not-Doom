@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 19:17:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/19 14:34:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	read_file(t_doom *doom, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		error_msg("File does not exist or could not be opened.\n");
+	//ft_bzero(&doom->active_mtx, sizeof(doom->active_mtx));
 	while (get_next_line(fd, &line))
 	{
 		read_type(doom, fd, line);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/18 14:31:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/19 14:34:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	parse(t_doom *doom, int amount, t_bxpm *dest, t_id_and_path *src)
 
 	threads = malloc(sizeof(t_thread_bxpm) * amount);
 	if (!threads)
-		error_msg("parse bxpm threads malloc\n");
+		error_msg("Parse bxpm threads malloc\n");
 	i = -1;
 	while (++i < amount)
 	{
@@ -59,3 +59,48 @@ void	init_textures(t_doom *doom)
 	init_clock(doom, &doom->mtx[4]);
 	color_palets(doom);
 }
+
+//void	init_textures1(t_doom *doom)
+//{
+//	int	i;
+//	int	t;
+//
+//	i = -1;
+//	while (++i < doom->nb.walls)
+//	{
+//		t = doom->walls[i].wtx;
+//		if (!doom->active_mtx[t])
+//		{
+//			if (!read_bxpm(&doom->mtx[g_map_textures[t].id], g_map_textures[t].path))
+//				ft_printf("Could not read %s\n", g_map_textures[t].path);
+//			doom->active_mtx[t] = 1;
+//		}
+//		t = abs(doom->walls[i].wtx);
+//		if (doom->walls[i].ptx > -1 && !doom->active_mtx[t])
+//		{
+//			if (!read_bxpm(&doom->mtx[g_map_textures[t].id], g_map_textures[t].path))
+//				ft_printf("Could not read %s\n", g_map_textures[t].path);
+//			doom->active_mtx[t] = 1;
+//		}
+//				
+//	}
+//	i = -1;
+//	while (++i < doom->nb.sectors)
+//	{
+//		t = doom->sectors[i].floor.tx;
+//		if (!doom->active_mtx[t])
+//		{
+//			if (!read_bxpm(&doom->mtx[g_map_textures[t].id], g_map_textures[t].path))
+//				ft_printf("Could not read %s\n", g_map_textures[t].path);
+//			doom->active_mtx[t] = 1;
+//		}
+//		t = doom->sectors[i].ceiling.tx;
+//		if (!doom->active_mtx[t])
+//		{
+//			if (!read_bxpm(&doom->mtx[g_map_textures[t].id], g_map_textures[t].path))
+//				ft_printf("Could not read %s\n", g_map_textures[t].path);
+//			doom->active_mtx[t] = 1;
+//		}
+//				
+//	}
+//}

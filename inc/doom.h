@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 18:40:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/19 13:16:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,6 +479,7 @@ typedef struct s_doom
 	t_list			*orb;
 	t_camera		cam;
 	t_player		player;
+	int				active_mtx[MAP_TEXTURE_AMOUNT];
 	t_bxpm			mtx[MAP_TEXTURE_AMOUNT];
 	t_bxpm			stx[SKYBOX_TEXTURE_AMOUNT];
 	t_bxpm			itx[ICON_TEXTURE_AMOUNT];
