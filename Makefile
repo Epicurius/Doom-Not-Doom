@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/15 10:55:14 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/19 14:54:45 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,7 +197,7 @@ fclean: clean
 	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
 	@rm -f $(NAME)
 
-RESOURCES:
+$(RESOURCES):
 	@./google_drive.sh
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
