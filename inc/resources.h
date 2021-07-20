@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/18 15:42:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 14:46:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 
 # define MAP_TEXTURE_AMOUNT	15
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
-{
+{	
 	{0, BXPM_PATH"bh.bxpm"},
 	{1, BXPM_PATH"vent.bxpm"},
 	{2, BXPM_PATH"tile_floor.bxpm"},
 	{3, BXPM_PATH"bars.bxpm"},
-	{4, "NULL"},
+	{4, BXPM_PATH"metal_tile2.bxpm"},
 	{5, BXPM_PATH"DoomScore.bxpm"},
 	{6, BXPM_PATH"lava.bxpm"},
 	{7, BXPM_PATH"metal_wall.bxpm"},
@@ -52,7 +52,7 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{11, BXPM_PATH"radar.bxpm"},
 	{12, BXPM_PATH"steel.bxpm"},
 	{13, BXPM_PATH"wall_panel.bxpm"},
-	{14, BXPM_PATH"metal_tile2.bxpm"}
+	{14, BXPM_PATH"clock.bxpm"}
 };
 
 # define SKYBOX_TEXTURE_AMOUNT	18

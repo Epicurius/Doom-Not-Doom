@@ -6,21 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/18 14:26:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 14:25:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	launcher(void)
+static const char *g_launcher[2] =
 {
-	char	*arr[2];
-
-	arr[0] = ft_strdup(ROOT_PATH"ui/menu");
-	arr[1] = NULL;
-	execv(arr[0], arr);
-	free(&arr[0]);
-}
+	ROOT_PATH"ui/menu",
+	NULL	
+};
 
 static void	sound_board(t_doom *doom)
 {
@@ -103,7 +99,7 @@ int	main(int ac, char **av)
 	args(ac, av, &settings);
 	game(av[1], settings);
 	if (settings.launcher)
-		launcher();
+		execv(g_launcher[0], g_launcher);
 	if (settings.debug)
 		system("leaks doom");
 	return (1);

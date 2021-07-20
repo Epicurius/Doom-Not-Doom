@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:29:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 14:40:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	wall->wsprite.num[x].time = time->date.tm_sec;
 	tmp = TTF_RenderText_Shaded(doom->font.digi100, str,
 			time->clock_fg, time->clock_bg);
-	clock_to_bxpm(tmp, &doom->mtx[4]);
+	clock_to_bxpm(tmp, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	SDL_FreeSurface(tmp);
 	free(str);
 	return (1);
