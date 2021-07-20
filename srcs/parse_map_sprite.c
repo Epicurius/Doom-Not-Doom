@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/18 15:46:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:57:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 void	parse_wsprite(t_doom *doom, char **arr)
 {
 	t_wsprites	*wsprite;
-	t_wsprite	*entity;
+	t_wsprite	*sprite;
 
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
 	wsprite->num = ft_realloc(wsprite->num, sizeof(t_wsprite) * wsprite->total,
 			sizeof(t_wsprite) * ++wsprite->total);
-	entity = &wsprite->num[wsprite->total - 1];
-	entity->id = ft_atoi(arr[0]);
-	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
-	entity->where.y = ft_atof(arr[3]) * doom->map_scale;
-	entity->tx = ft_atoi(arr[4]);
-	entity->scale_w = ft_atof(arr[5]) * doom->map_scale;
+	sprite = &wsprite->num[wsprite->total - 1];
+	sprite->id = ft_atoi(arr[0]);
+	sprite->where.x = ft_atof(arr[2]) * doom->map_scale;
+	sprite->where.y = ft_atof(arr[3]) * doom->map_scale;
+	sprite->tx = ft_atoi(arr[4]);
+	sprite->scale_w = ft_atof(arr[5]) * doom->map_scale;
+	sprite->trigger = -1;
 }
 
 int	sprite_type(char *str)

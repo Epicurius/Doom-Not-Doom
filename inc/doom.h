@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/19 17:49:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 17:27:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_keys
 	int				p;
 	int				r;
 	int				m;
+	int				e;
 	int				space;
 	int				lctr;
 	int				lshift;
@@ -149,6 +150,7 @@ typedef struct s_wsprite
 	double			scale_h;
 	t_v2			tscale;
 	int				ready;
+	int				trigger;
 }					t_wsprite;
 
 typedef struct s_wsprites
@@ -327,6 +329,7 @@ typedef struct s_render
 	int				light;
 	int				s;
 	t_bullet_hole	*bh;
+	int				center;
 	t_wsprites		wsprite;
 }					t_render;
 
@@ -446,6 +449,7 @@ typedef struct s_event
 	float		speed;
 	float		time;
 	int			dir;
+	t_wsprite	*wsprite;
 }				t_event;
 
 typedef struct s_doom

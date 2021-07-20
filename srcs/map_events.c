@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 12:09:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 17:30:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void	move_floor(t_doom *doom, t_event *event)
 	sector = &doom->sectors[event->sector];
 	sector->floor.y += 0.1 * event->dir;
 	if (sector->floor.y <= event->min)
+	{
 		event->dir = 1;
+		if (event->wsprite != NULL)
+			event->wsprite->trigger = 0;
+	}
 	else if (sector->floor.y >= event->max)
+	{
 		event->dir = -1;
+		if (event->wsprite != NULL)
+			event->wsprite->trigger = 0;
+	}
 	event->time = doom->time.curr;
 }
 
@@ -46,6 +54,8 @@ void	map_events(t_doom *doom)
 	while (++i < doom->nb.events)
 	{
 		if (doom->events[i].time + doom->events[i].speed > doom->time.curr)
+			continue ;
+		if (doom->events[i].wsprite != NULL && !doom->events[i].wsprite->trigger)
 			continue ;
 		if (doom->events[i].type == BOT)
 			move_floor(doom, &doom->events[i]);
