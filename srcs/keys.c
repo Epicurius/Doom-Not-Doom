@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/20 16:51:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 10:20:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ static void	key2(t_doom *doom, SDL_Event *event)
 		doom->key.equal = 1;
 	else if (event->key.keysym.sym == SDLK_e)
 		doom->key.e = event->type == SDL_KEYDOWN;
+	if (doom->player.action == NONE)
+		doom->player.action = doom->key.e ? CLICKING : NONE;
+	//t_printf("%d %d\n", doom->player.action, doom->key.e);
 }
 
 static void	key1(t_doom *doom, SDL_Event *event)

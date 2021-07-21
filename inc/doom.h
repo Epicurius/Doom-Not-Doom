@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/20 17:27:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 16:25:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_player
 	float			sprint_speed;
 	float			jump_height;
 	int				flying;
-	int				shooting;
+	int				action;
 	int				equiped;
 	int				debug;
 }					t_player;
@@ -151,6 +151,8 @@ typedef struct s_wsprite
 	t_v2			tscale;
 	int				ready;
 	int				trigger;
+	int				state;
+	int				action;
 }					t_wsprite;
 
 typedef struct s_wsprites
@@ -449,6 +451,7 @@ typedef struct s_event
 	float		speed;
 	float		time;
 	int			dir;
+	int			action;
 	t_wsprite	*wsprite;
 }				t_event;
 

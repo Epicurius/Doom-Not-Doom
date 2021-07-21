@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 17:18:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 10:24:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 	{
 		if (!weapon->frame)
 		{
-			doom->player.shooting = 1;
+			doom->player.action = SHOOTING;
 			weapon->mag_ammo -= 1;
 		}
 		weapon->frame++;
@@ -58,12 +58,12 @@ void	equip_weapon(t_doom *doom)
 void	precompute_weapon(t_doom *doom)
 {
 	t_weapon	*weapon;
-
+	
+	doom->player.action = NONE; //move
 	equip_weapon(doom);
 	if (doom->player.equiped < 0)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
-	doom->player.shooting = 0;
 	if (weapon->frame && weapon->frame < weapon->fire_frames
 		|| (doom->key.lmouse && weapon->mag_ammo > 0))
 		weapon_fire_animate(doom, weapon);

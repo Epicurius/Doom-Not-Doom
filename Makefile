@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/19 14:54:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/21 16:26:49 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,7 +164,7 @@ RESOURCES	= ./resources
 all: framework libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
-
+#-03
 $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@

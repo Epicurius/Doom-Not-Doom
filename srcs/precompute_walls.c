@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 11:55:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 11:47:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	i = -1;
 	while (++i < wall->wsprite.total)
 	{
-		if (wall->wsprite.num[i].tx == 4)
+		if (wall->wsprite.num[i].tx == MAP_TEXTURE_AMOUNT - 1)//enunm?
 			clock_wsprite(doom, wall, i);
-		else if (wall->wsprite.num[i].tx == 1)
+		else if (wall->wsprite.num[i].state == 1)//ENNUM loop
 			animate_wsprite(doom, &wall->wsprite.num[i]);
 		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w
 			/ wall->sv2.z;

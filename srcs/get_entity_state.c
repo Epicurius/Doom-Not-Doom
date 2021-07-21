@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/13 17:26:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 10:10:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
-	if (doom->player.shooting && dist > g_entity_data[entity->type]
+	if (doom->player.action && dist > g_entity_data[entity->type]
 		.view_distance && ai_track_player(doom, entity))
 		entity->state = MOVE;
 	else if (entity_line_of_sight(doom, entity, dist))
