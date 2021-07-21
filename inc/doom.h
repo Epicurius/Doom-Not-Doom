@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:25:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 16:49:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -667,8 +667,6 @@ void				line(SDL_Surface *surf, Uint32 color, t_point *p);
 /* File:			../srcs/malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File:			../srcs/map_events.c */
-void				move_ceiling(t_doom *doom, t_event *event);
-void				move_floor(t_doom *doom, t_event *event);
 void				map_events(t_doom *doom);
 /* File:			../srcs/minimap.c */
 void				map(t_doom *doom);

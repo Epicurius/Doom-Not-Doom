@@ -6,63 +6,37 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 11:44:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 17:11:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	move_ceiling(t_doom *doom, t_event *event)
+static void	move_plane(t_doom *doom, t_event *event)
 {
-	t_sector	*sector;
+	t_plane	*plane;
 
-	sector = &doom->sectors[event->sector];
-	sector->ceiling.y += 0.1 * event->dir;
-	if (sector->ceiling.y <= event->min)
-		event->dir = 1;
-	else if (sector->ceiling.y >= event->max)
-		event->dir = -1;
+	if (event->type == FLOOR)
+		plane = &doom->sectors[event->sector].floor;
+	else
+		plane = &doom->sectors[event->sector].ceiling;
+	plane->y += 0.1 * event->dir;
 	event->time = doom->time.curr;
-}
-
-void	move_floor(t_doom *doom, t_event *event)
-{
-	t_sector	*sector;
-
-	sector = &doom->sectors[event->sector];
-	sector->floor.y += 0.1 * event->dir;
-	if (sector->floor.y <= event->min)
-	{
+	if (plane->y <= event->min)
 		event->dir = 1;
-		if (event->wsprite != NULL)
-			event->wsprite->trigger = 0;
-		if (event->wsprite != NULL && event->wsprite->state == 2)
-		{
-			event->wsprite->src.x1 = 0;
-			event->wsprite->src.y1 = 0;
-			event->wsprite->src.x2 = 64;
-			event->wsprite->src.y2 = 64;
-		}
-	}
-	else if (sector->floor.y >= event->max)
-	{
+	else if (plane->y >= event->max)
 		event->dir = -1;
-		if (event->wsprite != NULL)
-			event->wsprite->trigger = 0;
-		if (event->wsprite != NULL && event->wsprite->state == 2)
-		{
-			event->wsprite->src.x1 = 0;
-			event->wsprite->src.y1 = 0;
-			event->wsprite->src.x2 = 64;
-			event->wsprite->src.y2 = 64;
-		}
-	}
-	event->time = doom->time.curr;
+	else
+		return ;
+	if (event->wsprite != NULL)
+		event->wsprite->trigger = 0;
+	if (event->wsprite != NULL && event->wsprite->state == 2)
+		event->wsprite->src = rect_xy2(0, 0, 64, 64);
 }
 
 void	map_events(t_doom *doom)
 {
-	int			i;
+	int	i;
 
 	i = -1;
 	while (++i < doom->nb.events)
@@ -73,9 +47,6 @@ void	map_events(t_doom *doom)
 			continue ;
 		if (doom->events[i].wsprite != NULL && doom->events[i].wsprite->state == 2)
 			animate_wsprite(doom, doom->events[i].wsprite);
-		if (doom->events[i].type == BOT)
-			move_floor(doom, &doom->events[i]);
-		else
-			move_ceiling(doom, &doom->events[i]);
+		move_plane(doom, &doom->events[i]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 11:17:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 16:32:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	wsprite_state(char *str)
 {
-	if (ft_strequ(str, "STATIC"))
-		return (0);
 	if (ft_strequ(str, "LOOP"))
-		return (1);
-	if (ft_strequ(str, "ACTION"))
-		return (2);
-	return (0);
+		return (LOOP);
+	else if (ft_strequ(str, "ACTION"))
+		return (ACTION);
+	return (STATIC);
 }
 
 void	parse_wsprite(t_doom *doom, char **arr)

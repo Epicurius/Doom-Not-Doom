@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 15:22:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 16:30:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,18 @@ typedef enum e_player_action
 	CLICKING
 }			t_player_action;
 
-typedef enum e_evet_type
+typedef enum e_event_type
 {
 	CEILING,
 	FLOOR,
 	STORE
 }			t_event_type;
+
+typedef enum e_wsprite_action
+{
+	STATIC,
+	LOOP,
+	ACTION
+}			t_wsprite_action;
 
 #endif
