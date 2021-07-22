@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/21 16:26:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/22 09:23:49 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,6 +160,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 PATH_H		=	./inc/path.h
 
 RESOURCES	= ./resources
+SDL2_DIR = libb/SDL2-2.0.14
 
 all: framework libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
 
@@ -170,11 +171,11 @@ $(ODIR):
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
-	@gcc -o $(NAME) $(LIBS) $(OBJ) $(CFLAGS)
+	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
-	@gcc $(LIBS) $(CFLAGS) -w -c $< -o $@
+	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
 	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
 
 $(LIB_DIR):

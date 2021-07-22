@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:52:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 14:25:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,17 @@ int	clip_wall(t_camera cam, t_wall *wall)
 	return (0);
 }
 
+//camera->v[sector->num][i].texture_scale[k].y = (env->wall_textures[sector->textures[i]].maps[k]->h / sector->scale[i].y) * (sector->ceiling - sector->floor);
+//camera->v[sector->num][i].texture_align[k].x = (sector->align[i].x * env->wall_textures[sector->textures[i]].maps[k]->w) / 10.0;
+//camera->v[sector->num][i].texture_align[k].y = (sector->align[i].y * env->wall_textures[sector->textures[i]].maps[k]->h) / 10.0;
+
 void	precompute_texture(t_doom *doom, t_wall *wall)
 {
 	int	i;
 
-	wall->tscale.x = wall->scale_w / wall->cv2.z;
+	wall->tscale = (t_v2){wall->scale_w / wall->cv2.z, wall->scale_h};
 	if (wall->sv2.z)
 		wall->tscale.x = wall->scale_w / wall->sv2.z;
-	wall->tscale.y = wall->scale_h;
 	i = -1;
 	while (++i < wall->bh.total)
 	{
@@ -67,9 +70,9 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 			clock_wsprite(doom, wall, i);
 		else if (wall->wsprite.num[i].state == LOOP)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
-		wall->wsprite.num[i].tscale.x = wall->wsprite.num[i].scale_w
-			/ wall->sv2.z;
-		wall->wsprite.num[i].tscale.y = wall->wsprite.num[i].scale_h;
+		wall->wsprite.num[i].tscale = (t_v2){
+			wall->wsprite.num[i].scale_w / wall->sv2.z,
+			wall->wsprite.num[i].scale_h};
 		wall->wsprite.num[i].ready = 1;
 	}
 }
@@ -106,7 +109,15 @@ void	precompute_walls(t_doom *doom)
 		clip_wall(doom->cam, &doom->walls[i]);
 		if (!doom->walls[i].visible)
 			continue ;
-		scale_wall_height(doom, &doom->walls[i]);
+		//scale_wall_height(doom, &doom->walls[i]);
+		//t_wall *wall;
+		//wall = &doom->walls[i];
+		//wall->width = point_distance_v2(wall->v1.x, wall->v1.y,
+		//		wall->v2.x, wall->v2.y);
+		//wall->height = doom->sectors[wall->sect].ceiling.y
+		//	- doom->sectors[wall->sect].floor.y;
+		//wall->scale_w = (doom->mtx[wall->wtx].w / wall->scale) * wall->width;
+		//wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
 		project_wall(doom, &doom->walls[i]);
 		precompute_texture(doom, &doom->walls[i]);
 	}

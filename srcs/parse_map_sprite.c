@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:32:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 08:42:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	sprite_type(char *str)
 		return (5);
 	if (ft_strequ(str, "Meat_Hook"))
 		return (6);
-	return (-1);
+	error_msg("%s is not a valid entity!\n", str);
 }
 
 void	parse_entity(t_doom *doom, char **arr)
@@ -64,12 +64,6 @@ void	parse_entity(t_doom *doom, char **arr)
 
 	entity = ft_pmalloc(sizeof(t_entity), "parse_entity");
 	entity->type = sprite_type(arr[1]);
-	if (entity->type == -1)
-	{
-		free(entity);
-		ft_printf("%s is not a valid entity!\n", arr[1]); //make clean
-		return ;
-	}
 	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y = ft_atof(arr[3]) * doom->map_scale;
 	entity->where.z = ft_atof(arr[4]) * doom->map_scale;

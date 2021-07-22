@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:25:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 09:30:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ static void	find_event_trigger(t_doom *doom, t_event *event, int id)
 void	get_event_type(t_event *event, char *str)
 {
 	if (ft_strequ(str, "Ceiling"))
+	{
+		event->dir = -1;
 		event->type = CEILING;
+	}
 	else if (ft_strequ(str, "Floor"))
+	{
+		event->dir = 1;
 		event->type = FLOOR;
+	}
 	else if (ft_strequ(str, "Store"))
 		event->type = STORE;
 	else
@@ -80,7 +86,6 @@ void	parse_events(t_doom *doom, char **arr)
 		event.speed = ft_atof(arr[7]) * 10.0f;
 	}
 	event.time = 0;
-	event.dir = 1;
 	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
 	doom->events[doom->nb.events - 1] = event;
