@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:49:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 16:07:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_player
 	int				action;
 	int				equiped;
 	int				debug;
+	int				store_access;
 }					t_player;
 
 typedef struct s_wsprite

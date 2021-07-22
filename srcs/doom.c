@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:23:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 16:30:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,14 @@ static void	sound_board(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
-void	buy_menu(t_doom *doom)
-{
-	if (doom->key.tab)
-	{
-		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
-		SDL_SetRelativeMouseMode(SDL_FALSE);
-		buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
-		ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
-		SDL_SetRelativeMouseMode(SDL_TRUE);
-		doom->time.curr = SDL_GetTicks();
-		ft_bzero(&doom->key, sizeof(doom->key));
-		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-	}	
-}
-
 static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
+	game_mode(doom);
 	update_camera(doom, 0, 0);
 	map_events(doom);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);
-	game_mode(doom);
 	sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
@@ -56,12 +41,11 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_entities(doom);
-	buy_menu(doom);
 	draw_crosshair(doom);
 	draw_hud(doom);
 	draw_weapon(doom);
 	fps_func(doom);
-	//map(doom);
+	map(doom);
 	update_screen(doom, doom->surface);
 	game_pause(doom);
 	game_quit(doom);

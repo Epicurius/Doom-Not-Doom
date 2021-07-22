@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 15:57:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 19:29:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{5, BXPM_PATH"cog2.bxpm"},
 	{6, BXPM_PATH"lava.bxpm"},
 	{7, BXPM_PATH"metal_wall.bxpm"},
-	{8, BXPM_PATH"door.bxpm"},
+	{8, BXPM_PATH"terminal.bxpm"},
 	{9, BXPM_PATH"console.bxpm"},
 	{10, BXPM_PATH"green_wall.bxpm"},
 	{11, BXPM_PATH"radar.bxpm"},

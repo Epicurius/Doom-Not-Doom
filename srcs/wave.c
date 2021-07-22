@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 12:05:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 19:23:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,30 @@ void	respawn_rifts(t_doom *doom)
 	}
 }
 
-//	else if (doom->intro[0] && eternal_round(doom))
 void	game_mode(t_doom *doom)
 {
+	int i;
+
+	i = -1;
 	if (doom->game.cool_down)
 	{
-		doom->game.cool_down -= doom->time.delta;
+		doom->game.cool_down -= 1 * doom->time.delta;
 		if (doom->game.cool_down <= 0)
+		{
+			doom->player.store_access = 0;
+			while (++i < doom->nb.events)
+				if (doom->events[i].type == STORE)
+					doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
 			respawn_rifts(doom);
+		}
 	}
 	else if (!Mix_Playing(CHANNEL_TTS) && eternal_round(doom))
+	{
 		doom->game.cool_down = 1000;
+		doom->player.hp = 200;
+		doom->player.store_access = 1;
+		while (++i < doom->nb.events)
+			if (doom->events[i].type == STORE)
+				doom->events[i].wsprite->src = rect_xy2(0, 0, 662, 550);
+	}
 }

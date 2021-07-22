@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 19:24:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_wave_mode(t_doom *doom)
 {
 	t_list	*curr;
+	int		i;
 
 	doom->game.round = 0;
 	doom->game.time = doom->time.curr;
@@ -30,4 +31,10 @@ void	init_wave_mode(t_doom *doom)
 			doom->game.spawns += 1;
 		curr = curr->next;
 	}
+	doom->player.store_access = 0;
+	i = -1;
+	while (++i < doom->nb.events)
+		if (doom->events[i].type == STORE)
+			doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
+	
 }
