@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 08:51:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 14:21:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,6 +393,7 @@ typedef struct s_game_mode
 
 typedef struct s_weapon
 {
+	char			*name;
 	int				own;
 	int				price;
 	int				ammo_price;
