@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 18:23:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 14:15:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	movement(t_doom *doom)
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);
 	get_base_speed(doom, &speed);
-	move = new_v3(0, 0, 0);
+	//move = new_v3(0, 0, 0);
+	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);
 	player_collision(doom);

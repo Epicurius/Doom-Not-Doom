@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/14 12:16:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:38:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	collision_detection(&collision);
 	if (entity->velocity.x != 0 || entity->velocity.y != 0)
 		entity->yaw = angle_to_point_v2(entity->where,
-			add_v3(entity->where, entity->velocity));
+				add_v3(entity->where, entity->velocity));
 }

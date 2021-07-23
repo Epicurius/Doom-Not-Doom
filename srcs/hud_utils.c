@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	hud_health(t_doom *doom)
 	SDL_Rect	dstr;
 	SDL_Surface	*surf;
 
-	str = ft_itoa(doom->player.hp);
+	str = ft_itoa(doom->player.health);
 	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());

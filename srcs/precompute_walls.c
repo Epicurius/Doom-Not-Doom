@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 14:25:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 13:42:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ int	clip_wall(t_camera cam, t_wall *wall)
 	}
 	return (0);
 }
-
-//camera->v[sector->num][i].texture_scale[k].y = (env->wall_textures[sector->textures[i]].maps[k]->h / sector->scale[i].y) * (sector->ceiling - sector->floor);
-//camera->v[sector->num][i].texture_align[k].x = (sector->align[i].x * env->wall_textures[sector->textures[i]].maps[k]->w) / 10.0;
-//camera->v[sector->num][i].texture_align[k].y = (sector->align[i].y * env->wall_textures[sector->textures[i]].maps[k]->h) / 10.0;
 
 void	precompute_texture(t_doom *doom, t_wall *wall)
 {

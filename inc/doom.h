@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 14:21:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_player
 	double			anglesin;
 	double			anglecos;
 	double			horizon;
-	int				hp;
+	int				health;
 	int				armour;
 	float			walk_speed;
 	float			sprint_speed;
@@ -393,7 +393,6 @@ typedef struct s_game_mode
 
 typedef struct s_weapon
 {
-	char			*name;
 	int				own;
 	int				price;
 	int				ammo_price;
@@ -451,7 +450,9 @@ typedef struct s_fonts
 
 typedef struct s_event
 {
-	int			sector;
+	t_sector	*event_sector;
+	t_sector	*trigger_sector;
+	t_wsprite	*wsprite;
 	int			type;
 	float		min;
 	float		max;
@@ -460,7 +461,6 @@ typedef struct s_event
 	float		time;
 	int			dir;
 	int			action;
-	t_wsprite	*wsprite;
 }				t_event;
 
 typedef struct s_doom

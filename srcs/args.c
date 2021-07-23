@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/18 14:25:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:37:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	read_args2(t_settings *init, char **av, int i)
 static int	read_args1(t_settings *init, char **av, int i)
 {
 	char	**arr;
-	
+
 	if (ft_strequ(av[i], "-debug"))
 		init->debug = 1;
 	else if (ft_strequ(av[i], "-launcher"))

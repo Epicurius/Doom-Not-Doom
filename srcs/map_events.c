@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 17:53:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:48:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	move_plane(t_doom *doom, t_event *event)
 	t_plane	*plane;
 
 	if (event->type == FLOOR)
-		plane = &doom->sectors[event->sector].floor;
+		plane = &event->event_sector->floor;
 	else
-		plane = &doom->sectors[event->sector].ceiling;
+		plane = &event->event_sector->ceiling;
 	plane->y += 0.1 * event->dir;
 	event->time = doom->time.curr;
 	if (plane->y <= event->min)
@@ -51,8 +51,8 @@ void	loop_events(t_doom *doom, t_event *event)
 			return ;
 		move_plane(doom, event);
 		j = -1;
-		while (++j < doom->sectors[event->sector].npoints)
-			scale_wall_height(doom, doom->sectors[event->sector].wall[j]);
+		while (++j < event->event_sector->npoints)
+			scale_wall_height(doom, event->event_sector->wall[j]);
 	}
 	else if (event->type == STORE && doom->player.store_access)
 	{
@@ -72,9 +72,9 @@ void	buy_menu(t_doom *doom)
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
-void	trigger_events(t_doom *doom, t_event *event)
+void	wsprite_trigger_events(t_doom *doom, t_event *event)
 {
-	int	j;
+	int	i;
 	
 	if (!event->wsprite->trigger)
 		return ;
@@ -85,9 +85,9 @@ void	trigger_events(t_doom *doom, t_event *event)
 		if (event->wsprite->state == ACTION)
 			animate_wsprite(doom, event->wsprite);
 		move_plane(doom, event);
-		j = -1;
-		while (++j < doom->sectors[event->sector].npoints)
-			scale_wall_height(doom, doom->sectors[event->sector].wall[j]);
+		i = -1;
+		while (++i < event->event_sector->npoints)
+			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
 	else if (event->type == STORE && doom->player.store_access)
 	{
@@ -96,6 +96,27 @@ void	trigger_events(t_doom *doom, t_event *event)
 			buy_menu(doom);
 			event->wsprite->trigger = 0;
 		}
+	}
+}
+
+void	sector_trigger_events(t_doom *doom, t_event *event)
+{
+	int	i;
+	
+	if (event->trigger_sector->id != doom->player.sector) //maybe pointer also
+		return ;
+	if (event->type == FLOOR || event->type == CEILING)
+	{
+		if (event->time + 10 > doom->time.curr)
+			return ;
+		move_plane(doom, event);
+		i = -1;
+		while (++i < event->event_sector->npoints)
+			scale_wall_height(doom, event->event_sector->wall[i]);
+	}
+	else if (event->type == STORE && doom->player.store_access)
+	{
+		buy_menu(doom);
 	}
 }
 
@@ -108,17 +129,9 @@ void	map_events(t_doom *doom)
 	{
 		if (doom->events[i].action == NONE)
 			loop_events(doom, &doom->events[i]);
+		else if (doom->events[i].action == SECTOR)
+			sector_trigger_events(doom, &doom->events[i]);
 		else
-			trigger_events(doom, &doom->events[i]);
-		//if (doom->events[i].time + doom->events[i].speed > doom->time.curr)
-		//	continue ;
-		//if (doom->events[i].wsprite != NULL && !doom->events[i].wsprite->trigger)
-		//	continue ;
-		//if (doom->events[i].wsprite != NULL && doom->events[i].wsprite->state == 2)
-		//	animate_wsprite(doom, doom->events[i].wsprite);
-		//move_plane(doom, &doom->events[i]);
-		//j = -1;
-		//while (++j < doom->sectors[doom->events[i].sector].npoints)
-		//	scale_wall_height(doom, doom->sectors[doom->events[i].sector].wall[j]);
+			wsprite_trigger_events(doom, &doom->events[i]);
 	}
 }

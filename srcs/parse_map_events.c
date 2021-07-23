@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 09:30:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 14:45:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	get_event_action(t_event *event, char *str)
 		event->action = CLICKING;
 	else if (ft_strequ(str, "SHOOT"))
 		event->action = SHOOTING;
+	else if (ft_strequ(str, "SECTOR"))
+		event->action = SECTOR;
 	else
 		event->action = NONE;
 }
@@ -71,16 +73,16 @@ void	parse_events(t_doom *doom, char **arr)
 	get_event_type(&event, arr[1]);
 	get_event_action(&event, arr[2]);
 	event.wsprite = NULL;
-	if (event.action != NONE)
+	if (event.action == CLICKING || event.action == SHOOTING)
 	{
 		find_event_trigger(doom, &event, ft_atoi(arr[3]));
 		event.wsprite->action = event.action;
 	}
-	if (event.type != 2)
+	if (event.action == SECTOR)
+		event.trigger_sector = &doom->sectors[ft_atoi(arr[3])];
+	if (event.type == FLOOR || event.type == CEILING)
 	{
-		event.sector = ft_atoi(arr[4]);
-		if (event.sector > doom->nb.sectors || event.sector < 0)
-			error_msg("Map event %s: %s is not valid sector", arr[0], arr[4]);	
+		event.event_sector = &doom->sectors[ft_atoi(arr[4])];
 		event.min = ft_atof(arr[5]);
 		event.max = ft_atof(arr[6]);
 		event.speed = ft_atof(arr[7]) * 10.0f;

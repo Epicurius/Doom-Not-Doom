@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:20:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 		return ;
 	if (g_entity_data[entity->type].attack_style == 2)
 	{
-		doom->player.hp -= g_entity_data[entity->type].damage;
+		doom->player.health -= g_entity_data[entity->type].damage;
 		entity->hp = 0;
 		entity->state = DEATH;
 	}

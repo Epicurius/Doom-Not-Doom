@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 19:29:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:37:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_id_and_path
 	char		*path;
 }				t_id_and_path;
 
-# define WAV_AMOUNT	8
+# define WAV_AMOUNT	9
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 {
 	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
@@ -32,7 +32,8 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
 	{WAV_JUMP, WAV_PATH"jump.wav"},
 	{WAV_GUN, WAV_PATH"gun.wav"},
-	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"}	
+	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
+	{WAV_DOSH, WAV_PATH"Dosh.wav"}
 };
 
 # define MAP_TEXTURE_AMOUNT	15
@@ -217,6 +218,16 @@ typedef struct s_entity_data
 	int				tc[4];
 }					t_entity_data;
 
+# define WEAPON_AMOUNT 5
+static const char			*g_weapon_data[WEAPON_AMOUNT] =
+{
+	"SHOTGUN",
+	"GLOCK",
+	"KAR98",
+	"MINIGUN",
+	"PUMP"
+};
+
 # define ENTITY_AMOUNT	7
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 {
@@ -381,17 +392,6 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {543, 5, 579 - 543, 104 - 5}
 	}
-};
-
-# define WEAPON_AMOUNT 5
-
-static const char	*g_weapon_icon[WEAPON_AMOUNT] =
-{
-	BXPM_PATH"pump-0.bxpm",
-	BXPM_PATH"pump-1.bxpm",
-	BXPM_PATH"pump-2.bxpm",
-	BXPM_PATH"pump-3.bxpm",
-	BXPM_PATH"pump-4.bxpm"
 };
 
 #endif

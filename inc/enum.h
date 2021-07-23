@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 16:30:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:35:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ typedef enum e_enum_sounds
 	WAV_FOOT_STEPS,
 	WAV_JUMP,
 	WAV_GUN,
-	WAV_ELEVATOR_MUSIC
+	WAV_ELEVATOR_MUSIC,
+	WAV_DOSH
 }				t_enum_sounds;
 
-#define CHANNEL_AMOUNT	7
+# define CHANNEL_AMOUNT 7
 
 typedef enum e_enum_sound_channel
 {
@@ -80,7 +81,8 @@ typedef enum e_player_action
 {
 	NONE,
 	SHOOTING,
-	CLICKING
+	CLICKING,
+	SECTOR
 }			t_player_action;
 
 typedef enum e_event_type
