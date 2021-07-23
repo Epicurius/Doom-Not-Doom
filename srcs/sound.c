@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 20:26:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 15:48:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ static void	parse_wav(int amount, Mix_Chunk **dest, t_id_and_path *src)
 
 void	init_sound(t_doom *doom)
 {
+	int i;
+	
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(32);
 	parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
-	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
+	//Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	Mix_Volume(-1, 0);
 }

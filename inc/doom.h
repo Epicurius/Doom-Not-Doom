@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/19 13:16:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 08:51:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+static const char *g_launcher[2] =
+{
+	ROOT_PATH"ui/menu",
+	NULL	
+};
 
 typedef struct s_settings
 {
@@ -59,6 +65,7 @@ typedef struct s_keys
 	int				p;
 	int				r;
 	int				m;
+	int				e;
 	int				space;
 	int				lctr;
 	int				lshift;
@@ -132,9 +139,10 @@ typedef struct s_player
 	float			sprint_speed;
 	float			jump_height;
 	int				flying;
-	int				shooting;
+	int				action;
 	int				equiped;
 	int				debug;
+	int				store_access;
 }					t_player;
 
 typedef struct s_wsprite
@@ -149,6 +157,9 @@ typedef struct s_wsprite
 	double			scale_h;
 	t_v2			tscale;
 	int				ready;
+	int				trigger;
+	int				state;
+	int				action;
 }					t_wsprite;
 
 typedef struct s_wsprites
@@ -327,6 +338,7 @@ typedef struct s_render
 	int				light;
 	int				s;
 	t_bullet_hole	*bh;
+	int				center;
 	t_wsprites		wsprite;
 }					t_render;
 
@@ -376,7 +388,7 @@ typedef struct s_game_mode
 	int				spawns;
 	int				time;
 	int				spawn_rate;
-	int				cool_down;
+	float			cool_down;
 }					t_game_mode;
 
 typedef struct s_weapon
@@ -446,6 +458,8 @@ typedef struct s_event
 	float		speed;
 	float		time;
 	int			dir;
+	int			action;
+	t_wsprite	*wsprite;
 }				t_event;
 
 typedef struct s_doom
@@ -479,7 +493,6 @@ typedef struct s_doom
 	t_list			*orb;
 	t_camera		cam;
 	t_player		player;
-	int				active_mtx[MAP_TEXTURE_AMOUNT];
 	t_bxpm			mtx[MAP_TEXTURE_AMOUNT];
 	t_bxpm			stx[SKYBOX_TEXTURE_AMOUNT];
 	t_bxpm			itx[ICON_TEXTURE_AMOUNT];
@@ -661,8 +674,6 @@ void				line(SDL_Surface *surf, Uint32 color, t_point *p);
 /* File:			../srcs/malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File:			../srcs/map_events.c */
-void				move_ceiling(t_doom *doom, t_event *event);
-void				move_floor(t_doom *doom, t_event *event);
 void				map_events(t_doom *doom);
 /* File:			../srcs/minimap.c */
 void				map(t_doom *doom);
@@ -784,9 +795,9 @@ void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			../srcs/wave.c */
 void				spawn_mob(t_doom *doom, t_entity *rift);
 void				rift_spawn(t_doom *doom);
-int					eternal_round(t_doom *doom);
+int					endless_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
-void				game_mode(t_doom *doom);
+void				game_mode_endless(t_doom *doom);
 void				args(int ac, char **av, t_settings *init);
 void				print_help_msg(void);
 void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface *surface, t_inv *inv);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 15:00:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/20 17:26:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	init_render(t_doom *doom)
 		doom->render[x].skybox = doom->skybox;
 		doom->render[x].mtx = doom->mtx;
 		doom->render[x].stx = doom->stx;
+		doom->render[x].center = doom->surface_center;
 	}
 }

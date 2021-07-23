@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:28:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/21 11:03:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,19 @@ int	animate_wsprite(t_doom *doom, t_wsprite *entity)
 	}
 	return (1);
 }
+
+//void	wsprite_action(t_doom *doom, t_wsprite *wsprite)
+//{
+//	if (wsprite->state == LOOP)
+//		animate_wsprite(doom, wsprite);
+//	else if (wsprite->state == CLICKING)
+//	{
+//		if (doom->player.action == CLICKING)
+//			animate_wsprite(doom, wsprite);	
+//	}
+//	else if (wsprite->state == SHOOTINNG)
+//	{
+//		if (doom->player.action == SHOOTING)
+//			animate_wsprite(doom, wsprite);	
+//	}
+//}

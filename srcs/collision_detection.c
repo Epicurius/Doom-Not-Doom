@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 13:25:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ static int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
 {
 	t_v3	point;
 
-	if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y)
-		<= hitbox_radius)
+	if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox_radius)
 		return (1);
-	if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y)
-		<= hitbox_radius)
+	if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox_radius)
 		return (2);
 	point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
 	if (point_distance_v2(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
@@ -87,29 +85,41 @@ static int	fit_in_portal(t_collision *entity, t_sector *sector,
 int	horizontal_collision(t_collision *entity, t_v3 dest)
 {
 	int			i;
+	int			intersect;
+	int			collision;
+	int			neighbour;
 	t_wall		*wall;
 	t_sector	*sector;
 
 	i = -1;
 	sector = &entity->sectors[*entity->sector];
+	neighbour = sector->id; 
 	while (++i < sector->npoints)
 	{
 		wall = sector->wall[i];
-		if (intersect_check_v2(*entity->where, dest, wall->v1, wall->v2))
+		intersect = intersect_check_v2(*entity->where, dest, wall->v1, wall->v2);
+		collision = hitbox_collision(dest, wall, entity->hitbox_radius);
+		if (collision || intersect)
 		{
-			if (wall->solid || !fit_in_portal(entity, sector, wall, dest))
+			if (wall->solid == 1)
 				return (1);
-			*entity->sector = wall->n;
-			break ;
-		}
-		else if ((wall->solid || !fit_in_portal(entity, sector, wall, dest))
-			&& hitbox_collision(dest, wall, entity->hitbox_radius))
-		{
-			return (1);
+			if (intersect)
+			{
+				if (!fit_in_portal(entity, sector, wall, dest))
+					return (2);
+				neighbour = wall->n;
+			}
+			else if (collision && !intersect && !wall->solid)
+			{
+				if (!fit_in_portal(entity, sector, wall,
+					closest_point_on_segment_v2(dest, wall->v1, wall->v2)))
+					return (3);
+			}
 		}
 	}
 	entity->where->x += entity->velocity->x;
 	entity->where->y += entity->velocity->y;
+	*entity->sector = neighbour;
 	return (0);
 }
 

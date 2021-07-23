@@ -6,18 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/05 12:08:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/22 19:23:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void	scale_wall_height(t_doom *doom, t_wall *wall)
-{
-	wall->height = doom->sectors[wall->sect].ceiling.y
-		- doom->sectors[wall->sect].floor.y;
-	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
-}
 
 static void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 {
@@ -31,8 +24,10 @@ static void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 		wsprite = &wall->wsprite.num[i];
 		p.x = doom->mtx[wsprite->tx].w;
 		p.y = doom->mtx[wsprite->tx].h;
-		if (wsprite->tx == 1)
+		if (wsprite->state != 0)
 			p = new_v2(64, 64);
+		if (wsprite->tx == 8)
+			p = new_v2(662, 550);
 		wsprite->scale_h = p.y / p.x * wsprite->scale_w;
 		wsprite->scale_w = p.x / wsprite->scale_w * wall->width;
 		wsprite->scale_h = p.y / wsprite->scale_h * wall->height;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 12:58:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,42 @@ double	point_distance_v3(t_v3 p1, t_v3 p2)
 //	Closest point on a segment to a external point
 t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 {
-	t_v2	ab;
+	float	l;
+	float	t;
 	t_v3	point;
-	double	len;
-	double	t;
 
-	ab.x = b.x - a.x;
-	ab.y = b.y - a.y;
-	len = ab.x * ab.x + ab.y * ab.y;
-	t = ((p.x - a.x) * ab.x + (p.y - a.x) * ab.y) / len;
-	t = ft_clamp(t, 0, 1);
-	point.x = a.x + t * ab.x;
-	point.y = a.y + t * ab.y;
+	l = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+	if (l == 0)
+		return (a);
+	t = (p.x - a.x) * (b.x - a.x) + (p.y - a.y) * (b.y - a.y);
+	t = t / l;
+	t = t > 1.0 ? 1 : t;
+	t = t < 0.0 ? 0 : t;
+	point.x = a.x + t * (b.x - a.x);
+	point.y = a.y + t * (b.y - a.y);
 	return (point);
 }
+
+//float sqr(float x)
+//{
+//	return (x * x);
+//}
+//
+//float dist2(t_v3 v, t_v3 w) { return (sqr(v.x - w.x) + sqr(v.y - w.y)); }
+//
+//t_v3	closest_point_on_segment_v22(t_v3 p, t_v3 a, t_v3 b)
+//{
+//  float l2 = dist2(a, b);
+//  if (l2 == 0)
+//  	return a;
+//  float t = ((p.x - a.x) * (b.x - a.x) + (p.y - a.y) * (b.y - a.y)) / l2;
+//  //t = max(0, min(1, t));
+//  t_v3 asd;
+//  asd.x = a.x + t * (b.x - a.x);
+//  asd.y = a.y + t * (b.y - a.y);
+//  //ft_printf("(%f)\n", dist(p, asd));
+//  return asd;
+//}
 
 //	Is point on segment, optional buffer;
 int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
