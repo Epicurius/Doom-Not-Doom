@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 16:07:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 08:51:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+static const char *g_launcher[2] =
+{
+	ROOT_PATH"ui/menu",
+	NULL	
+};
 
 typedef struct s_settings
 {
@@ -382,7 +388,7 @@ typedef struct s_game_mode
 	int				spawns;
 	int				time;
 	int				spawn_rate;
-	int				cool_down;
+	float			cool_down;
 }					t_game_mode;
 
 typedef struct s_weapon
@@ -789,9 +795,9 @@ void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			../srcs/wave.c */
 void				spawn_mob(t_doom *doom, t_entity *rift);
 void				rift_spawn(t_doom *doom);
-int					eternal_round(t_doom *doom);
+int					endless_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
-void				game_mode(t_doom *doom);
+void				game_mode_endless(t_doom *doom);
 void				args(int ac, char **av, t_settings *init);
 void				print_help_msg(void);
 void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface *surface, t_inv *inv);

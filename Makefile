@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/22 09:23:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/23 08:47:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ RAW_SRC		=	ai_attack.c\
 				init_spooky.c\
 				init_textures.c\
 				init_torch.c\
-				init_wave_mode.c\
+				init_endless.c\
 				init_weapons.c\
 				keys.c\
 				line.c\
@@ -124,7 +124,7 @@ RAW_SRC		=	ai_attack.c\
 				validate_map2.c\
 				vertical_line.c\
 				wall_to_screen_xz.c\
-				wave.c\
+				endless.c\
 				args.c\
 				help.c\
 				buy_menu.c

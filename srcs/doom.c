@@ -6,17 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 16:30:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/23 08:46:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-static const char *g_launcher[2] =
-{
-	ROOT_PATH"ui/menu",
-	NULL	
-};
 
 static void	sound_board(t_doom *doom)
 {
@@ -26,7 +20,7 @@ static void	sound_board(t_doom *doom)
 
 static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
-	game_mode(doom);
+	game_mode_endless(doom);
 	update_camera(doom, 0, 0);
 	map_events(doom);
 	precompute_walls(doom);
