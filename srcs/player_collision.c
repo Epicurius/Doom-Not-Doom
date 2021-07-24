@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:33:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 09:02:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:47:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static inline void	fix_sector_bug(t_doom *doom)
 {
-	//if (doom->settings.debug)
+	if (!doom->settings.debug)
 		printf("%d Wrong Sector!\n", doom->player.sector);
 	doom->player.sector = find_sector(doom->sectors, doom->nb.sectors,
-		doom->player.where);
-	//if (doom->settings.debug)
+			doom->player.where);
+	if (!doom->settings.debug)
 	{
 		if (doom->player.sector != -1)
 			ft_printf("%d [ERROR]!\n", doom->player.sector);

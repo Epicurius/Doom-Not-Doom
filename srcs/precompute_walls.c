@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 13:42:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:48:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,6 @@ void	precompute_walls(t_doom *doom)
 		clip_wall(doom->cam, &doom->walls[i]);
 		if (!doom->walls[i].visible)
 			continue ;
-		//scale_wall_height(doom, &doom->walls[i]);
-		//t_wall *wall;
-		//wall = &doom->walls[i];
-		//wall->width = point_distance_v2(wall->v1.x, wall->v1.y,
-		//		wall->v2.x, wall->v2.y);
-		//wall->height = doom->sectors[wall->sect].ceiling.y
-		//	- doom->sectors[wall->sect].floor.y;
-		//wall->scale_w = (doom->mtx[wall->wtx].w / wall->scale) * wall->width;
-		//wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
 		project_wall(doom, &doom->walls[i]);
 		precompute_texture(doom, &doom->walls[i]);
 	}

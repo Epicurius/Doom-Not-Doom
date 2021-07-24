@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 17:56:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:22:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	weapon_texture_array(t_doom *doom)
 	while (++i < WEAPON_AMOUNT)
 	{
 		doom->weapon[i].bxpm = malloc(sizeof(t_bxpm)
-			* (doom->weapon[i].fire_frames + doom->weapon[i].reload_frames));
+				* (doom->weapon[i].fire_frames
+					+ doom->weapon[i].reload_frames));
 		if (!doom->weapon[i].bxpm)
 			error_msg("Weapon bxpm array nb %d.", i);
 	}

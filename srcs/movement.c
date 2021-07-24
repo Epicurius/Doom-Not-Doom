@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 14:15:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:46:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	get_base_speed(t_doom *doom, float *speed)
 static inline void	foot_steps(t_doom *doom, t_player player, t_v3 *move)
 {
 	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
-		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector], player.where))
+		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector],
+			player.where))
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
 			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
@@ -104,7 +105,6 @@ void	movement(t_doom *doom)
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);
 	get_base_speed(doom, &speed);
-	//move = new_v3(0, 0, 0);
 	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);

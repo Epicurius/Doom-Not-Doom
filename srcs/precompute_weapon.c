@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 10:24:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:49:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ void	equip_weapon(t_doom *doom)
 		doom->player.equiped = doom->key.num - 1;
 }
 
+//		move doom->player.action = NONE;
 void	precompute_weapon(t_doom *doom)
 {
 	t_weapon	*weapon;
-	
-	doom->player.action = NONE; //move
+
+	doom->player.action = NONE;
 	equip_weapon(doom);
 	if (doom->player.equiped < 0)
 		return ;

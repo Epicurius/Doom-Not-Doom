@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 18:40:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:49:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	re_init(t_doom *doom)
 {
 	int	x;
 
-	//init_camera(doom);
 	init_scale(doom);
 	init_player(doom);
 	init_wavemode(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 12:58:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:41:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,14 @@ t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 		return (a);
 	t = (p.x - a.x) * (b.x - a.x) + (p.y - a.y) * (b.y - a.y);
 	t = t / l;
-	t = t > 1.0 ? 1 : t;
-	t = t < 0.0 ? 0 : t;
+	if (t > 1.0)
+		t = 1.0;
+	if (t < 0.0)
+		t = 0.0;
 	point.x = a.x + t * (b.x - a.x);
 	point.y = a.y + t * (b.y - a.y);
 	return (point);
 }
-
-//float sqr(float x)
-//{
-//	return (x * x);
-//}
-//
-//float dist2(t_v3 v, t_v3 w) { return (sqr(v.x - w.x) + sqr(v.y - w.y)); }
-//
-//t_v3	closest_point_on_segment_v22(t_v3 p, t_v3 a, t_v3 b)
-//{
-//  float l2 = dist2(a, b);
-//  if (l2 == 0)
-//  	return a;
-//  float t = ((p.x - a.x) * (b.x - a.x) + (p.y - a.y) * (b.y - a.y)) / l2;
-//  //t = max(0, min(1, t));
-//  t_v3 asd;
-//  asd.x = a.x + t * (b.x - a.x);
-//  asd.y = a.y + t * (b.y - a.y);
-//  //ft_printf("(%f)\n", dist(p, asd));
-//  return asd;
-//}
 
 //	Is point on segment, optional buffer;
 int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:48:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:38:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,6 @@ void	scale_wall_height(t_doom *doom, t_wall *wall)
 	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
 }
 
-void	loop_events(t_doom *doom, t_event *event)
-{
-	int	j;
-	
-	if (event->type == FLOOR || event->type == CEILING)
-	{
-		if (event->time + 100 > doom->time.curr)
-			return ;
-		move_plane(doom, event);
-		j = -1;
-		while (++j < event->event_sector->npoints)
-			scale_wall_height(doom, event->event_sector->wall[j]);
-	}
-	else if (event->type == STORE && doom->player.store_access)
-	{
-		int i = 2;	
-	}
-}
-
 void	buy_menu(t_doom *doom)
 {
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
@@ -72,10 +53,25 @@ void	buy_menu(t_doom *doom)
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
+void	loop_events(t_doom *doom, t_event *event)
+{
+	int	j;
+
+	if (event->type == FLOOR || event->type == CEILING)
+	{
+		if (event->time + 100 > doom->time.curr)
+			return ;
+		move_plane(doom, event);
+		j = -1;
+		while (++j < event->event_sector->npoints)
+			scale_wall_height(doom, event->event_sector->wall[j]);
+	}
+}
+
 void	wsprite_trigger_events(t_doom *doom, t_event *event)
 {
 	int	i;
-	
+
 	if (!event->wsprite->trigger)
 		return ;
 	if (event->type == FLOOR || event->type == CEILING)
@@ -102,8 +98,8 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	int	i;
-	
-	if (event->trigger_sector->id != doom->player.sector) //maybe pointer also
+
+	if (event->trigger_sector->id != doom->player.sector)
 		return ;
 	if (event->type == FLOOR || event->type == CEILING)
 	{
