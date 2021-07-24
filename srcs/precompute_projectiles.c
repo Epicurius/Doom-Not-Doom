@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 09:40:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	projectile_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
 	projectile.step_height = 0;
 	if (player_contact(doom, orb->start, dest)
 		|| vertical_collision(doom, orb, dest)
-		|| horizontal_collision(&projectile, dest))
+		|| horizontal_collision(&projectile, dest, orb->sector, -1))
 		return (1);
 	return (0);
 }

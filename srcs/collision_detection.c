@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 13:25:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:03:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 //	Does player hitbox collide with vetex 1.
 //	Does player hitbox collide with vetex 2.
 //	Does player hitbox collide with vertex point closest to the wall.
-static int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
-{
-	t_v3	point;
-
-	if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox_radius)
-		return (1);
-	if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox_radius)
-		return (2);
-	point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
-	if (point_distance_v2(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
-		return (3);
-	return (0);
-}
+//if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox)
+//	return (1);
+//if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox)
+//	return (2);
+//static int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
+//{
+//	t_v3	point;
+//
+//	point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
+//	if (point_distance_v2(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
+//		return (3);
+//	return (0);
+//}
 
 // Player is walking up a slope
 // Player is walking down a slope
@@ -61,7 +61,7 @@ static int	vertical_collision(t_collision *entity, t_v3 dest)
 	return (0);
 }
 
-static int	fit_in_portal(t_collision *entity, t_sector *sector,
+static int	portal(t_collision *entity, t_sector *sector,
 	t_wall *wall, t_v3 dest)
 {
 	double	portal_top;
@@ -82,45 +82,34 @@ static int	fit_in_portal(t_collision *entity, t_sector *sector,
 // Dose path intersecta wall.
 // Is wall solid || or cant fit through portal to next sector.
 // Dose hitbox collide with solid surface
-int	horizontal_collision(t_collision *entity, t_v3 dest)
+// intersect = ft_clamp(point_side_v2(wall->v2, wall->v1, dest), 0, 1);
+int	horizontal_collision(t_collision *coll, t_v3 dest, int curr, int i)
 {
-	int			i;
 	int			intersect;
 	int			collision;
-	int			neighbour;
+	t_sector	*sect;
 	t_wall		*wall;
-	t_sector	*sector;
+	t_v3		point;
 
-	i = -1;
-	sector = &entity->sectors[*entity->sector];
-	neighbour = sector->id; 
-	while (++i < sector->npoints)
+	sect = &coll->sectors[*coll->sector];
+	while (++i < sect->npoints)
 	{
-		wall = sector->wall[i];
-		intersect = intersect_check_v2(*entity->where, dest, wall->v1, wall->v2);
-		collision = hitbox_collision(dest, wall, entity->hitbox_radius);
-		if (collision || intersect)
-		{
-			if (wall->solid == 1)
-				return (1);
-			if (intersect)
-			{
-				if (!fit_in_portal(entity, sector, wall, dest))
-					return (2);
-				neighbour = wall->n;
-			}
-			else if (collision && !intersect && !wall->solid)
-			{
-				if (!fit_in_portal(entity, sector, wall,
-					closest_point_on_segment_v2(dest, wall->v1, wall->v2)))
-					return (3);
-			}
-		}
+		wall = sect->wall[i];
+		point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
+		intersect = intersect_check_v2(*coll->where, dest, wall->v1, wall->v2);
+		collision = (point_distance_v2(point.x, point.y, dest.x, dest.y) <= 1);
+		if (!collision && !intersect)
+			continue ;
+		if (wall->solid || (intersect && !portal(coll, sect, wall, dest)))
+			return (2);
+		if (intersect)
+			curr = wall->n;
+		else if (collision && !wall->solid && !portal(coll, sect, wall, point))
+			return (3);
 	}
-	entity->where->x += entity->velocity->x;
-	entity->where->y += entity->velocity->y;
-	*entity->sector = neighbour;
-	return (0);
+	coll->where->x += coll->velocity->x;
+	coll->where->y += coll->velocity->y;
+	return (!(*coll->sector = curr));
 }
 
 int	collision_detection(t_collision *entity)
@@ -130,12 +119,10 @@ int	collision_detection(t_collision *entity)
 	dest = add_v3(*entity->where, *entity->velocity);
 	if (entity->player && sprite_collision(entity, dest))
 	{
-		entity->velocity->x = 0.0f;
-		entity->velocity->y = 0.0f;
-		entity->velocity->z = 0.0f;
+		ft_bzero(&entity->velocity, sizeof(t_v3));
 		return (1);
 	}
-	if (horizontal_collision(entity, dest))
+	if (horizontal_collision(entity, dest, *entity->sector, -1))
 	{
 		entity->velocity->x = 0.0f;
 		entity->velocity->y = 0.0f;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 09:41:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -529,7 +529,8 @@ void				update_camera(t_doom *doom, int x, int y);
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File:			../srcs/collision_detection.c */
-int					horizontal_collision(t_collision *entity, t_v3 dest);
+int					horizontal_collision(t_collision *coll, t_v3 dest,
+						int curr, int i);
 int					collision_detection(t_collision *entity);
 /* File:			../srcs/color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
