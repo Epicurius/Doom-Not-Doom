@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:38:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 17:35:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,18 @@ void	scale_wall_height(t_doom *doom, t_wall *wall)
 	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
 }
 
-void	buy_menu(t_doom *doom)
-{
-	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
-	SDL_SetRelativeMouseMode(SDL_FALSE);
-	buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
-	ft_printf("{CLR:78}Buymenu_new Done!{RESET}\n");
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-	doom->time.curr = SDL_GetTicks();
-	ft_bzero(&doom->key, sizeof(doom->key));
-	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-}
-
 void	loop_events(t_doom *doom, t_event *event)
 {
-	int	j;
+	int	i;
 
 	if (event->type == FLOOR || event->type == CEILING)
 	{
 		if (event->time + 100 > doom->time.curr)
 			return ;
 		move_plane(doom, event);
-		j = -1;
-		while (++j < event->event_sector->npoints)
-			scale_wall_height(doom, event->event_sector->wall[j]);
+		i = -1;
+		while (++i < event->event_sector->npoints)
+			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
 }
 
@@ -89,12 +77,13 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 	{
 		if (event->wsprite->trigger)
 		{
-			buy_menu(doom);
+			precompute_buy_menu(doom);
 			event->wsprite->trigger = 0;
 		}
 	}
 }
 
+//	Fix sector trigger Store
 void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	int	i;
@@ -112,7 +101,7 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 	}
 	else if (event->type == STORE && doom->player.store_access)
 	{
-		buy_menu(doom);
+		precompute_buy_menu(doom);
 	}
 }
 

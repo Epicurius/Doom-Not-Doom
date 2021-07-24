@@ -6,28 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:03:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 17:33:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-//	Does player hitbox collide with vetex 1.
-//	Does player hitbox collide with vetex 2.
-//	Does player hitbox collide with vertex point closest to the wall.
-//if (point_distance_v2(wall->v1.x, wall->v1.y, dest.x, dest.y) <= hitbox)
-//	return (1);
-//if (point_distance_v2(wall->v2.x, wall->v2.y, dest.x, dest.y) <= hitbox)
-//	return (2);
-//static int	hitbox_collision(t_v3 dest, t_wall *wall, float hitbox_radius)
-//{
-//	t_v3	point;
-//
-//	point = closest_point_on_segment_v2(dest, wall->v1, wall->v2);
-//	if (point_distance_v2(point.x, point.y, dest.x, dest.y) <= hitbox_radius)
-//		return (3);
-//	return (0);
-//}
 
 // Player is walking up a slope
 // Player is walking down a slope
@@ -36,26 +19,26 @@
 // Let the player keep on rising/falling.
 static int	vertical_collision(t_collision *entity, t_v3 dest)
 {
-	double		f;
-	double		c;
+	t_fc		y;
 	t_wall		*wall;
 	t_sector	*sector;
 
 	sector = &entity->sectors[*entity->sector];
-	c = get_ceiling_at_pos(sector,
-			new_v3(entity->where->x, entity->where->y, 0));
-	f = get_floor_at_pos(sector,
-			new_v3(entity->where->x, entity->where->y, 0));
-	if ((entity->velocity->z >= 0 && dest.z < f && f - dest.z
+	y.ceiling = get_ceiling_at_pos(sector, *entity->where);
+	y.floor = get_floor_at_pos(sector, *entity->where);
+	if (y.ceiling - y.floor <= entity->hitbox_height)
+		return ((entity->suffocate = 1));
+	if ((entity->velocity->z >= 0 && dest.z < y.floor && y.floor - dest.z
 			<= entity->step_height)
-		|| (entity->velocity->z == 0 && dest.z > f && dest.z - f
+		|| (entity->velocity->z == 0 && dest.z > y.floor && dest.z - y.floor
 			<= entity->step_height)
-		|| (entity->velocity->z < 0 && dest.z < f))
+		|| (entity->velocity->z < 0 && dest.z < y.floor))
 	{
-		entity->where->z = f;
+		entity->where->z = y.floor;
 		return (1);
 	}
-	else if (entity->velocity->z > 0 && dest.z + entity->hitbox_height > c)
+	else if (entity->velocity->z > 0 && dest.z
+		+ entity->hitbox_height > y.ceiling)
 		return (1);
 	entity->where->z += entity->velocity->z;
 	return (0);
@@ -101,15 +84,16 @@ int	horizontal_collision(t_collision *coll, t_v3 dest, int curr, int i)
 		if (!collision && !intersect)
 			continue ;
 		if (wall->solid || (intersect && !portal(coll, sect, wall, dest)))
-			return (2);
+			return (1);
 		if (intersect)
 			curr = wall->n;
 		else if (collision && !wall->solid && !portal(coll, sect, wall, point))
-			return (3);
+			return (2);
 	}
 	coll->where->x += coll->velocity->x;
 	coll->where->y += coll->velocity->y;
-	return (!(*coll->sector = curr));
+	*coll->sector = curr;
+	return (0);
 }
 
 int	collision_detection(t_collision *entity)
@@ -128,6 +112,8 @@ int	collision_detection(t_collision *entity)
 		entity->velocity->y = 0.0f;
 	}
 	if (vertical_collision(entity, dest))
+	{
 		entity->velocity->z = 0.0f;
+	}
 	return (1);
 }

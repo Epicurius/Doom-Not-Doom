@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/24 10:50:58 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/24 17:37:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,13 @@ RAW_SRC		=	ai_attack.c\
 				init_spooky.c\
 				init_textures.c\
 				init_torch.c\
-				init_endless.c\
+				init_game_mode.c\
 				init_weapons.c\
+				init_shotgun.c\
+				init_glock.c\
+				init_kar.c\
+				init_minigun.c\
+				init_pump.c\
 				keys.c\
 				line.c\
 				malloc_texture_pos.c\
@@ -118,7 +123,6 @@ RAW_SRC		=	ai_attack.c\
 				skybox_floor_vline.c\
 				skybox_wall_vline.c\
 				sound.c\
-				stats_weapons.c\
 				update_screen.c\
 				validate_map1.c\
 				validate_map2.c\
@@ -127,6 +131,8 @@ RAW_SRC		=	ai_attack.c\
 				endless.c\
 				args.c\
 				help.c\
+				spawn_entity.c\
+				precompute_buy_menu.c\
 				buy_menu.c
 		
 NAME		=	doom

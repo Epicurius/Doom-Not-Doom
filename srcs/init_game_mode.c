@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_endless.c                                     :+:      :+:    :+:   */
+/*   init_game_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:13:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 15:15:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_wave_mode(t_doom *doom)
+static void	init_endless(t_doom *doom)
 {
-	t_list	*curr;
 	int		i;
+	t_list	*curr;
 
 	doom->game.round = 0;
-	doom->game.time = doom->time.curr;
 	doom->game.spawn_rate = 5000;
 	doom->game.cool_down = 0;
 	doom->game.spawns = 0;
@@ -36,4 +35,11 @@ void	init_wave_mode(t_doom *doom)
 	while (++i < doom->nb.events)
 		if (doom->events[i].type == STORE)
 			doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
+}
+
+void	init_game_mode(t_doom *doom)
+{
+	doom->game.time = doom->time.curr;
+	if (doom->game.mode == ENDLESS)
+		init_endless(doom);
 }

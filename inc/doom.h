@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 09:41:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 16:17:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,7 @@ typedef struct s_sector
 
 typedef struct s_collision
 {
+	int				suffocate;
 	t_v3			*where;
 	t_v3			*velocity;
 	t_sector		*sectors;
@@ -382,14 +383,15 @@ typedef struct s_npc_bxpm
 	t_rect			***pos;
 }					t_npc_bxpm;
 
-typedef struct s_game_mode
+typedef struct s_game
 {
+	int				mode;
 	int				round;
 	int				spawns;
 	int				time;
 	int				spawn_rate;
 	float			cool_down;
-}					t_game_mode;
+}					t_game;
 
 typedef struct s_weapon
 {
@@ -478,7 +480,7 @@ typedef struct s_doom
 	int				w2;
 	int				h2;
 	int				surface_center;
-	t_game_mode		game;
+	t_game		game;
 	t_inv			inv;
 	t_nb			nb;
 	t_tpool			tpool;
@@ -512,7 +514,7 @@ int					ai_rand_move(t_doom *doom, t_entity *entity, int chance,
 						int angle);
 int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance,
 						int angle);
-void				ai_movement(t_doom *doom, t_entity *entity);
+void				entity_collision(t_doom *doom, t_entity *entity);
 /* File:			../srcs/animate_wsprite.c */
 int					animate_wsprite(t_doom *doom, t_wsprite *entity);
 /* File:			../srcs/blit_bxpm.c */
@@ -665,8 +667,8 @@ void				move_pos_spooky2(t_rect **pos);
 void				init_textures(t_doom *doom);
 /* File:			../srcs/init_torch.c */
 void				init_torch(t_doom *doom);
-/* File:			../srcs/init_wave_mode.c */
-void				init_wave_mode(t_doom *doom);
+/* File:			../srcs/init_game_mode.c */
+void				init_game_mode(t_doom *doom);
 /* File:			../srcs/init_weapons.c */
 void				init_weapons(t_doom *doom);
 /* File:			../srcs/keys.c */
@@ -795,7 +797,6 @@ void				vline_monochromic(t_render *render, t_vline *vline,
 /* File:			../srcs/wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 /* File:			../srcs/wave.c */
-void				spawn_mob(t_doom *doom, t_entity *rift);
 void				rift_spawn(t_doom *doom);
 int					endless_round(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
@@ -803,5 +804,6 @@ void				game_mode_endless(t_doom *doom);
 void				args(int ac, char **av, t_settings *init);
 void				print_help_msg(void);
 void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer, SDL_Surface *surface, t_inv *inv);
+void				precompute_buy_menu(t_doom *doom);
 
 #endif

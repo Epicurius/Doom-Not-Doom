@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:33:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:47:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 16:15:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	player_collision(t_doom *doom)
 	p.hitbox_height = doom->player.eye_lvl + 1;
 	p.hitbox_radius = PLAYER_RADIUS;
 	p.step_height = STEP_HEIGHT;
+	p.suffocate = 0;
 	collision_detection(&p);
+	if (p.suffocate)
+		doom->player.health = 0;
 	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
 		fix_sector_bug(doom);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 15:17:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	sound_board(t_doom *doom)
 
 static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
-	game_mode_endless(doom);
+	game_mode(doom);
 	update_camera(doom, 0, 0);
 	map_events(doom);
 	precompute_walls(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:38:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 16:51:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	return (1);
 }
 
-void	ai_movement(t_doom *doom, t_entity *entity)
+void	entity_collision(t_doom *doom, t_entity *entity)
 {
 	t_collision	collision;
 
@@ -70,11 +70,14 @@ void	ai_movement(t_doom *doom, t_entity *entity)
 	collision.sectors = doom->sectors;
 	collision.entities = doom->entity;
 	collision.nb_entities = doom->nb.entities;
-	collision.player = 0;
 	collision.hitbox_height = g_entity_data[entity->type].height;
 	collision.hitbox_radius = g_entity_data[entity->type].hitbox_radius;
 	collision.step_height = 2;
+	collision.player = 0;
+	collision.suffocate = 0;
 	collision_detection(&collision);
+	if (collision.suffocate)
+		entity->state = DEATH;
 	if (entity->velocity.x != 0 || entity->velocity.y != 0)
 		entity->yaw = angle_to_point_v2(entity->where,
 				add_v3(entity->where, entity->velocity));
