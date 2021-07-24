@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:59:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:09:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	endless_round(t_doom *doom)
 	{
 		doom->game.round++;
 		doom->game.spawn_rate = 200 - doom->game.round * 2;
+		doom->game.cool_down = 100;
+		doom->player.health = 1100 - doom->settings.difficulty * 100;
+		doom->inv.dosh += 100 + doom->game.round * 10;
+		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_DOSH], 0);
+		doom->player.store_access = 1;
 		return (1);
 	}
 	else if (doom->time.curr - doom->game.time > doom->game.spawn_rate)
@@ -76,15 +81,15 @@ void	respawn_rifts(t_doom *doom)
 	}
 }
 
+//		ft_printf("%f\n", doom->game.cool_down);
 void	game_mode_endless(t_doom *doom)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (doom->game.cool_down)
 	{
 		doom->game.cool_down -= 1 * doom->time.delta;
-		//ft_printf("%f\n", doom->game.cool_down);
 		if (doom->game.cool_down <= 0)
 		{
 			doom->player.store_access = 0;
@@ -96,11 +101,6 @@ void	game_mode_endless(t_doom *doom)
 	}
 	else if (!Mix_Playing(CHANNEL_TTS) && endless_round(doom))
 	{
-		doom->game.cool_down = 100;
-		doom->player.health = 1100 - doom->settings.difficulty * 100;
-		doom->inv.dosh += 100 + doom->game.round * 10;
-		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_DOSH], 0);
-		doom->player.store_access = 1;
 		while (++i < doom->nb.events)
 			if (doom->events[i].type == STORE)
 				doom->events[i].wsprite->src = rect_xy2(0, 0, 662, 550);

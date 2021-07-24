@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_wave_mode.c                                   :+:      :+:    :+:   */
+/*   init_endless.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 19:24:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:13:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,4 @@ void	init_wave_mode(t_doom *doom)
 	while (++i < doom->nb.events)
 		if (doom->events[i].type == STORE)
 			doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
-	
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 12:11:55 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:13:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void	init_inventory(t_doom *doom)
 {
 	doom->inv.dosh = 0;
-
 	doom->inv.max_armour_price = 100;
 	doom->inv.speed_price = 101;
 	doom->inv.jump_price = 102;
 	doom->inv.armour_price = 103;
 	doom->inv.max_armour = 100;
 	doom->inv.weapon = doom->weapon;
-	
 	doom->inv.hp = &doom->player.health;
 	doom->inv.armour = &doom->player.armour;
 	doom->inv.speed = &doom->player.sprint_speed;

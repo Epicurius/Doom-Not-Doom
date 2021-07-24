@@ -6,16 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/20 14:44:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:16:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		multy_thread_bxpm(void *arg)
+int	multy_thread_bxpm(void *arg)
 {
-	int res;
-	
+	int	res;
+
 	res = read_bxpm(((t_thread_bxpm *)arg)->bxpm, ((t_thread_bxpm *)arg)->path);
 	free(((t_thread_bxpm *)arg)->path);
 	if (res)
@@ -24,7 +24,7 @@ int		multy_thread_bxpm(void *arg)
 	return (0);
 }
 
-static void	parse(t_doom *doom, int amount, t_bxpm *dest, t_id_and_path *src)
+static void	get(t_doom *doom, int amount, t_bxpm *dest, t_id_and_path *src)
 {
 	int				i;
 	t_thread_bxpm	*threads;
@@ -45,15 +45,15 @@ static void	parse(t_doom *doom, int amount, t_bxpm *dest, t_id_and_path *src)
 
 void	init_textures(t_doom *doom)
 {
-	parse(doom, MAP_TEXTURE_AMOUNT - 1, doom->mtx, g_map_textures);
-	parse(doom, SKYBOX_TEXTURE_AMOUNT, doom->stx, g_skybox_textures);
-	parse(doom, ENTITY_TEXTURE_AMOUNT, doom->etx, g_entity_textures);
-	parse(doom, ICON_TEXTURE_AMOUNT, doom->itx, g_icon_textures);
-	parse(doom, SHOTGUN_TEXTURE_AMOUNT, doom->weapon[0].bxpm, g_shotgun_textures);
-	parse(doom, GLOCK_TEXTURE_AMOUNT, doom->weapon[1].bxpm, g_glock_textures);
-	parse(doom, MINIGUN_TEXTURE_AMOUNT, doom->weapon[2].bxpm, g_minigun_textures);
-	parse(doom, KAR_TEXTURE_AMOUNT, doom->weapon[3].bxpm, g_kar_textures);
-	parse(doom, PUMP_TEXTURE_AMOUNT, doom->weapon[4].bxpm, g_pump_textures);
+	get(doom, MAP_TEXTURE_AMOUNT - 1, doom->mtx, g_map_textures);
+	get(doom, SKYBOX_TEXTURE_AMOUNT, doom->stx, g_skybox_textures);
+	get(doom, ENTITY_TEXTURE_AMOUNT, doom->etx, g_entity_textures);
+	get(doom, ICON_TEXTURE_AMOUNT, doom->itx, g_icon_textures);
+	get(doom, SHOTGUN_TEXTURE_AMOUNT, doom->weapon[0].bxpm, g_shotgun_textures);
+	get(doom, GLOCK_TEXTURE_AMOUNT, doom->weapon[1].bxpm, g_glock_textures);
+	get(doom, MINIGUN_TEXTURE_AMOUNT, doom->weapon[2].bxpm, g_minigun_textures);
+	get(doom, KAR_TEXTURE_AMOUNT, doom->weapon[3].bxpm, g_kar_textures);
+	get(doom, PUMP_TEXTURE_AMOUNT, doom->weapon[4].bxpm, g_pump_textures);
 	init_clock(doom, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	color_palets(doom);
 }
