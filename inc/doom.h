@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:06:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 12:01:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -620,11 +620,11 @@ void				get_entity_state(t_doom *doom, t_entity *entity);
 /* File: help.c */
 void				print_help_msg(void);
 /* File: hud_utils.c */
-void				hud_health(t_doom *doom);
-void				hud_armour(t_doom *doom);
-void				hud_curr_ammo(t_doom *doom);
-void				hud_mag_ammo(t_doom *doom);
-void				hud_dosh(t_doom *doom);
+void				hud_health(t_doom *doom, SDL_Rect *dstr);
+void				hud_armour(t_doom *doom, SDL_Rect *dstr);
+void				hud_curr_ammo(t_doom *doom, SDL_Rect *dstr);
+void				hud_mag_ammo(t_doom *doom, SDL_Rect *dstr);
+void				hud_dosh(t_doom *doom, SDL_Rect *dstr);
 /* File: icon.c */
 int					set_icon(SDL_Window *window, char *dir);
 /* File: init.c */

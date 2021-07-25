@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/25 11:01:06 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/25 12:06:52 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ LIBGFX		:=	-I ../libgfx -L ../libgfx -lgfx
 LIBS		+=	-I $(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
 				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -Wfatal-errors
 
 PATH_H		=	./inc/path.h
 
@@ -176,7 +176,7 @@ $(ODIR):
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+	@gcc -O3 $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c

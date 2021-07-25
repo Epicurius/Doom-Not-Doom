@@ -6,11 +6,20 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:34:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 11:39:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+static void	launcher(void)
+{
+	char	*arr[2];
+
+	arr[0] = ft_strdup(ROOT_PATH"ui/menu");
+	arr[1] = NULL;
+	execv(arr[0], arr);
+}
 
 static void	sound_board(t_doom *doom)
 {
@@ -66,15 +75,6 @@ static void	game(char *map, t_settings settings)
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);
-}
-
-void	launcher(void)
-{
-	char	*arr[2];
-
-	arr[0] = ft_strdup(ROOT_PATH"ui/menu");
-	arr[1] = NULL;
-	execv(arr[0], arr);
 }
 
 int	main(int ac, char **av)
