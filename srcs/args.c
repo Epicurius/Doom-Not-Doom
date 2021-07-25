@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:43:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 13:48:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	read_args1(t_settings *init, char **av, int i)
 	else if (ft_strequ(av[i], "-launcher"))
 		init->launcher = 1;
 	else if (ft_strnequ(av[i], "-res=", 5))
-		init->render_resolution = atof(av[i] + 5);
+		init->rresolution = atof(av[i] + 5);
 	else if (ft_strnequ(av[i], "-diff=", 6))
 		init->difficulty = atoi(av[i] + 6);
 	else if (ft_strnequ(av[i], "-fov=", 5))
@@ -54,7 +54,7 @@ void	args(int ac, char **av, t_settings *init)
 	i = 1;
 	ft_bzero(init, sizeof(init));
 	init->size = (t_point){1920, 1080};
-	init->render_resolution = 1;
+	init->rresolution = 1;
 	init->mouse = (t_v2){MOUSE_X, MOUSE_Y};
 	init->fov = FOV;
 	while (++i < ac)
@@ -63,7 +63,7 @@ void	args(int ac, char **av, t_settings *init)
 		printf("%s\nScreen Size\t\t%dx%d\nRender Resolution\t%.2f\n"
 			"Mouse Sensitivity\t%.3fx%.3f\nGame Difficulty\t\t"
 			"%d\nFOV\t\t\t%d\nDebug Mode\t\t%d\nLauncher\t\t%d\n",
-			av[1], init->size.x, init->size.y, init->render_resolution,
+			av[1], init->size.x, init->size.y, init->rresolution,
 			init->mouse.x, init->mouse.y, init->difficulty,
 			init->fov, init->debug, init->launcher);
 }

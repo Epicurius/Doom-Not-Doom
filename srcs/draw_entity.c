@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 13:58:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 		thread[y].shooting = doom->player.action;
 		thread[y].dmg = doom->weapon[doom->player.equiped].damage;
 		thread[y].hp = &entity->hp;
+		thread[y].hm = &doom->player.hm;
 		thread[y].center = doom->c;
 		tpool_add(&doom->tpool, blit_game_entity, &thread[y]);
 	}

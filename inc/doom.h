@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 12:33:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 15:27:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 typedef struct s_settings
 {
 	t_point			size;
-	float			render_resolution;
+	float			rresolution;
 	t_v2			mouse;
 	int				difficulty;
 	int				fov;
@@ -137,6 +137,7 @@ typedef struct s_player
 	int				equiped;
 	int				debug;
 	int				store_access;
+	int				hm;
 }					t_player;
 
 typedef struct s_wsprite
@@ -310,6 +311,7 @@ typedef struct s_entity_thread
 	t_rect			pos;
 	int				dmg;
 	int				*hp;
+	int				*hm;
 	int				shooting;
 	t_v3			center;
 }					t_entity_thread;
@@ -682,7 +684,8 @@ void				init_weapons(t_doom *doom);
 /* File: keys.c */
 void				poll_event(t_doom *doom, SDL_Event *event);
 /* File: line.c */
-void				line(SDL_Surface *surf, Uint32 color, t_point *p);
+void				line(SDL_Surface *surf, Uint32 color,
+						t_point v1, t_point v2);
 /* File: malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File: map_events.c */
@@ -812,5 +815,6 @@ void				vline_monochromic(t_render *render,
 						t_vline *vline, int side);
 /* File: wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
+void				add_to_list(t_list **list, void *new_v, size_t size);
 
 #endif

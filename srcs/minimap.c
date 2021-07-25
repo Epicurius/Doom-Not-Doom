@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 15:45:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	map_player(t_doom *doom)
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_left)
 		+ map.pos.y;
 	cohen_sutherland(p, map.size);
-	line(doom->surface, MM_VIEW_COLOR, p);
+	line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
 	p[0] = map.pos;
 	p[1].x = (player.anglecos * FAR_Z - player.anglesin * doom->cam.far_right)
 		+ map.pos.x;
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_right)
 		+ map.pos.y;
 	cohen_sutherland(p, map.size);
-	line(doom->surface, MM_VIEW_COLOR, p);
+	line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
 }
 
 static void	draw_map2(t_doom *doom, t_wall *wall)
@@ -49,13 +49,12 @@ static void	draw_map2(t_doom *doom, t_wall *wall)
 	if (cohen_sutherland(p, doom->map.size))
 	{
 		if (wall->n != -1)
-			line(doom->surface, 0xFFFF0000, p);
+			line(doom->surface, 0xFFFF0000, p[0], p[1]);
 		else
-			line(doom->surface, 0xFFFFFFFF, p);
+			line(doom->surface, 0xFFFFFFFF, p[0], p[1]);
 	}
 }
 
-;
 static void	draw_map(t_doom *doom)
 {
 	int			s;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:39:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 16:05:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,26 @@ static void	game(char *map, t_settings settings)
 	SDL_Event	event;
 
 	ft_bzero(&doom, sizeof(t_doom));
+	ft_putstr("1\n");
 	doom.settings = settings;
+	ft_putstr("2\n");
 	init_sdl(&doom);
+	ft_putstr("3\n");
 	game_loading(&doom);
+	ft_putstr("4\n");
 	read_file(&doom, map);
+	ft_putstr("5\n");
 	if (!validate_map(&doom))
 		return ;
+	ft_putstr("6\n");
 	init_doom(&doom);
+	ft_putstr("7\n");
 	while (!doom.quit && doom.player.health > 0)
 	{
 		game_loop(&doom, &event);
 		reload_map(&doom, map);
 	}
+	ft_putstr("8\n");
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);
