@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:44:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:49:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
-
-//static const char	*g_launcher[2] =
-//{
-//	ROOT_PATH"ui/menu",
-//	NULL	
-//};
 
 typedef struct s_settings
 {
@@ -477,7 +471,7 @@ typedef struct s_doom
 	double			map_scale;
 	t_fonts			font;
 	t_render		*render;
-	t_v3			surface_center;
+	t_v3			c;
 	t_game			game;
 	t_inv			inv;
 	t_nb			nb;
@@ -510,7 +504,7 @@ void				ai_attack(t_doom *doom, t_entity *entity);
 int					ai_track_player(t_doom *doom, t_entity *entity);
 int					ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
 int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
-void				entity_collision(t_doom *doom, t_entity *entity);
+void				ai_collision(t_doom *doom, t_entity *entity);
 /* File: animate_wsprite.c */
 int					animate_wsprite(t_doom *doom, t_wsprite *entity);
 /* File: args.c */
@@ -737,7 +731,7 @@ void				map(t_doom *doom);
 void				movement(t_doom *doom);
 /* File: object_collision.c */
 void				object_collision(t_doom *doom, t_player *player);
-int					sprite_collision(t_collision *e, t_v3 dest);
+int					entity_collision(t_collision *e, t_v3 dest);
 /* File: orientation.c */
 void				degree_fix(double *degrees);
 int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);

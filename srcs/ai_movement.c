@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 16:51:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:49:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	return (1);
 }
 
-void	entity_collision(t_doom *doom, t_entity *entity)
+void	ai_collision(t_doom *doom, t_entity *entity)
 {
 	t_collision	collision;
 

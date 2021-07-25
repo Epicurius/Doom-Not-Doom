@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//cam->hscale = doom->surface_center.x / (cam->near_up / cam->near_z);
-//cam->vscale = doom->surface_center.y / (cam->near_down / cam->near_z);
+//cam->hscale = doom->c.x / (cam->near_up / cam->near_z);
+//cam->vscale = doom->c.y / (cam->near_down / cam->near_z);
 void	init_camera(t_doom *doom)
 {
 	t_camera	*cam;
@@ -31,7 +31,7 @@ void	init_camera(t_doom *doom)
 	cam->near_up = -tan(CONVERT_RADIANS * cam->vfov / 2) * cam->near_z;
 	cam->near_down = tan(CONVERT_RADIANS * cam->vfov / 2) * cam->near_z;
 	cam->range = cam->near_right - cam->near_left;
-	cam->scale = doom->surface_center.y / (cam->near_down / cam->near_z);
+	cam->scale = doom->c.y / (cam->near_down / cam->near_z);
 	update_camera(doom, 10, 10);
 }
 
@@ -41,7 +41,7 @@ void	update_camera(t_doom *doom, int x, int y)
 	doom->player.yaw += x * doom->settings.mouse.x;
 	doom->player.pitch = ft_clamp(doom->player.pitch + y
 			* doom->settings.mouse.y, -1, 1);
-	doom->player.horizon = doom->surface_center.y - doom->player.pitch * doom->cam.scale;
+	doom->player.horizon = doom->c.y - doom->player.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);
 	doom->player.anglecos = cos(doom->player.yaw);
 	doom->player.yaw *= CONVERT_DEGREES;

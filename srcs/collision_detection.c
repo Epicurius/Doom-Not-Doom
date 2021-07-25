@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:34:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:48:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	collision_detection(t_collision *entity)
 	t_v3	dest;
 
 	dest = add_v3(*entity->where, *entity->velocity);
-	if (entity->player && sprite_collision(entity, dest))
+	if (entity->player && entity_collision(entity, dest))
 	{
 		ft_bzero(&entity->velocity, sizeof(t_v3));
 		return (1);

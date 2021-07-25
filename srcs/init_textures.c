@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:47:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:38:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	multy_thread_bxpm(void *arg)
 	return (0);
 }
 
-static void	get(t_doom *doom, int amount, t_bxpm *dest, const t_id_and_path *src)
+static void	get(t_doom *doom, int amount, t_bxpm *dest,
+	const t_id_and_path *src)
 {
 	int				i;
 	t_thread_bxpm	*threads;

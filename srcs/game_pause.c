@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:40:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	p_to_unpause(t_doom *doom, int y)
 
 	surface = TTF_RenderText_Blended(doom->font.amaz50,
 			"'P' to unpause", hex_to_sdl_color(0xFFFFFFFF));
-	dstr = (SDL_Rect){doom->surface_center.x - surface->w / 2, y, surface->w, surface->h};
+	dstr = (SDL_Rect){doom->c.x - surface->w / 2, y, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
 }
@@ -82,9 +82,9 @@ void	game_pause(t_doom *doom)
 	bxpm = ft_pmalloc(sizeof(t_bxpm), "game_pause bxpm.");
 	read_bxpm(bxpm, BXPM_PATH"pause.bxpm");
 	blit_bxpm(doom->surface, bxpm,
-		doom->surface_center.x - bxpm->w / 2, doom->surface_center.y - bxpm->h / 2);
+		doom->c.x - bxpm->w / 2, doom->c.y - bxpm->h / 2);
 	s_to_save_screen_shot(doom);
-	p_to_unpause(doom, doom->surface_center.y + bxpm->h / 2);
+	p_to_unpause(doom, doom->c.y + bxpm->h / 2);
 	update_screen(doom, doom->surface);
 	pause_loop(doom, bmp);
 	free_bmp(bmp);

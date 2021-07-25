@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:17:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:36:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	precompute_weapon(t_doom *doom)
 	if (doom->player.equiped < 0)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
-	if ((weapon->frame && (weapon->frame < weapon->fire_frames)) || (doom->key.lmouse && weapon->mag_ammo > 0))
+	if ((weapon->frame && (weapon->frame < weapon->fire_frames))
+		|| (doom->key.lmouse && weapon->mag_ammo > 0))
 		weapon_fire_animate(doom, weapon);
 	else if (weapon->frame >= weapon->fire_frames)
 		weapon_reload_animate(doom, weapon);

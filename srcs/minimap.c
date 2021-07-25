@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	draw_map2(t_doom *doom, t_wall *wall)
 	t_point		p[2];
 
 	where = doom->player.where;
-	p[0].x = doom->surface_center.x + (wall->v1.x - where.x) * MM_SECTORS_SCALE;
-	p[0].y = doom->surface_center.y + (wall->v1.y - where.y) * MM_SECTORS_SCALE;
-	p[1].x = doom->surface_center.x + (wall->v2.x - where.x) * MM_SECTORS_SCALE;
-	p[1].y = doom->surface_center.y + (wall->v2.y - where.y) * MM_SECTORS_SCALE;
+	p[0].x = doom->c.x + (wall->v1.x - where.x) * MM_SECTORS_SCALE;
+	p[0].y = doom->c.y + (wall->v1.y - where.y) * MM_SECTORS_SCALE;
+	p[1].x = doom->c.x + (wall->v2.x - where.x) * MM_SECTORS_SCALE;
+	p[1].y = doom->c.y + (wall->v2.y - where.y) * MM_SECTORS_SCALE;
 	if (cohen_sutherland(p, doom->map.size))
 	{
 		if (wall->n != -1)
