@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/25 12:06:52 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/25 12:28:30 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -176,7 +176,7 @@ $(ODIR):
 	@mkdir -p $@
 
 $(NAME): $(OBJ)
-	@gcc -O3 $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c

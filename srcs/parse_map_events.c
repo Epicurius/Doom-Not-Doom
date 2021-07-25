@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 14:45:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 13:17:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	get_event_type(t_event *event, char *str)
 	}
 	else if (ft_strequ(str, "Store"))
 		event->type = STORE;
+	else if (ft_strequ(str, "Hazard"))
+		event->type = HAZARD;
 	else
 		error_msg("Map event %s is not valid", str);
 }
@@ -73,12 +75,14 @@ void	parse_events(t_doom *doom, char **arr)
 	get_event_type(&event, arr[1]);
 	get_event_action(&event, arr[2]);
 	event.wsprite = NULL;
+	event.event_sector = NULL;
+	event.trigger_sector = NULL;
 	if (event.action == CLICKING || event.action == SHOOTING)
 	{
 		find_event_trigger(doom, &event, ft_atoi(arr[3]));
 		event.wsprite->action = event.action;
 	}
-	if (event.action == SECTOR)
+	else if (event.action == SECTOR)
 		event.trigger_sector = &doom->sectors[ft_atoi(arr[3])];
 	if (event.type == FLOOR || event.type == CEILING)
 	{
@@ -87,6 +91,8 @@ void	parse_events(t_doom *doom, char **arr)
 		event.max = ft_atof(arr[6]);
 		event.speed = ft_atof(arr[7]) * 10.0f;
 	}
+	else if (event.type == HAZARD)
+		event.speed = ft_atoi(arr[7]);
 	event.time = 0;
 	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);

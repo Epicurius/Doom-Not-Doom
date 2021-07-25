@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 17:35:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 13:16:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->wsprite->trigger = 0;
 	if (event->wsprite != NULL && event->wsprite->state == 2)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
+	if (event->trigger_sector != NULL)
+		event->trigger_sector->trigger = 0;
 }
 
 void	scale_wall_height(t_doom *doom, t_wall *wall)
@@ -88,20 +90,28 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	int	i;
 
-	if (event->trigger_sector->id != doom->player.sector)
+	i = -1;
+	if ((event->trigger_sector->id != doom->player.sector)
+		&& !event->trigger_sector->trigger)
 		return ;
+	event->trigger_sector->trigger = 1;
 	if (event->type == FLOOR || event->type == CEILING)
 	{
 		if (event->time + 10 > doom->time.curr)
 			return ;
 		move_plane(doom, event);
-		i = -1;
 		while (++i < event->event_sector->npoints)
 			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
 	else if (event->type == STORE && doom->player.store_access)
 	{
 		precompute_buy_menu(doom);
+		event->trigger_sector->trigger = 0;
+	}
+	else if (event->type == HAZARD)
+	{
+		if (get_floor_at_pos(event->trigger_sector, doom->player.where) >= doom->player.where.z)
+			doom->player.health -= event->speed;
 	}
 }
 

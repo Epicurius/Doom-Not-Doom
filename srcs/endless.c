@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:11:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 12:55:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	endless_round(t_doom *doom)
 	if (doom->game.spawns == 0)
 	{
 		doom->game.round++;
-		doom->game.spawn_rate = 200 - doom->game.round * 2;
-		doom->game.cool_down = 100;
+		doom->game.spawn_rate = 5000 - doom->game.round * 2;
+		doom->game.cool_down = 10;
 		doom->player.health = 1100 - doom->settings.difficulty * 100;
 		doom->inv.dosh += 100 + doom->game.round * 10;
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_DOSH], 0);
@@ -39,7 +39,7 @@ void	game_mode_endless(t_doom *doom)
 	int	i;
 
 	i = -1;
-	if (doom->game.cool_down)
+	if (doom->game.cool_down > 0)
 	{
 		doom->game.cool_down -= 1 * doom->time.delta;
 		ft_printf("%f\n", doom->game.cool_down);
