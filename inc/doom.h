@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:20:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:27:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,7 @@ typedef struct s_entity_thread
 	int				dmg;
 	int				*hp;
 	int				shooting;
-	int				center;
+	t_v3			center;
 }					t_entity_thread;
 
 typedef struct s_render
@@ -339,7 +339,7 @@ typedef struct s_render
 	int				light;
 	int				s;
 	t_bullet_hole	*bh;
-	int				center;
+	t_v3			center;
 	t_wsprites		wsprite;
 }					t_render;
 
@@ -474,12 +474,10 @@ typedef struct s_doom
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
 	double			*zbuffer;
+	double			map_scale;
 	t_fonts			font;
 	t_render		*render;
-	double			map_scale;
-	int				w2;
-	int				h2;
-	int				surface_center;
+	t_v3			surface_center;
 	t_game			game;
 	t_inv			inv;
 	t_nb			nb;

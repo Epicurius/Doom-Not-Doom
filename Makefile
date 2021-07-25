@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/24 17:37:06 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/25 09:31:46 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,7 +168,7 @@ PATH_H		=	./inc/path.h
 RESOURCES	= ./resources
 SDL2_DIR = libb/SDL2-2.0.14
 
-all: framework libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
+all: framework libs $(RESOURCES) $(PATH_H) $(NAME)
 
 -include $(DEP)
 #-03
@@ -176,13 +176,13 @@ $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
 
-$(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+$(NAME): $(SRCS)
+	@gcc $(SRCS) $(CFLAGS) $(LIBS) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
 
-$(ODIR)/%.o: $(CDIR)/%.c
-	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
-	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
+#$(ODIR)/%.o: $(CDIR)/%.c
+#	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
+#	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
 
 $(LIB_DIR):
 	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)

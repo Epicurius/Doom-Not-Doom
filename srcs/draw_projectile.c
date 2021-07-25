@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	project_projectile(t_doom *doom, t_projectile *orb,
 	screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch + (4.5);
-	screen.x = doom->w2 + (screen.x * doom->cam.scale / -screen.z);
-	screen.y = doom->h2 + (screen.y * doom->cam.scale / -screen.z);
+	screen.x = doom->surface_center.x + (screen.x * doom->cam.scale / -screen.z);
+	screen.y = doom->surface_center.y + (screen.y * doom->cam.scale / -screen.z);
 	size.x = thread.pos.w * 35 / screen.z;
 	size.y = thread.pos.h * 35 / screen.z;
 	render->z = screen.z;

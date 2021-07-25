@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/21 10:13:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:26:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 	t_wall		*wall;
 	t_wsprite	*bh;
 
-	if (render->player.action == SHOOTING && render->x == render->surface->w / 2
-		&& vline->y1 == render->surface->h / 2)
+	if (render->player.action == SHOOTING
+		&& render->x == render->center.x && vline->y1 == render->center.y)
 	{
 		wall = &render->wall;
 		if (render->bh->curr >= MAX_BH)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:07:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:23:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	init_doom(t_doom *doom)
 {
-	doom->w2 = doom->settings.size.x * doom->settings.render_resolution / 2;
-	doom->h2 = doom->settings.size.y * doom->settings.render_resolution / 2;
-	doom->surface_center = doom->h2 * doom->surface->w + doom->w2;
+	doom->surface_center.x = doom->settings.size.x * doom->settings.render_resolution / 2;
+	doom->surface_center.y = doom->settings.size.y * doom->settings.render_resolution / 2;
+	doom->surface_center.z= doom->surface_center.y * doom->surface->w + doom->surface_center.x;
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = doom->surface->w / 10;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))

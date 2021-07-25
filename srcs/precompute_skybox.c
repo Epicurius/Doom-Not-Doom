@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:57:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void	project_skybox(t_doom *doom, t_wall *wall)
 {
 	wall->scale_v1 = doom->cam.scale / -wall->cv1.z;
 	wall->scale_v2 = doom->cam.scale / -wall->cv2.z;
-	wall->cx1 = doom->w2 + (wall->cv1.x * wall->scale_v1);
-	wall->cx2 = doom->w2 + (wall->cv2.x * wall->scale_v2);
+	wall->cx1 = doom->surface_center.x + (wall->cv1.x * wall->scale_v1);
+	wall->cx2 = doom->surface_center.x + (wall->cv2.x * wall->scale_v2);
 	wall->cx1 = ceil(wall->cx1);
-	wall->x1 = doom->w2 + wall->sv1.x * doom->cam.scale / -wall->sv1.z;
-	wall->x2 = doom->w2 + wall->sv2.x * doom->cam.scale / -wall->sv2.z;
+	wall->x1 = doom->surface_center.x + wall->sv1.x * doom->cam.scale / -wall->sv1.z;
+	wall->x2 = doom->surface_center.x + wall->sv2.x * doom->cam.scale / -wall->sv2.z;
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
-	wall->slope_v1.ceiling = doom->h2 + (5 + wall->angle_z1) * wall->scale_v1;
-	wall->slope_v2.ceiling = doom->h2 + (5 + wall->angle_z2) * wall->scale_v2;
-	wall->slope_v1.floor = doom->h2 + (-5 + wall->angle_z1) * wall->scale_v1;
-	wall->slope_v2.floor = doom->h2 + (-5 + wall->angle_z2) * wall->scale_v2;
+	wall->slope_v1.ceiling = doom->surface_center.y + (5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope_v2.ceiling = doom->surface_center.y + (5 + wall->angle_z2) * wall->scale_v2;
+	wall->slope_v1.floor = doom->surface_center.y + (-5 + wall->angle_z1) * wall->scale_v1;
+	wall->slope_v2.floor = doom->surface_center.y + (-5 + wall->angle_z2) * wall->scale_v2;
 	wall->xrange = wall->x2 - wall->x1;
 	wall->slope_range.floor = wall->slope_v2.floor - wall->slope_v1.floor;
 	wall->slope_range.ceiling = wall->slope_v2.ceiling - wall->slope_v1.ceiling;
