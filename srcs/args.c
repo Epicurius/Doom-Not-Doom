@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:42:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 11:31:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void	args(int ac, char **av, t_settings *init)
 	while (++i < ac)
 		read_args1(init, av, i);
 	if (init->debug)
-		printf("%s\n-size %dx%d\n-res %f\n-mouse %.3fx%.3f\n-diff"
-			"%d\n-fov %d\n-debug %d\n-launcher %d\n",
+		printf("%s\nScreen Size\t\t%dx%d\nRender Resolution\t%.2f\n"
+			"Mouse Sensitivity\t%.3fx%.3f\nGame Difficulty\t\t"
+			"%d\nFOV\t\t\t%d\nDebug Mode\t\t%d\nLauncher\t\t%d\n",
 			av[1],
 			init->size.x, init->size.y,
 			init->render_resolution,

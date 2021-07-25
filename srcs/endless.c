@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:30:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 11:11:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	game_mode_endless(t_doom *doom)
 	if (doom->game.cool_down)
 	{
 		doom->game.cool_down -= 1 * doom->time.delta;
+		ft_printf("%f\n", doom->game.cool_down);
 		if (doom->game.cool_down <= 0)
 		{
 			doom->player.store_access = 0;

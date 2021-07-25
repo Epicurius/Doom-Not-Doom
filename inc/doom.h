@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:58:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 11:06:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,7 +440,6 @@ typedef struct s_inv
 typedef struct s_fonts
 {
 	TTF_Font		*amaz50;
-	TTF_Font		*digi50;
 	TTF_Font		*digi100;
 }					t_fonts;
 
@@ -587,7 +586,6 @@ void				*ft_pmalloc(size_t size, char *str);
 int					in_sector(t_sector *sector, t_v3 pos);
 int					find_sector(t_sector *sectors, int nb, t_v3 pos);
 /* File: fps.c */
-void				blit_fps(t_doom *doom);
 void				fps_func(t_doom *doom);
 void				init_fps(t_doom *doom);
 /* File: free.c */

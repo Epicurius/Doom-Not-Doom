@@ -6,25 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:40:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 11:05:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void	blit_fps(t_doom *doom)
-{
-	if (doom->time.surf == NULL)
-		return ;
-	SDL_BlitSurface(doom->time.surf, NULL, doom->surface, NULL);
-}
-
-//static void	update_fps_surface(char *str, TTF_Font *font, t_time *time)
-//{
-//	if (time->surf != NULL)
-//		SDL_FreeSurface(time->surf);
-//	time->surf = TTF_RenderText_Blended(font, str, time->color);
-//}
 
 void	fps_func(t_doom *doom)
 {
