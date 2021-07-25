@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/25 10:47:48 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/25 11:01:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ RESET		:=	"\e[0m"
 RAW_SRC		=	ai_attack.c\
 				ai_movement.c\
 				animate_wsprite.c\
+				args.c\
 				blit_bxpm.c\
 				blit_entity.c\
+				buy_menu.c\
 				camera.c\
 				clock.c\
 				collision_detection.c\
@@ -49,6 +51,7 @@ RAW_SRC		=	ai_attack.c\
 				draw_wall.c\
 				draw_weapon.c\
 				draw_wsprites.c\
+				endless.c\
 				error.c\
 				find_sector.c\
 				fps.c\
@@ -61,32 +64,33 @@ RAW_SRC		=	ai_attack.c\
 				game_pause.c\
 				game_quit.c\
 				get_entity_state.c\
+				help.c\
 				hud_utils.c\
 				icon.c\
 				init.c\
 				init_alfred.c\
 				init_barrel.c\
 				init_entity.c\
+				init_game_mode.c\
+				init_glock.c\
 				init_inventory.c\
+				init_kar.c\
 				init_lamp.c\
 				init_meat_hook.c\
+				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
+				init_pump.c\
 				init_render.c\
 				init_rift.c\
 				init_scale.c\
 				init_sdl.c\
+				init_shotgun.c\
 				init_slope.c\
 				init_spooky.c\
 				init_textures.c\
 				init_torch.c\
-				init_game_mode.c\
 				init_weapons.c\
-				init_shotgun.c\
-				init_glock.c\
-				init_kar.c\
-				init_minigun.c\
-				init_pump.c\
 				keys.c\
 				line.c\
 				malloc_texture_pos.c\
@@ -108,6 +112,7 @@ RAW_SRC		=	ai_attack.c\
 				parse_map_sector.c\
 				parse_map_sprite.c\
 				player_collision.c\
+				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
 				precompute_skybox.c\
@@ -123,17 +128,12 @@ RAW_SRC		=	ai_attack.c\
 				skybox_floor_vline.c\
 				skybox_wall_vline.c\
 				sound.c\
+				spawn_entity.c\
 				update_screen.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
-				wall_to_screen_xz.c\
-				endless.c\
-				args.c\
-				help.c\
-				spawn_entity.c\
-				precompute_buy_menu.c\
-				buy_menu.c
+				wall_to_screen_xz.c
 		
 NAME		=	doom
 CDIR		=	srcs
