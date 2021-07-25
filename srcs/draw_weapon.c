@@ -6,14 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:22:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:38:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int	weapon_thread(t_weapon_thread *thread)
+int	weapon_thread(void *args)
 {
+	t_weapon_thread	*thread;
+	
+	thread = args;
 	blit_bxpm_scaled(thread->dst, thread->dstr, thread->src, thread->srcr);
 	return (1);
 }

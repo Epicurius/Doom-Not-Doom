@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/20 13:54:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:14:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@ static void	init_ttf(t_doom *doom)
 		error_msg("Could not open font: %s\n", TTF_GetError());
 }
 
-static void	init_mix(t_doom *doom)
-{
-	if (Mix_Init(MIX_INIT_FLAC) & MIX_INIT_FLAC != MIX_INIT_FLAC)
-		error_msg("Could not init MIX: %s\n", SDL_GetError());
-}
+//static void	init_mix(void)
+//{
+//	int flags;
+//	int initted;
+//	
+//	flags = MIX_INIT_FLAC;
+//	initted = Mix_Init(flags);
+//	if ((initted & flags) != flags)
+//		error_msg("Could not init MIX: %s\n", SDL_GetError());
+//}
 
 static void	init_sdl2(t_doom *doom)
 {
@@ -66,5 +71,5 @@ void	init_sdl(t_doom *doom)
 {
 	init_sdl2(doom);
 	init_ttf(doom);
-	init_mix(doom);
+	//init_mix();
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:46:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:50:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	get_base_speed(t_doom *doom, float *speed)
 	*speed *= doom->time.delta;
 }
 
-static inline void	foot_steps(t_doom *doom, t_player player, t_v3 *move)
+static inline void	foot_steps(t_doom *doom, t_player player)
 {
 	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
 		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector],
@@ -63,7 +63,7 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 		move->x += player.anglesin * -speed;
 		move->y += player.anglecos * speed;
 	}
-	foot_steps(doom, player, move);
+	foot_steps(doom, player);
 }
 
 static void	get_velocity(t_doom *doom, t_v3 move)

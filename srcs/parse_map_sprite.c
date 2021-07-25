@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 08:42:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:49:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	sprite_type(char *str)
 	if (ft_strequ(str, "Meat_Hook"))
 		return (6);
 	error_msg("%s is not a valid entity!\n", str);
+	return (-1);
 }
 
 void	parse_entity(t_doom *doom, char **arr)

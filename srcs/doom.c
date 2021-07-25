@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:17:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:36:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ static void	game(char *map, t_settings settings)
 	free_doom(&doom);
 }
 
+void	launcher(void)
+{
+	char	*arr[2];
+
+	arr[0] = ft_strdup(ROOT_PATH"ui/menu");
+	arr[1] = NULL;
+	execv(arr[0], arr);	
+}
+
 int	main(int ac, char **av)
 {
 	t_settings	settings;
@@ -77,7 +86,7 @@ int	main(int ac, char **av)
 	args(ac, av, &settings);
 	game(av[1], settings);
 	if (settings.launcher)
-		execv(g_launcher[0], g_launcher);
+		launcher();
 	if (settings.debug)
 		system("leaks doom");
 	return (1);

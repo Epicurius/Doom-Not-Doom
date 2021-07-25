@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:44:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	check_map(t_doom *doom)
 	{
 		sector_center(&doom->sectors[i]);
 		fix_wall_orientation(&doom->sectors[i]);
-		if (!fix_wall_order(doom, &doom->sectors[i]))
+		if (!fix_wall_order(&doom->sectors[i]))
 			return (0);
-		if (!is_convex(doom, &doom->sectors[i]))
+		if (!is_convex(&doom->sectors[i]))
 			return (0);
 	}
 	return (1);

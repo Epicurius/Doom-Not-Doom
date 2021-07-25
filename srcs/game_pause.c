@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:40:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	s_to_save_screen_shot(t_doom *doom)
 	TTF_CloseFont(amaz);
 }
 
-static void	pause_loop(t_doom *doom, t_bxpm *bxpm, t_bmp *bmp)
+static void	pause_loop(t_doom *doom, t_bmp *bmp)
 {
 	int			i;
 	SDL_Event	event;
@@ -86,7 +86,7 @@ void	game_pause(t_doom *doom)
 	s_to_save_screen_shot(doom);
 	p_to_unpause(doom, doom->surface_center.y + bxpm->h / 2);
 	update_screen(doom, doom->surface);
-	pause_loop(doom, bxpm, bmp);
+	pause_loop(doom, bmp);
 	free_bmp(bmp);
 	free_bxpm(bxpm);
 	SDL_SetRelativeMouseMode(SDL_TRUE);

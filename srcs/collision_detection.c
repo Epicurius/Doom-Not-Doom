@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 17:33:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:34:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 static int	vertical_collision(t_collision *entity, t_v3 dest)
 {
 	t_fc		y;
-	t_wall		*wall;
 	t_sector	*sector;
 
 	sector = &entity->sectors[*entity->sector];

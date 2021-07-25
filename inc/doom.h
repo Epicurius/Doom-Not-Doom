@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:27:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:44:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # include <math.h>
 # include <fcntl.h>
 
-static const char	*g_launcher[2] =
-{
-	ROOT_PATH"ui/menu",
-	NULL	
-};
+//static const char	*g_launcher[2] =
+//{
+//	ROOT_PATH"ui/menu",
+//	NULL	
+//};
 
 typedef struct s_settings
 {
@@ -829,8 +829,8 @@ int					validate_map(t_doom *doom);
 /* File: validate_map2.c */
 void				sector_center(t_sector *sector);
 void				fix_wall_orientation(t_sector *sector);
-int					fix_wall_order(t_doom *doom, t_sector *sector);
-int					is_convex(t_doom *doom, t_sector *sector);
+int					fix_wall_order(t_sector *sector);
+int					is_convex(t_sector *sector);
 /* File: vertical_line.c */
 Uint32				z_clr(double z, double max_z);
 void				shade_zbuffer(t_render *render, t_vline *vline, int side);

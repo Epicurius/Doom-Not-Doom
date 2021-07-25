@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:53:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ int	ft_sign(double x)
 		return (1);
 	if (x < 0)
 		return (-1);
-	return (0);
-}
-
-//	Determine whether the two number ranges overlap.
-int	nb_overlap(double a0, double a1, double b0, double b1)
-{
-	if (ft_min(a0, a1) <= ft_max(b0, b1) && ft_min(b0, b1) <= ft_max(a0, a1))
-		return (1);
 	return (0);
 }
 

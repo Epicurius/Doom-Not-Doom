@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 16:02:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:37:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,29 @@ static void	draw_portal_solid(t_render *render, t_vline *vline)
 	}
 }
 
-static void	draw_portal_alpha(t_render *render, t_vline *vline)
-{
-	t_v3	text;
-	double	alpha;
-	int		coord;
-	t_bxpm	*ptx;
-
-	ptx = &render->mtx[3];
-	text.z = vline->z;
-	text.x = (vline->alpha * render->wall.tscale.x * vline->z);
-	if (text.x >= ptx->w || text.x < 0)
-		text.x = abs((int)text.x % ptx->w);
-	while (vline->y1 < vline->y2)
-	{
-		coord = vline->y1 * render->surface->w + render->x;
-		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
-		text.y = alpha * render->wall.tscale.y;
-		if (text.y >= ptx->h || text.y < 0)
-			text.y = abs((int)text.y % ptx->h);
-		blit_pixel_alpha(render, coord, text, ptx);
-		vline->y1++;
-	}
-}
+//static void	draw_portal_alpha(t_render *render, t_vline *vline)
+//{
+//	t_v3	text;
+//	double	alpha;
+//	int		coord;
+//	t_bxpm	*ptx;
+//
+//	ptx = &render->mtx[3];
+//	text.z = vline->z;
+//	text.x = (vline->alpha * render->wall.tscale.x * vline->z);
+//	if (text.x >= ptx->w || text.x < 0)
+//		text.x = abs((int)text.x % ptx->w);
+//	while (vline->y1 < vline->y2)
+//	{
+//		coord = vline->y1 * render->surface->w + render->x;
+//		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
+//		text.y = alpha * render->wall.tscale.y;
+//		if (text.y >= ptx->h || text.y < 0)
+//			text.y = abs((int)text.y % ptx->h);
+//		blit_pixel_alpha(render, coord, text, ptx);
+//		vline->y1++;
+//	}
+//}
 
 void	draw_portal_texture(t_render *render, t_vline *vline)
 {

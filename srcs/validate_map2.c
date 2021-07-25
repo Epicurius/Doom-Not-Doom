@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map_utils.c                               :+:      :+:    :+:   */
+/*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 17:30:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:45:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 //		sector->center.z = (sector->ceiling.y - sector->floor.y) / 2.0;
 void	sector_center(t_sector *sector)
 {
-	int		i;
-	t_v3	c;
+	int	i;
 
 	i = -1;
 	while (++i < sector->npoints)
@@ -47,7 +46,7 @@ void	fix_wall_orientation(t_sector *sector)
 	}
 }
 
-static int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_v3 v2)
+static int	fix_wall_order2(t_sector *sector, int i, t_v3 v2)
 {
 	int		j;
 	t_wall	*temp;
@@ -68,10 +67,9 @@ static int	fix_wall_order2(t_doom *doom, t_sector *sector, int i, t_v3 v2)
 	return (0);
 }
 
-int	fix_wall_order(t_doom *doom, t_sector *sector)
+int	fix_wall_order(t_sector *sector)
 {
 	int		i;
-	int		j;
 	t_v3	v2;
 
 	i = 0;
@@ -83,14 +81,14 @@ int	fix_wall_order(t_doom *doom, t_sector *sector)
 			v2 = sector->wall[i % sector->npoints]->v2;
 			continue ;
 		}
-		if (!fix_wall_order2(doom, sector, i, v2))
+		if (!fix_wall_order2(sector, i, v2))
 			return (0);
 		i -= 1;
 	}
 	return (1);
 }
 
-int	is_convex(t_doom *doom, t_sector *sector)
+int	is_convex(t_sector *sector)
 {
 	int		i;
 	int		n;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:22:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:41:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	quit_loop(t_doom *doom)
 			doom->quit = 0;
 			break ;
 		}
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y
-			|| event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q)
+		if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y)
+			|| (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q))
 			break ;
 	}
 }

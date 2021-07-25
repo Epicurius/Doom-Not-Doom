@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:37:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 10:25:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,8 @@ static const char			*g_weapon_data[WEAPON_AMOUNT] =
 	"SHOTGUN",
 	"GLOCK",
 	"KAR98",
-	"MINIGUN",
-	"PUMP"
+	"PUMP",
+	"MINIGUN"
 };
 
 # define ENTITY_AMOUNT	7

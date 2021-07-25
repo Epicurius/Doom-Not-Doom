@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:25:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 09:39:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	blit_wsprite32(t_render *render, int coord, t_v3 text,
 
 	pix = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
 	clr = bxpm->clr[pix];
-	if (0 == clr >> 24 & 0xFF)
+	if (0 == (clr >> 24 & 0xFF))
 		return ;
 	((Uint32 *)render->surface->pixels)[coord]
 		= blend_alpha(clr, ((Uint32 *)render->surface->pixels)[coord], 240);
