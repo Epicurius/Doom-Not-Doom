@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 09:09:51 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 09:19:12 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,6 @@ RAW_SRC		=	ai_attack.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
-				better_keys.c\
 				wall_to_screen_xz.c
 		
 NAME		=	doom
@@ -173,7 +172,7 @@ PATH_H		=	./inc/path.h
 
 RESOURCES	=	./resources
 
-all: framework libs $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
+all: framework $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
 #-04
@@ -189,9 +188,9 @@ $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
 	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
 
-$(LIB_DIR):
-	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
-	@git clone -q https://github.com/Epicurius/lib.git
+#$(LIB_DIR):
+#	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
+#	@git clone -q https://github.com/Epicurius/lib.git
 
 libs: $(LIB_DIR)
 	@make -C ./lib/libft

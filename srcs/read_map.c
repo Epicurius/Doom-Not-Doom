@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/19 18:51:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 09:11:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 	{
 		if (line[0] == '-')
 			break ;
-		arr = ft_strsplit(line, '\t', NULL);
+		arr = stringsplit(line, '\t', NULL);
 		f(doom, arr);
 		free(arr);
 		ft_strdel(&line);

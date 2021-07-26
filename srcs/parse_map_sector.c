@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 12:41:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 09:11:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	parse_fc(t_doom *doom, char **arr)
 	ceiling->tx = ft_atoi(arr[4]);
 	floor->scale = atof(arr[5]) * doom->map_scale;
 	ceiling->scale = atof(arr[6]) * doom->map_scale;
-	slope = ft_strsplit(arr[7], ' ', NULL);
+	slope = stringsplit(arr[7], ' ', NULL);
 	doom->sectors[sect].wall_floor_slope = ft_atoi(slope[0]);
 	doom->sectors[sect].floor_slope = ft_atoi(slope[1]) * CONVERT_RADIANS;
 	doom->sectors[sect].wall_ceiling_slope = ft_atoi(slope[2]);
@@ -82,9 +82,9 @@ void	parse_sector(t_doom *doom, char **arr)
 
 	sect = &doom->sectors[ft_atoi(arr[0])];
 	sect->id = ft_atoi(arr[0]);
-	walls = ft_strsplit(arr[1], ' ', &sect->npoints);
+	walls = stringsplit(arr[1], ' ', &sect->npoints);
 	sect->wall = ft_pmalloc(sizeof(t_wall *) * (sect->npoints), "parse_sector");
-	neighbour = ft_strsplit(arr[2], ' ', &nb);
+	neighbour = stringsplit(arr[2], ' ', &nb);
 	if (nb != sect->npoints)
 		error_msg("Sect %d walls != Neighbours.\n", sect->id);
 	sect->gravity = ft_atoi(arr[3]) / 1000.0;

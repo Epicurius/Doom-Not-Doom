@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 13:48:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 09:11:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	read_args2(t_settings *init, char **av, int i)
 
 	if (ft_strnequ(av[i], "-size=", 6))
 	{
-		arr = ft_strsplit(av[i] + 6, 'x', NULL);
+		arr = stringsplit(av[i] + 6, 'x', NULL);
 		init->size = (t_point){atoi(arr[0]), atoi(arr[1])};
 		free(arr);
 	}
 	else if (ft_strnequ(av[i], "-mouse=", 7))
 	{
-		arr = ft_strsplit(av[i] + 7, 'x', NULL);
+		arr = stringsplit(av[i] + 7, 'x', NULL);
 		init->mouse = (t_v2){atof(arr[0]), atof(arr[1])};
 		free(arr);
 	}
