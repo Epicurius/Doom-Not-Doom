@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 11:14:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:02:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	shade_zbuffer(t_render *render, t_vline *vline, int side)
 			else if (side == TOP)
 				z = (vline->max.ceiling - vline->y1) / vline->height.ceiling;
 			z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
-			((Uint32 *)render->surface->pixels)[coord] = z_clr(z, 200);
+			((Uint32 *)render->surface->pixels)[coord] = z_clr(z, ZB);
 			((double *)render->surface->userdata)[coord] = z;
 		}
 		else
 		{
-			((Uint32 *)render->surface->pixels)[coord] = z_clr(vline->z, 200);
+			((Uint32 *)render->surface->pixels)[coord] = z_clr(vline->z, ZB);
 			((double *)render->surface->userdata)[coord] = vline->z;
 		}
 		coord += render->surface->w;
