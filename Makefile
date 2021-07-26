@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 10:46:37 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 13:52:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,13 +143,13 @@ SRCS		=	$(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:=	$(OBJ:.o=.d)
 
-SDL_DIR		:= ./SDL
+SDL_DIR		:= ../libs/SDL_Frameworks
 SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
 SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
 SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
 SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
 
-LIB_DIR		:=	../libDoom
+LIB_DIR		:=	../libs
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
@@ -166,33 +166,13 @@ PATH_H		=	./inc/path.h
 
 RESOURCES	=	./resources
 
-all: framework $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
+all: $(RESOURCES) $(PATH_H) $(NAME)
 
 -include $(DEP)
-#-04
-$(ODIR):
-	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
-	@mkdir -p $@
 
-$(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+$(NAME): $(SRCS)
+	@gcc $(CFLAGS) $(LIBS) $(SRCS) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
-
-$(ODIR)/%.o: $(CDIR)/%.c
-	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
-	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
-
-#$(LIB_DIR):
-#	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
-#	@git clone -q https://github.com/Epicurius/lib.git
-
-# libs: $(LIB_DIR)
-#	@make -C ./lib/libft
-#	@make -C ./lib/libpf
-#	@make -C ./lib/libtp
-#	@make -C ./libbxpm
-#	@make -C ./bmp_to_bxpm
-#	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
@@ -213,32 +193,6 @@ $(PATH_H):
 	@./find_path
 	@mv path.h ./inc/
 	@rm -f find_path
-
-framework:
-ifeq ($(SHELL_NAME), Darwin)
-	@mkdir -p ~/Library/Frameworks
-ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
-else
-	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
-endif
-endif
-
-framework_del:
-	@rm -rf ~/Library/Frameworks/SDL2*.framework
-	@/bin/rm -f $(NAME)
-	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
-
-framework_re: framework_del
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
 
 re: fclean all
 

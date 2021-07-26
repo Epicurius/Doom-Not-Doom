@@ -6,11 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/22 19:23:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 13:58:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	scale_wall_height(t_doom *doom, t_wall *wall)
+{
+	wall->height = doom->sectors[wall->sect].ceiling.y
+		- doom->sectors[wall->sect].floor.y;
+	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
+}
 
 static void	init_wsprite_scale(t_doom *doom, t_wall *wall)
 {

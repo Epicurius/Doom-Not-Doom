@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmpv2.c                                            :+:      :+:    :+:   */
+/*   converter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 11:08:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 13:44:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libDoom/libft/libft.h"
-#include "../../libDoom/libpf/libpf.h"
-#include "../../libDoom/libbxpm/bxpm.h"
+#include "../../libs/libft/libft.h"
+#include "../../libs/libpf/libpf.h"
+#include "../../libs/libbxpm/bxpm.h"
 
 void	create_path_and_name(char *file, char **path, char **name)
 {

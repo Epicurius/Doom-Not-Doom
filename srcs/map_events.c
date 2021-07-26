@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 13:16:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 13:58:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
 	if (event->trigger_sector != NULL)
 		event->trigger_sector->trigger = 0;
-}
-
-void	scale_wall_height(t_doom *doom, t_wall *wall)
-{
-	wall->height = doom->sectors[wall->sect].ceiling.y
-		- doom->sectors[wall->sect].floor.y;
-	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
 }
 
 void	loop_events(t_doom *doom, t_event *event)
@@ -108,11 +101,9 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 		precompute_buy_menu(doom);
 		event->trigger_sector->trigger = 0;
 	}
-	else if (event->type == HAZARD)
-	{
-		if (get_floor_at_pos(event->trigger_sector, doom->player.where) >= doom->player.where.z)
-			doom->player.health -= event->speed;
-	}
+	else if (event->type == HAZARD && get_floor_at_pos(event->trigger_sector,
+			doom->player.where) >= doom->player.where.z)
+		doom->player.health -= event->speed;
 }
 
 void	map_events(t_doom *doom)

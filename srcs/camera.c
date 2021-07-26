@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 13:41:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 13:31:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	update_camera(t_doom *doom, int x, int y)
 {
 	doom->player.yaw *= CONVERT_RADIANS;
 	doom->player.yaw += x * doom->settings.mouse.x;
-	doom->player.pitch = ft_clamp(doom->player.pitch + y
+	doom->player.pitch = ft_fclamp(doom->player.pitch + y
 			* doom->settings.mouse.y, -1.5, 1.5);
 	doom->player.horizon = doom->c.y - doom->player.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);

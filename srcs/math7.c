@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:53:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 14:03:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ double	point_side_v2(t_v3 v1, t_v3 v2, t_v3 p)
 double	point_distance_v2(double x1, double y1, double x2, double y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+void	add3(t_v3 *a, double x, double y, double z)
+{
+	a->x += x;
+	a->y += y;
+	a->z += z;
 }

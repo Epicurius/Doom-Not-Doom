@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 11:10:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 13:44:31 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,9 +143,9 @@ SRC =	converter.c
 
 OBJ = $(SRCS:.c=.o)
 
-INCLUDES = 	-I ../../libDoom/libft ../../libDoom/libft/libft.a\
-			-I ../../libDoom/libpf ../../libDoom/libpf/libpf.a\
-			-I ../../libDoom/libbxpm ../../libDoom/libbxpm/libbxpm.a
+INCLUDES = 	-I ../../libs/libft ../../libs/libft/libft.a\
+			-I ../../libs/libpf ../../libs/libpf/libpf.a\
+			-I ../../libs/libbxpm ../../libs/libbxpm/libbxpm.a
 
 FLAGS = -Wall -Wextra -Werror
 

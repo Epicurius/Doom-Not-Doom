@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:48:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 14:04:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ int	horizontal_collision(t_collision *coll, t_v3 dest, int curr, int i)
 		else if (collision && !wall->solid && !portal(coll, sect, wall, point))
 			return (2);
 	}
-	coll->where->x += coll->velocity->x;
-	coll->where->y += coll->velocity->y;
+	add3(coll->where, coll->velocity->x, coll->velocity->y, 0);
 	*coll->sector = curr;
 	return (0);
 }
