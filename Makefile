@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/25 15:52:16 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 09:09:51 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,7 @@ RAW_SRC		=	ai_attack.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
+				better_keys.c\
 				wall_to_screen_xz.c
 		
 NAME		=	doom
@@ -149,14 +150,19 @@ SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F
 SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
 SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
 
-LIB_DIR		:=	./lib
+LIB_DIR		:=	../libDoom
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
-LIBBXPM		:=	-I ./libbxpm	-L ./libbxpm/ -lbxpm
-LIBUI		:=	-I ../better_libui -L../better_libui -lui -I../ft_printf
-LIBFT_J		:=	-I ../libft -L ../libft -lft
-LIBGFX		:=	-I ../libgfx -L ../libgfx -lgfx
+LIBBXPM		:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
+LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
+LIBGFX		:= -I $(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
+
+
+#LIBBXPM		:=	-I ./libbxpm	-L ./libbxpm/ -lbxpm
+#LIBUI		:=	-I ../better_libui -L../better_libui -lui -I../ft_printf
+#LIBFT_J		:=	-I ../libft -L ../libft -lft
+#LIBGFX		:=	-I ../libgfx -L ../libgfx -lgfx
 
 LIBS		+=	-I $(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
 				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)

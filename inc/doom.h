@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 15:27:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:39:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,53 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+typedef enum e_key
+{
+	K_A,
+	K_B,
+	K_C,
+	K_D,
+	K_E,
+	K_F,
+	K_G,
+	K_H,
+	K_I,
+	K_J,
+	K_K,
+	K_L,
+	K_M,
+	K_N,
+	K_O,
+	K_P,
+	K_Q,
+	K_R,
+	K_S,
+	K_T,
+	K_U,
+	K_V,
+	K_W,
+	K_X,
+	K_Y,
+	K_Z,
+	K_0,
+	K_1,
+	K_2,
+	K_3,
+	K_4,
+	K_5,
+	K_6,
+	K_7,
+	K_8,
+	K_9,
+	K_SPACE,
+	K_LCTRL,
+	K_LSHIFT,
+	K_LMOUSE,
+	K_TAB,
+	K_EQUAL,
+	K_AMOUNT,
+};
 
 typedef struct s_settings
 {
@@ -461,6 +508,12 @@ typedef struct s_event
 	int				action;
 }					t_event;
 
+typedef struct	s_key
+{
+	int				key;
+	int				state;
+}					t_key;
+
 typedef struct s_doom
 {
 	t_settings		settings;
@@ -498,6 +551,7 @@ typedef struct s_doom
 	t_weapon		weapon[WEAPON_AMOUNT];
 	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
+	t_key			keys[K_AMOUNT];
 }					t_doom;
 
 /* File: ai_attack.c */

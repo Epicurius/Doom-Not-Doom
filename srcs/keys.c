@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:22:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:44:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static void	keys(t_doom *doom, SDL_Event *event)
 
 void	poll_event(t_doom *doom, SDL_Event *event)
 {
+	ft_timer_start();
 	while (SDL_PollEvent(event))
 		keys(doom, event);
+	printf("%f\n", ft_timer_end());
 }
