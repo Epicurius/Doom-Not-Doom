@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 09:19:12 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 10:46:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -153,18 +153,12 @@ LIB_DIR		:=	../libDoom
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
+LIBGFX		:= -I $(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
 LIBBXPM		:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
 LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
-LIBGFX		:= -I $(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
-
-
-#LIBBXPM		:=	-I ./libbxpm	-L ./libbxpm/ -lbxpm
-#LIBUI		:=	-I ../better_libui -L../better_libui -lui -I../ft_printf
-#LIBFT_J		:=	-I ../libft -L ../libft -lft
-#LIBGFX		:=	-I ../libgfx -L ../libgfx -lgfx
 
 LIBS		+=	-I $(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
-				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBFT_J) $(LIBGFX)
+				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
 
 CFLAGS		=	-Wall -Wextra -Werror -Wfatal-errors
 
@@ -192,13 +186,13 @@ $(ODIR)/%.o: $(CDIR)/%.c
 #	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
 #	@git clone -q https://github.com/Epicurius/lib.git
 
-libs: $(LIB_DIR)
-	@make -C ./lib/libft
-	@make -C ./lib/libpf
-	@make -C ./lib/libtp
-	@make -C ./libbxpm
-	@make -C ./bmp_to_bxpm
-	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
+# libs: $(LIB_DIR)
+#	@make -C ./lib/libft
+#	@make -C ./lib/libpf
+#	@make -C ./lib/libtp
+#	@make -C ./libbxpm
+#	@make -C ./bmp_to_bxpm
+#	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
