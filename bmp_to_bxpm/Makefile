@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/18 14:45:46 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/26 11:10:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ MAGENTA			:= "\e[0;35m"
 CYAN			:= "\e[0;36m"
 RESET			:= "\e[0m"
 
-RAW_TEXTURES =	DoomScore.bmp\
-				alfred.bmp\
+RAW_TEXTURES = alfred.bmp\
 				bars.bmp\
 				bh.bmp\
 				game_over.bmp\
@@ -130,8 +129,7 @@ RAW_TEXTURES =	DoomScore.bmp\
 				radar.bmp\
 				steel.bmp\
 				wall_panel.bmp\
-				metal_tile2.bmp\
-				wood.bmp
+				metal_tile2.bmp
 
 RESOURCES_DIR	= ../resources
 PATH_TO_BMP		= $(RESOURCES_DIR)/BMP
@@ -145,7 +143,9 @@ SRC =	converter.c
 
 OBJ = $(SRCS:.c=.o)
 
-INCLUDES = ../lib/libft/libft.a ../lib/libpf/libpf.a ../libbxpm/libbxpm.a
+INCLUDES = 	-I ../../libDoom/libft ../../libDoom/libft/libft.a\
+			-I ../../libDoom/libpf ../../libDoom/libpf/libpf.a\
+			-I ../../libDoom/libbxpm ../../libDoom/libbxpm/libbxpm.a
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -163,11 +163,11 @@ $(PATH_TO_BXPM)/%.bxpm: $(PATH_TO_BMP)/%.bmp
 	@mv ../resources/BMP/*.bxpm ../resources/BXPM/
 
 clean:
-	/bin/rm -f $(OBJ)
+	@rm -f $(OBJ)
 	@printf $(CYAN)"[INFO]	$(NAME) cleaned\n"$(RESET)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
