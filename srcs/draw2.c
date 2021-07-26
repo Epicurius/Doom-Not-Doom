@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:42:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 14:56:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	render_vline(t_render render, int sector)
 		if (sect->wall[s]->n == -1)
 			return (1);
 		render_vline(render, sect->wall[s]->n);
-		if (sect->wall[s]->ptx != -1)
+		if (sect->wall[s]->ptx > 0)
 			draw_portal_texture(&render, &vline);
 		return (1);
 	}

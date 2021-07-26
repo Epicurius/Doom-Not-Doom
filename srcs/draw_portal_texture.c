@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 21:16:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:37:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 14:54:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	draw_portal_solid(t_render *render, t_vline *vline)
 	int		coord;
 	t_bxpm	*ptx;
 
-	ptx = &render->mtx[3];
+	ptx = &render->mtx[render->wall.ptx];
 	text.z = vline->z;
 	text.x = (vline->alpha * render->wall.tscale.x * vline->z);
 	if (text.x >= ptx->w || text.x < 0)
