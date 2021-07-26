@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:49:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:32:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	sprite_type(char *str)
 		return (4);
 	if (ft_strequ(str, "Torch"))
 		return (5);
-	if (ft_strequ(str, "Meat_Hook"))
+	if (ft_strequ(str, "MeatHook"))
 		return (6);
 	error_msg("%s is not a valid entity!\n", str);
 	return (-1);

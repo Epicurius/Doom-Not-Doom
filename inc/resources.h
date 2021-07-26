@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:41:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:31:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,7 +370,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.tc = {371, 209, 381 - 371, 256 - 209}
 	},
 	{
-		.name = "Meat Hook",
+		.name = "MeatHook",
 		.health = 11120,
 		.damage = 0,
 		.animate = 0,
