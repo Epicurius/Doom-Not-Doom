@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 11:02:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:41:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 6000,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
+		.frame_rate[DEATH] = 4000,
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {174, 182, 209 - 174, 233 - 182}
 	},

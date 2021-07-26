@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 19:26:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:38:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_doom(t_doom *doom)
 {
-	ft_printf("{CLR:142}In FREE!\n{RESET}");
 	free_map(doom);
 	free_entities(doom);
 	free_rifts(doom);
@@ -35,5 +34,4 @@ void	free_doom(t_doom *doom)
 	SDL_Quit();
 	Mix_Quit();
 	TTF_Quit();
-	ft_printf("{GREEN}Done FREE!\n{RESET}");
 }
