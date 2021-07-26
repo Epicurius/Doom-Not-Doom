@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:03:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:04:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define PLAYER_RADIUS				0.7
 # define NEAR_Z						0.1
 # define FAR_Z						1000
-# define ZB							100.0
+# define RENDER_DISTANCE			200.0
+# define ZB							100
 
 /*
 ** Entities
