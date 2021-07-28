@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 13:52:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/28 14:29:48 by jsalmi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,15 @@ RAW_SRC		=	ai_attack.c\
 				blit_bxpm.c\
 				blit_entity.c\
 				buy_menu.c\
+				buy_menu_help.c\
+				buy_menu_weapon_stats.c\
+				buy_menu_player_stats.c\
+				buy_menu_weapon.c\
+				buy_menu_weapon_upgrades.c\
+				buy_menu_player_upgrades.c\
+				buy_menu_player.c\
+				buy_menu_buttons.c\
+				buy_menu_init.c\
 				camera.c\
 				clock.c\
 				collision_detection.c\
@@ -134,11 +143,11 @@ RAW_SRC		=	ai_attack.c\
 				validate_map2.c\
 				vertical_line.c\
 				wall_to_screen_xz.c
-		
+
 NAME		=	doom
 CDIR		=	srcs
 ODIR		=	obj
-INC			=	./inc 
+INC			=	-I./inc -I../
 SRCS		=	$(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:=	$(OBJ:.o=.d)
@@ -157,16 +166,14 @@ LIBGFX		:= -I $(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
 LIBBXPM		:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
 LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
 
-LIBS		+=	-I $(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
+LIBS		+=	$(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
 				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
 
 CFLAGS		=	-Wall -Wextra -Werror -Wfatal-errors
 
-PATH_H		=	./inc/path.h
-
 RESOURCES	=	./resources
 
-all: $(RESOURCES) $(PATH_H) $(NAME)
+all: $(RESOURCES) $(NAME)
 
 -include $(DEP)
 
@@ -186,13 +193,6 @@ $(RESOURCES):
 	@./google_drive.sh
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
-
-$(PATH_H):
-	@printf $(CYAN)"[INFO]	Creating path.h\n"$(RESET)
-	@gcc -o find_path ./Get_Path/path.c
-	@./find_path
-	@mv path.h ./inc/
-	@rm -f find_path
 
 re: fclean all
 
