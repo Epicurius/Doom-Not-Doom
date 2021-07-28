@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 14:56:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:12:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_vline	draw_vline(t_render *render)
 	return (vline);
 }
 
-static t_vline 	init_wall_vline(t_render *render, t_sector *sector, int s)
+static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 {
 	t_wall	*wall;
 
