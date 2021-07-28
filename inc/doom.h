@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 14:05:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:22:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -634,6 +634,7 @@ int					set_icon(SDL_Window *window, char *dir);
 void				init_doom(t_doom *doom);
 /* File: init_alfred.c */
 void				init_alfred(t_doom *doom);
+void				move_pos_alfred2(t_rect **pos);
 /* File: init_barrel.c */
 void				init_barrel(t_doom *doom);
 /* File: init_entity.c */
@@ -674,6 +675,7 @@ double				get_floor_at_pos(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
 /* File: init_spooky.c */
 void				init_spooky(t_doom *doom);
+void				move_pos_spooky2(t_rect **pos);
 /* File: init_textures.c */
 int					multy_thread_bxpm(void *arg);
 void				init_textures(t_doom *doom);

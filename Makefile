@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 13:52:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/28 15:20:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ RAW_SRC		=	ai_attack.c\
 				icon.c\
 				init.c\
 				init_alfred.c\
+				init_alfred2.c\
 				init_barrel.c\
 				init_entity.c\
 				init_game_mode.c\
@@ -88,6 +89,7 @@ RAW_SRC		=	ai_attack.c\
 				init_shotgun.c\
 				init_slope.c\
 				init_spooky.c\
+				init_spooky2.c\
 				init_textures.c\
 				init_torch.c\
 				init_weapons.c\
