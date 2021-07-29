@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 14:05:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/29 09:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+
 
 typedef struct s_settings
 {
@@ -255,6 +257,7 @@ typedef struct s_collision
 	float			hitbox_height;
 	float			hitbox_radius;
 	float			step_height;
+	int				lowest_ceiling;
 }					t_collision;
 
 typedef struct s_camera
@@ -461,6 +464,24 @@ typedef struct s_event
 	int				action;
 }					t_event;
 
+typedef struct		s_motion
+{
+	t_wall			wall;
+	int				sector;
+	int				lowest_ceiling;
+	int				flight;
+	double			size_2d;
+	double			eyesight;
+	double			height;
+	t_v3			where;
+	t_v3			velocity;
+	t_v3			future;
+	int				curr_sect;
+	int				prev_sect;
+	int				suffocate;
+	t_v3			move;
+}					t_motion;
+
 typedef struct s_doom
 {
 	t_settings		settings;
@@ -469,6 +490,7 @@ typedef struct s_doom
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
+	int				sect_list[100];
 	double			*zbuffer;
 	double			map_scale;
 	t_fonts			font;
@@ -499,7 +521,11 @@ typedef struct s_doom
 	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
 }					t_doom;
-
+int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
+int		intersection_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
+void	print_v3(char *str, t_v3 v);
+t_v3	better_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
+t_v3	bb_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */
@@ -532,7 +558,8 @@ int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File: collision_detection.c */
 int					horizontal_collision(t_collision *coll, t_v3 dest,
 						int curr, int i);
-int					collision_detection(t_collision *entity);
+t_v3			collision_detection1(t_doom *doom, t_v3 velocity, t_motion *motion);
+int				collision_detection(t_collision *entity);
 /* File: color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);

@@ -6,11 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 16:10:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/29 11:49:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	print_v3(char *str, t_v3 v)
+{
+	if (str)
+		ft_printf("%s\t", str);
+	ft_printf("[%.2f\t%.2f\t%.2f]\n", v.x, v.y, v.z);
+}
 
 static void	get_base_speed(t_doom *doom, float *speed)
 {
@@ -81,13 +88,28 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	}
 	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
 	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
-	if (!player->flying)
-	{
-		if (doom->player.where.z > get_floor_at_pos(sector, player->where))
-			player->velocity.z -= sector->gravity;
-	}
-	else
+	//if (!player->flying)
+	//{
+	//	if (doom->player.where.z > get_floor_at_pos(sector, player->where))
+	//		player->velocity.z -= sector->gravity;
+	//}
+	//else
+	//	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+	if (player->flying)
 		player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+}
+
+t_motion	new_motion(int sector, double size_2d, double eyesight, t_v3 where)
+{
+	t_motion motion;
+
+	motion.sector = sector;
+	motion.size_2d = size_2d;
+	motion.eyesight = eyesight;
+	motion.height = motion.eyesight + 1;
+	motion.where = where;
+	motion.suffocate = 0;
+	return (motion);
 }
 
 void	movement(t_doom *doom)
@@ -108,5 +130,25 @@ void	movement(t_doom *doom)
 	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);
-	player_collision(doom);
+
+	t_motion motion = new_motion(doom->player.sector, 0.75, doom->player.eye_lvl, doom->player.where);
+	motion.flight = doom->player.flying;
+	motion.lowest_ceiling = find_lowest_ceiling(doom, motion);
+	doom->player.velocity = bb_collision_detection(doom, doom->player.velocity, motion);
+	doom->player.where = add_v3(doom->player.where, doom->player.velocity);
+
+
+	//ft_printf("Sect: %d\t", doom->player.sector);
+	//print_v3("pos:", doom->player.where);
+	if (doom->player.where.z < get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where))
+	{
+		//printf("Player under sector\n");
+		doom->player.velocity.z = 0;
+		doom->player.where.z = get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where);////////
+	}
+	//ft_printf("%f %d\n",doom->player.where.z, doom->player.sector);
+	//doom->player.sector = find_sector(doom->sectors, doom->nb.sectors, doom->player.where);
+	//ft_printf("%f %f %f\n", move.x, move.y, move.z);
+	//ft_printf("PLAYER SECTOR: %d\n", doom->player.sector);
+	//player_collision(doom);
 }
