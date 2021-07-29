@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/28 15:11:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	project_projectile(t_doom *doom, t_projectile *orb,
 	render->yrange = render->end.y - render->start.y;
 }
 
-void 	draw_projectiles(t_doom *doom)
+void	draw_projectiles(t_doom *doom)
 {
 	t_list			*curr;
 	t_projectile	*orb;
