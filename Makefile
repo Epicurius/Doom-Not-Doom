@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 13:52:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/28 14:26:41 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,8 @@ RAW_SRC		=	ai_attack.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
+				better_collision_detection.c\
+				bb_collision_detection.c\
 				wall_to_screen_xz.c
 		
 NAME		=	doom
@@ -160,19 +162,39 @@ LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
 LIBS		+=	-I $(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
 				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
 
-CFLAGS		=	-Wall -Wextra -Werror -Wfatal-errors
+CFLAGS		=	-Wall -Wextra -Werror# -Wfatal-errors
 
 PATH_H		=	./inc/path.h
 
 RESOURCES	=	./resources
 
-all: $(RESOURCES) $(PATH_H) $(NAME)
+all: framework $(RESOURCES) $(PATH_H) $(ODIR) $(NAME)
 
 -include $(DEP)
+#-04
+$(ODIR):
+	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
+	@mkdir -p $@
 
-$(NAME): $(SRCS)
-	@gcc $(CFLAGS) $(LIBS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJ)
+	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
+
+$(ODIR)/%.o: $(CDIR)/%.c
+	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
+	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
+
+#$(LIB_DIR):
+#	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
+#	@git clone -q https://github.com/Epicurius/lib.git
+
+#libs: $(LIB_DIR)
+#	@make -C ./lib/libft
+#	@make -C ./lib/libpf
+#	@make -C ./lib/libtp
+#	@make -C ./libbxpm
+#	@make -C ./bmp_to_bxpm
+#	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
@@ -193,6 +215,32 @@ $(PATH_H):
 	@./find_path
 	@mv path.h ./inc/
 	@rm -f find_path
+
+framework:
+ifeq ($(SHELL_NAME), Darwin)
+	@mkdir -p ~/Library/Frameworks
+ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
+	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
+	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
+else
+	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
+endif
+endif
+
+framework_del:
+	@rm -rf ~/Library/Frameworks/SDL2*.framework
+	@/bin/rm -f $(NAME)
+	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
+
+framework_re: framework_del
+	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
+	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
+	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
 
 re: fclean all
 
