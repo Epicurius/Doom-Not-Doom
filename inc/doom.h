@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/29 18:30:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 10:13:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -524,8 +524,8 @@ typedef struct s_doom
 int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
 int		intersection_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 void	print_v3(char *str, t_v3 v);
-t_v3	better_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
-t_v3	bb_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
+//t_v3	better_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
+int	bb_collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */

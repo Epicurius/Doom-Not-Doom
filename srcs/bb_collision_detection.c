@@ -6,15 +6,34 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/29 17:50:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 10:32:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius)
+t_v3	parallel_movement(t_doom *doom, t_v3 velocity, t_wall *wall)
+{
+	double	norm_velo;
+	double	norm_wall;
+	double	scalar;
+	t_v2	w;
 
-
+	w.x = wall->v2.x - wall->v1.x;
+	w.y = wall->v2.y - wall->v1.y;
+	norm_velo = pythagoras(velocity.x, velocity.y);
+	norm_wall = pythagoras(w.x, w.y);
+	scalar = w.x / norm_wall * velocity.x / norm_velo +
+		w.y / norm_wall * velocity.y / norm_velo;
+	if (scalar != 0)
+	{
+		velocity.x = norm_velo * w.x / norm_wall * scalar;
+		velocity.y = norm_velo * w.y / norm_wall * scalar;
+	}
+	else
+		return (new_v3(0, 0, 0));
+	return (velocity);
+}
 
 static int	portal_hitbox(t_doom *doom, t_motion *motion, t_wall *wall)
 {
@@ -45,12 +64,12 @@ static int	portal_intersect(t_doom *doom, t_motion *motion, t_wall *wall)
 		return (0);
 	if (portal_top > motion->where.z + motion->height && portal_bot <= motion->where.z + STEP_HEIGHT)
 	{
-		print_v3("POINT:\t", point);
-		motion->move = add_v3(motion->move, sub_v3(point, motion->where));
-		//point.z = get_floor_at_pos(&doom->sectors[wall->n], point);
-		//motion->where.z = get_floor_at_pos(&doom->sectors[wall->n], point);
-		motion->where = point;
-		motion->velocity = sub_v3(motion->future, motion->where);
+		motion->move.x += point.x - motion->where.x;
+		motion->move.y += point.y - motion->where.y;
+		motion->where.x = point.x;
+		motion->where.y = point.y;
+		motion->velocity.x = motion->future.x - motion->where.x;
+		motion->velocity.y = motion->future.y - motion->where.y;
 		motion->prev_sect = motion->curr_sect;
 		motion->curr_sect = wall->n;
 		return (1);
@@ -63,17 +82,26 @@ int	h_collision(t_doom *doom, t_motion *motion)
 	int		i;
 	t_wall	*wall;
 
-
 	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
 		if (wall->solid || wall->n == -1)
 		{
-			if (intersection_check(motion->where, motion->future, wall->v1, wall->v2))
-				return (1);
+			if (intersect_check_v2(motion->where, motion->future, wall->v1, wall->v2))
+			{
+				//motion->velocity = parallel_movement(doom, motion->velocity, wall);
+				//if (!h_collision(doom, motion))
+				//	motion->move = motion->velocity;
+				return (1);	
+			}
 			else if (hitbox_collision2(motion->future, wall->v1, wall->v2, 1.0))
+			{
+				//motion->velocity = parallel_movement(doom, motion->velocity, wall);
+				//if (!h_collision(doom, motion))
+				//	motion->move = motion->velocity;
 				return (2);
+			}
 		}
 	}
 	i = -1;
@@ -82,7 +110,7 @@ int	h_collision(t_doom *doom, t_motion *motion)
 		wall = doom->sectors[motion->curr_sect].wall[i];
 		if (!wall->solid && wall->n != -1 && wall->n != motion->prev_sect)
 		{
-			if (intersection_check(motion->where, motion->future, wall->v1, wall->v2))
+			if (intersect_check_v2(motion->where, motion->future, wall->v1, wall->v2))
 			{
 				if (portal_intersect(doom, motion, wall))
 				{
@@ -97,23 +125,9 @@ int	h_collision(t_doom *doom, t_motion *motion)
 			}	
 		}
 	}
-	//Maybe ccheck vcol before giving the ok?
-	motion->move = add_v3(motion->move, motion->velocity);
+	motion->move.x += motion->velocity.x;
+	motion->move.y += motion->velocity.y;
 	return (0);
-}
-
-int		check_floor1(t_doom *doom, t_motion *motion, int dest_set)
-{
-	double	floor;
-
-	floor = get_floor_at_pos(&doom->sectors[dest_set], motion->future);
-	if (floor > motion->future.z + 2 && dest_set != motion->sector)
-		return (0);
-	if ((doom->sectors[dest_set].floor_slope != 0
-		&& floor > motion->future.z + 1 && dest_set == motion->sector && !motion->flight)
-		|| (floor > motion->future.z && dest_set == motion->sector && motion->flight))
-		return (0);
-	return (1);
 }
 
 int	v_collision(t_doom *doom, t_motion *motion)
@@ -123,53 +137,55 @@ int	v_collision(t_doom *doom, t_motion *motion)
 	y.ceiling = get_ceiling_at_pos(&doom->sectors[motion->curr_sect], motion->where);
 	y.floor = get_floor_at_pos(&doom->sectors[motion->curr_sect], motion->where);
 	if (y.ceiling - y.floor < motion->height)
-		return ((motion->suffocate = 1));
+		return (1);
 	if (!motion->flight && motion->where.z > y.floor)
 	{
-		ft_printf("[1] ");
+		//ft_printf("[1] ");
 		motion->velocity.z -= doom->sectors[motion->curr_sect].gravity;
 		motion->where.z += motion->velocity.z;
-	}
-		
+	}	
 	if (motion->where.z < y.floor || motion->where.z + motion->velocity.z < y.floor)
 	{
-		ft_printf("[2] ");
+		//ft_printf("[2] ");
 		motion->velocity.z = 0;
-		motion->where.z = y.floor;
+		if (motion->where.z < y.floor)
+			motion->where.z = y.floor;
 	}
-	if (motion->velocity.z >= 0 && motion->future.z + 1 > y.ceiling)
+	if (motion->velocity.z > 0 && motion->where.z + motion->velocity.z + motion->height >= y.ceiling)
 	{
-		ft_printf("[3] ");
-		if (motion->velocity.z > 0)
-			motion->velocity.z = -doom->sectors[motion->curr_sect].gravity;
-		//motion->where.z = y.ceiling - motion->height;
+		//ft_printf("[3] ");
+		motion->velocity.z = 0;//-doom->sectors[motion->curr_sect].gravity;
+		//motion->where.z += motion->velocity.z;
 	}
+	motion->move.z += motion->velocity.z;
 	return (0);
 }
 
-t_v3	bb_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion)
+int	bb_collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity)
 {
-	t_v3 move;
-	
-	motion.velocity = doom->player.velocity;
-	motion.curr_sect = doom->player.sector;
-	motion.prev_sect = doom->player.sector;
-	motion.future = add_v3(motion.where, velocity);
-	motion.move = new_v3(0, 0, 0);
+	motion.where = *where;
+	motion.velocity = *velocity;
+	motion.prev_sect = motion.curr_sect;
+	motion.move = new_v3(0.0f, 0.0f, 0.0f);
 	if (v_collision(doom, &motion))
-		return (move);
-	motion.future = add_v3(motion.where, velocity);
-
-	print_v3("VELOCITY:\t", motion.velocity);
-	int i = h_collision(doom, &motion);
-	if(i)
-		motion.move.z += motion.velocity.z;
-	doom->player.sector = motion.curr_sect;
-	ft_printf("%d\t%d", motion.curr_sect, i);
-	move = motion.move;
-	print_v3("MOVE:\t", move);
-	print_v3("POS:\t", add_v3(doom->player.where, move));
-	//doom->player.sector = motion->curr_sect;
-	//doom->player.sector = find_sector(doom->sectors, doom->nb.sectors, add_v3(doom->player.where, move));
-	return (move);
+		return (-1);
+	motion.future = add_v3(motion.where, motion.velocity);
+	//print_v3("VELOCITY:\t", motion.velocity);
+	h_collision(doom, &motion);
+	*velocity = motion.move;
+	*where = add_v3(*where, *velocity);
+	if (where->z < get_floor_at_pos(&doom->sectors[motion.curr_sect], *where))
+	{
+		velocity->z = 0;
+		where->z = get_floor_at_pos(&doom->sectors[motion.curr_sect], *where);
+	}
+	//ft_printf("%d\t", doom->player.sector);
+	//print_v3("MOVE:\t", motion.move);
+	//print_v3("POS:\t",doom->player.where);
+	if (!in_sector(&doom->sectors[motion.curr_sect], *where))
+	{
+		ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
+		motion.curr_sect = find_sector(doom->sectors, doom->nb.sectors, *where);
+	}
+	return (motion.curr_sect);
 }

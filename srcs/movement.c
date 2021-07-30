@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/29 11:49:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 10:20:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,7 @@ void	movement(t_doom *doom)
 	t_v3	move;
 	float	speed;
 
-	if (doom->player.where.z + doom->player.eye_lvl + 2
-		< doom->sectors[doom->player.sector].ceiling.y)
+	if (doom->player.where.z + doom->player.eye_lvl + 2 < doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eye_lvl = EYE_LVL;
 	if (doom->key.lctr)
 		doom->player.eye_lvl = 4;
@@ -130,22 +129,29 @@ void	movement(t_doom *doom)
 	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
 	get_velocity(doom, move);
+	//print_v3("VELOCITY:\t", doom->player.velocity);
 
-	t_motion motion = new_motion(doom->player.sector, 0.75, doom->player.eye_lvl, doom->player.where);
+	t_motion motion;// = new_motion(doom->player.sector, 0.75, doom->player.eye_lvl, doom->player.where);
+	motion.eyesight = doom->player.eye_lvl;
+	motion.height = motion.eyesight + 1;
+	motion.curr_sect = doom->player.sector;
 	motion.flight = doom->player.flying;
-	motion.lowest_ceiling = find_lowest_ceiling(doom, motion);
-	doom->player.velocity = bb_collision_detection(doom, doom->player.velocity, motion);
-	doom->player.where = add_v3(doom->player.where, doom->player.velocity);
+	//motion.lowest_ceiling = find_lowest_ceiling(doom, motion);
+	doom->player.sector = bb_collision_detection(doom, motion, &doom->player.where, &doom->player.velocity);
+	if (doom->player.sector == -1)
+		doom->player.health = 0;
+	ft_printf("doom->player.sector = %d\n", doom->player.sector);
+	//doom->player.where = add_v3(doom->player.where, doom->player.velocity);
 
 
 	//ft_printf("Sect: %d\t", doom->player.sector);
 	//print_v3("pos:", doom->player.where);
-	if (doom->player.where.z < get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where))
-	{
-		//printf("Player under sector\n");
-		doom->player.velocity.z = 0;
-		doom->player.where.z = get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where);////////
-	}
+	//if (doom->player.where.z < get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where))
+	//{
+	//	//printf("Player under sector\n");
+	//	doom->player.velocity.z = 0;
+	//	doom->player.where.z = get_floor_at_pos(&doom->sectors[motion.sector], doom->player.where);////////
+	//}
 	//ft_printf("%f %d\n",doom->player.where.z, doom->player.sector);
 	//doom->player.sector = find_sector(doom->sectors, doom->nb.sectors, doom->player.where);
 	//ft_printf("%f %f %f\n", move.x, move.y, move.z);
