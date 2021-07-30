@@ -1,0 +1,227 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
+#    Updated: 2021/07/30 13:43:49 by nneronin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SHELL_NAME	:= $(shell uname -s)
+
+RED			:=	"\e[0;31m"
+GREEN		:=	"\x1b[38;5;119m"
+ORANGE		:=	"\x1b[38;5;208m"
+YELLOW		:=	"\e[0;33m"
+BLUE		:=	"\e[0;34m"
+MAGENTA		:=	"\e[0;35m"
+CYAN		:=	"\e[0;36m"
+UNDERLINE	:=	"\x1b[4m"
+RESET		:=	"\e[0m"
+
+RAW_SRC		=	ai_attack.c\
+				ai_movement.c\
+				animate_wsprite.c\
+				args.c\
+				blit_bxpm.c\
+				blit_entity.c\
+				buy_menu.c\
+				buy_menu_help.c\
+				buy_menu_weapon_stats.c\
+				buy_menu_player_stats.c\
+				buy_menu_weapon.c\
+				buy_menu_weapon_upgrades.c\
+				buy_menu_player_upgrades.c\
+				buy_menu_player.c\
+				buy_menu_buttons.c\
+				buy_menu_init.c\
+				camera.c\
+				clock.c\
+				color_and_brightness.c\
+				compute_vline.c\
+				crosshair_position.c\
+				doom.c\
+				draw2.c\
+				draw_bullet_holes.c\
+				draw_ceiling.c\
+				draw_crosshair.c\
+				draw_entity.c\
+				draw_floor.c\
+				draw_floor_and_ceiling.c\
+				draw_hud.c\
+				draw_neighbor_wall.c\
+				draw_portal_texture.c\
+				draw_projectile.c\
+				draw_skybox.c\
+				draw_wall.c\
+				draw_weapon.c\
+				draw_wsprites.c\
+				endless.c\
+				error.c\
+				find_sector.c\
+				fps.c\
+				free.c\
+				free1.c\
+				free2.c\
+				free3.c\
+				game_loading.c\
+				game_over.c\
+				game_pause.c\
+				game_quit.c\
+				get_entity_state.c\
+				help.c\
+				hud_utils.c\
+				icon.c\
+				init.c\
+				init_alfred.c\
+				init_alfred2.c\
+				init_barrel.c\
+				init_entity.c\
+				init_game_mode.c\
+				init_glock.c\
+				init_inventory.c\
+				init_kar.c\
+				init_lamp.c\
+				init_meat_hook.c\
+				init_minigun.c\
+				init_minimap.c\
+				init_player.c\
+				init_pump.c\
+				init_render.c\
+				init_rift.c\
+				init_scale.c\
+				init_sdl.c\
+				init_shotgun.c\
+				init_slope.c\
+				init_spooky.c\
+				init_spooky2.c\
+				init_textures.c\
+				init_torch.c\
+				init_weapons.c\
+				keys.c\
+				line.c\
+				malloc_texture_pos.c\
+				map_events.c\
+				math1.c\
+				math2.c\
+				math3.c\
+				math4.c\
+				math5.c\
+				math6.c\
+				math7.c\
+				math8.c\
+				minimap.c\
+				movement.c\
+				object_collision.c\
+				orientation.c\
+				parse_map_events.c\
+				parse_map_header.c\
+				parse_map_sector.c\
+				parse_map_sprite.c\
+				precompute_buy_menu.c\
+				precompute_entities.c\
+				precompute_projectiles.c\
+				precompute_skybox.c\
+				precompute_walls.c\
+				precompute_weapon.c\
+				project_entity.c\
+				project_wall.c\
+				put_pixels.c\
+				random.c\
+				read_map.c\
+				reload_map.c\
+				skybox_ceiling_vline.c\
+				skybox_floor_vline.c\
+				skybox_wall_vline.c\
+				sound.c\
+				spawn_entity.c\
+				update_screen.c\
+				validate_map1.c\
+				validate_map2.c\
+				vertical_line.c\
+				collision_detection.c\
+				wall_slide.c\
+				wall_to_screen_xz.c
+
+NAME		=	doom
+CDIR		=	srcs
+ODIR		=	obj
+INC			=	-I./inc -I../
+SRCS		=	$(addprefix $(CDIR)/,$(RAW_SRC))
+OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
+DEP			:=	$(OBJ:.o=.d)
+
+SDL_DIR		:= ../libs/SDL
+SDL_INC		:= -I$(SDL_DIR)/include
+SDL_LIB		:= -L$(SDL_DIR)/lib
+SDL_LIBS	:= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+
+LIB_DIR		:= ../libs
+
+INCL		= \
+			  -I$(LIB_DIR)/libft \
+			  -I$(LIB_DIR)/better_libui \
+			  -I$(LIB_DIR)/libpf \
+			  -I$(LIB_DIR)/libgfx \
+			  $(SDL_INC) \
+			  -I$(LIB_DIR)/libtp \
+			  -I$(LIB_DIR)/libbxpm \
+
+LIBR		= \
+			  -L$(LIB_DIR)/libft \
+			  -L$(LIB_DIR)/better_libui \
+			  -L$(LIB_DIR)/libpf \
+			  -L$(LIB_DIR)/libgfx \
+			  $(SDL_LIB) \
+			  -L$(LIB_DIR)/libtp \
+			  -L$(LIB_DIR)/libbxpm \
+
+LIBRA		= \
+			  -lui \
+			  -lpf \
+			  -lft \
+			  -lgfx \
+			  $(SDL_LIBS) \
+			  -ltp \
+			  -lbxpm \
+
+LIBS		= $(INCL) $(INC) $(LIBR) $(LIBRA)
+
+CFLAGS		=	-Wall -Wextra
+
+RESOURCES	=	./resources
+
+all: $(RESOURCES) $(ODIR) $(NAME)
+
+-include $(DEP)
+$(ODIR):
+	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
+	@mkdir -p $@
+
+$(NAME): $(OBJ)
+	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
+
+$(ODIR)/%.o: $(CDIR)/%.c
+	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
+	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
+
+clean:
+	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
+	@rm -rf $(ODIR)
+
+fclean: clean
+	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
+	@rm -f $(NAME)
+
+$(RESOURCES):
+	@./google_drive.sh
+	@tar -xf file.tar.gz
+	@rm -rf file.tar.gz
+
+re: fclean all
+
+.PHONY: clean, all, re, fclean, resources, framework, framework_del, frameworks_re
