@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/29 18:30:03 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/30 13:43:49 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ RAW_SRC		=	ai_attack.c\
 				buy_menu_init.c\
 				camera.c\
 				clock.c\
-				collision_detection.c\
 				color_and_brightness.c\
 				compute_vline.c\
 				crosshair_position.c\
@@ -122,7 +121,6 @@ RAW_SRC		=	ai_attack.c\
 				parse_map_header.c\
 				parse_map_sector.c\
 				parse_map_sprite.c\
-				player_collision.c\
 				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
@@ -144,8 +142,8 @@ RAW_SRC		=	ai_attack.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
-				better_collision_detection.c\
-				bb_collision_detection.c\
+				collision_detection.c\
+				wall_slide.c\
 				wall_to_screen_xz.c
 
 NAME		=	doom
@@ -162,7 +160,7 @@ SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F
 SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
 SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
 
-LIB_DIR		:=	../libs
+LIB_DIR		:= ../libs
 LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
 LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
@@ -187,23 +185,11 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
-	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready\n"$(RESET)
+	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
 	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
-
-#$(LIB_DIR):
-#	@printf $(CYAN)"[INFO]	Cloning lib.\n"$(RESET)
-#	@git clone -q https://github.com/Epicurius/lib.git
-
-#libs: $(LIB_DIR)
-#	@make -C ./lib/libft
-#	@make -C ./lib/libpf
-#	@make -C ./lib/libtp
-#	@make -C ./libbxpm
-#	@make -C ./bmp_to_bxpm
-#	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)

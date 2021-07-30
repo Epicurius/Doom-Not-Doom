@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/28 15:11:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	project_projectile(t_doom *doom, t_projectile *orb,
 	t_v3	screen;
 
 	dist.x = orb->where.x - doom->player.where.x;
-	dist.y = orb->where.z - doom->player.where.z - doom->player.eye_lvl;
+	dist.y = orb->where.z - doom->player.where.z - doom->player.eyelvl;
 	dist.z = orb->where.y - doom->player.where.y;
 	screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;

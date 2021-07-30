@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 09:40:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 12:30:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 	return (0);
 }
 
-static int	vertical_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
+static int	vertical_collision_lite(t_doom *doom, t_projectile *orb, t_v3 dest)
 {
 	t_sector	sector;
 
@@ -35,20 +35,28 @@ static int	vertical_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
 	return (0);
 }
 
-int	projectile_collision(t_doom *doom, t_projectile *orb, t_v3 dest)
+static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
-	t_collision	projectile;
+	t_motion	motion;
 
-	projectile.where = &orb->where;
-	projectile.velocity = &orb->velocity;
-	projectile.sector = &orb->sector;
-	projectile.sectors = doom->sectors;
-	projectile.hitbox_height = 5;
-	projectile.hitbox_radius = 5;
-	projectile.step_height = 0;
-	if (player_contact(doom, orb->start, dest)
-		|| vertical_collision(doom, orb, dest)
-		|| horizontal_collision(&projectile, dest, orb->sector, -1))
+	motion.future = add_v3(orb->where, orb->velocity);
+	if (player_contact(doom, orb->start, motion.future))
+		return (1);
+	if (vertical_collision_lite(doom, orb, motion.future))
+		return (1);
+	motion.flight = 1;
+	motion.height = 5;
+	motion.curr_sect = orb->sector;
+	motion.where = orb->where;
+	motion.velocity = orb->velocity;
+	motion.prev_sect = motion.curr_sect;
+	motion.move = new_v3(0.0f, 0.0f, 0.0f);
+	if (horizontal_collision(doom, &motion) > 0)
+		return (1);
+	orb->velocity = motion.move;
+	orb->where = add_v3(orb->where, orb->velocity);
+	orb->sector = motion.curr_sect;
+	if (!in_sector(&doom->sectors[orb->sector], orb->where))
 		return (1);
 	return (0);
 }
@@ -63,9 +71,11 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
-		dest = add_v3(orb->where, orb->velocity);
-		if (projectile_collision(doom, orb, dest))
+		if (projectile_collision(doom, orb))
+		{
+			doom->nb.projectiles -= 1;
 			curr = ft_dellstnode(&doom->orb, curr);
+		}
 		else
 			curr = curr->next;
 	}

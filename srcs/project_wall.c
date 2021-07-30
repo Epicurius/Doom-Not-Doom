@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 	t_fc		v2;
 	double		eye_z;
 
-	eye_z = doom->player.where.z + doom->player.eye_lvl;
+	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.floor = doom->sectors[w->sect].floor.y - eye_z;
 	v2.floor = doom->sectors[w->sect].floor.y - eye_z;
 	v1.ceiling = doom->sectors[w->sect].ceiling.y - eye_z;
@@ -37,7 +37,7 @@ static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	t_fc		v2;
 	double		eye_z;
 
-	eye_z = doom->player.where.z + doom->player.eye_lvl;
+	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.floor = get_floor_at_pos(&doom->sectors[w->sect], p1) - eye_z;
 	v1.ceiling = get_ceiling_at_pos(&doom->sectors[w->sect], p1) - eye_z;
 	v2.floor = get_floor_at_pos(&doom->sectors[w->sect], p2) - eye_z;
@@ -58,7 +58,7 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	t_fc		v2;
 	double		eye_z;
 
-	eye_z = doom->player.where.z + doom->player.eye_lvl;
+	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.floor = get_floor_at_pos(&doom->sectors[w->n], p1) - eye_z;
 	v1.ceiling = get_ceiling_at_pos(&doom->sectors[w->n], p1) - eye_z;
 	v2.floor = get_floor_at_pos(&doom->sectors[w->n], p2) - eye_z;

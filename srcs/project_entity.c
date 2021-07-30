@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 	t_v3	screen;
 
 	dist.x = ent->where.x - doom->player.where.x;
-	dist.y = ent->where.z - doom->player.where.z - doom->player.eye_lvl;
+	dist.y = ent->where.z - doom->player.where.z - doom->player.eyelvl;
 	dist.z = ent->where.y - doom->player.where.y;
 	screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;

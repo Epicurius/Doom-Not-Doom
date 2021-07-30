@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 13:48:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/27 10:35:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static void	init_sdl2(t_doom *doom)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 		error_msg("Could not init SDL: %s\n", SDL_GetError());
-	doom->win = SDL_CreateWindow("DOOM", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, doom->settings.size.x,
+	doom->win = SDL_CreateWindow("DOOM", 0, 0, doom->settings.size.x,
 			doom->settings.size.y, SDL_WINDOW_SHOWN);
 	if (!doom->win)
 		error_msg("Could not create window: %s\n", SDL_GetError());

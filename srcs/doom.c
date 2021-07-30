@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 16:14:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:21:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 {
 	game_mode(doom);
 	update_camera(doom, 0, 0);
-	map_events(doom);
+	//map_events(doom);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 10:13:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 13:45:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_player
 {
 	t_v3			where;
 	t_v3			velocity;
-	int				eye_lvl;
+	int				eyelvl;
 	int				sector;
 	double			yaw;
 	double			pitch;
@@ -134,7 +134,7 @@ typedef struct s_player
 	float			walk_speed;
 	float			sprint_speed;
 	float			jump_height;
-	int				flying;
+	int				flight;
 	int				action;
 	int				equiped;
 	int				debug;
@@ -243,22 +243,6 @@ typedef struct s_sector
 	t_v2			floor_normal;
 	int				trigger;
 }					t_sector;
-
-typedef struct s_collision
-{
-	int				suffocate;
-	t_v3			*where;
-	t_v3			*velocity;
-	t_sector		*sectors;
-	t_list			*entities;
-	int				*sector;
-	int				nb_entities;
-	int				player;
-	float			hitbox_height;
-	float			hitbox_radius;
-	float			step_height;
-	int				lowest_ceiling;
-}					t_collision;
 
 typedef struct s_camera
 {
@@ -471,7 +455,7 @@ typedef struct		s_motion
 	int				lowest_ceiling;
 	int				flight;
 	double			size_2d;
-	double			eyesight;
+	//double			eyesight;
 	double			height;
 	t_v3			where;
 	t_v3			velocity;
@@ -521,11 +505,11 @@ typedef struct s_doom
 	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
 }					t_doom;
+
 int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
-int		intersection_check(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
-void	print_v3(char *str, t_v3 v);
-//t_v3	better_collision_detection(t_doom *doom, t_v3 velocity, t_motion motion);
-int	bb_collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
+int		hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius);
+int		collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
+void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */
@@ -555,11 +539,6 @@ void				update_camera(t_doom *doom, int x, int y);
 /* File: clock.c */
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
-/* File: collision_detection.c */
-int					horizontal_collision(t_collision *coll, t_v3 dest,
-						int curr, int i);
-t_v3			collision_detection1(t_doom *doom, t_v3 velocity, t_motion *motion);
-int				collision_detection(t_collision *entity);
 /* File: color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
@@ -728,8 +707,7 @@ void				map(t_doom *doom);
 /* File: movement.c */
 void				movement(t_doom *doom);
 /* File: object_collision.c */
-void				object_collision(t_doom *doom, t_player *player);
-int					entity_collision(t_collision *e, t_v3 dest);
+int					entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity);
 /* File: orientation.c */
 void				degree_fix(double *degrees);
 int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
@@ -751,8 +729,6 @@ int					wsprite_state(char *str);
 void				parse_wsprite(t_doom *doom, char **arr);
 int					sprite_type(char *str);
 void				parse_entity(t_doom *doom, char **arr);
-/* File: player_collision.c */
-void				player_collision(t_doom *doom);
 /* File: precompute_buy_menu.c */
 void				precompute_buy_menu(t_doom *doom);
 /* File: precompute_entities.c */
@@ -764,8 +740,6 @@ int					get_coresponding_entity_state_frame(t_doom *doom,
 void				precompute_entities(t_doom *doom);
 /* File: precompute_projectiles.c */
 int					player_contact(t_doom *doom, t_v3 start, t_v3 dest);
-int					projectile_collision(t_doom *doom,
-						t_projectile *orb, t_v3 dest);
 void				precompute_projectiles(t_doom *doom);
 /* File: precompute_skybox.c */
 void				compute_skybox(t_doom *doom);

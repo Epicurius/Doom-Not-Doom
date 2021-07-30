@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:49:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 12:29:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 	speed /= point_distance_v3(doom->player.where, entity->where);
 	entity->velocity.x = (doom->player.where.x - entity->where.x) * speed;
 	entity->velocity.y = (doom->player.where.y - entity->where.y) * speed;
-	if (g_entity_data[entity->type].flying)
-		entity->velocity.z = (doom->player.where.z + doom->player.eye_lvl
+	if (g_entity_data[entity->type].flight)
+		entity->velocity.z = (doom->player.where.z + doom->player.eyelvl
 				- entity->where.z) * speed;
 	return (1);
 }
@@ -54,31 +54,23 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;
 	entity->velocity.y = (100 * sin(a)) * speed;
-	if (g_entity_data[entity->type].flying)
-		entity->velocity.z = (doom->player.where.z + doom->player.eye_lvl
+	if (g_entity_data[entity->type].flight)
+		entity->velocity.z = (doom->player.where.z + doom->player.eyelvl
 				- entity->where.z) * speed;
 	return (1);
 }
 
 void	ai_collision(t_doom *doom, t_entity *entity)
 {
-	t_collision	collision;
+	t_motion	motion;
 
-	collision.where = &entity->where;
-	collision.velocity = &entity->velocity;
-	collision.sector = &entity->sector;
-	collision.sectors = doom->sectors;
-	collision.entities = doom->entity;
-	collision.nb_entities = doom->nb.entities;
-	collision.hitbox_height = g_entity_data[entity->type].height;
-	collision.hitbox_radius = g_entity_data[entity->type].hitbox_radius;
-	collision.step_height = 2;
-	collision.player = 0;
-	collision.suffocate = 0;
-	collision_detection(&collision);
-	if (collision.suffocate)
+	motion.flight = g_entity_data[entity->type].flight;
+	motion.height = g_entity_data[entity->type].height;
+	motion.curr_sect = entity->sector;
+	entity->sector = collision_detection(doom, motion, &entity->where, &entity->velocity);
+	if (entity->sector == -1)
 		entity->state = DEATH;
-	if (entity->velocity.x != 0 || entity->velocity.y != 0)
+	else if (entity->velocity.x != 0 || entity->velocity.y != 0)
 		entity->yaw = angle_to_point_v2(entity->where,
 				add_v3(entity->where, entity->velocity));
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/28 15:12:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	loop_screen_sector(void	*arg)
 			* p->anglecos + p->where.x;
 		pos.y = tmp * p->anglecos - (-cam->near_z)
 			* p->anglesin + p->where.y;
-		pos.z = p->where.z + p->eye_lvl;
+		pos.z = p->where.z + p->eyelvl;
 		render_vline(*render, find_sector(render->sectors,
 				render->nb_sectors, pos));
 		render->x++;

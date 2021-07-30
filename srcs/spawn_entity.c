@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:21:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 11:20:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	spawn_mob(t_doom *doom, t_entity *rift)
 	mob->sector = rift->sector;
 	mob->dest = mob->where;
 	mob->state = IDLE;
-	if (g_entity_data[mob->type].flying)
+	if (g_entity_data[mob->type].flight)
 		mob->where.z += 5;
 	mob->hp = g_entity_data[mob->type].health;
 	project_entity(doom, mob, &mob->render);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:48:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 12:18:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,26 @@ void	object_collision(t_doom *doom, t_player *player)
 }
 */
 
-int	entity_collision(t_collision *e, t_v3 dest)
+int	entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity)
 {
+	t_v3		dest;
 	t_list		*curr;
-	t_entity	*entities;
+	t_entity	*entity;
 
-	curr = e->entities;
+	curr = doom->entity;
+	if (!curr)
+		return (0);
+	dest = add_v3(*where, *velocity);
 	while (curr)
 	{
-		entities = curr->content;
+		entity = curr->content;
 		curr = curr->next;
-		if (point_distance_v3(entities->where, dest) > (e->hitbox_radius + 3))
-			continue ;
-		return (1);
+		if (point_distance_v3(entity->where, dest)
+			< g_entity_data[entity->type].hitbox_radius)
+		{
+			*velocity = new_v3(0, 0, 0);	
+			return (1);
+		}
 	}
 	return (0);
 }
