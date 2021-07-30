@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:27:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 16:59:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	re_init(t_doom *doom)
 	init_game_mode(doom);
 	init_slope_normal(doom);
 	color_palets(doom);
+	ft_bzero(&doom->keys, 517);
 	x = -1;
 	while (++x < doom->nb.threads)
 	{
@@ -69,6 +70,8 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_fc);
 	else if (ft_strnequ(line, "type:wsprite", 12))
 		read_line(doom, fd, parse_wsprite);
+	else if (ft_strnequ(line, "type:event", 10))
+		read_line(doom, fd, parse_events);
 }
 
 static void	free_file(t_doom *doom)
@@ -108,6 +111,5 @@ void	reload_map(t_doom *doom, char *file_name)
 	close(fd);
 	validate_map(doom);
 	re_init(doom);
-	doom->keys[KEY_EQUAL] = 0;
 	ft_printf("{CLR:41}[INFO] Map ReLoaded!{RESET}\n");
 }

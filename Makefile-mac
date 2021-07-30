@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile-mac                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/30 13:43:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/30 17:16:13 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,17 +29,18 @@ RAW_SRC		=	ai_attack.c\
 				blit_bxpm.c\
 				blit_entity.c\
 				buy_menu.c\
-				buy_menu_help.c\
-				buy_menu_weapon_stats.c\
-				buy_menu_player_stats.c\
-				buy_menu_weapon.c\
-				buy_menu_weapon_upgrades.c\
-				buy_menu_player_upgrades.c\
-				buy_menu_player.c\
 				buy_menu_buttons.c\
+				buy_menu_help.c\
 				buy_menu_init.c\
+				buy_menu_player.c\
+				buy_menu_player_stats.c\
+				buy_menu_player_upgrades.c\
+				buy_menu_weapon.c\
+				buy_menu_weapon_stats.c\
+				buy_menu_weapon_upgrades.c\
 				camera.c\
 				clock.c\
+				collision_detection.c\
 				color_and_brightness.c\
 				compute_vline.c\
 				crosshair_position.c\
@@ -142,7 +143,6 @@ RAW_SRC		=	ai_attack.c\
 				validate_map1.c\
 				validate_map2.c\
 				vertical_line.c\
-				collision_detection.c\
 				wall_slide.c\
 				wall_to_screen_xz.c
 

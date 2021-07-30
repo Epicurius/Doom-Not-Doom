@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:03:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 16:43:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,8 @@ enum e_key_code
 	KEY_RCTRL = 228,
 	KEY_RSHIFT = 229,
 	KEY_RALT = 230,
-	MOUSE_LEFT = 513,
-	MOUSE_RIGHT = 514,
+	MOUSE_LEFT = 512,
+	MOUSE_RIGHT = 513,
 };
 
 #endif

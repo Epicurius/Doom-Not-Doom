@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:44:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 16:53:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	get_events(t_doom *doom, char *key)
 		if (event.key.type == SDL_KEYDOWN || event.key.type == SDL_KEYUP)
 			key[event.key.keysym.scancode] = event.key.type == SDL_KEYDOWN;
 		else if (event.button.type == SDL_MOUSEBUTTONDOWN || event.button.type == SDL_MOUSEBUTTONUP)
-			key[SDL_NUM_SCANCODES + event.button.button] = event.button.type == SDL_MOUSEBUTTONDOWN;
+			key[511 + event.button.button] = event.button.type == SDL_MOUSEBUTTONDOWN;
 	}	
 }
 
@@ -36,7 +36,7 @@ void	poll_event(t_doom *doom)
 	if (key[KEY_ESCAPE] || key[KEY_Q])
 		doom->quit = 1;
 	if (key[KEY_M])
-		mute(key[KEY_M]);
+		mute(key[KEY_M] = 0);
 	if (key[SDL_SCANCODE_GRAVE])
 		doom->player.where = doom->sectors[doom->player.sector].center;
 	if (doom->player.action == NONE && key[KEY_E])

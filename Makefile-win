@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile-win                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/30 13:43:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/30 17:08:29 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,6 +197,7 @@ RESOURCES	=	./resources
 all: $(RESOURCES) $(ODIR) $(NAME)
 
 -include $(DEP)
+
 $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@

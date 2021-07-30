@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:45:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 17:20:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
-
-
 
 typedef struct s_settings
 {
@@ -430,19 +428,13 @@ typedef struct s_event
 
 typedef struct		s_motion
 {
-	t_wall			wall;
-	int				sector;
-	int				lowest_ceiling;
 	int				flight;
-	double			size_2d;
-	//double			eyesight;
 	double			height;
 	t_v3			where;
 	t_v3			velocity;
 	t_v3			future;
 	int				curr_sect;
 	int				prev_sect;
-	int				suffocate;
 	t_v3			move;
 }					t_motion;
 
@@ -482,58 +474,49 @@ typedef struct s_doom
 	t_weapon		weapon[WEAPON_AMOUNT];
 	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
-	char			keys[SDL_NUM_SCANCODES + 5];
+	char			keys[517];
 }					t_doom;
 
-int		horizontal_collision(t_doom *doom, t_motion *motion);
-int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
-int		hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius);
-int		collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
-void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */
 int					ai_track_player(t_doom *doom, t_entity *entity);
-int					ai_rand_move(t_doom *doom, t_entity *entity,
-						int chance, int angle);
-int					ai_rand_dodge(t_doom *doom, t_entity *entity,
-						int chance, int angle);
+int					ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle);
+int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle);
 void				ai_collision(t_doom *doom, t_entity *entity);
 /* File: animate_wsprite.c */
 int					animate_wsprite(t_doom *doom, t_wsprite *entity);
 /* File: args.c */
 void				args(int ac, char **av, t_settings *init);
 /* File: blit_bxpm.c */
-void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm,
-						int sx, int sy);
+void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 						t_bxpm *src, t_rect srcr);
 /* File: blit_entity.c */
 int					blit_game_entity(void *arg);
-/* File: buy_menu.c */
-void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
-						SDL_Surface *surface, t_inv *inv);
 /* File: camera.c */
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom, int x, int y);
 /* File: clock.c */
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
+/* File: collision_detection.c */
+int					hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
+int					hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius);
+int					horizontal_collision(t_doom *doom, t_motion *motion);
+int					vertical_collision(t_doom *doom, t_motion *motion);
+int					collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
 /* File: color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
-int					blend_alpha(unsigned int src, unsigned int dest,
-						uint8_t alpha);
+int					blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha);
 void				color_palet(t_bxpm *bxpm, int light);
 void				color_palets(t_doom *doom);
 /* File: compute_vline.c */
-void				compute_vline_data(t_render *render,
-						t_wall wall, t_vline *vline);
-void				compute_vline_texels(t_render *render,
-						t_wall wall, t_vline *vline);
+void				compute_vline_data(t_render *render, t_wall wall, t_vline *vline);
+void				compute_vline_texels(t_render *render, t_wall wall, t_vline *vline);
 /* File: crosshair_position.c */
-void				crosshair_position(t_render *render,
-						t_vline *vline, double alpha);
+void				crosshair_position(t_render *render, t_vline *vline, double alpha);
 /* File: doom.c */
 /* File: draw2.c */
 void				draw_screen(t_doom *doom);
@@ -562,6 +545,7 @@ void				draw_skybox(t_render *render, t_vline *vline, int side);
 /* File: draw_wall.c */
 void				draw_wall_texture(t_render *render, t_vline *vline);
 /* File: draw_weapon.c */
+int					weapon_thread(void *args);
 void				draw_weapon(t_doom *doom);
 /* File: draw_wsprites.c */
 void				draw_wsprites(t_render *render, t_vline *vline);
@@ -620,6 +604,7 @@ int					set_icon(SDL_Window *window, char *dir);
 void				init_doom(t_doom *doom);
 /* File: init_alfred.c */
 void				init_alfred(t_doom *doom);
+/* File: init_alfred2.c */
 void				move_pos_alfred2(t_rect **pos);
 /* File: init_barrel.c */
 void				init_barrel(t_doom *doom);
@@ -650,6 +635,7 @@ void				init_render(t_doom *doom);
 /* File: init_rift.c */
 void				init_rift(t_doom *doom);
 /* File: init_scale.c */
+void				scale_wall_height(t_doom *doom, t_wall *wall);
 void				init_scale(t_doom *doom);
 /* File: init_sdl.c */
 void				init_sdl(t_doom *doom);
@@ -661,6 +647,7 @@ double				get_floor_at_pos(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
 /* File: init_spooky.c */
 void				init_spooky(t_doom *doom);
+/* File: init_spooky2.c */
 void				move_pos_spooky2(t_rect **pos);
 /* File: init_textures.c */
 int					multy_thread_bxpm(void *arg);
@@ -672,12 +659,10 @@ void				init_weapons(t_doom *doom);
 /* File: keys.c */
 void				poll_event(t_doom *doom);
 /* File: line.c */
-void				line(SDL_Surface *surf, Uint32 color,
-						t_point v1, t_point v2);
+void				line(SDL_Surface *surf, Uint32 color, t_point v1, t_point v2);
 /* File: malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File: map_events.c */
-void				scale_wall_height(t_doom *doom, t_wall *wall);
 void				loop_events(t_doom *doom, t_event *event);
 void				wsprite_trigger_events(t_doom *doom, t_event *event);
 void				sector_trigger_events(t_doom *doom, t_event *event);
@@ -687,6 +672,7 @@ void				map(t_doom *doom);
 /* File: movement.c */
 void				movement(t_doom *doom);
 /* File: object_collision.c */
+void				object_collision(t_doom *doom, t_player *player);
 int					entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity);
 /* File: orientation.c */
 void				degree_fix(double *degrees);
@@ -713,10 +699,8 @@ void				parse_entity(t_doom *doom, char **arr);
 void				precompute_buy_menu(t_doom *doom);
 /* File: precompute_entities.c */
 int					frame_animation(t_doom *doom, t_entity *entity);
-void				preforme_entity_state_fuction(t_doom *doom,
-						t_entity *entity);
-int					get_coresponding_entity_state_frame(t_doom *doom,
-						t_entity *entity);
+void				preforme_entity_state_fuction(t_doom *doom, t_entity *entity);
+int					get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity);
 void				precompute_entities(t_doom *doom);
 /* File: precompute_projectiles.c */
 int					player_contact(t_doom *doom, t_v3 start, t_v3 dest);
@@ -738,19 +722,15 @@ void				weapon_reload_animate(t_doom *doom, t_weapon *weapon);
 void				equip_weapon(t_doom *doom);
 void				precompute_weapon(t_doom *doom);
 /* File: project_entity.c */
-void				project_entity(t_doom *doom,
-						t_entity *ent, t_entity_render *render);
+void				project_entity(t_doom *doom, t_entity *ent, t_entity_render *render);
 /* File: project_wall.c */
 void				project_wall(t_doom *doom, t_wall *wall);
 /* File: put_pixels.c */
-void				blit_pixel_brightness(t_render *render, int coord,
-						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_alpha(t_render *render, int coord,
-						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_opaque(t_render *render, int coord,
-						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_skybox(t_render *render, int coord,
-						t_v3 text, int side);
+void				blit_pixel_brightness(t_render *render, int coord, t_v3 text,
+						t_bxpm *bxpm);
+void				blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm);
+void				blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm);
+void				blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side);
 /* File: random.c */
 void				get_entity_state_name(t_entity *entity);
 void				what_vert(t_doom *doom);
@@ -761,14 +741,11 @@ int					read_file(t_doom *doom, char *file_name);
 /* File: reload_map.c */
 void				reload_map(t_doom *doom, char *file_name);
 /* File: skybox_ceiling_vline.c */
-void				skybox_ceiling_vline(t_render *render,
-						t_vline vline, int tx);
+void				skybox_ceiling_vline(t_render *render, t_vline vline, int tx);
 /* File: skybox_floor_vline.c */
-void				skybox_floor_vline(t_render *render,
-						t_vline vline, int tx);
+void				skybox_floor_vline(t_render *render, t_vline vline, int tx);
 /* File: skybox_wall_vline.c */
-void				skybox_wall_vline(t_render *render,
-						t_vline vline, int tx);
+void				skybox_wall_vline(t_render *render, t_vline vline, int tx);
 /* File: sound.c */
 void				mute(int i);
 void				init_sound(t_doom *doom);
@@ -790,14 +767,12 @@ int					is_convex(t_sector *sector);
 /* File: vertical_line.c */
 Uint32				z_clr(double z, double max_z);
 void				shade_zbuffer(t_render *render, t_vline *vline, int side);
-void				vline_color_bot_top(t_render *render,
-						t_vline *vline, int side);
-void				vline_color_walls(t_render *render,
-						t_vline *vline);
-void				vline_monochromic(t_render *render,
-						t_vline *vline, int side);
+void				vline_color_bot_top(t_render *render, t_vline *vline, int side);
+void				vline_color_walls(t_render *render, t_vline *vline);
+void				vline_monochromic(t_render *render, t_vline *vline, int side);
+/* File: wall_slide.c */
+void				slide_collision(t_doom *doom, t_motion *motion, t_wall *wall);
 /* File: wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
-void				add_to_list(t_list **list, void *new_v, size_t size);
 
 #endif

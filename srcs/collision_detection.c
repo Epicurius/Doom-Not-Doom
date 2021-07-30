@@ -12,7 +12,6 @@
 
 #include "doom.h"
 
-
 int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius)
 {
 	double	len;
