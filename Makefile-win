@@ -155,29 +155,48 @@ OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
 DEP			:=	$(OBJ:.o=.d)
 
 SDL_DIR		:= ../libs/SDL
-SDL_INC		:= -I$(SDL_DIR)
-SDL_LIB		:= -L$(SDL_DIR)
+SDL_INC		:= -I$(SDL_DIR)/include
+SDL_LIB		:= -L$(SDL_DIR)/lib
 SDL_LIBS	:= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 LIB_DIR		:= ../libs
-LIBFT		:= -I$(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
-LIBPF		:= -I$(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
-LIBTP		:= -I$(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
-LIBGFX		:= -I$(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
-LIBBXPM		:= -I$(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
-LIBUI		:= -I$(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
 
-LIBS		+=	$(INC) $(SDL_INC) $(SDL_LIB) $(SDL_LIBS) \
-				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
+INCL		= \
+			  -I$(LIB_DIR)/libft \
+			  -I$(LIB_DIR)/better_libui \
+			  -I$(LIB_DIR)/libpf \
+			  -I$(LIB_DIR)/libgfx \
+			  $(SDL_INC) \
+			  -I$(LIB_DIR)/libtp \
+			  -I$(LIB_DIR)/libbxpm \
 
-CFLAGS		=	-Wall -Wextra -Werror# -Wfatal-errors
+LIBR		= \
+			  -L$(LIB_DIR)/libft \
+			  -L$(LIB_DIR)/better_libui \
+			  -L$(LIB_DIR)/libpf \
+			  -L$(LIB_DIR)/libgfx \
+			  $(SDL_LIB) \
+			  -L$(LIB_DIR)/libtp \
+			  -L$(LIB_DIR)/libbxpm \
+
+LIBRA		= \
+			  -lui \
+			  -lpf \
+			  -lft \
+			  -lgfx \
+			  $(SDL_LIBS) \
+			  -ltp \
+			  -lbxpm \
+
+LIBS		= $(INCL) $(INC) $(LIBR) $(LIBRA)
+
+CFLAGS		=	-Wall -Wextra
 
 RESOURCES	=	./resources
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
 -include $(DEP)
-#-04
 $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
