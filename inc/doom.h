@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 13:45:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:45:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,6 @@ typedef struct s_plane
 	double			feet;
 	double			scale;
 }					t_plane;
-
-typedef struct s_keys
-{
-	int				w;
-	int				a;
-	int				s;
-	int				d;
-	int				t;
-	int				p;
-	int				r;
-	int				m;
-	int				e;
-	int				space;
-	int				lctr;
-	int				lshift;
-	int				lmouse;
-	int				tab;
-	int				num;
-	int				equal;
-}					t_keys;
 
 typedef struct s_fc
 {
@@ -474,7 +454,6 @@ typedef struct s_doom
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
-	int				sect_list[100];
 	double			*zbuffer;
 	double			map_scale;
 	t_fonts			font;
@@ -485,7 +464,6 @@ typedef struct s_doom
 	t_nb			nb;
 	t_tpool			tpool;
 	t_time			time;
-	t_keys			key;
 	t_map			map;
 	t_v3			*vert;
 	t_wall			*walls;
@@ -504,8 +482,10 @@ typedef struct s_doom
 	t_weapon		weapon[WEAPON_AMOUNT];
 	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
+	char			keys[SDL_NUM_SCANCODES + 5];
 }					t_doom;
 
+int		horizontal_collision(t_doom *doom, t_motion *motion);
 int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius);
 int		hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius);
 int		collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity);
@@ -690,7 +670,7 @@ void				init_torch(t_doom *doom);
 /* File: init_weapons.c */
 void				init_weapons(t_doom *doom);
 /* File: keys.c */
-void				poll_event(t_doom *doom, SDL_Event *event);
+void				poll_event(t_doom *doom);
 /* File: line.c */
 void				line(SDL_Surface *surf, Uint32 color,
 						t_point v1, t_point v2);

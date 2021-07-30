@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/30 13:43:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/07/30 15:37:24 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,7 +175,7 @@ CFLAGS		=	-Wall -Wextra -Werror# -Wfatal-errors
 
 RESOURCES	=	./resources
 
-all: $(RESOURCES) $(ODIR) $(NAME)
+all: $(RESOURCES) $(NAME)
 
 -include $(DEP)
 #-04
@@ -183,13 +183,10 @@ $(ODIR):
 	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
 
-$(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+$(NAME): $(SRCS)
+	@gcc $(CFLAGS) $(LIBS) $(SRCS) -o $(NAME)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
 
-$(ODIR)/%.o: $(CDIR)/%.c
-	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
-	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)

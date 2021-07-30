@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 15:45:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:21:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	map_area(t_doom *doom)
 
 void	map(t_doom *doom)
 {
-	if (doom->key.tab)
+	if (doom->keys[KEY_TAB])
 	{
 		map_area(doom);
 		draw_map(doom);

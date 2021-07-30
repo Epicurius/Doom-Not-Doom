@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:20:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	pause_loop(t_doom *doom, t_bmp *bmp)
 		SDL_PollEvent(&event);
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
 		{
-			doom->key.p = 0;
+			doom->keys[KEY_P] = 0;
 			break ;
 		}
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q)
@@ -74,7 +74,7 @@ void	game_pause(t_doom *doom)
 	t_bxpm		*bxpm;
 	t_bmp		*bmp;
 
-	if (!doom->key.p)
+	if (!doom->keys[KEY_P])
 		return ;
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
@@ -90,6 +90,6 @@ void	game_pause(t_doom *doom)
 	free_bmp(bmp);
 	free_bxpm(bxpm);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	ft_bzero(&doom->key, sizeof(doom->key));
+	ft_bzero(&doom->keys, sizeof(char) * (SDL_NUM_SCANCODES + 5));
 	doom->time.curr = SDL_GetTicks();
 }

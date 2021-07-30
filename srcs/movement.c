@@ -6,22 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 12:29:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:23:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	print_v3(char *str, t_v3 v)
-{
-	if (str)
-		ft_printf("%s\t", str);
-	ft_printf("[%.2f\t%.2f\t%.2f]\n", v.x, v.y, v.z);
-}
-
 static void	get_base_speed(t_doom *doom, float *speed)
 {
-	if (doom->key.lshift)
+	if (doom->keys[KEY_LSHIFT])
 		*speed = doom->player.sprint_speed;
 	else
 		*speed = doom->player.walk_speed;
@@ -30,7 +23,7 @@ static void	get_base_speed(t_doom *doom, float *speed)
 
 static inline void	foot_steps(t_doom *doom, t_player player)
 {
-	if ((doom->key.w || doom->key.s || doom->key.a || doom->key.d)
+	if ((doom->keys[KEY_W] || doom->keys[KEY_S] || doom->keys[KEY_A] || doom->keys[KEY_D])
 		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector],
 			player.where))
 	{
@@ -46,26 +39,26 @@ static inline void	foot_steps(t_doom *doom, t_player player)
 
 static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 {
-	if (doom->key.w)
+	if (doom->keys[KEY_W])
 	{
 		move->x += player.anglecos * speed;
 		move->y += player.anglesin * speed;
 		if (player.flight)
 			move->z += -player.pitch * speed;
 	}
-	if (doom->key.s)
+	if (doom->keys[KEY_S])
 	{
 		move->x += player.anglecos * -speed;
 		move->y += player.anglesin * -speed;
 		if (player.flight)
 			move->z += player.pitch * speed;
 	}
-	if (doom->key.a)
+	if (doom->keys[KEY_A])
 	{
 		move->x += player.anglesin * speed;
 		move->y += player.anglecos * -speed;
 	}
-	if (doom->key.d)
+	if (doom->keys[KEY_D])
 	{
 		move->x += player.anglesin * -speed;
 		move->y += player.anglecos * speed;
@@ -80,7 +73,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
-	if (doom->key.space
+	if (doom->keys[KEY_SPACE]
 		&& player->where.z <= get_floor_at_pos(sector, player->where) + 0.1)
 	{
 		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
@@ -102,7 +95,7 @@ void	movement(t_doom *doom)
 
 	if (doom->player.where.z + doom->player.eyelvl + 2 < doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eyelvl = PLAYER_HEIGHT - 1;
-	if (doom->key.lctr)
+	if (doom->keys[KEY_LCTRL])
 		doom->player.eyelvl = PLAYER_HEIGHT - 4;
 	SDL_GetRelativeMouseState(&x, &y);
 	update_camera(doom, x, y);

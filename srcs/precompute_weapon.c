@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:36:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:36:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,16 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->key.num >= 1 && doom->key.num <= WEAPON_AMOUNT + 1
-		&& doom->weapon[doom->key.num - 1].own)
-		doom->player.equiped = doom->key.num - 1;
+	if (doom->weapon[0].own && doom->keys[KEY_1])
+		doom->player.equiped = 0;
+	else if (doom->weapon[1].own && doom->keys[KEY_2])
+		doom->player.equiped = 1;
+	else if (doom->weapon[2].own && doom->keys[KEY_3])
+		doom->player.equiped = 2;
+	else if (doom->weapon[3].own && doom->keys[KEY_4])
+		doom->player.equiped = 3;
+	else if (doom->weapon[4].own && doom->keys[KEY_5])
+		doom->player.equiped = 5;
 }
 
 //		move doom->player.action = NONE;
@@ -66,11 +73,11 @@ void	precompute_weapon(t_doom *doom)
 		return ;
 	weapon = &doom->weapon[doom->player.equiped];
 	if ((weapon->frame && (weapon->frame < weapon->fire_frames))
-		|| (doom->key.lmouse && weapon->mag_ammo > 0))
+		|| (doom->keys[MOUSE_LEFT] && weapon->mag_ammo > 0))
 		weapon_fire_animate(doom, weapon);
 	else if (weapon->frame >= weapon->fire_frames)
 		weapon_reload_animate(doom, weapon);
-	else if (doom->key.r && !weapon->frame
+	else if (doom->keys[KEY_R] && !weapon->frame
 		&& !weapon->mag_ammo && weapon->cur_ammo)
 		weapon_reload_animate(doom, weapon);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:18:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/16 13:17:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:18:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	game_loading(t_doom *doom)
 	SDL_PollEvent(&event);
 	SDL_RaiseWindow(doom->win);
 	free_bxpm(bxpm);
-	ft_bzero(&doom->key, sizeof(doom->key));
+	ft_bzero(&doom->keys, sizeof(char) * (SDL_NUM_SCANCODES + 5));
+	//ft_bzero(&doom->key, sizeof(doom->key));
 	doom->time.curr = SDL_GetTicks();
 }

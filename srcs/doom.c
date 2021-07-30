@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 11:21:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:40:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	sound_board(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
-static inline void	game_loop(t_doom *doom, SDL_Event *event)
+static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
 	update_camera(doom, 0, 0);
-	//map_events(doom);
+	map_events(doom);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);
@@ -40,7 +40,7 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 	precompute_entities(doom);
 	precompute_projectiles(doom);
 	movement(doom);
-	poll_event(doom, event);
+	poll_event(doom);
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_entities(doom);
@@ -57,7 +57,6 @@ static inline void	game_loop(t_doom *doom, SDL_Event *event)
 static void	game(char *map, t_settings settings)
 {
 	t_doom		doom;
-	SDL_Event	event;
 
 	ft_bzero(&doom, sizeof(t_doom));
 	doom.settings = settings;
@@ -69,7 +68,7 @@ static void	game(char *map, t_settings settings)
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
 	{
-		game_loop(&doom, &event);
+		game_loop(&doom);
 		reload_map(&doom, map);
 	}
 	if (doom.player.health <= 0)

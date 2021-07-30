@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:07:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:27:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	reload_map(t_doom *doom, char *file_name)
 	int		fd;
 	char	*line;
 
-	if (!doom->key.equal)
+	if (!doom->keys[KEY_EQUAL])
 		return ;
 	free_file(doom);
 	fd = open(file_name, O_RDONLY);
@@ -108,6 +108,6 @@ void	reload_map(t_doom *doom, char *file_name)
 	close(fd);
 	validate_map(doom);
 	re_init(doom);
-	doom->key.equal = 0;
+	doom->keys[KEY_EQUAL] = 0;
 	ft_printf("{CLR:41}[INFO] Map ReLoaded!{RESET}\n");
 }

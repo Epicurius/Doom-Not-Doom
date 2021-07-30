@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 12:30:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:38:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 
 void	precompute_projectiles(t_doom *doom)
 {
-	t_v3			dest;
 	t_list			*curr;
 	t_projectile	*orb;
 

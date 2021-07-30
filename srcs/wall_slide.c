@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 12:37:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 15:44:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static t_v3	parallel_movement(t_doom *doom, t_v3 m, t_v3 v1, t_v3 v2)
+static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 {
 	double	move_norm;
 	double	wall_norm;
@@ -62,7 +62,7 @@ void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall)
 {
 	t_v3 velocity;
 
-	velocity = parallel_movement(doom, motion->velocity, wall->v1, wall->v2);
+	velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
 	if (!horizontal_slide_collision(doom, *motion, velocity))
 	{
 		motion->move = velocity;

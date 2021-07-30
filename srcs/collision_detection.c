@@ -17,7 +17,6 @@ int		hitbox_collision2(t_v3 p, t_v3 v1, t_v3 v2, double radius)
 {
 	double	len;
 	double	dot;
-	double	distance;
 	t_v3	closest;
 
 	if (point_distance_v2(v1.x, v1.y, p.x, p.y) <= radius ||
