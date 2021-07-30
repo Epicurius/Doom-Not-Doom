@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 16:52:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 17:26:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	mute(int i)
 {
+	(void)i;
 	if (Mix_Volume(-1, -1) <= 0)
 		Mix_Volume(-1, 128);
 	else

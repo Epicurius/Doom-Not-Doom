@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 17:20:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/30 17:25:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,6 +492,9 @@ void				args(int ac, char **av, t_settings *init);
 void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy);
 void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 						t_bxpm *src, t_rect srcr);
+/* File: buy_menu.c */
+void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
+						SDL_Surface *surface, t_inv *inv);
 /* File: blit_entity.c */
 int					blit_game_entity(void *arg);
 /* File: camera.c */
