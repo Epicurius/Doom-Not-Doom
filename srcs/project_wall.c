@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	double		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = get_floor_at_pos(&doom->sectors[w->sect], p1) - eye_z;
-	v1.ceiling = get_ceiling_at_pos(&doom->sectors[w->sect], p1) - eye_z;
-	v2.floor = get_floor_at_pos(&doom->sectors[w->sect], p2) - eye_z;
-	v2.ceiling = get_ceiling_at_pos(&doom->sectors[w->sect], p2) - eye_z;
+	v1.floor = floor_at(&doom->sectors[w->sect], p1) - eye_z;
+	v1.ceiling = ceiling_at(&doom->sectors[w->sect], p1) - eye_z;
+	v2.floor = floor_at(&doom->sectors[w->sect], p2) - eye_z;
+	v2.ceiling = ceiling_at(&doom->sectors[w->sect], p2) - eye_z;
 	w->slope_v1.floor = doom->c.y + (v1.floor + w->angle_z1) * w->scale_v1;
 	w->slope_v1.ceiling = doom->c.y + (v1.ceiling + w->angle_z1) * w->scale_v1;
 	w->slope_v2.floor = doom->c.y + (v2.floor + w->angle_z2) * w->scale_v2;
@@ -59,10 +59,10 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	double		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = get_floor_at_pos(&doom->sectors[w->n], p1) - eye_z;
-	v1.ceiling = get_ceiling_at_pos(&doom->sectors[w->n], p1) - eye_z;
-	v2.floor = get_floor_at_pos(&doom->sectors[w->n], p2) - eye_z;
-	v2.ceiling = get_ceiling_at_pos(&doom->sectors[w->n], p2) - eye_z;
+	v1.floor = floor_at(&doom->sectors[w->n], p1) - eye_z;
+	v1.ceiling = ceiling_at(&doom->sectors[w->n], p1) - eye_z;
+	v2.floor = floor_at(&doom->sectors[w->n], p2) - eye_z;
+	v2.ceiling = ceiling_at(&doom->sectors[w->n], p2) - eye_z;
 	w->nslope_v1.floor = doom->c.y + (v1.floor + w->angle_z1) * w->scale_v1;
 	w->nslope_v1.ceiling = doom->c.y + (v1.ceiling + w->angle_z1) * w->scale_v1;
 	w->nslope_v2.floor = doom->c.y + (v2.floor + w->angle_z2) * w->scale_v2;

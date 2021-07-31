@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 11:20:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:21:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 		entity->velocity = new_v3(0, 0, entity->velocity.z);
 	if (!g_entity_data[entity->type].flight)
 	{
-		if (entity->where.z > get_floor_at_pos(&doom->sectors[entity->sector],
+		if (entity->where.z > floor_at(&doom->sectors[entity->sector],
 				entity->where))
 			entity->velocity.z -= doom->sectors[entity->sector].gravity;
 	}

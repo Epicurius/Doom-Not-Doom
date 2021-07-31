@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:23:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_base_speed(t_doom *doom, float *speed)
 static inline void	foot_steps(t_doom *doom, t_player player)
 {
 	if ((doom->keys[KEY_W] || doom->keys[KEY_S] || doom->keys[KEY_A] || doom->keys[KEY_D])
-		&& player.where.z <= get_floor_at_pos(&doom->sectors[player.sector],
+		&& player.where.z <= floor_at(&doom->sectors[player.sector],
 			player.where))
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
@@ -74,7 +74,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
 	if (doom->keys[KEY_SPACE]
-		&& player->where.z <= get_floor_at_pos(sector, player->where) + 0.1)
+		&& player->where.z <= floor_at(sector, player->where) + 0.1)
 	{
 		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);

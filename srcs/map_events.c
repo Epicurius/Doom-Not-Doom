@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 17:03:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 		precompute_buy_menu(doom);
 		event->trigger_sector->trigger = 0;
 	}
-	else if (event->type == HAZARD && get_floor_at_pos(event->trigger_sector,
+	else if (event->type == HAZARD && floor_at(event->trigger_sector,
 			doom->player.where) + 0.1 >= doom->player.where.z)
 		doom->player.health -= event->speed;
 }

@@ -51,8 +51,8 @@ static int	portal_hitbox(t_doom *doom, t_motion *motion, t_wall *wall)
 	double	portal_bot;
 
 	t_v3 point = closest_point_on_segment_v2(motion->where, wall->v1, wall->v2);
-	portal_bot = ft_max(get_floor_at_pos(&doom->sectors[motion->curr_sect], point), get_floor_at_pos(&doom->sectors[wall->n], point));
-	portal_top = ft_min(get_ceiling_at_pos(&doom->sectors[motion->curr_sect], point), get_ceiling_at_pos(&doom->sectors[wall->n], point));
+	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point), floor_at(&doom->sectors[wall->n], point));
+	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point), ceiling_at(&doom->sectors[wall->n], point));
 	if (portal_top <= portal_bot + motion->height)
 		return (0);
 	if (portal_top > motion->where.z + motion->height && portal_bot <= motion->where.z + STEP_HEIGHT)
@@ -68,8 +68,8 @@ static int	portal_intersect(t_doom *doom, t_motion *motion, t_wall *wall)
 	double	portal_bot;
 
 	t_v3 point = closest_point_on_segment_v2(motion->where, wall->v1, wall->v2);
-	portal_bot = ft_max(get_floor_at_pos(&doom->sectors[motion->curr_sect], point), get_floor_at_pos(&doom->sectors[wall->n], point));
-	portal_top = ft_min(get_ceiling_at_pos(&doom->sectors[motion->curr_sect], point), get_ceiling_at_pos(&doom->sectors[wall->n], point));
+	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point), floor_at(&doom->sectors[wall->n], point));
+	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point), ceiling_at(&doom->sectors[wall->n], point));
 	if (portal_top <= portal_bot + motion->height)
 		return (0);
 	if (portal_top > motion->where.z + motion->height && portal_bot <= motion->where.z + STEP_HEIGHT)
@@ -143,11 +143,29 @@ int	vertical_collision(t_doom *doom, t_motion *motion)
 {
 	t_fc		y;
 
-	y.ceiling = get_ceiling_at_pos(&doom->sectors[motion->curr_sect], motion->where);
-	y.floor = get_floor_at_pos(&doom->sectors[motion->curr_sect], motion->where);
+	y.ceiling = ceiling_at(&doom->sectors[motion->curr_sect], motion->where);
+	y.floor = floor_at(&doom->sectors[motion->curr_sect], motion->where);
 	if (y.ceiling - y.floor < motion->height)
 		return (1);
-	if (!motion->flight && motion->where.z > y.floor)
+
+	int i = -1;
+	while (++i < doom->sectors[motion->curr_sect].npoints)
+	{
+		t_wall *wall = doom->sectors[motion->curr_sect].wall[i];
+		if (!wall->solid && wall->n != -1)
+		{
+			t_v3 point = closest_point_on_segment_v2(motion->where, wall->v1, wall->v2);
+			int my = (point_distance_v2(point.x, point.y, motion->where.x, motion->where.y) <= 1.0);
+			if (my && motion->where.z <= floor_at(&doom->sectors[wall->n], point))
+			{
+				if (motion->velocity.z < 0)
+					motion->velocity.z = 0;
+				break ;
+			}
+		}
+	}
+
+	if (i >= doom->sectors[motion->curr_sect].npoints && !motion->flight && motion->where.z > y.floor)
 	{
 		motion->velocity.z -= doom->sectors[motion->curr_sect].gravity;
 		motion->where.z += motion->velocity.z;
@@ -177,10 +195,10 @@ int	collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *veloci
 	horizontal_collision(doom, &motion);
 	*velocity = motion.move;
 	*where = add_v3(*where, *velocity);
-	if (where->z < get_floor_at_pos(&doom->sectors[motion.curr_sect], *where))
+	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))
 	{
 		velocity->z = 0;
-		where->z = get_floor_at_pos(&doom->sectors[motion.curr_sect], *where);
+		where->z = floor_at(&doom->sectors[motion.curr_sect], *where);
 	}
 	if (!in_sector(&doom->sectors[motion.curr_sect], *where))
 	{

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:35:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 11:41:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ t_v3	sub_v3(t_v3 v1, t_v3 v2)
 t_v3	mult_v3(t_v3 vec, float scalar)
 {
 	return (new_v3(vec.x * scalar, vec.y * scalar, vec.z * scalar));
+}
+
+t_v3	div_v3(t_v3 vec, float scalar)
+{
+	return (new_v3(vec.x / scalar, vec.y / scalar, vec.z / scalar));
 }

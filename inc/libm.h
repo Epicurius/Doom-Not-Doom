@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 14:04:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 11:26:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int					ft_sign(double x);
 double				point_side_v2(t_v3 v1, t_v3 v2, t_v3 p);
 double				point_distance_v2(double x1, double y1,
 						double x2, double y2);
-void				add3(t_v3 *a, double x, double y, double z);
+void				print_v2(char *str, t_v2 v);
+void				print_v3(char *str, t_v3 v);
 /* File: math8.c */
 int					cohen_sutherland(t_point v[2], t_rect size);
 

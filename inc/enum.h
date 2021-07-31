@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 16:43:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:17:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef enum e_enum_entity_state
 	IDLE,
 	ATTACK,
 	MOVE,
-	DEATH
+	DEATH,
+	TERMINATE
 }			t_enum_entity_state;
 
 typedef enum e_enum_skybox

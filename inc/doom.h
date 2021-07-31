@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 17:25:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -645,8 +645,8 @@ void				init_sdl(t_doom *doom);
 /* File: init_shotgun.c */
 void				init_shotgun(t_doom *doom, t_weapon *weapon);
 /* File: init_slope.c */
-double				get_ceiling_at_pos(t_sector *sector, t_v3 pos);
-double				get_floor_at_pos(t_sector *sector, t_v3 pos);
+double				ceiling_at(t_sector *sector, t_v3 pos);
+double				floor_at(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
 /* File: init_spooky.c */
 void				init_spooky(t_doom *doom);

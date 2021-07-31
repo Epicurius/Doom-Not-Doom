@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 12:29:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:23:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ai_collision(t_doom *doom, t_entity *entity)
 	motion.height = g_entity_data[entity->type].height;
 	motion.curr_sect = entity->sector;
 	entity->sector = collision_detection(doom, motion, &entity->where, &entity->velocity);
-	if (entity->sector == -1)
+	if (entity->sector < 0)
 		entity->state = DEATH;
 	else if (entity->velocity.x != 0 || entity->velocity.y != 0)
 		entity->yaw = angle_to_point_v2(entity->where,

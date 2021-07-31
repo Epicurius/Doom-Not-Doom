@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 16:53:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:47:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	get_events(t_doom *doom, char *key)
 	{
 		if (event.type == SDL_QUIT)
 			doom->quit = 1;
-		if (event.key.type == SDL_KEYDOWN || event.key.type == SDL_KEYUP)
+		else if (event.key.type == SDL_KEYDOWN || event.key.type == SDL_KEYUP)
 			key[event.key.keysym.scancode] = event.key.type == SDL_KEYDOWN;
 		else if (event.button.type == SDL_MOUSEBUTTONDOWN || event.button.type == SDL_MOUSEBUTTONUP)
 			key[511 + event.button.button] = event.button.type == SDL_MOUSEBUTTONDOWN;

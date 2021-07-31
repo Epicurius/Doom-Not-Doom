@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/22 12:34:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double	get_ceiling_at_pos(t_sector *sector, t_v3 pos)
+double	ceiling_at(t_sector *sector, t_v3 pos)
 {
 	double	peq;
 	t_v3	v;
@@ -23,7 +23,7 @@ double	get_ceiling_at_pos(t_sector *sector, t_v3 pos)
 	return (peq * sector->ceiling_slope + sector->ceiling.y);
 }
 
-double	get_floor_at_pos(t_sector *sector, t_v3 pos)
+double	floor_at(t_sector *sector, t_v3 pos)
 {
 	double	peq;
 	t_v3	v;

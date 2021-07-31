@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 17:34:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:48:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static void	sound_board(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 }
 
+struct timespec begin, end;
+double elapsed;
+
 static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
@@ -41,7 +44,11 @@ static inline void	game_loop(t_doom *doom)
 	precompute_projectiles(doom);
 	movement(doom);
 	poll_event(doom);
+	//clock_gettime(CLOCK_MONOTONIC, &begin);
 	tpool_wait(&doom->tpool);
+	//clock_gettime(CLOCK_MONOTONIC, &end);
+	//elapsed = end.tv_sec - begin.tv_sec;
+	//elapsed += (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
 	draw_projectiles(doom);
 	draw_entities(doom);
 	draw_crosshair(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:45:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sector_center(t_sector *sector)
 	}
 	sector->center.x /= sector->npoints;
 	sector->center.y /= sector->npoints;
-	sector->center.z = get_floor_at_pos(sector, sector->center);
+	sector->center.z = floor_at(sector, sector->center);
 }
 
 void	fix_wall_orientation(t_sector *sector)

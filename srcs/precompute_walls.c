@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	sector->floor.feet = doom->c.y
-		+ (get_floor_at_pos(sector, doom->player.where)
+		+ (floor_at(sector, doom->player.where)
 			- eye_z + doom->cam.near_z * doom->player.pitch)
 		* doom->cam.scale / -doom->cam.near_z;
 	sector->ceiling.head = doom->c.y
-		+ (get_ceiling_at_pos(sector, doom->player.where)
+		+ (ceiling_at(sector, doom->player.where)
 			- eye_z + doom->cam.near_z * doom->player.pitch)
 		* doom->cam.scale / -doom->cam.near_z;
 }

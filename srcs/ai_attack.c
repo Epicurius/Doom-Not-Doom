@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 12:01:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 	double	dist;
 	double	speed;
 
+	curr.z += 4.5;
+	dest.z += 4.5;
 	speed = PROJECTILE_SPEED * doom->time.delta;
-	move.x = dest.x - curr.x;
-	move.y = dest.y - curr.y;
-	move.z = dest.z - curr.z;
+	move = sub_v3(dest, curr);
 	if (move.x == 0 && move.y == 0 && move.z == 0)
 		return (move);
 	dist = space_diagonal(move);
@@ -51,10 +51,10 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 				doom->player.where);
 		orb->where.x = entity->where.x;
 		orb->where.y = entity->where.y;
-		orb->where.z = entity->where.z;
+		orb->where.z = entity->where.z + 4.5;
 		orb->start = orb->where;
 		orb->sector = entity->sector;
-		ft_lstadd_new(&doom->orb, orb, sizeof(orb));
+		ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
 		entity->frame += 1;
 		doom->nb.projectiles += 1;
 	}

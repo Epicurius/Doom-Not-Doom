@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:41:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 09:47:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ t_v3	get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
 	double	vxs_a;
 	double	vxs_b;
 
+	div = cross_product_v2(a1.x - a2.x, a1.y - a2.y, b1.x - b2.x, b1.y - b2.y);
 	vxs_a = cross_product_v2(a1.x, a1.y, a2.x, a2.y);
 	vxs_b = cross_product_v2(b1.x, b1.y, b2.x, b2.y);
-	div = cross_product_v2(a1.x - a2.x, a1.y - a2.y, b1.x - b2.x, b1.y - b2.y);
 	point.x = cross_product_v2(vxs_a, a1.x - a2.x, vxs_b, b1.x - b2.x) / div;
 	point.y = cross_product_v2(vxs_a, a1.y - a2.y, vxs_b, b1.y - b2.y) / div;
 	return (point);
