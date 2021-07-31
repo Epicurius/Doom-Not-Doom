@@ -51,14 +51,15 @@ static int	portal_hitbox(t_doom *doom, t_motion *motion, t_wall *wall)
 	double	portal_bot;
 
 	t_v3 point = closest_point_on_segment_v2(motion->where, wall->v1, wall->v2);
-	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point), floor_at(&doom->sectors[wall->n], point));
-	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point), ceiling_at(&doom->sectors[wall->n], point));
+	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point),
+			floor_at(&doom->sectors[wall->n], point));
+	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point),
+			ceiling_at(&doom->sectors[wall->n], point));
 	if (portal_top <= portal_bot + motion->height)
 		return (0);
-	if (portal_top > motion->where.z + motion->height && portal_bot <= motion->where.z + STEP_HEIGHT)
-	{
+	if (portal_top > motion->where.z + motion->height
+		&& portal_bot <= motion->where.z + STEP_HEIGHT)
 		return (1);
-	}
 	return (0);
 }
 
@@ -68,8 +69,10 @@ static int	portal_intersect(t_doom *doom, t_motion *motion, t_wall *wall)
 	double	portal_bot;
 
 	t_v3 point = closest_point_on_segment_v2(motion->where, wall->v1, wall->v2);
-	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point), floor_at(&doom->sectors[wall->n], point));
-	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point), ceiling_at(&doom->sectors[wall->n], point));
+	portal_bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], point),
+			floor_at(&doom->sectors[wall->n], point));
+	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point),
+			ceiling_at(&doom->sectors[wall->n], point));
 	if (portal_top <= portal_bot + motion->height)
 		return (0);
 	if (portal_top > motion->where.z + motion->height && portal_bot <= motion->where.z + STEP_HEIGHT)

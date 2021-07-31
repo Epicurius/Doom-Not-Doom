@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 11:58:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 12:02:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,55 +31,6 @@ static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 		return (1);
 	return (0);
 }
-
-//static int	portal(t_doom *doom, t_motion *motion, t_wall *wall)
-//{
-//	double	top;
-//	double	bot;
-//
-//	bot = ft_max(floor_at(&doom->sectors[motion->curr_sect], motion->where),
-//			floor_at(&doom->sectors[wall->n], motion->where));
-//	top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], motion->where),
-//			ceiling_at(&doom->sectors[wall->n], motion->where));
-//	if (top <= bot + motion->height)
-//		return (0);
-//	if (top > motion->where.z + motion->height && bot <= motion->where.z)
-//		return (1);
-//	return (0);
-//}
-//
-//// Dose path intersecta wall.
-//// Is wall solid || or cant fit through portal to next sector.
-//// Dose hitbox collide with solid surface
-//// intersect = ft_clamp(point_side_v2(wall->v2, wall->v1, dest), 0, 1);
-//int	horizontal_collision_lite(t_doom *doom, t_motion *motion)
-//{
-//	int			intersect;
-//	int			collision;
-//	t_wall		*wall;
-//	t_v3		point;
-//	int			i;
-//
-//	i = -1;
-//	while (++i < doom->sectors[motion->curr_sect].npoints)
-//	{
-//		wall = doom->sectors[motion->curr_sect].wall[i];
-//		point = closest_point_on_segment_v2(motion->future, wall->v1, wall->v2);
-//		intersect = intersect_check_v2(motion->where, motion->future, wall->v1, wall->v2);
-//		collision = (point_distance_v2(point.x, point.y, motion->future.x, motion->future.y) <= 1.0);
-//		if (!collision && !intersect)
-//			continue ;
-//		if (wall->solid || (intersect && !portal(doom, motion, wall)))
-//			return (-1);
-//		if (intersect)
-//			motion->curr_sect = wall->n;
-//		else if (collision && !wall->solid && !portal(doom, motion, wall))
-//			return (-1);
-//	}
-//	motion->move.x += motion->velocity.x;
-//	motion->move.y += motion->velocity.y;
-//	return (motion->curr_sect);
-//}
 
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
