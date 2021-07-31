@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:13:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 
 	if (!event->wsprite->trigger)
 		return ;
+	if (event->wsprite->trigger == 1)
+	{
+		Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
+		event->wsprite->trigger = 2;
+	}
 	if (event->type == FLOOR || event->type == CEILING)
 	{
 		if (event->time + 10 > doom->time.curr)
@@ -76,6 +81,7 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 			event->wsprite->trigger = 0;
 		}
 	}
+		ft_printf("{RED}%d{RESET}\n", event->wsprite->trigger);
 }
 
 //	Fix sector trigger Store

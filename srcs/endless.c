@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:38:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:51:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	game_mode_endless(t_doom *doom)
 				if (doom->events[i].type == STORE)
 					doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
 			respawn_rifts(doom);
+			Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
 		}
 	}
 	else if (!Mix_Playing(CHANNEL_TTS) && endless_round(doom))

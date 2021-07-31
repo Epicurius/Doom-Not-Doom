@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 12:14:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 18:02:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_id_and_path
 	char		*path;
 }				t_id_and_path;
 
-# define WAV_AMOUNT	9
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 {
 	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
@@ -33,7 +32,13 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_JUMP, WAV_PATH"jump.wav"},
 	{WAV_GUN, WAV_PATH"gun.wav"},
 	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
-	{WAV_DOSH, WAV_PATH"Dosh.wav"}
+	{WAV_DOSH, WAV_PATH"dosh.wav"},
+	{WAV_EMPTY_CLIP, WAV_PATH"empty_clip.wav"},
+	{WAV_PLAYER_HIT, WAV_PATH"player_hit.wav"},
+	{WAV_BIP, WAV_PATH"bip.wav"},
+	{WAV_MONSTER_HIT, WAV_PATH"monster_hit.wav"},
+	{WAV_NEW_ROUND, WAV_PATH"new_round.wav"},
+	{WAV_ORB, WAV_PATH"orb.wav"}
 };
 
 # define MAP_TEXTURE_AMOUNT	15
@@ -218,7 +223,6 @@ typedef struct s_entity_data
 	int				tc[4];
 }					t_entity_data;
 
-# define WEAPON_AMOUNT 5
 static const char			*g_weapon_data[WEAPON_AMOUNT] =
 {
 	"SHOTGUN",
@@ -228,7 +232,6 @@ static const char			*g_weapon_data[WEAPON_AMOUNT] =
 	"MINIGUN"
 };
 
-# define ENTITY_AMOUNT	7
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 {
 	{

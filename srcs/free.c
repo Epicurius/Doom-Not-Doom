@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:38:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 14:36:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	free_doom(t_doom *doom)
 {
+	free_tpool(&doom->tpool);
 	free_map(doom);
 	free_entities(doom);
 	free_rifts(doom);
@@ -26,7 +27,6 @@ void	free_doom(t_doom *doom)
 	free_render_utils(doom);
 	free_font(doom);
 	free_sounds(doom);
-	free_tpool(&doom->tpool);
 	SDL_FreeSurface(doom->surface);
 	SDL_DestroyTexture(doom->texture);
 	SDL_DestroyRenderer(doom->renderer);

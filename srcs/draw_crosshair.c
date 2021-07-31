@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 14:00:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:27:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	draw_hit_marker(t_doom *doom)
 {
 	if (!doom->player.hm)
 		return ;
+	Mix_PlayChannel(CHANNEL_ENEMY, doom->sound[WAV_MONSTER_HIT], 0);
 	line(doom->surface, 0xff00ff00,
 		(t_point){doom->c.x - 10, doom->c.y - 10},
 		(t_point){doom->c.x + 10, doom->c.y + 10});

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 13:31:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 12:57:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_camera(t_doom *doom)
 	cam->near_down = tan(CONVERT_RADIANS * cam->vfov / 2) * cam->near_z;
 	cam->range = cam->near_right - cam->near_left;
 	cam->scale = doom->c.y / (cam->near_down / cam->near_z);
-	update_camera(doom, 10, 10);
+	update_camera(doom, 1, 1);
 }
 
 void	update_camera(t_doom *doom, int x, int y)

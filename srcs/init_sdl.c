@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/27 10:35:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 14:00:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_sdl2(t_doom *doom)
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
 			doom->settings.size.x * doom->settings.rresolution,
 			doom->settings.size.y * doom->settings.rresolution,
-			32, SDL_PIXELFORMAT_ARGB8888);
+			32, SDL_PIXELFORMAT_ARGB8888);//24?
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
 	doom->renderer = SDL_CreateRenderer(doom->win, -1,

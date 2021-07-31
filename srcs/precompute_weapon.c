@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:36:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 16:55:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	precompute_weapon(t_doom *doom)
 	if ((weapon->frame && (weapon->frame < weapon->fire_frames))
 		|| (doom->keys[MOUSE_LEFT] && weapon->mag_ammo > 0))
 		weapon_fire_animate(doom, weapon);
+	else if (!weapon->frame && doom->keys[MOUSE_LEFT] && weapon->mag_ammo <= 0)
+		Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[WAV_EMPTY_CLIP], 0);
 	else if (weapon->frame >= weapon->fire_frames)
 		weapon_reload_animate(doom, weapon);
 	else if (doom->keys[KEY_R] && !weapon->frame

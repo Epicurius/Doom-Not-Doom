@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:19:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 18:07:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	mute(int i)
 {
 	(void)i;
 	if (Mix_Volume(-1, -1) <= 0)
-		Mix_Volume(-1, 128);
+		Mix_Volume(-1, 64);
 	else
 		Mix_Volume(-1, 0);
 }
@@ -44,5 +44,4 @@ void	init_sound(t_doom *doom)
 	parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
-	Mix_Volume(-1, 0);
 }

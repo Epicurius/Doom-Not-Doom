@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 12:02:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 17:00:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	player_contact(t_doom *doom, t_v3 start, t_v3 dest)
 {
 	if (point_distance_v3(doom->player.where, dest) <= 5)
 	{
+		Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
 		doom->player.health -= 10;
 		return (1);
 	}

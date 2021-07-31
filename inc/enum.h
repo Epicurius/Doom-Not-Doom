@@ -6,23 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:17:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/07/31 18:06:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
 
-typedef enum e_enum_weapons
+enum e_enum_weapons
 {
 	WEAPON_SHOTGUN,
 	WEAPON_GUN,
 	WEAPON_KAR,
 	WEAPON_PUMP,
-	WEAPON_MINIGUN
-}				t_enum_weapons;
+	WEAPON_MINIGUN,
+	WEAPON_AMOUNT
+};
 
-typedef enum e_enum_sounds
+enum e_enum_sounds
 {
 	WAV_MAIN_THEME,
 	WAV_SHOTGUN,
@@ -32,24 +33,29 @@ typedef enum e_enum_sounds
 	WAV_JUMP,
 	WAV_GUN,
 	WAV_ELEVATOR_MUSIC,
-	WAV_DOSH
-}				t_enum_sounds;
+	WAV_DOSH,
+	WAV_EMPTY_CLIP,
+	WAV_PLAYER_HIT,
+	WAV_BIP,
+	WAV_MONSTER_HIT,
+	WAV_NEW_ROUND,
+	WAV_ORB,
+	WAV_AMOUNT
+};
 
-# define CHANNEL_AMOUNT 7
-
-typedef enum e_enum_sound_channel
+enum e_enum_sound_channel
 {
 	CHANNEL_MUSIC,
 	CHANNEL_WEAPON,
 	CHANNEL_STEPS,
 	CHANNEL_JUMP,
 	CHANNEL_TTS,
-	CHANNEL_ALFRED,
-	CHANNEL_SPOOKY,
-	CHANNEL_EXPLOSION
-}				t_enum_sound_channel;
+	CHANNEL_ENEMY,
+	CHANNEL_EXPLOSION,
+	CHANNEL_AMOUNT
+};
 
-typedef enum e_enum_sprites
+enum e_enum_sprites
 {
 	ALFRED,
 	SPOOKY,
@@ -57,55 +63,56 @@ typedef enum e_enum_sprites
 	BARREL,
 	LAMP,
 	TORCH,
-	MEAT_HOOK
-}				t_enum_sprites;
+	MEAT_HOOK,
+	ENTITY_AMOUNT
+};
 
-typedef enum e_enum_entity_state
+enum e_enum_entity_state
 {
 	IDLE,
 	ATTACK,
 	MOVE,
 	DEATH,
 	TERMINATE
-}			t_enum_entity_state;
+};
 
-typedef enum e_enum_skybox
+enum e_enum_skybox
 {
 	TOP,
 	BOT,
 	SIDES,
 	TOP_HALF,
 	BOT_HALF
-}			t_enum_skybox;
+};
 
-typedef enum e_player_action
+enum e_player_action
 {
 	NONE,
 	SHOOTING,
 	CLICKING,
 	SECTOR
-}			t_player_action;
+};
 
-typedef enum e_event_type
+enum e_event_type
 {
 	CEILING,
 	FLOOR,
 	STORE,
 	HAZARD
-}			t_event_type;
+};
 
-typedef enum e_wsprite_action
+enum e_wsprite_action
 {
 	STATIC,
 	LOOP,
 	ACTION
-}			t_wsprite_action;
+};
 
-typedef enum e_game_mode
+enum e_game_mode
 {
 	STORY,
 	ENDLESS
-}			t_game_mode;
+};
 
 enum e_key_code
 {
