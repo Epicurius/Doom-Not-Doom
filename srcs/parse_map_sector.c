@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 07:57:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:07:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	parse_sector(t_doom *doom, char **arr)
 	sect = &doom->sectors[ft_atoi(arr[0])];
 	sect->id = ft_atoi(arr[0]);
 	walls = stringsplit(arr[1], ' ', &sect->npoints);
-	sect->wall = ft_pmalloc(sizeof(t_wall *) * (sect->npoints), "parse_sector");
+	sect->wall = protalloc(sizeof(t_wall *) * (sect->npoints), "parse_sector");
 	neighbour = stringsplit(arr[2], ' ', &nb);
 	if (nb != sect->npoints)
 		error_msg("Sect %d walls != Neighbours.\n", sect->id);

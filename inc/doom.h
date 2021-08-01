@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:02:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:07:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ typedef struct s_wsprites
 
 typedef struct s_bullet_hole
 {
-	t_wsprite		num[MAX_BH];
+	t_wsprite		num[MAX_BULLET_HOLES];
 	int				curr;
 	int				total;
 }					t_bullet_hole;
@@ -154,7 +154,7 @@ typedef struct s_bullet_hole
 typedef struct s_wall
 {
 	t_wsprites		wsprite;
-	t_bullet_hole	bh;
+	t_bullet_hole	bullet_hole;
 	int				id;
 	int				sect;
 	int				visible;
@@ -298,7 +298,7 @@ typedef struct s_render
 	t_plane			ceiling;
 	int				light;
 	int				s;
-	t_bullet_hole	*bh;
+	t_bullet_hole	*bullet_hole;
 	t_v3			center;
 	t_wsprites		wsprite;
 }					t_render;
@@ -555,7 +555,7 @@ int					endless_round(t_doom *doom);
 void				game_mode_endless(t_doom *doom);
 void				game_mode(t_doom *doom);
 /* File: error.c */
-void				*ft_pmalloc(size_t size, char *str);
+void				*protalloc(size_t size, char *str);
 /* File: find_sector.c */
 int					in_sector(t_sector *sector, t_v3 pos);
 int					find_sector(t_sector *sectors, int nb, t_v3 pos);

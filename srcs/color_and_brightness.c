@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/07 20:35:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:16:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	color_palet(t_bxpm *bxpm, int light)
 	i = -1;
 	if (bxpm->palet[255 + light])
 		return ;
-	bxpm->palet[255 + light] = ft_memalloc(sizeof(Uint32 *) * bxpm->clr_nb);
+	bxpm->palet[255 + light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb,
+		"color_palet");
 	if (!bxpm->palet[255 + light])
 		error_msg("bxpm->palet malloc");
 	while (++i < bxpm->clr_nb)

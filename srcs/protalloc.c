@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   protalloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/10 13:49:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:14:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	*ft_pmalloc(size_t size, char *str)
+void	*protalloc(size_t size, char *str)
 {
 	void	*mem;
 
@@ -22,10 +22,9 @@ void	*ft_pmalloc(size_t size, char *str)
 		ft_bzero(mem, size);
 		return (mem);
 	}
-	write(1, "\x1b[31m[ERROR]\x1b[00m\tMalloc", 24);
+	write(1, "\x1b[31m[ERROR]\x1b[00m\t(", 19);
 	if (!str)
-		ft_printf("\t%s\n", str);
-	else
-		write(1, "\n", 1);
+		ft_putstr(str);
+	write(1, ") Out of memory\n", 16);
 	exit(1);
 }

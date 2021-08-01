@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 17:49:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:15:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	}
 	else if (g_entity_data[entity->type].attack_style == 1)
 	{
-		orb = ft_memalloc(sizeof(t_projectile));
+		orb = protalloc(sizeof(t_projectile), "ai_attack");
 		orb->velocity = projectile_movement(doom, entity->where,
 				doom->player.where);
 		orb->where.x = entity->where.x;

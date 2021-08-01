@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:44:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:01:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 	alpha = (bxpm->clr[pixel] >> 24 & 0xFF);
 	if (alpha == 0)
 		return ;
-	((Uint32 *)render->surface->pixels)[coord]
-		= blend_alpha(bxpm->clr[pixel],
+	((Uint32 *)render->surface->pixels)[coord] = blend_alpha(bxpm->clr[pixel],
 			((Uint32 *)render->surface->pixels)[coord], -alpha);
 }
 

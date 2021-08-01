@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:41:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:04:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,11 @@
 # define PROJECTILE_MAX_RANGE		200
 # define PROJECTILE_SPEED			80.0
 
-/*
-** FPS
-*/
-# define FPS_FONT_SIZE				20
-# define FPS_COLOR					0xff00ffff
 
 /*
 ** Bullet Holes
 */
-# define MAX_BH						20
+# define MAX_BULLET_HOLES			20
 
 /*
 **	Movement

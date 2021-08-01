@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:26:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:59:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,25 @@ static void	debug(t_render *render, t_wall *wall)
 void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 {
 	t_wall		*wall;
-	t_wsprite	*bh;
+	t_wsprite	*bullet_hole;
 
 	if (render->player.action == SHOOTING
 		&& render->x == render->center.x && vline->y1 == render->center.y)
 	{
 		wall = &render->wall;
-		if (render->bh->curr >= MAX_BH)
-			render->bh->curr = 0;
-		bh = &render->bh->num[render->bh->curr];
-		bh->where.x = (vline->alpha / wall->sv2.z)
+		if (render->bullet_hole->curr >= MAX_BULLET_HOLES)
+			render->bullet_hole->curr = 0;
+		bullet_hole = &render->bullet_hole->num[render->bullet_hole->curr];
+		bullet_hole->where.x = (vline->alpha / wall->sv2.z)
 			/ ((1 - vline->alpha) / wall->sv1.z + vline->alpha / wall->sv2.z)
 			* wall->width;
-		bh->where.y = alpha * wall->height;
-		bh->where.x -= 0.5;
-		bh->where.y -= 0.5;
-		bh->ready = 0;
-		render->bh->curr += 1;
-		if (render->bh->total < MAX_BH)
-			render->bh->total += 1;
+		bullet_hole->where.y = alpha * wall->height;
+		bullet_hole->where.x -= 0.5;
+		bullet_hole->where.y -= 0.5;
+		bullet_hole->ready = 0;
+		render->bullet_hole->curr += 1;
+		if (render->bullet_hole->total < MAX_BULLET_HOLES)
+			render->bullet_hole->total += 1;
 		if (render->player.debug)
 			debug(render, wall);
 	}

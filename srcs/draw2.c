@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:53:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:58:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 	render->wsprite = wall->wsprite;
 	render->floor = sector->floor;
 	render->ceiling = sector->ceiling;
-	render->bh = &wall->bh;
+	render->bullet_hole = &wall->bullet_hole;
 	render->light = sector->light;
 	render->s = s;
 	return (draw_vline(render));

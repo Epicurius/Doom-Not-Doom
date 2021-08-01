@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 16:32:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:07:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	parse_entity(t_doom *doom, char **arr)
 {
 	t_entity	*entity;
 
-	entity = ft_pmalloc(sizeof(t_entity), "parse_entity");
+	entity = protalloc(sizeof(t_entity), "parse_entity");
 	entity->type = sprite_type(arr[1]);
 	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y = ft_atof(arr[3]) * doom->map_scale;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 17:13:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:19:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 			event->wsprite->trigger = 0;
 		}
 	}
-		ft_printf("{RED}%d{RESET}\n", event->wsprite->trigger);
 }
 
 //	Fix sector trigger Store
