@@ -45,7 +45,8 @@ srcs/get_entity_state.c \
 srcs/help.c \
 srcs/hud_utils.c \
 srcs/icon.c \
-srcs/init.c
+srcs/init.c \
+srcs/horizontal_collision.c
 
 #norminette-beta srcs/init_alfred.c \
 #srcs/init_alfred2.c \

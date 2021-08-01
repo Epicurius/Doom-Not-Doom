@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:04:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 14:53:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,6 +437,7 @@ typedef struct		s_motion
 	int				curr_sect;
 	int				prev_sect;
 	t_v3			move;
+	int				type;
 }					t_motion;
 
 typedef struct s_doom
@@ -478,7 +479,7 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-
+int	vertical_collision(t_doom *doom, t_motion *motion);
 int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
