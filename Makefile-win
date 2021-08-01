@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/30 17:08:29 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/01 13:07:58 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ RAW_SRC		=	ai_attack.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
-				init_pump.c\
+				init_launcher.c\
 				init_render.c\
 				init_rift.c\
 				init_scale.c\

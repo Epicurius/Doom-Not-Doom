@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:20:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:07:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	init_pump(t_doom *doom, t_weapon *weapon)
+void	init_launcher(t_doom *doom, t_weapon *weapon)
 {
 	weapon->own = 0;
 	weapon->price = 500;

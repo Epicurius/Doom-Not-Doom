@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 15:15:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:04:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	init_endless(t_doom *doom)
 	curr = doom->entity;
 	while (curr)
 	{
-		if (((t_entity *)curr->content)->type == 0
-			|| ((t_entity *)curr->content)->type == 1
-			|| ((t_entity *)curr->content)->type == 2)
+		if (((t_entity *)curr->content)->type == ALFRED
+			|| ((t_entity *)curr->content)->type == SPOOKY
+			|| ((t_entity *)curr->content)->type == RIFT)
 			doom->game.spawns += 1;
 		curr = curr->next;
 	}

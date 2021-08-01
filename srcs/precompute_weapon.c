@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:55:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:20:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static void	fire_orb(t_doom *doom, t_weapon *weapon)
 	orb->start = orb->where;
 	orb->sector = doom->player.sector;
 	orb->target = 1;
+	orb->range = PLAYER_PROJECTILE_MAX_RANGE;
 	ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
+	doom->nb.projectiles += 1;
 }
 
 void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)

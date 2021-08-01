@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:55:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:19:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 		orb = protalloc(sizeof(t_projectile), "ai_attack");
 		orb->velocity = projectile_movement(doom, entity->where,
 				doom->player.where);
-		orb->where.x = entity->where.x;
-		orb->where.y = entity->where.y;
-		orb->where.z = entity->where.z + 4.5;
+		orb->where = entity->where;
+		orb->where.z += 4.5;
 		orb->start = orb->where;
 		orb->sector = entity->sector;
 		orb->target = 0;
+		orb->range = ENTITY_PROJECTILE_MAX_RANGE;
 		ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
 		entity->frame += 1;
 		doom->nb.projectiles += 1;

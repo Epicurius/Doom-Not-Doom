@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:22:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:07:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	init_weapons(t_doom *doom)
 	init_glock(doom, &doom->weapon[1]);
 	init_minigun(doom, &doom->weapon[2]);
 	init_kar98(doom, &doom->weapon[3]);
-	init_pump(doom, &doom->weapon[4]);
+	init_launcher(doom, &doom->weapon[4]);
 	weapon_texture_array(doom);
 }

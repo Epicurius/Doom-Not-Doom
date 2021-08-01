@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/01 09:14:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/01 13:16:48 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ RAW_SRC		=	ai_attack.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
-				init_pump.c\
+				init_launcher.c\
 				init_render.c\
 				init_rift.c\
 				init_scale.c\
@@ -144,6 +144,7 @@ RAW_SRC		=	ai_attack.c\
 				validate_map2.c\
 				vertical_line.c\
 				wall_slide.c\
+				projectile_contact.c\
 				wall_to_screen_xz.c
 
 NAME		=	doom

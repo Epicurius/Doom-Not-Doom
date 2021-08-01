@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:34:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:19:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_projectile
 	int				sector;
 	int				moving;
 	char			target;
+	int				range;
 }					t_projectile;
 
 typedef struct s_weapon_thread
@@ -477,6 +478,8 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+
+int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */
@@ -632,7 +635,7 @@ void				init_minimap(t_doom *doom);
 /* File: init_player.c */
 void				init_player(t_doom *doom);
 /* File: init_pump.c */
-void				init_pump(t_doom *doom, t_weapon *weapon);
+void				init_launcher(t_doom *doom, t_weapon *weapon);
 /* File: init_render.c */
 void				init_render(t_doom *doom);
 /* File: init_rift.c */

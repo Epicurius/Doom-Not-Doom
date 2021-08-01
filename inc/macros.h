@@ -6,49 +6,47 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:33:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:19:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
 
-# define DEMON						0
-# define PLAYER						1
-
 /*
 ** Screen info
 */
-# define MAX_PROCESSORS				64
+# define MAX_PROCESSORS					64
 
 /*
 **	Vision
 */
-# define PLAYER_HEIGHT 				7
-# define EYE_LVL					6
-# define OVER_HEAD_SPACE			1
-# define DUCK_HEIGHT				2.5
-# define STEP_HEIGHT				2
-# define CAMERA_RATIO				1.77777777778
-# define FOV						90
-# define PLAYER_YAW					45
-# define PLAYER_PITCH				10
-# define PLAYER_RADIUS				0.7
-# define NEAR_Z						0.1
-# define FAR_Z						1000
-# define RENDER_DISTANCE			200.0
-# define ZB							100
+# define PLAYER_HEIGHT 					7
+# define EYE_LVL						6
+# define OVER_HEAD_SPACE				1
+# define DUCK_HEIGHT					2.5
+# define STEP_HEIGHT					2
+# define CAMERA_RATIO					1.77777777778
+# define FOV							90
+# define PLAYER_YAW						45
+# define PLAYER_PITCH					10
+# define PLAYER_RADIUS					0.7
+# define NEAR_Z							0.1
+# define FAR_Z							1000
+# define RENDER_DISTANCE				200.0
+# define ZB								100
 
 /*
 ** Entities
 */
-# define MAX_ENTITIES_RENDERED		20
-# define FRAMES						0
-# define ANGLES						1
-# define STYLE_MELEE				0
-# define STYLE_RANGE				1
-# define PROJECTILE_MAX_RANGE		200
-# define PROJECTILE_SPEED			80.0
+# define MAX_ENTITIES_RENDERED			20
+# define FRAMES							0
+# define ANGLES							1
+# define STYLE_MELEE					0
+# define STYLE_RANGE					1
+# define PLAYER_PROJECTILE_MAX_RANGE	60
+# define ENTITY_PROJECTILE_MAX_RANGE	200
+# define PROJECTILE_SPEED				80.0
 
 
 /*

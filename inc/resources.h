@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 12:03:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:09:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ static const t_id_and_path	g_kar_textures[KAR_TEXTURE_AMOUNT] =
 	{37, BXPM_PATH"kar-37.bxpm"}
 };
 
-# define PUMP_TEXTURE_AMOUNT	8
-static const t_id_and_path	g_pump_textures[PUMP_TEXTURE_AMOUNT] =
+# define LAUNCHER_TEXTURE_AMOUNT	8
+static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 {
 	{0, BXPM_PATH"launcher-0.bxpm"},
 	{1, BXPM_PATH"launcher-1.bxpm"},
@@ -227,7 +227,7 @@ static const char			*g_weapon_data[WEAPON_AMOUNT] =
 	"SHOTGUN",
 	"GLOCK",
 	"KAR98",
-	"PUMP",
+	"LAUNCHER",
 	"MINIGUN"
 };
 
