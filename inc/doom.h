@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:19:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:48:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -669,9 +669,6 @@ void				line(SDL_Surface *surf, Uint32 color, t_point v1, t_point v2);
 /* File: malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);
 /* File: map_events.c */
-void				loop_events(t_doom *doom, t_event *event);
-void				wsprite_trigger_events(t_doom *doom, t_event *event);
-void				sector_trigger_events(t_doom *doom, t_event *event);
 void				map_events(t_doom *doom);
 /* File: minimap.c */
 void				map(t_doom *doom);

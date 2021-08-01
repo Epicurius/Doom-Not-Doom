@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 07:51:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:40:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static void	get_base_speed(t_doom *doom, float *speed)
 
 static inline void	foot_steps(t_doom *doom, t_player player)
 {
-	if ((doom->keys[KEY_W] || doom->keys[KEY_S] || doom->keys[KEY_A] || doom->keys[KEY_D])
-		&& player.where.z <= floor_at(&doom->sectors[player.sector],
-			player.where))
+	if ((doom->keys[KEY_W] || doom->keys[KEY_S]
+			|| doom->keys[KEY_A] || doom->keys[KEY_D])
+		&& floor_at(&doom->sectors[player.sector], player.where)
+		>= player.where.z)
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
 			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
@@ -93,7 +94,8 @@ void	movement(t_doom *doom)
 	float		speed;
 	t_motion	motion;
 
-	if (doom->player.where.z + doom->player.eyelvl + 2 < doom->sectors[doom->player.sector].ceiling.y)
+	if (doom->player.where.z + doom->player.eyelvl + 2
+		< doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	if (doom->keys[KEY_LCTRL])
 		doom->player.eyelvl = PLAYER_HEIGHT - 4;

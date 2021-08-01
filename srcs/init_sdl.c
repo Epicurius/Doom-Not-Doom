@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 07:27:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:51:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_sdl2(t_doom *doom)
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
 			doom->settings.size.x * doom->settings.rresolution,
 			doom->settings.size.y * doom->settings.rresolution,
-			32, SDL_PIXELFORMAT_ARGB8888);//24?
+			32, SDL_PIXELFORMAT_ARGB8888);
 	if (!doom->surface)
 		error_msg("Could not create surface: %s\n", SDL_GetError());
 	doom->renderer = SDL_CreateRenderer(doom->win, -1,
@@ -46,7 +46,6 @@ static void	init_sdl2(t_doom *doom)
 			SDL_TEXTUREACCESS_STREAMING, doom->surface->w, doom->surface->h);
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
-	//SDL_SetHintWithPriority(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1", SDL_HINT_OVERRIDE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/DND.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());

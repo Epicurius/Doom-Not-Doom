@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:19:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:48:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,20 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->trigger_sector->trigger = 0;
 }
 
-void	loop_events(t_doom *doom, t_event *event)
+static void	loop_events(t_doom *doom, t_event *event, int i)
 {
-	int	i;
-
 	if (event->type == FLOOR || event->type == CEILING)
 	{
 		if (event->time + 100 > doom->time.curr)
 			return ;
 		move_plane(doom, event);
-		i = -1;
 		while (++i < event->event_sector->npoints)
 			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
 }
 
-void	wsprite_trigger_events(t_doom *doom, t_event *event)
+static void	wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 {
-	int	i;
-
 	if (!event->wsprite->trigger)
 		return ;
 	if (event->wsprite->trigger == 1)
@@ -69,26 +64,20 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 		if (event->wsprite->state == ACTION)
 			animate_wsprite(doom, event->wsprite);
 		move_plane(doom, event);
-		i = -1;
 		while (++i < event->event_sector->npoints)
 			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
-	else if (event->type == STORE && doom->player.store_access)
+	else if (event->type == STORE && event->wsprite->trigger
+		&& doom->player.store_access)
 	{
-		if (event->wsprite->trigger)
-		{
-			precompute_buy_menu(doom);
-			event->wsprite->trigger = 0;
-		}
+		precompute_buy_menu(doom);
+		event->wsprite->trigger = 0;
 	}
 }
 
 //	Fix sector trigger Store
-void	sector_trigger_events(t_doom *doom, t_event *event)
+static void	sector_trigger_events(t_doom *doom, t_event *event, int i)
 {
-	int	i;
-
-	i = -1;
 	if ((event->trigger_sector->id != doom->player.sector)
 		&& !event->trigger_sector->trigger)
 		return ;
@@ -119,10 +108,10 @@ void	map_events(t_doom *doom)
 	while (++i < doom->nb.events)
 	{
 		if (doom->events[i].action == NONE)
-			loop_events(doom, &doom->events[i]);
+			loop_events(doom, &doom->events[i], -1);
 		else if (doom->events[i].action == SECTOR)
-			sector_trigger_events(doom, &doom->events[i]);
+			sector_trigger_events(doom, &doom->events[i], -1);
 		else
-			wsprite_trigger_events(doom, &doom->events[i]);
+			wsprite_trigger_events(doom, &doom->events[i], -1);
 	}
 }

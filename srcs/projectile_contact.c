@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:20:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:36:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,12 @@ static int	target_demon(t_doom *doom, t_projectile *orb, t_v3 dest)
 	curr = doom->entity;
 	while (curr)
 	{
-		if (((t_entity *)curr->content)->type == ALFRED
-			|| ((t_entity *)curr->content)->type == SPOOKY)
+		if (((t_entity *)curr->content)->type < RIFT
+			&& point_distance_v3(((t_entity *)curr->content)->where, dest) <= 5)
 		{
-			if (point_distance_v3(((t_entity *)curr->content)->where, dest) <= 5)
-			{
-				((t_entity *)curr->content)->state = DEATH;
-				contact = 1;
-				break ;
-			}		
+			((t_entity *)curr->content)->state = DEATH;
+			contact = 1;
+			break ;
 		}
 		curr = curr->next;
 	}
