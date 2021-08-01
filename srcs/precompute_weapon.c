@@ -6,11 +6,27 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 16:55:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 11:25:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	fire_orb(t_doom *doom, t_weapon *weapon)
+{
+	if (doom->player_orb.moving)
+		return ;
+	doom->player_orb.velocity.x = cos(doom->player.pitch) * doom->player.anglecos;
+	doom->player_orb.velocity.y = cos(doom->player.pitch) * doom->player.anglesin;
+	doom->player_orb.velocity.z = -sin(doom->player.pitch);
+	doom->player_orb.where = doom->player.where;
+	doom->player_orb.where.z += 4.5;
+	doom->player_orb.where = add_v3(doom->player_orb.where,
+		mult_v3(doom->player_orb.velocity, 5));
+	doom->player_orb.start = doom->player_orb.where;
+	doom->player_orb.sector = doom->player.sector;
+	doom->player_orb.moving = 1;
+}
 
 void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 {
@@ -20,7 +36,10 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 	{
 		if (!weapon->frame)
 		{
-			doom->player.action = SHOOTING;
+			if (doom->player.equiped == 0)
+				fire_orb(doom, weapon);
+			else
+				doom->player.action = SHOOTING;
 			weapon->mag_ammo -= 1;
 		}
 		weapon->frame++;

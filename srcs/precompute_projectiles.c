@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 17:00:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 11:18:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	t_motion	motion;
 
 	motion.future = add_v3(orb->where, orb->velocity);
-	if (player_contact(doom, orb->start, motion.future))
-		return (1);
+	//if (player_contact(doom, orb->start, motion.future))
+	//	return (1);
 	if (vertical_collision_lite(doom, orb))
 		return (2);
 	motion.flight = 1;
@@ -76,4 +76,9 @@ void	precompute_projectiles(t_doom *doom)
 		else
 			curr = curr->next;
 	}
+	if (doom->player_orb.moving)
+	{
+		if (projectile_collision(doom, &doom->player_orb))
+			doom->player_orb.moving = 0;
+	}	
 }

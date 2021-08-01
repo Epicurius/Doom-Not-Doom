@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:07:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 10:12:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ typedef struct s_projectile
 	t_v3			where;
 	t_v3			velocity;
 	double			dist;
-	int				sector;	
+	int				sector;
+	int				moving;
 }					t_projectile;
 
 typedef struct s_weapon_thread
@@ -462,6 +463,7 @@ typedef struct s_doom
 	t_list			*entity;
 	t_list			*rifts;
 	t_list			*orb;
+	t_projectile	player_orb;
 	t_camera		cam;
 	t_player		player;
 	t_bxpm			mtx[MAP_TEXTURE_AMOUNT];
