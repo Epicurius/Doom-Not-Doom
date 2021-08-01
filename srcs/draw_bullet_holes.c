@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:58:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:52:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ static void	put_bh_pixels(t_render *render, int coord, t_v3 text)
 	Uint32			clr;
 	unsigned short	pix;
 
-	pix = render->mtx[0].pix[(int)text.y * 128 + (int)text.x];
+	pix = render->mtx[0].pix[(int)text.y * 64 + (int)text.x];
 	clr = render->mtx[0].clr[pix];
-	if (clr == 0x800080)
+	if (clr == 0xFF800080)
 		return ;
 	((Uint32 *)render->surface->pixels)[coord] = clr;
 	((double *)render->surface->userdata)[coord] = text.z;
 }
 
-static void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bullet_hole, int x)
+static void	vline_wall_bh(t_render *render, t_vline *vline,
+	t_wsprite bullet_hole, int x)
 {
 	t_v3	text;
 	int		coord;
@@ -40,7 +41,7 @@ static void	vline_wall_bh(t_render *render, t_vline *vline, t_wsprite bullet_hol
 		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = (alpha - pos) * bullet_hole.tscale.y + 0;
-		if (text.y >= 0 && text.y < 128)
+		if (text.y >= 0 && text.y < 64)
 			put_bh_pixels(render, coord, text);
 		vline->y1++;
 	}
@@ -65,7 +66,7 @@ void	draw_wall_bh(t_render *render, t_vline *vline)
 		else
 			pos *= render->wall.cv2.z;
 		x = vline->alpha * bullet_hole.tscale.x * vline->z + 0 - pos;
-		if (x >= 0 && x < 128)
+		if (x >= 0 && x < 64)
 		{
 			vline->y1 = vline->curr.ceiling;
 			vline->y2 = vline->curr.floor;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:58:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 09:50:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	i = -1;
 	while (++i < wall->bullet_hole.total)
 	{
-		wall->bullet_hole.num[i].tscale.x = 128 * wall->width / wall->sv2.z;
-		wall->bullet_hole.num[i].tscale.y = 128 * wall->height;
+		wall->bullet_hole.num[i].tscale.x = 64 * wall->width / wall->sv2.z;
+		wall->bullet_hole.num[i].tscale.y = 64 * wall->height;
 		wall->bullet_hole.num[i].ready = 1;
 	}
 	i = -1;
