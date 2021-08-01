@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:07:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:18:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 		else if (wall->wsprite.num[i].state == LOOP)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
 		wall->wsprite.num[i].tscale = new_v2(
-			wall->wsprite.num[i].scale_w / wall->sv2.z,
-			wall->wsprite.num[i].scale_h);
+				wall->wsprite.num[i].scale_w / wall->sv2.z,
+				wall->wsprite.num[i].scale_h);
 		wall->wsprite.num[i].ready = 1;
 	}
 }
@@ -78,11 +78,9 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 	double	eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	sector->floor.feet = doom->c.y
-		+ (floor_at(sector, doom->player.where)
+	sector->floor.feet = doom->c.y + (floor_at(sector, doom->player.where)
 			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
-	sector->ceiling.head = doom->c.y
-		+ (ceiling_at(sector, doom->player.where)
+	sector->ceiling.head = doom->c.y + (ceiling_at(sector, doom->player.where)
 			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
 }
 

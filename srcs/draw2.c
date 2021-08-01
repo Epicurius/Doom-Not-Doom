@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:02:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:53:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,13 @@ static int	loop_screen_sector(void	*arg)
 	{
 		render->ytop = 0;
 		render->ybot = render->surface->h;
-		tmp = (render->x / (double)(render->surface->w - 1))
+		tmp = (render->x / (double)(render->surface->w - 1)) 
 			* cam->range + cam->near_left;
-		pos.x = tmp * (-p->anglesin) - (-NEAR_Z)
-			* p->anglecos + p->where.x;
-		pos.y = tmp * p->anglecos - (-NEAR_Z)
-			* p->anglesin + p->where.y;
+		pos.x = tmp * (-p->anglesin) - (-NEAR_Z) * p->anglecos + p->where.x;
+		pos.y = tmp * p->anglecos - (-NEAR_Z) * p->anglesin + p->where.y;
 		pos.z = p->where.z + p->eyelvl;
-		render_vline(*render, find_sector(render->sectors,
-				render->nb_sectors, pos));
+		render_vline(*render,
+			find_sector(render->sectors, render->nb_sectors, pos));
 		render->x++;
 	}
 	return (1);
@@ -119,8 +117,7 @@ void	draw_screen(t_doom *doom)
 	while (++x < doom->nb.threads)
 	{
 		doom->render[x].x = w / (double)doom->nb.threads * x;
-		doom->render[x].xend
-			= ft_min(w / (double)doom->nb.threads * (x + 1), w);
+		doom->render[x].xend = ft_min(w / (double)doom->nb.threads * (x + 1), w);
 		doom->render[x].player = doom->player;
 		doom->render[x].cam = doom->cam;
 		//loop_screen_sector(&doom->render[x]);
