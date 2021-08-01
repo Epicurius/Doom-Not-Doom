@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 16:17:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:54:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	fire_orb(t_doom *doom)
 	t_projectile	*orb;
 
 	orb = protalloc(sizeof(t_projectile), "player_projectile");
-	orb->velocity.x = cos(doom->player.pitch) * doom->player.anglecos;
-	orb->velocity.y = cos(doom->player.pitch) * doom->player.anglesin;
+	orb->velocity.x = doom->player.anglecos;
+	orb->velocity.y = doom->player.anglesin;
 	orb->velocity.z = -sin(doom->player.pitch);
 	orb->where = doom->player.where;
 	orb->where.z += 4.5;

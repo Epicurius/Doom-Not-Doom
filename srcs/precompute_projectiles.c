@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:20:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:46:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 	return (0);
 }
 
+//			Maybe separate horizontal collision without slide?
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
