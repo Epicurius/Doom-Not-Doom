@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:19:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:25:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,49 +48,48 @@
 # define ENTITY_PROJECTILE_MAX_RANGE	200
 # define PROJECTILE_SPEED				80.0
 
-
 /*
 ** Bullet Holes
 */
-# define MAX_BULLET_HOLES			20
+# define MAX_BULLET_HOLES				20
 
 /*
 **	Movement
 */
-# define WALK_SPEED					10.0f
-# define SPRINT_SPEED				20.0f
-# define JUMP_HEIGHT				0.01f
-# define CROUCH_SPEED				0.006f
-# define MOUSE_X					0.003f
-# define MOUSE_Y					0.003f
-# define ACCELERATION				0.7
+# define WALK_SPEED						10.0f
+# define SPRINT_SPEED					20.0f
+# define JUMP_HEIGHT					0.01f
+# define CROUCH_SPEED					0.006f
+# define MOUSE_X						0.003f
+# define MOUSE_Y						0.003f
+# define ACCELERATION					0.7
 
 /*
 ** Map Rendering
 */
-# define MAXQUEUE					32
+# define MAXQUEUE						32
 
 /*
 ** Texture
 */
-# define ZBUFFER_COLOR				1
-# define TEXTURE_DISABLED			0
-# define OPAQUE						30
-# define NB_SKYBOX_TEXTURES			6
-# define NB_WALL_TEXTURES			5
-# define NB_CEILING_TEXTURES		1
-# define NB_FLOOR_TEXTURES			1
-# define CLOCK_BG_COLOR				0xFF000000
-# define CLOCK_FG_COLOR				0xFFFFFFFF
+# define ZBUFFER_COLOR					1
+# define TEXTURE_DISABLED				0
+# define OPAQUE							30
+# define NB_SKYBOX_TEXTURES				6
+# define NB_WALL_TEXTURES				5
+# define NB_CEILING_TEXTURES			1
+# define NB_FLOOR_TEXTURES				1
+# define CLOCK_BG_COLOR					0xFF000000
+# define CLOCK_FG_COLOR					0xFFFFFFFF
 
 /*
 ** Minimap
 */
-# define MM_SCALE					0.8
-# define MM_SECTORS_SCALE			2
-# define MM_BEZEL_SIZE				5
-# define MM_BEZEL_COLOR				0x222222
-# define MM_VIEW_COLOR				0xFFD700
-# define MM_ALPHA					100
+# define MM_SCALE						0.8
+# define MM_SECTORS_SCALE				2
+# define MM_BEZEL_SIZE					5
+# define MM_BEZEL_COLOR					0x222222
+# define MM_VIEW_COLOR					0xFFD700
+# define MM_ALPHA						100
 
 #endif

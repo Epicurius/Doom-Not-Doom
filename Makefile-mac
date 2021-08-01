@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/01 15:10:42 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/01 15:19:14 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,6 @@ RAW_SRC		=	ai_attack.c\
 				draw_weapon.c\
 				draw_wsprites.c\
 				endless.c\
-				protalloc.c\
 				find_sector.c\
 				fps.c\
 				free.c\
@@ -74,6 +73,7 @@ RAW_SRC		=	ai_attack.c\
 				game_quit.c\
 				get_entity_state.c\
 				help.c\
+				horizontal_collision.c\
 				hud_utils.c\
 				icon.c\
 				init.c\
@@ -86,11 +86,11 @@ RAW_SRC		=	ai_attack.c\
 				init_inventory.c\
 				init_kar.c\
 				init_lamp.c\
+				init_launcher.c\
 				init_meat_hook.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
-				init_launcher.c\
 				init_render.c\
 				init_rift.c\
 				init_scale.c\
@@ -131,6 +131,8 @@ RAW_SRC		=	ai_attack.c\
 				precompute_weapon.c\
 				project_entity.c\
 				project_wall.c\
+				projectile_contact.c\
+				protalloc.c\
 				put_pixels.c\
 				random.c\
 				read_map.c\
@@ -143,12 +145,10 @@ RAW_SRC		=	ai_attack.c\
 				update_screen.c\
 				validate_map1.c\
 				validate_map2.c\
+				vertical_collision.c\
 				vertical_line.c\
 				wall_slide.c\
-				projectile_contact.c\
-				wall_to_screen_xz.c\
-				horizontal_collision.c\
-				vertical_collision.c
+				wall_to_screen_xz.c
 
 NAME		=	doom
 CDIR		=	srcs

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:07:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:21:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ int					comp_v3(t_v3 v1, t_v3 v2);
 t_v3				add_v3(t_v3 v1, t_v3 v2);
 t_v3				sub_v3(t_v3 v1, t_v3 v2);
 t_v3				mult_v3(t_v3 vec, float scalar);
+t_v3				div_v3(t_v3 vec, float scalar);
 /* File: math3.c */
 int					intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 double				point_distance_v3(t_v3 p1, t_v3 p2);
 t_v3				closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
-int					point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2,
-						double buffer);
+int					point_on_segment_v2(t_v3 p, t_v3 v1,
+						t_v3 v2, double buffer);
 t_v3				get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2);
 /* File: math4.c */
 double				vector_magnitude_v2(t_v3 v);
@@ -98,11 +99,10 @@ int					ft_sign(double x);
 double				point_side_v2(t_v3 v1, t_v3 v2, t_v3 p);
 double				point_distance_v2(double x1, double y1,
 						double x2, double y2);
-void				print_v2(char *str, t_v2 v);
-void				print_v3(char *str, t_v3 v);
-void				clamp_radians(double *angle);
-void				clamp_degrees(double *angle);
 /* File: math8.c */
 int					cohen_sutherland(t_point v[2], t_rect size);
+/* File: math9.c */
+void				clamp_radians(double *angle);
+void				clamp_degrees(double *angle);
 
 #endif

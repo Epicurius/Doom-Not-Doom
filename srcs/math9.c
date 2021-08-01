@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:41:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:42:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:27:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void	clamp_degrees(double *angle)
 	while (*angle < 0)
 		*angle += 360;
 }
-
