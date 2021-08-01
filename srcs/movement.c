@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:40:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:08:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 
 void	movement(t_doom *doom)
 {
-	int			x;
-	int			y;
 	t_v3		move;
 	float		speed;
 	t_motion	motion;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:32:22 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:32:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:06:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int	horizontal_collision_wall(t_doom *doom,
 {
 	if (wall->solid || wall->n == -1)
 	{
-		if (intersect_check_v2(motion->where, motion->future, wall->v1, wall->v2))
+		if (intersect_check_v2(motion->where, motion->future,
+				wall->v1, wall->v2))
 		{
 			slide_collision(doom, motion, wall);
 			motion->type = 1;
@@ -86,7 +87,8 @@ static int	horizontal_collision_portal(t_doom *doom,
 {
 	if (!wall->solid && wall->n != -1 && wall->n != motion->prev_sect)
 	{
-		if (intersect_check_v2(motion->where, motion->future, wall->v1, wall->v2))
+		if (intersect_check_v2(motion->where, motion->future,
+				wall->v1, wall->v2))
 		{
 			if (portal_intersect(doom, motion, wall))
 			{

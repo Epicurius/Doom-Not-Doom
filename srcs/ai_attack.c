@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:19:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:04:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,27 @@ static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 	return (move);
 }
 
-void	ai_attack(t_doom *doom, t_entity *entity)
+static void	spaw_projectile(t_doom *doom, t_entity *entity)
 {
 	t_projectile	*orb;
 
+	orb = protalloc(sizeof(t_projectile), "ai_attack");
+	orb->velocity = projectile_movement(doom, entity->where,
+			doom->player.where);
+	orb->where = entity->where;
+	orb->where.z += 4.5;
+	orb->start = orb->where;
+	orb->sector = entity->sector;
+	orb->target = 0;
+	orb->range = ENTITY_PROJECTILE_MAX_RANGE;
+	ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
+	entity->frame += 1;
+	doom->nb.projectiles += 1;
+	Mix_PlayChannel(CHANNEL_EXPLOSION, doom->sound[WAV_ORB], 0);
+}
+
+void	ai_attack(t_doom *doom, t_entity *entity)
+{
 	entity->yaw = angle_to_point_v2(entity->where, doom->player.where);
 	if (entity->frame < doom->npc_bxpm[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
@@ -46,19 +63,5 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 		entity->state = DEATH;
 	}
 	else if (g_entity_data[entity->type].attack_style == 1)
-	{
-		orb = protalloc(sizeof(t_projectile), "ai_attack");
-		orb->velocity = projectile_movement(doom, entity->where,
-				doom->player.where);
-		orb->where = entity->where;
-		orb->where.z += 4.5;
-		orb->start = orb->where;
-		orb->sector = entity->sector;
-		orb->target = 0;
-		orb->range = ENTITY_PROJECTILE_MAX_RANGE;
-		ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
-		entity->frame += 1;
-		doom->nb.projectiles += 1;
-		Mix_PlayChannel(CHANNEL_EXPLOSION, doom->sound[WAV_ORB], 0);
-	}
+		spaw_projectile(doom, entity);
 }

@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:36:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:10:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 //			Maybe remove break for multy kills? will be slower.
-static int	target_demon(t_doom *doom, t_projectile *orb, t_v3 dest)
+static int	target_demon(t_doom *doom, t_v3 dest)
 {
 	int		contact;
 	t_list	*curr;
@@ -45,7 +45,7 @@ int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest)
 			return (1);
 		}
 	}
-	else if (orb->target == 1 && target_demon(doom, orb, dest))
+	else if (orb->target == 1 && target_demon(doom, dest))
 		return (1);
 	if (point_distance_v3(start, dest) > orb->range)
 		return (1);

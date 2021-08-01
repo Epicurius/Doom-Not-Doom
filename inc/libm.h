@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:11:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:07:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ double				point_distance_v2(double x1, double y1,
 						double x2, double y2);
 void				print_v2(char *str, t_v2 v);
 void				print_v3(char *str, t_v3 v);
-void				clamp_degrees(double *angle);
+void				clamp_radians(double *angle);
 void				clamp_degrees(double *angle);
 /* File: math8.c */
 int					cohen_sutherland(t_point v[2], t_rect size);

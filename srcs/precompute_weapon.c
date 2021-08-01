@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:37:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:09:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	fire_orb(t_doom *doom, t_weapon *weapon)
+static void	fire_orb(t_doom *doom)
 {
 	t_projectile	*orb;
 
@@ -40,7 +40,7 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 		if (!weapon->frame)
 		{
 			if (doom->player.equiped == 4)
-				fire_orb(doom, weapon);
+				fire_orb(doom);
 			else
 				doom->player.action = SHOOTING;
 			weapon->mag_ammo -= 1;

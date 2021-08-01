@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:53:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 15:10:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where)
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
 	t_fc	y;
-	t_wall	*wall;
 
 	y.ceiling = ceiling_at(&doom->sectors[motion->curr_sect], motion->where);
 	y.floor = floor_at(&doom->sectors[motion->curr_sect], motion->where);

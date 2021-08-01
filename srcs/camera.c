@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:11:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 14:59:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	init_camera(t_doom *doom)
 
 void	update_camera(t_doom *doom)
 {
-	int x;
-	int y;
-	
-	SDL_GetRelativeMouseState(&x, &y);	
+	int	x;
+	int	y;
+
+	SDL_GetRelativeMouseState(&x, &y);
 	doom->player.yaw += x * doom->settings.mouse.x;
 	clamp_radians(&doom->player.yaw);
 	doom->player.pitch += y * doom->settings.mouse.y;
@@ -44,5 +44,4 @@ void	update_camera(t_doom *doom)
 	doom->player.horizon = doom->c.y - doom->player.pitch * doom->cam.scale;
 	doom->player.anglesin = sin(doom->player.yaw);
 	doom->player.anglecos = cos(doom->player.yaw);
-
 }
