@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/01 13:07:58 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/01 16:58:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,17 +29,18 @@ RAW_SRC		=	ai_attack.c\
 				blit_bxpm.c\
 				blit_entity.c\
 				buy_menu.c\
-				buy_menu_help.c\
-				buy_menu_weapon_stats.c\
-				buy_menu_player_stats.c\
-				buy_menu_weapon.c\
-				buy_menu_weapon_upgrades.c\
-				buy_menu_player_upgrades.c\
-				buy_menu_player.c\
 				buy_menu_buttons.c\
+				buy_menu_help.c\
 				buy_menu_init.c\
+				buy_menu_player.c\
+				buy_menu_player_stats.c\
+				buy_menu_player_upgrades.c\
+				buy_menu_weapon.c\
+				buy_menu_weapon_stats.c\
+				buy_menu_weapon_upgrades.c\
 				camera.c\
 				clock.c\
+				collision_detection.c\
 				color_and_brightness.c\
 				compute_vline.c\
 				crosshair_position.c\
@@ -60,7 +61,6 @@ RAW_SRC		=	ai_attack.c\
 				draw_weapon.c\
 				draw_wsprites.c\
 				endless.c\
-				error.c\
 				find_sector.c\
 				fps.c\
 				free.c\
@@ -73,6 +73,7 @@ RAW_SRC		=	ai_attack.c\
 				game_quit.c\
 				get_entity_state.c\
 				help.c\
+				horizontal_collision.c\
 				hud_utils.c\
 				icon.c\
 				init.c\
@@ -85,11 +86,11 @@ RAW_SRC		=	ai_attack.c\
 				init_inventory.c\
 				init_kar.c\
 				init_lamp.c\
+				init_launcher.c\
 				init_meat_hook.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
-				init_launcher.c\
 				init_render.c\
 				init_rift.c\
 				init_scale.c\
@@ -113,6 +114,7 @@ RAW_SRC		=	ai_attack.c\
 				math6.c\
 				math7.c\
 				math8.c\
+				math9.c\
 				minimap.c\
 				movement.c\
 				object_collision.c\
@@ -129,6 +131,8 @@ RAW_SRC		=	ai_attack.c\
 				precompute_weapon.c\
 				project_entity.c\
 				project_wall.c\
+				projectile_contact.c\
+				protalloc.c\
 				put_pixels.c\
 				random.c\
 				read_map.c\
@@ -141,8 +145,8 @@ RAW_SRC		=	ai_attack.c\
 				update_screen.c\
 				validate_map1.c\
 				validate_map2.c\
+				vertical_collision.c\
 				vertical_line.c\
-				collision_detection.c\
 				wall_slide.c\
 				wall_to_screen_xz.c
 
