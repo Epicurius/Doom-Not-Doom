@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:04:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 12:33:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
+
+# define DEMON						0
+# define PLAYER						1
 
 /*
 ** Screen info

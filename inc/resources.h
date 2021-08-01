@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:52:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 12:03:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,18 +187,17 @@ static const t_id_and_path	g_kar_textures[KAR_TEXTURE_AMOUNT] =
 	{37, BXPM_PATH"kar-37.bxpm"}
 };
 
-# define PUMP_TEXTURE_AMOUNT	9
+# define PUMP_TEXTURE_AMOUNT	8
 static const t_id_and_path	g_pump_textures[PUMP_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"pump-0.bxpm"},
-	{1, BXPM_PATH"pump-1.bxpm"},
-	{2, BXPM_PATH"pump-2.bxpm"},
-	{3, BXPM_PATH"pump-3.bxpm"},
-	{4, BXPM_PATH"pump-4.bxpm"},
-	{5, BXPM_PATH"pump-5.bxpm"},
-	{6, BXPM_PATH"pump-6.bxpm"},
-	{7, BXPM_PATH"pump-7.bxpm"},
-	{8, BXPM_PATH"pump-8.bxpm"}
+	{0, BXPM_PATH"launcher-0.bxpm"},
+	{1, BXPM_PATH"launcher-1.bxpm"},
+	{2, BXPM_PATH"launcher-2.bxpm"},
+	{3, BXPM_PATH"launcher-3.bxpm"},
+	{4, BXPM_PATH"launcher-4.bxpm"},
+	{5, BXPM_PATH"launcher-5.bxpm"},
+	{6, BXPM_PATH"launcher-6.bxpm"},
+	{7, BXPM_PATH"launcher-7.bxpm"}
 };
 
 typedef struct s_entity_data

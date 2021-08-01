@@ -6,26 +6,27 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 11:25:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 12:55:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	fire_orb(t_doom *doom, t_weapon *weapon)
+static void	fire_orb(t_doom *doom, t_weapon *weapon)
 {
-	if (doom->player_orb.moving)
-		return ;
-	doom->player_orb.velocity.x = cos(doom->player.pitch) * doom->player.anglecos;
-	doom->player_orb.velocity.y = cos(doom->player.pitch) * doom->player.anglesin;
-	doom->player_orb.velocity.z = -sin(doom->player.pitch);
-	doom->player_orb.where = doom->player.where;
-	doom->player_orb.where.z += 4.5;
-	doom->player_orb.where = add_v3(doom->player_orb.where,
-		mult_v3(doom->player_orb.velocity, 5));
-	doom->player_orb.start = doom->player_orb.where;
-	doom->player_orb.sector = doom->player.sector;
-	doom->player_orb.moving = 1;
+	t_projectile	*orb;
+	
+	orb = protalloc(sizeof(t_projectile), "player_projectile");
+	orb->velocity.x = cos(doom->player.pitch) * doom->player.anglecos;
+	orb->velocity.y = cos(doom->player.pitch) * doom->player.anglesin;
+	orb->velocity.z = -sin(doom->player.pitch);
+	orb->where = doom->player.where;
+	orb->where.z += 4.5;
+	orb->where = add_v3(orb->where, mult_v3(orb->velocity, 5));
+	orb->start = orb->where;
+	orb->sector = doom->player.sector;
+	orb->target = 1;
+	ft_lstadd_new(&doom->orb, orb, sizeof(t_projectile));
 }
 
 void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
@@ -36,7 +37,7 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 	{
 		if (!weapon->frame)
 		{
-			if (doom->player.equiped == 0)
+			if (doom->player.equiped == 4)
 				fire_orb(doom, weapon);
 			else
 				doom->player.action = SHOOTING;

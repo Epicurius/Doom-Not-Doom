@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:14:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 12:20:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	init_pump(t_doom *doom, t_weapon *weapon)
 	weapon->mag_ammo = 8;
 	weapon->cur_ammo = 20;
 	weapon->max_ammo = 100;
-	weapon->fire_frames = 9;
+	weapon->fire_frames = 8;
 	weapon->reload_frames = 0;
 	weapon->frame = 0;
 	weapon->frame_rate = 100;
-	weapon->x_offset = 1.5;
+	weapon->x_offset = 2;
 	weapon->time = doom->time.curr;
-	weapon->sound = WAV_SHOTGUN;
+	weapon->sound = WAV_ORB;
 	weapon->scale = 0.3 * (doom->surface->w / 457);
 	weapon->ammo_increase = 10;
 	weapon->damage_increase = 2;
