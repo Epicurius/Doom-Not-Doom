@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:23:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:57:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 
 	if ((rand() % 1000) > chance)
 		return (0);
-	a = (entity->yaw + ((rand() % angle) - angle / 2)) * CONVERT_RADIANS;
+	a = (entity->yaw + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
 	speed = doom->time.delta * g_entity_data[entity->type].speed;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;
@@ -49,7 +49,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	if ((rand() % 1000) > chance)
 		return (0);
 	a = angle_to_point_v2(entity->where, doom->player.where);
-	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_RADIANS;
+	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
 	speed = doom->time.delta * g_entity_data[entity->type].speed;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;

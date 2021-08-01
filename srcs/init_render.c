@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:20:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	init_render(t_doom *doom)
 {
-	int	x;
+	int	i;
 
-	x = -1;
+	i = -1;
 	doom->render = ft_pmalloc(sizeof(t_render)
 			* doom->nb.threads, "doom->render");
 	doom->zbuffer = ft_pmalloc(sizeof(double)
 			* (doom->surface->w * doom->surface->h), "doom->zbuffer");
 	doom->surface->userdata = doom->zbuffer;
-	while (++x < doom->nb.threads)
+	while (++i < doom->nb.threads)
 	{
-		doom->render[x].surface = doom->surface;
-		doom->render[x].sectors = doom->sectors;
-		doom->render[x].nb_sectors = doom->nb.sectors;
-		doom->render[x].skybox = doom->skybox;
-		doom->render[x].mtx = doom->mtx;
-		doom->render[x].stx = doom->stx;
-		doom->render[x].center = doom->c;
+		doom->render[i].surface = doom->surface;
+		doom->render[i].sectors = doom->sectors;
+		doom->render[i].nb_sectors = doom->nb.sectors;
+		doom->render[i].skybox = doom->skybox;
+		doom->render[i].mtx = doom->mtx;
+		doom->render[i].stx = doom->stx;
+		doom->render[i].center = doom->c;
 	}
 }

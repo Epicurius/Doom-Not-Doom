@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:52:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -499,7 +499,7 @@ void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
 int					blit_game_entity(void *arg);
 /* File: camera.c */
 void				init_camera(t_doom *doom);
-void				update_camera(t_doom *doom, int x, int y);
+void				update_camera(t_doom *doom);
 /* File: clock.c */
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);

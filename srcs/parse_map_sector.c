@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 09:11:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:57:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	parse_fc(t_doom *doom, char **arr)
 	ceiling->scale = atof(arr[6]) * doom->map_scale;
 	slope = stringsplit(arr[7], ' ', NULL);
 	doom->sectors[sect].wall_floor_slope = ft_atoi(slope[0]);
-	doom->sectors[sect].floor_slope = ft_atoi(slope[1]) * CONVERT_RADIANS;
+	doom->sectors[sect].floor_slope = ft_atoi(slope[1]) * CONVERT_TO_RADIANS;
 	doom->sectors[sect].wall_ceiling_slope = ft_atoi(slope[2]);
-	doom->sectors[sect].ceiling_slope = ft_atoi(slope[3]) * CONVERT_RADIANS;
+	doom->sectors[sect].ceiling_slope = ft_atoi(slope[3]) * CONVERT_TO_RADIANS;
 	free(slope);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 17:52:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:31:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,52 +37,52 @@ double elapsed;
 static inline void	game_loop(t_doom *doom)
 {
 	int i = 0;
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	game_mode(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	map_events(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	precompute_walls(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	precompute_skybox(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_screen(doom);//4
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	sound_board(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	precompute_weapon(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	precompute_entities(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	precompute_projectiles(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	movement(doom);//9 9
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	poll_event(doom);//10 10 10
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	if (!tpool_wait(&doom->tpool))//11 11
 		ft_putstr("asdasdasd\n");
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_projectiles(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_entities(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_crosshair(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_hud(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	draw_weapon(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	fps_func(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	map(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	update_screen(doom, doom->surface);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	game_pause(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d ", i++);
 	game_quit(doom);
-	//ft_printf("%d\n", i++);
+	ft_printf("%d\n", i++);
 }
 
 static void	game(char *map, t_settings settings)

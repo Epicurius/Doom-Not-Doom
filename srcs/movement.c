@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 07:51:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ void	movement(t_doom *doom)
 		doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	if (doom->keys[KEY_LCTRL])
 		doom->player.eyelvl = PLAYER_HEIGHT - 4;
-	SDL_GetRelativeMouseState(&x, &y);
-	update_camera(doom, x, y);
+	update_camera(doom);
 	get_base_speed(doom, &speed);
 	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
