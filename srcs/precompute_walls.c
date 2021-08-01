@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:07:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	clip_to_fustrum(t_camera cam, t_wall *wall)
 
 	i = get_intersection_v2(new_v3(wall->sv1.x, wall->sv1.z, 0),
 			new_v3(wall->sv2.x, wall->sv2.z, 0),
-			new_v3(cam.near_left, cam.near_z, 0),
-			new_v3(cam.near_right, cam.near_z, 0));
-	if (wall->sv1.z < cam.near_z)
+			new_v3(cam.near_left, NEAR_Z, 0),
+			new_v3(cam.near_right, NEAR_Z, 0));
+	if (wall->sv1.z < NEAR_Z)
 		wall->cv1 = new_v3(i.x, 0, i.y);
 	else
 		wall->cv1 = new_v3(wall->sv1.x, 0, wall->sv1.z);
-	if (wall->sv2.z < cam.near_z)
+	if (wall->sv2.z < NEAR_Z)
 		wall->cv2 = new_v3(i.x, 0, i.y);
 	else
 		wall->cv2 = new_v3(wall->sv2.x, 0, wall->sv2.z);
@@ -32,8 +32,8 @@ void	clip_to_fustrum(t_camera cam, t_wall *wall)
 
 int	clip_wall(t_camera cam, t_wall *wall)
 {
-	if ((wall->sv1.z < cam.near_z && wall->sv2.z < cam.near_z)
-		|| (wall->sv1.z > cam.far_z && wall->sv2.z > cam.far_z)
+	if ((wall->sv1.z < NEAR_Z && wall->sv2.z < NEAR_Z)
+		|| (wall->sv1.z > FAR_Z && wall->sv2.z > FAR_Z)
 		|| (wall->sv1.z < cam.far_left && wall->sv2.z < cam.far_left)
 		|| (wall->sv1.z > cam.far_right && wall->sv2.z > cam.far_right))
 		wall->visible = 0;
@@ -49,7 +49,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 {
 	int	i;
 
-	wall->tscale = (t_v2){wall->scale_w / wall->cv2.z, wall->scale_h};
+	wall->tscale = new_v2(wall->scale_w / wall->cv2.z, wall->scale_h);
 	if (wall->sv2.z)
 		wall->tscale.x = wall->scale_w / wall->sv2.z;
 	i = -1;
@@ -66,9 +66,9 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 			clock_wsprite(doom, wall, i);
 		else if (wall->wsprite.num[i].state == LOOP)
 			animate_wsprite(doom, &wall->wsprite.num[i]);
-		wall->wsprite.num[i].tscale = (t_v2){
+		wall->wsprite.num[i].tscale = new_v2(
 			wall->wsprite.num[i].scale_w / wall->sv2.z,
-			wall->wsprite.num[i].scale_h};
+			wall->wsprite.num[i].scale_h);
 		wall->wsprite.num[i].ready = 1;
 	}
 }
@@ -80,12 +80,10 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	sector->floor.feet = doom->c.y
 		+ (floor_at(sector, doom->player.where)
-			- eye_z + doom->cam.near_z * doom->player.pitch)
-		* doom->cam.scale / -doom->cam.near_z;
+			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
 	sector->ceiling.head = doom->c.y
 		+ (ceiling_at(sector, doom->player.where)
-			- eye_z + doom->cam.near_z * doom->player.pitch)
-		* doom->cam.scale / -doom->cam.near_z;
+			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
 }
 
 void	precompute_walls(t_doom *doom)

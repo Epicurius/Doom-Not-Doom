@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 07:52:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:02:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,6 @@ typedef struct s_camera
 	double			near_right;
 	double			far_left;
 	double			far_right;
-	double			near_z;
-	double			far_z;
 	double			range;
 	double			near_up;
 	double			near_down;

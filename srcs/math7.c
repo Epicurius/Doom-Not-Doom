@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 07:57:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 08:15:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ double	angle_to_point_v2(t_v3 p1, t_v3 p2)
 	double	angle;
 
 	angle = atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_TO_DEGREES;
-	while (angle > 360)
-		angle -= 360;
-	while (angle < 0)
-		angle += 360;
+	clamp_degrees(&angle);
 	return (angle);
 }
 
@@ -47,16 +44,20 @@ double	point_distance_v2(double x1, double y1, double x2, double y2)
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-//void	print_v2(char *str, t_v2 v)
-//{
-//	if (str)
-//		ft_printf("%s\t", str);
-//	ft_printf("[%.2f\t%.2f]\n", v.x, v.y);
-//}
-//
-//void	print_v3(char *str, t_v3 v)
-//{
-//	if (str)
-//		ft_printf("%s\t", str);
-//	ft_printf("[%.2f\t%.2f\t%.2f]\n", v.x, v.y, v.z);
-//}
+void	clamp_radians(double *angle)
+{
+	*angle *= CONVERT_TO_DEGREES;
+	while (*angle > 360)
+		*angle -= 360;
+	while (*angle < 0)
+		*angle += 360;
+	*angle *= CONVERT_TO_RADIANS;
+}
+
+void	clamp_degrees(double *angle)
+{
+	while (*angle > 360)
+		*angle -= 360;
+	while (*angle < 0)
+		*angle += 360;
+}
