@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 10:21:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 14:00:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	crosshair_position(t_render *render, t_vline *vline, double alpha)
 	t_wall		*wall;
 	t_wsprite	*bullet_hole;
 
-	if (render->player.action == SHOOTING 
+	if (render->player.action == SHOOTING
 		&& render->x == render->center.x && vline->y1 == render->center.y)
 	{
 		wall = &render->wall;

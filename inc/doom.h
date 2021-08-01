@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:48:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 14:04:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -756,7 +756,7 @@ void				init_sound(t_doom *doom);
 void				rift_spawn(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 /* File: update_screen.c */
-void				update_screen(t_doom *doom, SDL_Surface *surface);
+void				update_screen(t_doom *doom);
 /* File: validate_map1.c */
 int					check_entities(t_doom *doom);
 int					check_player(t_doom *doom);

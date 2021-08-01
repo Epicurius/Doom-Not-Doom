@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:56:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 13:52:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_threading(t_doom *doom)
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
-		error_msg(NULL);	
+		error_msg(NULL);
 }
 
 void	init_doom(t_doom *doom)
@@ -46,4 +46,3 @@ void	init_doom(t_doom *doom)
 	init_slope_normal(doom);
 	init_camera(doom);
 }
-

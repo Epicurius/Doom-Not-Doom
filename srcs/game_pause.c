@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:07:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 14:04:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void	game_pause(t_doom *doom)
 		doom->c.x - bxpm->w / 2, doom->c.y - bxpm->h / 2);
 	s_to_save_screen_shot(doom);
 	p_to_unpause(doom, doom->c.y + bxpm->h / 2);
-	update_screen(doom, doom->surface);
+	update_screen(doom);
 	pause_loop(doom, bmp);
 	free_bmp(bmp);
 	free_bxpm(bxpm);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	ft_bzero(&doom->keys, sizeof(char) * (SDL_NUM_SCANCODES + 5));
+	ft_bzero(&doom->keys, 517);
 	doom->time.curr = SDL_GetTicks();
 }
