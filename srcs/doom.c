@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:58:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:23:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static inline void	game_loop(t_doom *doom)
 	precompute_projectiles(doom);
 	ft_printf("%d ", i++);
 	movement(doom);
-	ft_printf("%d ", i++);
+	ft_printf("%d ", i++);//10
 	poll_event(doom);
 	ft_printf("%d ", i++);
 	tpool_wait(&doom->tpool);

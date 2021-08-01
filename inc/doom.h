@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:24:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:25:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_projectile
 	double			dist;
 	int				sector;
 	int				moving;
-	char			target;
+	int				target;
 	int				range;
 }					t_projectile;
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:10:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:41:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //			Maybe remove break for multy kills? will be slower.
 static int	target_demon(t_doom *doom, t_v3 dest)
 {
+	t_v3	w;
 	int		contact;
 	t_list	*curr;
 
@@ -22,12 +23,16 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 	curr = doom->entity;
 	while (curr)
 	{
-		if (((t_entity *)curr->content)->type < RIFT
-			&& point_distance_v3(((t_entity *)curr->content)->where, dest) <= 5)
+		if ((((t_entity *)curr->content)->type == ALFRED)
+			|| ((t_entity *)curr->content)->type == SPOOKY)
 		{
-			((t_entity *)curr->content)->state = DEATH;
-			contact = 1;
-			break ;
+			w = ((t_entity *)curr->content)->where;
+			w.z += g_entity_data[((t_entity *)curr->content)->type].height / 2;
+			if (point_distance_v3(w, dest) <= 3)
+			{
+				((t_entity *)curr->content)->hp = 0;
+				contact = 1;
+			}
 		}
 		curr = curr->next;
 	}

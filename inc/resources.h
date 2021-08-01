@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:09:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:14:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,13 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{14, BXPM_PATH"clock.bxpm"}
 };
 
-# define SKYBOX_TEXTURE_AMOUNT	18
+//{12, BXPM_PATH"cosmos-4.bxpm"},
+//{13, BXPM_PATH"cosmos-1.bxpm"},
+//{14, BXPM_PATH"cosmos-2.bxpm"},
+//{15, BXPM_PATH"cosmos-3.bxpm"},
+//{16, BXPM_PATH"cosmos-0.bxpm"},
+//{17, BXPM_PATH"cosmos-5.bxpm"}
+# define SKYBOX_TEXTURE_AMOUNT	12
 static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
 	{0, BXPM_PATH"space-3.bxpm"},
@@ -75,13 +81,7 @@ static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 	{8, BXPM_PATH"land-2.bxpm"},
 	{9, BXPM_PATH"land-3.bxpm"},
 	{10, BXPM_PATH"land-0.bxpm"},
-	{11, BXPM_PATH"land-5.bxpm"},
-	{12, BXPM_PATH"cosmos-4.bxpm"},
-	{13, BXPM_PATH"cosmos-1.bxpm"},
-	{14, BXPM_PATH"cosmos-2.bxpm"},
-	{15, BXPM_PATH"cosmos-3.bxpm"},
-	{16, BXPM_PATH"cosmos-0.bxpm"},
-	{17, BXPM_PATH"cosmos-5.bxpm"}
+	{11, BXPM_PATH"land-5.bxpm"}
 };
 
 # define ICON_TEXTURE_AMOUNT	5
@@ -187,7 +187,7 @@ static const t_id_and_path	g_kar_textures[KAR_TEXTURE_AMOUNT] =
 	{37, BXPM_PATH"kar-37.bxpm"}
 };
 
-# define LAUNCHER_TEXTURE_AMOUNT	8
+# define LAUNCHER_TEXTURE_AMOUNT	14
 static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 {
 	{0, BXPM_PATH"launcher-0.bxpm"},
@@ -197,7 +197,13 @@ static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 	{4, BXPM_PATH"launcher-4.bxpm"},
 	{5, BXPM_PATH"launcher-5.bxpm"},
 	{6, BXPM_PATH"launcher-6.bxpm"},
-	{7, BXPM_PATH"launcher-7.bxpm"}
+	{7, BXPM_PATH"launcher-7.bxpm"},
+	{8, BXPM_PATH"launcher-8.bxpm"},
+	{9, BXPM_PATH"launcher-9.bxpm"},
+	{10, BXPM_PATH"launcher-10.bxpm"},
+	{11, BXPM_PATH"launcher-11.bxpm"},
+	{12, BXPM_PATH"launcher-12.bxpm"},
+	{13, BXPM_PATH"launcher-13.bxpm"}
 };
 
 typedef struct s_entity_data

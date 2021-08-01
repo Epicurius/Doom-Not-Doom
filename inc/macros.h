@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:25:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:18:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define ANGLES							1
 # define STYLE_MELEE					0
 # define STYLE_RANGE					1
-# define PLAYER_PROJECTILE_MAX_RANGE	60
-# define ENTITY_PROJECTILE_MAX_RANGE	200
+# define PLAYER_PROJECTILE_MAX_RANGE	100
+# define ENTITY_PROJECTILE_MAX_RANGE	100
 # define PROJECTILE_SPEED				80.0
 
 /*

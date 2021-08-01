@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 13:44:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:08:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 			continue ;
 		read_bmp(&bmp[0], av[i]);
 		bxpm = bmp_to_bxpm(bmp);
-		ft_printf("Create\t%s\n", av[i]);
+		ft_printf("Reading\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
 		ft_printf("Writing\t%s.bxpm\n", path);
 		write_bxpm(bxpm, path);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:09:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:17:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	fire_orb(t_doom *doom)
 	orb->where = doom->player.where;
 	orb->where.z += 4.5;
 	orb->where = add_v3(orb->where, mult_v3(orb->velocity, 5));
+	orb->velocity = mult_v3(orb->velocity, 3);
 	orb->start = orb->where;
 	orb->sector = doom->player.sector;
 	orb->target = 1;

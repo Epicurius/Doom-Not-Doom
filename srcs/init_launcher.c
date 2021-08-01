@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pump.c                                        :+:      :+:    :+:   */
+/*   init_launcher.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:07:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/01 16:09:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_launcher(t_doom *doom, t_weapon *weapon)
 	weapon->mag_ammo = 8;
 	weapon->cur_ammo = 20;
 	weapon->max_ammo = 100;
-	weapon->fire_frames = 8;
+	weapon->fire_frames = 14;
 	weapon->reload_frames = 0;
 	weapon->frame = 0;
 	weapon->frame_rate = 100;
