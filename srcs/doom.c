@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/02 10:21:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:32:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,54 +33,28 @@ static void	sound_board(t_doom *doom)
 
 static inline void	game_loop(t_doom *doom)
 {
-	int	i;
-
-	i = 0;
-	ft_printf("%d ", i++);
 	game_mode(doom);
-	ft_printf("%d ", i++);
 	map_events(doom);
-	ft_printf("%d ", i++);
 	precompute_walls(doom);
-	ft_printf("%d ", i++);
 	precompute_skybox(doom);
-	ft_printf("%d ", i++);
 	draw_screen(doom);
-	ft_printf("%d ", i++);
 	sound_board(doom);
-	ft_printf("%d ", i++);
 	precompute_weapon(doom);
-	ft_printf("%d ", i++);
 	precompute_entities(doom);
-	ft_printf("%d ", i++);
 	precompute_projectiles(doom);
-	ft_printf("%d ", i++);
 	movement(doom);
-	ft_printf("%d ", i++);//10
 	poll_event(doom);
-	ft_printf("%d ", i++);
 	tpool_wait(&doom->tpool);
-	ft_printf("%d ", i++);
 	draw_projectiles(doom);
-	ft_printf("%d ", i++);
 	draw_entities(doom);
-	ft_printf("%d ", i++);
 	draw_crosshair(doom);
-	ft_printf("%d ", i++);
 	draw_hud(doom);
-	ft_printf("%d ", i++);
 	draw_weapon(doom);
-	ft_printf("%d ", i++);
 	fps_func(doom);
-	ft_printf("%d ", i++);
 	map(doom);
-	ft_printf("%d ", i++);
 	update_screen(doom);
-	ft_printf("%d ", i++);
 	game_pause(doom);
-	ft_printf("%d ", i++);
 	game_quit(doom);
-	ft_printf("%d\n", i++);
 }
 
 static void	game(char *map, t_settings settings)
@@ -117,7 +91,5 @@ int	main(int ac, char **av)
 		launcher();
 	if (settings.debug)
 		system("leaks doom");
-	while (1)
-		;
 	return (1);
 }

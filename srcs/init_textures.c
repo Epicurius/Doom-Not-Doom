@@ -6,23 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/02 10:22:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:30:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-int	multy_thread_bxpm(void *arg)
-{
-	int	res;
-
-	res = read_bxpm(((t_thread_bxpm *)arg)->bxpm, ((t_thread_bxpm *)arg)->path);
-	free(((t_thread_bxpm *)arg)->path);
-	if (res)
-		return (1);
-	ft_printf("Could not read %s\n", ((t_thread_bxpm *)arg)->path);
-	return (0);
-}
 
 static void	parse_bxpm(t_doom *doom, int amount, t_bxpm *dest,
 	const t_id_and_path *src)
@@ -38,12 +26,11 @@ static void	parse_bxpm(t_doom *doom, int amount, t_bxpm *dest,
 	{
 		threads[src[i].id].path = ft_strdup(src[i].path);
 		threads[src[i].id].bxpm = &dest[src[i].id];
-		tpool_add(&doom->tpool, multy_thread_bxpm, &threads[src[i].id]);
+		tpool_add(&doom->tpool, multithread_read_bxpm, &threads[src[i].id]);
 	}
 	tpool_wait(&doom->tpool);
 	free(threads);
 }
-
 
 static void	parse_wtx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 {
@@ -52,7 +39,7 @@ static void	parse_wtx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 		threads[id].active = 1;
 		threads[id].path = ft_strdup(g_map_textures[id].path);
 		threads[id].bxpm = &doom->mtx[id];
-		tpool_add(&doom->tpool, multy_thread_bxpm, &threads[id]);
+		tpool_add(&doom->tpool, multithread_read_bxpm, &threads[id]);
 	}
 }
 
@@ -69,16 +56,14 @@ static void	parse_stx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 		{
 			threads[i].path = ft_strdup(g_skybox_textures[i].path);
 			threads[i].bxpm = &doom->stx[i];
-			tpool_add(&doom->tpool, multy_thread_bxpm, &threads[i]);
+			tpool_add(&doom->tpool, multithread_read_bxpm, &threads[i]);
 			i++;
 		}
 	}
 }
 
-static void	parse_map_textures(t_doom *doom)
+static void	parse_map_textures(t_doom *doom, int i, int j)
 {
-	int				i;
-	int				j;
 	t_thread_bxpm	wtx_threads[MAP_TEXTURE_AMOUNT];
 	t_thread_bxpm	stx_threads[SKYBOX_TEXTURE_AMOUNT];
 
@@ -94,30 +79,25 @@ static void	parse_map_textures(t_doom *doom)
 		parse_wtx_texture(doom, wtx_threads, doom->walls[i].ptx);
 		j = -1;
 		while (++j < doom->walls[i].wsprite.total)
-			parse_wtx_texture(doom, wtx_threads, doom->walls[i].wsprite.num[j].tx);
+			parse_wtx_texture(doom, wtx_threads,
+				doom->walls[i].wsprite.num[j].tx);
 	}
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
-		if (doom->sectors[i].ceiling.tx < 0)
-			parse_stx_texture(doom, stx_threads, doom->sectors[i].ceiling.tx);
-		else
-			parse_wtx_texture(doom, wtx_threads, doom->sectors[i].ceiling.tx);
-		if (doom->sectors[i].floor.tx < 0)
-			parse_stx_texture(doom, stx_threads, doom->sectors[i].floor.tx);
-		else
-			parse_wtx_texture(doom, wtx_threads, doom->sectors[i].floor.tx);
+		parse_wtx_texture(doom, wtx_threads, doom->sectors[i].ceiling.tx);
+		parse_wtx_texture(doom, wtx_threads, doom->sectors[i].floor.tx);
 	}
 	tpool_wait(&doom->tpool);
 }
 
+//parse_bxpm(doom, MAP_TEXTURE_AMOUNT - 1,
+//	doom->mtx, g_map_textures);
+//parse_bxpm(doom, SKYBOX_TEXTURE_AMOUNT,
+//	doom->stx, g_skybox_textures);
 void	init_textures(t_doom *doom)
 {
-	parse_map_textures(doom);
-	//parse_bxpm(doom, MAP_TEXTURE_AMOUNT - 1,
-	//	doom->mtx, g_map_textures);
-	//parse_bxpm(doom, SKYBOX_TEXTURE_AMOUNT,
-	//	doom->stx, g_skybox_textures);
+	parse_map_textures(doom, -1, -1);
 	parse_bxpm(doom, ENTITY_TEXTURE_AMOUNT,
 		doom->etx, g_entity_textures);
 	parse_bxpm(doom, ICON_TEXTURE_AMOUNT,
