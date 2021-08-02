@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/02 10:26:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/02 13:35:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_ORB, WAV_PATH"orb.wav"}
 };
 
-# define MAP_TEXTURE_AMOUNT	15
+# define MAP_TEXTURE_AMOUNT	21
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 {	
 	{0, BXPM_PATH"bh.bxpm"},
@@ -56,18 +56,18 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{9, BXPM_PATH"console.bxpm"},
 	{10, BXPM_PATH"green_wall.bxpm"},
 	{11, BXPM_PATH"radar.bxpm"},
-	{12, BXPM_PATH"steel.bxpm"},
-	{13, BXPM_PATH"wall_panel.bxpm"},
-	{14, BXPM_PATH"clock.bxpm"}
+	{12, BXPM_PATH"compwall.bxpm"},
+	{13, BXPM_PATH"door.bxpm"},
+	{14, BXPM_PATH"fiber_wall.bxpm"},
+	{15, BXPM_PATH"rock.bxpm"},
+	{16, BXPM_PATH"steel_tile1.bxpm"},
+	{17, BXPM_PATH"steel_tile2.bxpm"},
+	{18, BXPM_PATH"steel_tlight.bxpm"},
+	{19, BXPM_PATH"wires.bxpm"},
+	{20, BXPM_PATH"clock.bxpm"}
 };
 
-//{12, BXPM_PATH"cosmos-4.bxpm"},
-//{13, BXPM_PATH"cosmos-1.bxpm"},
-//{14, BXPM_PATH"cosmos-2.bxpm"},
-//{15, BXPM_PATH"cosmos-3.bxpm"},
-//{16, BXPM_PATH"cosmos-0.bxpm"},
-//{17, BXPM_PATH"cosmos-5.bxpm"}
-# define SKYBOX_TEXTURE_AMOUNT	12
+# define SKYBOX_TEXTURE_AMOUNT	18
 static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
 	{0, BXPM_PATH"space-3.bxpm"},
@@ -81,7 +81,13 @@ static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 	{8, BXPM_PATH"land-2.bxpm"},
 	{9, BXPM_PATH"land-3.bxpm"},
 	{10, BXPM_PATH"land-0.bxpm"},
-	{11, BXPM_PATH"land-5.bxpm"}
+	{11, BXPM_PATH"land-5.bxpm"},
+	{12, BXPM_PATH"cosmos-4.bxpm"},
+	{13, BXPM_PATH"cosmos-1.bxpm"},
+	{14, BXPM_PATH"cosmos-2.bxpm"},
+	{15, BXPM_PATH"cosmos-3.bxpm"},
+	{16, BXPM_PATH"cosmos-0.bxpm"},
+	{17, BXPM_PATH"cosmos-5.bxpm"}
 };
 
 # define ICON_TEXTURE_AMOUNT	5
