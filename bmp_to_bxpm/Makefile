@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 13:39:16 by nneronin          #+#    #+#              #
-#    Updated: 2021/07/26 13:44:31 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/01 17:12:18 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,7 +150,7 @@ INCLUDES = 	-I ../../libs/libft ../../libs/libft/libft.a\
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
-	@printf $(CYAN)"[INFO]	$(NAME) ready!\n"$(RESET)
+	@printf $(CYAN)"[INFO]	$(NAME) is up to date!\n"$(RESET)
 
 $(NAME): $(SRC)
 	@gcc -o $(NAME) $(SRC) $(INCLUDES)

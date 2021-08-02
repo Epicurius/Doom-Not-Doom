@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 16:23:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/02 10:21:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ int	main(int ac, char **av)
 		launcher();
 	if (settings.debug)
 		system("leaks doom");
+	while (1)
+		;
 	return (1);
 }
