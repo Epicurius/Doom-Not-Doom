@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:12:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:51:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,4 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	}
 	else if (g_entity_data[entity->type].type == RANGE)
 		spaw_projectile(doom, entity);
-
 }

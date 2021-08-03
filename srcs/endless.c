@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 08:49:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:51:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	endless_round(t_doom *doom)
 		doom->game.cool_down = 10;
 		doom->player.health = 1100 - doom->settings.difficulty * 100;
 		doom->inv.dosh += 100 + doom->game.round * 10;
-		doom->player.store_access = 1;	
+		doom->player.store_access = 1;
 		Mix_PlayChannel(-1, doom->sound[WAV_DOSH], 0);
 		Mix_PlayChannel(-1, doom->sound[WAV_ROUND_END], 0);
 		return (1);
@@ -58,7 +58,6 @@ void	game_mode_endless(t_doom *doom)
 		while (++i < doom->nb.events)
 			if (doom->events[i].type == STORE)
 				doom->events[i].wsprite->src = rect_xy2(0, 0, 662, 550);
-
 	}
 }
 

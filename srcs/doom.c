@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 09:55:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:51:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ static inline void	game_loop(t_doom *doom)
 	draw_weapon(doom);
 	fps_func(doom);
 	map(doom);
-	//t_rect dstr = (t_rect){580, 930, 734, 1037};
-	//t_rect srcr = (t_rect){580, 930, 250, 1037};
-	//blit_bxpm_scaled(doom->surface, dstr, &doom->etx[4], srcr);
 	update_screen(doom);
 	game_pause(doom);
 	game_quit(doom);
