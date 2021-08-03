@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 08:45:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 11:29:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ static const t_id_and_path	g_icon_textures[ICON_TEXTURE_AMOUNT] =
 	{4, ICON_PATH"cash_dosh.bxpm"}
 };
 
-# define ENTITY_TEXTURE_AMOUNT	4
+# define ENTITY_TEXTURE_AMOUNT	5
 static const t_id_and_path	g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
 {
 	{0, BXPM_PATH"alfred.bxpm"},
 	{1, BXPM_PATH"spooky.bxpm"},
 	{2, BXPM_PATH"rift.bxpm"},
-	{3, BXPM_PATH"objects.bxpm"}
+	{3, BXPM_PATH"objects.bxpm"},
+	{4, BXPM_PATH"ghost.bxpm"}
 };
 
 # define SHOTGUN_TEXTURE_AMOUNT	14
@@ -293,6 +294,29 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[DEATH] = 12000,
 		.path = BXPM_PATH"spooky.bxpm",
 		.tc = {25, 193, 139 - 25, 377 - 193}
+	},
+	{
+		.name = "Ghost",
+		.health = 1,
+		.damage = 100,
+		.animate = 1,
+		.hostile = 1,
+		.attack_style = 1,
+		.scale = 0.03,
+		.height = 2,
+		.hitbox_radius = 5,
+		.speed = 20,
+		.move = 1,
+		.view_distance = 200,
+		.detection_radius = 40,
+		.attack_range = 50,
+		.flight = 0,
+		.frame_rate[IDLE] = 2000,
+		.frame_rate[MOVE] = 6000,
+		.frame_rate[ATTACK] = 6000,
+		.frame_rate[DEATH] = 4000,
+		.path = BXPM_PATH"ghost.bxpm",
+		.tc = {0, 0, 43, 47}
 	},
 	{
 		.name = "Rift",

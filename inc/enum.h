@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 08:37:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 10:01:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ enum e_enum_sprites
 {
 	ALFRED,
 	SPOOKY,
+	GHOST,
 	RIFT,
 	BARREL,
 	LAMP,
