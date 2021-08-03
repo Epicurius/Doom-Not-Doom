@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/02 13:35:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:45:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
 	{WAV_DOSH, WAV_PATH"dosh.wav"},
 	{WAV_EMPTY_CLIP, WAV_PATH"empty_clip.wav"},
-	{WAV_PLAYER_HIT, WAV_PATH"player_hit.wav"},
 	{WAV_BIP, WAV_PATH"bip.wav"},
-	{WAV_MONSTER_HIT, WAV_PATH"monster_hit.wav"},
+	{WAV_ORB, WAV_PATH"orb.wav"},
+	{WAV_ROUND_END, WAV_PATH"round_end.wav"},
 	{WAV_NEW_ROUND, WAV_PATH"new_round.wav"},
-	{WAV_ORB, WAV_PATH"orb.wav"}
+	{WAV_MONSTER_HIT, WAV_PATH"EntityHit.wav"},
+	{WAV_PLAYER_HIT, WAV_PATH"PlayerHit.wav"},
+	{WAV_ENTITY_DEATH, WAV_PATH"EntityDeath.wav"},
+	{WAV_PLAYER_DEATH, WAV_PATH"PlayerDeath.wav"}
 };
 
 # define MAP_TEXTURE_AMOUNT	21

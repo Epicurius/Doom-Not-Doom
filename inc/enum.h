@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 18:06:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:37:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ enum e_enum_sounds
 	WAV_ELEVATOR_MUSIC,
 	WAV_DOSH,
 	WAV_EMPTY_CLIP,
-	WAV_PLAYER_HIT,
 	WAV_BIP,
-	WAV_MONSTER_HIT,
-	WAV_NEW_ROUND,
 	WAV_ORB,
+	WAV_NEW_ROUND,
+	WAV_ROUND_END,
+	WAV_PLAYER_HIT,
+	WAV_MONSTER_HIT,
+	WAV_PLAYER_DEATH,
+	WAV_ENTITY_DEATH,
 	WAV_AMOUNT
 };
 

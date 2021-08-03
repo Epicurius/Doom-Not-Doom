@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:04:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:34:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	game_over(t_doom *doom)
 	blit_game_stats(doom, NULL);
 	blit_screen_shot(doom);
 	update_screen(doom);
+	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_PLAYER_DEATH], 0);
 	while (1)
 	{
 		SDL_PollEvent(&event);

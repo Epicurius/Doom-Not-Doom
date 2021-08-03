@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/02 12:32:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 08:42:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	sound_board(t_doom *doom)
 	if (!Mix_Playing(CHANNEL_TTS) && !Mix_Playing(CHANNEL_MUSIC))
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-		Mix_Volume(CHANNEL_MUSIC, 50);
-		Mix_Volume(CHANNEL_WEAPON, 50);
+		//Mix_Volume(CHANNEL_MUSIC, 10);
+		//Mix_Volume(CHANNEL_WEAPON, 50);
 	}
 }
 
