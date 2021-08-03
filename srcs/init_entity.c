@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 10:01:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:46:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	init_entity_pos(t_doom *doom)
 	init_torch(doom);
 	init_meat_hook(doom);
 	init_ghost(doom);
+	init_ceiling_lamp(doom);
+	init_gargoyl(doom);
 }
 
 void	init_entities(t_doom *doom)
@@ -38,7 +40,7 @@ void	init_entities(t_doom *doom)
 		entity->hp = g_entity_data[entity->type].health;
 		entity->dest = entity->where;
 		entity->state = IDLE;
-		if (entity->type == 2)
+		if (entity->type == RIFT)
 		{
 			new = ft_lstnew(curr->content, sizeof(t_entity));
 			ft_lstadd(&doom->rifts, new);

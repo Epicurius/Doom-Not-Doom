@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 10:05:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:26:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,14 @@ void	parse_wsprite(t_doom *doom, char **arr)
 
 int	sprite_type(char *str)
 {
-	if (ft_strequ(str, "Alfred"))
-		return (ALFRED);
-	if (ft_strequ(str, "Spooky"))
-		return (SPOOKY);
-	if (ft_strequ(str, "Rift"))
-		return (RIFT);
-	if (ft_strequ(str, "Barrel"))
-		return (BARREL);
-	if (ft_strequ(str, "Lamp"))
-		return (LAMP);
-	if (ft_strequ(str, "Torch"))
-		return (TORCH);
-	if (ft_strequ(str, "MeatHook"))
-		return (MEAT_HOOK);
-	if (ft_strequ(str, "Ghost"))
-		return (GHOST);
+	int	i;
+
+	i = -1;
+	while (++i < ENTITY_AMOUNT)
+	{
+		if (ft_strequ(str, g_entity_data[i].name))
+			return (i);
+	}
 	error_msg("%s is not a valid entity!\n", str);
 	return (-1);
 }
