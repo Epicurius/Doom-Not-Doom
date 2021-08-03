@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 10:52:13 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 16:59:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 18:08:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_wavemode(t_doom *doom)
 		entity->hp = g_entity_data[entity->type].health;
 		entity->dest = entity->where;
 		entity->state = IDLE;
-		if (entity->type == 2)
+		if (entity->type == RIFT)
 		{
 			new = ft_lstnew(curr->content, sizeof(t_entity));
 			ft_lstadd(&doom->rifts, new);

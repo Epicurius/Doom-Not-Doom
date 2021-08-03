@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:51:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 18:10:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static inline void	game_loop(t_doom *doom)
 	game_quit(doom);
 }
 
+//	Crouch in small area and standup for insta death? Maybe fix?
 static void	game(char *map, t_settings settings)
 {
 	t_doom		doom;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:40:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:58:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 # define MAP_TEXTURE_AMOUNT	21
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 {	
-	{0, BXPM_PATH"bh.bxpm"},
+	{0, BXPM_PATH"bullet_hole.bxpm"},
 	{1, BXPM_PATH"vent.bxpm"},
 	{2, BXPM_PATH"tile_floor.bxpm"},
 	{3, BXPM_PATH"bars.bxpm"},
