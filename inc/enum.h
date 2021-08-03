@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 10:01:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:07:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENUM_H
 # define ENUM_H
 
-enum e_enum_weapons
+enum e_weapons
 {
 	WEAPON_SHOTGUN,
 	WEAPON_GUN,
@@ -23,7 +23,7 @@ enum e_enum_weapons
 	WEAPON_AMOUNT
 };
 
-enum e_enum_sounds
+enum e_sounds
 {
 	WAV_MAIN_THEME,
 	WAV_SHOTGUN,
@@ -46,7 +46,7 @@ enum e_enum_sounds
 	WAV_AMOUNT
 };
 
-enum e_enum_sound_channel
+enum e_sound_channel
 {
 	CHANNEL_MUSIC,
 	CHANNEL_WEAPON,
@@ -58,7 +58,7 @@ enum e_enum_sound_channel
 	CHANNEL_AMOUNT
 };
 
-enum e_enum_sprites
+enum e_sprites
 {
 	ALFRED,
 	SPOOKY,
@@ -71,7 +71,7 @@ enum e_enum_sprites
 	ENTITY_AMOUNT
 };
 
-enum e_enum_entity_state
+enum e_entity_state
 {
 	IDLE,
 	ATTACK,
@@ -80,7 +80,7 @@ enum e_enum_entity_state
 	TERMINATE
 };
 
-enum e_enum_skybox
+enum e_skybox
 {
 	TOP,
 	BOT,
@@ -116,6 +116,14 @@ enum e_game_mode
 {
 	STORY,
 	ENDLESS
+};
+
+enum e_entity_type
+{
+	INANIMATE,
+	MELEE,
+	RANGE,
+	KAMIKAZE
 };
 
 enum e_key_code

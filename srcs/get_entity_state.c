@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:13:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:01:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
-	if (g_entity_data[entity->type].animate && entity->render.z > 10
+	if (g_entity_data[entity->type].type && entity->render.z > 10
 		&& doom->c.x > entity->render.start.x
 		&& doom->c.x < entity->render.end.x
 		&& doom->c.y > entity->render.start.y
@@ -87,7 +87,7 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		entity->frame = 0;
 		entity->time = 0;
 	}
-	else if (!g_entity_data[entity->type].animate
+	else if (!g_entity_data[entity->type].type
 		|| entity->state == DEATH || entity->frame)
 		return ;
 	else

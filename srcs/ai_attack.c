@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 08:27:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:12:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,19 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	entity->yaw = angle_to_point_v2(entity->where, doom->player.where);
 	if (entity->frame < doom->npc_bxpm[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
-	if (g_entity_data[entity->type].attack_style == 2)
+	if (g_entity_data[entity->type].type == MELEE)
+	{
+		doom->player.health -= g_entity_data[entity->type].damage;
+		Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
+	}
+	else if (g_entity_data[entity->type].type == KAMIKAZE)
 	{
 		doom->player.health -= g_entity_data[entity->type].damage;
 		Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
 		entity->hp = 0;
 		entity->state = DEATH;
 	}
-	else if (g_entity_data[entity->type].attack_style == 1)
+	else if (g_entity_data[entity->type].type == RANGE)
 		spaw_projectile(doom, entity);
+
 }

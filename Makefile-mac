@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/03 10:01:20 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/03 16:41:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,7 +157,7 @@ ODIR		=	obj
 INC			=	-I./inc -I../
 SRCS		=	$(addprefix $(CDIR)/,$(RAW_SRC))
 OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
-DEP			:=	$(OBJ:.o=.d)
+DEP			=	$(OBJ:.o=.d)
 
 SDL_DIR		:= ../libs/SDL_Frameworks
 SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
@@ -176,17 +176,17 @@ LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
 LIBS		+=	$(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
 				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
 
-CFLAGS		=	-Wall -Wextra -Werror -Wfatal-errors
+CFLAGS		=	-Wall -Wextra -MMD -Werror -Wfatal-errors
 
 RESOURCES	=	./resources
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
 -include $(DEP)
-#-04
+
 $(ODIR):
 	@mkdir -p $@
-
+	
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
 	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
