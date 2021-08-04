@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/04 11:30:22 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/04 12:47:18 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,17 +77,22 @@ RAW_SRC		=	ai_attack.c\
 				hud_utils.c\
 				icon.c\
 				init.c\
-				init_alfred.c\
-				init_alfred2.c\
+				init_alfred_part1.c\
+				init_alfred_part2.c\
 				init_barrel.c\
+				init_ceiling_lamp.c\
 				init_entity.c\
 				init_game_mode.c\
+				init_gargoyl.c\
+				init_ghost_part1.c\
+				init_ghost_part2.c\
 				init_glock.c\
 				init_inventory.c\
 				init_kar.c\
 				init_lamp.c\
 				init_launcher.c\
 				init_meat_hook.c\
+				init_med_kit.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
@@ -97,9 +102,8 @@ RAW_SRC		=	ai_attack.c\
 				init_sdl.c\
 				init_shotgun.c\
 				init_slope.c\
-				init_ghost.c\
-				init_spooky.c\
-				init_spooky2.c\
+				init_spooky_part1.c\
+				init_spooky_part2.c\
 				init_textures.c\
 				init_torch.c\
 				init_weapons.c\
@@ -134,6 +138,7 @@ RAW_SRC		=	ai_attack.c\
 				project_wall.c\
 				projectile_contact.c\
 				protalloc.c\
+				purge_entities.c\
 				put_pixels.c\
 				random.c\
 				read_map.c\
@@ -144,15 +149,12 @@ RAW_SRC		=	ai_attack.c\
 				sound.c\
 				spawn_entity.c\
 				update_screen.c\
-				validate_map1.c\
-				validate_map2.c\
+				validate_map_part1.c\
+				validate_map_part2.c\
 				vertical_collision.c\
 				vertical_line.c\
 				wall_slide.c\
-				init_ceiling_lamp.c\
-				init_gargoyl.c\
-				init_med_kit.c\
-				wall_to_screen_xz.c
+				wall_to_screen_xz.c\
 
 NAME		=	doom
 CDIR		=	srcs
@@ -216,17 +218,12 @@ $(RESOURCES):
 	@rm -rf file.tar.gz
 
 framework:
-ifeq ($(SHELL_NAME), Darwin)
 	@mkdir -p ~/Library/Frameworks
 ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
 	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
 	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
 	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
 	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Moving Frameworks\n"$(RESET)
-else
-	@printf $(CYAN)"[INFO]	Frameworks Exists\n"$(RESET)
-endif
 endif
 
 framework_del:
@@ -234,13 +231,6 @@ framework_del:
 	@/bin/rm -f $(NAME)
 	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
-framework_re: framework_del
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-	@printf $(CYAN)"[INFO]	Mooving SDL2 Frameworks to ~/Library/Frameworks\n"$(RESET)
-
 re: fclean all
 
-.PHONY: clean, all, re, fclean, resources, framework, framework_del, frameworks_re
+.PHONY: clean, all, re, fclean, resources, framework, framework_del

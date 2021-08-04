@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/01 16:58:57 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/04 12:45:15 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,17 +77,22 @@ RAW_SRC		=	ai_attack.c\
 				hud_utils.c\
 				icon.c\
 				init.c\
-				init_alfred.c\
-				init_alfred2.c\
+				init_alfred_part1.c\
+				init_alfred_part2.c\
 				init_barrel.c\
+				init_ceiling_lamp.c\
 				init_entity.c\
 				init_game_mode.c\
+				init_gargoyl.c\
+				init_ghost_part1.c\
+				init_ghost_part2.c\
 				init_glock.c\
 				init_inventory.c\
 				init_kar.c\
 				init_lamp.c\
 				init_launcher.c\
 				init_meat_hook.c\
+				init_med_kit.c\
 				init_minigun.c\
 				init_minimap.c\
 				init_player.c\
@@ -97,8 +102,8 @@ RAW_SRC		=	ai_attack.c\
 				init_sdl.c\
 				init_shotgun.c\
 				init_slope.c\
-				init_spooky.c\
-				init_spooky2.c\
+				init_spooky_part1.c\
+				init_spooky_part2.c\
 				init_textures.c\
 				init_torch.c\
 				init_weapons.c\
@@ -133,6 +138,7 @@ RAW_SRC		=	ai_attack.c\
 				project_wall.c\
 				projectile_contact.c\
 				protalloc.c\
+				purge_entities.c\
 				put_pixels.c\
 				random.c\
 				read_map.c\
@@ -143,12 +149,12 @@ RAW_SRC		=	ai_attack.c\
 				sound.c\
 				spawn_entity.c\
 				update_screen.c\
-				validate_map1.c\
-				validate_map2.c\
+				validate_map_part1.c\
+				validate_map_part2.c\
 				vertical_collision.c\
 				vertical_line.c\
 				wall_slide.c\
-				wall_to_screen_xz.c
+				wall_to_screen_xz.c\
 
 NAME		=	doom
 CDIR		=	srcs

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:48:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:42:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,10 +477,6 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-void	init_med_kit(t_doom *doom);
-void	init_ghost(t_doom *doom);
-void	init_ceiling_lamp(t_doom *doom);
-void	init_gargoyl(t_doom *doom);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */
@@ -615,16 +611,25 @@ void				hud_dosh(t_doom *doom, SDL_Rect *dstr);
 int					set_icon(SDL_Window *window, char *dir);
 /* File: init.c */
 void				init_doom(t_doom *doom);
-/* File: init_alfred.c */
+/* File: init_alfred_part1.c */
 void				init_alfred(t_doom *doom);
-/* File: init_alfred2.c */
+/* File: init_alfred_part2.c */
 void				move_pos_alfred2(t_rect **pos);
 /* File: init_barrel.c */
 void				init_barrel(t_doom *doom);
+/* File: init_ceiling_lamp.c */
+void				init_ceiling_lamp(t_doom *doom);
 /* File: init_entity.c */
 void				init_entities(t_doom *doom);
 /* File: init_game_mode.c */
 void				init_game_mode(t_doom *doom);
+/* File: init_gargoyl.c */
+void				init_gargoyl(t_doom *doom);
+/* File: init_ghost_part1.c */
+void				init_ghost(t_doom *doom);
+/* File: init_ghost_part2.c */
+void				move_pos_ghost2(t_rect **pos);
+void				attack_pos_ghost2(t_rect **pos);
 /* File: init_glock.c */
 void				init_glock(t_doom *doom, t_weapon *weapon);
 /* File: init_inventory.c */
@@ -637,6 +642,8 @@ void				init_lamp(t_doom *doom);
 void				init_launcher(t_doom *doom, t_weapon *weapon);
 /* File: init_meat_hook.c */
 void				init_meat_hook(t_doom *doom);
+/* File: init_med_kit.c */
+void				init_med_kit(t_doom *doom);
 /* File: init_minigun.c */
 void				init_minigun(t_doom *doom, t_weapon *weapon);
 /* File: init_minimap.c */
@@ -658,12 +665,11 @@ void				init_shotgun(t_doom *doom, t_weapon *weapon);
 double				ceiling_at(t_sector *sector, t_v3 pos);
 double				floor_at(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
-/* File: init_spooky.c */
+/* File: init_spooky_part1.c */
 void				init_spooky(t_doom *doom);
-/* File: init_spooky2.c */
+/* File: init_spooky_part2.c */
 void				move_pos_spooky2(t_rect **pos);
 /* File: init_textures.c */
-int					multy_thread_bxpm(void *arg);
 void				init_textures(t_doom *doom);
 /* File: init_torch.c */
 void				init_torch(t_doom *doom);
@@ -736,6 +742,8 @@ int					target_contact(t_doom *doom, t_projectile *orb,
 						t_v3 start, t_v3 dest);
 /* File: protalloc.c */
 void				*protalloc(size_t size, char *str);
+/* File: purge_entities.c */
+void				purge_entities(t_doom *doom);
 /* File: put_pixels.c */
 void				blit_pixel_brightness(t_render *render, int coord,
 						t_v3 text, t_bxpm *bxpm);
@@ -771,12 +779,12 @@ void				rift_spawn(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 /* File: update_screen.c */
 void				update_screen(t_doom *doom);
-/* File: validate_map1.c */
+/* File: validate_map_part1.c */
 int					check_entities(t_doom *doom);
 int					check_player(t_doom *doom);
 int					check_map(t_doom *doom);
 int					validate_map(t_doom *doom);
-/* File: validate_map2.c */
+/* File: validate_map_part2.c */
 void				sector_center(t_sector *sector);
 void				fix_wall_orientation(t_sector *sector);
 int					fix_wall_order(t_sector *sector);

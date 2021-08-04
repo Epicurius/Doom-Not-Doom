@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 09:58:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:36:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	movement(t_doom *doom)
 	if (doom->keys[KEY_LCTRL])
 		doom->player.eyelvl = PLAYER_HEIGHT - 4;
 	else if (doom->player.where.z + PLAYER_HEIGHT
-			< doom->sectors[doom->player.sector].ceiling.y)
+		< doom->sectors[doom->player.sector].ceiling.y)
 		doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	update_camera(doom);
 	get_base_speed(doom, &speed);
