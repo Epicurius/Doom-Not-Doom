@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:19:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:29:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 # define ICON_TEXTURE_AMOUNT	5
 static const t_id_and_path	g_icon_textures[ICON_TEXTURE_AMOUNT] =
 {
-	{0, ICON_PATH"health_heart.bxpm"},
-	{1, ICON_PATH"armour_shield.bxpm"},
-	{2, ICON_PATH"ammo_patrons.bxpm"},
-	{3, ICON_PATH"mag_ammo.bxpm"},
-	{4, ICON_PATH"cash_dosh.bxpm"}
+	{0, BXPM_PATH"health_heart.bxpm"},
+	{1, BXPM_PATH"armour_shield.bxpm"},
+	{2, BXPM_PATH"ammo_patrons.bxpm"},
+	{3, BXPM_PATH"mag_ammo.bxpm"},
+	{4, BXPM_PATH"cash_dosh.bxpm"}
 };
 
 # define ENTITY_TEXTURE_AMOUNT	5
