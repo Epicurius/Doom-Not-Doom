@@ -6,13 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:34:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:27:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:03:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 static void	idle_pos(t_rect **pos)
+{
+	pos[0][0] = rect_xy2(178, 242, 206, 260);
+}
+
+static void	death_pos(t_rect **pos)
 {
 	pos[0][0] = rect_xy2(178, 242, 206, 260);
 }
@@ -29,8 +34,9 @@ void	init_med_kit(t_doom *doom)
 	img->nb[MOVE][ANGLES] = 0;
 	img->nb[ATTACK][FRAMES] = 0;
 	img->nb[ATTACK][ANGLES] = 0;
-	img->nb[DEATH][FRAMES] = 0;
-	img->nb[DEATH][ANGLES] = 0;
+	img->nb[DEATH][FRAMES] = 1;
+	img->nb[DEATH][ANGLES] = 1;
 	malloc_texture_pos(img);
 	idle_pos(img->pos[IDLE]);
+	idle_pos(img->pos[DEATH]);
 }

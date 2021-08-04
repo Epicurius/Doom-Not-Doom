@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:53:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:15:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static inline void	game_loop(t_doom *doom)
 	update_screen(doom);
 	game_pause(doom);
 	game_quit(doom);
-	ft_printf("%d\n", doom->nb.entities);
 }
 
 //	Crouch in small area and standup for insta death? Maybe fix?

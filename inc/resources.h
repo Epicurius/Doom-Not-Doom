@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:37:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:19:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ typedef struct s_entity_data
 	char			*name;
 	int				health;
 	int				height;
+	int				pickup;
 	int				hitbox_radius;
 	double			speed;
 	int				flight;
@@ -249,6 +250,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 {
 	{
 		.name = "Alfred",
+		.pickup = FALSE,
 		.type = KAMIKAZE,
 		.move = TRUE,
 		.flight = TRUE,
@@ -270,6 +272,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Spooky",
+		.pickup = FALSE,
 		.health = 1,
 		.damage = 30,
 		.type = RANGE,
@@ -291,6 +294,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Ghost",
+		.pickup = FALSE,
 		.health = 1,
 		.damage = 1,
 		.type = MELEE,
@@ -312,6 +316,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Rift",
+		.pickup = FALSE,
 		.health = 1,
 		.damage = 200,
 		.type = INANIMATE,
@@ -333,6 +338,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Barrel",
+		.pickup = FALSE,
 		.health = 20,
 		.damage = 0,
 		.type = INANIMATE,
@@ -354,6 +360,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Lamp",
+		.pickup = FALSE,
 		.health = MAX_INT,
 		.damage = 0,
 		.type = INANIMATE,
@@ -375,6 +382,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Torch",
+		.pickup = FALSE,
 		.health = MAX_INT,
 		.damage = 0,
 		.type = INANIMATE,
@@ -396,6 +404,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "MeatHook",
+		.pickup = FALSE,
 		.health = MAX_INT,
 		.damage = 0,
 		.type = INANIMATE,
@@ -417,6 +426,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "CeilingLamp",
+		.pickup = FALSE,
 		.type = INANIMATE,
 		.move = FALSE,
 		.flight = FALSE,
@@ -438,6 +448,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "Gargoyl",
+		.pickup = FALSE,
 		.type = INANIMATE,
 		.move = FALSE,
 		.flight = FALSE,
@@ -459,6 +470,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	},
 	{
 		.name = "MedKit",
+		.pickup = TRUE,
 		.type = INANIMATE,
 		.move = FALSE,
 		.flight = FALSE,
