@@ -30,7 +30,7 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	if (vertical_collision(doom, &motion))
 		return (-1);
 	motion.future = add_v3(motion.where, motion.velocity);
-	horizontal_collision(doom, &motion);
+	horizontal_collision(doom, &motion, TRUE);
 	*velocity = motion.move;
 	*where = add_v3(*where, *velocity);
 	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))

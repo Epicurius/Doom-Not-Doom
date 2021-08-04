@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:34:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 09:54:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ static int	horizontal_slide_collision(t_doom *doom, t_motion motion,
 	return (0);
 }
 
-void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall)
+void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall, int slide)
 {
 	t_v3	velocity;
 
+	if (slide == FALSE)
+		return ;
 	velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
 	if (!horizontal_slide_collision(doom, *motion, velocity))
 	{

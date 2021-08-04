@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:55:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 09:59:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -605,7 +605,8 @@ void				get_entity_state(t_doom *doom, t_entity *entity);
 /* File: help.c */
 void				print_help_msg(void);
 /* File: horizontal_collision.c */
-int					horizontal_collision(t_doom *doom, t_motion *motion);
+int					horizontal_collision(t_doom *doom,
+						t_motion *motion, int slide);
 /* File: hud_utils.c */
 void				hud_health(t_doom *doom, SDL_Rect *dstr);
 void				hud_armour(t_doom *doom, SDL_Rect *dstr);
@@ -800,8 +801,8 @@ void				vline_color_walls(t_render *render,
 void				vline_monochromic(t_render *render,
 						t_vline *vline, int side);
 /* File: wall_slide.c */
-void				slide_collision(t_doom *doom,
-						t_motion *motion, t_wall *wall);
+void				slide_collision(t_doom *doom, t_motion *motion,
+						t_wall *wall, int slide);
 /* File: wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 
