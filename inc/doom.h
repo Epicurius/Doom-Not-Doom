@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 09:59:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:48:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,20 +253,18 @@ typedef struct s_entity_render
 typedef struct s_entity
 {
 	t_v3			where;
-	t_v3			dest;
 	t_v3			velocity;
+	t_v3			dest;
 	int				sector;
-	double			yaw;
 	int				danger;
 	int				state;
 	int				frame;
 	int				angle;
-	t_entity_render	render;
-	int				id;
 	int				hp;
 	int				type;
-	double			scale;
+	double			yaw;
 	double			time;
+	t_entity_render	render;
 }					t_entity;
 
 typedef struct s_entity_thread
@@ -479,7 +477,7 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-
+void	init_med_kit(t_doom *doom);
 void	init_ghost(t_doom *doom);
 void	init_ceiling_lamp(t_doom *doom);
 void	init_gargoyl(t_doom *doom);
@@ -709,11 +707,6 @@ void				parse_entity(t_doom *doom, char **arr);
 /* File: precompute_buy_menu.c */
 void				precompute_buy_menu(t_doom *doom);
 /* File: precompute_entities.c */
-int					frame_animation(t_doom *doom, t_entity *entity);
-void				preforme_entity_state_fuction(t_doom *doom,
-						t_entity *entity);
-int					get_coresponding_entity_state_frame(t_doom *doom,
-						t_entity *entity);
 void				precompute_entities(t_doom *doom);
 /* File: precompute_projectiles.c */
 void				precompute_projectiles(t_doom *doom);

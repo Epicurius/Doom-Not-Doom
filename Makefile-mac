@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/03 17:55:53 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/04 11:30:22 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,6 +151,7 @@ RAW_SRC		=	ai_attack.c\
 				wall_slide.c\
 				init_ceiling_lamp.c\
 				init_gargoyl.c\
+				init_med_kit.c\
 				wall_to_screen_xz.c
 
 NAME		=	doom

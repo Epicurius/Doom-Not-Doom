@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 11:34:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:56:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	respawn_rifts(t_doom *doom)
 		new = ft_lstnew(curr->content, curr->content_size);
 		ft_lstadd(&doom->entity, new);
 		doom->game.spawns += 1;
+		doom->nb.entities += 1;
 		curr = curr->next;
 	}
 }

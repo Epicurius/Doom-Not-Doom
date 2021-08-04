@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:39:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:27:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ enum e_sprites
 	MEAT_HOOK,
 	CEILING_LAMP,
 	GARGOYL,
+	MED_KIT,
 	ENTITY_AMOUNT
 };
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:58:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 11:37:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,6 +442,27 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.move = FALSE,
 		.flight = FALSE,
 		.health = MAX_INT,
+		.scale = 0.04,
+		.speed = 0,
+		.damage = 0,
+		.height = 2,
+		.attack_range = 0,
+		.hitbox_radius = 2,
+		.view_distance = 0,
+		.detection_radius = 0,
+		.frame_rate[IDLE] = 1000,
+		.frame_rate[MOVE] = 0,
+		.frame_rate[ATTACK] = 0,
+		.frame_rate[DEATH] = 0,
+		.path = BXPM_PATH"object.bxpm",
+		.tc = {0, 0, 43, 47}
+	},
+	{
+		.name = "MedKit",
+		.type = INANIMATE,
+		.move = FALSE,
+		.flight = FALSE,
+		.health = 100,
 		.scale = 0.04,
 		.speed = 0,
 		.damage = 0,
