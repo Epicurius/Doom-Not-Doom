@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 13:29:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/04 17:10:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,7 +443,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"object.bxpm",
+		.path = BXPM_PATH"objects.bxpm",
 		.tc = {0, 0, 43, 47}
 	},
 	{
@@ -465,7 +465,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"object.bxpm",
+		.path = BXPM_PATH"objects.bxpm",
 		.tc = {0, 0, 43, 47}
 	},
 	{
@@ -487,7 +487,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"object.bxpm",
+		.path = BXPM_PATH"objects.bxpm",
 		.tc = {0, 0, 43, 47}
 	}
 };
