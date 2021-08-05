@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 13:55:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/05 11:48:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	parse_stx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 {
 	int	i;
 
-	id = abs(id) - 1;
+	id = (abs(id) - 1) * 6;
 	if (!threads[id].active)
 	{
 		threads[id].active = 1;
@@ -69,6 +69,7 @@ static void	parse_map_textures(t_doom *doom, int i, int j)
 
 	ft_bzero(&wtx_threads, sizeof(t_thread_bxpm) * MAP_TEXTURE_AMOUNT);
 	ft_bzero(&stx_threads, sizeof(t_thread_bxpm) * SKYBOX_TEXTURE_AMOUNT);
+	parse_wtx_texture(doom, wtx_threads, 0);
 	i = -1;
 	while (++i < doom->nb.walls)
 	{
@@ -85,8 +86,10 @@ static void	parse_map_textures(t_doom *doom, int i, int j)
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
-		parse_wtx_texture(doom, wtx_threads, doom->sectors[i].ceiling.tx);
-		parse_wtx_texture(doom, wtx_threads, doom->sectors[i].floor.tx);
+		if (doom->sectors[i].ceiling.tx > 0)
+			parse_wtx_texture(doom, wtx_threads, doom->sectors[i].ceiling.tx);
+		if (doom->sectors[i].floor.tx > 0)
+			parse_wtx_texture(doom, wtx_threads, doom->sectors[i].floor.tx);
 	}
 	tpool_wait(&doom->tpool);
 }
