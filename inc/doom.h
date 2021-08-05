@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:42:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/05 17:03:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,6 +423,7 @@ typedef struct s_event
 	float			time;
 	int				dir;
 	int				action;
+	Mix_Chunk		*audio;
 }					t_event;
 
 typedef struct s_motion
