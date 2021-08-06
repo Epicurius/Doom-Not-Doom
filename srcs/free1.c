@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 14:35:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 16:40:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	free_map(t_doom *doom)
 	while (++i < doom->nb.sectors)
 		ft_memdel((void *)&doom->sectors[i].wall);
 	ft_memdel((void *)&doom->sectors);
+	i = -1;
+	while (++i < doom->nb.events)
+		if (doom->events[i].audio)
+			Mix_FreeChunk(doom->events[i].audio);
 	ft_memdel((void *)&doom->events);
 }
 

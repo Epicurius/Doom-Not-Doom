@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 14:36:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 16:42:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
 	t_wall	*wall;
 
 	i = -1;
-	ft_bzero(&doom->sectbool, sizeof(int) * doom->nb.sectors);
+	ft_bzero(doom->sectbool, sizeof(int) * doom->nb.sectors);
 	doom->sectbool[sector] = 1;
 	while (++i < doom->sectors[sector].npoints)
 	{

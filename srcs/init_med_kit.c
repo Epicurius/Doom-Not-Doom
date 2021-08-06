@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:34:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:03:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 16:44:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	init_med_kit(t_doom *doom)
 	img->nb[DEATH][ANGLES] = 1;
 	malloc_texture_pos(img);
 	idle_pos(img->pos[IDLE]);
-	idle_pos(img->pos[DEATH]);
+	death_pos(img->pos[DEATH]);
 }

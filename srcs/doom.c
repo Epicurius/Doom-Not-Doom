@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 13:12:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 16:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
-static void	sound_board(t_doom *doom)
-{
-	//if (!Mix_Playing(CHANNEL_TTS) && !Mix_Playing(CHANNEL_MUSIC))
-	{
-		//Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-		//Mix_Volume(CHANNEL_MUSIC, 10);
-		//Mix_Volume(CHANNEL_WEAPON, 50);
-	}
-}
+//static void	sound_board(t_doom *doom)
+//{
+//	//if (!Mix_Playing(CHANNEL_TTS) && !Mix_Playing(CHANNEL_MUSIC))
+//	{
+//		//Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
+//		//Mix_Volume(CHANNEL_MUSIC, 10);
+//		//Mix_Volume(CHANNEL_WEAPON, 50);
+//	}
+//}
 
 static inline void	game_loop(t_doom *doom)
 {
@@ -38,7 +38,7 @@ static inline void	game_loop(t_doom *doom)
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);
-	sound_board(doom);
+	//sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
