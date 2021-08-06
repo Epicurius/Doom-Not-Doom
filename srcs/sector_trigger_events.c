@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 11:39:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:12:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 		event->trigger_sector = -1;
 		event->trigger = 0;
 	}
-	else if (event->type == HAZARD && floor_at(event->trigger_sector, doom->player.where) + 0.1 >= doom->player.where.z)
+	else if (event->type == HAZARD)
 	{
-		doom->player.health -= 10;
+		if (floor_at(&doom->sectors[event->trigger_sector],
+			doom->player.where) + 0.1 >= doom->player.where.z)
+			doom->player.health -= 1;
 		event->trigger = 0;
 	}
 }
