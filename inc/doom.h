@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/05 17:03:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:00:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,17 +413,18 @@ typedef struct s_fonts
 typedef struct s_event
 {
 	t_sector		*event_sector;
-	t_sector		*trigger_sector;
 	t_wsprite		*wsprite;
+	int				trigger_sector;
+	int				trigger;
+	Mix_Chunk		*audio;
+	char			*path;
 	int				type;
+	int				action;
 	float			min;
 	float			max;
-	float			amount;
 	float			speed;
 	float			time;
 	int				dir;
-	int				action;
-	Mix_Chunk		*audio;
 }					t_event;
 
 typedef struct s_motion
@@ -478,6 +479,8 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+
+void	sector_trigger_events(t_doom *doom, t_event *event);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */

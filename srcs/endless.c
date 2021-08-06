@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:54:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:33:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	game_mode_endless(t_doom *doom)
 		{
 			doom->player.store_access = 0;
 			while (++i < doom->nb.events)
-				if (doom->events[i].type == STORE)
+				if (doom->events[i].type == STORE && doom->events[i].wsprite)
 					doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
 			remove_med_kits(doom);
 			respawn_rifts(doom);
@@ -72,7 +72,7 @@ void	game_mode_endless(t_doom *doom)
 	else if (!Mix_Playing(CHANNEL_TTS) && endless_round(doom))
 	{
 		while (++i < doom->nb.events)
-			if (doom->events[i].type == STORE)
+			if (doom->events[i].type == STORE && doom->events[i].wsprite)
 				doom->events[i].wsprite->src = rect_xy2(0, 0, 662, 550);
 	}
 }

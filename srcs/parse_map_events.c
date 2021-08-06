@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/05 17:01:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:00:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,16 @@ void	parse_events(t_doom *doom, char **arr)
 		event.wsprite->action = event.action;
 	}
 	else if (event.action == SECTOR)
-		event.trigger_sector = &doom->sectors[ft_atoi(arr[3])];
+		event.trigger_sector = ft_atoi(arr[3]);
 	if (event.type == FLOOR || event.type == CEILING)
 	{
 		event.event_sector = &doom->sectors[ft_atoi(arr[4])];
 		event.min = ft_atof(arr[5]);
 		event.max = ft_atof(arr[6]);
-		event.speed = ft_atof(arr[7]) * 10.0f;
 	}
-	else if (event.type == HAZARD)
-		event.speed = ft_atoi(arr[7]);
 	else if (event.type == AUDIO)
-		event.audio = Mix_LoadWAV(arr[4]);
+		event.path = ft_strdup(arr[4]);
+	event.speed = 10;
 	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
 	doom->events[doom->nb.events - 1] = event;
