@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:32:22 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 09:59:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:11:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 	int		i;
 	t_wall	*wall;
 
+	//slide = FALSE;
 	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
