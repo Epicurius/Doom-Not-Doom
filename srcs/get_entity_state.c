@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:01:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:36:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,45 @@ static int	entity_see(t_doom *doom, t_entity *entity)
 	return (0);
 }
 
+int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
+{
+	int		i;
+	t_wall	*wall;
+
+	i = -1;
+	ft_bzero(&doom->sectbool, sizeof(int) * doom->nb.sectors);
+	doom->sectbool[sector] = 1;
+	while (++i < doom->sectors[sector].npoints)
+	{
+		if (doom->player.sector == sector)
+			return (1);
+		wall = doom->sectors[sector].wall[i];
+		if (wall->n >= 0 && doom->sectbool[wall->n] == 0)
+		{
+			if (doom->player.sector == wall->n)
+				return (1);
+			doom->sectbool[wall->n] = 1;
+			if (intersect_check_v2(enemy, player, wall->v1, wall->v2))
+			{
+				sector = wall->n;
+				i = -1;
+			}
+		}
+	}
+	return (0);
+}
+
 static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 {
 	if (dist > g_entity_data[entity->type].view_distance)
 		return (0);
-	if (dist < g_entity_data[entity->type].detection_radius)
-		return (1);
-	if (entity_see(doom, entity))
-		return (2);
+	if (dist < g_entity_data[entity->type].detection_radius || entity_see(doom, entity))
+	{
+		if (doom->player.sector == entity->sector)
+			return (1);
+		if (ray_collision(doom, entity->where, doom->player.where, entity->sector))
+			return (2);
+	}
 	return (0);
 }
 
@@ -51,6 +82,11 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);
+	//if (dist > 200)//????
+	//{
+	//	entity->state = IDLE;
+	//	return ;
+	//}
 	if (doom->player.action && dist > g_entity_data[entity->type]
 		.view_distance && ai_track_player(doom, entity))
 		entity->state = MOVE;
@@ -88,9 +124,9 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		entity->time = 0;
 	}
 	else if (!g_entity_data[entity->type].type
-		|| entity->state == DEATH || entity->frame)
+			|| entity->state == DEATH || entity->frame)
 		return ;
-	else
+	else//if (doom->sectors[entity->sector].visible)
 		get_entity_state2(doom, entity);
 	entity->danger = 0;
 }

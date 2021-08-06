@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 12:02:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:38:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	init_sound(t_doom *doom)
 		if (doom->events[i].type == AUDIO)
 		{
 			doom->events[i].audio = Mix_LoadWAV(doom->events[i].path);
+			if (!doom->events[i].audio)
+				ft_printf("Audio not loaded\n");
 			free(doom->events[i].path);
 		}
 	}

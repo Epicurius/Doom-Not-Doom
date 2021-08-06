@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 17:10:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:25:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.height = 7,
 		.hitbox_radius = 5,
 		.speed = 10,
-		.move = TRUE,
+		.move = FALSE,
 		.view_distance = 100,
 		.detection_radius = 40,
 		.attack_range = 50,

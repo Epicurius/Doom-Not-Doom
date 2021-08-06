@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:07:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:35:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_map(t_doom *doom)
 {
 	int	i;
 
-	ft_memdel((void *)&doom->vert);
+	ft_memdel((void *)&doom->vert);//>>>????
 	i = -1;
 	while (++i < doom->nb.walls)
 		ft_memdel((void *)&doom->walls[i].wsprite);
@@ -32,6 +32,7 @@ void	free_render_utils(t_doom *doom)
 {
 	free(doom->zbuffer);
 	free(doom->render);
+	free(doom->sectbool);
 }
 
 void	free_font(t_doom *doom)
