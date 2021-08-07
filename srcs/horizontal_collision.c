@@ -65,8 +65,7 @@ static int	horizontal_collision_wall(t_doom *doom,
 {
 	if (wall->solid || wall->n == -1)
 	{
-		if (intersect_check_v2(motion->where, motion->future,
-			wall->v1, wall->v2))
+		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2))
 		{
 			slide_collision(doom, motion, wall, slide);
 			return (motion->type = 1);
@@ -79,11 +78,12 @@ static int	horizontal_collision_wall(t_doom *doom,
 	}
 	else
 	{
-		if ((wall->v1.z == 1.0f && point_distance_v2(motion->future.x,
+		if (wall->v1.z == 1.0f && point_distance_v2(motion->future.x,
 			motion->future.y, wall->v1.x, wall->v1.y) <= 1.0)
-			|| (wall->v2.z == 1.0f && point_distance_v2(motion->future.x,
-			motion->future.y, wall->v2.x, wall->v2.y) <= 1.0))
 			return (motion->type = 3);
+		if (wall->v2.z == 1.0f && point_distance_v2(motion->future.x,
+			motion->future.y, wall->v2.x, wall->v2.y) <= 1.0)
+			return (motion->type = 4);
 	}
 	return (0);
 }
@@ -92,10 +92,8 @@ static int	horizontal_collision_portal(t_doom *doom,
 	t_motion *motion, t_wall *wall, int slide)
 {
 	if (!wall->solid && wall->n != -1 && wall->n != motion->prev_sect)
-	{	
-
-		if (intersect_check_v2(motion->where, motion->future,
-			wall->v1, wall->v2))
+	{
+		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2))
 		{
 			if (portal_intersect(doom, motion, wall))
 			{
@@ -108,7 +106,7 @@ static int	horizontal_collision_portal(t_doom *doom,
 			if (portal_hitbox(doom, motion, wall))
 			{
 				slide_collision(doom, motion, wall, slide);
-				return (motion->type = 4);
+				return (motion->type = 5);
 			}
 		}
 	}

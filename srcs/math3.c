@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 09:47:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:35:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
 //	Checks if line intersects
-int	intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
+int	intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 {
 	int	p1_dir;
 	int	w1_dir;

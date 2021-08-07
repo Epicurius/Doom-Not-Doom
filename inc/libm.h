@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:21:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:35:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_v3				sub_v3(t_v3 v1, t_v3 v2);
 t_v3				mult_v3(t_v3 vec, float scalar);
 t_v3				div_v3(t_v3 vec, float scalar);
 /* File: math3.c */
-int					intersect_check_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
+int					intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 double				point_distance_v3(t_v3 p1, t_v3 p2);
 t_v3				closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
 int					point_on_segment_v2(t_v3 p, t_v3 v1,

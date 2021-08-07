@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 08:37:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:46:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ static int	horizontal_slide_collision(t_doom *doom, t_motion motion,
 		wall = doom->sectors[motion.curr_sect].wall[i];
 		if (wall->solid || wall->n == -1)
 		{
-			if (intersect_check_v2(motion.where, motion.future,
-					wall->v1, wall->v2))
+			if (intersect_v2(motion.where, motion.future, wall->v1, wall->v2))
 				return (1);
 			else if (hitbox_collision(motion.future, wall->v1, wall->v2, 1.0))
 				return (2);
 		}
-		else if (hitbox_collision(motion.future, wall->v1, wall->v2, 1.0))//Redundant
+		else if (hitbox_collision(motion.future, wall->v1, wall->v2, 1.0))
 			return (3);
 	}
 	return (0);
@@ -64,12 +63,13 @@ void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall, int slide)
 {
 	t_v3	velocity;
 
-	if (slide == FALSE)
-		return ;
-	velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
-	if (!horizontal_slide_collision(doom, *motion, velocity))
+	if (slide == TRUE)
 	{
-		motion->move = velocity;
-		motion->velocity = velocity;
+		velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
+		if (!horizontal_slide_collision(doom, *motion, velocity))
+		{
+			motion->move = velocity;
+			motion->velocity = velocity;
+		}
 	}
 }

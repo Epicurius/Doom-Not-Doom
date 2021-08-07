@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 17:18:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 09:21:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:47:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	solid_corners(t_doom *doom)
 			while (++j < doom->nb.walls)
 			{
 				if (doom->walls[i].v1.x == doom->walls[j].v1.x
-						&& doom->walls[i].v1.y == doom->walls[j].v1.y)
+					&& doom->walls[i].v1.y == doom->walls[j].v1.y)
 					doom->walls[j].v1.z = 1.0f;
 				if (doom->walls[i].v2.x == doom->walls[j].v2.x
-						&& doom->walls[i].v2.y == doom->walls[j].v2.y)
+					&& doom->walls[i].v2.y == doom->walls[j].v2.y)
 					doom->walls[j].v2.z = 1.0f;
 			}
 		}

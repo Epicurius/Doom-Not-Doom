@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 16:37:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:51:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
 	}
 }
 
+//if (doom->game.mode == ENDLESS && !doom->settings.debug)
+//	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
+//Mix_Volume(-1, 0)
 void	init_sound(t_doom *doom)
 {
 	int	i;
@@ -51,11 +54,8 @@ void	init_sound(t_doom *doom)
 		{
 			doom->events[i].audio = Mix_LoadWAV(doom->events[i].path);
 			if (!doom->events[i].audio)
-				ft_printf("Audio not loaded\n");
+				ft_printf("Audio event %s not found\n", doom->events[i].path);
 			free(doom->events[i].path);
 		}
 	}
-	//if (doom->game.mode == ENDLESS && !doom->settings.debug)
-	//	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
-	//Mix_Volume(-1, 0);
 }
