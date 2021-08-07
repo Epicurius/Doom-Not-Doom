@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solid_corners.c                                    :+:      :+:    :+:   */
+/*   init_corners.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 17:18:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 09:47:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 13:03:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	solid_corners(t_doom *doom)
+void	init_corners(t_doom *doom)
 {
 	int	i;
 	int	j;
