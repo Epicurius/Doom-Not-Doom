@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map2.c                                    :+:      :+:    :+:   */
+/*   validate_map_part2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 14:27:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		sector->center.z = (sector->ceiling.y - sector->floor.y) / 2.0;
+//		Find sector centroid
 void	sector_center(t_sector *sector)
 {
-	int	i;
-
+	int		i;
+	float	a;
+	float	t;
+	
 	i = -1;
+	a = 0.0f;
 	while (++i < sector->npoints)
 	{
-		sector->center.x += sector->wall[i]->v1.x;
-		sector->center.y += sector->wall[i]->v1.y;
+		t = sector->wall[i]->v1.x * sector->wall[i]->v2.y
+			- sector->wall[i]->v2.x * sector->wall[i]->v1.y;
+		a += t;
+		sector->center.x += (sector->wall[i]->v1.x + sector->wall[i]->v2.x) * t;
+		sector->center.y += (sector->wall[i]->v1.y + sector->wall[i]->v2.y) * t;
 	}
-	sector->center.x /= sector->npoints;
-	sector->center.y /= sector->npoints;
+	sector->center.x /= 6.0 * (a * 0.5);
+	sector->center.y /= 6.0 * (a * 0.5);
 	sector->center.z = floor_at(sector, sector->center);
 }
 

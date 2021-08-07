@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 12:45:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 13:47:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static inline void	game_loop(t_doom *doom)
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_screen(doom);
-	//sound_board(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
@@ -87,7 +86,6 @@ static void	game(char *map, t_settings settings)
 		game_over(&doom);
 	free_doom(&doom);
 }
-
 
 int	main(int ac, char **av)
 {

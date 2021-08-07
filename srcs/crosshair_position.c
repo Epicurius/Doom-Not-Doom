@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:00:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 13:55:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void	debug(t_render *render, t_wall *wall)
 {
-	ft_printf("{CLR:204}Wall:\t%d Sector: %d Neighbour: %d\n", wall->id,
-		wall->sect, wall->n);
+	ft_printf("{CLR:204}Wall:\t%d Sector: %d Neighbour: %d\n",
+		wall->id, wall->sect, wall->n);
 	ft_printf("Player:\t%d [%.1f][%.1f][%.1f]{RESET}\n",
 		render->player.sector, render->player.where.x,
 		render->player.where.y, render->player.where.z);
 }
 
-void	crosshair_position(t_render *render, t_vline *vline, double alpha)
+void	crosshair_position(t_render *render, t_vline *vline,
+			double alpha, int coord)
 {
 	t_wall		*wall;
 	t_wsprite	*bullet_hole;
 
-	if (render->player.action == SHOOTING
-		&& render->x == render->center.x && vline->y1 == render->center.y)
+	if (coord == render->center.z && render->player.action == SHOOTING)
 	{
 		wall = &render->wall;
 		if (render->bullet_hole->curr >= MAX_BULLET_HOLES)

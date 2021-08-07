@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:36:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 13:46:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static inline void	foot_steps(t_doom *doom, t_player player)
 {
 	if ((doom->keys[KEY_W] || doom->keys[KEY_S]
 			|| doom->keys[KEY_A] || doom->keys[KEY_D])
-		&& floor_at(&doom->sectors[player.sector], player.where)
+		&& floor_at(&doom->sectors[player.sector], player.where) + 0.01
 		>= player.where.z)
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
@@ -92,11 +92,11 @@ void	movement(t_doom *doom)
 	float		speed;
 	t_motion	motion;
 
-	if (doom->keys[KEY_LCTRL])
-		doom->player.eyelvl = PLAYER_HEIGHT - 4;
-	else if (doom->player.where.z + PLAYER_HEIGHT
-		< doom->sectors[doom->player.sector].ceiling.y)
-		doom->player.eyelvl = PLAYER_HEIGHT - 1;
+	//if (doom->keys[KEY_LCTRL])
+	//	doom->player.eyelvl = PLAYER_HEIGHT - 4;
+	//else if (doom->player.where.z + PLAYER_HEIGHT <
+	//	ceiling_at(&doom->sectors[doom->player.sector], doom->player.where))
+	//	doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	update_camera(doom);
 	get_base_speed(doom, &speed);
 	ft_bzero(&move, sizeof(t_v3));
