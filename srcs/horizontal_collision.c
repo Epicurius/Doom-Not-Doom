@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:32:22 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 17:11:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:25:40y nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static int	portal_hitbox(t_doom *doom, t_motion *motion, t_wall *wall)
 	portal_top = ft_min(ceiling_at(&doom->sectors[motion->curr_sect], point),
 			ceiling_at(&doom->sectors[wall->n], point));
 	if (portal_top <= portal_bot + motion->height)
-		return (0);
+		return (1);
 	if (portal_top > motion->where.z + motion->height
 		&& portal_bot <= motion->where.z + STEP_HEIGHT)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 static int	portal_intersect(t_doom *doom, t_motion *motion, t_wall *wall)
@@ -66,18 +66,24 @@ static int	horizontal_collision_wall(t_doom *doom,
 	if (wall->solid || wall->n == -1)
 	{
 		if (intersect_check_v2(motion->where, motion->future,
-				wall->v1, wall->v2))
+			wall->v1, wall->v2))
 		{
 			slide_collision(doom, motion, wall, slide);
-			motion->type = 1;
-			return (1);
+			return (motion->type = 1);
 		}
-		else if (hitbox_collision(motion->future, wall->v1, wall->v2, 1.0))
+		if (hitbox_collision(motion->future, wall->v1, wall->v2, 1.0))
 		{
 			slide_collision(doom, motion, wall, slide);
-			motion->type = 2;
-			return (2);
+			return (motion->type = 2);
 		}
+	}
+	else
+	{
+		if ((wall->v1.z == 1.0f && point_distance_v2(motion->future.x,
+			motion->future.y, wall->v1.x, wall->v1.y) <= 1.0)
+			|| (wall->v2.z == 1.0f && point_distance_v2(motion->future.x,
+			motion->future.y, wall->v2.x, wall->v2.y) <= 1.0))
+			return (motion->type = 3);
 	}
 	return (0);
 }
@@ -86,24 +92,23 @@ static int	horizontal_collision_portal(t_doom *doom,
 	t_motion *motion, t_wall *wall, int slide)
 {
 	if (!wall->solid && wall->n != -1 && wall->n != motion->prev_sect)
-	{
+	{	
+
 		if (intersect_check_v2(motion->where, motion->future,
-				wall->v1, wall->v2))
+			wall->v1, wall->v2))
 		{
 			if (portal_intersect(doom, motion, wall))
 			{
 				horizontal_collision(doom, motion, slide);
-				motion->type = -1;
-				return (-1);
+				return (motion->type = -1);
 			}
 		}
 		if (hitbox_collision(motion->future, wall->v1, wall->v2, 1.0))
 		{
-			if (!portal_hitbox(doom, motion, wall))
+			if (portal_hitbox(doom, motion, wall))
 			{
 				slide_collision(doom, motion, wall, slide);
-				motion->type = 3;
-				return (3);
+				return (motion->type = 4);
 			}
 		}
 	}
@@ -115,7 +120,6 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 	int		i;
 	t_wall	*wall;
 
-	//slide = FALSE;
 	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
@@ -127,6 +131,7 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
+
 		if (horizontal_collision_portal(doom, motion, wall, slide))
 			return (motion->type);
 	}

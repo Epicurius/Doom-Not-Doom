@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 16:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:05:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static void	launcher(void)
 //	}
 //}
 
+struct timespec start, finish;
+double elapsed;
+
 static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
@@ -44,7 +47,12 @@ static inline void	game_loop(t_doom *doom)
 	precompute_projectiles(doom);
 	movement(doom);
 	poll_event(doom);
+//clock_gettime(CLOCK_MONOTONIC, &start);
 	tpool_wait(&doom->tpool);
+//clock_gettime(CLOCK_MONOTONIC, &finish);
+//elapsed = (finish.tv_sec - start.tv_sec);
+//elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+//ft_printf("%f\n", elapsed);
 	draw_projectiles(doom);
 	draw_entities(doom);
 	draw_crosshair(doom);
@@ -69,6 +77,12 @@ static void	game(char *map, t_settings settings)
 	read_file(&doom, map);
 	if (!validate_map(&doom))
 		return ;
+clock_gettime(CLOCK_MONOTONIC, &start);
+	solid_corners(&doom);
+clock_gettime(CLOCK_MONOTONIC, &finish);
+elapsed = (finish.tv_sec - start.tv_sec);
+elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+ft_printf("%f\n", elapsed);
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
 	{

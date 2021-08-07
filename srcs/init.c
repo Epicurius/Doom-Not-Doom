@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:52:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:05:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_doom(t_doom *doom)
 	init_threading(doom);
 	get_surface_center(doom);
 	init_fps(doom);
+	//solid_corners(doom);
 	init_skybox(doom);
 	init_weapons(doom);
 	init_minimap(doom);

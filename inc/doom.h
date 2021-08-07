@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 14:33:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:04:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,7 +480,7 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-
+void	solid_corners(t_doom *doom);
 void	sector_trigger_events(t_doom *doom, t_event *event);
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
