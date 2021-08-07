@@ -70,7 +70,7 @@ static int	horizontal_collision_wall(t_doom *doom,
 			slide_collision(doom, motion, wall, slide);
 			return (motion->type = 1);
 		}
-		if (hitbox_collision(motion->future, wall->v1, wall->v2, 1.0))
+		if (hitbox_collision(motion->future, wall->v1, wall->v2, DIAMETER))
 		{
 			slide_collision(doom, motion, wall, slide);
 			return (motion->type = 2);
@@ -79,10 +79,10 @@ static int	horizontal_collision_wall(t_doom *doom,
 	else
 	{
 		if (wall->v1.z == 1.0f && point_distance_v2(motion->future.x,
-			motion->future.y, wall->v1.x, wall->v1.y) <= 1.0)
+			motion->future.y, wall->v1.x, wall->v1.y) <= DIAMETER)
 			return (motion->type = 3);
 		if (wall->v2.z == 1.0f && point_distance_v2(motion->future.x,
-			motion->future.y, wall->v2.x, wall->v2.y) <= 1.0)
+			motion->future.y, wall->v2.x, wall->v2.y) <= DIAMETER)
 			return (motion->type = 4);
 	}
 	return (0);
@@ -101,7 +101,7 @@ static int	horizontal_collision_portal(t_doom *doom,
 				return (motion->type = -1);
 			}
 		}
-		if (hitbox_collision(motion->future, wall->v1, wall->v2, 1.0))
+		if (hitbox_collision(motion->future, wall->v1, wall->v2, DIAMETER))
 		{
 			if (portal_hitbox(doom, motion, wall))
 			{

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 16:56:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:27:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define MOUSE_X						0.003f
 # define MOUSE_Y						0.003f
 # define ACCELERATION					0.7
+# define DIAMETER						0.7
 
 /*
 ** Map Rendering

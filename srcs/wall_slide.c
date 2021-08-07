@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 09:46:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:21:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static int	horizontal_slide_collision(t_doom *doom, t_motion motion,
 		{
 			if (intersect_v2(motion.where, motion.future, wall->v1, wall->v2))
 				return (1);
-			else if (hitbox_collision(motion.future, wall->v1, wall->v2, 1.0))
+			else if (hitbox_collision(motion.future, wall->v1, wall->v2, DIAMETER))
 				return (2);
 		}
-		else if (hitbox_collision(motion.future, wall->v1, wall->v2, 1.0))
+		else if (hitbox_collision(motion.future, wall->v1, wall->v2, DIAMETER))
 			return (3);
 	}
 	return (0);

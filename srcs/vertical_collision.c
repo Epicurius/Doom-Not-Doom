@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:47:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:21:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where)
 		point = closest_point_on_segment_v2(where, wall->v1, wall->v2);
 		dist = point_distance_v2(point.x, point.y, where.x, where.y);
 		
-		if (dist <= 1.0 && where.z <= floor_at(&doom->sectors[wall->n], point))
+		if (dist <= DIAMETER && where.z <= floor_at(&doom->sectors[wall->n], point))
 		{
 			if (motion->velocity.z < 0)
 				motion->velocity.z = 0;
 			return (1);
 		}
-		if (dist <= 1.0 && where.z + motion->height + motion->velocity.z
+		if (dist <= DIAMETER && where.z + motion->height + motion->velocity.z
 			>= ceiling_at(&doom->sectors[wall->n], point))
 		{
 			motion->velocity.z = 0;
