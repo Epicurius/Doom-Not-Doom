@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 10:25:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 11:50:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	motion.move = new_v3(0, 0, 0);
 	if (vertical_collision(doom, &motion))
 		return (-1);
-	print_v3("POS1 ", doom->player.velocity);
-	print_v3("POS1 ", doom->player.where);
 	if (!(velocity->x == 0 && velocity->y == 0))
 	{
 		motion.future = add_v3(motion.where, motion.velocity);
@@ -39,8 +37,7 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	}
 	*velocity = motion.move;
 	*where = add_v3(*where, *velocity);
-	print_v3("POS2 ", doom->player.velocity);
-	print_v3("POS2 ", doom->player.where);
+
 	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))
 	{
 		velocity->z = 0;

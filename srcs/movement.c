@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 10:22:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 12:09:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 	foot_steps(doom, player);
 }
 
+//player->velocity.x = move.x * 3.5;
+//player->velocity.y = move.y * 3.5;
+//if (player->flight)
+//	player->velocity.z = move.z * 3.5;
 static void	get_velocity(t_doom *doom, t_v3 move)
 {
 	t_player	*player;
@@ -74,25 +78,25 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
-	if (doom->keys[KEY_SPACE]
-		&& player->where.z <= floor_at(sector, player->where) + 0.1)
+	if (doom->keys[KEY_SPACE] && player->where.z
+		<= floor_at(sector, player->where) + 0.1)
 	{
 		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
 		player->velocity.z += (0.5 + doom->player.jump_height);
 	}
-	player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
-	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
+	player->velocity.x = move.x * 3.5;
+	player->velocity.y = move.y * 3.5;
 	if (player->flight)
-		player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
-	if (player->velocity.x < 0.0001 && player->velocity.x > -0.0001)
-		player->velocity.x = 0.0f;
-	if (player->velocity.y < 0.0001 && player->velocity.y > -0.0001)
-		player->velocity.y = 0.0f;
-	//player->velocity.x = move.x;
-	//player->velocity.y = move.y;
+		player->velocity.z = move.z * 3.5;
+	//player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
+	//player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
 	//if (player->flight)
-	//	player->velocity.z = move.z;
-}
+	//	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+	//if (player->velocity.x < 0.001 && player->velocity.x > -0.001)
+	//	player->velocity.x = 0.0;
+	//if (player->velocity.y < 0.001 && player->velocity.y > -0.001)
+	//	player->velocity.y = 0.0;
+}//
 
 void	movement(t_doom *doom)
 {
@@ -100,11 +104,11 @@ void	movement(t_doom *doom)
 	float		speed;
 	t_motion	motion;
 
-	//if (doom->keys[KEY_LCTRL])
-	//	doom->player.eyelvl = PLAYER_HEIGHT - 4;
-	//else if (doom->player.where.z + PLAYER_HEIGHT <
-	//	ceiling_at(&doom->sectors[doom->player.sector], doom->player.where))
-	//	doom->player.eyelvl = PLAYER_HEIGHT - 1;
+	if (doom->keys[KEY_LCTRL])
+		doom->player.eyelvl = PLAYER_HEIGHT - 4;
+	else if (doom->player.where.z + PLAYER_HEIGHT <
+		ceiling_at(&doom->sectors[doom->player.sector], doom->player.where))
+		doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	update_camera(doom);
 	get_base_speed(doom, &speed);
 	ft_bzero(&move, sizeof(t_v3));
