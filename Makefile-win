@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/08 09:17:34 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/08 09:22:01 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,20 +143,20 @@ RAW_SRC		=	ai_attack.c\
 				BuyMenu/buy_menu_weapon.c\
 				BuyMenu/buy_menu_weapon_stats.c\
 				BuyMenu/buy_menu_weapon_upgrades.c\
-				EntityCoords/init_alfred_part1.c\
-				EntityCoords/init_alfred_part2.c\
-				EntityCoords/init_barrel.c\
-				EntityCoords/init_ceiling_lamp.c\
-				EntityCoords/init_gargoyl.c\
-				EntityCoords/init_ghost_part1.c\
-				EntityCoords/init_ghost_part2.c\
-				EntityCoords/init_lamp.c\
-				EntityCoords/init_spooky_part1.c\
-				EntityCoords/init_spooky_part2.c\
-				EntityCoords/init_meat_hook.c\
-				EntityCoords/init_med_kit.c\
-				EntityCoords/init_torch.c\
-				EntityCoords/init_rift.c\
+				EntityCoords/alfred.c\
+				EntityCoords/alfred.c\
+				EntityCoords/barrel.c\
+				EntityCoords/ceiling_lamp.c\
+				EntityCoords/gargoyl.c\
+				EntityCoords/ghost.c\
+				EntityCoords/ghost.c\
+				EntityCoords/lamp.c\
+				EntityCoords/spooky.c\
+				EntityCoords/spooky.c\
+				EntityCoords/meat_hook.c\
+				EntityCoords/med_kit.c\
+				EntityCoords/torch.c\
+				EntityCoords/rift.c\
 
 NAME		=	doom
 CDIR		=	srcs
