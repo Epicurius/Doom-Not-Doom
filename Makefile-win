@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/04 12:45:15 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/08 09:17:34 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,6 @@ RAW_SRC		=	ai_attack.c\
 				args.c\
 				blit_bxpm.c\
 				blit_entity.c\
-				buy_menu.c\
-				buy_menu_buttons.c\
-				buy_menu_help.c\
-				buy_menu_init.c\
-				buy_menu_player.c\
-				buy_menu_player_stats.c\
-				buy_menu_player_upgrades.c\
-				buy_menu_weapon.c\
-				buy_menu_weapon_stats.c\
-				buy_menu_weapon_upgrades.c\
 				camera.c\
 				clock.c\
 				collision_detection.c\
@@ -63,10 +53,24 @@ RAW_SRC		=	ai_attack.c\
 				endless.c\
 				find_sector.c\
 				fps.c\
-				free.c\
-				free1.c\
-				free2.c\
-				free3.c\
+				icon.c\
+				init.c\
+				init_entity.c\
+				init_game_mode.c\
+				init_glock.c\
+				init_inventory.c\
+				init_kar.c\
+				init_launcher.c\
+				init_minigun.c\
+				init_minimap.c\
+				init_player.c\
+				init_render.c\
+				init_scale.c\
+				init_sdl.c\
+				init_shotgun.c\
+				init_slope.c\
+				init_textures.c\
+				init_weapons.c\
 				game_loading.c\
 				game_over.c\
 				game_pause.c\
@@ -75,51 +79,10 @@ RAW_SRC		=	ai_attack.c\
 				help.c\
 				horizontal_collision.c\
 				hud_utils.c\
-				icon.c\
-				init.c\
-				init_alfred_part1.c\
-				init_alfred_part2.c\
-				init_barrel.c\
-				init_ceiling_lamp.c\
-				init_entity.c\
-				init_game_mode.c\
-				init_gargoyl.c\
-				init_ghost_part1.c\
-				init_ghost_part2.c\
-				init_glock.c\
-				init_inventory.c\
-				init_kar.c\
-				init_lamp.c\
-				init_launcher.c\
-				init_meat_hook.c\
-				init_med_kit.c\
-				init_minigun.c\
-				init_minimap.c\
-				init_player.c\
-				init_render.c\
-				init_rift.c\
-				init_scale.c\
-				init_sdl.c\
-				init_shotgun.c\
-				init_slope.c\
-				init_spooky_part1.c\
-				init_spooky_part2.c\
-				init_textures.c\
-				init_torch.c\
-				init_weapons.c\
 				keys.c\
 				line.c\
 				malloc_texture_pos.c\
 				map_events.c\
-				math1.c\
-				math2.c\
-				math3.c\
-				math4.c\
-				math5.c\
-				math6.c\
-				math7.c\
-				math8.c\
-				math9.c\
 				minimap.c\
 				movement.c\
 				object_collision.c\
@@ -154,7 +117,46 @@ RAW_SRC		=	ai_attack.c\
 				vertical_collision.c\
 				vertical_line.c\
 				wall_slide.c\
+				sector_trigger_events.c\
+				init_corners.c\
 				wall_to_screen_xz.c\
+				Math/math1.c\
+				Math/math2.c\
+				Math/math3.c\
+				Math/math4.c\
+				Math/math5.c\
+				Math/math6.c\
+				Math/math7.c\
+				Math/math8.c\
+				Math/math9.c\
+				Free/free.c\
+				Free/free1.c\
+				Free/free2.c\
+				Free/free3.c\
+				BuyMenu/buy_menu.c\
+				BuyMenu/buy_menu_buttons.c\
+				BuyMenu/buy_menu_help.c\
+				BuyMenu/buy_menu_init.c\
+				BuyMenu/buy_menu_player.c\
+				BuyMenu/buy_menu_player_stats.c\
+				BuyMenu/buy_menu_player_upgrades.c\
+				BuyMenu/buy_menu_weapon.c\
+				BuyMenu/buy_menu_weapon_stats.c\
+				BuyMenu/buy_menu_weapon_upgrades.c\
+				EntityCoords/init_alfred_part1.c\
+				EntityCoords/init_alfred_part2.c\
+				EntityCoords/init_barrel.c\
+				EntityCoords/init_ceiling_lamp.c\
+				EntityCoords/init_gargoyl.c\
+				EntityCoords/init_ghost_part1.c\
+				EntityCoords/init_ghost_part2.c\
+				EntityCoords/init_lamp.c\
+				EntityCoords/init_spooky_part1.c\
+				EntityCoords/init_spooky_part2.c\
+				EntityCoords/init_meat_hook.c\
+				EntityCoords/init_med_kit.c\
+				EntityCoords/init_torch.c\
+				EntityCoords/init_rift.c\
 
 NAME		=	doom
 CDIR		=	srcs
@@ -200,7 +202,7 @@ LIBRA		= \
 
 LIBS		= $(INCL) $(INC) $(LIBR) $(LIBRA)
 
-CFLAGS		=	-Wall -Wextra
+CFLAGS		=	-Wall -Wextra -MMD
 
 RESOURCES	=	./resources
 
@@ -209,8 +211,11 @@ all: $(RESOURCES) $(ODIR) $(NAME)
 -include $(DEP)
 
 $(ODIR):
-	@printf $(CYAN)"[INFO]	Creating folder obj.\n"$(RESET)
 	@mkdir -p $@
+	@mkdir -p $@/Math
+	@mkdir -p $@/Free
+	@mkdir -p $@/BuyMenu
+	@mkdir -p $@/EntityCoords
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
