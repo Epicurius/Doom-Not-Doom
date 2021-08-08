@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 16:21:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 15:19:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall, int slide)
 			motion->velocity = velocity;
 		}
 	}
+	else if (slide == FALSE)
+		ft_bzero(&motion->move, sizeof(t_v3));
 }

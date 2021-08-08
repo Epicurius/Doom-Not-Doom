@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 12:09:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 14:10:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	movement(t_doom *doom)
 	motion.flight = doom->player.flight;
 	doom->player.sector = collision_detection(doom, motion,
 			&doom->player.where, &doom->player.velocity);
-
 	if (doom->player.sector == -1)
 		doom->player.health = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 09:55:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 16:08:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 {
-	if (orb->where.z + 2 > ceiling_at(&doom->sectors[orb->sector], orb->where)
-		|| orb->where.z < floor_at(&doom->sectors[orb->sector], orb->where))
+	if (orb->where.z + orb->velocity.z + 2
+		> ceiling_at(&doom->sectors[orb->sector], orb->where)
+		|| orb->where.z + orb->velocity.z
+		< floor_at(&doom->sectors[orb->sector], orb->where))
 		return (1);
 	return (0);
 }
 
-//			Maybe separate horizontal collision without slide?
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
@@ -30,14 +31,19 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 		return (1);
 	if (vertical_collision_lite(doom, orb))
 		return (2);
-	motion.flight = 1;
+	motion.flight = TRUE;
 	motion.height = 2;
 	motion.curr_sect = orb->sector;
 	motion.where = orb->where;
 	motion.velocity = orb->velocity;
 	motion.prev_sect = motion.curr_sect;
-	motion.move = new_v3(0.0f, 0.0f, 0.0f);
+	motion.move = new_v3(0, 0, 0);
 	motion.move.z += motion.velocity.z;
+	//print_v3("POS: ", motion.where);
+	//print_v3("VELO: ", motion.velocity);
+	//int asd = horizontal_collision(doom, &motion, FALSE);
+	//ft_printf("%d\n", asd)
+	//if (asd > 0)
 	if (horizontal_collision(doom, &motion, FALSE) > 0)
 		return (3);
 	orb->where = add_v3(orb->where, motion.move);
@@ -56,12 +62,17 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
+		//ft_printf("Is it here?\n");
 		if (projectile_collision(doom, orb))
 		{
+			//ft_printf("DEL?\n");
 			doom->nb.projectiles -= 1;
 			curr = ft_dellstnode(&doom->orb, curr);
 		}
 		else
+		{
+			//ft_printf("NO?\n");
 			curr = curr->next;
+		}
 	}
 }

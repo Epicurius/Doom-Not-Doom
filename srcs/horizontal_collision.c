@@ -95,17 +95,21 @@ static int	horizontal_collision_portal(t_doom *doom,
 	{
 		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2))
 		{
+			//ft_printf("1\n");
 			if (portal_intersect(doom, motion, wall))
 			{
 				horizontal_collision(doom, motion, slide);
+				//ft_printf("0\n");
 				return (motion->type = -1);
 			}
 		}
 		if (hitbox_collision(motion->future, wall->v1, wall->v2, DIAMETER))
 		{
+			//ft_printf("1\n");
 			if (portal_hitbox(doom, motion, wall))
 			{
 				slide_collision(doom, motion, wall, slide);
+				//ft_printf("0\n");
 				return (motion->type = 5);
 			}
 		}
@@ -118,6 +122,7 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 	int		i;
 	t_wall	*wall;
 
+	//ft_printf("\nstate\n");
 	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
@@ -126,13 +131,14 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 			return (motion->type);
 	}
 	i = -1;
+	//ft_printf("half\n");
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
-
 		if (horizontal_collision_portal(doom, motion, wall, slide))
 			return (motion->type);
 	}
+	//ft_printf("End\n");
 	motion->move.x += motion->velocity.x;
 	motion->move.y += motion->velocity.y;
 	motion->type = 0;
