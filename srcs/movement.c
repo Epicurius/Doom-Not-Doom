@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:46:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 10:22:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
 	if (player->flight)
 		player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+	if (player->velocity.x < 0.0001 && player->velocity.x > -0.0001)
+		player->velocity.x = 0.0f;
+	if (player->velocity.y < 0.0001 && player->velocity.y > -0.0001)
+		player->velocity.y = 0.0f;
+	//player->velocity.x = move.x;
+	//player->velocity.y = move.y;
+	//if (player->flight)
+	//	player->velocity.z = move.z;
 }
 
 void	movement(t_doom *doom)
@@ -109,6 +117,7 @@ void	movement(t_doom *doom)
 	motion.flight = doom->player.flight;
 	doom->player.sector = collision_detection(doom, motion,
 			&doom->player.where, &doom->player.velocity);
+
 	if (doom->player.sector == -1)
 		doom->player.health = 0;
 }

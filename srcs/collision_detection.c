@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 09:54:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/08 10:25:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,24 @@ int	hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius)
 int	collision_detection(t_doom *doom, t_motion motion,
 	t_v3 *where, t_v3 *velocity)
 {
+
 	motion.where = *where;
 	motion.velocity = *velocity;
 	motion.prev_sect = motion.curr_sect;
-	motion.move = new_v3(0.0f, 0.0f, 0.0f);
+	motion.move = new_v3(0, 0, 0);
 	if (vertical_collision(doom, &motion))
 		return (-1);
-	motion.future = add_v3(motion.where, motion.velocity);
-	horizontal_collision(doom, &motion, TRUE);
+	print_v3("POS1 ", doom->player.velocity);
+	print_v3("POS1 ", doom->player.where);
+	if (!(velocity->x == 0 && velocity->y == 0))
+	{
+		motion.future = add_v3(motion.where, motion.velocity);
+		horizontal_collision(doom, &motion, TRUE);
+	}
 	*velocity = motion.move;
 	*where = add_v3(*where, *velocity);
+	print_v3("POS2 ", doom->player.velocity);
+	print_v3("POS2 ", doom->player.where);
 	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))
 	{
 		velocity->z = 0;
