@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 10:10:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 11:09:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,16 @@ void	precompute_projectiles(t_doom *doom)
 	while (curr)
 	{
 		orb = curr->content;
-		ft_printf("PROJECTLE Is it here?\n");
+		//ft_printf("PROJECTLE Is it here?\n");
 		if (projectile_collision(doom, orb))
 		{
-			ft_printf("PROJECTLE DEL?\n");
+			//ft_printf("PROJECTLE DEL?\n");
 			doom->nb.projectiles -= 1;
 			curr = ft_dellstnode(&doom->orb, curr);
 		}
 		else
 		{
-			ft_printf("PROJECTLE NO?\n");
+			//ft_printf("PROJECTLE NO?\n");
 			curr = curr->next;
 		}
 	}

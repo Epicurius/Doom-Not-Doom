@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:47:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 13:00:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static inline void	game_loop(t_doom *doom)
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
-	movement(doom);
-	poll_event(doom);
 //clock_gettime(CLOCK_MONOTONIC, &start);
-	tpool_wait(&doom->tpool);
+	movement(doom);
 //clock_gettime(CLOCK_MONOTONIC, &finish);
 //elapsed = (finish.tv_sec - start.tv_sec);
 //elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
 //ft_printf("%f\n", elapsed);
+	poll_event(doom);
+	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_entities(doom);
 	draw_crosshair(doom);

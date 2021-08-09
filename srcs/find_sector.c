@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 15:05:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	in_sector(t_sector *sector, t_v3 pos)
 	int		i;
 
 	i = -1;
-	if (floor_at(sector, pos) > pos.z
-		|| ceiling_at(sector, pos) < pos.z)
+	if (floor_at(sector, pos) > pos.z || ceiling_at(sector, pos) < pos.z)
 		return (0);
 	while (++i < sector->npoints)
 	{
