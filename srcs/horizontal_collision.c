@@ -27,7 +27,10 @@ static int	portal_hitbox(t_doom *doom, t_motion *motion, t_wall *wall)
 		return (1);
 	if (portal_top > motion->where.z + motion->height
 		&& portal_bot <= motion->where.z + STEP_HEIGHT)
+	{
+		//doom->sectbool[wall->n] == TRUE;
 		return (0);
+	}
 	return (1);
 }
 
@@ -53,7 +56,7 @@ static int	portal_intersect(t_doom *doom, t_motion *motion, t_wall *wall)
 		motion->where.y = point.y;
 		motion->velocity.x = motion->future.x - motion->where.x;
 		motion->velocity.y = motion->future.y - motion->where.y;
-		motion->prev_sect = motion->curr_sect;
+		doom->sectbool[motion->curr_sect] == TRUE;
 		motion->curr_sect = wall->n;
 		return (1);
 	}
@@ -91,25 +94,21 @@ static int	horizontal_collision_wall(t_doom *doom,
 static int	horizontal_collision_portal(t_doom *doom,
 	t_motion *motion, t_wall *wall, int slide)
 {
-	if (!wall->solid && wall->n != -1 && wall->n != motion->prev_sect)
+	if (!wall->solid && wall->n != -1 && doom->sectbool[wall->n] != TRUE)
 	{
 		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2))
 		{
-			//ft_printf("1\n");
 			if (portal_intersect(doom, motion, wall))
 			{
 				horizontal_collision(doom, motion, slide);
-				//ft_printf("0\n");
 				return (motion->type = -1);
 			}
 		}
 		if (hitbox_collision(motion->future, wall->v1, wall->v2, DIAMETER))
 		{
-			//ft_printf("1\n");
 			if (portal_hitbox(doom, motion, wall))
 			{
 				slide_collision(doom, motion, wall, slide);
-				//ft_printf("0\n");
 				return (motion->type = 5);
 			}
 		}
@@ -122,7 +121,6 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 	int		i;
 	t_wall	*wall;
 
-	//ft_printf("\nstate\n");
 	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
@@ -131,14 +129,12 @@ int	horizontal_collision(t_doom *doom, t_motion *motion, int slide)
 			return (motion->type);
 	}
 	i = -1;
-	//ft_printf("half\n");
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
 		if (horizontal_collision_portal(doom, motion, wall, slide))
 			return (motion->type);
 	}
-	//ft_printf("End\n");
 	motion->move.x += motion->velocity.x;
 	motion->move.y += motion->velocity.y;
 	motion->type = 0;

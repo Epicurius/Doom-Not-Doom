@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:45:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 09:18:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,7 +435,6 @@ typedef struct s_motion
 	t_v3			velocity;
 	t_v3			future;
 	int				curr_sect;
-	int				prev_sect;
 	t_v3			move;
 	int				type;
 }					t_motion;

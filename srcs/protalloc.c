@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:14:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 09:11:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,9 @@ void	*protalloc(size_t size, char *str)
 		ft_putstr(str);
 	write(1, ") Out of memory\n", 16);
 	exit(1);
+}
+
+void	reset_sectbool(t_doom *doom, int to)
+{
+	ft_memset(doom->sectbool, to, doom->nb.sectors * 4);
 }
