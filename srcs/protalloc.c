@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 14:35:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 16:52:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	*protalloc(size_t size, char *str)
 
 void	reset_sectbool(t_doom *doom, int curr_sect)
 {
-	ft_memset(doom->sectbool, 0, 4 * doom->nb.sectors);
+	ft_memset(doom->sectbool, FALSE, 4 * doom->nb.sectors);
 	doom->sectbool[curr_sect] = TRUE;
 }

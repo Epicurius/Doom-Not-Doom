@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 11:09:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 16:19:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	motion.velocity = orb->velocity;
 	motion.move = new_v3(0, 0, 0);
 	motion.move.z += motion.velocity.z;
-	ft_bzero(doom->sectbool, sizeof(int) * doom->nb.sectors);
-	doom->sectbool[motion.curr_sect] = TRUE;
+	reset_sectbool(doom, motion.curr_sect);
 	if (horizontal_collision_lite(doom, &motion) > 0)
 		return (3);
 	orb->where = add_v3(orb->where, motion.move);

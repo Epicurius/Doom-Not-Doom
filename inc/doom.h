@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 15:29:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/09 15:52:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,37 +479,8 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-//int	check_solid_walls(t_doom *doom, t_motion *motion, int sect)
-//{
-//	int		i;
-//	t_wall	*wall;
-//	t_v3	point;
-//
-//	i = -1;
-//	while (++i < doom->sectors[sect].npoints)
-//	{
-//		wall = doom->sectors[sect].wall[i];
-//		point = closest_point_on_segment_v2(motion->future, wall->v1, wall->v2);
-//		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2)
-//			|| (point_distance_v2(point.x, point.y, motion->future.x, motion->future.y) <= DIAMETER))
-//		{
-//			if (wall->solid || wall->n == -1)
-//				return (1);
-//			if (doom->sectbool[wall->n] != TRUE)
-//			{
-//				if (floor_at(&doom->sectors[wall->n], point) > motion->future.z + 2)
-//					return (2);
-//				if (ceiling_at(&doom->sectors[wall->n], point) < motion->future.z + motion->height) //crouch issues
-//					return (3);
-//				doom->sectbool[wall->n] = TRUE;
-//				if (check_solid_walls(doom, motion, wall->n))
-//					return (4);
-//			}
-//		}
-//	}
-//	return (0);
-//}
-
+int		in_sector_area(t_sector *sector, t_v3 pos);
+int		find_sector_no_z(t_sector *sectors, int nb, t_v3 pos);
 void	reset_sectbool(t_doom *doom, int curr_sect);
 void	init_corners(t_doom *doom);
 void	sector_trigger_events(t_doom *doom, t_event *event);
@@ -635,8 +606,7 @@ void				get_entity_state(t_doom *doom, t_entity *entity);
 /* File: help.c */
 void				print_help_msg(void);
 /* File: horizontal_collision.c */
-int					horizontal_collision(t_doom *doom,
-						t_motion *motion, int slide);
+int					horizontal_collision(t_doom *doom, t_motion *motion);
 /* File: hud_utils.c */
 void				hud_health(t_doom *doom, SDL_Rect *dstr);
 void				hud_armour(t_doom *doom, SDL_Rect *dstr);
