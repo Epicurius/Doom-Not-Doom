@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 10:33:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:58:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect)
 				if (check_portal(doom, motion, wall, point))
 					return (2);
 				doom->sectbool[wall->n] = TRUE;
-				if (check_solid_surfaces(doom, motion, wall->n))
+				if (check_solid_surfaces_no_slide(doom, motion, wall->n))
 					return (3);
 			}
 		}

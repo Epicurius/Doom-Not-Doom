@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 10:26:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:51:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
 		return (1);
 	if (portal.ceiling <= motion->dest.z + motion->height)
 		return (2);
-	if (portal.floor > motion->dest.z + STEP_HEIGHT)
+	if (portal.floor > motion->dest.z + motion->step)
 		return (3);
 	return (0);
 }
@@ -88,6 +88,7 @@ int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 int	collision_detection(t_doom *doom, t_motion motion,
 	t_v3 *where, t_v3 *velocity)
 {
+	motion.step = 2;
 	motion.where = *where;
 	motion.velocity = *velocity;
 	if (vertical_collision(doom, &motion))

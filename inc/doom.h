@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 10:29:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 11:00:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,6 +431,7 @@ typedef struct s_motion
 {
 	int				flight;
 	double			height;
+	double			step;
 	t_v3			where;
 	t_v3			velocity;
 	t_v3			dest;
@@ -479,7 +480,9 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-
+int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect);
+int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect);
+int	find_from_sectbool(t_doom *doom, t_motion motion);
 int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point);
 int	check_collsion(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 *point);
 int		in_sector_area(t_sector *sector, t_v3 pos);
