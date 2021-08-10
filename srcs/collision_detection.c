@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 10:26:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:26:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_collsion(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 *point)
 int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;
-	t_wall	*wall;
 	t_v3	point;
+	t_wall	*wall;
 
 	i = -1;
 	while (++i < doom->sectors[sect].npoints)

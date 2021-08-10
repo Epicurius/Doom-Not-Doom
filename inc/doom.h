@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 09:38:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:29:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,6 +479,9 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+
+int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point);
+int	check_collsion(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 *point);
 int		in_sector_area(t_sector *sector, t_v3 pos);
 int		find_sector_no_z(t_sector *sectors, int nb, t_v3 pos);
 void	reset_sectbool(t_doom *doom, int curr_sect);

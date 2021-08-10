@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 09:57:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:33:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,27 @@ static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 	return (m);
 }
 
-int	slide_check_solid_walls(t_doom *doom, t_motion *motion, int sect)
+int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;
-	t_wall	*wall;
 	t_v3	point;
-	double	ptop;
-	double	pbot;
+	t_wall	*wall;
 
 	i = -1;
 	while (++i < doom->sectors[sect].npoints)
 	{
 		wall = doom->sectors[sect].wall[i];
-		point = closest_point_on_segment_v2(motion->dest, wall->v1, wall->v2);
-		if (intersect_v2(motion->where, motion->dest, wall->v1, wall->v2)
-			|| (point_distance_v2(point.x, point.y, motion->dest.x, motion->dest.y) <= DIAMETER))
+		if (check_collsion(doom, motion, wall, &point))
 		{
 			if (wall->solid || wall->n == -1)
 				return (1);
-			pbot = ft_max(
-					floor_at(&doom->sectors[sect], point),
-					floor_at(&doom->sectors[wall->n], point));
-			ptop = ft_min(
-					ceiling_at(&doom->sectors[sect], point),
-					ceiling_at(&doom->sectors[wall->n], point));
-			if (ptop <= pbot + motion->height)
-				return (1);
-			if (ptop <= motion->dest.z + motion->height || pbot > motion->dest.z + STEP_HEIGHT)
-				return (1);
 			if (doom->sectbool[wall->n] == FALSE)
 			{
+				if (check_portal(doom, motion, wall, point))
+					return (2);
 				doom->sectbool[wall->n] = TRUE;
 				if (check_solid_surfaces(doom, motion, wall->n))
-					return (1);
+					return (3);
 			}
 		}
 	}
@@ -77,11 +65,11 @@ int	slide_check_solid_walls(t_doom *doom, t_motion *motion, int sect)
 int	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall)
 {
 	t_motion	new;
-	
+
 	new = *motion;
 	new.velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
 	new.dest = add_v3(new.where, new.velocity);
-	if (!slide_check_solid_walls(doom, &new, new.curr_sect))
+	if (!check_solid_surfaces_no_slide(doom, &new, new.curr_sect))
 	{
 		motion->velocity.x = new.velocity.x;
 		motion->velocity.y = new.velocity.y;
