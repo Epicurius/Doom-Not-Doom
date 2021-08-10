@@ -6,11 +6,70 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 13:58:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:25:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+static void	hit_enemy(t_entity_thread *thread, int coord)
+{
+	if (thread->hp != NULL && thread->shooting && coord == thread->center.z)
+	{
+		*thread->hp -= thread->dmg;
+		*thread->hm = 1;
+	}
+}
+
+void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
+{
+	Uint32			clr;
+	unsigned short	pix;
+
+	if (text.z >= ((double *)thread->surface->userdata)[coord])
+		return ;
+	pix = thread->bxpm->pix[(int)text.y * thread->bxpm->w + (int)text.x];
+	clr = thread->bxpm->clr[pix];
+	if (thread->bxpm->bpp == 32)
+	{
+		if (clr == 0x00000000)
+			return ;
+		clr = blend_alpha(((Uint32 *)thread->surface->pixels)[coord], clr,
+				clr >> 24 & 0xFF);
+	}
+	else if (clr == 0xFF800080)
+		return ;
+	((Uint32 *)thread->surface->pixels)[coord] = clr;
+	((double *)thread->surface->userdata)[coord] = text.z;
+	if (thread->hp != NULL)
+		hit_enemy(thread, coord);
+}
+
+int	draw_entity(void *arg)
+{
+	t_v3			text;
+	t_v2			alpha;
+	t_point			p;
+	t_entity_thread	*thread;
+
+	thread = arg;
+	text.z = thread->render.z;
+	p.y = thread->render.clamp_start.y - 1;
+	while (++p.y < thread->render.clamp_end.y)
+	{
+		alpha.y = (p.y - thread->render.start.y) / thread->render.yrange;
+		text.y = (1.0 - alpha.y) * thread->pos.y1 + alpha.y * thread->pos.y2;
+		p.x = thread->render.clamp_start.x - 1;
+		while (++p.x < thread->render.clamp_end.x)
+		{
+			alpha.x = (p.x - thread->render.start.x) / thread->render.xrange;
+			text.x = (1.0 - alpha.x) * thread->pos.x1 + alpha.x
+				* thread->pos.x2;
+			blit_entity(thread, p.y * thread->surface->w + p.x, text);
+		}
+	}
+	return (1);
+}
 
 static void	entity_threads(t_doom *doom, t_entity *entity,
 	t_entity_thread *thread)
@@ -36,7 +95,7 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 		thread[y].hp = &entity->hp;
 		thread[y].hm = &doom->player.hm;
 		thread[y].center = doom->c;
-		tpool_add(&doom->tpool, blit_game_entity, &thread[y]);
+		tpool_add(&doom->tpool, draw_entity, &thread[y]);
 	}
 }
 

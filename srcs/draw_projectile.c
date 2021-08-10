@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:17:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:26:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_projectiles(t_doom *doom)
 		{
 			project_projectile(doom, orb, thread, &thread.render);
 			if (thread.render.z > 0.5)
-				blit_game_entity(&thread);
+				draw_entity(&thread);
 		}
 		curr = curr->next;
 	}
