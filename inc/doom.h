@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:34:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 14:25:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -478,6 +478,7 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+void	wsprite_trigger_events(t_doom *doom, t_event *event);
 int	crouch_collision(t_doom *doom, t_player *player);
 int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect);
 int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect);

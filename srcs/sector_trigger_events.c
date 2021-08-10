@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 12:12:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 14:23:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	move_plane(t_doom *doom, t_event *event)
 		plane = &event->event_sector->ceiling;
 	plane->y += 0.1 * event->dir;
 	event->time = doom->time.curr;
-
-	// Swith dir
 	if (plane->y <= event->min || plane->y >= event->max)
 	{
 		event->dir *= -1;
@@ -34,8 +32,6 @@ static void	move_plane(t_doom *doom, t_event *event)
 	}
 	else
 		event->speed = 10;
-
-	//Scale walls
 	while (++i < event->event_sector->npoints)
 		scale_wall_height(doom, event->event_sector->wall[i]);
 }
@@ -49,7 +45,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 		if (event->trigger > 2)
 			event->trigger = 0;
 	}
-	else if (event->type == STORE || event->type == AUDIO)//Is neaded ??
+	else if (event->type == STORE || event->type == AUDIO)
 	{
 		if (event->type == STORE && doom->player.store_access)
 			precompute_buy_menu(doom);
@@ -67,7 +63,6 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	}
 }
 
-//void	sector_triggered_events(t_doom *doom, t_event *event)
 void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	if (event->trigger_sector == doom->player.sector || event->trigger)

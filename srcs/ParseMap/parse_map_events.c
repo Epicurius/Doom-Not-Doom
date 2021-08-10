@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 12:00:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:41:39by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	find_event_trigger(t_doom *doom, t_event *event, int id)
+static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 {
 	int	i;
 	int	j;
@@ -29,6 +29,7 @@ static void	find_event_trigger(t_doom *doom, t_event *event, int id)
 			{
 				event->wsprite = &doom->walls[i].wsprite.num[j];
 				event->wsprite->trigger = 0;
+				event->wsprite->action = event->action;
 				return ;
 			}
 		}
@@ -70,6 +71,8 @@ void	get_event_action(t_event *event, char *str)
 		event->action = NONE;
 }
 
+//	if (event.type == HAZARD && event.action != SECTOR)
+//	if (event.action == NONE && (event.type == STORE || event.type == AUDIO))
 void	parse_events(t_doom *doom, char **arr)
 {
 	t_event	event;
@@ -78,10 +81,7 @@ void	parse_events(t_doom *doom, char **arr)
 	get_event_type(&event, arr[1]);
 	get_event_action(&event, arr[2]);
 	if (event.action == CLICKING || event.action == SHOOTING)
-	{
-		find_event_trigger(doom, &event, ft_atoi(arr[3]));
-		event.wsprite->action = event.action;
-	}
+		find_wsprite_trigger(doom, &event, ft_atoi(arr[3]));
 	else if (event.action == SECTOR)
 		event.trigger_sector = ft_atoi(arr[3]);
 	if (event.type == FLOOR || event.type == CEILING)

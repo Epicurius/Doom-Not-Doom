@@ -6,70 +6,34 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 11:37:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 14:31:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	move_plane(t_doom *doom, t_event *event)
+static void	loop_events(t_doom *doom, t_event *event)
 {
+	int		i;
 	t_plane	*plane;
 
-	if (event->type == FLOOR)
-		plane = &event->event_sector->floor;
-	else
-		plane = &event->event_sector->ceiling;
-	plane->y += 0.1 * event->dir;
-	event->time = doom->time.curr;
-	if (plane->y <= event->min)
-		event->dir = 1;
-	else if (plane->y >= event->max)
-		event->dir = -1;
-	else
-		return ;
-	if (event->wsprite != NULL)
-		event->wsprite->trigger = 0;
-	if (event->wsprite != NULL && event->wsprite->state == 2)
-		event->wsprite->src = rect_xy2(0, 0, 64, 64);
-}
-
-static void	loop_events(t_doom *doom, t_event *event, int i)
-{
+	i = -1;
 	if (event->type == FLOOR || event->type == CEILING)
 	{
 		if (event->time + 100 > doom->time.curr)
 			return ;
-		move_plane(doom, event);
+		if (event->type == FLOOR)
+			plane = &event->event_sector->floor;
+		else
+			plane = &event->event_sector->ceiling;
+		plane->y += 0.1 * event->dir;
+		event->time = doom->time.curr;
+		if (plane->y <= event->min)
+			event->dir = 1;
+		else if (plane->y >= event->max)
+			event->dir = -1;
 		while (++i < event->event_sector->npoints)
 			scale_wall_height(doom, event->event_sector->wall[i]);
-	}
-}
-
-static void	wsprite_trigger_events(t_doom *doom, t_event *event, int i)
-{
-	if (!event->wsprite->trigger)
-		return ;
-	if (event->wsprite->trigger == 1)
-	{
-		Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
-		event->wsprite->trigger = 2;
-	}
-	if (event->type == FLOOR || event->type == CEILING)
-	{
-		if (event->time + 10 > doom->time.curr)
-			return ;
-		if (event->wsprite->state == ACTION)
-			animate_wsprite(doom, event->wsprite);
-		move_plane(doom, event);
-		while (++i < event->event_sector->npoints)
-			scale_wall_height(doom, event->event_sector->wall[i]);
-	}
-	else if (event->type == STORE && event->wsprite->trigger
-		&& doom->player.store_access)
-	{
-		precompute_buy_menu(doom);
-		event->wsprite->trigger = 0;
 	}
 }
 
@@ -81,10 +45,10 @@ void	map_events(t_doom *doom)
 	while (++i < doom->nb.events)
 	{
 		if (doom->events[i].action == NONE)
-			loop_events(doom, &doom->events[i], -1);
+			loop_events(doom, &doom->events[i]);
 		else if (doom->events[i].action == SECTOR)
 			sector_trigger_events(doom, &doom->events[i]);
 		else
-			wsprite_trigger_events(doom, &doom->events[i], -1);
+			wsprite_trigger_events(doom, &doom->events[i]);
 	}
 }
