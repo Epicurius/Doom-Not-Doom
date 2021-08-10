@@ -6,100 +6,109 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 16:54:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 10:26:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int	hitbox_collision(t_v3 p, t_v3 v1, t_v3 v2, double radius)
+int	find_from_sectbool(t_doom *doom, t_motion motion)
 {
-	t_v3	point;
+	int		i;
+	t_v3	where;
 
-	point = closest_point_on_segment_v2(p, v1, v2);
-	return ((point_distance_v2(point.x, point.y, p.x, p.y) <= radius));
+	i = -1;
+	where = add_v3(motion.where, motion.velocity);
+	while (++i < doom->nb.sectors)
+	{
+		if (doom->sectbool[i] && in_sector_area(&doom->sectors[i], where))
+			return (i);
+	}
+	ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
+	return (find_sector_no_z(doom->sectors, doom->nb.sectors, where));
 }
 
-int	check_solid_walls(t_doom *doom, t_motion *motion, int sect)
+int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
+{
+	t_fc	portal;
+
+	portal.floor = ft_max(
+			floor_at(&doom->sectors[wall->sect], point),
+			floor_at(&doom->sectors[wall->n], point));
+	portal.ceiling = ft_min(
+			ceiling_at(&doom->sectors[wall->sect], point),
+			ceiling_at(&doom->sectors[wall->n], point));
+	if (portal.ceiling <= portal.floor + motion->height)
+		return (1);
+	if (portal.ceiling <= motion->dest.z + motion->height)
+		return (2);
+	if (portal.floor > motion->dest.z + STEP_HEIGHT)
+		return (3);
+	return (0);
+}
+
+int	check_collsion(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 *point)
+{
+	*point = closest_point_on_segment_v2(motion->dest, wall->v1, wall->v2);
+	if (intersect_v2(motion->where, motion->dest, wall->v1, wall->v2))
+		return (1);
+	if (point_distance_v2(point->x, point->y, motion->dest.x, motion->dest.y)
+		<= DIAMETER)
+		return (2);
+	return (0);
+}
+
+int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;
 	t_wall	*wall;
 	t_v3	point;
-	double	ptop;
-	double	pbot;
 
 	i = -1;
 	while (++i < doom->sectors[sect].npoints)
 	{
 		wall = doom->sectors[sect].wall[i];
-		point = closest_point_on_segment_v2(motion->future, wall->v1, wall->v2);
-		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2)
-			|| (point_distance_v2(point.x, point.y, motion->future.x, motion->future.y) <= DIAMETER))
+		if (check_collsion(doom, motion, wall, &point))
 		{
 			if (wall->solid || wall->n == -1)
-				return (1);
+				return (slide_collision(doom, motion, wall));
 			if (doom->sectbool[wall->n] == FALSE)
 			{
-				pbot = ft_max(
-						floor_at(&doom->sectors[sect], point),
-						floor_at(&doom->sectors[wall->n], point));
-				ptop = ft_min(
-						ceiling_at(&doom->sectors[sect], point),
-						ceiling_at(&doom->sectors[wall->n], point));
-				if (ptop <= pbot + motion->height)
-					return (2);
-				if (ptop <= motion->future.z + motion->height || pbot > motion->future.z + STEP_HEIGHT)
-					return (3);
+				if (check_portal(doom, motion, wall, point))
+					return (slide_collision(doom, motion, wall));
 				doom->sectbool[wall->n] = TRUE;
-				if (check_solid_walls(doom, motion, wall->n))
-					return (4);
+				if (check_solid_surfaces(doom, motion, wall->n))
+					return (1);
 			}
 		}
 	}
 	return (0);
 }
 
-int	collision_detection(t_doom *doom, t_motion motion, t_v3 *where, t_v3 *velocity)
+int	collision_detection(t_doom *doom, t_motion motion,
+	t_v3 *where, t_v3 *velocity)
 {
-	//ft_printf("asdasdasdasdasdasdasdasd\n");
 	motion.where = *where;
 	motion.velocity = *velocity;
-	motion.move = new_v3(0, 0, 0);
 	if (vertical_collision(doom, &motion))
 		return (-1);
 	if (!(velocity->x == 0 && velocity->y == 0))
 	{
-		motion.future = add_v3(motion.where, motion.velocity);
+		motion.dest = add_v3(motion.where, motion.velocity);
 		reset_sectbool(doom, motion.curr_sect);
-		if (!check_solid_walls(doom, &motion, motion.curr_sect))
-		{
-			int i = -1;
-			motion.move.x += motion.velocity.x;
-			motion.move.y += motion.velocity.y;
-			while (++i < doom->nb.sectors)
-			{
-				if (doom->sectbool[i] == TRUE && in_sector_area(&doom->sectors[i], add_v3(*where, motion.move)))
-				{
-					motion.curr_sect = i;
-					break ;
-				}
-			}
-			//reset_sectbool(doom, motion.curr_sect);
-			//horizontal_collision(doom, &motion);
-		}
+		if (!check_solid_surfaces(doom, &motion, motion.curr_sect))
+			motion.curr_sect = find_from_sectbool(doom, motion);
+		else
+			motion.velocity = new_v3(0, 0, motion.velocity.z);
 	}
-	*velocity = motion.move;
+	if (motion.curr_sect == -1)
+		return (-1);
+	*velocity = motion.velocity;
 	*where = add_v3(*where, *velocity);
 	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))
 	{
 		velocity->z = 0;
 		where->z = floor_at(&doom->sectors[motion.curr_sect], *where);
 	}
-	if (!in_sector(&doom->sectors[motion.curr_sect], *where))
-	{
-		ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
-		motion.curr_sect = find_sector_no_z(doom->sectors, doom->nb.sectors, *where);
-	}
-	//ft_printf("yuiyuiyuiyuiy\n");
 	return (motion.curr_sect);
 }

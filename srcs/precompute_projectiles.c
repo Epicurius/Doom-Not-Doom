@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 16:19:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 09:31:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	portal_intersect_lite(t_doom *doom, t_motion *motion, t_wall *wall)
 		motion->move.y += point.y - motion->where.y;
 		motion->where.x = point.x;
 		motion->where.y = point.y;
-		motion->velocity.x = motion->future.x - motion->where.x;
-		motion->velocity.y = motion->future.y - motion->where.y;
+		motion->velocity.x = motion->dest.x - motion->where.x;
+		motion->velocity.y = motion->dest.y - motion->where.y;
 		doom->sectbool[motion->curr_sect] = TRUE;
 		motion->curr_sect = wall->n;
 		return (1);
@@ -62,7 +62,7 @@ static int	horizontal_collision_lite(t_doom *doom, t_motion *motion)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
 		if ((wall->solid || wall->n == -1) && intersect_v2(
-				motion->where, motion->future, wall->v1, wall->v2))
+				motion->where, motion->dest, wall->v1, wall->v2))
 			return (1);
 	}
 	i = -1;
@@ -70,7 +70,7 @@ static int	horizontal_collision_lite(t_doom *doom, t_motion *motion)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
 		if (!wall->solid && wall->n != -1 && doom->sectbool[wall->n] != TRUE
-			&& intersect_v2(motion->where, motion->future, wall->v1, wall->v2)
+			&& intersect_v2(motion->where, motion->dest, wall->v1, wall->v2)
 			&& portal_intersect_lite(doom, motion, wall))
 		{
 			horizontal_collision_lite(doom, motion);
@@ -86,8 +86,8 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
 
-	motion.future = add_v3(orb->where, orb->velocity);
-	if (target_contact(doom, orb, orb->start, motion.future))
+	motion.dest = add_v3(orb->where, orb->velocity);
+	if (target_contact(doom, orb, orb->start, motion.dest))
 		return (1);
 	if (vertical_collision_lite(doom, orb))
 		return (2);

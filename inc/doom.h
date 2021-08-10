@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 15:52:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 09:38:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,7 +433,7 @@ typedef struct s_motion
 	double			height;
 	t_v3			where;
 	t_v3			velocity;
-	t_v3			future;
+	t_v3			dest;
 	int				curr_sect;
 	t_v3			move;
 	int				type;
@@ -808,8 +808,7 @@ void				vline_color_walls(t_render *render,
 void				vline_monochromic(t_render *render,
 						t_vline *vline, int side);
 /* File: wall_slide.c */
-void				slide_collision(t_doom *doom, t_motion *motion,
-						t_wall *wall, int slide);
+int				slide_collision(t_doom *doom, t_motion *motion, t_wall *wall);
 /* File: wall_to_screen_xz.c */
 void				wall_to_screen_xz(t_player player, t_wall *wall);
 

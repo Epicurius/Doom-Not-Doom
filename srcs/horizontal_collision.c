@@ -31,7 +31,7 @@ static int	horizontal_collision_portal(t_doom *doom, t_motion *motion, t_wall *w
 {
 	if (!wall->solid && wall->n != -1 && doom->sectbool[wall->n] != TRUE)
 	{
-		if (intersect_v2(motion->where, motion->future, wall->v1, wall->v2))
+		if (intersect_v2(motion->where, motion->dest, wall->v1, wall->v2))
 		{
 			portal_intersect(doom, motion, wall);
 			horizontal_collision(doom, motion);
