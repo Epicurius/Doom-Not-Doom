@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 11:11:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:21:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 /*
 ** Entities
 */
+# define ACTIVE_AREA					50
 # define MAX_ENTITIES_RENDERED			20
 # define FRAMES							0
 # define ANGLES							1
@@ -87,7 +88,7 @@
 ** Minimap
 */
 # define MM_SCALE						0.8
-# define MM_SECTORS_SCALE				6
+# define MM_SECTORS_SCALE				1
 # define MM_BEZEL_SIZE					5
 # define MM_BEZEL_COLOR					0x222222
 # define MM_VIEW_COLOR					0xFFD700

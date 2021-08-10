@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 15:21:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:24:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	map_player(t_doom *doom)
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_left)
 		+ map.pos.y;
 	cohen_sutherland(p, map.size);
-	line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
+	draw_line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
 	p[0] = map.pos;
 	p[1].x = (player.anglecos * FAR_Z - player.anglesin * doom->cam.far_right)
 		+ map.pos.x;
 	p[1].y = (player.anglesin * FAR_Z + player.anglecos * doom->cam.far_right)
 		+ map.pos.y;
 	cohen_sutherland(p, map.size);
-	line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
+	draw_line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
 }
 
 static void	draw_map2(t_doom *doom, t_wall *wall)
@@ -42,16 +42,16 @@ static void	draw_map2(t_doom *doom, t_wall *wall)
 	t_point		p[2];
 
 	where = doom->player.where;
-	p[0].x = doom->c.x + (wall->v1.x - where.x) * MM_SECTORS_SCALE;
-	p[0].y = doom->c.y + (wall->v1.y - where.y) * MM_SECTORS_SCALE;
-	p[1].x = doom->c.x + (wall->v2.x - where.x) * MM_SECTORS_SCALE;
-	p[1].y = doom->c.y + (wall->v2.y - where.y) * MM_SECTORS_SCALE;
+	p[0].x = doom->c.x + (wall->v1.x - where.x) * doom->map.zoom;
+	p[0].y = doom->c.y + (wall->v1.y - where.y) * doom->map.zoom;
+	p[1].x = doom->c.x + (wall->v2.x - where.x) * doom->map.zoom;
+	p[1].y = doom->c.y + (wall->v2.y - where.y) * doom->map.zoom;
 	if (cohen_sutherland(p, doom->map.size))
 	{
 		if (wall->n != -1)
-			line(doom->surface, 0xFFFF0000, p[0], p[1]);
+			draw_line(doom->surface, 0xFFFF0000, p[0], p[1]);
 		else
-			line(doom->surface, 0xFFFFFFFF, p[0], p[1]);
+			draw_line(doom->surface, 0xFFFFFFFF, p[0], p[1]);
 	}
 }
 
@@ -107,8 +107,13 @@ void	map(t_doom *doom)
 {
 	if (doom->keys[KEY_TAB])
 	{
+		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 15);
 		map_area(doom);
 		draw_map(doom);
 		map_player(doom);
+		if (doom->settings.debug)
+			draw_circle(doom->surface, 0xff00ff00,
+				new_point(doom->surface->w / 2, doom->surface->h / 2),
+				ACTIVE_AREA * doom->map.zoom);
 	}
 }

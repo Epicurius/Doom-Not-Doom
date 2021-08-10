@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:50:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 15:34:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	get_events(t_doom *doom, char *key)
 			|| event.button.type == SDL_MOUSEBUTTONUP)
 			key[511 + event.button.button]
 				= event.button.type == SDL_MOUSEBUTTONDOWN;
+		else if (event.type == SDL_MOUSEWHEEL)
+			doom->map.zoom += event.wheel.y;
 	}	
 }
 

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/10 13:07:06 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/10 16:27:20 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ CFILES		=	ai_attack.c\
 				minimap.c\
 				movement.c\
 				orientation.c\
+				sector_trigger_events.c\
 				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
@@ -61,7 +62,7 @@ CFILES		=	ai_attack.c\
 				sound.c\
 				spawn_entity.c\
 				update_screen.c\
-				sector_trigger_events.c\
+				wsprite_trigger_events.c\
 				wall_to_screen_xz.c\
 				UI/game_loading.c\
 				UI/game_over.c\
@@ -136,6 +137,7 @@ CFILES		=	ai_attack.c\
 				Draw/draw_hud_utils.c\
 				Draw/draw_vline.c\
 				Draw/draw_line.c\
+				Draw/draw_circle.c\
 				EntityCoords/alfred1.c\
 				EntityCoords/alfred2.c\
 				EntityCoords/barrel.c\
@@ -156,6 +158,7 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/object_collision.c\
 				CollisionDetection/slide_collision.c\
 				CollisionDetection/projectile_collision.c\
+				CollisionDetection/crouch_collision.c
 
 NAME		=	doom
 CDIR		=	srcs

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:25:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:24:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,7 @@ typedef struct s_render
 
 typedef struct s_map
 {
+	int				zoom;
 	t_point			pos;
 	t_rect			size;
 }					t_map;
@@ -478,6 +479,7 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+void	draw_circle(SDL_Surface *surface, Uint32 color, t_point point, int size);
 void	wsprite_trigger_events(t_doom *doom, t_event *event);
 int	crouch_collision(t_doom *doom, t_player *player);
 int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect);
@@ -689,8 +691,8 @@ void				init_torch(t_doom *doom);
 void				init_weapons(t_doom *doom);
 /* File: keys.c */
 void				poll_event(t_doom *doom);
-/* File: line.c */
-void				line(SDL_Surface *surf, Uint32 color,
+/* File: draw_line.c */
+void				draw_line(SDL_Surface *surf, Uint32 color,
 						t_point v1, t_point v2);
 /* File: malloc_texture_pos.c */
 void				malloc_texture_pos(t_npc_bxpm *entity);

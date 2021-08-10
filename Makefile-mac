@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/10 14:26:49 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/10 14:55:37 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,6 +137,7 @@ CFILES		=	ai_attack.c\
 				Draw/draw_hud_utils.c\
 				Draw/draw_vline.c\
 				Draw/draw_line.c\
+				Draw/draw_circle.c\
 				EntityCoords/alfred1.c\
 				EntityCoords/alfred2.c\
 				EntityCoords/barrel.c\
