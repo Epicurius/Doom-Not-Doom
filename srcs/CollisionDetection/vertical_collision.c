@@ -6,19 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 11:46:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:01:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where)
+static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where, int i)
 {
-	int		i;
 	t_v3	point;
 	t_wall	*wall;
 
-	i = -1;
 	while (++i < doom->sectors[motion->curr_sect].npoints)
 	{
 		wall = doom->sectors[motion->curr_sect].wall[i];
@@ -46,19 +44,19 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where)
 
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
-	t_fc	where;
+	t_fc	pos;
 
-	where.ceiling = ceiling_at(&doom->sectors[motion->curr_sect], motion->where);
-	where.floor = floor_at(&doom->sectors[motion->curr_sect], motion->where);
-	if (where.ceiling - where.floor < motion->height)
+	pos.ceiling = ceiling_at(&doom->sectors[motion->curr_sect], motion->where);
+	pos.floor = floor_at(&doom->sectors[motion->curr_sect], motion->where);
+	if (pos.ceiling - pos.floor < motion->height)
 		return (1);
-	if (motion->flight == FALSE && motion->where.z > where.floor
-		&& !portal_cliff(doom, motion, motion->where))
+	if (motion->flight == FALSE && motion->where.z > pos.floor
+		&& !portal_cliff(doom, motion, motion->where, -1))
 	{
 		motion->velocity.z -= doom->sectors[motion->curr_sect].gravity;
 		motion->where.z += motion->velocity.z;
 	}
-	if (motion->where.z + motion->velocity.z + motion->height >= where.ceiling)
+	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
 		motion->velocity.z = 0;
 	motion->move.z += motion->velocity.z;
 	return (0);

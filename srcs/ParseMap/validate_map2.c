@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map_part2.c                               :+:      :+:    :+:   */
+/*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 14:27:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:48:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sector_center(t_sector *sector)
 	int		i;
 	float	a;
 	float	t;
-	
+
 	i = -1;
 	a = 0.0f;
 	while (++i < sector->npoints)

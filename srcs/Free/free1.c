@@ -1,74 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free1.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 16:40:49 by nneronin         ###   ########.fr       */
+/*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
+/*   Updated: 2021/07/31 14:36:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	free_map(t_doom *doom)
+void	free_doom(t_doom *doom)
 {
-	int	i;
-
-	ft_memdel((void *)&doom->vert);//>>>????
-	i = -1;
-	while (++i < doom->nb.walls)
-		ft_memdel((void *)&doom->walls[i].wsprite);
-	ft_memdel((void *)&doom->walls);
-	i = -1;
-	while (++i < doom->nb.sectors)
-		ft_memdel((void *)&doom->sectors[i].wall);
-	ft_memdel((void *)&doom->sectors);
-	i = -1;
-	while (++i < doom->nb.events)
-		if (doom->events[i].audio)
-			Mix_FreeChunk(doom->events[i].audio);
-	ft_memdel((void *)&doom->events);
-}
-
-void	free_render_utils(t_doom *doom)
-{
-	free(doom->zbuffer);
-	free(doom->render);
-	free(doom->sectbool);
-}
-
-void	free_font(t_doom *doom)
-{
-	TTF_CloseFont(doom->font.amaz50);
-	TTF_CloseFont(doom->font.digi100);
-}
-
-void	free_color_palet(t_bxpm *bxpm)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 512)
-	{
-		if (bxpm->palet[i])
-			free(bxpm->palet[i]);
-	}
-}
-
-void	free_entity_pos(t_npc_bxpm *entity)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < entity->nb[i][FRAMES])
-			free(entity->pos[i][j]);
-		free(entity->pos[i]);
-	}
-	free(entity->pos);
+	free_tpool(&doom->tpool);
+	free_map(doom);
+	free_entities(doom);
+	free_rifts(doom);
+	free_sprites_pos(doom);
+	free_projectiles(doom);
+	free_textures(doom);
+	free_icon(doom);
+	free_weapons(doom);
+	SDL_FreeSurface(doom->time.surf);
+	free_render_utils(doom);
+	free_font(doom);
+	free_sounds(doom);
+	SDL_FreeSurface(doom->surface);
+	SDL_DestroyTexture(doom->texture);
+	SDL_DestroyRenderer(doom->renderer);
+	SDL_DestroyWindow(doom->win);
+	SDL_Quit();
+	Mix_Quit();
+	TTF_Quit();
 }

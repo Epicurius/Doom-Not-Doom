@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/08 09:22:01 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/10 13:07:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,75 +22,29 @@ CYAN		:=	"\e[0;36m"
 UNDERLINE	:=	"\x1b[4m"
 RESET		:=	"\e[0m"
 
-RAW_SRC		=	ai_attack.c\
+CFILES		=	ai_attack.c\
 				ai_movement.c\
 				animate_wsprite.c\
 				args.c\
 				blit_bxpm.c\
-				blit_entity.c\
 				camera.c\
 				clock.c\
-				collision_detection.c\
 				color_and_brightness.c\
 				compute_vline.c\
 				crosshair_position.c\
 				doom.c\
-				draw2.c\
-				draw_bullet_holes.c\
-				draw_ceiling.c\
-				draw_crosshair.c\
-				draw_entity.c\
-				draw_floor.c\
-				draw_floor_and_ceiling.c\
-				draw_hud.c\
-				draw_neighbor_wall.c\
-				draw_portal_texture.c\
-				draw_projectile.c\
-				draw_skybox.c\
-				draw_wall.c\
-				draw_weapon.c\
-				draw_wsprites.c\
 				endless.c\
 				find_sector.c\
 				fps.c\
 				icon.c\
-				init.c\
-				init_entity.c\
-				init_game_mode.c\
-				init_glock.c\
-				init_inventory.c\
-				init_kar.c\
-				init_launcher.c\
-				init_minigun.c\
-				init_minimap.c\
-				init_player.c\
-				init_render.c\
-				init_scale.c\
-				init_sdl.c\
-				init_shotgun.c\
-				init_slope.c\
-				init_textures.c\
-				init_weapons.c\
-				game_loading.c\
-				game_over.c\
-				game_pause.c\
-				game_quit.c\
 				get_entity_state.c\
 				help.c\
-				horizontal_collision.c\
-				hud_utils.c\
 				keys.c\
-				line.c\
 				malloc_texture_pos.c\
 				map_events.c\
 				minimap.c\
 				movement.c\
-				object_collision.c\
 				orientation.c\
-				parse_map_events.c\
-				parse_map_header.c\
-				parse_map_sector.c\
-				parse_map_sprite.c\
 				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
@@ -99,27 +53,44 @@ RAW_SRC		=	ai_attack.c\
 				precompute_weapon.c\
 				project_entity.c\
 				project_wall.c\
-				projectile_contact.c\
 				protalloc.c\
 				purge_entities.c\
 				put_pixels.c\
 				random.c\
-				read_map.c\
 				reload_map.c\
-				skybox_ceiling_vline.c\
-				skybox_floor_vline.c\
-				skybox_wall_vline.c\
 				sound.c\
 				spawn_entity.c\
 				update_screen.c\
-				validate_map_part1.c\
-				validate_map_part2.c\
-				vertical_collision.c\
-				vertical_line.c\
-				wall_slide.c\
 				sector_trigger_events.c\
-				init_corners.c\
 				wall_to_screen_xz.c\
+				UI/game_loading.c\
+				UI/game_over.c\
+				UI/game_pause.c\
+				UI/game_quit.c\
+				ParseMap/parse_map.c\
+				ParseMap/parse_map_events.c\
+				ParseMap/parse_map_header.c\
+				ParseMap/parse_map_sector.c\
+				ParseMap/parse_map_sprite.c\
+				ParseMap/validate_map1.c\
+				ParseMap/validate_map2.c\
+				Init/init.c\
+				Init/init_entity.c\
+				Init/init_game_mode.c\
+				Init/init_glock.c\
+				Init/init_inventory.c\
+				Init/init_kar.c\
+				Init/init_launcher.c\
+				Init/init_minigun.c\
+				Init/init_minimap.c\
+				Init/init_player.c\
+				Init/init_render.c\
+				Init/init_scale.c\
+				Init/init_sdl.c\
+				Init/init_shotgun.c\
+				Init/init_slope.c\
+				Init/init_textures.c\
+				Init/init_weapons.c\
 				Math/math1.c\
 				Math/math2.c\
 				Math/math3.c\
@@ -129,10 +100,11 @@ RAW_SRC		=	ai_attack.c\
 				Math/math7.c\
 				Math/math8.c\
 				Math/math9.c\
-				Free/free.c\
+				Math/math10.c\
 				Free/free1.c\
 				Free/free2.c\
 				Free/free3.c\
+				Free/free4.c\
 				BuyMenu/buy_menu.c\
 				BuyMenu/buy_menu_buttons.c\
 				BuyMenu/buy_menu_help.c\
@@ -143,27 +115,54 @@ RAW_SRC		=	ai_attack.c\
 				BuyMenu/buy_menu_weapon.c\
 				BuyMenu/buy_menu_weapon_stats.c\
 				BuyMenu/buy_menu_weapon_upgrades.c\
-				EntityCoords/alfred.c\
-				EntityCoords/alfred.c\
+				Draw/draw2.c\
+				Draw/draw_bullet_holes.c\
+				Draw/draw_ceiling.c\
+				Draw/draw_crosshair.c\
+				Draw/draw_entity.c\
+				Draw/draw_floor.c\
+				Draw/draw_floor_and_ceiling.c\
+				Draw/draw_hud.c\
+				Draw/draw_neighbor_wall.c\
+				Draw/draw_portal_texture.c\
+				Draw/draw_projectile.c\
+				Draw/draw_skybox_ceiling.c\
+				Draw/draw_skybox_floor.c\
+				Draw/draw_skybox_wall.c\
+				Draw/draw_skybox.c\
+				Draw/draw_wall.c\
+				Draw/draw_weapon.c\
+				Draw/draw_wsprites.c\
+				Draw/draw_hud_utils.c\
+				Draw/draw_vline.c\
+				Draw/draw_line.c\
+				EntityCoords/alfred1.c\
+				EntityCoords/alfred2.c\
 				EntityCoords/barrel.c\
 				EntityCoords/ceiling_lamp.c\
 				EntityCoords/gargoyl.c\
-				EntityCoords/ghost.c\
-				EntityCoords/ghost.c\
+				EntityCoords/ghost1.c\
+				EntityCoords/ghost2.c\
 				EntityCoords/lamp.c\
-				EntityCoords/spooky.c\
-				EntityCoords/spooky.c\
+				EntityCoords/spooky1.c\
+				EntityCoords/spooky2.c\
 				EntityCoords/meat_hook.c\
 				EntityCoords/med_kit.c\
 				EntityCoords/torch.c\
 				EntityCoords/rift.c\
+				CollisionDetection/collision_detection.c\
+				CollisionDetection/horizontal_collision.c\
+				CollisionDetection/vertical_collision.c\
+				CollisionDetection/object_collision.c\
+				CollisionDetection/slide_collision.c\
+				CollisionDetection/projectile_collision.c\
 
 NAME		=	doom
 CDIR		=	srcs
 ODIR		=	obj
 INC			=	-I./inc -I../
-SRCS		=	$(addprefix $(CDIR)/,$(RAW_SRC))
-OBJ			=	$(addprefix $(ODIR)/,$(RAW_SRC:.c=.o))
+SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
+OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			:=	$(OBJ:.o=.d)
 
 SDL_DIR		:= ../libs/SDL
@@ -212,10 +211,15 @@ all: $(RESOURCES) $(ODIR) $(NAME)
 
 $(ODIR):
 	@mkdir -p $@
+	@mkdir -p $@/UI
+	@mkdir -p $@/Init
 	@mkdir -p $@/Math
 	@mkdir -p $@/Free
+	@mkdir -p $@/Draw
 	@mkdir -p $@/BuyMenu
+	@mkdir -p $@/ParseMap
 	@mkdir -p $@/EntityCoords
+	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 14:10:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:04:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,14 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 	foot_steps(doom, player);
 }
 
-//player->velocity.x = move.x * 3.5;
-//player->velocity.y = move.y * 3.5;
+//player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
+//player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
 //if (player->flight)
-//	player->velocity.z = move.z * 3.5;
+//	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
+//if (player->velocity.x < 0.001 && player->velocity.x > -0.001)
+//	player->velocity.x = 0.0;
+//if (player->velocity.y < 0.001 && player->velocity.y > -0.001)
+//	player->velocity.y = 0.0;
 static void	get_velocity(t_doom *doom, t_v3 move)
 {
 	t_player	*player;
@@ -88,15 +92,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 	player->velocity.y = move.y * 3.5;
 	if (player->flight)
 		player->velocity.z = move.z * 3.5;
-	//player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
-	//player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
-	//if (player->flight)
-	//	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
-	//if (player->velocity.x < 0.001 && player->velocity.x > -0.001)
-	//	player->velocity.x = 0.0;
-	//if (player->velocity.y < 0.001 && player->velocity.y > -0.001)
-	//	player->velocity.y = 0.0;
-}//
+}
 
 void	movement(t_doom *doom)
 {
@@ -106,8 +102,8 @@ void	movement(t_doom *doom)
 
 	if (doom->keys[KEY_LCTRL])
 		doom->player.eyelvl = PLAYER_HEIGHT - 4;
-	else if (doom->player.where.z + PLAYER_HEIGHT <
-		ceiling_at(&doom->sectors[doom->player.sector], doom->player.where))
+	else if (doom->player.where.z + PLAYER_HEIGHT
+		< ceiling_at(&doom->sectors[doom->player.sector], doom->player.where))
 		doom->player.eyelvl = PLAYER_HEIGHT - 1;
 	update_camera(doom);
 	get_base_speed(doom, &speed);
