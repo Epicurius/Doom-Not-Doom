@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 11:57:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,20 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	if (!(velocity->x == 0 && velocity->y == 0))
 	{
 		motion.dest = add_v3(motion.where, motion.velocity);
-		reset_sectbool(doom, motion.curr_sect);
-		if (!check_solid_surfaces(doom, &motion, motion.curr_sect))
-			motion.curr_sect = find_from_sectbool(doom, motion);
+		reset_sectbool(doom, motion.sector);
+		if (!check_solid_surfaces(doom, &motion, motion.sector))
+			motion.sector = find_from_sectbool(doom, motion);
 		else
 			motion.velocity = new_v3(0, 0, motion.velocity.z);
 	}
-	if (motion.curr_sect == -1)
+	if (motion.sector == -1)
 		return (-1);
 	*velocity = motion.velocity;
 	*where = add_v3(*where, *velocity);
-	if (where->z < floor_at(&doom->sectors[motion.curr_sect], *where))
+	if (where->z < floor_at(&doom->sectors[motion.sector], *where))
 	{
 		velocity->z = 0;
-		where->z = floor_at(&doom->sectors[motion.curr_sect], *where);
+		where->z = floor_at(&doom->sectors[motion.sector], *where);
 	}
-	return (motion.curr_sect);
+	return (motion.sector);
 }

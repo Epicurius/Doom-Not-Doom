@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 11:01:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	reset_sectbool(doom, orb->sector);
 	if (check_solid_surfaces_no_slide(doom, &motion, orb->sector))
 		return (3);
-	motion.curr_sect = find_from_sectbool(doom, motion);
-	if (motion.curr_sect == -1)
+	motion.sector = find_from_sectbool(doom, motion);
+	if (motion.sector == -1)
 		return (4);
 	orb->where = add_v3(motion.where, motion.velocity);
-	orb->sector = motion.curr_sect;
+	orb->sector = motion.sector;
 	return (0);
 }
 

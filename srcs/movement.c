@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:04:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	movement(t_doom *doom)
 	if (entity_collision(doom, &doom->player.where, &doom->player.velocity))
 		return ;
 	motion.height = doom->player.eyelvl + 1;
-	motion.curr_sect = doom->player.sector;
+	motion.sector = doom->player.sector;
 	motion.flight = doom->player.flight;
 	doom->player.sector = collision_detection(doom, motion,
 			&doom->player.where, &doom->player.velocity);

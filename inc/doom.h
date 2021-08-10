@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:06:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:16:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,12 +432,10 @@ typedef struct s_motion
 	int				flight;
 	double			height;
 	double			step;
+	int				sector;
 	t_v3			where;
 	t_v3			velocity;
 	t_v3			dest;
-	int				curr_sect;
-	t_v3			move;
-	int				type;
 }					t_motion;
 
 typedef struct s_doom

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:06:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall)
 	new = *motion;
 	new.velocity = parallel_movement(motion->velocity, wall->v1, wall->v2);
 	new.dest = add_v3(new.where, new.velocity);
-	if (!check_solid_surfaces_no_slide(doom, &new, new.curr_sect))
+	if (!check_solid_surfaces_no_slide(doom, &new, new.sector))
 	{
 		motion->velocity.x = new.velocity.x;
 		motion->velocity.y = new.velocity.y;
