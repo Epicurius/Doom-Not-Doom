@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/09 08:46:39 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/10 12:01:01 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ CFILES		=	ai_attack.c\
 				blit_entity.c\
 				camera.c\
 				clock.c\
-				collision_detection.c\
 				color_and_brightness.c\
 				compute_vline.c\
 				crosshair_position.c\
@@ -77,7 +76,6 @@ CFILES		=	ai_attack.c\
 				game_quit.c\
 				get_entity_state.c\
 				help.c\
-				horizontal_collision.c\
 				hud_utils.c\
 				keys.c\
 				line.c\
@@ -85,7 +83,6 @@ CFILES		=	ai_attack.c\
 				map_events.c\
 				minimap.c\
 				movement.c\
-				object_collision.c\
 				orientation.c\
 				parse_map_events.c\
 				parse_map_header.c\
@@ -114,11 +111,8 @@ CFILES		=	ai_attack.c\
 				update_screen.c\
 				validate_map_part1.c\
 				validate_map_part2.c\
-				vertical_collision.c\
 				vertical_line.c\
-				wall_slide.c\
 				sector_trigger_events.c\
-				init_corners.c\
 				wall_to_screen_xz.c\
 				Math/math1.c\
 				Math/math2.c\
@@ -158,6 +152,11 @@ CFILES		=	ai_attack.c\
 				EntityCoords/med_kit.c\
 				EntityCoords/torch.c\
 				EntityCoords/rift.c\
+				CollisionDetection/collision_detection.c\
+				CollisionDetection/horizontal_collision.c\
+				CollisionDetection/vertical_collision.c\
+				CollisionDetection/object_collision.c\
+				CollisionDetection/slide_collision.c\
 
 
 NAME		=	doom
@@ -199,6 +198,7 @@ $(ODIR):
 	@mkdir -p $@/Free
 	@mkdir -p $@/BuyMenu
 	@mkdir -p $@/EntityCoords
+	@mkdir -p $@/CollisionDetection
 	
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
