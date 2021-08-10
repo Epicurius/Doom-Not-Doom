@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:58:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:34:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	launcher(void)
 //	}
 //}
 
-struct timespec start, finish;
-double elapsed;
+//struct timespec start, finish;
+//double elapsed;
 
 static inline void	game_loop(t_doom *doom)
 {

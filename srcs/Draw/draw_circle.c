@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:41:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 15:24:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:31:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static inline void	put_pixel(SDL_Surface *surface, Uint32 color, int x, int y)
 {
-	if (x >= 0 && x < surface->w && y >= 0 && y < surface->h)
+	if (x > 0 && x < surface->w && y > 0 && y < surface->h)
 		((Uint32 *)surface->pixels)[y * surface->w + x] = color;
 }
 
