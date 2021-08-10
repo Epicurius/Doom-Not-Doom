@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:56:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 11:57:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:05:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
 	return (0);
 }
 
-int	check_collsion(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 *point)
+int	check_collsion(t_motion *motion, t_wall *wall, t_v3 *point)
 {
 	*point = closest_point_on_segment_v2(motion->dest, wall->v1, wall->v2);
 	if (intersect_v2(motion->where, motion->dest, wall->v1, wall->v2))
@@ -52,7 +52,7 @@ int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 	while (++i < doom->sectors[sect].npoints)
 	{
 		wall = doom->sectors[sect].wall[i];
-		if (check_collsion(doom, motion, wall, &point))
+		if (check_collsion(motion, wall, &point))
 		{
 			if (wall->solid || wall->n == -1)
 				return (slide_collision(doom, motion, wall));

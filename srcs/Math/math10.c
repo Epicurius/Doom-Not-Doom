@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 10:04:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 11:10:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:05:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	print_v3(char *str, t_v3 v)
 {
 	if (str)
 		ft_printf("%s\t", str);
-	printf("[%.18f\t%.18f\t%.18f]\n", v.x, v.y, v.z);//ft_
+	ft_printf("[%.2f\t%.2f\t%.2f]\n", v.x, v.y, v.z);
 }

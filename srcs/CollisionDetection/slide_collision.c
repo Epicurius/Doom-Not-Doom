@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_slide.c                                       :+:      :+:    :+:   */
+/*   slide_collision.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 10:58:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:06:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect)
 	while (++i < doom->sectors[sect].npoints)
 	{
 		wall = doom->sectors[sect].wall[i];
-		if (check_collsion(doom, motion, wall, &point))
+		if (check_collsion(motion, wall, &point))
 		{
 			if (wall->solid || wall->n == -1)
 				return (1);

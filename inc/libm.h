@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 10:05:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:09:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBM_H
 
 # include <math.h>
+# include "libpf.h"
 # define CONVERT_TO_RADIANS	0.0174532925199432955
 # define CONVERT_TO_DEGREES	57.295779513082322864
 
@@ -35,14 +36,6 @@ typedef struct s_v3
 	double			y;
 	double			z;
 }					t_v3;
-
-typedef struct s_v4
-{
-	double			x;
-	double			y;
-	double			z;
-	double			w;
-}					t_v4;
 
 typedef struct s_rect
 {
@@ -71,8 +64,7 @@ t_v3				div_v3(t_v3 vec, float scalar);
 int					intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
 double				point_distance_v3(t_v3 p1, t_v3 p2);
 t_v3				closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
-int					point_on_segment_v2(t_v3 p, t_v3 v1,
-						t_v3 v2, double buffer);
+int					point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buff);
 t_v3				get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2);
 /* File: math4.c */
 double				vector_magnitude_v2(t_v3 v);

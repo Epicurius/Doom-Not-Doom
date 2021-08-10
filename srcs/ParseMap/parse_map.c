@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 17:28:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:14:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_events);
 }
 
-int	read_file(t_doom *doom, char *file_name)
+int	parse_map(t_doom *doom, char *file_name)
 {
 	int		fd;
 	char	*line;

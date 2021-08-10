@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/10 12:01:01 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/10 12:13:47 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,23 +53,6 @@ CFILES		=	ai_attack.c\
 				find_sector.c\
 				fps.c\
 				icon.c\
-				init.c\
-				init_entity.c\
-				init_game_mode.c\
-				init_glock.c\
-				init_inventory.c\
-				init_kar.c\
-				init_launcher.c\
-				init_minigun.c\
-				init_minimap.c\
-				init_player.c\
-				init_render.c\
-				init_scale.c\
-				init_sdl.c\
-				init_shotgun.c\
-				init_slope.c\
-				init_textures.c\
-				init_weapons.c\
 				game_loading.c\
 				game_over.c\
 				game_pause.c\
@@ -84,10 +67,6 @@ CFILES		=	ai_attack.c\
 				minimap.c\
 				movement.c\
 				orientation.c\
-				parse_map_events.c\
-				parse_map_header.c\
-				parse_map_sector.c\
-				parse_map_sprite.c\
 				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
@@ -101,7 +80,6 @@ CFILES		=	ai_attack.c\
 				purge_entities.c\
 				put_pixels.c\
 				random.c\
-				read_map.c\
 				reload_map.c\
 				skybox_ceiling_vline.c\
 				skybox_floor_vline.c\
@@ -114,6 +92,28 @@ CFILES		=	ai_attack.c\
 				vertical_line.c\
 				sector_trigger_events.c\
 				wall_to_screen_xz.c\
+				ParseMap/parse_map.c\
+				ParseMap/parse_map_events.c\
+				ParseMap/parse_map_header.c\
+				ParseMap/parse_map_sector.c\
+				ParseMap/parse_map_sprite.c\
+				Init/init.c\
+				Init/init_entity.c\
+				Init/init_game_mode.c\
+				Init/init_glock.c\
+				Init/init_inventory.c\
+				Init/init_kar.c\
+				Init/init_launcher.c\
+				Init/init_minigun.c\
+				Init/init_minimap.c\
+				Init/init_player.c\
+				Init/init_render.c\
+				Init/init_scale.c\
+				Init/init_sdl.c\
+				Init/init_shotgun.c\
+				Init/init_slope.c\
+				Init/init_textures.c\
+				Init/init_weapons.c\
 				Math/math1.c\
 				Math/math2.c\
 				Math/math3.c\
@@ -158,7 +158,6 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/object_collision.c\
 				CollisionDetection/slide_collision.c\
 
-
 NAME		=	doom
 CDIR		=	srcs
 ODIR		=	obj
@@ -194,9 +193,11 @@ all: $(RESOURCES) $(ODIR) $(NAME)
 
 $(ODIR):
 	@mkdir -p $@
+	@mkdir -p $@/Init
 	@mkdir -p $@/Math
 	@mkdir -p $@/Free
 	@mkdir -p $@/BuyMenu
+	@mkdir -p $@/ParseMap
 	@mkdir -p $@/EntityCoords
 	@mkdir -p $@/CollisionDetection
 	

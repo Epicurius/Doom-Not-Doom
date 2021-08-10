@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 09:23:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/10 12:15:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	game(char *map, t_settings settings)
 	doom.settings = settings;
 	init_sdl(&doom);
 	game_loading(&doom);
-	read_file(&doom, map);
+	parse_map(&doom, map);
 	if (!validate_map(&doom))
 		return ;
 	init_doom(&doom);
