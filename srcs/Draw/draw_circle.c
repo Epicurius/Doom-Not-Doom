@@ -6,18 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:41:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:31:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:40:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Blit pixels to surface if inside surface bounderies.
+ */
 static inline void	put_pixel(SDL_Surface *surface, Uint32 color, int x, int y)
 {
 	if (x > 0 && x < surface->w && y > 0 && y < surface->h)
 		((Uint32 *)surface->pixels)[y * surface->w + x] = color;
 }
 
+/*
+ *	Calucalte the pixels positions from the center.
+ */
 static inline void	circle_points(SDL_Surface *surface, Uint32 color,
 	t_point center, t_point c)
 {
@@ -31,6 +37,9 @@ static inline void	circle_points(SDL_Surface *surface, Uint32 color,
 	put_pixel(surface, color, center.x + c.x, center.y + c.y);
 }
 
+/*
+ *	Draw a circle on surface with color on position with radius.
+ */
 void	draw_circle(SDL_Surface *surface, Uint32 color,
 	t_point center, int size)
 {

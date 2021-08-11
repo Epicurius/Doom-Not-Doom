@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hud_utils.c                                        :+:      :+:    :+:   */
+/*   draw_hud_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 12:04:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:00:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw Heath icon and amount.
+ */
 void	hud_health(t_doom *doom, SDL_Rect *dstr)
 {
 	char		*str;
@@ -30,6 +33,9 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	SDL_FreeSurface(surf);
 }
 
+/*
+ *	Draw Armour icon and amount.
+ */
 void	hud_armour(t_doom *doom, SDL_Rect *dstr)
 {
 	char		*str;
@@ -48,6 +54,9 @@ void	hud_armour(t_doom *doom, SDL_Rect *dstr)
 	SDL_FreeSurface(surf);
 }
 
+/*
+ *	Draw total ammo icon and amount.
+ */
 void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 {
 	char		*str;
@@ -66,6 +75,9 @@ void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 	SDL_FreeSurface(surf);
 }
 
+/*
+ *	Draw ammo in magazine icon and amount.
+ */
 void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 {
 	char		*str;
@@ -84,6 +96,9 @@ void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 	SDL_FreeSurface(surf);
 }
 
+/*
+ *	Draw Dosh (Money) icon and amount.
+ */
 void	hud_dosh(t_doom *doom, SDL_Rect *dstr)
 {
 	char		*str;

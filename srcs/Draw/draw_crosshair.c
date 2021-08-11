@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:24:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:41:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	If player hit enemy draw diagonal crosshair in green.
+ */
 static void	draw_hit_marker(t_doom *doom)
 {
 	if (!doom->player.hm)
@@ -26,6 +29,9 @@ static void	draw_hit_marker(t_doom *doom)
 	doom->player.hm = 0;
 }
 
+/*
+ *	Draw crosshair if equiped weapon is not launcher.
+ */
 void	draw_crosshair(t_doom *doom)
 {
 	int		y;

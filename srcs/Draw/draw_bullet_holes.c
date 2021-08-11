@@ -6,25 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:52:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:37:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	put_bh_pixels(t_render *render, int coord, t_v3 text)
-{
-	Uint32			clr;
-	unsigned short	pix;
-
-	pix = render->mtx[0].pix[(int)text.y * 64 + (int)text.x];
-	clr = render->mtx[0].clr[pix];
-	if (clr == 0xFF800080)
-		return ;
-	((Uint32 *)render->surface->pixels)[coord] = clr;
-	((double *)render->surface->userdata)[coord] = text.z;
-}
-
+/*
+ *	Draw bullet hole.
+ */
 static void	vline_wall_bh(t_render *render, t_vline *vline,
 	t_wsprite bullet_hole, int x)
 {
@@ -42,11 +32,14 @@ static void	vline_wall_bh(t_render *render, t_vline *vline,
 		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
 		text.y = (alpha - pos) * bullet_hole.tscale.y + 0;
 		if (text.y >= 0 && text.y < 64)
-			put_bh_pixels(render, coord, text);
+			blit_pixel_opaque(render, coord, text, &render->mtx[0]);
 		vline->y1++;
 	}
 }
 
+/*
+ *	Calcualte scale and pos of the bullet hole.
+ */
 void	draw_wall_bh(t_render *render, t_vline *vline)
 {
 	int			i;

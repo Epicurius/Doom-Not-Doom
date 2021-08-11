@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:44:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:14:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw vertical line wall texture to window surface.
+ *	With brightness.
+ *	And check bullet hole creation.
+ */
 void	draw_wall_texture(t_render *render, t_vline *vline)
 {
 	t_v3	text;

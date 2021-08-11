@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skybox_floor_vline.c                               :+:      :+:    :+:   */
+/*   draw_skybox_floor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:46:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:08:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw skybox vertical line floor texture to window surface.
+ */
 void	skybox_floor_vline(t_render *render, t_vline vline, int tx)
 {
 	int		coord;

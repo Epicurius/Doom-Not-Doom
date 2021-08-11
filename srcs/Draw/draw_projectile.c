@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:26:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:07:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calcualte the projectile projection values.
+ */
 static void	project_projectile(t_doom *doom, t_projectile *orb,
 	t_entity_thread thread, t_entity_render *render)
 {
@@ -42,6 +45,10 @@ static void	project_projectile(t_doom *doom, t_projectile *orb,
 	render->yrange = render->end.y - render->start.y;
 }
 
+/*
+ *	Draw projectile to window surface.
+ *	TODO: Multythread.
+ */
 void	draw_projectiles(t_doom *doom)
 {
 	t_list			*curr;

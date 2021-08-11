@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_floor&ceiling.c                               :+:      :+:    :+:   */
+/*   draw_floor_and_ceiling.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:37:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:57:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calls draw floor adn/or ceiling depending if there are visible
+ *	on the current vertical line.
+ */
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 {
 	if (vline->curr.ceiling > render->ytop)

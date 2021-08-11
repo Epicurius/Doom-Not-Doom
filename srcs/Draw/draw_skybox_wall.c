@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skybox_wall_vline.c                                :+:      :+:    :+:   */
+/*   draw_skybox_wall.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:47:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:08:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw skybox vertical line wall texture to window surface.
+ */
 void	skybox_wall_vline(t_render *render, t_vline vline, int tx)
 {
 	int		coord;

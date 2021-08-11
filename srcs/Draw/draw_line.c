@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:00 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:24:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:03:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw a line to surface with color from vertice 1 to vertice 2.
+ *	Dont draw outside surface borders.
+ *	Bresehamn's algorithm.
+ */
 void	draw_line(SDL_Surface *surf, Uint32 color, t_point v1, t_point v2)
 {
 	t_point	cath;

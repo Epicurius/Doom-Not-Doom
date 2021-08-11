@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skybox_ceiling_vline.c                             :+:      :+:    :+:   */
+/*   draw_skybox_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:46:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:07:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+
+/*
+ *
+ */
 void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx)
 {
 	int		coord;

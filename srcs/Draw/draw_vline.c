@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertical_line.c                                    :+:      :+:    :+:   */
+/*   draw_vline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 15:02:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:14:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calculate the shade of white depending on the zbuffer value sfor the pixel.
+ */
 Uint32	z_clr(double z, double max_z)
 {
 	Uint32	clr;
@@ -28,6 +31,10 @@ Uint32	z_clr(double z, double max_z)
 	return (clr);
 }
 
+/*
+ *	Color the screen with shades of white depending
+ *	 on the distance from the player.
+ */
 void	shade_zbuffer(t_render *render, t_vline *vline, int side)
 {
 	int		coord;
@@ -56,6 +63,9 @@ void	shade_zbuffer(t_render *render, t_vline *vline, int side)
 	}
 }
 
+/*
+ *	Draw monochrome color neighbour wall.
+ */
 void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 {
 	int		coord;
@@ -76,6 +86,9 @@ void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 	}
 }
 
+/*
+ *	Draw monochrome color walls.
+ */
 void	vline_color_walls(t_render *render, t_vline *vline)
 {
 	int	coord;
@@ -105,6 +118,10 @@ void	vline_color_walls(t_render *render, t_vline *vline)
 	}
 }
 
+/*
+ *	Depending on the macro draw walls with white zbuffer shade
+ *	or monochome color.
+ */
 void	vline_monochromic(t_render *render, t_vline *vline, int side)
 {
 	if (ZBUFFER_COLOR)

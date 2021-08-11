@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/17 13:58:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:58:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw veretical line ceiling texture to window surface.
+ *	With brightness.
+ */
 void	draw_ceiling_texture(t_render *render, t_vline *vline)
 {
 	int		coord;

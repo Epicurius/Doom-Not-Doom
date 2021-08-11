@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:25:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:56:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check if entity is "hitable" if player shooting
+ *	and pixel is in the middle of the surface damage the entity.
+ */
 static void	hit_enemy(t_entity_thread *thread, int coord)
 {
 	if (thread->hp != NULL && thread->shooting && coord == thread->center.z)
@@ -21,6 +25,9 @@ static void	hit_enemy(t_entity_thread *thread, int coord)
 	}
 }
 
+/*
+ *	Blit entity to surface.
+ */
 void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 {
 	Uint32			clr;
@@ -45,11 +52,14 @@ void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 		hit_enemy(thread, coord);
 }
 
+/*
+ *	Mutlythread function that draws a part of the entity to windows surface.
+ */
 int	draw_entity(void *arg)
 {
+	t_point			p;
 	t_v3			text;
 	t_v2			alpha;
-	t_point			p;
 	t_entity_thread	*thread;
 
 	thread = arg;
@@ -71,6 +81,11 @@ int	draw_entity(void *arg)
 	return (1);
 }
 
+/*
+ *	Prepares the entity frame to be multy threaded.
+ *	Split the frame iono its y axis in to 5 pieces.
+ *	Add them to tpool.
+ */
 static void	entity_threads(t_doom *doom, t_entity *entity,
 	t_entity_thread *thread)
 {
@@ -99,6 +114,9 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 	}
 }
 
+/*
+ *	Draw entities if visible and not closer that 0.3
+ */
 void	draw_entities(t_doom *doom)
 {
 	t_list			*curr;

@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:42:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:17:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Weapon drawing thread function.
+ */
 int	weapon_thread(void *args)
 {
 	t_weapon_thread	*thread;
@@ -21,7 +24,10 @@ int	weapon_thread(void *args)
 	return (1);
 }
 
-static void	draw_weapon2(t_doom *doom, t_rect *srcr, t_rect *dstr)
+/*
+ *	Calcualte frame scale of the weapon.
+ */
+static void	weapon_frame_scale(t_doom *doom, t_rect *srcr, t_rect *dstr)
 {
 	t_bxpm		*bxpm;
 	t_weapon	*weapon;
@@ -42,6 +48,9 @@ static void	draw_weapon2(t_doom *doom, t_rect *srcr, t_rect *dstr)
 	srcr->h -= srcr->h % 10;
 }
 
+/*
+ *	Calculate weapon frame and create threads.
+ */
 void	draw_weapon(t_doom *doom)
 {
 	int				y;
@@ -51,7 +60,7 @@ void	draw_weapon(t_doom *doom)
 
 	if (doom->player.equiped < 0)
 		return ;
-	draw_weapon2(doom, &srcr, &dstr);
+	weapon_frame_scale(doom, &srcr, &dstr);
 	y = -1;
 	while (++y < 10)
 	{

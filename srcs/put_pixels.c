@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:44:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:35:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
  */
 void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
-	unsigned short	light;
 	unsigned short	pixel;
 
-	light = 255 + render->light;
 	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
 	if (bxpm->clr[pixel] == 0xFF800080)
 		return ;

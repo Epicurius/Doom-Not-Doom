@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 10:27:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:05:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draw neighbour wall.
+ *	The top and bot half if the neighbor floor or ceiling are higher and lower
+ *	than the current sectors floor and ceiling.
+ */
 static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 {
 	if (vline->curr_n.ceiling > vline->curr.ceiling)
@@ -38,6 +43,9 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 	}
 }
 
+/*
+ *	Calcualte the position of the neighbour wall draw window.
+ */
 void	draw_neighbor_wall(t_render *render, t_vline *vline)
 {
 	vline->max_n.ceiling = vline->clipped_alpha

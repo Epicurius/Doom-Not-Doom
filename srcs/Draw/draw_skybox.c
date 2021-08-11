@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/19 16:43:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:11:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calculate the skybox floor & ceiling.
+ *	So that there is an affect of hight compared non skybox sectors.
+ */
 static void	skybox_limits(t_render *render, t_vline *vline,
 	int side, int *limit)
 {
@@ -42,6 +46,9 @@ static void	skybox_limits(t_render *render, t_vline *vline,
 	}
 }
 
+/*
+ *	Depending on y axis draw skybox floor, wall or ceilig.
+ */
 static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 {
 	int	i;
@@ -67,6 +74,9 @@ static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 	}
 }
 
+/*
+ * Calculate skybox vertical line projection values.
+ */
 static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 {
 	t_wall	w;
@@ -93,6 +103,9 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 		- (vline->clipped_alpha * w.slope_range.ceiling + w.slope_v1.ceiling);
 }
 
+/*
+ *	Loop all of the skybox walls and if visible draw them.
+ */
 void	draw_skybox(t_render *render, t_vline *vline, int side)
 {
 	int			i;
