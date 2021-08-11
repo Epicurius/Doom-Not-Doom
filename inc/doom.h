@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:17:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:38:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -748,7 +748,7 @@ void				free_doom(t_doom *doom);
 void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
-void				free_color_palet(t_bxpm *bxpm);
+void				free_shade_palet(t_bxpm *bxpm);
 void				free_entity_pos(t_npc_bxpm *entity);
 /* File: Free/free3.c */
 void				free_sprites_pos(t_doom *doom);

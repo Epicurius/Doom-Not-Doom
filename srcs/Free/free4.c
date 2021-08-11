@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free3.c                                            :+:      :+:    :+:   */
+/*   free4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:44:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:09:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:46:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Free weapons.
+ */
 void	free_weapons(t_doom *doom)
 {
 	int	i;
@@ -31,6 +34,9 @@ void	free_weapons(t_doom *doom)
 	}
 }
 
+/*
+ *	Free all sounds.
+ */
 void	free_sounds(t_doom *doom)
 {
 	int	i;
@@ -40,6 +46,9 @@ void	free_sounds(t_doom *doom)
 		Mix_FreeChunk(doom->sound[i]);
 }
 
+/*
+ *	Free all icons aka HUD.
+ */
 void	free_icon(t_doom *doom)
 {
 	int	i;

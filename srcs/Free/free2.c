@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:56:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:39:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Free the map.
+ */
 void	free_map(t_doom *doom)
 {
 	int	i;
@@ -32,6 +35,9 @@ void	free_map(t_doom *doom)
 	ft_memdel((void *)&doom->events);
 }
 
+/*
+ *	Free non SDL render utils
+ */
 void	free_render_utils(t_doom *doom)
 {
 	free(doom->zbuffer);
@@ -39,13 +45,19 @@ void	free_render_utils(t_doom *doom)
 	free(doom->sectbool);
 }
 
+/*
+ *	Free all TTF_Fonts.
+ */
 void	free_font(t_doom *doom)
 {
 	TTF_CloseFont(doom->font.amaz50);
 	TTF_CloseFont(doom->font.digi100);
 }
 
-void	free_color_palet(t_bxpm *bxpm)
+/*
+ *	Free all BXPM shade palets.
+ */
+void	free_shade_palet(t_bxpm *bxpm)
 {
 	int	i;
 
@@ -55,20 +67,4 @@ void	free_color_palet(t_bxpm *bxpm)
 		if (bxpm->palet[i])
 			free(bxpm->palet[i]);
 	}
-}
-
-void	free_entity_pos(t_npc_bxpm *entity)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < entity->nb[i][FRAMES])
-			free(entity->pos[i][j]);
-		free(entity->pos[i]);
-	}
-	free(entity->pos);
 }

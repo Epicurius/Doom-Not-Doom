@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free2.c                                            :+:      :+:    :+:   */
+/*   free3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/17 18:40:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:45:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Free all allocated entity frame cordinates.
+ */
 void	free_sprites_pos(t_doom *doom)
 {
 	int	i;
+	int	j;
+	int	k;
 
 	i = -1;
 	while (++i < ENTITY_AMOUNT)
 	{
 		if (doom->npc_bxpm[i].pos)
-			free_entity_pos(&doom->npc_bxpm[i]);
+		{
+			k = -1;
+			while (++k < 4)
+			{
+				j = -1;
+				while (++j < doom->npc_bxpm[i].nb[k][FRAMES])
+					free(doom->npc_bxpm[i].pos[k][j]);
+				free(doom->npc_bxpm[i].pos[k]);
+			}
+			free(doom->npc_bxpm[i].pos);
+		}
 	}
 }
 
+/*
+ *	Free entities.
+ */
 void	free_entities(t_doom *doom)
 {
 	t_list	*tmp;
@@ -40,6 +58,9 @@ void	free_entities(t_doom *doom)
 	doom->entity = NULL;
 }
 
+/*
+ *	Free Rifts.
+ */
 void	free_rifts(t_doom *doom)
 {
 	t_list	*tmp;
@@ -56,6 +77,9 @@ void	free_rifts(t_doom *doom)
 	doom->rifts = NULL;
 }
 
+/*
+ *	Free Textures.
+ */
 void	free_textures(t_doom *doom)
 {
 	int	i;
@@ -65,7 +89,7 @@ void	free_textures(t_doom *doom)
 	{
 		free(doom->mtx[i].clr);
 		free(doom->mtx[i].pix);
-		free_color_palet(&doom->mtx[i]);
+		free_shade_palet(&doom->mtx[i]);
 	}
 	i = -1;
 	while (++i < SKYBOX_TEXTURE_AMOUNT)
@@ -81,6 +105,9 @@ void	free_textures(t_doom *doom)
 	}
 }
 
+/*
+ *	Free any remaining projectiles.
+ */
 void	free_projectiles(t_doom *doom)
 {
 	t_list	*curr;
