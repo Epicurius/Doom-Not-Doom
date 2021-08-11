@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:23:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:18:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	else if (event->type == HAZARD)
 	{
 		if (floor_at(&doom->sectors[event->trigger_sector],
-			doom->player.where) + 0.1 >= doom->player.where.z)
+				doom->player.where) + 0.1 >= doom->player.where.z)
 			doom->player.health -= 1;
 		event->trigger = 0;
 	}
@@ -68,7 +68,7 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 	if (event->trigger_sector == doom->player.sector || event->trigger)
 	{
 		if (event->trigger == 0)
-			event->trigger = 1;	
+			event->trigger = 1;
 		preform_sector_trigger_event(doom, event);
 	}
 }

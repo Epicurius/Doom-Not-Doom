@@ -6,15 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:15:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where, int i)
+static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
 {
-	t_v3	point;
+	t_v3	p;
 	t_wall	*wall;
 
 	while (++i < doom->sectors[motion->sector].npoints)
@@ -22,18 +22,17 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 where, int i)
 		wall = doom->sectors[motion->sector].wall[i];
 		if (wall->solid || wall->n == -1)
 			continue ;
-		point = closest_point_on_segment_v2(where, wall->v1, wall->v2);
-		if (point_distance_v2(point.x, point.y, where.x, where.y) > DIAMETER)
+		p = closest_point_on_segment_v2(pos, wall->v1, wall->v2);
+		if (point_distance_v2(p.x, p.y, pos.x, pos.y) > DIAMETER)
 			continue ;
-		if (where.z + motion->velocity.z
-			<= floor_at(&doom->sectors[wall->n], point))
+		if (pos.z + motion->velocity.z <= floor_at(&doom->sectors[wall->n], p))
 		{
 			if (motion->velocity.z < 0)
 				motion->velocity.z = 0;
 			return (1);
 		}
-		if (where.z + motion->height + motion->velocity.z
-			>= ceiling_at(&doom->sectors[wall->n], point))
+		if (pos.z + motion->velocity.z + motion->height
+			>= ceiling_at(&doom->sectors[wall->n], p))
 		{
 			motion->velocity.z = 0;
 			return (1);

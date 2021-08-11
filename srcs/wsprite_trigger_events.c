@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:29:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:16:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	move_plane(t_doom *doom, t_event *event)
 {
-	int	i;
+	int		i;
 	t_plane	*plane;
 
 	i = -1;
@@ -36,7 +36,6 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->wsprite->trigger = 0;
 	if (event->wsprite != NULL && event->wsprite->state == 2)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
-
 }
 
 static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)

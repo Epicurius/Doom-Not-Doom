@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:34:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:41:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
-//static void	sound_board(t_doom *doom)
-//{
-//	//if (!Mix_Playing(CHANNEL_TTS) && !Mix_Playing(CHANNEL_MUSIC))
-//	{
-//		//Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
-//		//Mix_Volume(CHANNEL_MUSIC, 10);
-//		//Mix_Volume(CHANNEL_WEAPON, 50);
-//	}
-//}
-
-//struct timespec start, finish;
-//double elapsed;
-
 static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
@@ -44,12 +31,7 @@ static inline void	game_loop(t_doom *doom)
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);
-//clock_gettime(CLOCK_MONOTONIC, &start);
 	movement(doom);
-//clock_gettime(CLOCK_MONOTONIC, &finish);
-//elapsed = (finish.tv_sec - start.tv_sec);
-//elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-//ft_printf("%f\n", elapsed);
 	poll_event(doom);
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
@@ -64,7 +46,6 @@ static inline void	game_loop(t_doom *doom)
 	game_quit(doom);
 }
 
-//	Crouch in small area and standup for insta death? Maybe fix?
 static void	game(char *map, t_settings settings)
 {
 	t_doom		doom;

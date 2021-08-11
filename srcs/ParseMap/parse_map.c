@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:57:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:10:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	parse_player(t_doom *doom, char **arr)
 {
-	t_player	*player;
-
-	player = &doom->player;
-	player->where.x = ft_atof(arr[1]) * doom->map_scale;
-	player->where.y = ft_atof(arr[2]) * doom->map_scale;
-	player->where.z = ft_atof(arr[3]) * doom->map_scale;
-	player->yaw = ft_atoi(arr[4]);
+	doom->player.where.x = ft_atof(arr[1]) * doom->map_scale;
+	doom->player.where.y = ft_atof(arr[2]) * doom->map_scale;
+	doom->player.where.z = ft_atof(arr[3]) * doom->map_scale;
+	doom->player.yaw = ft_atoi(arr[4]);
 }
 
 void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))

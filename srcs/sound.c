@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:05:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:17:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	init_sound(t_doom *doom)
 			free(doom->events[i].path);
 		}
 	}
-	//Mix_Volume(-1, 0);
 }
