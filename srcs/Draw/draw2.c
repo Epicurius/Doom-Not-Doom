@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:57:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:35:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Depending on what is in the vertical line send it to the correct function.
+ */
 static t_vline	draw_vline(t_render *render)
 {
 	t_vline	vline;
@@ -38,6 +41,9 @@ static t_vline	draw_vline(t_render *render)
 	return (vline);
 }
 
+/*
+ *	Init render thread.
+ */
 static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 {
 	t_wall	*wall;
@@ -53,6 +59,13 @@ static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 	return (draw_vline(render));
 }
 
+/*
+ *	Loops through all the walls in the sector until it finds the visible one.
+ *	Then draws the wall, floor, ceiling, wall sprites, bullet holes.
+ *	If wall not solid recall render_vline with neighbour sector untill it is.
+ *	Then loop back and check for each wall if it has a portal texture.
+ *	If it has draw it.
+ */
 static int	render_vline(t_render render, int sector)
 {
 	int			s;
@@ -79,6 +92,10 @@ static int	render_vline(t_render render, int sector)
 	return (1);
 }
 
+/*
+ *	Loop through vertical line and for each finds there sector.
+ *	Then passes the vertical line to render_vline.
+ */
 static int	loop_screen_sector(void	*arg)
 {
 	t_render	*render;
@@ -106,6 +123,9 @@ static int	loop_screen_sector(void	*arg)
 	return (1);
 }
 
+/*
+ *	Splits the surface in thread amount of pieces and adds the to tpool.
+ */
 void	draw_screen(t_doom *doom)
 {
 	int	x;

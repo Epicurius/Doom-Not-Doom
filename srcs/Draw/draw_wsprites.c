@@ -6,41 +6,38 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:39:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 12:24:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	blit_wsprite24(t_render *render, int coord, t_v3 text,
-	t_bxpm *bxpm)
+/*
+ *	Blit wall sprite depending on if it has alpha or not.
+ */
+static void	blit_wsprite(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 {
 	Uint32			clr;
 	unsigned short	pix;
 
 	pix = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
 	clr = bxpm->clr[pix];
-	if (clr == 0xFF800080)
+	if (bxpm->bpp == 32)
+	{
+		if (0 == (clr >> 24 & 0xFF))
+			return ;
+		clr = blend_alpha(((Uint32 *)render->surface->pixels)[coord], clr,
+				clr >> 24 & 0xFF);
+	}
+	else if (clr == 0xFF800080)
 		return ;
 	((Uint32 *)render->surface->pixels)[coord] = clr;
 	((double *)render->surface->userdata)[coord] = text.z;
 }
 
-static void	blit_wsprite32(t_render *render, int coord, t_v3 text,
-	t_bxpm *bxpm)
-{
-	Uint32			clr;
-	unsigned short	pix;
-
-	pix = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
-	clr = bxpm->clr[pix];
-	if (0 == (clr >> 24 & 0xFF))
-		return ;
-	((Uint32 *)render->surface->pixels)[coord]
-		= blend_alpha(clr, ((Uint32 *)render->surface->pixels)[coord], 240);
-	((double *)render->surface->userdata)[coord] = text.z;
-}
-
+/*
+ *	Draw vertical line wall sprite to window surface.
+ */
 static void	vline_wsprite(t_render *render, t_vline *vline,
 	t_wsprite *wsprite, int x)
 {
@@ -62,15 +59,15 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 			if (wsprite->trigger == 0 && render->center.z == coord
 				&& render->player.action == wsprite->action)
 				wsprite->trigger = 1;
-			if (render->mtx[wsprite->tx].bpp == 32)
-				blit_wsprite32(render, coord, text, &render->mtx[wsprite->tx]);
-			else
-				blit_wsprite24(render, coord, text, &render->mtx[wsprite->tx]);
+			blit_wsprite(render, coord, text, &render->mtx[wsprite->tx]);
 		}
 		vline->y1++;
 	}
 }
 
+/*
+ *	Draw wall sprite.
+ */
 void	draw_wsprites(t_render *render, t_vline *vline)
 {
 	int			i;
