@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:24:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:53:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Draws the player view fustrum edges on the minimap.
+ */
 static void	map_player(t_doom *doom)
 {
 	t_map		map;
@@ -36,6 +39,9 @@ static void	map_player(t_doom *doom)
 	draw_line(doom->surface, MM_VIEW_COLOR, p[0], p[1]);
 }
 
+/*
+ *	Draws the wall.
+ */
 static void	draw_map2(t_doom *doom, t_wall *wall)
 {
 	t_v3		where;
@@ -55,6 +61,9 @@ static void	draw_map2(t_doom *doom, t_wall *wall)
 	}
 }
 
+/*
+ *	Loop that draws the all the walls.
+ */
 static void	draw_map(t_doom *doom)
 {
 	int			s;
@@ -75,6 +84,9 @@ static void	draw_map(t_doom *doom)
 	}
 }
 
+/*
+ *	Draw the minimap border aswell as shading the minimap area.
+ */
 static void	map_area(t_doom *doom)
 {
 	int		x;
@@ -103,6 +115,10 @@ static void	map_area(t_doom *doom)
 	}
 }
 
+/*
+ *	Main minimap draw function.
+ *	If Tab is pressed draw minimap.
+ */
 void	map(t_doom *doom)
 {
 	if (doom->keys[KEY_TAB])

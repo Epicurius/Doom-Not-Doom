@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:02 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 08:12:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:56:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Returns the frame to be rendered,
+ *	depending on the angle of the entity to the player.
+ */
 int	orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles)
 {
 	int		i;

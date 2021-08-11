@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:22:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:43:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Checks the entity's view cone if the the player is present.
+ */
 static int	entity_see(t_doom *doom, t_entity *entity)
 {
 	t_v3	far_left;
@@ -34,6 +37,9 @@ static int	entity_see(t_doom *doom, t_entity *entity)
 	return (0);
 }
 
+/*
+ *	Checks it the line of sight ray reaches the player.
+ */
 int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
 {
 	int		i;
@@ -61,6 +67,9 @@ int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
 	return (0);
 }
 
+/*
+ *	Checks the entity sees the player.
+ */
 static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 {
 	if (dist > g_entity_data[entity->type].view_distance)
@@ -77,6 +86,12 @@ static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
 	return (0);
 }
 
+/*
+ *	Gets the state of the entity.
+ *	If the entity sees the player and danger try to dodge,
+ *	else move into range and preform attack.
+ *	If none are true state -> IDLE.
+ */
 void	get_entity_state2(t_doom *doom, t_entity *entity)
 {
 	double	dist;
@@ -105,6 +120,13 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 	}
 }
 
+/*
+ *	Gets the state of the entity.
+ *	If not hp -> DEATH.
+ *	Is the not in the players active area -> IDLE.
+ *	(To not calculate every entity on the map).
+ *	If player is hovering over the entity give it danger flag.
+ */
 void	get_entity_state(t_doom *doom, t_entity *entity)
 {
 	if (entity->hp <= 0 && entity->state != DEATH)

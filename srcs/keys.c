@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 15:34:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:47:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check all the keyboard events that have happened and save the to doom->keys
+ *	Check all mouse button events and save them.
+ */
 static void	get_events(t_doom *doom, char *key)
 {
 	SDL_Event	event;
@@ -32,6 +36,12 @@ static void	get_events(t_doom *doom, char *key)
 	}	
 }
 
+/*
+ *	After checking all the events with get_events.
+ *	Check if mute or unmute.
+ *	Check if tp player to center of sector. (Useful if stuck)
+ *	Set player action to clicking.
+ */
 void	poll_event(t_doom *doom)
 {
 	char	*key;

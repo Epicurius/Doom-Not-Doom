@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 13:49:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:49:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Handles the mallocing of the entity state frame position array. (t_rect)
+ *	Acording to the amount of frame for each action aswell as angles.
+ */
 static int	malloc_state_frames_and_angles(t_npc_bxpm *entity, int state)
 {
 	int	i;
@@ -33,6 +37,10 @@ static int	malloc_state_frames_and_angles(t_npc_bxpm *entity, int state)
 	return (1);
 }
 
+/*
+ *	Handles the mallocing of the entity state array. (t_rect)
+ *	IDLE, MOVE, ATTACK, DEATH.
+ */
 void	malloc_texture_pos(t_npc_bxpm *entity)
 {
 	entity->pos = (t_rect ***)protalloc(sizeof(t_rect **) * 4,

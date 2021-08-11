@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 14:31:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:50:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Hanfle loop events, atm only Floot and Ceiling can be loop events.
+ */
 static void	loop_events(t_doom *doom, t_event *event)
 {
 	int		i;
@@ -37,6 +40,9 @@ static void	loop_events(t_doom *doom, t_event *event)
 	}
 }
 
+/*
+ *	Checks the type of map event.
+ */
 void	map_events(t_doom *doom)
 {
 	int	i;

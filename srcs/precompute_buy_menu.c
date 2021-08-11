@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:34:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 17:14:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:57:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Precomputes the BuyMenu.
+ *	Chenges music, releases the mouse and afterward flushes the events.
+ */
 void	precompute_buy_menu(t_doom *doom)
 {
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);

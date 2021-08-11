@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 14:42:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:10:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:43:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Print help message to standard output.
+ */
 void	print_help_msg(void)
 {
 	ft_printf("{CLR:41}------------------------------"
