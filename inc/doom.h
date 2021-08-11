@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:42:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:17:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -508,8 +508,8 @@ SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
 int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
-void				color_palet(t_bxpm *bxpm, int light);
-void				color_palets(t_doom *doom);
+void				shade_palet(t_bxpm *bxpm, int light);
+void				shade_palets(t_doom *doom);
 /* File: compute_vline.c */
 void				compute_vline_data(t_render *render, t_wall wall,
 						t_vline *vline);

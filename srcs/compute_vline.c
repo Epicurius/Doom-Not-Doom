@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/28 15:24:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:20:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calculates the vertical line dimensions for drawing.
+ */
 void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 {
 	vline->alpha = (render->x - wall.x1) / wall.xrange;
@@ -33,6 +36,9 @@ void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
 	vline->line_height = vline->real_floor - vline->real_ceiling;
 }
 
+/*
+ *	Calculates vertical line texture position.
+ */
 void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
 {
 	t_v2	camera_z;

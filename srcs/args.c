@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 14:01:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:02:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check if the argument is window size(int,int)
+ *	or mouse sensitivity(float,float).
+ */
 static void	read_args2(t_settings *init, char **av, int i)
 {
 	char	**arr;
@@ -30,6 +34,10 @@ static void	read_args2(t_settings *init, char **av, int i)
 	}
 }
 
+/*
+ *	Check is the argument is debug(bool), launcher(bool),
+ *	render reslution(float), game difficulty(int) or FOV(int).	
+ */
 static int	read_args1(t_settings *init, char **av, int i)
 {
 	if (ft_strequ(av[i], "-debug"))
@@ -47,6 +55,10 @@ static int	read_args1(t_settings *init, char **av, int i)
 	return (1);
 }
 
+/*
+ *	Give settings there presets, and changes them depending
+ *	on the give arguments.
+ */
 void	args(int ac, char **av, t_settings *init)
 {
 	int	i;

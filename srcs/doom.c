@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:41:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:47:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Launch the DnD launcher if flag -launcher was passed.
+ */
 static void	launcher(void)
 {
 	char	*arr[2];
@@ -21,6 +24,9 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
+/*
+ *	Main game loop that handles all of the games elements.
+ */
 static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
@@ -46,6 +52,9 @@ static inline void	game_loop(t_doom *doom)
 	game_quit(doom);
 }
 
+/*
+ *	Gets everything ready.
+ */
 static void	game(char *map, t_settings settings)
 {
 	t_doom		doom;

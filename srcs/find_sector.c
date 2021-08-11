@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/09 15:40:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:28:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Checks it pos(x,y,z) is in given sector.
+ *	For this to work all walls have to be in order.
+ */
 int	in_sector(t_sector *sector, t_v3 pos)
 {
 	int		i;
@@ -27,6 +31,10 @@ int	in_sector(t_sector *sector, t_v3 pos)
 	return (1);
 }
 
+/*
+ *	Loops thru all sectors and checks if pos(x,y,z) is in it.
+ *	Returns pos sector or -1 if pos is none of the sectors.
+ */
 int	find_sector(t_sector *sectors, int nb, t_v3 pos)
 {
 	int	i;
@@ -40,6 +48,10 @@ int	find_sector(t_sector *sectors, int nb, t_v3 pos)
 	return (-1);
 }
 
+/*
+ *	Checks it pos(x,y) is in given sector.
+ *	For this to work all walls have to be in order.
+ */
 int	in_sector_area(t_sector *sector, t_v3 pos)
 {
 	int		i;
@@ -53,6 +65,10 @@ int	in_sector_area(t_sector *sector, t_v3 pos)
 	return (1);
 }
 
+/*
+ *	Loops thru all sectors and checks if pos(x,y) is in it.
+ *	Returns pos sector or -1 if pos is none of the sectors.
+ */
 int	find_sector_no_z(t_sector *sectors, int nb, t_v3 pos)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:51:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:17:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,5 @@ void	init_textures(t_doom *doom)
 	parse_bxpm(doom, LAUNCHER_TEXTURE_AMOUNT,
 		doom->weapon[4].bxpm, g_launcher_textures);
 	init_clock(doom, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
-	color_palets(doom);
+	shade_palets(doom);
 }

@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:31:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:53:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Function calculates projectile direction and velocity towards the player.
+ */
 static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 {
 	t_v3	move;
@@ -31,6 +34,9 @@ static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 	return (move);
 }
 
+/*
+ *	Function spawns and inits projectile.
+ */
 static void	spaw_projectile(t_doom *doom, t_entity *entity)
 {
 	t_projectile	*orb;
@@ -50,6 +56,9 @@ static void	spaw_projectile(t_doom *doom, t_entity *entity)
 	Mix_PlayChannel(CHANNEL_EXPLOSION, doom->sound[WAV_ORB], 0);
 }
 
+/*
+ *	Function handles the entity attack state.
+ */
 void	ai_attack(t_doom *doom, t_entity *entity)
 {
 	entity->yaw = angle_to_point_v2(entity->where, doom->player.where);

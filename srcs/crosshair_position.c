@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 13:55:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:22:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	debug(t_render *render, t_wall *wall)
 		render->player.where.y, render->player.where.z);
 }
 
+/*
+ *	Checks it the crosshair(center of the surface) is the pixel beeing drawn.
+ *	And player is shooting it is saves the position for the bullet hole.
+ *	So the next draw loop can draw it.
+ *	Works atm only on walls.
+ */
 void	crosshair_position(t_render *render, t_vline *vline,
 			double alpha, int coord)
 {

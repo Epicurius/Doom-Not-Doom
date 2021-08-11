@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 11:33:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:26:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Removes any MedKits left over from prevoius round.
+ */
 static void	remove_med_kits(t_doom *doom)
 {
 	t_list		*curr;
@@ -29,6 +32,9 @@ static void	remove_med_kits(t_doom *doom)
 	}
 }
 
+/*
+ *	Checks and handels round end or start.
+ */
 int	endless_round(t_doom *doom)
 {
 	if (doom->game.spawns == 0)
@@ -49,7 +55,10 @@ int	endless_round(t_doom *doom)
 	return (0);
 }
 
-//		ft_printf("%f\n", doom->game.cool_down);
+/*
+ *	Handels the endless game mode.
+ *	Spawning enemies and giving store access to the player.
+ */
 void	game_mode_endless(t_doom *doom)
 {
 	int	i;
@@ -77,6 +86,9 @@ void	game_mode_endless(t_doom *doom)
 	}
 }
 
+/*
+ *	Small function, made for handling future game modes.
+ */
 void	game_mode(t_doom *doom)
 {
 	if (doom->game.mode == ENDLESS)

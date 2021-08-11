@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:59:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:08:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Inits the camera, FOV, view fustrum and view scale.
+ */
 void	init_camera(t_doom *doom)
 {
 	t_camera	*cam;
@@ -31,6 +34,9 @@ void	init_camera(t_doom *doom)
 	update_camera(doom);
 }
 
+/*
+ *	Updates camera yaw, pitch according to mouse movement.
+ */
 void	update_camera(t_doom *doom)
 {
 	int	x;

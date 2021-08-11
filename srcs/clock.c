@@ -6,17 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:58:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:13:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Get current local time on your PC.
+ */
 static void	get_time(time_t *t)
 {
 	*t = time(NULL);
 }
 
+/*
+ *	Simple pixel copy from SDL_Surface fo BXPM. 
+ *	(Clock has only 2 colors black and white which makes this a lot faster)
+ */
 static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
 {
 	int	i;
@@ -31,6 +38,9 @@ static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
 	}
 }
 
+/*
+ *	Inits clock wall sprite.
+ */
 void	init_clock(t_doom *doom, t_bxpm *bxpm)
 {
 	time_t		t;
@@ -60,6 +70,10 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	free(str);
 }
 
+/*
+ *	Handles the updating of the clock bxpm.
+ *	Only if the time has changed (second).
+ */
 int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 {
 	char		*str;

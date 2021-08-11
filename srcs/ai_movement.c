@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 08:57:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calculates the velocity for the entity to move towards the player.
+ */
 int	ai_track_player(t_doom *doom, t_entity *entity)
 {
 	double	speed;
@@ -26,6 +29,9 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 	return (1);
 }
 
+/*
+ *	Calulates if the entity can random move, and give it x,y velocity.
+ */
 int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 {
 	double	a;
@@ -41,6 +47,9 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 	return (1);
 }
 
+/*
+ *	Calclates if the entity can dodge at what angle and gives it velocity.
+ */
 int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 {
 	double	a;
@@ -60,6 +69,9 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	return (1);
 }
 
+/*
+ *	Checks the collision of the entity to its destination, and rotates it.
+ */
 void	ai_collision(t_doom *doom, t_entity *entity)
 {
 	t_motion	motion;

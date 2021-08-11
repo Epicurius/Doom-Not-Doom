@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 11:05:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:30:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Updates the delta and current time.
+ *	And updates the window title FPS.
+ */
 void	fps_func(t_doom *doom)
 {
 	t_time		*time;
@@ -33,6 +37,9 @@ void	fps_func(t_doom *doom)
 	}
 }
 
+/*
+ *	Inits the values for FPS.
+ */
 void	init_fps(t_doom *doom)
 {
 	doom->time.fps = 0;

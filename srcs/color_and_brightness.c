@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:00:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:18:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Converts Hexadeciaml color to SDL_Color (aka ARGB).
+ */
 SDL_Color	hex_to_sdl_color(int hex)
 {
 	SDL_Color	color;
@@ -24,9 +27,9 @@ SDL_Color	hex_to_sdl_color(int hex)
 }
 
 /*
-** Darkens or brightens a color 
-** -x darker, 0 nothing, +x lighter obvs -255 to 255
-*/
+ * Darkens or brightens a color 
+ * -x darker, 0 nothing, +x lighter obvs -255 to 255
+ */
 Uint32	brightness(Uint32 src, int light)
 {
 	if (light == 0)
@@ -38,8 +41,8 @@ Uint32	brightness(Uint32 src, int light)
 }
 
 /*
-** Blends a src color with an alpha 0 - 255
-*/
+ * Blends a src color with an alpha 0 - 255
+ */
 int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 {
 	int	a;
@@ -51,7 +54,11 @@ int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 		| ((a * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
 }
 
-void	color_palet(t_bxpm *bxpm, int light)
+/*
+ *	Creates a separete palet of the BXPM image with the light shade.
+ *	Saves it to bxpm->palet[light from -255 -> 255].
+ */
+void	shade_palet(t_bxpm *bxpm, int light)
 {
 	int	i;
 
@@ -70,7 +77,12 @@ void	color_palet(t_bxpm *bxpm, int light)
 	}
 }
 
-void	color_palets(t_doom *doom)
+
+/*
+ *	Check all the sectors light levels and textures, if a textures does not
+ *	have the light palet then it creates one.
+ */
+void	shade_palets(t_doom *doom)
 {
 	int			s;
 	int			w;
@@ -84,11 +96,11 @@ void	color_palets(t_doom *doom)
 		while (++w < doom->sectors[s].npoints)
 		{
 			if (sector->wall[w]->wtx >= 0)
-				color_palet(&doom->mtx[sector->wall[w]->wtx], sector->light);
+				shade_palet(&doom->mtx[sector->wall[w]->wtx], sector->light);
 		}
 		if (sector->ceiling.tx >= 0)
-			color_palet(&doom->mtx[sector->floor.tx], sector->light);
+			shade_palet(&doom->mtx[sector->floor.tx], sector->light);
 		if (sector->ceiling.tx >= 0)
-			color_palet(&doom->mtx[sector->ceiling.tx], sector->light);
+			shade_palet(&doom->mtx[sector->ceiling.tx], sector->light);
 	}
 }

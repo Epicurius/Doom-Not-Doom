@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:34:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 09:06:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	SDL_BliySurface but fomr BXPM.
+ *	Copies	the BXPM to surface 1:1.
+ */
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
 	t_point	p;
@@ -31,6 +35,9 @@ void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 	}
 }
 
+/*
+ *	Copy pixel if its alpha is not 0.
+ */
 static void	copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
 	Uint32	clr;
@@ -40,6 +47,9 @@ static void	copy_pixel(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 		((Uint32 *)dst->pixels)[dstr.y2 * dst->w + dstr.x2] = clr;
 }
 
+/*
+ *	Copies the y column.
+ */
 static void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 {
 	int	inc;
@@ -63,6 +73,11 @@ static void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 	}
 }
 
+/*
+ *	SDL_BlitScaled but for BXPM.
+ *	Blits the part from BXPM to part of the surface.
+ *	Copies the x row.
+ */
 void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 			t_bxpm *src, t_rect srcr)
 {
