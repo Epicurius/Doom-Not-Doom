@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 09:44:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:05:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Find sector for each entity.
+ */
 int	check_entities(t_doom *doom)
 {
 	t_list		*curr;
@@ -33,6 +36,9 @@ int	check_entities(t_doom *doom)
 	return (1);
 }
 
+/*
+ *	Find player sector.
+ */
 int	check_player(t_doom *doom)
 {
 	doom->player.sector = find_sector(doom->sectors,
@@ -45,6 +51,13 @@ int	check_player(t_doom *doom)
 	return (1);
 }
 
+/*
+ *	For each sector:
+ *	Calcualte sector center.
+ *	Fix wall orientation to be clockwise.
+ *	Fix wall order, if not possible error.
+ *	If sector convex, else error.
+ */
 int	check_map(t_doom *doom)
 {
 	int	i;
@@ -62,6 +75,10 @@ int	check_map(t_doom *doom)
 	return (1);
 }
 
+/*
+ *	Main validation function.
+ *	Checks if map is valid else free.
+ */
 int	validate_map(t_doom *doom)
 {
 	if (check_map(doom)

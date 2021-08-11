@@ -6,13 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:48:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:07:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		Find sector centroid
+/*
+ *	Find sector centroid.
+ */
 void	sector_center(t_sector *sector)
 {
 	int		i;
@@ -34,6 +36,9 @@ void	sector_center(t_sector *sector)
 	sector->center.z = floor_at(sector, sector->center);
 }
 
+/*
+ *	Fixes wall so wall vertices are clockwise.
+ */
 void	fix_wall_orientation(t_sector *sector)
 {
 	int		i;
@@ -52,6 +57,9 @@ void	fix_wall_orientation(t_sector *sector)
 	}
 }
 
+/*
+ *	Fixes wall order so each wall has its left and right wall next to it.
+ */
 static int	fix_wall_order2(t_sector *sector, int i, t_v3 v2)
 {
 	int		j;
@@ -94,6 +102,9 @@ int	fix_wall_order(t_sector *sector)
 	return (1);
 }
 
+/*
+ *	Checks if sector is convex.
+ */
 int	is_convex(t_sector *sector)
 {
 	int		i;

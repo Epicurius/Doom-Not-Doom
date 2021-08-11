@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:10:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:01:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Parse player pos and yaw.
+ */
 void	parse_player(t_doom *doom, char **arr)
 {
 	doom->player.where.x = ft_atof(arr[1]) * doom->map_scale;
@@ -20,6 +23,9 @@ void	parse_player(t_doom *doom, char **arr)
 	doom->player.yaw = ft_atoi(arr[4]);
 }
 
+/*
+ *	Read a line and split it with '\t' and pass the array to function.
+ */
 void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 {
 	char	*line;
@@ -38,6 +44,9 @@ void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 	free(line);
 }
 
+/*
+ *	Check what type will be read.
+ */
 static void	read_type(t_doom *doom, int fd, char *line)
 {
 	if (ft_strnequ(line, "type:map", 8))
@@ -60,6 +69,9 @@ static void	read_type(t_doom *doom, int fd, char *line)
 		read_line(doom, fd, parse_events);
 }
 
+/*
+ *	Read map and save.
+ */
 int	parse_map(t_doom *doom, char *file_name)
 {
 	int		fd;
