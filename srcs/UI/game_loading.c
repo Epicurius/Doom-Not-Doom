@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:18:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 13:27:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:10:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Creates the loading screen.
+ *	Loads loading.bxpm and blits it to surface.
+ *	Raises Window so that the loading is visible.
+ */
 void	game_loading(t_doom *doom)
 {
 	SDL_Event	event;

@@ -6,15 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:07:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:23:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-
 /*
- *
+ *	Draw skybox vertical line ceiling texture to window surface.
  */
 void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx)
 {

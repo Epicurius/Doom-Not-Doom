@@ -6,18 +6,21 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 08:34:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:17:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Creates a BMP of the game over screen and save it in ./ScreenShots/.
+ */
 static void	print_score(t_doom *doom, int *i)
 {
 	char	*name;
 	t_bmp	*bmp;
 
-	name = ft_sprintf("%s/DoomScore%d%d%d.bmp", GAME_PATH,
+	name = ft_sprintf("%s/ScreenShots/DoomScore%d%d%d.bmp", GAME_PATH,
 			doom->time.date.tm_mon + 1, doom->time.date.tm_mday,
 			doom->time.date.tm_min);
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
@@ -30,6 +33,9 @@ static void	print_score(t_doom *doom, int *i)
 	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 }
 
+/*
+ *	Blits game_over.bxmp to screen.
+ */
 static void	blit_game_over(t_doom *doom)
 {
 	t_bxpm	*bxpm;
@@ -41,6 +47,10 @@ static void	blit_game_over(t_doom *doom)
 	free_bxpm(bxpm);
 }
 
+/*
+ *	Draws the game stats: Rounds Survived and Enemies Killed.
+ *	TODO: Find a better colour for "Press Enter..."
+ */
 static void	blit_game_stats(t_doom *doom, char *str)
 {
 	SDL_Rect	dstr;
@@ -70,6 +80,9 @@ static void	blit_game_stats(t_doom *doom, char *str)
 	SDL_FreeSurface(surface);
 }
 
+/*
+ *	Blit "'P' to Save Screen Shot" to surface.
+ */
 static void	blit_screen_shot(t_doom *doom)
 {
 	SDL_Rect	dstr;
@@ -86,6 +99,9 @@ static void	blit_screen_shot(t_doom *doom)
 	TTF_CloseFont(amaz);
 }
 
+/*
+ *	Draws game over screen and handels events for exiting and screen shots.
+ */
 void	game_over(t_doom *doom)
 {
 	SDL_Event	event;

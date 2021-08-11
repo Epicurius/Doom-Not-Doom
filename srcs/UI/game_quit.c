@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:04:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:20:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Blits Y/N to surface.
+ */
 static void	y_or_n(t_doom *doom, int y)
 {
 	SDL_Rect	dstr;
@@ -24,6 +27,9 @@ static void	y_or_n(t_doom *doom, int y)
 	SDL_FreeSurface(surface);
 }
 
+/*
+ *	Quit? loop wait for player to press y, n, esc or q.
+ */
 static void	quit_loop(t_doom *doom)
 {
 	SDL_Event	event;
@@ -42,6 +48,9 @@ static void	quit_loop(t_doom *doom)
 	}
 }
 
+/*
+ *	Draws Quit? screen aswell as handling events.
+ */
 void	game_quit(t_doom *doom)
 {
 	t_bxpm	*bxpm;

@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 14:04:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:19:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Creates a BMP of the game and save it in ./ScreenShots/.
+ *	NOTE: All pause menu text will not be writen to screen shot.
+ */
 static void	s_to_save_screen_shot(t_doom *doom)
 {
 	SDL_Rect	dstr;
@@ -28,6 +32,9 @@ static void	s_to_save_screen_shot(t_doom *doom)
 	TTF_CloseFont(amaz);
 }
 
+/*
+ *	Pause loop waits for player to unpause, screen shot or exit.
+ */
 static void	pause_loop(t_doom *doom, t_bmp *bmp)
 {
 	int			i;
@@ -57,6 +64,9 @@ static void	pause_loop(t_doom *doom, t_bmp *bmp)
 	}
 }
 
+/*
+ *	Blits "'P' to unpause" to surface.
+ */
 static void	p_to_unpause(t_doom *doom, int y)
 {
 	SDL_Rect	dstr;
@@ -69,6 +79,9 @@ static void	p_to_unpause(t_doom *doom, int y)
 	SDL_FreeSurface(surface);
 }
 
+/*
+ *	Draws Pause screen aswell as handling events.
+ */
 void	game_pause(t_doom *doom)
 {
 	t_bxpm		*bxpm;

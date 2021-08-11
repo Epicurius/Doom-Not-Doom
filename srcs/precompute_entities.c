@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:10:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:30:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ static void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 		return ;
 	if (entity->state != MOVE)
 		entity->velocity = new_v3(0, 0, entity->velocity.z);
-	//if (!g_entity_data[entity->type].flight)
-	//{
-	//	if (entity->where.z > floor_at(&doom->sectors[entity->sector],
-	//			entity->where))
-	//		entity->velocity.z -= doom->sectors[entity->sector].gravity;
-	//}
 	ai_collision(doom, entity);
 	if (entity->state == ATTACK)
 		ai_attack(doom, entity);

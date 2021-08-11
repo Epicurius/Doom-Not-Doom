@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:26:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:28:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ void	equip_weapon(t_doom *doom)
 
 /*
  *	Handels all the player weapon calulations.
+ *	TODO: "move doom->player.action = NONE" some where else
+ *	makes not sense or int to be here.
  */
 void	precompute_weapon(t_doom *doom)
 {
 	t_weapon	*weapon;
 
-	doom->player.action = NONE;// move doom->player.action = NONE;
+	doom->player.action = NONE;
 	equip_weapon(doom);
 	if (doom->player.equiped < 0)
 		return ;

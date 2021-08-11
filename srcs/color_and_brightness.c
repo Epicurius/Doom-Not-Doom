@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:18:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:30:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	shade_palet(t_bxpm *bxpm, int light)
 		bxpm->palet[255 + light][i] = brightness(bxpm->clr[i], light);
 	}
 }
-
 
 /*
  *	Check all the sectors light levels and textures, if a textures does not

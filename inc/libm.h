@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 16:40:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:31:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include "libpf.h"
+
 # define CONVERT_TO_RADIANS	0.0174532925199432955
 # define CONVERT_TO_DEGREES	57.295779513082322864
 
