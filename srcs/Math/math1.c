@@ -6,13 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:39:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/08 08:42:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:00:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
-//	Make a new t_point struct and assign values
+/*
+ *	Create a new t_point struct and assign values
+ */
 t_point	new_point(int x, int y)
 {
 	t_point	new;
@@ -22,7 +24,9 @@ t_point	new_point(int x, int y)
 	return (new);
 }
 
-//	Make a new t_v2 struct and assign values
+/*
+ *	Create a new t_v2 struct and assign values
+ */
 t_v2	new_v2(double x, double y)
 {
 	t_v2	new;
@@ -32,7 +36,9 @@ t_v2	new_v2(double x, double y)
 	return (new);
 }
 
-//	Make a new t_v3 struct and assign values
+/*
+ *	Create a new t_v3 struct and assign values
+ */
 t_v3	new_v3(double x, double y, double z)
 {
 	t_v3	new;
@@ -43,7 +49,9 @@ t_v3	new_v3(double x, double y, double z)
 	return (new);
 }
 
-//		Make new t_rect struct for texture sheets
+/*
+ *	Create a new t_rect struct with x1, y1, x2, y2
+ */
 t_rect	rect_xy2(int x1, int y1, int x2, int y2)
 {
 	t_rect	new;
@@ -58,6 +66,9 @@ t_rect	rect_xy2(int x1, int y1, int x2, int y2)
 	return (new);
 }
 
+/*
+ *	Create a new t_rect struct with x, y, width, height
+ */
 t_rect	rect_xywh(int x1, int y1, int w, int h)
 {
 	t_rect	new;

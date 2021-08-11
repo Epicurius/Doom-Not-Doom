@@ -6,37 +6,47 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:16 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:04:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
-//		Length of a vector 2D
+/*
+ *	Length of a vector 2D
+ */
 double	vector_magnitude_v2(t_v3 v)
 {
 	return (sqrt((v.x * v.y) + (v.x * v.y)));
 }
 
-//		Length of a vector 3D
+/*
+ *	Length of a vector 3D
+ */
 double	vector_magnitude_v3(t_v3 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-//		Space Diagonal
+/*
+ *	Space Diagonal
+ */
 double	pythagoras(double x, double y)
 {
 	return (sqrt(x * x + y * y));
 }
 
-//		Space Diagonal/Pythagoras
+/*
+ *	Space Diagonal/Pythagoras
+ */
 double	space_diagonal(t_v3 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-//		Get normal
+/*
+ *	Get normal
+ */
 t_v3	normalize(t_v3 vec)
 {
 	float	length;

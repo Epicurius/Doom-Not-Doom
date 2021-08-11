@@ -6,13 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 09:35:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:04:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
-//	Checks if line intersects
+/*
+ *	Checks if line intersects
+ */
 int	intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 {
 	int	p1_dir;
@@ -26,7 +28,9 @@ int	intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 	return (0);
 }
 
-//	Distance between 2 3d points
+/*
+ *	Distance between 2 3d points
+ */
 double	point_distance_v3(t_v3 p1, t_v3 p2)
 {
 	t_v3	square;
@@ -37,7 +41,9 @@ double	point_distance_v3(t_v3 p1, t_v3 p2)
 	return (sqrt(square.x + square.y + square.z));
 }
 
-//	Closest point on a segment to a external point
+/*
+ *	Closest point on a segment to a external point
+ */
 t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 {
 	float	l;
@@ -58,7 +64,9 @@ t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 	return (point);
 }
 
-//	Is point on segment, optional buffer;
+/*
+ *	Is point on segment, optional buffer;
+ */
 int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
 {
 	double	pv1;
@@ -73,7 +81,9 @@ int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, double buffer)
 	return (0);
 }
 
-//	Calculate point of intersection between 2 lines.
+/*
+ *	Calculate point of intersection between 2 lines.
+ */
 t_v3	get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
 {
 	t_v3	point;

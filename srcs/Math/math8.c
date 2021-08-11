@@ -6,13 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 15:27:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:07:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
-/*	Cohen Sutherland clipping line in rectangle algorithm */
+/*
+ *	Cohen Sutherland clipping line in rectangle algorithm
+ */
 static unsigned int	compute_outcode(int x, int y, t_rect size)
 {
 	unsigned int	i;
