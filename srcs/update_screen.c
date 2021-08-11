@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 16:16:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 15:27:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:54:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Update window with new frame.
+ *	surface -> texture -> renderer -> window.
+ */
 void	update_screen(t_doom *doom)
 {
 	if (SDL_UpdateTexture(doom->texture, NULL,

@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:18:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:50:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Move plane up or down.
+ *	Always reset to original position.
+ */
 static void	move_plane(t_doom *doom, t_event *event)
 {
 	int		i;
@@ -36,6 +40,9 @@ static void	move_plane(t_doom *doom, t_event *event)
 		scale_wall_height(doom, event->event_sector->wall[i]);
 }
 
+/*
+ *	Preform the sector trigger event.
+ */
 static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 {
 	if (event->type == FLOOR || event->type == CEILING)
@@ -63,6 +70,10 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	}
 }
 
+/*
+ *	Main funciotion for sector triggered events.
+ *	Check if player is in sector or the event is already triggred.
+ */
 void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	if (event->trigger_sector == doom->player.sector || event->trigger)

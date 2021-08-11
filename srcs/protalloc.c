@@ -6,12 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:03:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:38:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	A malloc that sets all bytes to NULL
+ *	If memory allocation fails, will display error message
+ *	(with custom string if given)
+ *	and exit(1), so not to segfaault the program later on;
+ */
 void	*protalloc(size_t size, char *str)
 {
 	void	*mem;
@@ -29,6 +35,9 @@ void	*protalloc(size_t size, char *str)
 	exit(1);
 }
 
+/*
+ *	Resets the sectbool list with FALSE(0) and sets current sector to TRUE(1).
+ */
 void	reset_sectbool(t_doom *doom, int curr_sect)
 {
 	ft_memset(doom->sectbool, FALSE, 4 * doom->nb.sectors);

@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:57:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calulate floor and ceiling dimensions.
+ */
 static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 {
 	t_fc		v1;
@@ -31,6 +34,9 @@ static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 	w->static_range.ceiling = w->static_v2.ceiling - w->static_v1.ceiling;
 }
 
+/*
+ *	Calulate sloping floor and ceiling dimensions.
+ */
 static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
@@ -50,8 +56,10 @@ static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	w->slope_range.ceiling = w->slope_v2.ceiling - w->slope_v1.ceiling;
 }
 
-//		screen y for floor and ceiling vertex
-//		z of floor and ceiling with slope
+/*
+ *	Calulate neighbour floor and ceiling dimensions.
+ *	Screen y for floor and ceiling vertex, z of floor and ceiling with slope.
+ */
 static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
@@ -71,6 +79,9 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	w->nslope_range.ceiling = w->nslope_v2.ceiling - w->nslope_v1.ceiling;
 }
 
+/*
+ *	Calcualte the rotates position on screen of the wall verticies.
+ */
 static void	vertex_relative_pos(t_doom *doom, t_wall *wall, t_v3 *p1, t_v3 *p2)
 {
 	t_player	*p;
@@ -82,7 +93,9 @@ static void	vertex_relative_pos(t_doom *doom, t_wall *wall, t_v3 *p1, t_v3 *p2)
 	p2->y = wall->cv2.z * p->anglesin - wall->cv2.x * p->anglecos + p->where.y;
 }
 
-/* Do perspective transformation */
+/*
+ *	Preforms perspective transformation
+ */
 void	project_wall(t_doom *doom, t_wall *wall)
 {
 	t_v3		p1;

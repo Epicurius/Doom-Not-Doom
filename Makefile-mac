@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/10 14:55:37 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/11 10:46:16 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ CFILES		=	ai_attack.c\
 				protalloc.c\
 				purge_entities.c\
 				put_pixels.c\
-				random.c\
 				reload_map.c\
 				sound.c\
 				spawn_entity.c\

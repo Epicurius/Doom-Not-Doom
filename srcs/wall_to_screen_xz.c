@@ -6,15 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 14:31:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/06/18 15:50:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:55:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-/*	Acquire the x,y coordinates of the two endpoints
-	(vertices) of this edge of the sector 
-	Rotate correctly hte map into players view		*/
+/*
+ *	Acquire the x,y coordinates of the two endpoints.
+ *	(vertices) of this edge of the sector.
+ *	Rotate correctly the map into players view.
+ */
 void	wall_to_screen_xz(t_player player, t_wall *wall)
 {
 	t_v2	v1;

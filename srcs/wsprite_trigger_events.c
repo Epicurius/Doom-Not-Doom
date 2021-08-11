@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:16:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:57:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Move plane up or down.
+ *	Dont reset to original position.
+ *	When finished update wall sprite if needed.
+ */
 static void	move_plane(t_doom *doom, t_event *event)
 {
 	int		i;
@@ -38,6 +43,9 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
 }
 
+/*
+ *	Preform the wall sprite trigger event.
+ */
 static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 {
 	if (event->type == FLOOR || event->type == CEILING)
@@ -61,6 +69,11 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 	}
 }
 
+/*
+ *	Main funciotion for wall sprite triggered events.
+ *	Check if wall sprite has been triggered and play sound.
+ *	Then preform the event action.
+ */
 void	wsprite_trigger_events(t_doom *doom, t_event *event)
 {
 	if (!event->wsprite->trigger)

@@ -6,17 +6,20 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 11:56:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:53:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	spawn_mob(t_doom *doom, t_entity *rift)
+/*
+ *	Spawn a Alfred, Spooky or Ghost and init it.
+ */
+static void	spawn_entity(t_doom *doom, t_entity *rift)
 {
 	t_entity	*mob;
 
-	mob = protalloc(sizeof(t_entity), "spawn_mob");
+	mob = protalloc(sizeof(t_entity), "spawn_entity");
 	mob->type = rand() % 3;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;
@@ -32,6 +35,9 @@ static void	spawn_mob(t_doom *doom, t_entity *rift)
 	doom->game.spawns += 1;
 }
 
+/*
+ *	Loop all the Rifts and spawn a entity.
+ */
 void	rift_spawn(t_doom *doom)
 {
 	t_list	*curr;
@@ -40,11 +46,14 @@ void	rift_spawn(t_doom *doom)
 	while (curr)
 	{
 		if (((t_entity *)curr->content)->type == RIFT)
-			spawn_mob(doom, curr->content);
+			spawn_entity(doom, curr->content);
 		curr = curr->next;
 	}
 }
 
+/*
+ *	Respawn all the Rifts.
+ */
 void	respawn_rifts(t_doom *doom)
 {
 	t_list	*new;

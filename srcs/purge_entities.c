@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 12:16:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:35:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:57:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Function to remove all spawnable entitites.
+ *	Mainly a debug/developer function.
+ */
 void	purge_entities(t_doom *doom)
 {
 	t_list		*curr;

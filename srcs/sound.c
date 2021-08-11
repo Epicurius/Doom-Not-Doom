@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:17:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:51:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Mute or unmute sounds.
+ */
 void	mute(int i)
 {
 	(void)i;
@@ -21,6 +24,9 @@ void	mute(int i)
 		Mix_Volume(-1, 0);
 }
 
+/*
+ *	Parse .wav files and save them too doom->sounds.
+ */
 static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
 {
 	int	i;
@@ -36,9 +42,9 @@ static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
 	}
 }
 
-//if (doom->game.mode == ENDLESS && !doom->settings.debug)
-//	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
-//Mix_Volume(-1, 0)
+/*
+ *	Init all the sounds and any event audio.
+ */
 void	init_sound(t_doom *doom)
 {
 	int	i;
