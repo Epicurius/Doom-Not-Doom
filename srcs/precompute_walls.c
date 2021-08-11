@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 09:50:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:21:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Clips walls to player fustrum
+ *	(left and right wall that are partially in view)
+ */
 void	clip_to_fustrum(t_camera cam, t_wall *wall)
 {
 	t_v3	i;
@@ -30,6 +34,10 @@ void	clip_to_fustrum(t_camera cam, t_wall *wall)
 		wall->cv2 = new_v3(wall->sv2.x, 0, wall->sv2.z);
 }
 
+/*
+ *	If wall not in player view wall->visible = 0;
+ *	else wall->visible = 1 and clip it to fustrum.
+ */
 int	clip_wall(t_camera cam, t_wall *wall)
 {
 	if ((wall->sv1.z < NEAR_Z && wall->sv2.z < NEAR_Z)
@@ -45,6 +53,9 @@ int	clip_wall(t_camera cam, t_wall *wall)
 	return (0);
 }
 
+/*
+ *	Precomputes some map texture scaling.
+ */
 void	precompute_texture(t_doom *doom, t_wall *wall)
 {
 	int	i;
@@ -73,6 +84,10 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	}
 }
 
+/*
+ *	Calualtes the hights of floor and ceiling at player postion.
+ *	This will lighten the load when drawing.
+ */
 void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 {
 	double	eye_z;
@@ -84,6 +99,11 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
 }
 
+/*
+ *	Prepares all the walls inside player view fustrum for drawing.
+ *	aka values that dont need to be calulated more than once per frame,
+ *	to make multythreading posiible and faster.
+ */
 void	precompute_walls(t_doom *doom)
 {
 	int	i;

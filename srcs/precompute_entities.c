@@ -6,12 +6,18 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/04 12:07:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:10:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Checks if its time for the next frame.
+ *	and resets if frame has reached the end of its loop.
+ *	But if entity state is DEATH and it reached the end, return 0
+ *	so it can be deleted.
+ */
 static int	frame_animation(t_doom *doom, t_entity *entity)
 {
 	if (g_entity_data[entity->type].frame_rate[entity->state] * doom->time.delta
@@ -29,23 +35,31 @@ static int	frame_animation(t_doom *doom, t_entity *entity)
 	return (1);
 }
 
+/*
+ *	Preform the entity state function.
+ *	atm only MOVE and ATTACK have a funcition.
+ */
 static void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
 {
 	if (!g_entity_data[entity->type].type)
 		return ;
 	if (entity->state != MOVE)
 		entity->velocity = new_v3(0, 0, entity->velocity.z);
-	if (!g_entity_data[entity->type].flight)
-	{
-		if (entity->where.z > floor_at(&doom->sectors[entity->sector],
-				entity->where))
-			entity->velocity.z -= doom->sectors[entity->sector].gravity;
-	}
+	//if (!g_entity_data[entity->type].flight)
+	//{
+	//	if (entity->where.z > floor_at(&doom->sectors[entity->sector],
+	//			entity->where))
+	//		entity->velocity.z -= doom->sectors[entity->sector].gravity;
+	//}
 	ai_collision(doom, entity);
 	if (entity->state == ATTACK)
 		ai_attack(doom, entity);
 }
 
+/*
+ *	Get the entity state frame and and angle.
+ *	Then get entity projection values.
+ */
 static int	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
 	if (doom->npc_bxpm[entity->type].nb[entity->state][FRAMES] > 1
@@ -57,6 +71,10 @@ static int	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 	return (1);
 }
 
+/*
+ *	Pay the man(the player) for killing the entity.
+ *	If a Rift was killed swap it with a MedKit.
+ */
 static int	pay_the_man(t_doom *doom, t_entity *entity)
 {
 	doom->inv.dosh += 10 + doom->nb.kills * 1;
@@ -76,6 +94,9 @@ static int	pay_the_man(t_doom *doom, t_entity *entity)
 	return (1);
 }
 
+/*
+ *	Handles all the entities calulation.
+ */
 void	precompute_entities(t_doom *doom)
 {
 	t_list		*curr;

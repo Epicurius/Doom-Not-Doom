@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 16:54:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:26:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Handels launcher projectile.
+ *	Spawns a projectile and calulates it velocity.
+ */
 static void	fire_orb(t_doom *doom)
 {
 	t_projectile	*orb;
@@ -32,6 +36,9 @@ static void	fire_orb(t_doom *doom)
 	doom->nb.projectiles += 1;
 }
 
+/*
+ *	Handels weapon fire frames.
+ */
 void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 {
 	if (weapon->frame == 0 && weapon->mag_ammo > 0)
@@ -53,6 +60,9 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 		weapon->frame = 0;
 }
 
+/*
+ *	Handels weapon reload frames.
+ */
 void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 {
 	if (!weapon->frame)
@@ -71,6 +81,9 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 	}
 }
 
+/*
+ *	Checks witch weapon player has equiped.
+ */
 void	equip_weapon(t_doom *doom)
 {
 	if (doom->weapon[0].own && doom->keys[KEY_1])
@@ -85,12 +98,14 @@ void	equip_weapon(t_doom *doom)
 		doom->player.equiped = 5;
 }
 
-//		move doom->player.action = NONE;
+/*
+ *	Handels all the player weapon calulations.
+ */
 void	precompute_weapon(t_doom *doom)
 {
 	t_weapon	*weapon;
 
-	doom->player.action = NONE;
+	doom->player.action = NONE;// move doom->player.action = NONE;
 	equip_weapon(doom);
 	if (doom->player.equiped < 0)
 		return ;

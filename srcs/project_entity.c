@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/30 11:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:27:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calculates the entity projection values.
+ */
 void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 {
 	t_point	size;

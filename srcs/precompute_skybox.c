@@ -6,13 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/25 10:35:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:16:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		(coord - 5)
+/*
+ *	Calcualtes the skybox box.
+ *	Box dimensions 5 from player in each direction(x,y,z)
+ *	So a 10x10x10 box.
+ */
 void	compute_skybox(t_doom *doom)
 {
 	t_player	player;
@@ -32,6 +36,9 @@ void	compute_skybox(t_doom *doom)
 	doom->skybox[3].sv2 = doom->skybox[0].sv1;
 }
 
+/*
+ *	Calulates the values for projeccting the skybox around the player.
+ */
 void	project_skybox(t_doom *doom, t_wall *wall)
 {
 	wall->scale_v1 = doom->cam.scale / -wall->cv1.z;
@@ -60,6 +67,10 @@ void	project_skybox(t_doom *doom, t_wall *wall)
 	wall->yzrange = wall->y1z0 - wall->y0z1;
 }
 
+/*
+ *	Loops all of the skybox walls and calulates those that intersect with
+ *	player view fustrum.
+ */
 void	precompute_skybox(t_doom *doom)
 {
 	int	i;
@@ -75,6 +86,10 @@ void	precompute_skybox(t_doom *doom)
 	}
 }
 
+/*
+ *	Inits skybox vertices,
+ *	10x10x10 box.
+ */
 void	init_skybox(t_doom *doom)
 {
 	doom->skybox[0].v1 = new_v3(0, 0, 0);

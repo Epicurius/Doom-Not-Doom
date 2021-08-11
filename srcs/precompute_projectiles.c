@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 10:12:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	A simple version of vertical collision.
+ *	Projectile cant chenche its velocity after start,
+ *	so it need only a simple vertical collision check.
+ */
 static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 {
 	if (orb->where.z + orb->velocity.z + 2
@@ -22,6 +27,10 @@ static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 	return (0);
 }
 
+/*
+ *	Handles projectile collision. Entity contace -> veertical -> horizontal
+ *	return (0) is projectile wil continue.
+ */
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
@@ -47,6 +56,9 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	return (0);
 }
 
+/*
+ *	Check all projectiles paths one collides then delets it.
+ */
 void	precompute_projectiles(t_doom *doom)
 {
 	t_list			*curr;
