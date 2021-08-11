@@ -6,12 +6,16 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:26:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:17:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+
+/*
+ *	Parse wall sprite state.
+ */
 int	wsprite_state(char *str)
 {
 	if (ft_strequ(str, "LOOP"))
@@ -21,6 +25,9 @@ int	wsprite_state(char *str)
 	return (STATIC);
 }
 
+/*
+ *	Parse wall sprite.
+ */
 void	parse_wsprite(t_doom *doom, char **arr)
 {
 	t_wsprites	*wsprite;
@@ -39,7 +46,11 @@ void	parse_wsprite(t_doom *doom, char **arr)
 	sprite->trigger = -1;
 }
 
-int	sprite_type(char *str)
+/*
+ *	Parse entity type.
+ *	Returns -1 if not valid entity.
+ */
+static int	entity_type(char *str)
 {
 	int	i;
 
@@ -53,12 +64,15 @@ int	sprite_type(char *str)
 	return (-1);
 }
 
+/*
+ *	Parse entity.
+ */
 void	parse_entity(t_doom *doom, char **arr)
 {
 	t_entity	*entity;
 
 	entity = protalloc(sizeof(t_entity), "parse_entity");
-	entity->type = sprite_type(arr[1]);
+	entity->type = entity_type(arr[1]);
 	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y = ft_atof(arr[3]) * doom->map_scale;
 	entity->where.z = ft_atof(arr[4]) * doom->map_scale;

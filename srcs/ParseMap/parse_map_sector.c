@@ -6,19 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:48:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:15:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//		doom->vert[ft_atoi(arr[0])].z = ft_atof(arr[3]) * doom->map_scale;
+/*
+ *	Parse vertice.
+ */
 void	parse_vertex(t_doom *doom, char **arr)
 {
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
 }
 
+/*
+ *	Parse wall.
+ */
 void	parse_wall(t_doom *doom, char **arr)
 {
 	t_wall	*wall;
@@ -32,6 +37,9 @@ void	parse_wall(t_doom *doom, char **arr)
 	wall->solid = ft_atoi(arr[6]);
 }
 
+/*
+ *	Parse floor and ceiling.
+ */
 void	parse_fc(t_doom *doom, char **arr)
 {
 	int		sect;
@@ -56,6 +64,9 @@ void	parse_fc(t_doom *doom, char **arr)
 	free(slope);
 }
 
+/*
+ *	Link wall to sector walls.
+ */
 void	complete_wall(t_sector *sect, t_wall *walls, char **id,
 		char **neighbour)
 {
@@ -73,6 +84,9 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id,
 	}
 }
 
+/*
+ *	Parse sector.
+ */
 void	parse_sector(t_doom *doom, char **arr)
 {
 	int			nb;

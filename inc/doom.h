@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:38:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:16:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -817,7 +817,6 @@ void				parse_sector(t_doom *doom, char **arr);
 /* File: ParseMap/parse_map_sprite.c */
 int					wsprite_state(char *str);
 void				parse_wsprite(t_doom *doom, char **arr);
-int					sprite_type(char *str);
 void				parse_entity(t_doom *doom, char **arr);
 /* File: ParseMap/validate_map1.c */
 int					check_entities(t_doom *doom);

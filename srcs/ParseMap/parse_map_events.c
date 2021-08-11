@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:10:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 13:12:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Find the wall sprite that is the trigger for the event.
+ */
 static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 {
 	int	i;
@@ -37,6 +40,9 @@ static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 	error_msg("No wsprite wspprite with id:%d found.\n", id);
 }
 
+/*
+ *	Parse event type.
+ */
 void	get_event_type(t_event *event, char *str)
 {
 	if (ft_strequ(str, "Ceiling"))
@@ -59,6 +65,9 @@ void	get_event_type(t_event *event, char *str)
 		error_msg("Map event %s is not valid", str);
 }
 
+/*
+ *	Parse event action.
+ */
 void	get_event_action(t_event *event, char *str)
 {
 	if (ft_strequ(str, "CLICK"))
@@ -71,8 +80,12 @@ void	get_event_action(t_event *event, char *str)
 		event->action = NONE;
 }
 
-//	if (event.type == HAZARD && event.action != SECTOR)
-//	if (event.action == NONE && (event.type == STORE || event.type == AUDIO))
+/*
+ *	Parse type:events
+ *	Type HAZARD can only have action SECTOR.
+ * 	Actions STORE and AUDIO cant have type NONE.
+ * 	It will not break instead not do anything.
+ */
 void	parse_events(t_doom *doom, char **arr)
 {
 	t_event	event;
