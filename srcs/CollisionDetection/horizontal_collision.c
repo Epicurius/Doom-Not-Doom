@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:56:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 12:05:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:24:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check portal dimension on the closest point of the wall to the entity.
+ */
 int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
 {
 	t_fc	portal;
@@ -31,6 +34,9 @@ int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
 	return (0);
 }
 
+/*
+ *	Check if entity intersects wall or that its hitbox touches the wall.
+ */
 int	check_collsion(t_motion *motion, t_wall *wall, t_v3 *point)
 {
 	*point = closest_point_on_segment_v2(motion->dest, wall->v1, wall->v2);
@@ -42,6 +48,11 @@ int	check_collsion(t_motion *motion, t_wall *wall, t_v3 *point)
 	return (0);
 }
 
+/*
+ *	Check all the solid surfaces that the hitbox collides with.
+ *	Solid wall or portal bottom half or portal top half.
+ *	If there is collision try sliding parallel to the wall.
+ */
 int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;

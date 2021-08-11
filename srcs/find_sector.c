@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:50:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:28:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:19:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	in_sector(t_sector *sector, t_v3 pos)
 }
 
 /*
- *	Loops thru all sectors and checks if pos(x,y,z) is in it.
+ *	Loops through all sectors and checks if pos(x,y,z) is in it.
  *	Returns pos sector or -1 if pos is none of the sectors.
  */
 int	find_sector(t_sector *sectors, int nb, t_v3 pos)
@@ -66,7 +66,7 @@ int	in_sector_area(t_sector *sector, t_v3 pos)
 }
 
 /*
- *	Loops thru all sectors and checks if pos(x,y) is in it.
+ *	Loops through all sectors and checks if pos(x,y) is in it.
  *	Returns pos sector or -1 if pos is none of the sectors.
  */
 int	find_sector_no_z(t_sector *sectors, int nb, t_v3 pos)

@@ -6,12 +6,19 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:15:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:31:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check if player is less than 1.0 from neighbour portal.
+ *	Hard to put into words, but idea is that the player should never reach the
+ *	wall (hitbox can touch the wall).
+ *	If player was stading on a cliff and walks less than 1.0 into the lower
+ *	sector dont move him down, otherwise he would be to close to the wall.
+ */
 static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
 {
 	t_v3	p;
@@ -41,6 +48,11 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
 	return (0);
 }
 
+/*
+ *	Checks vertical collision.
+ *	Does the entity head hit ceiling.
+ *	Is entity falling thru the floor.
+ */
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
 	t_fc	pos;

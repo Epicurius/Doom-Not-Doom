@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projectile_contact.c                               :+:      :+:    :+:   */
+/*   projectile_collision.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 16:41:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:21:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-//			Maybe remove break for multy kills? will be slower.
+/*
+ *	Check if player projectile contact a enemy.
+ *	if add break ; will be single kill otherwise a multy kill.
+ */
 static int	target_demon(t_doom *doom, t_v3 dest)
 {
 	t_v3	w;
@@ -39,6 +42,9 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 	return (contact);
 }
 
+/*
+ *	Check projectil contact.
+ */
 int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest)
 {
 	if (orb->target == 0)

@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:31:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:34:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:13:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Check it the player can stand up at its current pos.
+ *	If player hits ceiling.
+ *	If player is < 1.0 from neighbour wall and hits neighbour ceiling.
+ */
 int	crouch_collision(t_doom *doom, t_player *player)
 {
 	int		i;

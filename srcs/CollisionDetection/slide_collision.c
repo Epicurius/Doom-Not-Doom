@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 13:15:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/11 11:24:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Calulate parallel velocity to vector.
+ */
 static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 {
 	double	move_norm;
@@ -35,6 +38,9 @@ static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 	return (m);
 }
 
+/*
+ *	Check if new slide velocity collides with a solid wall.
+ */
 int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;
@@ -62,6 +68,10 @@ int	check_solid_surfaces_no_slide(t_doom *doom, t_motion *motion, int sect)
 	return (0);
 }
 
+/*
+ *	Calculate new velocity (parallele to wall collided)
+ *	and check if the movement is ok.
+ */
 int	slide_collision(t_doom *doom, t_motion *motion, t_wall *wall)
 {
 	t_motion	new;
