@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:43:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/20 10:37:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		entity->frame = 0;
 		entity->time = 0;
 	}
-	else if (point_distance_v2(entity->where.x, entity->where.y,
-			doom->player.where.x, doom->player.where.y) >= ACTIVE_AREA)
+	else if (entity->state != DEATH && point_distance_v2(entity->where.x, entity->where.y,
+			doom->player.where.x, doom->player.where.y) >= ACTIVE_AREA) //fix
 	{
 		entity->state = IDLE;
 		entity->frame = 0;
