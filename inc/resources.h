@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 14:25:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:13:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,23 +218,23 @@ static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 
 typedef struct s_entity_data
 {
-	char			*name;
+	double			scale;
+	double			speed;
 	int				health;
 	int				height;
 	int				pickup;
 	int				hitbox_radius;
-	double			speed;
 	int				flight;
 	int				damage;
 	int				type;
-	double			scale;
 	int				move;
 	int				view_distance;
 	int				detection_radius;
 	int				attack_range;
 	int				frame_rate[4];
-	char			*path;
 	int				tc[4];
+	char			*path;
+	char			*name;
 }					t_entity_data;
 
 static const char			*g_weapon_data[WEAPON_AMOUNT] =

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:16:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:15:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ typedef struct s_projectile
 typedef struct s_weapon_thread
 {
 	SDL_Surface		*dst;
-	t_rect			dstr;
 	t_bxpm			*src;
+	t_rect			dstr;
 	t_rect			srcr;	
 }					t_weapon_thread;
 
@@ -112,15 +112,15 @@ typedef struct s_player
 	double			horizon;
 	int				health;
 	int				armour;
-	float			walk_speed;
-	float			sprint_speed;
-	float			jump_height;
 	int				flight;
 	int				action;
 	int				equiped;
 	int				debug;
 	int				store_access;
 	int				hm;
+	float			walk_speed;
+	float			sprint_speed;
+	float			jump_height
 }					t_player;
 
 typedef struct s_wsprite
@@ -128,8 +128,8 @@ typedef struct s_wsprite
 	int				id;
 	t_v3			where;
 	int				tx;	
-	double			time;
 	int				frame;
+	double			time;
 	t_rect			src;
 	double			scale_w;
 	double			scale_h;
@@ -156,11 +156,10 @@ typedef struct s_bullet_hole
 
 typedef struct s_wall
 {
-	t_wsprites		wsprite;
-	t_bullet_hole	bullet_hole;
 	int				id;
 	int				sect;
 	int				visible;
+	int				n;
 	t_v3			v1;
 	t_v3			v2;
 	t_v3			sv1;
@@ -171,11 +170,7 @@ typedef struct s_wall
 	double			scale_h;
 	double			width;
 	double			height;
-	signed char		wtx;
-	signed char		ptx;
 	double			scale;
-	signed char		solid;
-	int				n;
 	double			scale_v1;
 	double			scale_v2;
 	double			angle_z1;
@@ -203,6 +198,11 @@ typedef struct s_wall
 	double			y1z0;
 	double			y0z1;
 	t_v2			tscale;
+	signed char		wtx;
+	signed char		ptx;
+	signed char		solid;
+	t_wsprites		wsprite;
+	t_bullet_hole	bullet_hole;
 }					t_wall;
 
 typedef struct s_sector
@@ -214,7 +214,6 @@ typedef struct s_sector
 	t_plane			ceiling;
 	int				light;
 	float			gravity;
-	char			visible;
 	t_v3			center;
 	int				wall_ceiling_slope;
 	float			ceiling_slope;
@@ -223,6 +222,7 @@ typedef struct s_sector
 	t_v2			ceiling_normal;
 	t_v2			floor_normal;
 	int				trigger;
+	char			visible;
 }					t_sector;
 
 typedef struct s_camera
@@ -241,13 +241,13 @@ typedef struct s_camera
 
 typedef struct s_entity_render
 {
-	float			z;
 	t_point			start;
 	t_point			end;
 	t_point			clamp_start;
 	t_point			clamp_end;
 	double			xrange;
 	double			yrange;
+	float			z;
 }					t_entity_render;
 
 typedef struct s_entity
@@ -282,7 +282,7 @@ typedef struct s_entity_thread
 
 typedef struct s_render
 {
-	SDL_Surface		*surface;
+	SDL_Surface		*surface; //96
 	t_sector		*sectors;
 	int				nb_sectors;
 	t_wall			*skybox;
@@ -306,9 +306,9 @@ typedef struct s_render
 
 typedef struct s_map
 {
-	int				zoom;
 	t_point			pos;
 	t_rect			size;
+	int				zoom;
 }					t_map;
 
 typedef struct s_nb
@@ -327,9 +327,9 @@ typedef struct s_nb
 
 typedef struct s_time
 {
+	int				fps;
 	float			curr;
 	float			prev;
-	int				fps;
 	float			delta;
 	SDL_Color		color;
 	SDL_Surface		*surf;
@@ -341,8 +341,8 @@ typedef struct s_time
 typedef struct s_npc_bxpm
 {
 	t_bxpm			*bxpm;
-	int				nb[4][2];
 	t_rect			***pos;
+	int				nb[4][2];
 }					t_npc_bxpm;
 
 typedef struct s_game
@@ -392,9 +392,9 @@ typedef struct s_dialog
 
 typedef struct s_inv
 {
-	int				dosh;
 	int				*hp;
 	int				*armour;
+	int				dosh;
 	int				max_armour;
 	int				max_armour_price;
 	int				speed_price;
@@ -417,23 +417,23 @@ typedef struct s_event
 	t_wsprite		*wsprite;
 	int				trigger_sector;
 	int				trigger;
-	Mix_Chunk		*audio;
-	char			*path;
 	int				type;
 	int				action;
 	float			min;
 	float			max;
 	float			speed;
 	float			time;
+	Mix_Chunk		*audio;
 	int				dir;
+	char			*path;
 }					t_event;
 
 typedef struct s_motion
 {
 	int				flight;
+	int				sector;
 	double			height;
 	double			step;
-	int				sector;
 	t_v3			where;
 	t_v3			velocity;
 	t_v3			dest;
@@ -442,12 +442,12 @@ typedef struct s_motion
 typedef struct s_doom
 {
 	t_settings		settings;
-	int				quit;
 	SDL_Window		*win;
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
 	double			*zbuffer;
+	int				quit;
 	int				*sectbool;
 	double			map_scale;
 	t_fonts			font;
