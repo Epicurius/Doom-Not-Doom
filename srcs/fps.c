@@ -6,25 +6,20 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:27:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:14:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-inline int	ticks_elapsed(int curr_tick, int start_tick, int ticks)
-{
-	return (((curr_tick - start_tick) % TICKS_PER_SEC) > (TICKS_PER_SEC / ticks));
-}
-
-//int	get_curr_tick()
+//inline int	ticks_elapsed(int curr_tick, int start_tick, int ticks)
 //{
-//	return ((SDL_GetTicks() * TICKS_PER_SEC) / 1000.0f);
+//	return (((curr_tick - start_tick) % TICKS_PER_SEC) > (TICKS_PER_SEC / ticks));
 //}
 
 /*
  *	Updates the delta and current time.
- *	And updates the window title FPS.
+ *	And updates the FPS (Window Title).
  */
 void	fps_func(t_doom *doom)
 {

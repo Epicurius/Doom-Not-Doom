@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:28:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:45:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:16:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 int	animate_wsprite(t_doom *doom, t_wsprite *wsprite)
 {
-	if (doom->time.curr - wsprite->time > 100)
+	if (doom->time.curr - wsprite->time > WALL_SPRITE_SPEED)
 	{
 		wsprite->src.x1 += 64;
 		wsprite->frame += 1;
@@ -26,7 +26,7 @@ int	animate_wsprite(t_doom *doom, t_wsprite *wsprite)
 			wsprite->src.x1 = 0;
 			wsprite->src.y1 += 64;
 		}
-		if (wsprite->frame >= 3 || wsprite->src.y1 >= doom->mtx[wsprite->tx].h) //fix
+		if (wsprite->src.y1 >= doom->mtx[wsprite->tx].h)
 		{
 			wsprite->src.x1 = 0;
 			wsprite->src.y1 = 0;

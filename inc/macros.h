@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:43:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:25:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 */
 # define PLAYER_HEIGHT 					7
 # define EYE_LVL						6
-# define OVER_HEAD_SPACE				1
-# define DUCK_HEIGHT					2.5
-# define STEP_HEIGHT					2
 # define CAMERA_RATIO					1.77777777778
 # define FOV							90
-# define PLAYER_YAW						45
-# define PLAYER_PITCH					10
 # define PLAYER_RADIUS					0.7
 # define NEAR_Z							0.1
 # define FAR_Z							1000
@@ -40,7 +35,6 @@
 ** Entities
 */
 # define ACTIVE_AREA					50
-# define MAX_ENTITIES_RENDERED			20
 # define FRAMES							0
 # define ANGLES							1
 # define PLAYER_PROJECTILE_MAX_RANGE	100
@@ -65,22 +59,13 @@
 # define DIAMETER						0.7
 
 /*
-** Map Rendering
-*/
-# define MAXQUEUE						32
-
-/*
 ** Texture
 */
 # define ZBUFFER_COLOR					1
 # define TEXTURE_DISABLED				0
-# define OPAQUE							30
-# define NB_SKYBOX_TEXTURES				6
-# define NB_WALL_TEXTURES				5
-# define NB_CEILING_TEXTURES			1
-# define NB_FLOOR_TEXTURES				1
 # define CLOCK_BG_COLOR					0xFF000000
 # define CLOCK_FG_COLOR					0xFFFFFFFF
+# define WALL_SPRITE_SPEED				100
 
 /*
 ** Minimap
