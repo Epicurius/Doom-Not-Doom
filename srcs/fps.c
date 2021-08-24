@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:20:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:27:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	fps_func(t_doom *doom)
 	prev = time->curr;
 	time->curr = SDL_GetTicks();
 	time->delta = (time->curr - prev) / 1000.0f;
-	time->tick = time->curr * TICKS_PER_SEC / 1000.0f;
+	//time->tick = time->curr * TICKS_PER_SEC / 1000.0f;
 	time->fps++;
 	if (time->curr - time->prev >= 1000)
 	{

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:28:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:19:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:45:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 /*
  *	Handels the wsprite frames, depending on game ticks.
  */
-int	animate_wsprite(t_doom *doom, t_wsprite *entity)
+int	animate_wsprite(t_doom *doom, t_wsprite *wsprite)
 {
-	if (doom->time.curr - entity->time > 100)
+	if (doom->time.curr - wsprite->time > 100)
 	{
-		entity->src.x1 += 64;
-		entity->frame += 1;
-		if (entity->src.x1 >= doom->mtx[entity->tx].w)
+		wsprite->src.x1 += 64;
+		wsprite->frame += 1;
+		if (wsprite->src.x1 >= doom->mtx[wsprite->tx].w)
 		{
-			entity->src.x1 = 0;
-			entity->src.y1 += 64;
+			wsprite->src.x1 = 0;
+			wsprite->src.y1 += 64;
 		}
-		if (entity->frame >= 3 || entity->src.y1 >= doom->mtx[entity->tx].h) //fix
+		if (wsprite->frame >= 3 || wsprite->src.y1 >= doom->mtx[wsprite->tx].h) //fix
 		{
-			entity->src.x1 = 0;
-			entity->src.y1 = 0;
-			entity->frame = 0;
-			exit(1);
+			wsprite->src.x1 = 0;
+			wsprite->src.y1 = 0;
+			wsprite->frame = 0;
 		}
-		entity->src.x2 = entity->src.x1 + 64;
-		entity->src.y2 = entity->src.y1 + 64;
-		ft_printf("%d\n", doom->time.curr);
-		entity->time = doom->time.curr;
+		wsprite->src.x2 = wsprite->src.x1 + 64;
+		wsprite->src.y2 = wsprite->src.y1 + 64;
+		wsprite->time = doom->time.curr;
 	}
 	return (1);
 }
