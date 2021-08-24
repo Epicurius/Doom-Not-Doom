@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/22 10:15:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:15:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+# define TICKS_PER_SEC 48
 
 typedef struct s_settings
 {
@@ -120,7 +122,7 @@ typedef struct s_player
 	int				hm;
 	float			walk_speed;
 	float			sprint_speed;
-	float			jump_height
+	float			jump_height;
 }					t_player;
 
 typedef struct s_wsprite
@@ -129,7 +131,7 @@ typedef struct s_wsprite
 	t_v3			where;
 	int				tx;	
 	int				frame;
-	double			time;
+	int				time;
 	t_rect			src;
 	double			scale_w;
 	double			scale_h;
@@ -263,7 +265,7 @@ typedef struct s_entity
 	int				hp;
 	int				type;
 	double			yaw;
-	double			time;
+	int				time;
 	t_entity_render	render;
 }					t_entity;
 
@@ -282,7 +284,7 @@ typedef struct s_entity_thread
 
 typedef struct s_render
 {
-	SDL_Surface		*surface; //96
+	SDL_Surface		*surface;
 	t_sector		*sectors;
 	int				nb_sectors;
 	t_wall			*skybox;
@@ -328,8 +330,9 @@ typedef struct s_nb
 typedef struct s_time
 {
 	int				fps;
-	float			curr;
-	float			prev;
+	int				curr;
+	int				prev;
+	int				tick;
 	float			delta;
 	SDL_Color		color;
 	SDL_Surface		*surf;
@@ -422,7 +425,7 @@ typedef struct s_event
 	float			min;
 	float			max;
 	float			speed;
-	float			time;
+	int				time;
 	Mix_Chunk		*audio;
 	int				dir;
 	char			*path;
@@ -836,5 +839,8 @@ void				game_over(t_doom *doom);
 void				game_pause(t_doom *doom);
 /* File: UI/game_quit.c */
 void				game_quit(t_doom *doom);
+
+
+int	ticks_elapsed(int curr_tick, int start_tick, int ticks);
 
 #endif

@@ -6,11 +6,21 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:30:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:20:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+inline int	ticks_elapsed(int curr_tick, int start_tick, int ticks)
+{
+	return (((curr_tick - start_tick) % TICKS_PER_SEC) > (TICKS_PER_SEC / ticks));
+}
+
+//int	get_curr_tick()
+//{
+//	return ((SDL_GetTicks() * TICKS_PER_SEC) / 1000.0f);
+//}
 
 /*
  *	Updates the delta and current time.
@@ -19,13 +29,14 @@
 void	fps_func(t_doom *doom)
 {
 	t_time		*time;
-	double		prev;
+	int			prev;
 	char		*str;
 
 	time = &doom->time;
 	prev = time->curr;
 	time->curr = SDL_GetTicks();
 	time->delta = (time->curr - prev) / 1000.0f;
+	time->tick = time->curr * TICKS_PER_SEC / 1000.0f;
 	time->fps++;
 	if (time->curr - time->prev >= 1000)
 	{
