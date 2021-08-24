@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:00:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	SDL_Surface	*surf;
 
 	str = ft_itoa(doom->player.health);
-	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
+	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
@@ -42,7 +42,7 @@ void	hud_armour(t_doom *doom, SDL_Rect *dstr)
 	SDL_Surface	*surf;
 
 	str = ft_itoa(doom->player.armour);
-	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
+	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
@@ -63,7 +63,7 @@ void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 	SDL_Surface	*surf;
 
 	str = ft_itoa(doom->weapon[doom->player.equiped].cur_ammo);
-	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
+	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
@@ -84,7 +84,7 @@ void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 	SDL_Surface	*surf;
 
 	str = ft_itoa(doom->weapon[doom->player.equiped].mag_ammo);
-	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
+	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
@@ -105,7 +105,7 @@ void	hud_dosh(t_doom *doom, SDL_Rect *dstr)
 	SDL_Surface	*surf;
 
 	str = ft_itoa(doom->inv.dosh);
-	surf = TTF_RenderText_Blended(doom->font.amaz50, str, doom->time.color);
+	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
 	dstr->y = dstr->y - surf->h;

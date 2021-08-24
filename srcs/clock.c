@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:13:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	time->date = *localtime(&t);
 	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour,
 			time->date.tm_min, time->date.tm_sec);
-	tmp = TTF_RenderText_Shaded(doom->font.digi100, str,
+	tmp = TTF_RenderText_Shaded(doom->font.digital, str,
 			time->clock_fg, time->clock_bg);
 	bxpm->w = tmp->w;
 	bxpm->h = tmp->h;
@@ -89,7 +89,7 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	str = ft_sprintf("%02d:%02d:%02d", time->date.tm_hour,
 			time->date.tm_min, time->date.tm_sec);
 	wall->wsprite.num[x].time = time->date.tm_sec;
-	tmp = TTF_RenderText_Shaded(doom->font.digi100, str,
+	tmp = TTF_RenderText_Shaded(doom->font.digital, str,
 			time->clock_fg, time->clock_bg);
 	clock_to_bxpm(tmp, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	SDL_FreeSurface(tmp);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:11:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,8 +408,8 @@ typedef struct s_inv
 
 typedef struct s_fonts
 {
-	TTF_Font		*amaz50;
-	TTF_Font		*digi100;
+	TTF_Font		*amaz;
+	TTF_Font		*digital;
 }					t_fonts;
 
 typedef struct s_event
@@ -427,6 +427,8 @@ typedef struct s_event
 	Mix_Chunk		*audio;
 	int				dir;
 	char			*path;
+	t_v3			pos;
+	int				entity;
 }					t_event;
 
 typedef struct s_motion

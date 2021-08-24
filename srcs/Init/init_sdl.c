@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/14 10:21:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:40:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	init_ttf(t_doom *doom)
 {
 	if (TTF_Init())
 		error_msg("Could not init TTF: %s\n", SDL_GetError());
-	doom->font.amaz50 = TTF_OpenFont(TTF_PATH"AmazDoom.ttf", 50);
-	if (!doom->font.amaz50)
+	doom->font.amaz = TTF_OpenFont(TTF_PATH"AmazDoom.ttf", 50);
+	if (!doom->font.amaz)
 		error_msg("Could not open font: %s\n", TTF_GetError());
-	doom->font.digi100 = TTF_OpenFont(TTF_PATH"Digital.ttf", 100);
-	if (!doom->font.digi100)
+	doom->font.digital = TTF_OpenFont(TTF_PATH"Digital.ttf", 100);
+	if (!doom->font.digital)
 		error_msg("Could not open font: %s\n", TTF_GetError());
 }
 

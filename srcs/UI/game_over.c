@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:17:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	blit_game_stats(t_doom *doom, char *str)
 	SDL_Surface	*surface;
 
 	str = ft_sprintf("Rounds Survived %d", doom->game.round);
-	surface = TTF_RenderText_Blended(doom->font.amaz50, str,
+	surface = TTF_RenderText_Blended(doom->font.amaz, str,
 			hex_to_sdl_color(0xFFFFFFFF));
 	free(str);
 	dstr = (SDL_Rect){doom->surface->w * 0.05 + 10,
@@ -65,14 +65,14 @@ static void	blit_game_stats(t_doom *doom, char *str)
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
 	str = ft_sprintf("Enemies Killed: %d", doom->nb.kills);
-	surface = TTF_RenderText_Blended(doom->font.amaz50, str,
+	surface = TTF_RenderText_Blended(doom->font.amaz, str,
 			hex_to_sdl_color(0xFFFFFFFF));
 	free(str);
 	dstr = (SDL_Rect){doom->surface->w * 0.05 + 10,
 		doom->surface->h * 0.05 + 260, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
-	surface = TTF_RenderText_Blended(doom->font.amaz50,
+	surface = TTF_RenderText_Blended(doom->font.amaz,
 			"Press Enter to Continue ", hex_to_sdl_color(0xFF303030));
 	dstr = (SDL_Rect){doom->surface->w - surface->w,
 		doom->surface->h - surface->h, surface->w, surface->h};

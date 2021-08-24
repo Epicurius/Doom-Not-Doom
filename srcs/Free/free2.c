@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:39:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	free_render_utils(t_doom *doom)
  */
 void	free_font(t_doom *doom)
 {
-	TTF_CloseFont(doom->font.amaz50);
-	TTF_CloseFont(doom->font.digi100);
+	TTF_CloseFont(doom->font.amaz);
+	TTF_CloseFont(doom->font.digital);
 }
 
 /*

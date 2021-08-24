@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:20:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	y_or_n(t_doom *doom, int y)
 	SDL_Rect	dstr;
 	SDL_Surface	*surface;
 
-	surface = TTF_RenderText_Blended(doom->font.amaz50,
+	surface = TTF_RenderText_Blended(doom->font.amaz,
 			"Y/N", hex_to_sdl_color(0xFFFFFFFF));
 	dstr = (SDL_Rect){doom->c.x - surface->w / 2, y, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);

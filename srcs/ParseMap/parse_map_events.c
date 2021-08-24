@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:12:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:53:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,13 @@ void	parse_events(t_doom *doom, char **arr)
 		event.event_sector = &doom->sectors[ft_atoi(arr[4])];
 		event.min = ft_atof(arr[5]);
 		event.max = ft_atof(arr[6]);
+	}
+	else if (event.type == SPAWN)
+	{
+		event.entity = ft_atoi(arr[4]);
+		event.pos.x = ft_atof(arr[5]) * doom->map_scale;
+		event.pos.y = ft_atof(arr[6]) * doom->map_scale;
+		event.pos.z = ft_atof(arr[7]) * doom->map_scale;
 	}
 	else if (event.type == AUDIO)
 		event.path = ft_strdup(arr[4]);
