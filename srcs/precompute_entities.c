@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:30:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:50:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 static int	frame_animation(t_doom *doom, t_entity *entity)
 {
-	if (g_entity_data[entity->type].frame_rate[entity->state] * doom->time.delta
+	if (g_entity_data[entity->type].frame_rate[entity->state]
 		< doom->time.curr - entity->time)
 	{
 		entity->frame++;

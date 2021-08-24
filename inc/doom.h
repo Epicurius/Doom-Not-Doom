@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:15:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:11:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
-
-# define TICKS_PER_SEC 48
 
 typedef struct s_settings
 {

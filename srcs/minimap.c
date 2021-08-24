@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:53:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/24 15:07:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	map(t_doom *doom)
 {
 	if (doom->keys[KEY_TAB])
 	{
-		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 15);
+		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);
 		draw_map(doom);
 		map_player(doom);
