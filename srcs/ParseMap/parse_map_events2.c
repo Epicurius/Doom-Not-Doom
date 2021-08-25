@@ -6,12 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:59:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 11:27:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+/*
+ *	Parse Floor or Ceiling event args.
+ */
 void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
 	if (nb < 7)
@@ -22,6 +25,9 @@ void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr)
 	event->speed = ft_atof(arr[7]);
 }
 
+/*
+ *	Parse Spawn event args.
+ */
 void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
 	if (nb < 8)
@@ -34,6 +40,9 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 	event->yaw = ft_atoi(arr[8]);
 }
 
+/*
+ *	Parse Audio event args.
+ */
 void	audio_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
 	if (nb < 4)
@@ -43,6 +52,9 @@ void	audio_event(t_doom *doom, t_event *event, int nb, char **arr)
 	event->path = ft_strdup(arr[4]);
 }
 
+/*
+ *	Parse Hazard event args.
+ */
 void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
 	if (nb < 4)
