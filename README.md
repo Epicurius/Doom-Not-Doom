@@ -37,13 +37,13 @@
 
 ### Constraints
 
-> C is mandatory.
-> Follow the Norm (A royal pain in the ass)
-> Drawing only by filling a one-dimension array of pixels manually.
-> Computing everything on the CPU.
-> No 3rd party libraries except for SDL, pthread, malloc.
-> No crash or memory leaks.
-> Ofcourse that the frame rate is not garbage.
+	C is mandatory.
+	Follow the Norm (A royal pain in the ass)
+	Drawing only by filling a one-dimension array of pixels manually.
+	Computing everything on the CPU.
+	No 3rd party libraries except for SDL, pthread, malloc.
+	No crash or memory leaks.
+	Ofcourse that the frame rate is not garbage.
 
 ## Features
 - Skybox 360 view.
