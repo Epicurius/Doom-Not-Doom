@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/10 16:27:20 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/25 14:04:29 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ CFILES		=	ai_attack.c\
 				protalloc.c\
 				purge_entities.c\
 				put_pixels.c\
-				random.c\
 				reload_map.c\
 				sound.c\
 				spawn_entity.c\
@@ -69,7 +68,8 @@ CFILES		=	ai_attack.c\
 				UI/game_pause.c\
 				UI/game_quit.c\
 				ParseMap/parse_map.c\
-				ParseMap/parse_map_events.c\
+				ParseMap/parse_map_events1.c\
+				ParseMap/parse_map_events2.c\
 				ParseMap/parse_map_header.c\
 				ParseMap/parse_map_sector.c\
 				ParseMap/parse_map_sprite.c\
