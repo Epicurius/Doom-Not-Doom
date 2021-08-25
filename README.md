@@ -38,7 +38,7 @@
 ### Constraints
 
 	C is mandatory.
-	Follow the Norm (A royal pain in the ass)
+	Follow the Norm (read TheNorm in root)
 	Drawing only by filling a one-dimension array of pixels manually.
 	Computing everything on the CPU.
 	No 3rd party libraries except for SDL, pthread, malloc.
@@ -61,3 +61,6 @@
 - Many more...
 
 By: Niklas Neronin & Jony Salmi
+
+
+
