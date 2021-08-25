@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:55:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 10:07:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -848,5 +848,6 @@ void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	audio_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
+void	spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);
 
 #endif

@@ -6,20 +6,40 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:53:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 10:07:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-/*
- *	Spawn a Alfred, Spooky or Ghost and init it.
- */
-static void	spawn_entity(t_doom *doom, t_entity *rift)
+void	spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw)
 {
 	t_entity	*mob;
 
 	mob = protalloc(sizeof(t_entity), "spawn_entity");
+	mob->type = type;
+	mob->yaw = yaw;
+	mob->where = pos;
+	mob->sector = find_sector(doom->sectors, doom->nb.sectors, pos);
+	mob->dest = mob->where;
+	mob->state = IDLE;
+	if (g_entity_data[mob->type].flight)
+		mob->where.z += 5;
+	mob->hp = g_entity_data[mob->type].health;
+	project_entity(doom, mob, &mob->render);
+	ft_lstadd_new(&doom->entity, mob, sizeof(mob));
+	doom->nb.entities += 1;
+	doom->game.spawns += 1;
+}
+
+/*
+ *	Spawn a Alfred, Spooky or Ghost and init it.
+ */
+static void	spawn_entity_from_rift(t_doom *doom, t_entity *rift)
+{
+	t_entity	*mob;
+
+	mob = protalloc(sizeof(t_entity), "spawn_entity_from_rift");
 	mob->type = rand() % 3;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;
@@ -46,7 +66,7 @@ void	rift_spawn(t_doom *doom)
 	while (curr)
 	{
 		if (((t_entity *)curr->content)->type == RIFT)
-			spawn_entity(doom, curr->content);
+			spawn_entity_from_rift(doom, curr->content);
 		curr = curr->next;
 	}
 }

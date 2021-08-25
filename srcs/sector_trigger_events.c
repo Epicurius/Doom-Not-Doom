@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:50:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 10:18:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,23 @@ static void	move_plane(t_doom *doom, t_event *event)
  */
 static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 {
-	if (event->type == FLOOR || event->type == CEILING)
-	{
-		if (event->time + event->speed < doom->time.curr)
-			move_plane(doom, event);
-		if (event->trigger > 2)
-			event->trigger = 0;
-	}
-	else if (event->type == STORE || event->type == AUDIO)
+	if (event->type == STORE || event->type == AUDIO || event->type == SPAWN)
 	{
 		if (event->type == STORE && doom->player.store_access)
 			precompute_buy_menu(doom);
 		else if (event->type == AUDIO && event->audio)
 			Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
+		else if (event->type == SPAWN)
+			spawn_entity(doom, event->entity, event->pos, event->yaw);
 		event->trigger_sector = -1;
 		event->trigger = 0;
+	}
+	else if (event->type == FLOOR || event->type == CEILING)
+	{
+		if (event->time + event->speed < doom->time.curr)
+			move_plane(doom, event);
+		if (event->trigger > 2)
+			event->trigger = 0;
 	}
 	else if (event->type == HAZARD)
 	{
