@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:13:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:45:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static int	parse_game_mode(char *str)
  *	Parse header and malloc amount of vertices, walls adn sectors.
  *	Could use realloc but htis is faster, so why not.
  */
-void	parse_header(t_doom *doom, char **arr)
+void	parse_header(t_doom *doom, int nb, char **arr)
 {
+	if (nb < 5)
+		error_msg("Invalid amount of arguments for event %s\n", arr[0]);
 	doom->game.mode = parse_game_mode(arr[1]);
 	doom->map_scale = ft_atoi(arr[2]);
 	doom->nb.vertices = ft_atoi(arr[3]);

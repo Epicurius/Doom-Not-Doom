@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:39:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:55:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -427,8 +427,9 @@ typedef struct s_event
 	Mix_Chunk		*audio;
 	int				dir;
 	char			*path;
-	t_v3			pos;
 	int				entity;
+	t_v3			pos;
+	int				yaw;
 }					t_event;
 
 typedef struct s_motion
@@ -801,26 +802,27 @@ void				init_textures(t_doom *doom);
 /* File: Init/init_weapons.c */
 void				init_weapons(t_doom *doom);
 /* File: ParseMap/parse_map.c */
-void				parse_player(t_doom *doom, char **arr);
-void				read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**));
+void				parse_player(t_doom *doom, int ac, char **av);
+void				read_line(t_doom *doom, int fd,
+						void (*f)(t_doom*, int, char**));
 int					parse_map(t_doom *doom, char *file_name);
 /* File: ParseMap/parse_map_events.c */
 void				get_event_type(t_event *event, char *str);
 void				get_event_action(t_event *event, char *str);
-void				parse_events(t_doom *doom, char **arr);
+void				parse_events(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_header.c */
-void				parse_header(t_doom *doom, char **arr);
+void				parse_header(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sector.c */
-void				parse_vertex(t_doom *doom, char **arr);
-void				parse_wall(t_doom *doom, char **arr);
-void				parse_fc(t_doom *doom, char **arr);
+void				parse_vertex(t_doom *doom, int ac, char **av);
+void				parse_wall(t_doom *doom, int ac, char **av);
+void				parse_fc(t_doom *doom, int ac, char **av);
 void				complete_wall(t_sector *sect, t_wall *walls, char **id,
 						char **neighbour);
-void				parse_sector(t_doom *doom, char **arr);
+void				parse_sector(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sprite.c */
 int					wsprite_state(char *str);
-void				parse_wsprite(t_doom *doom, char **arr);
-void				parse_entity(t_doom *doom, char **arr);
+void				parse_wsprite(t_doom *doom, int ac, char **av);
+void				parse_entity(t_doom *doom, int ac, char **av);
 /* File: ParseMap/validate_map1.c */
 int					check_entities(t_doom *doom);
 int					check_player(t_doom *doom);
@@ -842,5 +844,9 @@ void				game_quit(t_doom *doom);
 
 
 int	ticks_elapsed(int curr_tick, int start_tick, int ticks);
+void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
+void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
+void	audio_event(t_doom *doom, t_event *event, int nb, char **arr);
+void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
 
 #endif

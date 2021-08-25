@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:42:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:46:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Parse vertice.
  */
-void	parse_vertex(t_doom *doom, char **arr)
+void	parse_vertex(t_doom *doom, int nb, char **arr)
 {
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
@@ -24,7 +24,7 @@ void	parse_vertex(t_doom *doom, char **arr)
 /*
  *	Parse wall.
  */
-void	parse_wall(t_doom *doom, char **arr)
+void	parse_wall(t_doom *doom, int nb, char **arr)
 {
 	t_wall	*wall;
 
@@ -40,7 +40,7 @@ void	parse_wall(t_doom *doom, char **arr)
 /*
  *	Parse floor and ceiling.
  */
-void	parse_fc(t_doom *doom, char **arr)
+void	parse_fc(t_doom *doom, int nb, char **arr)
 {
 	int		sect;
 	char	**slope;
@@ -87,7 +87,7 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id,
 /*
  *	Parse sector.
  */
-void	parse_sector(t_doom *doom, char **arr)
+void	parse_sector(t_doom *doom, int ac, char **arr)
 {
 	int			nb;
 	t_sector	*sect;

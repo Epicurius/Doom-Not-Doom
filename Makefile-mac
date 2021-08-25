@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/08/18 08:54:23 by nneronin         ###   ########.fr        #
+#    Updated: 2021/08/25 09:55:27 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ CFILES		=	ai_attack.c\
 				UI/game_pause.c\
 				UI/game_quit.c\
 				ParseMap/parse_map.c\
-				ParseMap/parse_map_events.c\
+				ParseMap/parse_map_events1.c\
+				ParseMap/parse_map_events2.c\
 				ParseMap/parse_map_header.c\
 				ParseMap/parse_map_sector.c\
 				ParseMap/parse_map_sprite.c\

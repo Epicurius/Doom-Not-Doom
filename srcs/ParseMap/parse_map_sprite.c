@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:23:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:47:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	wsprite_state(char *str)
 /*
  *	Parse wall sprite.
  */
-void	parse_wsprite(t_doom *doom, char **arr)
+void	parse_wsprite(t_doom *doom, int nb, char **arr)
 {
 	t_wsprites	*wsprite;
 	t_wsprite	*sprite;
@@ -66,7 +66,7 @@ static int	entity_type(char *str)
 /*
  *	Parse entity.
  */
-void	parse_entity(t_doom *doom, char **arr)
+void	parse_entity(t_doom *doom, int nb, char **arr)
 {
 	t_entity	*entity;
 

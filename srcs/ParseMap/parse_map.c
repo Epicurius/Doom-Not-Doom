@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:01:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 09:47:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Parse player pos and yaw.
  */
-void	parse_player(t_doom *doom, char **arr)
+void	parse_player(t_doom *doom, int nb, char **arr)
 {
 	doom->player.where.x = ft_atof(arr[1]) * doom->map_scale;
 	doom->player.where.y = ft_atof(arr[2]) * doom->map_scale;
@@ -26,8 +26,9 @@ void	parse_player(t_doom *doom, char **arr)
 /*
  *	Read a line and split it with '\t' and pass the array to function.
  */
-void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
+void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, int, char**))
 {
+	int		nb;
 	char	*line;
 	char	**arr;
 
@@ -35,8 +36,8 @@ void	read_line(t_doom *doom, int fd, void (*f)(t_doom*, char**))
 	{
 		if (line[0] == '-')
 			break ;
-		arr = stringsplit(line, '\t', NULL);
-		f(doom, arr);
+		arr = stringsplit(line, '\t', &nb);
+		f(doom, nb, arr);
 		free(arr);
 		ft_strdel(&line);
 	}
