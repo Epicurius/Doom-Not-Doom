@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:57:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/25 10:47:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,18 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 			animate_wsprite(doom, event->wsprite);
 		move_plane(doom, event);
 	}
-	else if (event->type == STORE && event->wsprite->trigger
-		&& doom->player.store_access)
+	else
 	{
-		precompute_buy_menu(doom);
+		if (event->type == STORE && doom->player.store_access)
+			precompute_buy_menu(doom);
+		else if (event->type == AUDIO)
+			Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
+		else if (event->type == SPAWN)
+			spawn_entity(doom, event->entity, event->pos, event->yaw);
 		event->wsprite->trigger = 0;
 	}
-	else if (event->type == AUDIO)
-	{
-		Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
-		event->wsprite->trigger = 0;
-	}
+	doom->player.action = NONE;
+	doom->keys[KEY_E] = 0;
 }
 
 /*
