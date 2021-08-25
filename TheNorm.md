@@ -1,4 +1,16 @@
-# The NORM
+# The Norm
+
+### Forbidden stuff!
+	You’re not allowed to use:
+	◦ for
+	◦ do...while
+	◦ switch
+	◦ case
+	◦ goto
+	Ternary operators such as ‘?’.
+	VLAs - Variable Length Arrays.
+	Implicit type in variable declarations
+	Non const static global variables.
 
 ###  Denomination
 	A structure’s name must start by s_.
@@ -9,25 +21,20 @@
 	Variables and functions names can only contain lowercases, digits and ’_’ (UnixCase).
 	Files and directories names can only contain lowercases, digits and ’_’ (Unix Case).
 	Characters that aren’t part of the standard ASCII table are forbidden.
-	Variables, functions, and any other identifier must use snake case. No capital letters,
-		and each word separated by an underscore.
+	Variables, functions, and any other identifier must use snake case.
 	All identifiers (functions, macros, types, variables, etc.) must be in English.
-	Objects (variables, functions, macros, types, files or directories) must have the most
-		explicit or most mnemonic names as possible.
 	Using global variables that are not marked const and static is forbidden and is
 		considered a norm error, unless the project explicitly allows them.
 
 ### Formatting
+	One instruction per line!
 	You must indent your code with 4-space tabulations. This is not the same as 4
 		average spaces, we’re talking about real tabulations here.
 	Each function must be maximum 25 lines, not counting the function’s own curly
 		brackets.
 	Each line must be at most 80 columns wide, comments included. Warning: a
 		tabulation doesn’t count as a column, but as the number of spaces it represents.
-	Each function must be separated by a newline. Any comment or preprocessor
-		instruction can be right above the function. The newline is after the previous
-			function.
-	One instruction per line.
+	Each function must be separated by a newline.
 	An empty line must be empty: no spaces or tabulations.
 	A line can never end with spaces or tabulations.
 	You can never have two consecutive spaces.
@@ -96,14 +103,3 @@
 ### Files
 	You cannot include a .c file.
 	You cannot have more than 5 function-definitions in a .c file.
-
-### Forbidden stuff!
-	You’re not allowed to use:
-	◦ for
-	◦ do...while
-	◦ switch
-	◦ case
-	◦ goto
-	Ternary operators such as ‘?’.
-	VLAs - Variable Length Arrays.
-	Implicit type in variable declarations

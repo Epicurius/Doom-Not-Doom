@@ -60,7 +60,4 @@
 - AI Dodge/Danger.
 - Many more...
 
-By: Niklas Neronin & Jony Salmi
-
-
-
+### By: Niklas Neronin & Jony Salmi
