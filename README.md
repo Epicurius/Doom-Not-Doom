@@ -38,26 +38,26 @@
 ### Constraints
 
 > C is mandatory.
-Follow the Norm (A royal pain in the ass)
-Drawing only by filling a one-dimension array of pixels manually.
-Computing everything on the CPU.
-No 3rd party libraries except for SDL, pthread, malloc.
-No crash or memory leaks.
-Ofcourse that the frame rate is not garbage.
+> Follow the Norm (A royal pain in the ass)
+> Drawing only by filling a one-dimension array of pixels manually.
+> Computing everything on the CPU.
+> No 3rd party libraries except for SDL, pthread, malloc.
+> No crash or memory leaks.
+> Ofcourse that the frame rate is not garbage.
 
 ## Features
 - Skybox 360 view.
 - Bullet holes left on wall.
-- Wall buttons when clicked trigger an event.
-- Wall targets when shot trigger an event.
 - Store where weapond and upgrades can be bought.
 - Rifts (Portals) that spawn entities.
 - 2 Game modes, Story and Endless.
-- Multythreading
+- Multythreading.
 - Map events.
+- Clickable or shootable buttons and position triggers.
 - User settings, Window size, FOV, Difficulty etc.
 - BXPM, custom image format.
-- Wall collision and slide. (like in original Doom)
+- Wall collision and wall slide.
 - AI Dodge/Danger.
+- Many more...
 
 By: Niklas Neronin & Jony Salmi
