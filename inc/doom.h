@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:05:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:13:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+# define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
 typedef struct s_settings
 {

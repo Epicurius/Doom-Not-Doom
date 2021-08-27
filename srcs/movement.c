@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:43:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:16:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,6 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-//player->velocity.x = (player->velocity.x + move.x) * ACCELERATION;
-//player->velocity.y = (player->velocity.y + move.y) * ACCELERATION;
-//if (player->flight)
-//	player->velocity.z = (player->velocity.z + move.z) * ACCELERATION;
-//if (player->velocity.x < 0.001 && player->velocity.x > -0.001)
-//	player->velocity.x = 0.0;
-//if (player->velocity.y < 0.001 && player->velocity.y > -0.001)
-//	player->velocity.y = 0.0;
 static void	get_velocity(t_doom *doom, t_v3 move)
 {
 	t_player	*player;
