@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:38:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:45:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /*
  *	A malloc that sets all bytes to NULL
  *	If memory allocation fails, will display error message
- *	(with custom string if given)
- *	and exit(1), so not to segfaault the program later on;
+ *	[ERROR]	Malloc: file, function, line number;
+ *	and exit(1), so not to segfault the program later on;
  */
-void	*protalloc(size_t size, char *str)
+void	*prot_alloc(size_t size, char *file, char *func, int line)
 {
 	void	*mem;
 
@@ -28,10 +28,7 @@ void	*protalloc(size_t size, char *str)
 		ft_bzero(mem, size);
 		return (mem);
 	}
-	write(1, "\x1b[31m[ERROR]\x1b[00m\t(", 19);
-	if (!str)
-		ft_putstr(str);
-	write(1, ") Out of memory\n", 16);
+	ft_printf("{RED}[ERROR]{RESET}\tMalloc: %s : %s %d\n", file, func, line);
 	exit(1);
 }
 

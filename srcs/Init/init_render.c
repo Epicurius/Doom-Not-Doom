@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 14:35:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:37:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ void	init_render(t_doom *doom)
 	int	i;
 
 	i = -1;
-	doom->sectbool = protalloc(sizeof(int)
-			* doom->nb.sectors, "doom->zbuffer");
-	doom->render = protalloc(sizeof(t_render)
-			* doom->nb.threads, "doom->render");
-	doom->zbuffer = protalloc(sizeof(double)
-			* (doom->surface->w * doom->surface->h), "doom->zbuffer");
+	doom->sectbool = PROT_ALLOC(sizeof(int) * doom->nb.sectors);
+	doom->render = PROT_ALLOC(sizeof(t_render) * doom->nb.threads);
+	doom->zbuffer = PROT_ALLOC(sizeof(double)
+			* (doom->surface->w * doom->surface->h));
 	doom->surface->userdata = doom->zbuffer;
 	while (++i < doom->nb.threads)
 	{

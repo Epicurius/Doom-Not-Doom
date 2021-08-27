@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 10:07:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:37:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw)
 {
 	t_entity	*mob;
 
-	mob = protalloc(sizeof(t_entity), "spawn_entity");
+	mob = PROT_ALLOC(sizeof(t_entity));
 	mob->type = type;
 	mob->yaw = yaw;
 	mob->where = pos;
@@ -39,7 +39,7 @@ static void	spawn_entity_from_rift(t_doom *doom, t_entity *rift)
 {
 	t_entity	*mob;
 
-	mob = protalloc(sizeof(t_entity), "spawn_entity_from_rift");
+	mob = PROT_ALLOC(sizeof(t_entity));
 	mob->type = rand() % 3;
 	mob->yaw = rand() % 365;
 	mob->where = rift->where;

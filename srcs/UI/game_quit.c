@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:38:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	game_quit(t_doom *doom)
 
 	if (doom->quit != 1)
 		return ;
-	bxpm = protalloc(sizeof(t_bxpm), "Game_quit bxpm.");
+	bxpm = PROT_ALLOC(sizeof(t_bxpm));
 	if (!read_bxpm(bxpm, BXPM_PATH"quit.bxpm"))
 		error_msg(0, "read game_over");
 	blit_bxpm(doom->surface, bxpm,

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:05:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:36:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ static void	shade_palet(t_doom *doom, int texture, int light)
 	if (texture < 0 || doom->mtx[texture].palet[255 + light] != NULL)
 		return ;
 	bxpm = &doom->mtx[texture];
-	bxpm->palet[255 + light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb,
-			"color_palet");
+	bxpm->palet[255 + light] = PROT_ALLOC(sizeof(Uint32 *) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
 	{
 		if (bxpm->clr[i] == 0xFF800080)

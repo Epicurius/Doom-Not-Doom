@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:18:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:10:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:38:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	game_loading(t_doom *doom)
 	SDL_Event	event;
 	t_bxpm		*bxpm;
 
-	bxpm = protalloc(sizeof(t_bxpm), "Game_loading bxpm.");
+	bxpm = PROT_ALLOC(sizeof(t_bxpm));
 	read_bxpm(bxpm, BXPM_PATH"loading.bxpm");
 	blit_bxpm(doom->surface, bxpm, doom->surface->w / 2 - bxpm->w / 2,
 		doom->surface->h / 2 - bxpm->h / 2);

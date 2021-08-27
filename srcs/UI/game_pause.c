@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:38:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	game_pause(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
-	bxpm = protalloc(sizeof(t_bxpm), "game_pause bxpm.");
+	bxpm = PROT_ALLOC(sizeof(t_bxpm));
 	read_bxpm(bxpm, BXPM_PATH"pause.bxpm");
 	blit_bxpm(doom->surface, bxpm,
 		doom->c.x - bxpm->w / 2, doom->c.y - bxpm->h / 2);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:53:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:36:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	spaw_projectile(t_doom *doom, t_entity *entity)
 {
 	t_projectile	*orb;
 
-	orb = protalloc(sizeof(t_projectile), "ai_attack");
+	orb = PROT_ALLOC(sizeof(t_projectile));
 	orb->velocity = projectile_movement(doom,
 			entity->where, doom->player.where);
 	orb->where = entity->where;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:45:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:37:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	parse_header(t_doom *doom, int nb, char **arr)
 	doom->orb = NULL;
 	doom->entity = NULL;
 	doom->rifts = NULL;
-	doom->vert = protalloc(sizeof(t_v3)
-			* doom->nb.vertices, "doom->vert");
-	doom->walls = protalloc(sizeof(t_wall)
-			* doom->nb.walls, "doom->walls");
-	doom->sectors = protalloc(sizeof(t_sector)
-			* doom->nb.sectors, "doom->sectors");
+	doom->vert = PROT_ALLOC(sizeof(t_v3) * doom->nb.vertices);
+	doom->walls = PROT_ALLOC(sizeof(t_wall) * doom->nb.walls);
+	doom->sectors = PROT_ALLOC(sizeof(t_sector) * doom->nb.sectors);
 }
