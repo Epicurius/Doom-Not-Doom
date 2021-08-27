@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:45:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:58:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  *	[ERROR]	Malloc: file, function, line number;
  *	and exit(1), so not to segfault the program later on;
  */
-void	*prot_alloc(size_t size, char *file, char *func, int line)
+void	*protalloc(size_t size, char *file, const char *func, int line)
 {
 	void	*mem;
 
@@ -28,7 +28,7 @@ void	*prot_alloc(size_t size, char *file, char *func, int line)
 		ft_bzero(mem, size);
 		return (mem);
 	}
-	ft_printf("{RED}[ERROR]{RESET}\tMalloc: %s : %s %d\n", file, func, line);
+	ft_printf("{RED}[ERROR]{RESET}\tMalloc: %s : %s : %d\n", file, func, line);
 	exit(1);
 }
 

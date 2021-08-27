@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buymenu.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 10:39:17 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/07/07 10:53:20 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/08/27 15:51:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,24 @@ typedef struct s_buymenu
 	t_bui_element	*weapon_menu;
 	t_bui_element	*weapon_upgrades;
 	t_bui_element	*player_menu;
-
-	//WEAPON STATS ELEMENTS
 	t_bui_element	*damage_stat;
 	t_bui_element	*ammo_stat;
 	t_bui_element	*max_ammo_stat;
 	t_bui_element	*firerate_stat;
-
-	//PLAYER STATS ELEMENTS
 	t_bui_element	*speed_stat;
 	t_bui_element	*jump_stat;
 	t_bui_element	*armour_stat;
 	t_bui_element	*max_armour_stat;
-
-	//WEAPON MENU ELEMENTS
 	t_bui_element	*gun_elem[WEAPON_AMOUNT];
 	t_bui_element	*gun_buy[WEAPON_AMOUNT];
-
-	//PLAYER MENU ELEMENTS
 	t_bui_element	*damage_elem;
 	t_bui_element	*firerate_elem;
 	t_bui_element	*ammo_elem;
 	t_bui_element	*max_ammo_elem;
-
-	//PLAYER MENU ELEMENTS
 	t_bui_element	*armor_elem;
 	t_bui_element	*max_armor_elem;
 	t_bui_element	*jump_elem;
 	t_bui_element	*speed_elem;
-
-	// EVENT HANDLING
 	t_bui_element	*active_gun;
 	t_list			*all_guns;
 }					t_buymenu;
@@ -83,7 +71,8 @@ void				player_upgrading_events(t_buymenu *buymenu, t_inv *inv);
 t_bui_element		*new_stat(t_bui_element *parent, char *str, t_xywh pos);
 t_bui_element		*new_button(t_bui_element *parent, char *name, t_xywh c);
 t_bui_element		*new_buy_button(t_bui_element *parent, t_xywh c);
-t_bui_element		*new_upgrade_button(t_bui_element *parent, char *str, int i);
+t_bui_element		*new_upgrade_button(
+						t_bui_element *parent, char *str, int i);
 
 /* HELP */
 int					get_active_gun(t_buymenu *buymenu);

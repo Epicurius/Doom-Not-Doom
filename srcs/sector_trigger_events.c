@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 16:01:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	move_plane(t_doom *doom, t_event *event)
 		event->speed = 10;
 	while (++i < event->event_sector->npoints)
 		scale_wall_height(doom, event->event_sector->wall[i]);
+	if (event->trigger > 2)
+		event->trigger = FALSE;
 }
 
 /*
@@ -49,14 +51,12 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	{
 		if (event->time + event->speed < doom->time.curr)
 			move_plane(doom, event);
-		if (event->trigger > 2)
-			event->trigger = FALSE;
 	}
 	else if (event->type == HAZARD)
 	{
-		if (floor_at(&doom->sectors[event->trigger_sector],
-				doom->player.where) + 0.1 >= doom->player.where.z)
-			doom->player.health -= 1;
+		if (floor_at(&doom->sectors[event->trigger_sector], doom->player.where)
+			+ 0.1 >= doom->player.where.z)
+			doom->player.health -= event->speed;
 		event->trigger = FALSE;
 	}
 	else
@@ -82,7 +82,7 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	if (event->trigger_sector == doom->player.sector || event->trigger)
 	{
-		if (event->trigger == 0)
+		if (event->trigger == FALSE)
 			event->trigger = TRUE;
 		preform_sector_trigger_event(doom, event);
 	}

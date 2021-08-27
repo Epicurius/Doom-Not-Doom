@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:05:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:33:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define PROT_ALLOC(size)	prot_alloc((size_t)size, (char *)__FILE__,\
-										(char *)__FUNCTION__, (int)__LINE__)
+# define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
 typedef struct s_settings
 {
@@ -586,8 +585,8 @@ void				project_entity(t_doom *doom, t_entity *ent,
 /* File: project_wall.c */
 void				project_wall(t_doom *doom, t_wall *wall);
 /* File: protalloc.c */
-void				*prot_alloc(size_t size, char *file, char *func, int line);
-void				*protalloc(size_t siz, char *str);
+void				*protalloc(size_t size, char *file,
+						const char *func, int line);
 void				reset_sectbool(t_doom *doom, int curr_sect);
 /* File: purge_entities.c */
 void				purge_entities(t_doom *doom);
@@ -813,11 +812,14 @@ void				get_event_type(t_event *event, char *str);
 void				get_event_action(t_event *event, char *str);
 void				parse_events(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_events2.c */
-void				floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
-void				spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
-void				audio_event(t_doom *doom, t_event *event, int nb, char **arr);
-void				hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
-void				light_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				floor_ceiling_event(t_doom *doom, t_event *event,
+						int nb, char **arr);
+void				spawn_event(t_doom *doom, t_event *event,
+						int nb, char **arr);
+void				light_event(t_doom *doom, t_event *event,
+						int nb, char **arr);
+void				audio_event(t_event *event, int nb, char **arr);
+void				hazard_event(t_event *event, int nb, char **arr);
 /* File: ParseMap/parse_map_header.c */
 void				parse_header(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sector.c */
