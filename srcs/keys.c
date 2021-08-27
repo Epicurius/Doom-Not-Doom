@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:51:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	poll_event(t_doom *doom)
 
 	key = doom->keys;
 	get_events(doom, key);
-	if (key[KEY_ESCAPE] || key[KEY_Q])
+	if (key[SDL_SCANCODE_ESCAPE] || key[SDL_SCANCODE_Q])
 		doom->quit = TRUE;
-	if (key[KEY_M])
-		mute(key[KEY_M] = 0);
+	if (key[SDL_SCANCODE_M])
+		mute(key[SDL_SCANCODE_M] = 0);
 	if (key[SDL_SCANCODE_GRAVE])
 		doom->player.where = doom->sectors[doom->player.sector].center;
-	if (doom->player.action == NONE && key[KEY_E])
+	if (doom->player.action == NONE && key[SDL_SCANCODE_E])
 		doom->player.action = CLICKING;
 }

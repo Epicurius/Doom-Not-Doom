@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:53:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
  */
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->weapon[0].own && doom->keys[KEY_1])
+	if (doom->weapon[0].own && doom->keys[SDL_SCANCODE_1])
 		doom->player.equiped = FALSE;
-	else if (doom->weapon[1].own && doom->keys[KEY_2])
+	else if (doom->weapon[1].own && doom->keys[SDL_SCANCODE_2])
 		doom->player.equiped = TRUE;
-	else if (doom->weapon[2].own && doom->keys[KEY_3])
+	else if (doom->weapon[2].own && doom->keys[SDL_SCANCODE_3])
 		doom->player.equiped = 2;
-	else if (doom->weapon[3].own && doom->keys[KEY_4])
+	else if (doom->weapon[3].own && doom->keys[SDL_SCANCODE_4])
 		doom->player.equiped = 3;
-	else if (doom->weapon[4].own && doom->keys[KEY_5])
+	else if (doom->weapon[4].own && doom->keys[SDL_SCANCODE_5])
 		doom->player.equiped = 5;
 }
 
@@ -119,7 +119,7 @@ void	precompute_weapon(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_WEAPON, doom->sound[WAV_EMPTY_CLIP], 0);
 	else if (weapon->frame >= weapon->fire_frames)
 		weapon_reload_animate(doom, weapon);
-	else if (doom->keys[KEY_R] && !weapon->frame
+	else if (doom->keys[SDL_SCANCODE_R] && !weapon->frame
 		&& !weapon->mag_ammo && weapon->cur_ammo)
 		weapon_reload_animate(doom, weapon);
 }

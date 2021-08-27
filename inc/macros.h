@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:56:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:55:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 ** Screen info
 */
 # define MAX_PROCESSORS					64
+# define MOUSE_LEFT						512
+# define MOUSE_RIGHT					513
 
 /*
 **	Vision

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:53:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	pause_loop(t_doom *doom, t_bmp *bmp)
 		SDL_PollEvent(&event);
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p)
 		{
-			doom->keys[KEY_P] = FALSE;
+			doom->keys[SDL_SCANCODE_P] = FALSE;
 			break ;
 		}
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q)
@@ -87,7 +87,7 @@ void	game_pause(t_doom *doom)
 	t_bxpm		*bxpm;
 	t_bmp		*bmp;
 
-	if (!doom->keys[KEY_P])
+	if (!doom->keys[SDL_SCANCODE_P])
 		return ;
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,

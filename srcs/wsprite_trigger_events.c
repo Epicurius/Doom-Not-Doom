@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:53:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 		event->wsprite->trigger = FALSE;
 	}
 	doom->player.action = NONE;
-	doom->keys[KEY_E] = FALSE;
+	doom->keys[SDL_SCANCODE_E] = FALSE;
 }
 
 /*
