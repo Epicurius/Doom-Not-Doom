@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:16:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:05:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	loop_events(t_doom *doom, t_event *event)
 		event->time = doom->time.curr;
 		ft_swap(&event->event_sector->light, &event->light);
 	}
-	else if (event->type == FLOOR || event->type == CEILING
+	else if ((event->type == FLOOR || event->type == CEILING)
 		&& event->time + 100 < doom->time.curr)
 	{
 		if (event->type == FLOOR)

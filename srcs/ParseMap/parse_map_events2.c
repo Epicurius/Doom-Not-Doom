@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 11:22:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:09:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
  */
 void	audio_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
+	(void)doom;
 	if (nb < 4)
 		error_msg("Invalid argument for event %s\n", arr[0]);
 	if (event->action == NONE)
@@ -57,6 +58,7 @@ void	audio_event(t_doom *doom, t_event *event, int nb, char **arr)
  */
 void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
+	(void)doom;
 	if (nb < 4)
 		error_msg("Invalid argument for event %s\n", arr[0]);
 	if (event->action != SECTOR)

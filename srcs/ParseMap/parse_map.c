@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:47:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:08:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  */
 void	parse_player(t_doom *doom, int nb, char **arr)
 {
+	if (nb < 5)
+		error_msg("Invalid amount of player arguments %s\n", arr[0]);
 	doom->player.where.x = ft_atof(arr[1]) * doom->map_scale;
 	doom->player.where.y = ft_atof(arr[2]) * doom->map_scale;
 	doom->player.where.z = ft_atof(arr[3]) * doom->map_scale;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:11:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  */
 void	parse_vertex(t_doom *doom, int nb, char **arr)
 {
+	if (nb < 2)
+		error_msg("Invalid amount of vertex arguments %s\n", arr[0]);
 	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
 }
@@ -28,6 +30,8 @@ void	parse_wall(t_doom *doom, int nb, char **arr)
 {
 	t_wall	*wall;
 
+	if (nb < 7)
+		error_msg("Invalid amount of wall arguments %s\n", arr[0]);
 	wall = &doom->walls[ft_atoi(arr[0])];
 	wall->v1 = doom->vert[ft_atoi(arr[1])];
 	wall->v2 = doom->vert[ft_atoi(arr[2])];
@@ -47,6 +51,8 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 	t_plane	*floor;
 	t_plane	*ceiling;
 
+	if (nb < 8)
+		error_msg("Invalid amount of f&c arguments %s\n", arr[0]);
 	sect = ft_atoi(arr[0]);
 	floor = &doom->sectors[sect].floor;
 	ceiling = &doom->sectors[sect].ceiling;
@@ -94,6 +100,8 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	char		**walls;
 	char		**neighbour;
 
+	if (ac < 5)
+		error_msg("Invalid amount of sector arguments %s\n", arr[0]);
 	sect = &doom->sectors[ft_atoi(arr[0])];
 	sect->id = ft_atoi(arr[0]);
 	walls = stringsplit(arr[1], ' ', &sect->npoints);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:47:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:05:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define PROT_ALLOC(size)	prot_alloc(size, __FILE__, __FUNCTION__, __LINE__)
+# define PROT_ALLOC(size)	prot_alloc((size_t)size, (char *)__FILE__,\
+										(char *)__FUNCTION__, (int)__LINE__)
 
 typedef struct s_settings
 {
@@ -608,6 +609,7 @@ void				sector_trigger_events(t_doom *doom, t_event *event);
 void				mute(int i);
 void				init_sound(t_doom *doom);
 /* File: spawn_entity.c */
+void				spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);
 void				rift_spawn(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
 /* File: update_screen.c */
@@ -806,10 +808,16 @@ void				parse_player(t_doom *doom, int ac, char **av);
 void				read_line(t_doom *doom, int fd,
 						void (*f)(t_doom*, int, char**));
 int					parse_map(t_doom *doom, char *file_name);
-/* File: ParseMap/parse_map_events.c */
+/* File: ParseMap/parse_map_events1.c */
 void				get_event_type(t_event *event, char *str);
 void				get_event_action(t_event *event, char *str);
 void				parse_events(t_doom *doom, int ac, char **av);
+/* File: ParseMap/parse_map_events2.c */
+void				floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				audio_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				light_event(t_doom *doom, t_event *event, int nb, char **arr);
 /* File: ParseMap/parse_map_header.c */
 void				parse_header(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sector.c */
@@ -841,12 +849,5 @@ void				game_over(t_doom *doom);
 void				game_pause(t_doom *doom);
 /* File: UI/game_quit.c */
 void				game_quit(t_doom *doom);
-
-void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
-void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
-void	audio_event(t_doom *doom, t_event *event, int nb, char **arr);
-void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
-void	spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);
-void	light_event(t_doom *doom, t_event *event, int nb, char **arr);
 
 #endif

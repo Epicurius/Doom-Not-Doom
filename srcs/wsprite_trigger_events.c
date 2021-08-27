@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:53:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:06:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	move_plane(t_doom *doom, t_event *event)
 /*
  *	Preform the wall sprite trigger event.
  */
-static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
+static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event)
 {
 	if (event->type == FLOOR || event->type == CEILING)
 	{
@@ -86,5 +86,5 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 		Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
 		event->wsprite->trigger = 2;
 	}
-	preform_wsprite_trigger_events(doom, event, -1);
+	preform_wsprite_trigger_events(doom, event);
 }

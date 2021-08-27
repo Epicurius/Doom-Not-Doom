@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:38:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 15:12:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	parse_wsprite(t_doom *doom, int nb, char **arr)
 	t_wsprites	*wsprite;
 	t_wsprite	*sprite;
 
+	if (nb < 7)
+		error_msg("Invalid amount of wsprite arguments %s\n", arr[0]);
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
 	wsprite->num = ft_realloc(wsprite->num, sizeof(t_wsprite) * wsprite->total,
 			sizeof(t_wsprite) * ++wsprite->total);
@@ -70,6 +72,8 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 {
 	t_entity	*entity;
 
+	if (nb < 6)
+		error_msg("Invalid amount of entity arguments %s\n", arr[0]);
 	entity = PROT_ALLOC(sizeof(t_entity));
 	entity->type = entity_type(arr[1]);
 	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
