@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:30:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 10:51:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,16 @@ void	shade_palets(t_doom *doom)
 			shade_palet(&doom->mtx[sector->floor.tx], sector->light);
 		if (sector->ceiling.tx >= 0)
 			shade_palet(&doom->mtx[sector->ceiling.tx], sector->light);
+	}
+	s = -1;
+	while (++s < doom->nb.events)
+	{
+		if (doom->events[s].type != LIGHT)
+			continue ;
+		w = -1;
+		while (++w < doom->events[s].event_sector->npoints)
+			shade_palet(&doom->mtx[doom->events[s].event_sector->wall[w]->wtx], doom->events[s].light);
+		shade_palet(&doom->mtx[doom->events[s].event_sector->floor.tx], doom->events[s].light);
+		shade_palet(&doom->mtx[doom->events[s].event_sector->ceiling.tx], doom->events[s].light);
 	}
 }

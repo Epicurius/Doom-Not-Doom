@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 09:59:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 10:20:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	get_event_type(t_event *event, char *str)
 		event->type = AUDIO;
 	else if (ft_strequ(str, "Spawn"))
 		event->type = SPAWN;
+	else if (ft_strequ(str, "Light"))
+		event->type = LIGHT;
 	else
 		error_msg("Map event %s is not valid", str);
 }
@@ -109,6 +111,8 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 		audio_event(doom, &event, nb, arr);
 	else if (event.type == HAZARD)
 		hazard_event(doom, &event, nb, arr);
+	else if (event.type == LIGHT)
+		light_event(doom, &event, nb, arr);
 	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
 	doom->events[doom->nb.events - 1] = event;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 11:27:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 11:22:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,15 @@ void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr)
 	if (event->action != SECTOR)
 		error_msg("Event 'Hazard' can only have SECTOR as an action.");
 	event->speed = ft_atoi(arr[4]);
+}
+
+/*
+ *	Parse Light event args.
+ */
+void	light_event(t_doom *doom, t_event *event, int nb, char **arr)
+{
+	if (nb < 5)
+		error_msg("Invalid argument for event %s\n", arr[0]);
+	event->event_sector = &doom->sectors[ft_atoi(arr[4])];
+	event->light = ft_atoi(arr[5]);
 }

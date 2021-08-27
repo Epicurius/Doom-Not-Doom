@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:50:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 10:17:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ enum e_event_type
 	STORE,
 	HAZARD,
 	AUDIO,
-	SPAWN
+	SPAWN,
+	LIGHT
 };
 
 enum e_wsprite_action

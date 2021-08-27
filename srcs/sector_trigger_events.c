@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 10:18:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 11:15:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	move_plane(t_doom *doom, t_event *event)
  */
 static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 {
-	if (event->type == STORE || event->type == AUDIO || event->type == SPAWN)
+	if (event->type == STORE || event->type == AUDIO || event->type == SPAWN
+		|| event->type == LIGHT)
 	{
 		if (event->type == STORE && doom->player.store_access)
 			precompute_buy_menu(doom);
@@ -53,6 +54,8 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 			Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
 		else if (event->type == SPAWN)
 			spawn_entity(doom, event->entity, event->pos, event->yaw);
+		else if (event->type == LIGHT)
+			ft_swap(&event->event_sector->light, &event->light);
 		event->trigger_sector = -1;
 		event->trigger = 0;
 	}

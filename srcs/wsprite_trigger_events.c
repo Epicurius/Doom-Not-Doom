@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 10:47:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 11:17:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 			Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
 		else if (event->type == SPAWN)
 			spawn_entity(doom, event->entity, event->pos, event->yaw);
+		else if (event->type == LIGHT)
+			ft_swap(&event->event_sector->light, &event->light);
 		event->wsprite->trigger = 0;
 	}
 	doom->player.action = NONE;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 11:24:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 11:29:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -429,6 +429,7 @@ typedef struct s_event
 	int				entity;
 	t_v3			pos;
 	int				yaw;
+	int				light;
 }					t_event;
 
 typedef struct s_motion
@@ -848,5 +849,6 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	audio_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);
+void	light_event(t_doom *doom, t_event *event, int nb, char **arr);
 
 #endif

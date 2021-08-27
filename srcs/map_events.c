@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:50:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 11:30:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*
  *	Hanfle loop events, atm only Floot and Ceiling can be loop events.
+ *	"mmamammmmammamamaaamammma"
  */
 static void	loop_events(t_doom *doom, t_event *event)
 {
@@ -21,10 +22,15 @@ static void	loop_events(t_doom *doom, t_event *event)
 	t_plane	*plane;
 
 	i = -1;
-	if (event->type == FLOOR || event->type == CEILING)
+	if (event->type == LIGHT && event->time + event->speed < doom->time.curr)
 	{
-		if (event->time + 100 > doom->time.curr)
-			return ;
+		event->speed = 100 + (rand() % 1000);
+		event->time = doom->time.curr;
+		ft_swap(&event->event_sector->light, &event->light);
+	}
+	else if (event->type == FLOOR || event->type == CEILING
+		&& event->time + 100 < doom->time.curr)
+	{
 		if (event->type == FLOOR)
 			plane = &event->event_sector->floor;
 		else
@@ -38,6 +44,7 @@ static void	loop_events(t_doom *doom, t_event *event)
 		while (++i < event->event_sector->npoints)
 			scale_wall_height(doom, event->event_sector->wall[i]);
 	}
+
 }
 
 /*
