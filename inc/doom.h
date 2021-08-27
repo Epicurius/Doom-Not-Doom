@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:42:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 14:47:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 typedef struct s_settings
 {
 	t_point			size;
-	float			rresolution;
 	t_v2			mouse;
+	float			rresolution;
 	int				difficulty;
 	int				fov;
 	int				debug;
@@ -427,11 +427,11 @@ typedef struct s_event
 	int				time;
 	Mix_Chunk		*audio;
 	int				dir;
-	char			*path;
 	int				entity;
 	t_v3			pos;
 	int				yaw;
 	int				light;
+	char			*path;
 }					t_event;
 
 typedef struct s_motion
@@ -602,8 +602,6 @@ void				blit_pixel_skybox(t_render *render, int coord,
 /* File: random.c */
 void				get_entity_state_name(t_entity *entity);
 void				what_vert(t_doom *doom);
-/* File: reload_map.c */
-//void				reload_map(t_doom *doom, char *file_name);
 /* File: sector_trigger_events.c */
 void				sector_trigger_events(t_doom *doom, t_event *event);
 /* File: sound.c */
@@ -844,8 +842,6 @@ void				game_pause(t_doom *doom);
 /* File: UI/game_quit.c */
 void				game_quit(t_doom *doom);
 
-
-int	ticks_elapsed(int curr_tick, int start_tick, int ticks);
 void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr);
 void	audio_event(t_doom *doom, t_event *event, int nb, char **arr);
