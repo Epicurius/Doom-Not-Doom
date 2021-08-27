@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:35:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	render_vline(t_render render, int sector)
 			continue ;
 		if (render.x < sect->wall[s]->cx1 || render.x > sect->wall[s]->cx2)
 			continue ;
-		sect->visible = 1;
+		sect->visible = TRUE;
 		vline = init_wall_vline(&render, sect, s);
 		if (sect->wall[s]->n == -1)
 			return (1);

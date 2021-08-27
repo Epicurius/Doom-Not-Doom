@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:38:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	quit_loop(t_doom *doom)
 		SDL_PollEvent(&event);
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_n)
 		{
-			doom->quit = 0;
+			doom->quit = FALSE;
 			break ;
 		}
 		if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y)

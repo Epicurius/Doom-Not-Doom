@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/06 11:33:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	init_endless(t_doom *doom)
 			doom->game.spawns += 1;
 		curr = curr->next;
 	}
-	doom->player.store_access = 0;
+	doom->player.store_access = FALSE;
 	i = -1;
 	while (++i < doom->nb.events)
 		if (doom->events[i].type == STORE && doom->events[i].wsprite)

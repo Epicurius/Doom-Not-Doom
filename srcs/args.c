@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:02:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	read_args2(t_settings *init, char **av, int i)
 static int	read_args1(t_settings *init, char **av, int i)
 {
 	if (ft_strequ(av[i], "-debug"))
-		init->debug = 1;
+		init->debug = TRUE;
 	else if (ft_strequ(av[i], "-launcher"))
-		init->launcher = 1;
+		init->launcher = TRUE;
 	else if (ft_strnequ(av[i], "-res=", 5))
 		init->rresolution = atof(av[i] + 5);
 	else if (ft_strnequ(av[i], "-diff=", 6))
@@ -63,7 +63,7 @@ void	args(int ac, char **av, t_settings *init)
 {
 	int	i;
 
-	i = 1;
+	i = TRUE;
 	ft_bzero(init, sizeof(init));
 	init->size = (t_point){1920, 1080};
 	init->rresolution = 1.0f;

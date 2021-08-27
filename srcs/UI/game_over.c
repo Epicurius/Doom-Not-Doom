@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:38:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	print_score(t_doom *doom, int *i)
 	write_bmp(name, bmp);
 	free_bmp(bmp);
 	free(name);
-	*i = 1;
+	*i = TRUE;
 	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);
 	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 }
@@ -107,7 +107,7 @@ void	game_over(t_doom *doom)
 	SDL_Event	event;
 	int			screen_shot;
 
-	screen_shot = 0;
+	screen_shot = FALSE;
 	blit_game_over(doom);
 	blit_game_stats(doom, NULL);
 	blit_screen_shot(doom);

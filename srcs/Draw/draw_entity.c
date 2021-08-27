@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:56:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	hit_enemy(t_entity_thread *thread, int coord)
 	if (thread->hp != NULL && thread->shooting && coord == thread->center.z)
 	{
 		*thread->hp -= thread->dmg;
-		*thread->hm = 1;
+		*thread->hm = TRUE;
 	}
 }
 

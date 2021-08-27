@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:43:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:14:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_shotgun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 1;
+	weapon->own = TRUE;
 	weapon->price = 100;
 	weapon->damage = 100;
 	weapon->ammo_price = 101;

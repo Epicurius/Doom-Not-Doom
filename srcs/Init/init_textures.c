@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:05:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	parse_wtx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 		return ;
 	if (!threads[id].active && g_map_textures[id].id != MAP_TEXTURE_AMOUNT - 1)
 	{
-		threads[id].active = 1;
+		threads[id].active = TRUE;
 		threads[id].path = ft_strdup(g_map_textures[id].path);
 		threads[id].bxpm = &doom->mtx[id];
 		tpool_add(&doom->tpool, multithread_read_bxpm, &threads[id]);
@@ -52,7 +52,7 @@ static void	parse_stx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 	id = (abs(id) - 1) * 6;
 	if (!threads[id].active)
 	{
-		threads[id].active = 1;
+		threads[id].active = TRUE;
 		i = id;
 		while (i < id + 6)
 		{

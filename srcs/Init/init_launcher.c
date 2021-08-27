@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/01 16:09:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_launcher(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 0;
+	weapon->own = FALSE;
 	weapon->price = 500;
 	weapon->damage = 100;
 	weapon->ammo_price = 101;

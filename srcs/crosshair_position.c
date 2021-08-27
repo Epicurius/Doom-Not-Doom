@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:22:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	crosshair_position(t_render *render, t_vline *vline,
 		bullet_hole->where.y = alpha * wall->height;
 		bullet_hole->where.x -= 0.5;
 		bullet_hole->where.y -= 0.5;
-		bullet_hole->ready = 0;
+		bullet_hole->ready = FALSE;
 		render->bullet_hole->curr += 1;
 		if (render->bullet_hole->total < MAX_BULLET_HOLES)
 			render->bullet_hole->total += 1;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/25 11:25:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	get_entity_state(t_doom *doom, t_entity *entity)
 		&& doom->c.x < entity->render.end.x
 		&& doom->c.y > entity->render.start.y
 		&& doom->c.y < entity->render.end.y)
-		entity->danger = 1;
+		entity->danger = TRUE;
 	get_entity_state2(doom, entity);
-	entity->danger = 0;
+	entity->danger = FALSE;
 }

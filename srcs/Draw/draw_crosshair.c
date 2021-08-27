@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:41:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_hit_marker(t_doom *doom)
 	draw_line(doom->surface, 0xff00ff00,
 		(t_point){doom->c.x - 10, doom->c.y + 10},
 		(t_point){doom->c.x + 10, doom->c.y - 10});
-	doom->player.hm = 0;
+	doom->player.hm = FALSE;
 }
 
 /*

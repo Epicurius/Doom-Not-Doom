@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 10:20:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 			{
 				event->wsprite = &doom->walls[i].wsprite.num[j];
 				event->wsprite->action = event->action;
-				event->wsprite->trigger = 0;
+				event->wsprite->trigger = FALSE;
 				return ;
 			}
 		}

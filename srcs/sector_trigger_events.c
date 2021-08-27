@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:57:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 		if (event->time + event->speed < doom->time.curr)
 			move_plane(doom, event);
 		if (event->trigger > 2)
-			event->trigger = 0;
+			event->trigger = FALSE;
 	}
 	else if (event->type == HAZARD)
 	{
 		if (floor_at(&doom->sectors[event->trigger_sector],
 				doom->player.where) + 0.1 >= doom->player.where.z)
 			doom->player.health -= 1;
-		event->trigger = 0;
+		event->trigger = FALSE;
 	}
 	else
 	{
@@ -70,7 +70,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 		else if (event->type == LIGHT)
 			ft_swap(&event->event_sector->light, &event->light);
 		event->trigger_sector = -1;
-		event->trigger = 0;
+		event->trigger = FALSE;
 	}
 }
 
@@ -83,7 +83,7 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 	if (event->trigger_sector == doom->player.sector || event->trigger)
 	{
 		if (event->trigger == 0)
-			event->trigger = 1;
+			event->trigger = TRUE;
 		preform_sector_trigger_event(doom, event);
 	}
 }

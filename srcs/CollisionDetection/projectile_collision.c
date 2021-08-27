@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:21:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 	int		contact;
 	t_list	*curr;
 
-	contact = 0;
+	contact = FALSE;
 	curr = doom->entity;
 	while (curr)
 	{
@@ -34,7 +34,7 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 			if (point_distance_v3(w, dest) <= 3)
 			{
 				((t_entity *)curr->content)->hp = 0;
-				contact = 1;
+				contact = TRUE;
 			}
 		}
 		curr = curr->next;

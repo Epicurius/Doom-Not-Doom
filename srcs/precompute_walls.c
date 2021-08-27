@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:21:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	clip_wall(t_camera cam, t_wall *wall)
 		|| (wall->sv1.z > FAR_Z && wall->sv2.z > FAR_Z)
 		|| (wall->sv1.z < cam.far_left && wall->sv2.z < cam.far_left)
 		|| (wall->sv1.z > cam.far_right && wall->sv2.z > cam.far_right))
-		wall->visible = 0;
+		wall->visible = FALSE;
 	else
 	{
-		wall->visible = 1;
+		wall->visible = TRUE;
 		clip_to_fustrum(cam, wall);
 	}
 	return (0);
@@ -68,7 +68,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	{
 		wall->bullet_hole.num[i].tscale.x = 64 * wall->width / wall->sv2.z;
 		wall->bullet_hole.num[i].tscale.y = 64 * wall->height;
-		wall->bullet_hole.num[i].ready = 1;
+		wall->bullet_hole.num[i].ready = TRUE;
 	}
 	i = -1;
 	while (++i < wall->wsprite.total)
@@ -80,7 +80,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 		wall->wsprite.num[i].tscale = new_v2(
 				wall->wsprite.num[i].scale_w / wall->sv2.z,
 				wall->wsprite.num[i].scale_h);
-		wall->wsprite.num[i].ready = 1;
+		wall->wsprite.num[i].ready = TRUE;
 	}
 }
 
@@ -111,7 +111,7 @@ void	precompute_walls(t_doom *doom)
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
-		doom->sectors[i].visible = 0;
+		doom->sectors[i].visible = FALSE;
 		precompute_floor_ceil(doom, &doom->sectors[i]);
 	}
 	i = -1;

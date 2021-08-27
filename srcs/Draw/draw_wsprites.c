@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:24:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 		{
 			if (wsprite->trigger == 0 && render->center.z == coord
 				&& render->player.action == wsprite->action)
-				wsprite->trigger = 1;
+				wsprite->trigger = TRUE;
 			blit_wsprite(render, coord, text, &render->mtx[wsprite->tx]);
 		}
 		vline->y1++;

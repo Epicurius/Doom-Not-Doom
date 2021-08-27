@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 11:17:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	move_plane(t_doom *doom, t_event *event)
 	else
 		return ;
 	if (event->wsprite != NULL)
-		event->wsprite->trigger = 0;
+		event->wsprite->trigger = FALSE;
 	if (event->wsprite != NULL && event->wsprite->state == 2)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
 }
@@ -66,10 +66,10 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event, int i)
 			spawn_entity(doom, event->entity, event->pos, event->yaw);
 		else if (event->type == LIGHT)
 			ft_swap(&event->event_sector->light, &event->light);
-		event->wsprite->trigger = 0;
+		event->wsprite->trigger = FALSE;
 	}
 	doom->player.action = NONE;
-	doom->keys[KEY_E] = 0;
+	doom->keys[KEY_E] = FALSE;
 }
 
 /*

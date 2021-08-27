@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:44:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/24 10:13:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_kar98(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = 0;
+	weapon->own = FALSE;
 	weapon->price = 400;
 	weapon->damage = 1000;
 	weapon->ammo_price = 101;
