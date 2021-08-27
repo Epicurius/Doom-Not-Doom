@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 11:29:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:05:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,8 +512,7 @@ SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
 int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
-void				shade_palet(t_bxpm *bxpm, int light);
-void				shade_palets(t_doom *doom);
+void				shade_palets(t_doom *doom, int s, int w);
 /* File: compute_vline.c */
 void				compute_vline_data(t_render *render, t_wall wall,
 						t_vline *vline);
@@ -601,7 +600,7 @@ void				blit_pixel_skybox(t_render *render, int coord,
 void				get_entity_state_name(t_entity *entity);
 void				what_vert(t_doom *doom);
 /* File: reload_map.c */
-void				reload_map(t_doom *doom, char *file_name);
+//void				reload_map(t_doom *doom, char *file_name);
 /* File: sector_trigger_events.c */
 void				sector_trigger_events(t_doom *doom, t_event *event);
 /* File: sound.c */
