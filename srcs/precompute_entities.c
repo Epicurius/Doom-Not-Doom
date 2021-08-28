@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 14:50:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	frame_animation(t_doom *doom, t_entity *entity)
 		entity->frame++;
 		entity->time = doom->time.curr;
 	}
-	if (entity->frame >= doom->npc_bxpm[entity->type].nb[entity->state][FRAMES])
+	if (entity->frame >= doom->eframes[entity->type].nb[entity->state][FRAMES])
 	{
 		if (entity->state == DEATH)
 			return (0);
@@ -56,11 +56,11 @@ static void	preforme_entity_state_fuction(t_doom *doom, t_entity *entity)
  */
 static int	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
 {
-	if (doom->npc_bxpm[entity->type].nb[entity->state][FRAMES] > 1
+	if (doom->eframes[entity->type].nb[entity->state][FRAMES] > 1
 		&& !frame_animation(doom, entity))
 		return (0);
 	entity->angle = orientation(entity->where, doom->player.where, entity->yaw,
-			doom->npc_bxpm[entity->type].nb[entity->state][ANGLES]);
+			doom->eframes[entity->type].nb[entity->state][ANGLES]);
 	project_entity(doom, entity, &entity->render);
 	return (1);
 }

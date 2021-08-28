@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:36:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	spaw_projectile(t_doom *doom, t_entity *entity)
 void	ai_attack(t_doom *doom, t_entity *entity)
 {
 	entity->yaw = angle_to_point_v2(entity->where, doom->player.where);
-	if (entity->frame < doom->npc_bxpm[entity->type].nb[ATTACK][FRAMES] - 1)
+	if (entity->frame < doom->eframes[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
 	if (g_entity_data[entity->type].type == MELEE)
 	{

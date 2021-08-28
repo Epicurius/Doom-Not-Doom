@@ -81,7 +81,7 @@ void	init_ghost(t_doom *doom)
 {
 	t_frames	*img;
 
-	img = &doom->npc_bxpm[GHOST];
+	img = &doom->eframes[GHOST];
 	img->bxpm = &doom->etx[4];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 8;

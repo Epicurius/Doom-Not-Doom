@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:34:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_med_kit(t_doom *doom)
 {
 	t_frames	*img;
 
-	img = &doom->npc_bxpm[MED_KIT];
+	img = &doom->eframes[MED_KIT];
 	img->bxpm = &doom->etx[3];
 	img->nb[IDLE][FRAMES] = 1;
 	img->nb[IDLE][ANGLES] = 1;

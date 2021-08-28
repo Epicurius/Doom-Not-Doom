@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_torch(t_doom *doom)
 {
 	t_frames	*img;
 
-	img = &doom->npc_bxpm[TORCH];
+	img = &doom->eframes[TORCH];
 	img->bxpm = &doom->etx[3];
 	img->nb[IDLE][FRAMES] = 5;
 	img->nb[IDLE][ANGLES] = 1;

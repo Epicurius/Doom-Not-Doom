@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 		if (y == 5 - 1)
 			thread[y].render.clamp_end.y = entity->render.clamp_end.y;
 		thread[y].surface = doom->surface;
-		thread[y].bxpm = doom->npc_bxpm[entity->type].bxpm;
-		thread[y].pos = doom->npc_bxpm[entity->type].pos
+		thread[y].bxpm = doom->eframes[entity->type].bxpm;
+		thread[y].pos = doom->eframes[entity->type].pos
 		[entity->state][entity->frame][entity->angle];
 		thread[y].shooting = doom->player.action;
 		thread[y].dmg = doom->weapon[doom->player.equiped].damage;
