@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:53:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	screen.x = doom->c.x + screen.x * doom->cam.scale / -screen.z;
 	screen.y = doom->c.y + screen.y * doom->cam.scale / -screen.z;
-	//ft_printf("%d %d\n", screen.x, screen.y);
+	//printf("%f %f %f\n", screen.x, screen.y, doom->cam.scale);
 	size.x = doom->eframes[ent->type].pos[ent->state][ent->frame][ent->angle].w
 			* ((g_entity_data[ent->type].scale * doom->surface->w) / screen.z);
 	size.y = doom->eframes[ent->type].pos[ent->state][ent->frame][ent->angle].h
