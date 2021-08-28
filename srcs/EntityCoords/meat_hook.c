@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_meat_hook.c                                   :+:      :+:    :+:   */
+/*   meat_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 14:42:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 12:46:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	idle_pos(t_rect **pos)
 
 void	init_meat_hook(t_doom *doom)
 {
-	t_npc_bxpm	*img;
+	t_frames	*img;
 
 	img = &doom->npc_bxpm[MEAT_HOOK];
 	img->bxpm = &doom->etx[3];

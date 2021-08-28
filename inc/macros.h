@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:55:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 11:49:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 /*
 **	Vision
 */
-# define PLAYER_HEIGHT 					7
-# define EYE_LVL						6
-# define CAMERA_RATIO					1.77777777778
+//# define CAMERA_RATIO					1.77777777778
 # define FOV							90
-# define PLAYER_RADIUS					0.7
 # define NEAR_Z							0.1
 # define FAR_Z							1000
+# define PLAYER_HEIGHT 					7
+# define PLAYER_RADIUS					0.7
+# define EYE_LVL						6
 # define RENDER_DISTANCE				200.0
 # define ZB								100
 

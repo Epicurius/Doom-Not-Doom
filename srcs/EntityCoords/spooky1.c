@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_spooky.c                                      :+:      :+:    :+:   */
+/*   spooky1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:53 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 10:49:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	death_pos_spooky(t_rect **pos)
 
 void	init_spooky(t_doom *doom)
 {
-	t_npc_bxpm	*img;
+	t_frames	*img;
 
 	img = &doom->npc_bxpm[SPOOKY];
 	img->bxpm = &doom->etx[1];

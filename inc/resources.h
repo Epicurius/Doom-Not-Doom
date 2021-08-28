@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:10:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 10:41:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,15 @@ static const t_id_and_path	g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
 	{2, BXPM_PATH"rift.bxpm"},
 	{3, BXPM_PATH"objects.bxpm"},
 	{4, BXPM_PATH"ghost.bxpm"}
+};
+
+static const char			*g_weapon_data[WEAPON_AMOUNT] =
+{
+	"SHOTGUN",
+	"GLOCK",
+	"KAR98",
+	"LAUNCHER",
+	"MINIGUN"
 };
 
 # define SHOTGUN_TEXTURE_AMOUNT	14
@@ -236,15 +245,6 @@ typedef struct s_entity_data
 	char			*path;
 	char			*name;
 }					t_entity_data;
-
-static const char			*g_weapon_data[WEAPON_AMOUNT] =
-{
-	"SHOTGUN",
-	"GLOCK",
-	"KAR98",
-	"LAUNCHER",
-	"MINIGUN"
-};
 
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 {

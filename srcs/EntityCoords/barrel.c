@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_barrel.c                                      :+:      :+:    :+:   */
+/*   barrel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 17:09:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/11 14:44:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	death_pos(t_rect **pos)
 
 void	init_barrel(t_doom *doom)
 {
-	t_npc_bxpm	*img;
+	t_frames	*img;
 
 	img = &doom->npc_bxpm[BARREL];
 	img->bxpm = &doom->etx[3];

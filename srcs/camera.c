@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:08:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:05:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
  */
 void	init_camera(t_doom *doom)
 {
+	double		vfov;
+	double		hfov;
 	t_camera	*cam;
 
 	cam = &doom->cam;
-	cam->hfov = doom->settings.fov;
-	cam->vfov = atan(tan((CONVERT_TO_RADIANS * cam->hfov * 0.5)) / CAMERA_RATIO)
-		* (180.0 / M_PI) * 2;
-	cam->near_left = -tan(CONVERT_TO_RADIANS * cam->hfov * 0.5) * NEAR_Z;
-	cam->near_right = tan(CONVERT_TO_RADIANS * cam->hfov * 0.5) * NEAR_Z;
-	cam->far_left = -tan(CONVERT_TO_RADIANS * cam->hfov * 0.5) * FAR_Z;
-	cam->far_right = tan(CONVERT_TO_RADIANS * cam->hfov * 0.5) * FAR_Z;
-	cam->near_up = -tan(CONVERT_TO_RADIANS * cam->vfov * 0.5) * NEAR_Z;
-	cam->near_down = tan(CONVERT_TO_RADIANS * cam->vfov * 0.5) * NEAR_Z;
+	hfov = doom->settings.fov;
+	cam->near_left = -tan(CONVERT_TO_RADIANS * hfov * 0.5) * NEAR_Z;
+	cam->near_right = tan(CONVERT_TO_RADIANS * hfov * 0.5) * NEAR_Z;
+	cam->far_left = -tan(CONVERT_TO_RADIANS * hfov * 0.5) * FAR_Z;
+	cam->far_right = tan(CONVERT_TO_RADIANS * hfov * 0.5) * FAR_Z;
 	cam->range = cam->near_right - cam->near_left;
-	cam->scale = doom->c.y / (cam->near_down / NEAR_Z);
+	vfov = atan(tan((CONVERT_TO_RADIANS * hfov * 0.5))
+		/ (doom->settings.size.x / (double)doom->settings.size.y))
+		* (180.0 / M_PI) * 2;
+	cam->scale = doom->c.y / tan(CONVERT_TO_RADIANS * vfov * 0.5);
 	update_camera(doom);
 }
 

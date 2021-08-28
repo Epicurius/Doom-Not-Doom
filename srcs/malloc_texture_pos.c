@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:54:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  *	Handles the mallocing of the entity state frame position array. (t_rect)
  *	Acording to the amount of frame for each action aswell as angles.
  */
-static int	malloc_state_frames_and_angles(t_npc_bxpm *entity, int state)
+static int	malloc_state_frames_and_angles(t_frames *entity, int state)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ static int	malloc_state_frames_and_angles(t_npc_bxpm *entity, int state)
  *	Handles the mallocing of the entity state array. (t_rect)
  *	IDLE, MOVE, ATTACK, DEATH.
  */
-void	malloc_texture_pos(t_npc_bxpm *entity)
+void	malloc_texture_pos(t_frames *entity)
 {
 	entity->pos = (t_rect ***)PROT_ALLOC(sizeof(t_rect **) * 4);
 	if (!entity->pos)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_gargoyl.c                                     :+:      :+:    :+:   */
+/*   gargoyl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:34:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/03 17:39:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	idle_pos(t_rect **pos)
 
 void	init_gargoyl(t_doom *doom)
 {
-	t_npc_bxpm	*img;
+	t_frames	*img;
 
 	img = &doom->npc_bxpm[GARGOYL];
 	img->bxpm = &doom->etx[3];

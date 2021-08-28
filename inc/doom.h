@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:33:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,15 +229,15 @@ typedef struct s_sector
 
 typedef struct s_camera
 {
-	double			hfov;
-	double			vfov;
+	//double			hfov;
+	//double			vfov;
 	double			near_left;
 	double			near_right;
 	double			far_left;
 	double			far_right;
 	double			range;
-	double			near_up;
-	double			near_down;
+	//double			near_up;
+	//double			near_down;
 	double			scale;
 }					t_camera;
 
@@ -249,7 +249,7 @@ typedef struct s_entity_render
 	t_point			clamp_end;
 	double			xrange;
 	double			yrange;
-	float			z;
+	double			z;
 }					t_entity_render;
 
 typedef struct s_entity
@@ -340,12 +340,12 @@ typedef struct s_time
 	SDL_Color		clock_bg;
 }					t_time;
 
-typedef struct s_npc_bxpm
+typedef struct s_frames
 {
 	t_bxpm			*bxpm;
 	t_rect			***pos;
 	int				nb[4][2];
-}					t_npc_bxpm;
+}					t_frames;
 
 typedef struct s_game
 {
@@ -480,7 +480,7 @@ typedef struct s_doom
 	t_bxpm			etx[ENTITY_TEXTURE_AMOUNT];
 	Mix_Chunk		*sound[WAV_AMOUNT];
 	t_weapon		weapon[WEAPON_AMOUNT];
-	t_npc_bxpm		npc_bxpm[ENTITY_AMOUNT];
+	t_frames		npc_bxpm[ENTITY_AMOUNT];
 	t_event			*events;
 	char			keys[517];
 }					t_doom;
@@ -548,7 +548,7 @@ int					set_icon(SDL_Window *window, char *dir);
 /* File: keys.c */
 void				poll_event(t_doom *doom);
 /* File: malloc_texture_pos.c */
-void				malloc_texture_pos(t_npc_bxpm *entity);
+void				malloc_texture_pos(t_frames *entity);
 /* File: map_events.c */
 void				map_events(t_doom *doom);
 /* File: minimap.c */
@@ -754,7 +754,7 @@ void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
 void				free_shade_palet(t_bxpm *bxpm);
-void				free_entity_pos(t_npc_bxpm *entity);
+void				free_entity_pos(t_frames *entity);
 /* File: Free/free3.c */
 void				free_sprites_pos(t_doom *doom);
 void				free_entities(t_doom *doom);

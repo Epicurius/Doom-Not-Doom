@@ -79,7 +79,7 @@ static void	death_pos_ghost(t_rect **pos)
 
 void	init_ghost(t_doom *doom)
 {
-	t_npc_bxpm	*img;
+	t_frames	*img;
 
 	img = &doom->npc_bxpm[GHOST];
 	img->bxpm = &doom->etx[4];

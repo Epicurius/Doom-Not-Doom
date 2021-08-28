@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:27:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:06:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 {
-	t_point	size;
+	t_v2	size;
 	t_v3	dist;
 	t_v3	screen;
 
@@ -27,12 +27,13 @@ void	project_entity(t_doom *doom, t_entity *ent, t_entity_render *render)
 	screen.x = dist.x * doom->player.anglesin - dist.z * doom->player.anglecos;
 	screen.z = dist.x * doom->player.anglecos + dist.z * doom->player.anglesin;
 	screen.y = dist.y + screen.z * doom->player.pitch;
-	screen.x = doom->c.x + (screen.x * doom->cam.scale / -screen.z);
-	screen.y = doom->c.y + (screen.y * doom->cam.scale / -screen.z);
+	screen.x = doom->c.x + screen.x * doom->cam.scale / -screen.z;
+	screen.y = doom->c.y + screen.y * doom->cam.scale / -screen.z;
+	//ft_printf("%d %d\n", screen.x, screen.y);
 	size.x = doom->npc_bxpm[ent->type].pos[ent->state][ent->frame][ent->angle].w
-		* (g_entity_data[ent->type].scale * doom->surface->w) / screen.z;
+			* ((g_entity_data[ent->type].scale * doom->surface->w) / screen.z);
 	size.y = doom->npc_bxpm[ent->type].pos[ent->state][ent->frame][ent->angle].h
-		* (g_entity_data[ent->type].scale * doom->surface->w) / screen.z;
+			* ((g_entity_data[ent->type].scale * doom->surface->w) / screen.z);
 	render->z = screen.z;
 	render->start = new_point(screen.x - size.x / 2, screen.y - size.y);
 	render->end = new_point(screen.x + size.x / 2, screen.y);
