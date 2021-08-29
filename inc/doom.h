@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 14:08:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/29 10:58:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,15 +229,11 @@ typedef struct s_sector
 
 typedef struct s_camera
 {
-	//double			hfov;
-	//double			vfov;
 	double			near_left;
 	double			near_right;
 	double			far_left;
 	double			far_right;
 	double			range;
-	double			near_up;
-	double			near_down;
 	double			scale;
 }					t_camera;
 

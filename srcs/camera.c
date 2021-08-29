@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 13:41:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/29 10:56:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,9 @@ void	init_camera(t_doom *doom)
 	cam->far_right = tan(CONVERT_TO_RADIANS * hfov * 0.5) * FAR_Z;
 	cam->range = cam->near_right - cam->near_left;
 	vfov = atan(tan((CONVERT_TO_RADIANS * hfov * 0.5))
-		/ (doom->settings.size.x / (double)doom->settings.size.y))
+			/ (doom->settings.size.x / (double)doom->settings.size.y))
 		* (180.0 / M_PI) * 2;
-	
-	//cam->near_up = -tan(CONVERT_TO_RADIANS * vfov / 2) * NEAR_Z;
-	//cam->near_down = tan(CONVERT_TO_RADIANS * vfov / 2) * NEAR_Z;
-
 	cam->scale = doom->c.y / tan(CONVERT_TO_RADIANS * vfov * 0.5);
-	//printf("%.16f\n", cam->scale);
-	//int ytop = (doom->surface->h / 2) + (cam->near_up / NEAR_Z) * cam->scale;
-	//int ybot = (doom->surface->h / 2) + (cam->near_down / NEAR_Z) * cam->scale;
-	//printf("%d %d\n", ytop, ybot);
 	update_camera(doom);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 14:23:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/29 13:48:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
  *	Checks vertical collision.
  *	Does the entity head hit ceiling.
  *	Is entity falling thru the floor.
+ *	p is position, v is velocity, t is time factor, a = acceleration.
+ *	p = p + v * t + t * (a + a * t) / 2
+ *	v += a * t
  */
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
@@ -64,8 +67,17 @@ int	vertical_collision(t_doom *doom, t_motion *motion)
 	if (motion->flight == FALSE && motion->where.z > pos.floor
 		&& !portal_cliff(doom, motion, motion->where, -1))
 	{
-		motion->velocity.z -= doom->sectors[motion->sector].gravity;
-		motion->where.z += motion->velocity.z;
+		//motion->velocity.z -= 2.0 * doom->time.delta / 2;
+		//motion->where.z += motion->velocity.z * doom->time.delta;
+		//motion->velocity.z -= 2.0 * doom->time.delta / 2;
+
+		
+		motion->where.z = motion->where.z + motion->velocity.z * doom->time.delta
+			+ doom->time.delta * (2.0 + 2.0 * doom->time.delta) / 2;
+ 		motion->velocity.z -= 2.0 * doom->time.delta;
+		 
+		//motion->velocity.z -= doom->sectors[motion->sector].gravity * doom->time.delta;
+		//motion->where.z += motion->velocity.z;
 	}
 	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
 		motion->velocity.z = 0;
