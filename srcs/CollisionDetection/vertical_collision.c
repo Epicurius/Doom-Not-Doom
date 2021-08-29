@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/29 13:48:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/29 14:04:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
  *	p is position, v is velocity, t is time factor, a = acceleration.
  *	p = p + v * t + t * (a + a * t) / 2
  *	v += a * t
+ *	NOTE: Jumping into another sector will retain original sector gravity;
  */
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
-	t_fc	pos;
+	t_fc			pos;
+	static double	temp;
 
 	pos.ceiling = ceiling_at(&doom->sectors[motion->sector], motion->where);
 	pos.floor = floor_at(&doom->sectors[motion->sector], motion->where);
@@ -67,18 +69,15 @@ int	vertical_collision(t_doom *doom, t_motion *motion)
 	if (motion->flight == FALSE && motion->where.z > pos.floor
 		&& !portal_cliff(doom, motion, motion->where, -1))
 	{
-		//motion->velocity.z -= 2.0 * doom->time.delta / 2;
-		//motion->where.z += motion->velocity.z * doom->time.delta;
-		//motion->velocity.z -= 2.0 * doom->time.delta / 2;
-
-		
-		motion->where.z = motion->where.z + motion->velocity.z * doom->time.delta
-			+ doom->time.delta * (2.0 + 2.0 * doom->time.delta) / 2;
- 		motion->velocity.z -= 2.0 * doom->time.delta;
-		 
-		//motion->velocity.z -= doom->sectors[motion->sector].gravity * doom->time.delta;
-		//motion->where.z += motion->velocity.z;
+		if (temp == 0)
+			temp = motion->velocity.z;
+		motion->velocity.z = temp * doom->time.delta
+			+ doom->time.delta * (doom->sectors[motion->sector].gravity
+				+ doom->sectors[motion->sector].gravity * doom->time.delta) / 2;
+		temp -= doom->sectors[motion->sector].gravity * doom->time.delta;
 	}
+	else
+		temp = 0;
 	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
 		motion->velocity.z = 0;
 	return (0);
