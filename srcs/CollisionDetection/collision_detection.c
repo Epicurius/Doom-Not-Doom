@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/30 15:30:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/30 16:29:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	find_from_sectbool(t_doom *doom, t_motion motion)
 	ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
 	return (find_sector_no_z(doom->sectors, doom->nb.sectors, where));
 }
+
+//double	gforce(double velocity, float g, float delta)
+//{
+//	return (velocity * delta + delta * (g + g * delta) / 2);
+//}
 
 /*
  *	Check map collision.
@@ -67,44 +72,44 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	return (motion.sector);
 }
 
-int	collision_detection1(t_doom *doom, t_motion motion,
-	t_v3 *where, t_v3 *velocity)
-{
-	motion.step = 2;//fix
-	motion.where = *where;
-	motion.velocity = *velocity;
-	if (1)
-	{
-		if (vertical_collision(doom, &motion))
-			return (-1);
-		velocity->z = motion.velocity.z;
-		where->z = motion.where.z;
-		
-	}
-	if (!(velocity->x == 0 && velocity->y == 0))
-	{
-		motion.dest.x = motion.where.x + motion.velocity.x;
-		motion.dest.z = motion.where.z;
-		motion.dest.y = motion.where.y + motion.velocity.y;
-		reset_sectbool(doom, motion.sector);
-		if (!check_solid_surfaces(doom, &motion, motion.sector))
-		{
-			motion.sector = find_from_sectbool(doom, motion);
-			velocity->x = motion.velocity.x;
-			velocity->y = motion.velocity.y;
-			where->x += velocity->x;
-			where->y += velocity->y;
-		}
-	}
-	if (motion.sector == -1)
-		return (-1);
-	//*velocity = motion.velocity;
-	//*where = add_v3(*where, *velocity);
-	if (where->z < floor_at(&doom->sectors[motion.sector], *where))
-	{
-		velocity->z = 0;
-		where->z = floor_at(&doom->sectors[motion.sector], *where);
-	}
-	//ft_printf("%f\n", where->z);
-	return (motion.sector);
-}
+//int	collision_detection1(t_doom *doom, t_motion motion,
+//	t_v3 *where, t_v3 *velocity)
+//{
+//	motion.step = 2;//fix
+//	motion.where = *where;
+//	motion.velocity = *velocity;
+//	if (1)
+//	{
+//		if (vertical_collision(doom, &motion))
+//			return (-1);
+//		velocity->z = motion.velocity.z;
+//		where->z = motion.where.z;
+//		
+//	}
+//	if (!(velocity->x == 0 && velocity->y == 0))
+//	{
+//		motion.dest.x = motion.where.x + motion.velocity.x;
+//		motion.dest.z = motion.where.z;
+//		motion.dest.y = motion.where.y + motion.velocity.y;
+//		reset_sectbool(doom, motion.sector);
+//		if (!check_solid_surfaces(doom, &motion, motion.sector))
+//		{
+//			motion.sector = find_from_sectbool(doom, motion);
+//			velocity->x = motion.velocity.x;
+//			velocity->y = motion.velocity.y;
+//			where->x += velocity->x;
+//			where->y += velocity->y;
+//		}
+//	}
+//	if (motion.sector == -1)
+//		return (-1);
+//	//*velocity = motion.velocity;
+//	//*where = add_v3(*where, *velocity);
+//	if (where->z < floor_at(&doom->sectors[motion.sector], *where))
+//	{
+//		velocity->z = 0;
+//		where->z = floor_at(&doom->sectors[motion.sector], *where);
+//	}
+//	//ft_printf("%f\n", where->z);
+//	return (motion.sector);
+//}

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/30 15:29:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/30 16:30:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,10 @@ int	vertical_collision(t_doom *doom, t_motion *motion)
 	if (motion->flight == FALSE && motion->where.z > pos.floor
 		&& !portal_cliff(doom, motion, motion->where, -1))
 	{
-		motion->where.z += motion->velocity.z * doom->time.delta + 0.5 * doom->sectors[motion->sector].gravity * doom->time.delta * 2;
-		motion->velocity.z = doom->sectors[motion->sector].gravity * doom->time.delta;
+		motion->velocity.z = motion->velocity.z * doom->time.delta + doom->sectors[motion->sector].gravity * doom->time.delta;
+		motion->where.z += motion->velocity.z;//gforce(motion->velocity.z, doom->sectors[motion->sector].gravity, doom->time.delta);
 	}
 	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
 		motion->velocity.z = 0;
 	return (0);
 }
-
- //t is the time since these values were last computed (e.g. the frame duration)
- //a is the acceleration (e.g. due to gravity). It must be constant.
- //v0 is the old velocity
- //p0 is the old position 
- //v is the new velocity 
- //p is the new position 
- //v = at    p = p0 + v0t + 0.5 * at2    v0 = v;    p0 = p;
