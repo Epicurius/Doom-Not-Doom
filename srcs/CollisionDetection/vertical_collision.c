@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/29 14:04:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/30 15:29:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,50 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
 	return (0);
 }
 
+double	g_force(double velocity, float g, float delta)
+{
+	return (velocity * delta + delta * (g + g * delta) / 2);
+}
+
+//int	vertical_collision(t_doom *doom, t_motion *motion)
+//{
+//	t_fc			pos;
+//	//double			g;
+//
+//	pos.ceiling = ceiling_at(&doom->sectors[motion->sector], motion->where);
+//	pos.floor = floor_at(&doom->sectors[motion->sector], motion->where);
+//	if (pos.ceiling - pos.floor < motion->height)
+//		return (1);
+//	//z = g_force(motion->velocity.z,	doom->sectors[motion->sector].gravity, doom->time.delta);
+//	if (motion->flight == FALSE && motion->where.z > pos.floor
+//		&& !portal_cliff(doom, motion, motion->where, -1))
+//	{
+//		//ft_printf("1 %f %f\n", motion->velocity.z, g_force(motion->velocity.z, doom->sectors[motion->sector].gravity, doom->time.delta));
+//		//motion->where.z += g_force(motion->velocity.z, doom->sectors[motion->sector].gravity, doom->time.delta);
+//		//motion->velocity.z -= doom->sectors[motion->sector].gravity * doom->time.delta;
+//
+//		//motion->where.z += motion->velocity.z * doom->time.delta
+//		//	+ doom->time.delta * (doom->sectors[motion->sector].gravity
+//		//		+ doom->sectors[motion->sector].gravity * doom->time.delta) / 2;
+//		//motion->velocity.z -= doom->sectors[motion->sector].gravity * doom->time.delta;
+//	
+//		//if (temp == 0)
+//		//	temp = motion->velocity.z;
+//		//motion->velocity.z = temp * doom->time.delta
+//		//	+ doom->time.delta * (doom->sectors[motion->sector].gravity
+//		//		+ doom->sectors[motion->sector].gravity * doom->time.delta) / 2;
+//		//temp -= doom->sectors[motion->sector].gravity * doom->time.delta;
+//	}
+//	//else
+//	//{
+//	//	ft_printf("2\n");
+//	//	motion->where.z += g_force(motion->velocity.z, 0, doom->time.delta);
+//	//}
+//	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
+//		motion->velocity.z = 0;
+//	return (0);
+//}
+
 /*
  *	Checks vertical collision.
  *	Does the entity head hit ceiling.
@@ -60,7 +104,6 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, t_v3 pos, int i)
 int	vertical_collision(t_doom *doom, t_motion *motion)
 {
 	t_fc			pos;
-	static double	temp;
 
 	pos.ceiling = ceiling_at(&doom->sectors[motion->sector], motion->where);
 	pos.floor = floor_at(&doom->sectors[motion->sector], motion->where);
@@ -69,16 +112,18 @@ int	vertical_collision(t_doom *doom, t_motion *motion)
 	if (motion->flight == FALSE && motion->where.z > pos.floor
 		&& !portal_cliff(doom, motion, motion->where, -1))
 	{
-		if (temp == 0)
-			temp = motion->velocity.z;
-		motion->velocity.z = temp * doom->time.delta
-			+ doom->time.delta * (doom->sectors[motion->sector].gravity
-				+ doom->sectors[motion->sector].gravity * doom->time.delta) / 2;
-		temp -= doom->sectors[motion->sector].gravity * doom->time.delta;
+		motion->where.z += motion->velocity.z * doom->time.delta + 0.5 * doom->sectors[motion->sector].gravity * doom->time.delta * 2;
+		motion->velocity.z = doom->sectors[motion->sector].gravity * doom->time.delta;
 	}
-	else
-		temp = 0;
 	if (motion->where.z + motion->velocity.z + motion->height >= pos.ceiling)
 		motion->velocity.z = 0;
 	return (0);
 }
+
+ //t is the time since these values were last computed (e.g. the frame duration)
+ //a is the acceleration (e.g. due to gravity). It must be constant.
+ //v0 is the old velocity
+ //p0 is the old position 
+ //v is the new velocity 
+ //p is the new position 
+ //v = at    p = p0 + v0t + 0.5 * at2    v0 = v;    p0 = p;
