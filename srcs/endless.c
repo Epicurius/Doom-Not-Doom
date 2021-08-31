@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:57:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ void	game_mode_endless(t_doom *doom)
 	}
 }
 
+void	game_mode_story(t_doom *doom)
+{
+	if (doom->time.curr - doom->game.time > doom->game.spawn_rate)
+	{
+		rift_spawn(doom);
+		doom->game.time = doom->time.curr;
+	}
+}
+
 /*
  *	Small function, made for handling future game modes.
  */
@@ -93,4 +102,6 @@ void	game_mode(t_doom *doom)
 {
 	if (doom->game.mode == ENDLESS)
 		game_mode_endless(doom);
+	else
+		game_mode_story(doom);
 }
