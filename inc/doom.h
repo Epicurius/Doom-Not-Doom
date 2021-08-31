@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:05:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:17:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,20 +286,20 @@ typedef struct s_render
 	t_wall			*skybox;
 	t_bxpm			*mtx;
 	t_bxpm			*stx;
-	t_camera		cam;
-	t_player		player;
+	t_camera		*cam;
+	t_player		*player;
 	int				ytop;
 	int				ybot;
 	int				x;
 	int				xend;
-	t_wall			wall;
-	t_plane			floor;
-	t_plane			ceiling;
+	t_wall			*wall;
+	t_plane			*floor;
+	t_plane			*ceiling;
 	int				light;
 	int				s;
 	t_bullet_hole	*bullet_hole;
 	t_v3			center;
-	t_wsprites		wsprite;
+	t_wsprites		*wsprite;
 }					t_render;
 
 typedef struct s_map
@@ -512,9 +512,9 @@ int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
 void				shade_palets(t_doom *doom, int s, int w);
 /* File: compute_vline.c */
-void				compute_vline_data(t_render *render, t_wall wall,
+void				compute_vline_data(t_render *render, t_wall *wall,
 						t_vline *vline);
-void				compute_vline_texels(t_render *render, t_wall wall,
+void				compute_vline_texels(t_render *render, t_wall *wall,
 						t_vline *vline);
 /* File: crosshair_position.c */
 void				crosshair_position(t_render *render,

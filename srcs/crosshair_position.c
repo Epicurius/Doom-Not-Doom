@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:24:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	debug(t_render *render, t_wall *wall)
 	ft_printf("{CLR:204}Wall:\t%d Sector: %d Neighbour: %d\n",
 		wall->id, wall->sect, wall->n);
 	ft_printf("Player:\t%d [%.1f][%.1f][%.1f]{RESET}\n",
-		render->player.sector, render->player.where.x,
-		render->player.where.y, render->player.where.z);
+		render->player->sector, render->player->where.x,
+		render->player->where.y, render->player->where.z);
 }
 
 /*
@@ -33,9 +33,9 @@ void	crosshair_position(t_render *render, t_vline *vline,
 	t_wall		*wall;
 	t_wsprite	*bullet_hole;
 
-	if (coord == render->center.z && render->player.action == SHOOTING)
+	if (coord == render->center.z && render->player->action == SHOOTING)
 	{
-		wall = &render->wall;
+		wall = render->wall;
 		if (render->bullet_hole->curr >= MAX_BULLET_HOLES)
 			render->bullet_hole->curr = 0;
 		bullet_hole = &render->bullet_hole->num[render->bullet_hole->curr];
@@ -49,7 +49,7 @@ void	crosshair_position(t_render *render, t_vline *vline,
 		render->bullet_hole->curr += 1;
 		if (render->bullet_hole->total < MAX_BULLET_HOLES)
 			render->bullet_hole->total += 1;
-		if (render->player.debug)
+		if (render->player->debug)
 			debug(render, wall);
 	}
 }

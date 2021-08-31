@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:21:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:37:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
+	ft_printf("%zu\n", sizeof(t_render));
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);

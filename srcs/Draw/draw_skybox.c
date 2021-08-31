@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:11:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 {
 	int	i;
 
-	i = (render->wall.wtx + 1) * (-6);
+	i = (render->wall->wtx + 1) * (-6);
 	if (limit[0] < skybox.curr.ceiling)
 	{
 		skybox.y1 = limit[0];
@@ -96,8 +96,8 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	vline->max.floor = vline->clipped_alpha
 		* w.slope_range.floor + w.slope_v1.floor;
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->start.ceiling = vline->max.ceiling - render->player.horizon;
-	vline->start.floor = vline->max.floor - render->player.horizon;
+	vline->start.ceiling = vline->max.ceiling - render->player->horizon;
+	vline->start.floor = vline->max.floor - render->player->horizon;
 	vline->line_height
 		= (vline->clipped_alpha * w.slope_range.floor + w.slope_v1.floor)
 		- (vline->clipped_alpha * w.slope_range.ceiling + w.slope_v1.ceiling);

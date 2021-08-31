@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:23:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:08:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx)
 	{
 		coord = vline.y1 * render->surface->w + render->x;
 		alpha = vline.start.ceiling
-			/ (double)(vline.y1 - render->player.horizon);
+			/ (double)(vline.y1 - render->player->horizon);
 		text.y = (alpha * vline.texel.y + (1.0 - alpha) * 5)
 			* render->stx[tx].h / 10;
 		text.x = (alpha * vline.texel.x + (1.0 - alpha) * 5)

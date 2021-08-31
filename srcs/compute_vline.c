@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:20:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:15:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,38 @@
 /*
  *	Calculates the vertical line dimensions for drawing.
  */
-void	compute_vline_data(t_render *render, t_wall wall, t_vline *vline)
+void	compute_vline_data(t_render *render, t_wall *wall, t_vline *vline)
 {
-	vline->alpha = (render->x - wall.x1) / wall.xrange;
-	vline->clipped_alpha = (render->x - wall.cx1) / (wall.cx2 - wall.cx1);
-	vline->divider = 1 / (wall.sv2.z + vline->alpha * wall.zrange);
-	vline->z = wall.zcomb * vline->divider;
+	vline->alpha = (render->x - wall->x1) / wall->xrange;
+	vline->clipped_alpha = (render->x - wall->cx1) / (wall->cx2 - wall->cx1);
+	vline->divider = 1 / (wall->sv2.z + vline->alpha * wall->zrange);
+	vline->z = wall->zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
 	vline->max.ceiling = vline->clipped_alpha
-		* wall.slope_range.ceiling + wall.slope_v1.ceiling;
+		* wall->slope_range.ceiling + wall->slope_v1.ceiling;
 	vline->max.floor = vline->clipped_alpha
-		* wall.slope_range.floor + wall.slope_v1.floor;
+		* wall->slope_range.floor + wall->slope_v1.floor;
 	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
 			render->ytop, render->ybot);
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
 	vline->real_floor = vline->clipped_alpha
-		* wall.static_range.floor + wall.static_v1.floor;
+		* wall->static_range.floor + wall->static_v1.floor;
 	vline->real_ceiling = vline->clipped_alpha
-		* wall.static_range.ceiling + wall.static_v1.ceiling;
+		* wall->static_range.ceiling + wall->static_v1.ceiling;
 	vline->line_height = vline->real_floor - vline->real_ceiling;
 }
 
 /*
  *	Calculates vertical line texture position.
  */
-void	compute_vline_texels(t_render *render, t_wall wall, t_vline *vline)
+void	compute_vline_texels(t_render *render, t_wall *wall, t_vline *vline)
 {
 	t_v2	camera_z;
 
-	camera_z.x = render->player.where.x * vline->z;
-	camera_z.y = render->player.where.y * vline->z;
-	vline->texel.x = (wall.x0z1 + vline->alpha * wall.xzrange) * vline->divider;
-	vline->texel.y = (wall.y0z1 + vline->alpha * wall.yzrange) * vline->divider;
+	camera_z.x = render->player->where.x * vline->z;
+	camera_z.y = render->player->where.y * vline->z;
+	vline->texel.x = (wall->x0z1 + vline->alpha * wall->xzrange) * vline->divider;
+	vline->texel.y = (wall->y0z1 + vline->alpha * wall->yzrange) * vline->divider;
 	vline->texel_nearz.x = vline->texel.x * NEAR_Z;
 	vline->texel_nearz.y = vline->texel.y * NEAR_Z;
 	vline->texel_range.x = camera_z.x - vline->texel_nearz.x;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:14:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	vline_color_walls(t_render *render, t_vline *vline)
 		coord += render->surface->w;
 		while (++vline->y1 < vline->y2 - 1)
 		{
-			if (render->x - 1 < render->wall.cx1
-				|| render->x + 1 > render->wall.cx2)
+			if (render->x - 1 < render->wall->cx1
+				|| render->x + 1 > render->wall->cx2)
 				((Uint32 *)render->surface->pixels)[coord] = 0xFF00FF00;
 			else
 				((Uint32 *)render->surface->pixels)[coord] = 0xFF888888;

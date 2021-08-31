@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:14:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 	int		coord;
 	t_bxpm	*wtx;
 
-	wtx = &render->mtx[render->wall.wtx];
+	wtx = &render->mtx[render->wall->wtx];
 	text.z = vline->z;
-	text.x = (vline->alpha * render->wall.tscale.x * vline->z);
+	text.x = (vline->alpha * render->wall->tscale.x * vline->z);
 	if (text.x >= wtx->w || text.x < 0)
 		text.x = abs((int)text.x % wtx->w);
 	while (vline->y1 < vline->y2)
@@ -34,7 +34,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->real_ceiling) / vline->line_height;
 		crosshair_position(render, vline, alpha, coord);
-		text.y = alpha * render->wall.tscale.y;
+		text.y = alpha * render->wall->tscale.y;
 		if (text.y >= wtx->h || text.y < 0)
 			text.y = abs((int)text.y % wtx->h);
 		blit_pixel_brightness(render, coord, text, wtx);

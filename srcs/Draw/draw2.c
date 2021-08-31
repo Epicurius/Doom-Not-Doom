@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/29 10:58:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:28:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static t_vline	draw_vline(t_render *render)
 	if (vline.curr.ceiling > render->ytop || vline.curr.floor < render->ybot)
 		compute_vline_texels(render, render->wall, &vline);
 	draw_floor_and_ceiling(render, &vline);
-	if (render->wall.n != -1)
+	if (render->wall->n != -1)
 		draw_neighbor_wall(render, &vline);
 	else
 	{
 		vline.y1 = vline.curr.ceiling;
 		vline.y2 = vline.curr.floor;
-		if (render->wall.wtx == 0 || TEXTURE_DISABLED)
+		if (render->wall->wtx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, &vline, SIDES);
-		else if (render->wall.wtx < 0)
+		else if (render->wall->wtx < 0)
 			draw_skybox(render, &vline, SIDES);
 		else
 			draw_wall_texture(render, &vline);
@@ -49,10 +49,10 @@ static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 	t_wall	*wall;
 
 	wall = sector->wall[s];
-	render->wall = *wall;
-	render->wsprite = wall->wsprite;
-	render->floor = sector->floor;
-	render->ceiling = sector->ceiling;
+	render->wall = wall;
+	render->wsprite = &wall->wsprite;
+	render->floor = &sector->floor;
+	render->ceiling = &sector->ceiling;
 	render->bullet_hole = &wall->bullet_hole;
 	render->light = sector->light;
 	render->s = s;
@@ -101,12 +101,12 @@ static int	loop_screen_sector(void	*arg)
 	t_render	*render;
 	t_v3		pos;
 	double		tmp;
-	t_camera	*cam;
+	t_camera	*cam;//
 	t_player	*p;
 
 	render = arg;
-	cam = &render->cam;
-	p = &render->player;
+	cam = render->cam;
+	p = render->player;
 	while (render->x < render->xend)
 	{
 		render->ytop = 0;
@@ -138,8 +138,8 @@ void	draw_screen(t_doom *doom)
 		doom->render[x].x = w / (double)doom->nb.threads * x;
 		doom->render[x].xend = ft_min(
 				w / (double)doom->nb.threads * (x + 1), w);
-		doom->render[x].player = doom->player;
-		doom->render[x].cam = doom->cam;
+		//doom->render[x].player = &doom->player;
+		//doom->render[x].cam = &doom->cam;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
 	}
 }

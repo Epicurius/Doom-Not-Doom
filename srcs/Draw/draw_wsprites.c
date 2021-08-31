@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:18:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 
 	text.x = x;
 	text.z = vline->z;
-	pos = wsprite->where.y / render->wall.height;
+	pos = wsprite->where.y / render->wall->height;
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * render->surface->w + render->x;
@@ -57,7 +57,7 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 		if (text.y > wsprite->src.y1 && text.y < wsprite->src.y2)
 		{
 			if (wsprite->trigger == 0 && render->center.z == coord
-				&& render->player.action == wsprite->action)
+				&& render->player->action == wsprite->action)
 				wsprite->trigger = TRUE;
 			blit_wsprite(render, coord, text, &render->mtx[wsprite->tx]);
 		}
@@ -76,16 +76,16 @@ void	draw_wsprites(t_render *render, t_vline *vline)
 	t_wsprite	*wsprite;
 
 	i = -1;
-	while (++i < render->wsprite.total)
+	while (++i < render->wsprite->total)
 	{
-		if (!render->wsprite.num[i].ready)
+		if (!render->wsprite->num[i].ready)
 			continue ;
-		wsprite = &render->wsprite.num[i];
-		pos = wsprite->where.x / render->wall.width * wsprite->tscale.x;
-		if (render->wall.sv2.z)
-			pos *= render->wall.sv2.z;
+		wsprite = &render->wsprite->num[i];
+		pos = wsprite->where.x / render->wall->width * wsprite->tscale.x;
+		if (render->wall->sv2.z)
+			pos *= render->wall->sv2.z;
 		else
-			pos *= render->wall.cv2.z;
+			pos *= render->wall->cv2.z;
 		x = vline->alpha * wsprite->tscale.x * vline->z + wsprite->src.x1 - pos;
 		if (x > wsprite->src.x1 && x < wsprite->src.x2)
 		{

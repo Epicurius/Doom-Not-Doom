@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:05:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 	{
 		vline->y1 = vline->curr.ceiling;
 		vline->y2 = vline->curr_n.ceiling;
-		if (render->wall.wtx == 0 || TEXTURE_DISABLED)
+		if (render->wall->wtx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline, TOP_HALF);
-		else if (render->wall.wtx < 0)
+		else if (render->wall->wtx < 0)
 			draw_skybox(render, vline, TOP_HALF);
 		else
 			draw_wall_texture(render, vline);
@@ -34,9 +34,9 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 	{
 		vline->y1 = vline->curr_n.floor;
 		vline->y2 = vline->curr.floor;
-		if (render->wall.wtx == 0 || TEXTURE_DISABLED)
+		if (render->wall->wtx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline, BOT_HALF);
-		else if (render->wall.wtx < 0)
+		else if (render->wall->wtx < 0)
 			draw_skybox(render, vline, BOT_HALF);
 		else
 			draw_wall_texture(render, vline);
@@ -49,9 +49,9 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 void	draw_neighbor_wall(t_render *render, t_vline *vline)
 {
 	vline->max_n.ceiling = vline->clipped_alpha
-		* render->wall.nslope_range.ceiling + render->wall.nslope_v1.ceiling;
+		* render->wall->nslope_range.ceiling + render->wall->nslope_v1.ceiling;
 	vline->max_n.floor = vline->clipped_alpha
-		* render->wall.nslope_range.floor + render->wall.nslope_v1.floor;
+		* render->wall->nslope_range.floor + render->wall->nslope_v1.floor;
 	vline->curr_n.ceiling = ft_clamp(vline->max_n.ceiling,
 			render->ytop, render->ybot);
 	vline->curr_n.floor = ft_clamp(vline->max_n.floor,

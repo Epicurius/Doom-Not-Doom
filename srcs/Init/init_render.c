@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:37:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:29:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	init_render(t_doom *doom)
 		doom->render[i].mtx = doom->mtx;
 		doom->render[i].stx = doom->stx;
 		doom->render[i].center = doom->c;
+		doom->render[i].player = &doom->player;
+		doom->render[i].cam = &doom->cam;
 	}
 }
