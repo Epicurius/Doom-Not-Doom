@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:39:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 14:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 /*
  *	Draw Heath icon and amount.
+ *	blit_bxpm_scaled(doom->surface,
+ *	rect_xywh(10 + surf->w + 10, dstr->y, doom->itx[0].w /
+ *		(1080 / doom->surface->h), doom->itx[0].h / (1080 / doom->surface->h)),
+ *	&doom->itx[0],
+ *	rect_xywh(0, 0, doom->itx[0].w, doom->itx[0].h));
  */
 void	hud_health(t_doom *doom, SDL_Rect *dstr)
 {

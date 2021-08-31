@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:34:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 14:59:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 /*
 **	Vision
 */
-//# define CAMERA_RATIO					1.77777777778
 # define FOV							90
 # define NEAR_Z							0.1
 # define FAR_Z							1000
@@ -44,8 +43,9 @@
 # define PROJECTILE_SPEED				80.0
 
 /*
-** Bullet Holes
+** Weapon
 */
+# define START_WEAPON					WEAPON_GUN
 # define MAX_BULLET_HOLES				20
 
 /*

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:01:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static int	pay_the_man(t_doom *doom, t_entity *entity)
 		entity->state = IDLE;
 		entity->frame = 0;
 		doom->nb.entities += 1;
+		project_entity(doom, entity, &entity->render);
 		return (0);
 	}
 	return (1);

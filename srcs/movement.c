@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:33:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 14:20:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	get_velocity(t_doom *doom, t_v3 move)
 		<= floor_at(sector, player->where) + 0.1)
 	{
 		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-		player->velocity.z += doom->player.jump_height;
+		player->velocity.z = doom->player.jump_height;
 	}
 	player->velocity.x = move.x;
 	player->velocity.y = move.y;
