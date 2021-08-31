@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:37:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:50:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static inline void	game_loop(t_doom *doom)
 
 /*
  *	Gets everything ready.
+ *	SDL_Delay(doom.map.zoom * 2);
  */
 static void	game(char *map, t_settings settings)
 {
@@ -68,10 +69,7 @@ static void	game(char *map, t_settings settings)
 		return ;
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
-	{
 		game_loop(&doom);
-		SDL_Delay(doom.map.zoom * 2);
-	}
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);
@@ -81,7 +79,6 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
-	ft_printf("%zu\n", sizeof(t_render));
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);

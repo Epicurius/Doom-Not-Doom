@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:28:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:48:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,16 @@ static int	loop_screen_sector(void	*arg)
 	t_render	*render;
 	t_v3		pos;
 	double		tmp;
-	t_camera	*cam;//
 	t_player	*p;
 
 	render = arg;
-	cam = render->cam;
 	p = render->player;
 	while (render->x < render->xend)
 	{
 		render->ytop = 0;
 		render->ybot = render->surface->h - 1;
 		tmp = (render->x / (double)(render->surface->w - 1))
-			* cam->range + cam->near_left;
+			* render->cam->range + render->cam->near_left;
 		pos.x = tmp * (-p->anglesin) - (-NEAR_Z) * p->anglecos + p->where.x;
 		pos.y = tmp * p->anglecos - (-NEAR_Z) * p->anglesin + p->where.y;
 		pos.z = p->where.z + p->eyelvl;
@@ -138,8 +136,6 @@ void	draw_screen(t_doom *doom)
 		doom->render[x].x = w / (double)doom->nb.threads * x;
 		doom->render[x].xend = ft_min(
 				w / (double)doom->nb.threads * (x + 1), w);
-		//doom->render[x].player = &doom->player;
-		//doom->render[x].cam = &doom->cam;
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
 	}
 }

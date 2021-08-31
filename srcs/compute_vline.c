@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:15:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 15:45:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	compute_vline_texels(t_render *render, t_wall *wall, t_vline *vline)
 
 	camera_z.x = render->player->where.x * vline->z;
 	camera_z.y = render->player->where.y * vline->z;
-	vline->texel.x = (wall->x0z1 + vline->alpha * wall->xzrange) * vline->divider;
-	vline->texel.y = (wall->y0z1 + vline->alpha * wall->yzrange) * vline->divider;
+	vline->texel.x = (wall->x0z1 + vline->alpha * wall->xzrange)
+		* vline->divider;
+	vline->texel.y = (wall->y0z1 + vline->alpha * wall->yzrange)
+		* vline->divider;
 	vline->texel_nearz.x = vline->texel.x * NEAR_Z;
 	vline->texel_nearz.y = vline->texel.y * NEAR_Z;
 	vline->texel_range.x = camera_z.x - vline->texel_nearz.x;
