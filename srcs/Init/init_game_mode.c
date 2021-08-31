@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:54:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 13:10:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_endless(t_doom *doom)
 	t_list	*curr;
 
 	ft_bzero(&doom->game, sizeof(t_game));
-	doom->game.spawn_rate = 5000;
+	doom->game.spawn_rate = 5000 - doom->settings.difficulty * 750;
 	curr = doom->entity;
 	while (curr)
 	{
@@ -39,7 +39,7 @@ static void	init_endless(t_doom *doom)
 static void	init_story(t_doom *doom)
 {
 	ft_bzero(&doom->game, sizeof(t_game));
-	doom->game.spawn_rate = 5000;
+	doom->game.spawn_rate = 5000 - doom->settings.difficulty * 750;
 	doom->game.cool_down = 0;
 	doom->game.spawns = 0;
 	doom->player.store_access = TRUE;

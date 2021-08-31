@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:58:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 13:14:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,10 +519,7 @@ void				compute_vline_texels(t_render *render, t_wall wall,
 /* File: crosshair_position.c */
 void				crosshair_position(t_render *render,
 						t_vline *vline, double alpha, int coord);
-/* File: doom.c */
 /* File: endless.c */
-int					endless_round(t_doom *doom);
-void				game_mode_endless(t_doom *doom);
 void				game_mode(t_doom *doom);
 /* File: find_sector.c */
 int					in_sector(t_sector *sector, t_v3 pos);

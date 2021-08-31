@@ -14,7 +14,7 @@
 
 static void	idle_pos_ghost(t_rect **pos)
 {
-	pos[0][4] = rect_xy2(0, 0, 132, 150);
+	pos[0][4] = rect_xy2(10, 0, 132, 150);
 	pos[0][5] = rect_xy2(171, 0, 278, 150);
 	pos[0][6] = rect_xy2(324, 0, 483, 150);
 	pos[0][7] = rect_xy2(489, 0, 632, 150);
@@ -26,7 +26,7 @@ static void	idle_pos_ghost(t_rect **pos)
 
 static void	move_pos_ghost(t_rect **pos)
 {
-	pos[0][4] = rect_xy2(0, 150, 132, 314);
+	pos[0][4] = rect_xy2(10, 150, 132, 314);
 	pos[0][5] = rect_xy2(171, 150, 278, 314);
 	pos[0][6] = rect_xy2(324, 150, 483, 314);
 	pos[0][7] = rect_xy2(489, 150, 632, 314);
@@ -34,7 +34,7 @@ static void	move_pos_ghost(t_rect **pos)
 	pos[0][1] = rect_xy2(771, 150, 917, 314);
 	pos[0][2] = rect_xy2(921, 150, 1077, 314);
 	pos[0][3] = rect_xy2(1122, 150, 1235, 314);
-	pos[1][4] = rect_xy2(0, 314, 132, 474);
+	pos[1][4] = rect_xy2(10, 314, 132, 474);
 	pos[1][5] = rect_xy2(171, 314, 278, 474);
 	pos[1][6] = rect_xy2(324, 314, 483, 474);
 	pos[1][7] = rect_xy2(489, 314, 632, 474);
@@ -47,7 +47,7 @@ static void	move_pos_ghost(t_rect **pos)
 
 static void	attack_pos_ghost(t_rect **pos)
 {
-	pos[0][4] = rect_xy2(0, 788, 132, 954);
+	pos[0][4] = rect_xy2(10, 788, 132, 954);
 	pos[0][5] = rect_xy2(171, 788, 278, 954);
 	pos[0][6] = rect_xy2(324, 788, 483, 954);
 	pos[0][7] = rect_xy2(489, 788, 632, 954);
@@ -55,7 +55,7 @@ static void	attack_pos_ghost(t_rect **pos)
 	pos[0][1] = rect_xy2(771, 788, 917, 954);
 	pos[0][2] = rect_xy2(921, 788, 1077, 954);
 	pos[0][3] = rect_xy2(1122, 788, 1235, 954);
-	pos[1][4] = rect_xy2(0, 957, 132, 1119);
+	pos[1][4] = rect_xy2(10, 957, 132, 1119);
 	pos[1][5] = rect_xy2(171, 957, 278, 1119);
 	pos[1][6] = rect_xy2(324, 957, 483, 1119);
 	pos[1][7] = rect_xy2(489, 957, 632, 1119);

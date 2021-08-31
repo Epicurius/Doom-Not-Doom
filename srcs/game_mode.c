@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   endless.c                                          :+:      :+:    :+:   */
+/*   game_mode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:57:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 13:27:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static void	remove_med_kits(t_doom *doom)
 /*
  *	Checks and handels round end or start.
  */
-int	endless_round(t_doom *doom)
+static int	endless_round(t_doom *doom)
 {
 	if (doom->game.spawns == 0)
 	{
 		doom->game.round++;
 		doom->game.cool_down = 10;
-		doom->game.spawn_rate = 5000 - doom->game.round * 2;
+		doom->game.spawn_rate -= doom->game.round * 2;
 		doom->player.health = 1100 - doom->settings.difficulty * 100;
 		doom->player.store_access = TRUE;
 		Mix_PlayChannel(-1, doom->sound[WAV_ROUND_END], 0);
@@ -57,9 +57,11 @@ int	endless_round(t_doom *doom)
 
 /*
  *	Handels the endless game mode.
- *	Spawning enemies and giving store access to the player.
+ *	Spawning enemies, giving store access to the player,
+ *	handling rounds and respawning rifts.
+ *	
  */
-void	game_mode_endless(t_doom *doom)
+static void	game_mode_endless(t_doom *doom)
 {
 	int	i;
 
@@ -86,7 +88,11 @@ void	game_mode_endless(t_doom *doom)
 	}
 }
 
-void	game_mode_story(t_doom *doom)
+/*
+ *	Handels the story game mode.
+ *	Spawning enemies from rifts if any are present.
+ */
+static void	game_mode_story(t_doom *doom)
 {
 	if (doom->time.curr - doom->game.time > doom->game.spawn_rate)
 	{

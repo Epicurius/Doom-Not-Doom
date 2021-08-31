@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/07 12:49:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 13:06:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_entities(t_doom *doom)
 		entity->hp = g_entity_data[entity->type].health;
 		entity->dest = entity->where;
 		entity->state = IDLE;
-		if (entity->type == RIFT)
+		if (doom->game.mode == ENDLESS && entity->type == RIFT)
 		{
 			new = ft_lstnew(curr->content, sizeof(t_entity));
 			ft_lstadd(&doom->rifts, new);

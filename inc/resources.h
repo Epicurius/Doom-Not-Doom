@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 10:41:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 14:13:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 180,
 		.frame_rate[DEATH] = 120,
 		.path = BXPM_PATH"spooky.bxpm",
-		.tc = {25, 193, 139 - 25, 377 - 193}
+		.tc = {25, 193, 114, 184}
 	},
 	{
 		.name = "Ghost",
@@ -298,7 +298,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.health = 1,
 		.damage = 1,
 		.type = MELEE,
-		.scale = 0.03,
+		.scale = 0.025,
 		.height = 2,
 		.hitbox_radius = 5,
 		.speed = 20,
@@ -312,7 +312,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 70,
 		.frame_rate[DEATH] = 40,
 		.path = BXPM_PATH"ghost.bxpm",
-		.tc = {0, 0, 43, 47}
+		.tc = {10, 0, 132, 150}
 	},
 	{
 		.name = "Rift",
@@ -356,7 +356,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 40,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {174, 182, 209 - 174, 233 - 182}
+		.tc = {174, 182, 35, 51}
 	},
 	{
 		.name = "Lamp",
@@ -378,7 +378,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {174, 7, 197 - 174, 91 - 7}
+		.tc = {174, 7, 23, 84}
 	},
 	{
 		.name = "Torch",
@@ -400,7 +400,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {371, 209, 381 - 371, 256 - 209}
+		.tc = {371, 209, 10, 47}
 	},
 	{
 		.name = "MeatHook",
@@ -422,7 +422,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {543, 5, 579 - 543, 104 - 5}
+		.tc = {543, 5, 36, 91}
 	},
 	{
 		.name = "CeilingLamp",
@@ -444,7 +444,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {0, 0, 43, 47}
+		.tc = {88, 70, 24, 56}
 	},
 	{
 		.name = "Gargoyl",
@@ -466,7 +466,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {0, 0, 43, 47}
+		.tc = {229, 97, 58, 75}
 	},
 	{
 		.name = "MedKit",
@@ -488,7 +488,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
 		.path = BXPM_PATH"objects.bxpm",
-		.tc = {0, 0, 43, 47}
+		.tc = {178, 242, 28, 18}
 	}
 };
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 13:48:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 	while (curr)
 	{
 		if ((((t_entity *)curr->content)->type == ALFRED)
-			|| ((t_entity *)curr->content)->type == SPOOKY)
+			|| ((t_entity *)curr->content)->type == SPOOKY
+			|| ((t_entity *)curr->content)->type == GHOST)
 		{
 			w = ((t_entity *)curr->content)->where;
 			w.z += g_entity_data[((t_entity *)curr->content)->type].height / 2;
