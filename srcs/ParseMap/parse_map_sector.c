@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 10:32:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 11:25:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	neighbour = stringsplit(arr[2], ' ', &nb);
 	if (nb != sect->npoints)
 		error_msg("Sect %d walls != Neighbours.\n", sect->id);
-	sect->gravity = ft_atoi(arr[3]) * 3;
+	sect->gravity = ft_atoi(arr[3]);
 	sect->light = ft_atoi(arr[4]);
 	sect->trigger = FALSE;
 	complete_wall(sect, doom->walls, walls, neighbour);

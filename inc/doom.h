@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 09:41:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 11:50:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -617,7 +617,7 @@ void				wsprite_trigger_events(t_doom *doom, t_event *event);
 void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
 						SDL_Surface *surface, t_inv *inv);
 /* File: CollisionDetection/collision_detection.c */
-int					find_from_sectbool(t_doom *doom, t_motion motion);
+int					find_from_sectbool(t_doom *doom, t_motion *motion);
 int					collision_detection(t_doom *doom, t_motion motion,
 						t_v3 *where, t_v3 *velocity);
 /* File: CollisionDetection/crouch_collision.c */
@@ -627,7 +627,7 @@ int					check_portal(t_doom *doom, t_motion *motion,
 						t_wall *wall, t_v3 point);
 int					check_collsion(t_motion *motion,
 						t_wall *wall, t_v3 *point);
-int					check_solid_surfaces(t_doom *doom,
+int					horizontal_collision(t_doom *doom,
 						t_motion *motion, int sect);
 /* File: CollisionDetection/object_collision.c */
 int					entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity);

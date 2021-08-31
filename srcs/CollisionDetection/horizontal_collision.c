@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:56:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:24:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 11:52:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,48 @@ int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 				if (check_portal(doom, motion, wall, point))
 					return (slide_collision(doom, motion, wall));
 				doom->sectbool[wall->n] = TRUE;
-				if (check_solid_surfaces(doom, motion, wall->n))
+				if (horizontal_collision(doom, motion, wall->n))
 					return (1);
 			}
 		}
+	}
+	return (0);
+}
+
+/*
+ *	Find the correct sector from the sectbool list of sectors
+ *	that player hitbox has moved through.
+ *	If none of the match, check all sectors.
+ *	If that fales return -1, to kill the entity.
+ */
+int	find_from_sectbool(t_doom *doom, t_motion *motion)
+{
+	int		i;
+	t_v3	where;
+
+	i = -1;
+	where = add_v3(motion->where, motion->velocity);
+	while (++i < doom->nb.sectors)
+	{
+		if (doom->sectbool[i] && in_sector_area(&doom->sectors[i], where))
+			return (i);
+	}
+	ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
+	return (find_sector_no_z(doom->sectors, doom->nb.sectors, where));
+}
+
+int	horizontal_collision(t_doom *doom, t_motion *motion, int sect)
+{
+	if (!check_solid_surfaces(doom, motion, motion->sector))
+	{
+		motion->sector = find_from_sectbool(doom, motion);
+		if (motion->sector == -1)
+			return (-1);
+	}
+	else
+	{
+		motion->velocity.x = 0;
+		motion->velocity.y = 0;
 	}
 	return (0);
 }
