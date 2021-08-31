@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:05:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:31:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	velocity->z = gforce;
 	if (where->z < floor_at(&doom->sectors[motion.sector], *where))
 	{
-		velocity->z = 0;
 		where->z = floor_at(&doom->sectors[motion.sector], *where);
+		velocity->z = 0;
 	}
 	return (motion.sector);
 }

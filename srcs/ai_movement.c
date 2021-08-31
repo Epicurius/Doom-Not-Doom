@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 08:57:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:46:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 {
 	double	speed;
 
-	speed = doom->time.delta * g_entity_data[entity->type].speed;
-	speed /= point_distance_v3(doom->player.where, entity->where);
-	entity->velocity.x = (doom->player.where.x - entity->where.x) * speed;
-	entity->velocity.y = (doom->player.where.y - entity->where.y) * speed;
+	speed = g_entity_data[entity->type].speed
+		/ point_distance_v3(doom->player.where, entity->where);
+	entity->velocity.x = (doom->player.where.x - entity->where.x)
+		* (speed * doom->time.delta);
+	entity->velocity.y = (doom->player.where.y - entity->where.y)
+		* (speed * doom->time.delta);
 	if (g_entity_data[entity->type].flight)
 		entity->velocity.z = (doom->player.where.z + doom->player.eyelvl
 				- entity->where.z) * speed;
@@ -59,13 +61,10 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 		return (0);
 	a = angle_to_point_v2(entity->where, doom->player.where);
 	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
-	speed = doom->time.delta * g_entity_data[entity->type].speed;
+	speed = g_entity_data[entity->type].speed * doom->time.delta;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;
 	entity->velocity.y = (100 * sin(a)) * speed;
-	if (g_entity_data[entity->type].flight)
-		entity->velocity.z = (doom->player.where.z + doom->player.eyelvl
-				- entity->where.z) * speed;
 	return (1);
 }
 

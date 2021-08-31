@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:56:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:59:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 12:33:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_collsion(t_motion *motion, t_wall *wall, t_v3 *point)
  *	Solid wall or portal bottom half or portal top half.
  *	If there is collision try sliding parallel to the wall.
  */
-static int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
+int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 {
 	int		i;
 	t_v3	point;
@@ -80,6 +80,11 @@ static int	check_solid_surfaces(t_doom *doom, t_motion *motion, int sect)
 	return (0);
 }
 
+/*
+ *	If NO horizontal solid surface collision, find the sector from visited
+ *	sectors list. (if no sector find return -1 to kill entity)
+ *	Else set horizontal velocity to 0.
+ */
 int	horizontal_collision(t_doom *doom, t_motion *motion)
 {
 	if (!check_solid_surfaces(doom, motion, motion->sector))
