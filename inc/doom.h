@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:50:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 11:58:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,8 +627,7 @@ int					check_portal(t_doom *doom, t_motion *motion,
 						t_wall *wall, t_v3 point);
 int					check_collsion(t_motion *motion,
 						t_wall *wall, t_v3 *point);
-int					horizontal_collision(t_doom *doom,
-						t_motion *motion, int sect);
+int					horizontal_collision(t_doom *doom, t_motion *motion);
 /* File: CollisionDetection/object_collision.c */
 int					entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity);
 /* File: CollisionDetection/projectile_collision.c */
