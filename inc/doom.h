@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/30 16:25:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/08/31 09:41:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -640,7 +640,7 @@ int					check_solid_surfaces_no_slide(t_doom *doom,
 int					slide_collision(t_doom *doom,
 						t_motion *motion, t_wall *wall);
 /* File: CollisionDetection/vertical_collision.c */
-int					vertical_collision(t_doom *doom, t_motion *motion);
+int					vertical_collision(t_doom *doom, t_motion *motion, double *temp);
 /* File: Draw/draw2.c */
 void				draw_screen(t_doom *doom);
 /* File: Draw/draw_bullet_holes.c */
