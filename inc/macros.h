@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 14:59:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 11:32:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 # define FOV							90
 # define NEAR_Z							0.1
-# define FAR_Z							1000
+# define FAR_Z							1000.0
 # define PLAYER_HEIGHT 					7
 # define PLAYER_RADIUS					0.7
 # define EYE_LVL						6
