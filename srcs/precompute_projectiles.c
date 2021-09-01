@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 11:49:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 13:43:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	motion.height = 2;
 	motion.step = 0;
 	motion.where = orb->where;
+	//motion.velocity = mult_v3(orb->velocity, doom->time.delta);
 	motion.velocity = orb->velocity;
 	reset_sectbool(doom, orb->sector);
 	if (check_solid_surfaces_no_slide(doom, &motion, orb->sector))
