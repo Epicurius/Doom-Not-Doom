@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 14:55:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 13:32:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_player(t_doom *doom)
 	doom->player.eyelvl = EYE_LVL;
 	doom->player.flight = doom->settings.debug;
 	doom->player.debug = doom->settings.debug;
-	doom->player.equiped = START_WEAPON;
+	doom->player.equiped = 4;//START_WEAPON;
 	doom->player.walk_speed = WALK_SPEED;
 	doom->player.sprint_speed = SPRINT_SPEED;
 	doom->player.jump_height = JUMP_HEIGHT;

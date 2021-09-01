@@ -6,25 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 11:56:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 13:27:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-//void	set_camera(t_doom *doom)
-//{
-//	double		vfov;
-//	double		hfov;
-//	
-//	hfov = doom->settings.fov;
-//	vfov = (180.0 / M_PI) * atan(tan((CONVERT_TO_RADIANS
-//		* hfov / 2)) / (doom->surface->w / (double)doom->surface->h)) * 2;
-//	double near_down = tan(CONVERT_TO_RADIANS * vfov / 2) * NEAR_Z;
-//	double y2 = (near_down / NEAR_Z);
-//	double vscale = (doom->surface->h / 2.0) / y2;
-//	printf("%f\n", vscale);
-//}
 
 /*
  *	Inits the camera, FOV, view fustrum and view scale.
@@ -45,10 +31,6 @@ void	init_camera(t_doom *doom)
 	vfov = atan(hfov / (doom->surface->w / (double)doom->surface->h))
 		* (180.0 / M_PI);
 	cam->scale = (doom->surface->h / 2) / tan(CONVERT_TO_RADIANS * vfov);
-
-	//cam->scale = (float)doom->surface->h / (2 * tan(0.5 * doom->settings.fov * M_PI / 180.0));
-	//ft_printf("%f\n", cam->scale);
-	//set_camera(doom);
 	update_camera(doom);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 12:05:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 12:54:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 13:37:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	project_entity(t_doom *doom, t_entity *e, t_entity_render *render)
 	screen.y = dist.y + screen.z * doom->player.pitch;
 	screen.x = doom->c.x + screen.x * doom->cam.scale / -screen.z;
 	screen.y = doom->c.y + screen.y * doom->cam.scale / -screen.z;
-	size.y = doom->surface->w * g_entity_data[e->type].scale
+	size.y = doom->c.x * g_entity_data[e->type].scale
 		* doom->cam.scale / screen.z;
 	size.x = size.y * doom->eframes[e->type].pos[e->state][e->frame][e->angle].w
 		/ (double)doom->eframes[e->type].pos[e->state][e->frame][e->angle].h;
@@ -40,6 +40,6 @@ void	project_entity(t_doom *doom, t_entity *e, t_entity_render *render)
 	render->clamp_start.y = ft_clamp(render->start.y, 0, doom->surface->h - 1);
 	render->clamp_end.x = ft_clamp(render->end.x, 0, doom->surface->w - 1);
 	render->clamp_end.y = ft_clamp(render->end.y, 0, doom->surface->h - 1);
-	render->xrange = render->end.x - render->start.x;//make int and t_point;
+	render->xrange = render->end.x - render->start.x;
 	render->yrange = render->end.y - render->start.y;
 }
