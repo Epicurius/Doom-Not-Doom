@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 13:43:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 14:13:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
-
-	motion.dest = add_v3(orb->where, orb->velocity);
+	
+	motion.where = orb->where;
+	motion.velocity = mult_v3(orb->velocity, doom->time.delta);
+	motion.dest = add_v3(motion.where, motion.velocity);
 	if (target_contact(doom, orb, orb->start, motion.dest))
 		return (1);
 	if (vertical_collision_lite(doom, orb))
@@ -43,9 +45,6 @@ static int	projectile_collision(t_doom *doom, t_projectile *orb)
 	motion.flight = TRUE;
 	motion.height = 2;
 	motion.step = 0;
-	motion.where = orb->where;
-	//motion.velocity = mult_v3(orb->velocity, doom->time.delta);
-	motion.velocity = orb->velocity;
 	reset_sectbool(doom, orb->sector);
 	if (check_solid_surfaces_no_slide(doom, &motion, orb->sector))
 		return (3);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 13:50:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 14:16:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.damage = 1,
 		.type = MELEE,
 		.scale = 9,
-		.height = 2,
+		.height = 7,
 		.hitbox_radius = 5,
 		.speed = 20,
 		.move = TRUE,

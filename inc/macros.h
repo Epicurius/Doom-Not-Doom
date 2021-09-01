@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 13:32:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/01 14:20:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define ANGLES							1
 # define PLAYER_PROJECTILE_MAX_RANGE	100
 # define ENTITY_PROJECTILE_MAX_RANGE	100
-# define PROJECTILE_SPEED				80.0
+# define PROJECTILE_SPEED				50.0
 
 /*
 ** Weapon
