@@ -36,8 +36,8 @@ For OSX.
 ---
 ###	Engine
 
-When designing and building the game engine my priority was preformance (FPS) over features.</n>
-In my mind a game with many features but low preformance is worse that the oposite,</n>
+When designing and building the game engine my priority was preformance (FPS) over features.
+In my mind a game with many features but low preformance is worse that the oposite,
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
 multithreading (pthreads) was my best option.
 
