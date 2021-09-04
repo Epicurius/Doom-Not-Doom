@@ -1,4 +1,3 @@
-
 <img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.
 For OSX.
