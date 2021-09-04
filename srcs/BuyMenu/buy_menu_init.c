@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buy_menu_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 15:38:42 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/07/28 15:38:43 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/09/03 18:42:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	menu_init(t_bui_window *win, t_buymenu *buymenu)
 
 	c = new_xywh(0, 0, win->position.w, win->position.h);
 	buymenu->menu = bui_new_menu(win, NULL, c);
-	bui_set_element_image_from_path(buymenu->menu, ELEMENT_DEFAULT,
-		ICON_PATH"test2.bmp", NULL);
+	//bui_set_element_image_from_path(buymenu->menu, ELEMENT_DEFAULT,
+	//	ICON_PATH"test2.bmp", NULL);
 	bui_set_element_image_from_path(buymenu->menu, ELEMENT_DEFAULT,
 		ICON_PATH"terminal_without_alpha.bmp", NULL);
 }
