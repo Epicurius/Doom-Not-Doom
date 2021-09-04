@@ -36,42 +36,43 @@ For OSX.
 ---
 ###	Engine
 
-When designing and building the game engine my priority was preformance (FPS) over features.
-In my mind a game with many features but low preformance is worse that the oposite,
+When designing and building the game engine my priority was preformance (FPS) over features.</n>
+In my mind a game with many features but low preformance is worse that the oposite,</n>
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
 multithreading (pthreads) was my best option.
 
 <img src="./Readme_assets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 ```
-1	-	Game is launched.
-2	-	Checking all passed argumnets, if not given sets default values.
-3	-	Parses the given map file.
-4	-	Validates the map values and corrects any it can, else program terminates.
-5	-	Inits everything needed for the game to run.
-6	-	Creates and executes texture parsing threads, wait for all to be ready.
-7	-	While user has not quit or died:
-		1	-	Handles game mode specific event, e.g. spawning enemies, game rounds.
-		2	-	Handles map events, e.g. mooving doors, light switches.
-		3	-	Precompute walls, values that can be calulated before drawing.
-		4	-	Precompute skybox, values that can be calulated before drawing.
-		5	-	Creates map drawing threads.
-		6	-	Precompute weapons, does it have ammo etc.
-		7	-	Precompute Entities, e.g. movement, aggression.
-		8	-	Precompute projectile, movemnt and collision.
-		9	-	Handels player collision detection.
-		10	-	Reads all user inputs.
-		11	-	Wait for all map drawing thread to be ready.
-		12	-	Draw all projectiles
-		13	-	Create and execute entity drawing threads.
-		14	-	Create and execute weapon drawing threads.
-		15	-	Draw HUD, e.g. ammo amount, health, armour.
-		16	-	If Tab is pressed draw map.
-		17	-	Calculate and update window FPS title and delta time.
-		18	-	Render to screen.
-		19	-	Check if user has paused or quit game.
-8	-	Free all allocated memory.
-9	-	Exit game.
+1  - Game is launched.
+2  - Checking all passed argumnets, if not given sets default values.
+3  - Parses the given map file.
+4  - Validates the map values and corrects any it can, else program terminates.
+5  - Inits everything needed for the game to run.
+6  - Creates and executes texture parsing threads, wait for all to be ready.
+7  - While user has not quit or died:
+	1  - Handles game mode specific event, e.g. spawning enemies, game rounds.
+	2  - Handles map events, e.g. mooving doors, light switches.
+	3  - Precompute walls, values that can be calulated before drawing.
+	4  - Precompute skybox, values that can be calulated before drawing.
+	5  - Creates map drawing threads.
+	6  - Precompute weapons, does it have ammo etc.
+	7  - Precompute Entities, e.g. movement, aggression.
+	8  - Precompute projectile, movemnt and collision.
+	9  - Handels player collision detection.
+	10 - Reads all user inputs.
+	11 - Wait for all map drawing thread to be ready.
+	12 - Draw all projectiles
+	13 - Create and execute entity drawing threads.
+	14 - Create and execute weapon drawing threads.
+	15 - Draw HUD, e.g. ammo amount, health, armour.
+	16 - If Tab is pressed draw map.
+	17 - Calculate and update window FPS title and delta time.
+	18 - Render to screen.
+	19 - Check if user has paused or quit game.
+8  - Free all allocated memory.
+9  - Exit game.
 ```
+
 ---
 
 ### BXPM
@@ -87,14 +88,12 @@ Header:
 	Size:		20 bytes.
 	Type:		int32_t
 	Content:	In order width, height, color amount, pixel amount, pixel format.
-```
-```
+
 Colors:
 	Size:		Color amount * 32 bytes
 	Type:		int32_t
 	Content:	Each unique color in the image.
-```
-```
+
 Pixels:
 	Size:		Pixel amount * 16 bytes
 	Type:		uint32_t
@@ -124,10 +123,12 @@ If you want to take a look at how it works the library is at root libs/libbxpm.<
 And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)</n>
 
 <img src="./Readme_assets/smile.png" alt="smile" width="200"/>
+
 ```c
 //Visualization of the above (10x10)Image in BXPM format devided by commas, actual BXPM is compressed.
 10,10,11,100,24,0xffffffff,0xff000000,0xff0032ff,0xff00ff00,0xff00fbff,0xffef00ff,0xffff6000,0xff00ffb5,0xffffd200, 0xffff0000,0xffffff00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,10,0,0,0,0,0,0,9,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,8,0,0,0,5,0,0,0,0,6,0,0,0,0,0,1,2,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ```
+
 ---
 ### Map
 
