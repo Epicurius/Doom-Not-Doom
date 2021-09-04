@@ -42,7 +42,7 @@ In my mind a game with many features but low preformance is worse that the oposi
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
 multithreading (pthreads) was my best option.
 
-<img src="./Readme_assets/Dnd_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
+<img src="./Readme_assets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 ```
 1	-	Game is launched.
 2	-	Checking all passed argumnets, if not given sets default values.
