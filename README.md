@@ -40,7 +40,7 @@ Short introduction on how the engine works.
 * [Engine Flow](#engine-flow)
 * [Map Drawing](#map-drawing)
 * [Skybox](#skybox)
-* [AI](#entites)
+* [AI](#entitites)
 
 ##### Engine Flow
 When designing and building the game engine my priority was performance (FPS) over features.</n>
@@ -100,6 +100,21 @@ The skybox box is a 10x10x10 box where the player is always in the middle, the b
 
 ##### AI
 
+Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.
+Alive/non static entities have a detection radius and a view cone, if their line of sight collides
+with the player they will get the state MOVE and try to get into their attack range.
+When the entity is inside their attack range they will get the state ATTACK and start attacking the player.
+If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
+During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.
+
+<img src="./Readme_assets/frame.jpg" alt="Engine_Flow" width="800"/></n>
+Each entity frames are divided into the entity states and into FRAME and ANGLE.
+Take for example the above image, it har move animation of 8 frames with each having 3 angles.
+When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.
+If an entity has 1 angle the entity will always face the player.
+So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME_NB][ANGLE]```;
+
+Entity presets can be found from inc/resources.h
 
 ---
 
