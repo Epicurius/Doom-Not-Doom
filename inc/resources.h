@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 15:14:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:55:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,7 +447,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.tc = {88, 70, 24, 56}
 	},
 	{
-		.name = "Gargoyl",
+		.name = "gargoyle",
 		.pickup = FALSE,
 		.type = INANIMATE,
 		.move = FALSE,

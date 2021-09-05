@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:52:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	draw_neighbor_wall2(t_render *render, t_vline *vline)
 }
 
 /*
- *	Calcualte the position of the neighbour wall draw window.
+ *	Calculate the position of the neighbour wall draw window.
  */
 void	draw_neighbor_wall(t_render *render, t_vline *vline)
 {

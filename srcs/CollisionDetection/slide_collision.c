@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:24:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:49:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Calulate parallel velocity to vector.
+ *	Calculate parallel velocity to vector.
  */
 static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 {

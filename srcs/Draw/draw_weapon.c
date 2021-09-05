@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:17:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	weapon_frame_scale(t_doom *doom, t_rect *srcr, t_rect *dstr)
 	t_bxpm		*bxpm;
 	t_weapon	*weapon;
 
-	weapon = &doom->weapon[doom->player.equiped];
+	weapon = &doom->weapon[doom->player.equipped];
 	bxpm = &weapon->bxpm[weapon->frame];
 	dstr->w = bxpm->w * weapon->scale;
 	dstr->h = bxpm->h * weapon->scale;
@@ -58,14 +58,14 @@ void	draw_weapon(t_doom *doom)
 	t_rect			srcr;
 	t_weapon_thread	thread[10];
 
-	if (doom->player.equiped < 0)
+	if (doom->player.equipped < 0)
 		return ;
 	weapon_frame_scale(doom, &srcr, &dstr);
 	y = -1;
 	while (++y < 10)
 	{
-		thread[y].src = &doom->weapon[doom->player.equiped].bxpm
-		[doom->weapon[doom->player.equiped].frame];
+		thread[y].src = &doom->weapon[doom->player.equipped].bxpm
+		[doom->weapon[doom->player.equipped].frame];
 		thread[y].srcr = rect_xywh(srcr.x1, srcr.y1 + (y * (srcr.h / 10)),
 				srcr.w, srcr.h / 10);
 		thread[y].dst = doom->surface;

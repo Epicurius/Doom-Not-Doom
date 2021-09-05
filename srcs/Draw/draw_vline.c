@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:52:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Calculate the shade of white depending on the zbuffer value sfor the pixel.
+ *	Calculate the shade of white depending on the zbuffer value for the pixel.
  */
 Uint32	z_clr(double z, double max_z)
 {
@@ -120,7 +120,7 @@ void	vline_color_walls(t_render *render, t_vline *vline)
 
 /*
  *	Depending on the macro draw walls with white zbuffer shade
- *	or monochome color.
+ *	or monochrome color.
  */
 void	vline_monochromic(t_render *render, t_vline *vline, int side)
 {

@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:04 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 13:37:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:52:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Calcualte the projectile projection values.
+ *	Calculate the projectile projection values.
  *	NOTE: Move to a precompute to save time.
  */
 static void	project_projectile(t_doom *doom, t_projectile *orb,
@@ -48,7 +48,7 @@ static void	project_projectile(t_doom *doom, t_projectile *orb,
 
 /*
  *	Draw projectile to window surface.
- *	TODO: Multythread.
+ *	TODO: Multithread.
  */
 void	draw_projectiles(t_doom *doom)
 {

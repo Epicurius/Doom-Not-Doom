@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 14:53:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 	char		*str;
 	SDL_Surface	*surf;
 
-	str = ft_itoa(doom->weapon[doom->player.equiped].cur_ammo);
+	str = ft_itoa(doom->weapon[doom->player.equipped].cur_ammo);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());
@@ -88,7 +88,7 @@ void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 	char		*str;
 	SDL_Surface	*surf;
 
-	str = ft_itoa(doom->weapon[doom->player.equiped].mag_ammo);
+	str = ft_itoa(doom->weapon[doom->player.equipped].mag_ammo);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
 		error_msg("TTF_RenderText_Blended error: %s\n", TTF_GetError());

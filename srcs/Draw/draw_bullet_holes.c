@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:16:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:51:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	vline_wall_bh(t_render *render, t_vline *vline,
 }
 
 /*
- *	Calcualte scale and pos of the bullet hole.
+ *	Calculate scale and pos of the bullet hole.
  */
 void	draw_wall_bh(t_render *render, t_vline *vline)
 {

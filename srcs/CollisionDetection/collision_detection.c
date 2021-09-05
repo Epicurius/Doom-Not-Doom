@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:31:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:48:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  *	Find the correct sector from the sectbool list of sectors
  *	that player hitbox has moved through.
  *	If none of the match, check all sectors.
- *	If that fales return -1, to kill the entity.
+ *	If that fails return -1, to kill the entity.
  */
 int	find_from_sectbool(t_doom *doom, t_motion *motion)
 {

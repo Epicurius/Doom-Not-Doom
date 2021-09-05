@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	draw_hit_marker(t_doom *doom)
 }
 
 /*
- *	Draw crosshair if equiped weapon is not launcher.
+ *	Draw crosshair if equipped weapon is not launcher.
  */
 void	draw_crosshair(t_doom *doom)
 {
@@ -38,7 +38,7 @@ void	draw_crosshair(t_doom *doom)
 	int		x;
 	Uint32	*pixels;
 
-	if (doom->player.equiped == 4)
+	if (doom->player.equipped == 4)
 		return ;
 	pixels = doom->surface->pixels;
 	x = doom->c.x;

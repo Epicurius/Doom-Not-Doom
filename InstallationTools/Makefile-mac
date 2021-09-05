@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/01 15:18:14 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/05 06:55:18 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,7 @@ CFILES		=	ai_attack.c\
 				EntityCoords/alfred2.c\
 				EntityCoords/barrel.c\
 				EntityCoords/ceiling_lamp.c\
-				EntityCoords/gargoyl.c\
+				EntityCoords/gargoyle.c\
 				EntityCoords/ghost1.c\
 				EntityCoords/ghost2.c\
 				EntityCoords/lamp.c\

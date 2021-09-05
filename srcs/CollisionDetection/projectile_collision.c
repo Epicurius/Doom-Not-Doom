@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 13:48:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:49:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Check if player projectile contact a enemy.
- *	if add break ; will be single kill otherwise a multy kill.
+ *	if add break ; will be single kill otherwise a multi kill.
  */
 static int	target_demon(t_doom *doom, t_v3 dest)
 {
@@ -44,7 +44,7 @@ static int	target_demon(t_doom *doom, t_v3 dest)
 }
 
 /*
- *	Check projectil contact.
+ *	Check projectile contact.
  */
 int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest)
 {

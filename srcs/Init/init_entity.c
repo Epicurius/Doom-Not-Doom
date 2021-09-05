@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 13:06:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:54:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_entity_pos(t_doom *doom)
 	init_meat_hook(doom);
 	init_ghost(doom);
 	init_ceiling_lamp(doom);
-	init_gargoyl(doom);
+	init_gargoyle(doom);
 	init_med_kit(doom);
 }
 

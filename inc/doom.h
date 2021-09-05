@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:46:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:54:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_player
 	int				armour;
 	int				flight;
 	int				action;
-	int				equiped;
+	int				equipped;
 	int				debug;
 	int				store_access;
 	int				hm;
@@ -718,8 +718,8 @@ void				move_pos_alfred2(t_rect **pos);
 void				init_barrel(t_doom *doom);
 /* File: EntityCoords/ceiling_lamp.c */
 void				init_ceiling_lamp(t_doom *doom);
-/* File: EntityCoords/gargoyl.c */
-void				init_gargoyl(t_doom *doom);
+/* File: EntityCoords/gargoyle.c */
+void				init_gargoyle(t_doom *doom);
 /* File: EntityCoords/ghost1.c */
 void				init_ghost(t_doom *doom);
 /* File: EntityCoords/ghost2.c */

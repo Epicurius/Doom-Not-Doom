@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 14:13:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 	{
 		if (!weapon->frame)
 		{
-			if (doom->player.equiped == 4)
+			if (doom->player.equipped == 4)
 				fire_orb(doom);
 			else
 				doom->player.action = SHOOTING;
@@ -82,20 +82,20 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 }
 
 /*
- *	Checks witch weapon player has equiped.
+ *	Checks witch weapon player has equipped.
  */
 void	equip_weapon(t_doom *doom)
 {
 	if (doom->weapon[0].own && doom->keys[SDL_SCANCODE_1])
-		doom->player.equiped = FALSE;
+		doom->player.equipped = FALSE;
 	else if (doom->weapon[1].own && doom->keys[SDL_SCANCODE_2])
-		doom->player.equiped = TRUE;
+		doom->player.equipped = TRUE;
 	else if (doom->weapon[2].own && doom->keys[SDL_SCANCODE_3])
-		doom->player.equiped = 2;
+		doom->player.equipped = 2;
 	else if (doom->weapon[3].own && doom->keys[SDL_SCANCODE_4])
-		doom->player.equiped = 3;
+		doom->player.equipped = 3;
 	else if (doom->weapon[4].own && doom->keys[SDL_SCANCODE_5])
-		doom->player.equiped = 5;
+		doom->player.equipped = 5;
 }
 
 /*
@@ -109,9 +109,9 @@ void	precompute_weapon(t_doom *doom)
 
 	doom->player.action = NONE;
 	equip_weapon(doom);
-	if (doom->player.equiped < 0)
+	if (doom->player.equipped < 0)
 		return ;
-	weapon = &doom->weapon[doom->player.equiped];
+	weapon = &doom->weapon[doom->player.equipped];
 	if ((weapon->frame && (weapon->frame < weapon->fire_frames))
 		|| (doom->keys[MOUSE_LEFT] && weapon->mag_ammo > 0))
 		weapon_fire_animate(doom, weapon);

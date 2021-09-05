@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 }
 
 /*
- *	Mutlythread function that draws a part of the entity to windows surface.
+ *	Multithread function that draws a part of the entity to windows surface.
  */
 int	draw_entity(void *arg)
 {
@@ -82,8 +82,8 @@ int	draw_entity(void *arg)
 }
 
 /*
- *	Prepares the entity frame to be multy threaded.
- *	Split the frame iono its y axis in to 5 pieces.
+ *	Prepares the entity frame to be multi threaded.
+ *	Split the frame into its y axis in to 5 pieces.
  *	Add them to tpool.
  */
 static void	entity_threads(t_doom *doom, t_entity *entity,
@@ -106,7 +106,7 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 		thread[y].pos = doom->eframes[entity->type].pos
 		[entity->state][entity->frame][entity->angle];
 		thread[y].shooting = doom->player.action;
-		thread[y].dmg = doom->weapon[doom->player.equiped].damage;
+		thread[y].dmg = doom->weapon[doom->player.equipped].damage;
 		thread[y].hp = &entity->hp;
 		thread[y].hm = &doom->player.hm;
 		thread[y].center = doom->c;

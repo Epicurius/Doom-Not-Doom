@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 14:41:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:40:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:51:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Blit pixels to surface if inside surface bounderies.
+ *	Blit pixels to surface if inside surface boundaries.
  */
 static inline void	put_pixel(SDL_Surface *surface, Uint32 color, int x, int y)
 {
@@ -22,7 +22,7 @@ static inline void	put_pixel(SDL_Surface *surface, Uint32 color, int x, int y)
 }
 
 /*
- *	Calucalte the pixels positions from the center.
+ *	Calculate the pixels positions from the center.
  */
 static inline void	circle_points(SDL_Surface *surface, Uint32 color,
 	t_point center, t_point c)

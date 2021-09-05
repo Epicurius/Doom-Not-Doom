@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:19:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:49:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Check if player collides with an entity.
- *	If entity can be picked up, pick it up and delet it.
+ *	If entity can be picked up, pick it up and delete it.
  */
 static int	collided_with_entity(t_doom *doom, t_v3 *velocity,
 		t_list *curr, t_entity *entity)
@@ -33,7 +33,7 @@ static int	collided_with_entity(t_doom *doom, t_v3 *velocity,
 
 /*
  *	Check player to entity collision.
- *	(entity can walk through other entitites but not the player)
+ *	(entity can walk through other entities but not the player)
  */
 int	entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity)
 {
