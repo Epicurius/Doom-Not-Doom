@@ -41,6 +41,10 @@ Short introduction on how the engine works.
 * [Map Drawing](#map-drawing)
 * [Skybox](#skybox)
 * [AI](#entitites)
+* [Shooting](#shooting)
+* [Collision Detection](#collision-detection)
+//segment and stuff
+//slope calc
 
 ##### Engine Flow
 When designing and building the game engine my priority was performance (FPS) over features.</n>
@@ -115,6 +119,27 @@ If an entity has 1 angle the entity will always face the player.
 So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME_NB][ANGLE]```;
 
 Entity presets can be found from inc/resources.h
+
+##### Shooting
+
+Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,
+and the player has pressed left click than that entity has been shot.
+No bullet collision detection algorithm is required.
+
+##### Collision Detection
+
+Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.
+First we check the vertical collision:
+*	Is ceiling - floor height smaller than entity height.
+*	If velocity > 0 and position + velocity intersect with ceiling.
+*	Check if entity is standing on a cliff (when moving from a sector to another that has lower
+	floor height), to prevent entity from falling to close to a wall and getting stuck.
+*	Apply gravity to entity.
+
+Secondly check horizontal collision:
+
+
+##### Floor and Ceiling Slopes
 
 ---
 
