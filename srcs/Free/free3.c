@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:11:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	free_textures(t_doom *doom)
 	{
 		free(doom->mtx[i].clr);
 		free(doom->mtx[i].pix);
-		free_shade_palet(&doom->mtx[i]);
+		free_shade_shade(&doom->mtx[i]);
 	}
 	i = -1;
 	while (++i < SKYBOX_TEXTURE_AMOUNT)

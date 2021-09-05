@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 11:35:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	blit_pixel_brightness(t_render *render, int coord, t_v3 text,
 
 	light = 255 + render->light;
 	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
-	((Uint32 *)render->surface->pixels)[coord] = bxpm->palet[light][pixel];
+	((Uint32 *)render->surface->pixels)[coord] = bxpm->shade[light][pixel];
 	((double *)render->surface->userdata)[coord] = text.z;
 }
 

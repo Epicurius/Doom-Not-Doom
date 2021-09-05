@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/24 15:39:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:45:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ void	free_font(t_doom *doom)
 }
 
 /*
- *	Free all BXPM shade palets.
+ *	Free all BXPM shade shades.
  */
-void	free_shade_palet(t_bxpm *bxpm)
+void	free_shade_shade(t_bxpm *bxpm)
 {
 	int	i;
 
 	i = -1;
 	while (++i < 512)
 	{
-		if (bxpm->palet[i])
-			free(bxpm->palet[i]);
+		if (bxpm->shade[i])
+			free(bxpm->shade[i]);
 	}
 }

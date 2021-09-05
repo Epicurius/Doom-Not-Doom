@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:36:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:47:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,32 @@ int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 }
 
 /*
- *	Creates a separete palet of the BXPM image with the light shade.
- *	Saves it to bxpm->palet[light from -255 -> 255].
+ *	Creates a separete shade of the BXPM image with the light shade.
+ *	Saves it to bxpm->shade[light from -255 -> 255].
  */
-static void	shade_palet(t_doom *doom, int texture, int light)
+static void	shade_bxpm(t_doom *doom, int texture, int light)
 {
 	int		i;
 	t_bxpm	*bxpm;
 
 	i = -1;
-	if (texture < 0 || doom->mtx[texture].palet[255 + light] != NULL)
+	if (texture < 0 || doom->mtx[texture].shade[255 + light] != NULL)
 		return ;
 	bxpm = &doom->mtx[texture];
-	bxpm->palet[255 + light] = PROT_ALLOC(sizeof(Uint32 *) * bxpm->clr_nb);
+	bxpm->shade[255 + light] = PROT_ALLOC(sizeof(Uint32 *) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
 	{
 		if (bxpm->clr[i] == 0xFF800080)
-			bxpm->palet[255 + light][i] = 0xFF800080;
-		bxpm->palet[255 + light][i] = brightness(bxpm->clr[i], light);
+			bxpm->shade[255 + light][i] = 0xFF800080;
+		bxpm->shade[255 + light][i] = brightness(bxpm->clr[i], light);
 	}
 }
 
 /*
  *	Check all the sectors light levels and textures, if a textures does not
- *	have the light palet then it creates one.
+ *	have the light shade then it creates one.
  */
-void	shade_palets(t_doom *doom, int s, int w)
+void	sector_shading(t_doom *doom, int s, int w)
 {
 	t_sector	*sector;
 
@@ -90,9 +90,9 @@ void	shade_palets(t_doom *doom, int s, int w)
 		w = -1;
 		sector = &doom->sectors[s];
 		while (++w < sector->npoints)
-			shade_palet(doom, sector->wall[w]->wtx, sector->light);
-		shade_palet(doom, sector->floor.tx, sector->light);
-		shade_palet(doom, sector->ceiling.tx, sector->light);
+			shade_bxpm(doom, sector->wall[w]->wtx, sector->light);
+		shade_bxpm(doom, sector->floor.tx, sector->light);
+		shade_bxpm(doom, sector->ceiling.tx, sector->light);
 	}
 	s = -1;
 	while (++s < doom->nb.events)
@@ -102,8 +102,8 @@ void	shade_palets(t_doom *doom, int s, int w)
 		w = -1;
 		sector = doom->events[s].event_sector;
 		while (++w < sector->npoints)
-			shade_palet(doom, sector->wall[w]->wtx, doom->events[s].light);
-		shade_palet(doom, sector->floor.tx, doom->events[s].light);
-		shade_palet(doom, sector->ceiling.tx, doom->events[s].light);
+			shade_bxpm(doom, sector->wall[w]->wtx, doom->events[s].light);
+		shade_bxpm(doom, sector->floor.tx, doom->events[s].light);
+		shade_bxpm(doom, sector->ceiling.tx, doom->events[s].light);
 	}
 }

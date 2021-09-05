@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:17:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:46:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -510,7 +510,7 @@ SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
 int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
-void				shade_palets(t_doom *doom, int s, int w);
+void				sector_shading(t_doom *doom, int s, int w);
 /* File: compute_vline.c */
 void				compute_vline_data(t_render *render, t_wall *wall,
 						t_vline *vline);
@@ -745,7 +745,7 @@ void				free_doom(t_doom *doom);
 void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
-void				free_shade_palet(t_bxpm *bxpm);
+void				free_shade_shade(t_bxpm *bxpm);
 void				free_entity_pos(t_frames *entity);
 /* File: Free/free3.c */
 void				free_sprites_pos(t_doom *doom);
