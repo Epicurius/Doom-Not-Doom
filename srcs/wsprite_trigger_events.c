@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:06:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:08:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event)
 }
 
 /*
- *	Main funciotion for wall sprite triggered events.
+ *	Main functions for wall sprite triggered events.
  *	Check if wall sprite has been triggered and play sound.
  *	Then preform the event action.
  */

@@ -6,15 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:06:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:05:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	SDL_BliySurface but fomr BXPM.
- *	Copies	the BXPM to surface 1:1.
+ *	SDL_BlitSurface but from BXPM.
+ *	Copies the BXPM to surface 1:1.
  */
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {

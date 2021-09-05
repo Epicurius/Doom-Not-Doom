@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:07:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 }
 
 /*
- *	Calualtes the hights of floor and ceiling at player postion.
+ *	Calculates the hights of floor and ceiling at player postion.
  *	This will lighten the load when drawing.
  */
 void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
@@ -101,8 +101,8 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 
 /*
  *	Prepares all the walls inside player view fustrum for drawing.
- *	aka values that dont need to be calulated more than once per frame,
- *	to make multythreading posiible and faster.
+ *	aka values that dont need to be calculated more than once per frame,
+ *	to make multithreading possible and faster.
  */
 void	precompute_walls(t_doom *doom)
 {

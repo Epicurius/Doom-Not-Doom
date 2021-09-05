@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:57:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:08:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Calulate floor and ceiling dimensions.
+ *	Calculate floor and ceiling dimensions.
  */
 static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 {
@@ -35,7 +35,7 @@ static void	curr_floor_and_ceil(t_doom *doom, t_wall *w)
 }
 
 /*
- *	Calulate sloping floor and ceiling dimensions.
+ *	Calculate sloping floor and ceiling dimensions.
  */
 static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
@@ -57,7 +57,7 @@ static void	slope_curr_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 }
 
 /*
- *	Calulate neighbour floor and ceiling dimensions.
+ *	Calculate neighbour floor and ceiling dimensions.
  *	Screen y for floor and ceiling vertex, z of floor and ceiling with slope.
  */
 static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
@@ -80,7 +80,7 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 }
 
 /*
- *	Calcualte the rotates position on screen of the wall verticies.
+ *	Calculate the rotates position on screen of the wall verticies.
  */
 static void	vertex_relative_pos(t_doom *doom, t_wall *wall, t_v3 *p1, t_v3 *p2)
 {

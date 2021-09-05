@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:11:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:53:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:03:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Creates a BMP of the game and save it in ./ScreenShots/.
- *	NOTE: All pause menu text will not be writen to screen shot.
+ *	NOTE: All pause menu text will not be written to screen shot.
  */
 static void	s_to_save_screen_shot(t_doom *doom)
 {
@@ -33,7 +33,7 @@ static void	s_to_save_screen_shot(t_doom *doom)
 }
 
 /*
- *	Pause loop waits for player to unpause, screen shot or exit.
+ *	Pause loop waits for player to unpauses, screen shot or exit.
  */
 static void	pause_loop(t_doom *doom, t_bmp *bmp)
 {
@@ -65,7 +65,7 @@ static void	pause_loop(t_doom *doom, t_bmp *bmp)
 }
 
 /*
- *	Blits "'P' to unpause" to surface.
+ *	Blits "'P' to unpauses" to surface.
  */
 static void	p_to_unpause(t_doom *doom, int y)
 {

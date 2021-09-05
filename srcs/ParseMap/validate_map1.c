@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:05:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:02:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_player(t_doom *doom)
 
 /*
  *	For each sector:
- *	Calcualte sector center.
+ *	Calculate sector center.
  *	Fix wall orientation to be clockwise.
  *	Fix wall order, if not possible error.
  *	If sector convex, else error.

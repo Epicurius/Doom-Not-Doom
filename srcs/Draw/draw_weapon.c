@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 06:59:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	weapon_thread(void *args)
 }
 
 /*
- *	Calcualte frame scale of the weapon.
+ *	Calculate frame scale of the weapon.
  */
 static void	weapon_frame_scale(t_doom *doom, t_rect *srcr, t_rect *dstr)
 {

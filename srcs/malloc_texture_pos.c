@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/28 12:09:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:06:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Handles the mallocing of the entity state frame position array. (t_rect)
- *	Acording to the amount of frame for each action aswell as angles.
+ *	According to the amount of frame for each action aswell as angles.
  */
 static int	malloc_state_frames_and_angles(t_frames *entity, int state)
 {

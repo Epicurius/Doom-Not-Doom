@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:48:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:00:03 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_vline	init_wall_vline(t_render *render, t_sector *sector, int s)
 /*
  *	Loops through all the walls in the sector until it finds the visible one.
  *	Then draws the wall, floor, ceiling, wall sprites, bullet holes.
- *	If wall not solid recall render_vline with neighbour sector untill it is.
+ *	If wall not solid recall render_vline with neighbour sector until it is.
  *	Then loop back and check for each wall if it has a portal texture.
  *	If it has draw it.
  */

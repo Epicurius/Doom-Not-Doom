@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:05:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:06:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Hanfle loop events, atm only Floot and Ceiling can be loop events.
+ *	Hanfle loop events, atm only Floor and Ceiling can be loop events.
  *	"mmamammmmammamamaaamammma"
  */
 static void	loop_events(t_doom *doom, t_event *event)

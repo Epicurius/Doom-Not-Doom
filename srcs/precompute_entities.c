@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:01:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:07:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	pay_the_man(t_doom *doom, t_entity *entity)
 }
 
 /*
- *	Handles all the entities calulation.
+ *	Handles all the entities calculation.
  */
 void	precompute_entities(t_doom *doom)
 {

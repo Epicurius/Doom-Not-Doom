@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/01 14:20:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:04:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 /*
  *	Function spawns and inits projectile.
  */
-static void	spaw_projectile(t_doom *doom, t_entity *entity)
+static void	spawn_projectile(t_doom *doom, t_entity *entity)
 {
 	t_projectile	*orb;
 
@@ -76,5 +76,5 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 		entity->state = DEATH;
 	}
 	else if (g_entity_data[entity->type].type == RANGE)
-		spaw_projectile(doom, entity);
+		spawn_projectile(doom, entity);
 }

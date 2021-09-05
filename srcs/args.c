@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:18:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:05:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	read_args2(t_settings *init, char **av, int i)
 
 /*
  *	Check is the argument is debug(bool), launcher(bool),
- *	render reslution(float), game difficulty(int) or FOV(int).	
+ *	render resolution(float), game difficulty(int) or FOV(int).	
  */
 static int	read_args1(t_settings *init, char **av, int i)
 {

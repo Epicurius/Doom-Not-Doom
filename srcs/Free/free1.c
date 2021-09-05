@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:36:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:00:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Frees everythign that was allocated.
+ *	Frees everything that was allocated.
  *	And quits SDL, Mix and TTF.
  */
 void	free_doom(t_doom *doom)

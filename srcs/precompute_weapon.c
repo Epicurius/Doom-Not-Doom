@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:07:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Handels launcher projectile.
- *	Spawns a projectile and calulates it velocity.
+ *	Spawns a projectile and calculates it velocity.
  */
 static void	fire_orb(t_doom *doom)
 {
@@ -99,7 +99,7 @@ void	equip_weapon(t_doom *doom)
 }
 
 /*
- *	Handels all the player weapon calulations.
+ *	Handels all the player weapon calculations.
  *	TODO: "move doom->player.action = NONE" some where else
  *	makes not sense or int to be here.
  */

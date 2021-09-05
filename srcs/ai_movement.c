@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:46:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:04:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
 }
 
 /*
- *	Calulates if the entity can random move, and give it x,y velocity.
+ *	Calculates if the entity can random move, and give it x,y velocity.
  */
 int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 {

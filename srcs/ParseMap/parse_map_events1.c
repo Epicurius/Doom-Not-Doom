@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:21:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:01:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 			}
 		}
 	}
-	error_msg("No wsprite wspprite with id:%d found.\n", id);
+	error_msg("No wsprite wsprite with id:%d found.\n", id);
 }
 
 /*

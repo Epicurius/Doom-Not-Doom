@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 16:01:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:08:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 }
 
 /*
- *	Main funciotion for sector triggered events.
- *	Check if player is in sector or the event is already triggred.
+ *	Main functions for sector triggered events.
+ *	Check if player is in sector or the event is already triggered.
  */
 void	sector_trigger_events(t_doom *doom, t_event *event)
 {

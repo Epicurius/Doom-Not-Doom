@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:00:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Free all allocated entity frame cordinates.
+ *	Free all allocated entity frame coordinates.
  */
 void	free_sprites_pos(t_doom *doom)
 {

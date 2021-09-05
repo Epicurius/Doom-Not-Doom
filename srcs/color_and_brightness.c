@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:47:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:06:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Converts Hexadeciaml color to SDL_Color (aka ARGB).
+ *	Converts Hexadecimal color to SDL_Color (aka ARGB).
  */
 SDL_Color	hex_to_sdl_color(int hex)
 {
@@ -28,7 +28,7 @@ SDL_Color	hex_to_sdl_color(int hex)
 
 /*
  * Darkens or brightens a color 
- * -x darker, 0 nothing, +x lighter obvs -255 to 255
+ * -x darker, 0 nothing, +x lighter (-255 to 255)
  */
 Uint32	brightness(Uint32 src, int light)
 {

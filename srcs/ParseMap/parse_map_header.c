@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 12:37:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:01:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	parse_game_mode(char *str)
 
 /*
  *	Parse header and malloc amount of vertices, walls adn sectors.
- *	Could use realloc but htis is faster, so why not.
+ *	Could use realloc but this is faster, so why not.
  */
 void	parse_header(t_doom *doom, int nb, char **arr)
 {

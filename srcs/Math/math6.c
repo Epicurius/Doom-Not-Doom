@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:06:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:01:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	x,y of vector
  */
-void	get_polar_cordinates(double len, double angle, t_v2 *polar)
+void	get_polar_cooordinates(double len, double angle, t_v2 *polar)
 {
 	polar->x = len * cos(angle);
 	polar->y = len * sin(angle);
@@ -24,7 +24,8 @@ void	get_polar_cordinates(double len, double angle, t_v2 *polar)
 /*
  *	len, angle of vector
  */
-void	get_cartesian_cordinates(double x, double y, double *len, double *angle)
+void	get_cartesian_cooordinates(double x, double y, double *len,
+	double *angle)
 {
 	*len = sqrt(x * x + y * y);
 	*angle = atan(y / x);

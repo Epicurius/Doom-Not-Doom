@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 13:27:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:06:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Removes any MedKits left over from prevoius round.
+ *	Removes any MedKits left over from previous round.
  */
 static void	remove_med_kits(t_doom *doom)
 {

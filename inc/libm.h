@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/22 10:32:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:01:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ double				cross_product_v2(double x1, double y1,
 						double x2, double y2);
 t_v3				cross_product_v3(t_v3 v1, t_v3 v2);
 /* File: Math/math6.c */
-void				get_polar_cordinates(double len, double angle, t_v2 *polar);
-void				get_cartesian_cordinates(double x, double y,
+void				get_polar_coordinates(double len, double angle, t_v2 *polar);
+void				get_cartesian_coordinates(double x, double y,
 						double *len, double *angle);
 float				to_radians(float degrees);
 float				to_degrees(float radians);

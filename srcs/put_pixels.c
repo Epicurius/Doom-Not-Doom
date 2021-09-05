@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:45:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/05 07:08:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	blit_pixel_opaque(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 
 /*
  *	Copy pixel to surface.
- *	Specificly for skybox because it does not need to check zbuffer,
+ *	Specificity for skybox because it does not need to check zbuffer,
  *	just set it to render distance + 1.
  */
 void	blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side)
