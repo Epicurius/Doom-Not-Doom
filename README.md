@@ -1,23 +1,23 @@
 <img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.
+Improved on the Build engine from Duke Nukem 3D.
 For OSX.
 
 * [Installation](#instalation)
 * [Controls](#controls)
-* [Map](#map)
+* [Map](#map-file)
 * [Engine](#engine)
-* [BXPM](#bxpm)
+* [BXPM](#bxpm-image-format)
 * [Features](#features)
 ---
 
-#### Installation
+### Installation
 ```sh
-git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD && cd DnD
-make
+git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD && cd DnD && make
 ./doom ./resources/MAPS/game.story
 ```
 ---
-#### Controls
+### Controls
 ```
 	WASD/Arrow Keys -	Move
 	Space			-	Jump
@@ -34,14 +34,22 @@ make
 ```
 
 ---
-###	Engine
+##	Engine
 
+Short introduction on how the engine works.
+* [Engine Flow](#engine-flow)
+* [Map Drawing](#map-drawing)
+* [Skybox](#skybox)
+* [AI](#entites)
+
+##### Engine Flow
 When designing and building the game engine my priority was performance (FPS) over features.</n>
 In my mind a game with many features but low performance is worse that the opposite,</n>
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
 multithreading (pthreads) was my best option.
 
 <img src="./Readme_assets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
+
 ```ruby
 1  - Game is launched.
 2  - Checking all passed arguments, if not given sets default values.
@@ -71,14 +79,31 @@ multithreading (pthreads) was my best option.
 	19 - Check if user has paused or quit game.
 8  - Free all allocated memory.
 9  - Exit game.
-
-To maximize on performance
-
 ```
+</p>
+##### Map Drawing
+To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces. Each vertical piece is self sufficient from start to end, which enabled them to render at the same time while the main thread can do tasks that don't require the screen, e.g. collision detection, precompute AI.
+And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering,
+e.g. Entity rendering.
+
+###### Map rendering on one thread, first monochrome than with texture.</center>
+<img src="./Readme_assets/map_render.gif" alt="Engine_Flow" width="900"/></n>
+
+When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.
+each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment (black part in the above gif) and start from the beginning.
+When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.
+
+##### Skybox
+
+Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.
+The skybox box is a 10x10x10 box where the player is always in the middle, the box also moves with the player creating the illusion that there is a vast distance.
+
+##### AI
+
 
 ---
 
-### BXPM
+## BXPM Image Format
 
 The game required to have different light levels, for that to work each pixel of</n>
 a given texture had to brightened or darkened to achieve the desired effect.</n>
@@ -133,7 +158,7 @@ And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)
 ```
 
 ---
-### Map
+### Map File
 
 DnD uses a custom map file, that is divided into segments (type) that the game interprets.</n>
 Each line inside the segment is a separate instance of the info.</n>
@@ -154,7 +179,7 @@ YAW		-	Player horizontal view direction (DEGREES).
 ```
 ---
 
-### Features
+## Features
 
 - 360 degree seamless skybox.
 - Bullet holes left on walls after shooting.
