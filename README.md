@@ -90,7 +90,7 @@ To maximize on performance the map surfaces are calculated first so that the scr
 And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering,
 e.g. Entity rendering.
 
-###### Map rendering on one thread, first monochrome than with texture.</center>
+###### Map rendering on one thread, first monochrome then with texture.</center>
 <img src="./Readme_assets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
 When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.
