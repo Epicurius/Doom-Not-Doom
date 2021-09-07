@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 10:40:21 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/08/06 08:48:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 12:01:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ void	buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
 	SDL_Texture		*texture;
 	t_bui_libui		*libui;
 	t_bui_window	*win;
-
+	int w, h;
+	
+	SDL_GetWindowSize(window, &w, &h);
 	libui = bui_new_libui();
 	win = bui_new_window_from_window(libui, window, surface);
 	win->update = 0;
 	buymenu = buymenu_init();
+	//SDL_BlitSurface(win->active_surface, NULL, surface, NULL);
+	//ft_printf("%d %d : %d %d\n", win->active_surface->w, win->active_surface->h, surface->w, surface->h);
 	texture = SDL_CreateTextureFromSurface(renderer, win->active_surface);
 	init(buymenu, win);
 	give_weapon(buymenu, inv, WEAPON_SHOTGUN);
@@ -58,7 +62,7 @@ void	buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
 		bui_render(libui);
 		SDL_UpdateTexture(texture, NULL, win->active_surface->pixels,
 			win->active_surface->pitch);
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
+		SDL_RenderCopy(renderer, texture, NULL, &(SDL_Rect){0, 0, w, h});
 		SDL_RenderPresent(renderer);
 	}
 	SDL_DestroyTexture(texture);

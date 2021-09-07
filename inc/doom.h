@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:54:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 11:31:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_settings
 {
 	t_point			size;
 	t_v2			mouse;
-	float			rresolution;
+	float			rres;
 	int				difficulty;
 	int				fov;
 	int				debug;

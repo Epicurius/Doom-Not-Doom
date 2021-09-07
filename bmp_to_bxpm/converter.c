@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/04 12:05:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 11:38:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 		ft_printf("Reading\t%s\n", av[i]);
 		create_path_and_name(av[i], &path, &name);
 		ft_printf("Writing\t%s.bxpm\n", path);
-		write_bxpm2(bxpm, path, "test");
+		write_bxpm(bxpm, path);
 		ft_printf("{GREEN}Done with: %s{RESET}\n", path);
 		free_converter(bmp, bxpm, path, name);
 	}

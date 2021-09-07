@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 11:59:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 11:33:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	get_surface_center(t_doom *doom)
 {
-	doom->c.x = (doom->settings.size.x * doom->settings.rresolution) / 2;
-	doom->c.y = (doom->settings.size.y * doom->settings.rresolution) / 2;
+	doom->c.x = (doom->settings.size.x * doom->settings.rres) / 2;
+	doom->c.y = (doom->settings.size.y * doom->settings.rres) / 2;
 	doom->c.z = doom->c.y * doom->surface->w + doom->c.x;
 }
 
