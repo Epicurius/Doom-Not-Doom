@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:00 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 14:07:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 15:45:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,48 +43,52 @@ void	draw_line(SDL_Surface *surf, Uint32 color, t_point v1, t_point v2)
 	}
 }
 
-void	myPixel(SDL_Surface *surf, int x, int y)
+inline void	myPixel(SDL_Surface *surf, int x, int y)
 {
 	if (x >= 0 && x <= surf->w && y >= 0 && y <= surf->h)
 		((Uint32 *)surf->pixels)[y * surf->w + x] = 0xff00ff00;
 }
-//EFLA
-void efla(SDL_Surface *surf, Uint32 color, t_point v1, t_point v2)
-{
-	bool yLonger = false;
-	int incrementVal;
-	double divDiff;
-	int shortLen = v2.y - v1.y;
-	int longLen = v2.x - v1.x;
-	
-	if (abs(shortLen) > abs(longLen))
-	{
-		ft_swap(shortLen, longLen);
-		yLonger=true;
-	}
 
-	if (longLen < 0)
-		incrementVal = -1;
-	else
-		incrementVal = 1;
-	if (shortLen == 0)
-		divDiff = longLen;
-	else
-		divDiff = (double)longLen / (double)shortLen;
-		
-	if (yLonger)
+void	draw_line2(SDL_Surface *surface, Uint32 color, t_point p1, t_point p2)
+{
+	bool	y_longer;
+	int		increment_val;
+	int		end_val;
+	int		dec_inc;
+	int		j;
+	int		i;
+
+	p2.y -= p1.y;
+	p2.x -= p1.x;
+	j = 0;
+	i = 0;
+	y_longer = abs(p2.y) > abs(p2.x);
+	if (y_longer)
+		ft_swap(&p2.y, &p2.x);
+	end_val = p2.x;
+	increment_val = 1;
+	if (p2.x < 0)
 	{
-		for (int i = 0; i != longLen; i += incrementVal)
-		{
-			myPixel(surf, v1.x + (int)((double)i/divDiff),v1.y + i);
-		}
+		increment_val = -1;
+		p2.x = -p2.x;
 	}
-	else
+	dec_inc = 0;
+	if (p2.x != 0)
+		dec_inc = (p2.y << 16) / p2.x;
+	if (y_longer)
 	{
-		for (int i = 0; i != longLen; i += incrementVal)
+		while (i != end_val)
 		{
-			myPixel(surf, v1.x+i,v1.y+(int)((double)i/divDiff));
+			myPixel(surface, p1.x + (j >> 16), p1.y + i);	
+			j += dec_inc;
+			i += increment_val;
 		}
+		return ;
 	}
-	//draw_line1(surf, color, v1, v2);
+	while (i != end_val)
+	{
+		myPixel(surface, p1.x + i, p1.y + (j >> 16));
+		j += dec_inc;
+		i += increment_val;
+	}
 }

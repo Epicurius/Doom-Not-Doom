@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 11:31:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 15:38:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ typedef struct s_doom
 	SDL_Renderer	*renderer;
 	double			*zbuffer;
 	int				quit;
-	int				*sectbool;
+	char			*sectbool;
 	double			map_scale;
 	t_fonts			font;
 	t_render		*render;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:52:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 15:48:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,13 @@ static void	draw_map(t_doom *doom)
 		sect = &doom->sectors[s];
 		if (sect->floor.y > where.z || sect->ceiling.y < where.z)
 			continue ;
+		doom->sectbool[s] = TRUE;
 		while (++w < sect->npoints)
+		{
+			if (sect->wall[w]->n != -1 && doom->sectbool[sect->wall[w]->n])
+				continue ;
 			draw_map2(doom, sect->wall[w]);
+		}
 	}
 }
 
@@ -123,6 +128,7 @@ void	map(t_doom *doom)
 {
 	if (doom->keys[SDL_SCANCODE_TAB])
 	{
+		reset_sectbool(doom, -1);
 		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);
 		draw_map(doom);

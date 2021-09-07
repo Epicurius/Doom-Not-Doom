@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:58:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/07 15:44:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*protalloc(size_t size, char *file, const char *func, int line)
 	mem = malloc(sizeof(*mem) * size);
 	if (mem)
 	{
-		ft_bzero(mem, size);
+		ft_memset(mem, FALSE, size);
 		return (mem);
 	}
 	ft_printf("{RED}[ERROR]{RESET}\tMalloc: %s : %s : %d\n", file, func, line);
@@ -37,6 +37,7 @@ void	*protalloc(size_t size, char *file, const char *func, int line)
  */
 void	reset_sectbool(t_doom *doom, int curr_sect)
 {
-	ft_memset(doom->sectbool, FALSE, 4 * doom->nb.sectors);
-	doom->sectbool[curr_sect] = TRUE;
+	ft_memset(doom->sectbool, FALSE, doom->nb.sectors);
+	if (curr_sect >= 0)
+		doom->sectbool[curr_sect] = TRUE;
 }
