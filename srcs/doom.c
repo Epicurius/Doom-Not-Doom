@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 15:12:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/08 15:22:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static inline void	game_loop(t_doom *doom)
 	map_events(doom);
 	precompute_walls(doom);
 	precompute_skybox(doom);
-	draw_screen(doom);
+	draw_map(doom);
 	precompute_weapon(doom);
 	precompute_entities(doom);
 	precompute_projectiles(doom);

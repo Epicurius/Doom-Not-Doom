@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:00:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/08 15:22:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ static int	loop_screen_sector(void	*arg)
 /*
  *	Splits the surface in thread amount of pieces and adds the to tpool.
  */
-void	draw_screen(t_doom *doom)
+void	draw_map(t_doom *doom)
 {
 	int	x;
 	int	w;

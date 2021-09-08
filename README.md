@@ -3,7 +3,7 @@ A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd p
 Improved on the Build engine from Duke Nukem 3D.
 For OSX.
 
-* [Installation](#instalation)
+* [Installation](#installation)
 * [Controls](#controls)
 * [Map](#map-file)
 * [Engine](#engine)
@@ -32,19 +32,28 @@ git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD && cd DnD && make
 	P				-	Pause
 	`				-	Unstuck player
 ```
+---
+##### Map
+
+The map is built using vertices, floors, ceiling, walls and sectors.
+Vertices are x and y decimals that describe a position.
+Walls are a line segment connected to 2 vertices.
+Sectors are a concave shape, consisting of 3 or more clockwise connected walls.
+Each sector has its own floor and ceiling.
+
+<img src="./Readme_assets/map.jpg" alt="Engine_Flow" width="700"/></p>
 
 ---
 ##	Engine
 
 Short introduction on how the engine works.
 * [Engine Flow](#engine-flow)
+* [Map](#map)
 * [Map Drawing](#map-drawing)
 * [Skybox](#skybox)
 * [AI](#entitites)
 * [Shooting](#shooting)
 * [Collision Detection](#collision-detection)
-//segment and stuff
-//slope calc
 
 ##### Engine Flow
 When designing and building the game engine my priority was performance (FPS) over features.</n>
@@ -85,6 +94,9 @@ multithreading (pthreads) was my best option.
 9  - Exit game.
 ```
 </p>
+
+
+
 ##### Map Drawing
 To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces. Each vertical piece is self sufficient from start to end, which enabled them to render at the same time while the main thread can do tasks that don't require the screen, e.g. collision detection, precompute AI.
 And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering,
@@ -123,23 +135,37 @@ Entity presets can be found from inc/resources.h
 ##### Shooting
 
 Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,
-and the player has pressed left click than that entity has been shot.
+and the player has pressed left click then that entity has been shot.
 No bullet collision detection algorithm is required.
 
 ##### Collision Detection
 
 Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.
-First we check the vertical collision:
-*	Is ceiling - floor height smaller than entity height.
-*	If velocity > 0 and position + velocity intersect with ceiling.
-*	Check if entity is standing on a cliff (when moving from a sector to another that has lower
-	floor height), to prevent entity from falling to close to a wall and getting stuck.
-*	Apply gravity to entity.
+It consists of 3 main parts:
 
-Secondly check horizontal collision:
-
-
-##### Floor and Ceiling Slopes
+```
+Vertical_collision():
+	Check for z axis collision, e.g. jump, fall.
+	If possible apply gravity.
+	Change z velocity appropriately.
+```
+```
+Horizontal_collision():
+	Check for x/y axis collision and sector changes.
+	Set each visited sector to TRUE, to keep track.
+	Check all walls in sector.
+	If intersect portal, check for step height and start checking all neighboring sectors walls.
+	If collision detected pass to slide_collision().
+	Else keep original x/y velocity.
+```
+```
+Slide_collision():
+	Adjusts velocity so that an entity slides parallel with given wall.
+	Checks x/y collision, if collision detected sets x and y velocity to 0.
+	Else change x/y velocity appropriately.
+```
+When all collision detection has been checked, add velocity to entity position.
+If entity position is not in original sector, find correct sector from visited sectors list.
 
 ---
 
@@ -200,9 +226,25 @@ And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)
 ---
 ### Map File
 
-DnD uses a custom map file, that is divided into segments (type) that the game interprets.</n>
-Each line inside the segment is a separate instance of the info.</n>
-```
+
+
+We uses a custom map file, that is divided into 9 types.
+Each type consists of x instances of the same information.
+For example:
+|type:vertex	|x|	y|
+|:-:|:-:|:-:|
+|0				|0|	0|
+|1				|10|0|
+|2				|10|10|
+|3				|0|10|
+
+In this example we have 4 vertices with and index, x and y coordinates.
+Each type always start with index and then type specific information in order.
+
+ 
+
+
+
 Type:Map
 NAME	-	Type of game mode.
 SCALE	-	Scale of the map.
