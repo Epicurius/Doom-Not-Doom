@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/09 17:53:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:24:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 static void	get_base_speed(t_doom *doom, float *speed)
 {
 	if (doom->keys[SDL_SCANCODE_LSHIFT])
-		*speed = 1;//doom->player.sprint_speed;
+		*speed = doom->player.sprint_speed;
 	else
-		*speed = 0.1;//doom->player.walk_speed;
-	//*speed *= doom->time.delta; //??
+		*speed = doom->player.walk_speed;
+	*speed *= doom->time.delta; //??
 }
 
 /*
@@ -77,13 +77,12 @@ static void	get_movement(t_doom *doom, t_player player, float speed, t_v3 *move)
 	foot_steps(doom, player);
 }
 
-float VectorNormalize (t_v3 *v)
+double VectorNormalize(t_v3 *v)
 {
-	float	length, ilength;
+	double	length;
+	double	ilength;
 
-	length = v->x * v->x + v->y * v->y + v->z * v->z;
-	length = sqrt(length);		// FIXME
-
+	length = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 	if (length)
 	{
 		ilength = 1 / length;
@@ -137,14 +136,16 @@ float VectorNormalize (t_v3 *v)
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-# define MAX_SPEED 320
-# define MAX_ACCEL (MAX_SPEED * 10)
-# define GROUND_FRICTION 4
+# define MAX_SPEED 4
+# define MAX_ACCEL 4
+# define MAX_ACCEL_AIR (MAX_SPEED / 10.0)
+# define GROUND_FRICTION 8
 static void	get_velocity_v2(t_doom *doom, t_v3 move)
 {
 	t_player	*player;
 	t_sector	*sector;
 
+	ft_printf("%f\n", sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y));
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
 	double wishspeed = VectorNormalize(&move);
@@ -164,14 +165,15 @@ static void	get_velocity_v2(t_doom *doom, t_v3 move)
 			doom->player.velocity.x *= newspeed / speed;
 			doom->player.velocity.y *= newspeed / speed;
 		}
+	
 		if (doom->keys[SDL_SCANCODE_SPACE])
 		{
 			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
 			player->velocity.z = doom->player.jump_height;
 		}
 	}
-	else if (wishspeed > 30)
-			wishspeed = 30;
+	else if (wishspeed > MAX_ACCEL_AIR)
+		wishspeed = MAX_ACCEL_AIR;
 			
 	double currentspeed = dot_product_v3(player->velocity, move);
 	double addspeed = wishspeed - currentspeed;
