@@ -2,7 +2,7 @@ type:map	type	scale	vert	wall	sec	ent
 0	story	1	1593	1937	378	12
 -----------------------------------
 type:spawn	x	y	z	dir
-0	80.0	100.0	0.0	45
+0	80.0	105.0	0.0	45
 -----------------------------------
 type:vertex	id	x	y
 0	204.0	145.0

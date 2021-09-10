@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/09 18:01:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/10 15:57:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,39 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
+double Vector_Normalize(t_v3 *v)
+{
+	double	length;
+	double	ilength;
+
+	length = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	if (length)
+	{
+		ilength = 1 / length;
+		v->x *= ilength;
+		v->y *= ilength;
+		v->z *= ilength;
+	}
+	return length;
+
+}
+
 /*
  *	Main game loop that handles all of the games elements.
  */
 static inline void	game_loop(t_doom *doom)
 {
+	/*t_v3 v;
+	v.z = 0;
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	v.x = x;
+	v.y = y;
+	Vector_Normalize(&v);
+	ft_printf("%f %f\n", v.x, v.y);
+	
+	draw_line(doom->surface, 0xff00ff00, (t_point){1920/2, 1080/2}, (t_point){x, y});
+	*/
 	game_mode(doom);
 	map_events(doom);
 	precompute_walls(doom);
