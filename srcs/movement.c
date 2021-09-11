@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/10 16:41:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/11 12:44:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ double VectorNormalize(t_v3 *v)
 	double	ilength;
 
 	length = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	//if (length)
-	//{
-	//	ilength = 1 / length;
-	//	v->x *= ilength;
-	//	v->y *= ilength;
-	//	v->z *= ilength;
-	//}
+	if (length)
+	{
+		ilength = 1 / length;
+		v->x *= ilength;
+		v->y *= ilength;
+		v->z *= ilength;
+	}
 	return length;
 
 }
@@ -98,24 +98,26 @@ double VectorNormalize(t_v3 *v)
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-//static void	get_velocity(t_doom *doom, t_v3 move)
-//{
-//	t_player	*player;
-//	t_sector	*sector;
-//
-//	player = &doom->player;
-//	sector = &doom->sectors[player->sector];
-//	if (doom->keys[SDL_SCANCODE_SPACE] && player->where.z
-//		<= floor_at(sector, player->where) + 0.1)
-//	{
-//		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-//		player->velocity.z = doom->player.jump_height;
-//	}
-//	player->velocity.x = move.x;
-//	player->velocity.y = move.y;
-//	if (player->flight)
-//		player->velocity.z = move.z;
-//}
+static void	get_velocity(t_doom *doom, t_v3 move)
+{
+	t_player	*player;
+	t_sector	*sector;
+
+	player = &doom->player;
+	sector = &doom->sectors[player->sector];
+	if (doom->keys[SDL_SCANCODE_SPACE] && player->where.z
+		<= floor_at(sector, player->where) + 0.1)
+	{
+		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+		player->velocity.z = doom->player.jump_height;
+	}
+	player->velocity.x = move.x;
+	player->velocity.y = move.y;
+	if (player->flight)
+		player->velocity.z = move.z;
+	//else
+	//	player->velocity.z = (player->velocity.z - 70 * doom->time.delta) * doom->time.delta;
+}
 
 /*
  *	Calculates the velocity depending on player movement and jump.
@@ -131,29 +133,102 @@ double VectorNormalize(t_v3 *v)
 // #define	PM_FRICTION			4
 // #define	PM_WATERFRICTION	4
 
-//# define MAX_SPEED (3.2)
-//# define MAX_ACCEL (MAX_SPEED * 10.0)
-//# define MAX_ACCEL_AIR (0.3) //0.7
-//# define GROUND_FRICTION 0.9
+# define MAX_SPEED (3.2)
+# define MAX_ACCEL (MAX_SPEED * 10.0)
+# define MAX_ACCEL_AIR (3) //0.7
+# define GROUND_FRICTION 4.0
+# define STOP_SPEED 10.0
+
+static void	get_velocity_v2(t_doom *doom, t_v3 move)
+{
+	t_player	*player;
+	t_sector	*sector;
+
+
+	//ft_printf("%f\n", sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y));
+	player = &doom->player;
+	sector = &doom->sectors[player->sector];
+	double wishspeed = VectorNormalize(&move);
+	doom->player.wishdir = move;
+	ft_printf("wishspeed %f\n", wishspeed);
+	if (wishspeed > MAX_SPEED)
+	{
+		ft_printf("wisgspeed Max\n");
+		move = mult_v3(move, MAX_SPEED / wishspeed);
+		wishspeed = MAX_SPEED;
+	}
+	if (player->where.z <= floor_at(sector, player->where))
+	{
+		//ft_printf("Floor\n");
+		double speed = sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y);
+		if (speed)
+		{
+			double newspeed = ft_fmax(0, speed - doom->time.delta * ft_fmax(speed, STOP_SPEED) * GROUND_FRICTION);
+			doom->player.velocity.x *= newspeed / speed;
+			doom->player.velocity.y *= newspeed / speed;
+		}
+	
+		if (doom->keys[SDL_SCANCODE_SPACE])
+		{
+			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+			player->velocity.z = doom->player.jump_height;
+		}
+	}
+	else if (wishspeed > MAX_ACCEL_AIR)
+	{
+		//ft_printf("Air\n");
+		wishspeed = MAX_ACCEL_AIR;
+	}
+	
+	//double currentspeed = dot_product_v3(player->velocity, move);
+	//double accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * doom->time.delta);
+	double currentspeed = dot_product_v3(player->velocity, move);
+	double addspeed = wishspeed - currentspeed;
+	if (addspeed <= 0)
+		return;
+	double accelspeed = MAX_ACCEL * doom->time.delta * wishspeed;
+	if (accelspeed > addspeed)
+		accelspeed = addspeed;
+
+	player->velocity.x += accelspeed * move.x;
+	player->velocity.y += accelspeed * move.y;
+	if (player->flight)
+		player->velocity.z += accelspeed * move.z;
+
+}
+
+
+
+//# define MAX_SPEED (1.0)
+//# define MAX_ACCEL (MAX_SPEED * 5.0)
+//# define MAX_ACCEL_AIR (0.7) //0.7
+//# define GROUND_FRICTION 2.0
 //# define STOP_SPEED 1.0
-//
 //static void	get_velocity_v3(t_doom *doom, t_v3 move)
 //{
 //	t_player	*player;
 //	t_sector	*sector;
+//	double 		currentspeed;
+//	double 		accelspeed;
 //
-//
-//	//ft_printf("%f\n", sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y));
 //	player = &doom->player;
 //	sector = &doom->sectors[player->sector];
-//	double wishspeed = VectorNormalize(&move);
-//	//ft_printf("whisspeed %f\n", wishspeed);
-//	if (wishspeed > MAX_SPEED)
+//
+//
+//	if (player->where.z <= floor_at(sector, player->where))
 //	{
-//		move = mult_v3(move, MAX_SPEED / wishspeed);
-//		wishspeed = MAX_SPEED;
+//		if (doom->keys[SDL_SCANCODE_SPACE])
+//		{
+//			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+//			move.z = doom->player.jump_height;
+//		}
 //	}
-//	if (player->where.z <= floor_at(sector, player->where) + 0.1)
+//
+//
+//	double wishspeed = VectorNormalize(&move);
+//	doom->player.wishdir = move;
+//
+//	if (player->where.z <= floor_at(sector, player->where))
 //	{
 //		double speed = sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y);
 //		if (speed)
@@ -162,95 +237,30 @@ double VectorNormalize(t_v3 *v)
 //			doom->player.velocity.x *= newspeed / speed;
 //			doom->player.velocity.y *= newspeed / speed;
 //		}
-//	
-//		if (doom->keys[SDL_SCANCODE_SPACE])
-//		{
-//			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-//			player->velocity.z = doom->player.jump_height;
-//		}
 //	}
-//	else if (wishspeed > MAX_ACCEL_AIR)
-//		wishspeed = MAX_ACCEL_AIR;
-//	
-//	double currentspeed = dot_product_v3(player->velocity, move);
-//	double accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * doom->time.delta);
-//	//double currentspeed = dot_product_v3(player->velocity, move);
-//	//double addspeed = wishspeed - currentspeed;
-//	//if (addspeed <= 0)
-//	//	return;
-//	//double accelspeed = MAX_ACCEL * doom->time.delta * wishspeed;
-//	//if (accelspeed > addspeed)
-//	//	accelspeed = addspeed;
-//
+//	else
+//	{
+//		if (wishspeed > MAX_SPEED)
+//		{
+//			move = mult_v3(move, MAX_SPEED / wishspeed);
+//			wishspeed = MAX_SPEED;
+//		}
+//		if (wishspeed > MAX_ACCEL_AIR)
+//			wishspeed = MAX_ACCEL_AIR;
+//		//ft_printf("%f\n", wishspeed);
+//	}
+//	currentspeed = dot_product_v3(player->velocity, move);
+//	double addspeed = wishspeed - currentspeed;
+//	if (addspeed <= 0)
+//		return;
+//	accelspeed = MAX_ACCEL * doom->time.delta * wishspeed;
+//	if (accelspeed > addspeed)
+//		accelspeed = addspeed;
 //	player->velocity.x += accelspeed * move.x;
 //	player->velocity.y += accelspeed * move.y;
-//	if (player->flight)
-//		player->velocity.z += accelspeed * move.z;
+//	player->velocity.z += accelspeed * move.z;
 //
 //}
-
-
-
-# define MAX_SPEED (1.0)
-# define MAX_ACCEL (MAX_SPEED * 5.0)
-# define MAX_ACCEL_AIR (0.7) //0.7
-# define GROUND_FRICTION 2.0
-# define STOP_SPEED 1.0
-static void	get_velocity_v3(t_doom *doom, t_v3 move)
-{
-	t_player	*player;
-	t_sector	*sector;
-	double 		currentspeed;
-	double 		accelspeed;
-
-	player = &doom->player;
-	sector = &doom->sectors[player->sector];	
-	if (player->where.z <= floor_at(sector, player->where))
-	{
-		if (doom->keys[SDL_SCANCODE_SPACE])
-		{
-			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-			move.z = doom->player.jump_height;
-		}
-	}
-	else
-		move.z -= 15;
-	
-	double wishspeed = VectorNormalize(&move);
-
-	if (player->where.z <= floor_at(sector, player->where))
-	{
-		double speed = sqrt(doom->player.velocity.x * doom->player.velocity.x + doom->player.velocity.y * doom->player.velocity.y);
-		if (speed)
-		{
-			double newspeed = ft_fmax(0, speed - doom->time.delta * ft_fmax(speed, STOP_SPEED) * GROUND_FRICTION);
-			doom->player.velocity.x *= newspeed / speed;
-			doom->player.velocity.y *= newspeed / speed;
-		}
-	}
-	else
-	{
-		if (wishspeed > MAX_SPEED)
-		{
-			move = mult_v3(move, MAX_SPEED / wishspeed);
-			wishspeed = MAX_SPEED;
-		}
-		if (wishspeed > MAX_ACCEL_AIR)
-			wishspeed = MAX_ACCEL_AIR;
-		//ft_printf("%f\n", wishspeed);
-	}
-	currentspeed = dot_product_v3(player->velocity, move);
-	double addspeed = wishspeed - currentspeed;
-	if (addspeed <= 0)
-		return;
-	accelspeed = MAX_ACCEL * doom->time.delta * wishspeed;
-	if (accelspeed > addspeed)
-		accelspeed = addspeed;
-	player->velocity.x += accelspeed * move.x;
-	player->velocity.y += accelspeed * move.y;
-	player->velocity.z += accelspeed * move.z;
-
-}
 
 /*
  *	Handels all the player movement.
@@ -270,7 +280,7 @@ void	movement(t_doom *doom)
 	get_base_speed(doom, &speed);
 	ft_bzero(&move, sizeof(t_v3));
 	get_movement(doom, doom->player, speed, &move);
-	get_velocity_v3(doom, move);
+	get_velocity_v2(doom, move);
 	if (entity_collision(doom, &doom->player.where, &doom->player.velocity))
 		return ;
 	motion.height = doom->player.eyelvl + 1;

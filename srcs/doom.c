@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/10 15:57:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/11 11:37:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,14 @@ double Vector_Normalize(t_v3 *v)
 
 }
 
+
+
 /*
  *	Main game loop that handles all of the games elements.
  */
 static inline void	game_loop(t_doom *doom)
 {
-	/*t_v3 v;
-	v.z = 0;
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-	v.x = x;
-	v.y = y;
-	Vector_Normalize(&v);
-	ft_printf("%f %f\n", v.x, v.y);
-	
-	draw_line(doom->surface, 0xff00ff00, (t_point){1920/2, 1080/2}, (t_point){x, y});
-	*/
+
 	game_mode(doom);
 	map_events(doom);
 	precompute_walls(doom);
@@ -97,7 +89,7 @@ static void	game(char *map, t_settings settings)
 		return ;
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
-		game_loop(&doom), SDL_Delay(doom.map.zoom * 2);
+		game_loop(&doom);//, SDL_Delay(doom.map.zoom * 2);
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);

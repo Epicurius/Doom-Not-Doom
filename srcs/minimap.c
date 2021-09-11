@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 15:48:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/11 11:53:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,22 +120,36 @@ static void	map_area(t_doom *doom)
 	}
 }
 
+void	movement_visualizer(t_doom *doom)
+{
+	t_v3 v;
+	
+	//draw_circle(doom->surface, 0xFFFF0000, (t_point){doom->c.x, doom->c.y}, 1.5 * (double)(doom->map.zoom * 100));
+	v = doom->player.velocity;
+	v = mult_v3(v, doom->map.zoom * 100);
+	draw_line(doom->surface, 0xFF00FF00, (t_point){doom->c.x, doom->c.y + 1}, (t_point){doom->c.x + v.x, doom->c.y + v.y});
+	v = doom->player.wishdir;
+	v = mult_v3(v, doom->map.zoom * 100);
+	draw_line(doom->surface, 0xFF0000FF, (t_point){doom->c.x + 1, doom->c.y}, (t_point){doom->c.x + v.x, doom->c.y + v.y});
+}
+
 /*
  *	Main minimap draw function.
  *	If Tab is pressed draw minimap.
  */
 void	map(t_doom *doom)
 {
-	if (doom->keys[SDL_SCANCODE_TAB])
+	if (1 == 1 || doom->keys[SDL_SCANCODE_TAB])
 	{
 		reset_sectbool(doom, -1);
 		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);
 		draw_map(doom);
-		map_player(doom);
+		//map_player(doom);
 		if (doom->settings.debug)
 			draw_circle(doom->surface, 0xff00ff00,
 				new_point(doom->surface->w / 2, doom->surface->h / 2),
 				ACTIVE_AREA * doom->map.zoom);
 	}
+	movement_visualizer(doom);
 }
