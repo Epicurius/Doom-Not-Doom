@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:01:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/13 10:47:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ double				vector_magnitude_v2(t_v3 v);
 double				vector_magnitude_v3(t_v3 v);
 double				pythagoras(double x, double y);
 double				space_diagonal(t_v3 v);
-t_v3				normalize(t_v3 vec);
+double				normalize_v3(t_v3 *vec);
 /* File: Math/math5.c */
 double				dot_product_v2(t_v3 v1, t_v3 v2);
 double				dot_product_v3(t_v3 v1, t_v3 v2);

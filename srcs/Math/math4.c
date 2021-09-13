@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:16 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:04:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/13 10:50:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,16 @@ double	space_diagonal(t_v3 v)
 /*
  *	Get normal
  */
-t_v3	normalize(t_v3 vec)
+double	normalize_v3(t_v3 *vec)
 {
-	float	length;
+	double	length;
 
-	length = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	return (new_v3(vec.x / length, vec.y / length, vec.z / length));
+	length = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+	if (length)
+	{
+		vec->x /= length;
+		vec->y /= length;
+		vec->z /= length;
+	}
+	return (length);
 }
