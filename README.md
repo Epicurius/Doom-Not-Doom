@@ -1,7 +1,7 @@
 <img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
-A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.
-Improved on the Build engine from Duke Nukem 3D.
-For OSX.
+A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.<br>
+Improved on the Build engine from Duke Nukem 3D.<br>
+Only works on OSX.
 
 * [Installation](#installation)
 * [Controls](#controls)
@@ -13,33 +13,36 @@ For OSX.
 
 ### Installation
 ```sh
-git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD && cd DnD && make
-./doom ./resources/MAPS/game.story
+git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
+cd DnD && make
+./game/doom ./game/resources/MAPS/game.story
+# OR
+./wolf3d
 ```
 ---
 ### Controls
 ```
-	WASD/Arrow Keys -	Move
+	WASD/Arrow Keys 	-	Move
 	Space			-	Jump
 	Mouse			-	Look around
 	Shift			-	Sprint
 	Control			-	Crouch
 	Left click		-	Shoot
-	E				-	Use
-	Tab				-	Show map
-	Scroll Wheel	-	Zoom map
+	E			-	Use
+	Tab			-	Show map
+	Scroll Wheel		-	Zoom map
 	ESC/Q			-	Quit
-	P				-	Pause
-	`				-	Unstuck player
+	P			-	Pause
+	`			-	Unstuck player
 ```
 ---
 ##### Map
 
-The map is built using vertices, floors, ceiling, walls and sectors.
-Vertices are x and y decimals that describe a position.
-Walls are a line segment connected to 2 vertices.
-Sectors are a concave shape, consisting of 3 or more clockwise connected walls.
-Each sector has its own floor and ceiling.
+The map is built using vertices, floors, ceiling, walls and sectors.<br>
+Vertices are x and y decimals that describe a position.<br>
+Walls are a line segment connected to 2 vertices.<br>
+Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
+Each sector has its own floor and ceiling.<br>
 
 <img src="./Readme_assets/map.jpg" alt="Engine_Flow" width="700"/></p>
 
@@ -56,10 +59,10 @@ Short introduction on how the engine works.
 * [Collision Detection](#collision-detection)
 
 ##### Engine Flow
-When designing and building the game engine my priority was performance (FPS) over features.</n>
-In my mind a game with many features but low performance is worse that the opposite,</n>
-so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
-multithreading (pthreads) was my best option.
+When designing and building the game engine my priority was performance (FPS) over features.<br>
+In my mind a game with many features but low performance is worse that the opposite,<br>
+so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)<br>
+multithreading (pthreads) was my best option.<br>
 
 <img src="./Readme_assets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 
@@ -98,50 +101,50 @@ multithreading (pthreads) was my best option.
 
 
 ##### Map Drawing
-To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces. Each vertical piece is self sufficient from start to end, which enabled them to render at the same time while the main thread can do tasks that don't require the screen, e.g. collision detection, precompute AI.
-And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering,
-e.g. Entity rendering.
+To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.<br>
+Each vertical piece is self sufficient from start to end, which enabled them to render at the same time while the main thread can do tasks that don't require the screen, e.g. collision detection, precompute AI.<br>
+And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
 ###### Map rendering on one thread, first monochrome then with texture.</center>
 <img src="./Readme_assets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
-When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.
+When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.<br>
 each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment (black part in the above gif) and start from the beginning.
-When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.
+When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.<br>
 
 ##### Skybox
 
-Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.
+Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.<br>
 The skybox box is a 10x10x10 box where the player is always in the middle, the box also moves with the player creating the illusion that there is a vast distance.
 
 ##### AI
 
-Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.
-Alive/non static entities have a detection radius and a view cone, if their line of sight collides
-with the player they will get the state MOVE and try to get into their attack range.
-When the entity is inside their attack range they will get the state ATTACK and start attacking the player.
+Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.<br>
+Alive/non static entities have a detection radius and a view cone, if their line of sight collides<br>
+with the player they will get the state MOVE and try to get into their attack range.<br>
+When the entity is inside their attack range they will get the state ATTACK and start attacking the player.<br>
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
-During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.
+During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.<br>
 
-<img src="./Readme_assets/frame.jpg" alt="Engine_Flow" width="800"/></n>
-Each entity frames are divided into the entity states and into FRAME and ANGLE.
-Take for example the above image, it har move animation of 8 frames with each having 3 angles.
-When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.
-If an entity has 1 angle the entity will always face the player.
+<img src="./Readme_assets/frame.jpg" alt="Engine_Flow" width="800"/><br>
+Each entity frames are divided into the entity states and into FRAME and ANGLE.<br>
+Take for example the above image, it har move animation of 8 frames with each having 3 angles.<br>
+When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.<br>
+If an entity has 1 angle the entity will always face the player.<br>
 So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME_NB][ANGLE]```;
 
 Entity presets can be found from inc/resources.h
 
 ##### Shooting
 
-Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,
-and the player has pressed left click then that entity has been shot.
-No bullet collision detection algorithm is required.
+Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,<br>
+and the player has pressed left click then that entity has been shot.<br>
+No bullet collision detection algorithm is required.<br>
 
 ##### Collision Detection
 
-Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.
-It consists of 3 main parts:
+Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.<br>
+It consists of 3 main parts:<br>
 
 ```
 Vertical_collision():
