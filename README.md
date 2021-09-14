@@ -13,8 +13,11 @@ Only works on OSX.
 
 ### Installation
 ```sh
-git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD && cd DnD && make
-./doom ./resources/MAPS/game.story
+git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
+cd DnD && make
+./game/doom ./game/resources/MAPS/game.story
+# OR
+./wolf3d
 ```
 ---
 ### Controls
