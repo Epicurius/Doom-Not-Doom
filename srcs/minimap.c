@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/11 12:52:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:32:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,17 +139,13 @@ void	movement_visualizer(t_doom *doom)
  */
 void	map(t_doom *doom)
 {
-	if (1 == 1 || doom->keys[SDL_SCANCODE_TAB])
+	if (doom->keys[SDL_SCANCODE_TAB])
 	{
 		reset_sectbool(doom, -1);
 		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);
 		draw_map(doom);
-		//map_player(doom);
-		if (doom->settings.debug)
-			draw_circle(doom->surface, 0xff00ff00,
-				new_point(doom->surface->w / 2, doom->surface->h / 2),
-				ACTIVE_AREA * doom->map.zoom);
+		map_player(doom);
 	}
-	movement_visualizer(doom);
+	//movement_visualizer(doom);
 }

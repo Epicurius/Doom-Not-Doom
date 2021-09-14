@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/13 11:43:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:31:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,27 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
-double Vector_Normalize(t_v3 *v)
-{
-	double	length;
-	double	ilength;
-
-	length = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	if (length)
-	{
-		ilength = 1 / length;
-		v->x *= ilength;
-		v->y *= ilength;
-		v->z *= ilength;
-	}
-	return length;
-
-}
-
-
+//void	ff_test_temp(t_doom *doom)
+//{
+//	if (doom->keys[SDL_SCANCODE_U])
+//	{
+//		for (int i = 0; i < 100; i++)
+//			draw_line(doom->surface, 0xffff0000,
+//				(t_point){0, rand() % 1079}, (t_point){1920, rand() % 1079});
+//		int x, y;
+//		SDL_GetMouseState(&x, &y);
+//		ft_timer_start();
+//		flood_fill(doom->surface, 0xff00ff00, x, y);
+//		ft_printf("time: %f\n", ft_timer_end());
+//		doom->keys[SDL_SCANCODE_U] = 0;
+//	}	
+//}
 
 /*
  *	Main game loop that handles all of the games elements.
  */
 static inline void	game_loop(t_doom *doom)
 {
-
 	game_mode(doom);
 	map_events(doom);
 	precompute_walls(doom);
@@ -59,6 +55,7 @@ static inline void	game_loop(t_doom *doom)
 	precompute_projectiles(doom);
 	movement(doom);
 	poll_event(doom);
+	//ff_test_temp(doom);
 	tpool_wait(&doom->tpool);
 	draw_projectiles(doom);
 	draw_entities(doom);
