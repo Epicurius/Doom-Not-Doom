@@ -1,11 +1,10 @@
 <img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.<br>
-Improved on the Build engine from Duke Nukem 3D.<br>
-Only works on OSX.
+Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
 
+**Work in Progress**
 * [Installation](#installation)
 * [Controls](#controls)
-* [Map](#map-file)
 * [Engine](#engine)
 * [BXPM](#bxpm-image-format)
 * [Features](#features)
@@ -39,7 +38,7 @@ cd DnD && make
 ##### Map
 
 The map is built using vertices, floors, ceiling, walls and sectors.<br>
-Vertices are x and y decimals that describe a position.<br>
+Vertices are x and y floats that describe a position.<br>
 Walls are a line segment connected to 2 vertices.<br>
 Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
 Each sector has its own floor and ceiling.<br>
@@ -84,14 +83,14 @@ multithreading (pthreads) was my best option.<br>
 	8  - Precompute projectile, movement and collision.
 	9  - Handel player collision detection.
 	10 - Reads all user inputs.
-	11 - Wait for all map drawing thread to be ready.
+	11 - Wait for all map drawing threads to be ready.
 	12 - Draw all projectiles
 	13 - Create and execute entity drawing threads.
 	14 - Create and execute weapon drawing threads.
-	15 - Draw HUD, e.g. ammo amount, health, armour.
-	16 - If Tab is pressed draw map.
-	17 - Calculate and update window FPS title and delta time.
-	18 - Render to screen.
+	15 - Draw HUD, e.g. ammo, health, armour amount.
+	16 - If Tab is pressed draw minimap.
+	17 - Calculate and update window title with FPS and calculate delta time.
+	18 - Render frame to screen.
 	19 - Check if user has paused or quit game.
 8  - Free all allocated memory.
 9  - Exit game.
@@ -102,14 +101,16 @@ multithreading (pthreads) was my best option.<br>
 
 ##### Map Drawing
 To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.<br>
-Each vertical piece is self sufficient from start to end, which enabled them to render at the same time while the main thread can do tasks that don't require the screen, e.g. collision detection, precompute AI.<br>
-And when all the all map surfaces have been rendered no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
+Each vertical piece is self sufficient from start to end, which enabled them to render and draw on the same surface at the same time,<br>
+while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.<br>
+And when all map surfaces have been drawn no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
 ###### Map rendering on one thread, first monochrome then with texture.</center>
 <img src="./Readme_assets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
 When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.<br>
-each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment (black part in the above gif) and start from the beginning.
+each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment<br>
+(black part in the above gif) and start from the beginning.<br>
 When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.<br>
 
 ##### Skybox
@@ -120,7 +121,7 @@ The skybox box is a 10x10x10 box where the player is always in the middle, the b
 ##### AI
 
 Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.<br>
-Alive/non static entities have a detection radius and a view cone, if their line of sight collides<br>
+Alive/non-static entities have a detection radius and a view cone, if their line of sight collides<br>
 with the player they will get the state MOVE and try to get into their attack range.<br>
 When the entity is inside their attack range they will get the state ATTACK and start attacking the player.<br>
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
@@ -128,10 +129,10 @@ During IDLE state, non static entities have a random chance of moving into a rad
 
 <img src="./Readme_assets/frame.jpg" alt="Engine_Flow" width="800"/><br>
 Each entity frames are divided into the entity states and into FRAME and ANGLE.<br>
-Take for example the above image, it har move animation of 8 frames with each having 3 angles.<br>
+Take for example the above image, it has move animation of 8 frames with each having 3 angles.<br>
 When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.<br>
 If an entity has 1 angle the entity will always face the player.<br>
-So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME_NB][ANGLE]```;
+So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME][ANGLE]```;
 
 Entity presets can be found from inc/resources.h
 
@@ -176,7 +177,7 @@ If entity position is not in original sector, find correct sector from visited s
 
 The game required to have different light levels, for that to work each pixel of</n>
 a given texture had to brightened or darkened to achieve the desired effect.</n>
-Each frame all pixels that had a custom light level had to be calculated.</n>
+Each frame all sectors screen pixels with a custom light level had to be calculated.</n>
 To improve performance BXPM image format was created.</n>
 
 BXPM is split into three parts:
@@ -184,7 +185,7 @@ BXPM is split into three parts:
 Header:
 	Size:		20 bytes.
 	Type:		int32_t
-	Content:	In order width, height, color amount, pixel amount, pixel format.
+	Content:	In order: width, height, color amount, pixel amount, pixel format.
 
 Colors:
 	Size:		Color amount * 32 bytes
@@ -227,42 +228,8 @@ And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)
 ```
 
 ---
-### Map File
 
 
-
-We uses a custom map file, that is divided into 9 types.
-Each type consists of x instances of the same information.
-For example:
-|type:vertex	|x|	y|
-|:-:|:-:|:-:|
-|0				|0|	0|
-|1				|10|0|
-|2				|10|10|
-|3				|0|10|
-
-In this example we have 4 vertices with and index, x and y coordinates.
-Each type always start with index and then type specific information in order.
-
- 
-
-
-
-Type:Map
-NAME	-	Type of game mode.
-SCALE	-	Scale of the map.
-VERT	-	Amount of vertices.
-WALL	-	Amount of walls.
-SECT	-	Amount of sectors.
-```
-```
-Type:Spawn
-X		-	Player spawn x.
-Y		-	Player spawn y
-Z		-	Player spawn z.
-YAW		-	Player horizontal view direction (DEGREES).
-```
----
 
 ## Features
 
@@ -279,3 +246,38 @@ YAW		-	Player horizontal view direction (DEGREES).
 - AI Dodge/Danger.
 - Many more...
 ---
+
+
+
+### Map File (WRITING IN PROGRESS)
+
+We uses a custom map file, that is divided into 9 types.
+Each type consists of x instances of the same information.
+For example:
+|type:vertex	|x|	y|
+|:-:|:-:|:-:|
+|0				|0|	0|
+|1				|10|0|
+|2				|10|10|
+|3				|0|10|
+
+In this example we have 4 vertices with and index, x and y coordinates.
+Each type always start with index and then type specific information in order.
+
+```
+Type:Map
+NAME	-	Type of game mode.
+SCALE	-	Scale of the map.
+VERT	-	Amount of vertices.
+WALL	-	Amount of walls.
+SECT	-	Amount of sectors.
+```
+```
+Type:Spawn
+X		-	Player spawn x.
+Y		-	Player spawn y
+Z		-	Player spawn z.
+YAW		-	Player horizontal view direction (DEGREES).
+```
+---
+
