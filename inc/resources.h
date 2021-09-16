@@ -447,7 +447,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.tc = {88, 70, 24, 56}
 	},
 	{
-		.name = "gargoyle",
+		.name = "Gargoyle",
 		.pickup = FALSE,
 		.type = INANIMATE,
 		.move = FALSE,

@@ -1,4 +1,5 @@
 <img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
+
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.<br>
 Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
 
@@ -7,9 +8,10 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 * [Controls](#controls)
 * [Engine](#engine)
 * [BXPM](#bxpm-image-format)
+* [Events](#events)
 * [Features](#features)
 ---
-
+<img src="./Readme_assets/cover_image.jpg" alt="cover_image" width="900"/></p>
 ### Installation
 ```sh
 git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
@@ -229,7 +231,23 @@ And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)
 
 ---
 
+## Events
 
+There are 7 events in DnD, these events are parsed through the map file.
+All events have a trigger, SECTOR, CLICK, SHOOT and NULL, these determine when the event should occur.
+SECTOR triggers when player is in a specific sector, CLICK & SHOOT pertains to wall sprites,
+and NULL is a infinite loop.
+
+Floor and ceiling events move the corresponding surfaces on th e y axis,
+they can be used to make elevators, garage doors and puzzle rooms.
+The Store event is used to open the store interface e.g. clicking a wall sprite.
+Hazard event makes the player take damage, used mainly for lava floor.
+Audio event plays a sound, the sound file path is passed with the map file,
+this makes it possible to add any sound you want without recompilation.
+Spawn event is used to spawn enemies, so that the engine does not need to handle them before the player is near.
+Light changes the sectors light level e.g. flickering lights and wall light switches.
+
+----
 
 ## Features
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/13 11:43:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/16 12:18:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	get_base_speed(t_doom *doom, t_v2 *speed)
 		speed->y = doom->player.sprint_speed;
 	else
 		speed->y = doom->player.walk_speed;
-	speed->y *= doom->time.delta;
+	speed->y *= doom->time.delta;//useless if normalize
 	speed->x = speed->y * 0.8;
 }
 
