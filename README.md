@@ -269,33 +269,94 @@ Light changes the sectors light level e.g. flickering lights and wall light swit
 
 ### Map File (WRITING IN PROGRESS)
 
-We uses a custom map file, that is divided into 9 types.
-Each type consists of x instances of the same information.
-For example:
-|type:vertex	|x|	y|
-|:-:|:-:|:-:|
-|0				|0|	0|
-|1				|10|0|
-|2				|10|10|
-|3				|0|10|
+```
+GM	-	Game mode
+SC	-	Scale
+V	-	Vertex
+W	-	Wall
+S	-	Sector
+X	-	X coordinate
+Y	-	Y coordinate
+Z	-	Z coordinate
+D	-	YAW
+V1	-	Vertex 1
+V2	-	VERTEX 2
+WTX	-	Wall Texture
+PTX	-	Portal Texture
+FTX	-	Floor Texture
+CTX	-	Ceiling Texture
+STX	-	Wall Sprite Texture
+SO	-	Solid
+N	-	Neighbor
+G	-	Gravity
+L	-	Light
+FH	-	Floor Height
+CH	-	Ceiling Height
+FS	-	Floor Scale
+CS	-	Ceiling Scale
+NM	-	Name
+T	-	Type
+A	-	Action
+I	-	Index
+STATE - State
+```
 
-In this example we have 4 vertices with and index, x and y coordinates.
-Each type always start with index and then type specific information in order.
+
+|type		|		|		|		|		|		|		|	|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|map		|GM		|SC		|V		|W		|S		|		|	|
+|spawn		|X		|Y		|Z		|D		|		|		|	|
+|vertex	|X		|Y		|		|		|		|		|	|
+|wall		|V1		|V2		|WTX	|PTX	|SC		|SO		|	|
+|wsprite	|W		|X		|Y		|TX		|SC		|STATE	|	|
+|sector	|W		|N		|G		|L		|		|		|	|
+|f&c		|FH		|CH		|FTX	|CTX	|FS		|CS		|SL	|
+|entity	|NM		|X		|Y		|Z		|D		|		|	|
+|event		|T		|A		|I		|		|		|		|	|
 
 ```
-Type:Map
-NAME	-	Type of game mode.
-SCALE	-	Scale of the map.
-VERT	-	Amount of vertices.
-WALL	-	Amount of walls.
-SECT	-	Amount of sectors.
+type:map		GM		SC	V	W	S
+0				endless	1	8	8	2
+-----------------------------------
+type:spawn		X	Y	Z	D
+0				30.0	49.0	0.0	0
+-----------------------------------
+type:vertex		X	Y
+0				41.0	59.0
+1				61.0	59.0
+2				61.0	40.0
+3				41.0	40.0
+4				41.0	40.0
+5				41.0	59.0
+6				20.0	59.0
+7				20.0	40.0
+-----------------------------------
+type:wall		V1	V2	WTX	PTX	SC	SO
+0				0	3	7	0	30.0	0
+1				1	0	7	0	30.0	1
+2				2	1	7	0	30.0	1
+3				3	2	7	0	30.0	1
+4				4	7	7	0	30.0	1
+5				5	4	7	0	30.0	0
+6				6	5	7	0	30.0	1
+7				7	6	7	0	30.0	1
+-----------------------------------
+type:wsprite	W	X		Y		STX		SC
+0				2	8.700	9.100	0		1.000	STATIC
+-----------------------------------
+type:sector		W			N			G	L
+0				0 1 2 3		1 -1 -1 -1	20	0
+1				4 5 6 7		-1 0 -1 -1	20	0
+-----------------------------------
+type:f&c		FH	CH	FTX	CTX	FS		CS		SL
+0				0	20	2	2	10.0	10.0	0 0 0 0
+1				0	20	2	2	10.0	10.0	0 0 0 0
+-----------------------------------
+type:entity		NM		X		Y		Z	D
+0				Ghost	58.0	43.0	0.0	180
+-----------------------------------
+type:event		T	A	I
+-----------------------------------
 ```
-```
-Type:Spawn
-X		-	Player spawn x.
-Y		-	Player spawn y
-Z		-	Player spawn z.
-YAW		-	Player horizontal view direction (DEGREES).
-```
+
 ---
-

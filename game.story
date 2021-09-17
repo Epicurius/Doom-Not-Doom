@@ -1,10 +1,10 @@
-type:map	type	scale	vert	wall	sec	ent
-0	story	1	1613	1957	382	21
+type:map	GM		SC	V		W		S
+0			story	1	1613	1957	382
 -----------------------------------
-type:spawn	x		y		z	dir
-0			10.0	105.0	0.0	45
+type:spawn		X		Y		Z		D
+0				10.0	105.0	0.0		160
 -----------------------------------
-type:vertex	id	x	y
+type:vertex		X		Y
 0	38.0	146.0
 1	37.0	147.0
 2	32.0	142.0
@@ -1619,7 +1619,7 @@ type:vertex	id	x	y
 1611	49.0	57.0
 1612	41.0	57.0
 -----------------------------------
-type:wall	id	v1	v2	walltex	portaltex	scale	solid
+type:wall		V1		V2		WTX		PTX		SC		SO
 0	0	3	7	0		30.0	0
 1	1	0	7	0		30.0	1
 2	2	1	7	0		30.0	0
@@ -3578,9 +3578,9 @@ type:wall	id	v1	v2	walltex	portaltex	scale	solid
 1955	1611	1612	7	0		30.0	1
 1956	1612	1608	7	0		30.0	0
 -----------------------------------
-type:wsprite	id	wall_id	x	y	tex	scale
+type:wsprite	W		X		Y		TX		SC
 -----------------------------------
-type:sector	id	wall_id	neighbors	gravity	light
+type:sector		W		N		G		L
 0	0 1 2 3	362 -1 361 -1	20	0
 1	4 5 6 7 8 9 10 11 12 13	360 -1 3 17 4 -1 260 -1 -1 -1	20	0
 2	14 15 16 17 18	363 93 3 360 361	20	0
@@ -3964,7 +3964,7 @@ type:sector	id	wall_id	neighbors	gravity	light
 380	1947 1948 1949 1950 1951	-1 -1 379 377 378	20	-100
 381	1952 1953 1954 1955 1956	377 379 -1 -1 378	20	-100
 -----------------------------------
-type:f&c	id	f_height	c_height	f_tex	c_tex	f_scale	c_scale	slope
+type:f&c		FH		CH		FTX		CTX		FS		CS	SL
 0	0	10	2	2	10.0	10.0	0 0 0 0
 1	0	40	2	2	10.0	10.0	0 0 0 0
 2	0	40	2	2	10.0	10.0	0 31 0 0
@@ -4348,7 +4348,7 @@ type:f&c	id	f_height	c_height	f_tex	c_tex	f_scale	c_scale	slope
 380	30	40	2	2	10.0	10.0	0 0 0 0
 381	30	40	2	2	10.0	10.0	0 0 0 0
 -----------------------------------
-type:entity	id	name	x	y	z	direction
+type:entity		NM		X		Y		Z		D
 20	Torch	43.0	55.0	30.0	90
 19	Torch	43.0	47.0	30.0	90
 18	Gargoyle	43.0	51.0	32.0	180
@@ -4371,5 +4371,5 @@ type:entity	id	name	x	y	z	direction
 16	Gargoyle	-92.0	129.0	0.0	90
 17	MedKit	-101.0	94.0	0.0	90
 -----------------------------------
-type:event	TYPE	ACTION	ID	SECTOR	MIN	MAX	SPEED
+type:event		T		A		
 -----------------------------------
