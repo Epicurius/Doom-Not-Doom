@@ -6,15 +6,15 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/31 10:09:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-double	ceiling_at(t_sector *sector, t_v3 pos)
+TEMP_FLOAT	ceiling_at(t_sector *sector, t_v3 pos)
 {
-	double	peq;
+	TEMP_FLOAT	peq;
 	t_v3	v;
 
 	v = sector->wall[sector->wall_ceiling_slope]->v1;
@@ -23,9 +23,9 @@ double	ceiling_at(t_sector *sector, t_v3 pos)
 	return (peq * sector->ceiling_slope + sector->ceiling.y);
 }
 
-double	floor_at(t_sector *sector, t_v3 pos)
+TEMP_FLOAT	floor_at(t_sector *sector, t_v3 pos)
 {
-	double	peq;
+	TEMP_FLOAT	peq;
 	t_v3	v;
 
 	v = sector->wall[sector->wall_floor_slope]->v1;
@@ -40,7 +40,7 @@ static t_v2	get_unit_normal_vector(t_sector *sector, int wall)
 	t_v3	v1;
 	t_v3	v2;
 	t_v2	normal;
-	double	m;
+	TEMP_FLOAT	m;
 
 	v1 = sector->wall[wall]->v1;
 	v2 = sector->wall[wall]->v2;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/11 11:03:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  *	If player was stading on a cliff and walks less than 1.0 into the lower
  *	sector dont move him down, otherwise he would be to close to the wall.
  */
-static int	portal_cliff(t_doom *doom, t_motion *motion, double z, int i)
+static int	portal_cliff(t_doom *doom, t_motion *motion, TEMP_FLOAT z, int i)
 {
 	t_v3	p;
 	t_wall	*wall;
@@ -57,7 +57,7 @@ static int	portal_cliff(t_doom *doom, t_motion *motion, double z, int i)
  *	v += a * t
  *	NOTE: Jumping into another sector will retain original sector gravity;
  */
-int	vertical_collision(t_doom *doom, t_motion *motion, double *temp)
+int	vertical_collision(t_doom *doom, t_motion *motion, TEMP_FLOAT *temp)
 {
 	t_fc	pos;
 

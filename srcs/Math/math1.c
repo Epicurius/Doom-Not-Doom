@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:39:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:00:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_point	new_point(int x, int y)
 /*
  *	Create a new t_v2 struct and assign values
  */
-t_v2	new_v2(double x, double y)
+t_v2	new_v2(TEMP_FLOAT x, TEMP_FLOAT y)
 {
 	t_v2	new;
 
@@ -39,7 +39,7 @@ t_v2	new_v2(double x, double y)
 /*
  *	Create a new t_v3 struct and assign values
  */
-t_v3	new_v3(double x, double y, double z)
+t_v3	new_v3(TEMP_FLOAT x, TEMP_FLOAT y, TEMP_FLOAT z)
 {
 	t_v3	new;
 
@@ -62,7 +62,7 @@ t_rect	rect_xy2(int x1, int y1, int x2, int y2)
 	new.y2 = y2;
 	new.w = new.x2 - new.x1;
 	new.h = new.y2 - new.y1;
-	new.ratio = (double)new.h / (double)new.w;
+	new.ratio = (TEMP_FLOAT)new.h / (TEMP_FLOAT)new.w;
 	return (new);
 }
 
@@ -79,6 +79,6 @@ t_rect	rect_xywh(int x1, int y1, int w, int h)
 	new.y2 = y1 + h;
 	new.w = w;
 	new.h = h;
-	new.ratio = (double)new.h / (double)new.w;
+	new.ratio = (TEMP_FLOAT)new.h / (TEMP_FLOAT)new.w;
 	return (new);
 }

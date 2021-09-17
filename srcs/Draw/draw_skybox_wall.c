@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 12:08:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	skybox_wall_vline(t_render *render, t_vline vline, int tx)
 {
 	int		coord;
 	t_v3	text;
-	double	alpha;
+	TEMP_FLOAT	alpha;
 
 	if (render->skybox[render->s].sv2.z)
 		coord = render->stx[tx].w / render->skybox[render->s].sv2.z;

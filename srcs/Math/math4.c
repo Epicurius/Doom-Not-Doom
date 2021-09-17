@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:16 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/13 10:50:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Length of a vector 2D
  */
-double	vector_magnitude_v2(t_v3 v)
+TEMP_FLOAT	vector_magnitude_v2(t_v3 v)
 {
 	return (sqrt((v.x * v.y) + (v.x * v.y)));
 }
@@ -23,7 +23,7 @@ double	vector_magnitude_v2(t_v3 v)
 /*
  *	Length of a vector 3D
  */
-double	vector_magnitude_v3(t_v3 v)
+TEMP_FLOAT	vector_magnitude_v3(t_v3 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -31,7 +31,7 @@ double	vector_magnitude_v3(t_v3 v)
 /*
  *	Space Diagonal
  */
-double	pythagoras(double x, double y)
+TEMP_FLOAT	pythagoras(TEMP_FLOAT x, TEMP_FLOAT y)
 {
 	return (sqrt(x * x + y * y));
 }
@@ -39,7 +39,7 @@ double	pythagoras(double x, double y)
 /*
  *	Space Diagonal/Pythagoras
  */
-double	space_diagonal(t_v3 v)
+TEMP_FLOAT	space_diagonal(t_v3 v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -47,9 +47,9 @@ double	space_diagonal(t_v3 v)
 /*
  *	Get normal
  */
-double	normalize_v3(t_v3 *vec)
+TEMP_FLOAT	normalize_v3(t_v3 *vec)
 {
-	double	length;
+	TEMP_FLOAT	length;
 
 	length = sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 	if (length)

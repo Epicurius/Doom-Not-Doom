@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/14 16:31:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,30 @@ typedef struct s_settings
 typedef struct s_plane
 {
 	int				tx;
-	double			y;
-	double			correct;
-	double			head;
-	double			feet;
-	double			scale;
+	TEMP_FLOAT			y;
+	TEMP_FLOAT			correct;
+	TEMP_FLOAT			head;
+	TEMP_FLOAT			feet;
+	TEMP_FLOAT			scale;
 }					t_plane;
 
 typedef struct s_fc
 {
-	double			floor;
-	double			ceiling;
+	TEMP_FLOAT			floor;
+	TEMP_FLOAT			ceiling;
 }					t_fc;
 
 typedef struct s_vline
 {
 	int				y1;
 	int				y2;
-	double			alpha;
-	double			clipped_alpha;
-	double			divider;
-	double			z;
-	double			zrange;
-	double			z_near_z;
-	double			line_height;
+	TEMP_FLOAT			alpha;
+	TEMP_FLOAT			clipped_alpha;
+	TEMP_FLOAT			divider;
+	TEMP_FLOAT			z;
+	TEMP_FLOAT			zrange;
+	TEMP_FLOAT			z_near_z;
+	TEMP_FLOAT			line_height;
 	t_fc			start;
 	t_fc			height;
 	t_fc			max;
@@ -77,8 +77,8 @@ typedef struct s_vline
 	t_v2			texel;
 	t_v2			texel_nearz;
 	t_v2			texel_range;
-	double			real_floor;
-	double			real_ceiling;
+	TEMP_FLOAT			real_floor;
+	TEMP_FLOAT			real_ceiling;
 }					t_vline;
 
 typedef struct s_projectile
@@ -86,7 +86,7 @@ typedef struct s_projectile
 	t_v3			start;
 	t_v3			where;
 	t_v3			velocity;
-	double			dist;
+	TEMP_FLOAT			dist;
 	int				sector;
 	int				moving;
 	int				target;
@@ -109,11 +109,11 @@ typedef struct s_player
 	t_v3			velocity;
 	int				eyelvl;
 	int				sector;
-	double			yaw;
-	double			pitch;
-	double			anglesin;
-	double			anglecos;
-	double			horizon;
+	TEMP_FLOAT			yaw;
+	TEMP_FLOAT			pitch;
+	TEMP_FLOAT			anglesin;
+	TEMP_FLOAT			anglecos;
+	TEMP_FLOAT			horizon;
 	int				health;
 	int				armour;
 	int				flight;
@@ -135,8 +135,8 @@ typedef struct s_wsprite
 	int				frame;
 	int				time;
 	t_rect			src;
-	double			scale_w;
-	double			scale_h;
+	TEMP_FLOAT			scale_w;
+	TEMP_FLOAT			scale_h;
 	t_v2			tscale;
 	int				ready;
 	int				trigger;
@@ -170,19 +170,19 @@ typedef struct s_wall
 	t_v3			sv2;
 	t_v3			cv1;
 	t_v3			cv2;
-	double			scale_w;
-	double			scale_h;
-	double			width;
-	double			height;
-	double			scale;
-	double			scale_v1;
-	double			scale_v2;
-	double			angle_z1;
-	double			angle_z2;
-	double			x1;
-	double			x2;
-	double			cx1;
-	double			cx2;
+	TEMP_FLOAT			scale_w;
+	TEMP_FLOAT			scale_h;
+	TEMP_FLOAT			width;
+	TEMP_FLOAT			height;
+	TEMP_FLOAT			scale;
+	TEMP_FLOAT			scale_v1;
+	TEMP_FLOAT			scale_v2;
+	TEMP_FLOAT			angle_z1;
+	TEMP_FLOAT			angle_z2;
+	TEMP_FLOAT			x1;
+	TEMP_FLOAT			x2;
+	TEMP_FLOAT			cx1;
+	TEMP_FLOAT			cx2;
 	t_fc			static_v1;
 	t_fc			static_v2;
 	t_fc			static_range;
@@ -192,15 +192,15 @@ typedef struct s_wall
 	t_fc			nslope_v1;
 	t_fc			nslope_v2;
 	t_fc			nslope_range;
-	double			xrange;
-	double			zrange;
-	double			zcomb;
-	double			xzrange;
-	double			yzrange;
-	double			x1z0;
-	double			x0z1;
-	double			y1z0;
-	double			y0z1;
+	TEMP_FLOAT			xrange;
+	TEMP_FLOAT			zrange;
+	TEMP_FLOAT			zcomb;
+	TEMP_FLOAT			xzrange;
+	TEMP_FLOAT			yzrange;
+	TEMP_FLOAT			x1z0;
+	TEMP_FLOAT			x0z1;
+	TEMP_FLOAT			y1z0;
+	TEMP_FLOAT			y0z1;
 	t_v2			tscale;
 	signed char		wtx;
 	signed char		ptx;
@@ -231,12 +231,12 @@ typedef struct s_sector
 
 typedef struct s_camera
 {
-	double			near_left;
-	double			near_right;
-	double			far_left;
-	double			far_right;
-	double			range;
-	double			scale;
+	TEMP_FLOAT			near_left;
+	TEMP_FLOAT			near_right;
+	TEMP_FLOAT			far_left;
+	TEMP_FLOAT			far_right;
+	TEMP_FLOAT			range;
+	TEMP_FLOAT			scale;
 }					t_camera;
 
 typedef struct s_entity_render
@@ -245,9 +245,9 @@ typedef struct s_entity_render
 	t_point			end;
 	t_point			clamp_start;
 	t_point			clamp_end;
-	double			xrange;
-	double			yrange;
-	double			z;
+	TEMP_FLOAT			xrange;
+	TEMP_FLOAT			yrange;
+	TEMP_FLOAT			z;
 }					t_entity_render;
 
 typedef struct s_entity
@@ -262,7 +262,7 @@ typedef struct s_entity
 	int				angle;
 	int				hp;
 	int				type;
-	double			yaw;
+	TEMP_FLOAT			yaw;
 	int				time;
 	t_entity_render	render;
 }					t_entity;
@@ -436,8 +436,8 @@ typedef struct s_motion
 {
 	int				flight;
 	int				sector;
-	double			height;
-	double			step;
+	TEMP_FLOAT			height;
+	TEMP_FLOAT			step;
 	t_v3			where;
 	t_v3			velocity;
 	t_v3			dest;
@@ -450,10 +450,10 @@ typedef struct s_doom
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
-	double			*zbuffer;
+	TEMP_FLOAT			*zbuffer;
 	int				quit;
 	char			*sectbool;
-	double			map_scale;
+	TEMP_FLOAT			map_scale;
 	t_fonts			font;
 	t_render		*render;
 	t_v3			c;
@@ -522,7 +522,7 @@ void				compute_vline_texels(t_render *render, t_wall *wall,
 						t_vline *vline);
 /* File: crosshair_position.c */
 void				crosshair_position(t_render *render,
-						t_vline *vline, double alpha, int coord);
+						t_vline *vline, TEMP_FLOAT alpha, int coord);
 /* File: endless.c */
 void				game_mode(t_doom *doom);
 /* File: find_sector.c */
@@ -553,7 +553,7 @@ void				map(t_doom *doom);
 /* File: movement.c */
 void				movement(t_doom *doom);
 /* File: orientation.c */
-int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
+int					orientation(t_v3 p1, t_v3 p2, TEMP_FLOAT yaw, int nb_angles);
 /* File: precompute_buy_menu.c */
 void				precompute_buy_menu(t_doom *doom);
 /* File: precompute_entities.c */
@@ -640,7 +640,7 @@ int					check_solid_surfaces_no_slide(t_doom *doom,
 int					slide_collision(t_doom *doom,
 						t_motion *motion, t_wall *wall);
 /* File: CollisionDetection/vertical_collision.c */
-int					vertical_collision(t_doom *doom, t_motion *motion, double *temp);
+int					vertical_collision(t_doom *doom, t_motion *motion, TEMP_FLOAT *temp);
 /* File: Draw/draw2.c */
 //void				draw_map(t_doom *doom);
 /* File: Draw/draw_bullet_holes.c */
@@ -696,7 +696,7 @@ void				skybox_floor_vline(t_render *render,
 void				skybox_wall_vline(t_render *render,
 						t_vline vline, int tx);
 /* File: Draw/draw_vline.c */
-Uint32				z_clr(double z, double max_z);
+Uint32				z_clr(TEMP_FLOAT z, TEMP_FLOAT max_z);
 void				shade_zbuffer(t_render *render,
 						t_vline *vline, int side);
 void				vline_color_bot_top(t_render *render,
@@ -791,8 +791,8 @@ void				init_sdl(t_doom *doom);
 /* File: Init/init_shotgun.c */
 void				init_shotgun(t_doom *doom, t_weapon *weapon);
 /* File: Init/init_slope.c */
-double				ceiling_at(t_sector *sector, t_v3 pos);
-double				floor_at(t_sector *sector, t_v3 pos);
+TEMP_FLOAT				ceiling_at(t_sector *sector, t_v3 pos);
+TEMP_FLOAT				floor_at(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
 /* File: Init/init_textures.c */
 void				init_textures(t_doom *doom);

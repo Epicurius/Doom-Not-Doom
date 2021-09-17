@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/11 11:03:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_from_sectbool(t_doom *doom, t_motion *motion)
 int	collision_detection(t_doom *doom, t_motion motion,
 		t_v3 *where, t_v3 *velocity)
 {
-	double	gforce;
+	TEMP_FLOAT	gforce;
 
 	motion.step = 2;
 	motion.where = *where;

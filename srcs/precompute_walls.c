@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:07:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
  */
 void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 {
-	double	eye_z;
+	TEMP_FLOAT	eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	sector->floor.feet = doom->c.y + (floor_at(sector, doom->player.where)

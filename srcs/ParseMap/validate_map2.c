@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 16:07:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ int	is_convex(t_sector *sector)
 {
 	int		i;
 	int		n;
-	double	prev;
-	double	curr;
+	TEMP_FLOAT	prev;
+	TEMP_FLOAT	curr;
 
 	i = -1;
 	prev = 0;

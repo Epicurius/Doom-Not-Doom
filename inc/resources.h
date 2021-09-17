@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:55:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,8 +227,8 @@ static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 
 typedef struct s_entity_data
 {
-	double			scale;
-	double			speed;
+	TEMP_FLOAT			scale;
+	TEMP_FLOAT			speed;
 	int				health;
 	int				height;
 	int				pickup;

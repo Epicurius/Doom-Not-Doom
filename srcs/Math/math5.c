@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 13:06:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Dot product v2 Returns scalar
  */
-double	dot_product_v2(t_v3 v1, t_v3 v2)
+TEMP_FLOAT	dot_product_v2(t_v3 v1, t_v3 v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y);
 }
@@ -23,7 +23,7 @@ double	dot_product_v2(t_v3 v1, t_v3 v2)
 /*
  *	Dot product v3
  */
-double	dot_product_v3(t_v3 v1, t_v3 v2)
+TEMP_FLOAT	dot_product_v3(t_v3 v1, t_v3 v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
@@ -31,7 +31,7 @@ double	dot_product_v3(t_v3 v1, t_v3 v2)
 /*
  *	Returns angle between 2 verticies in radians
  */
-double	vectors_angle(t_v3 v1, t_v3 v2)
+TEMP_FLOAT	vectors_angle(t_v3 v1, t_v3 v2)
 {
 	return (acos(dot_product_v3(v1, v2)
 			/ (space_diagonal(v1) * space_diagonal(v2))));
@@ -40,7 +40,7 @@ double	vectors_angle(t_v3 v1, t_v3 v2)
 /*
  *	Cross product of v2
  */
-double	cross_product_v2(double x1, double y1, double x2, double y2)
+TEMP_FLOAT	cross_product_v2(TEMP_FLOAT x1, TEMP_FLOAT y1, TEMP_FLOAT x2, TEMP_FLOAT y2)
 {
 	return (x1 * y2 - y1 * x2);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
 /*
  *	Checks the entity sees the player.
  */
-static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
+static int	entity_line_of_sight(t_doom *doom, t_entity *entity, TEMP_FLOAT dist)
 {
 	if (dist > g_entity_data[entity->type].view_distance)
 		return (0);
@@ -94,7 +94,7 @@ static int	entity_line_of_sight(t_doom *doom, t_entity *entity, double dist)
  */
 void	get_entity_state2(t_doom *doom, t_entity *entity)
 {
-	double	dist;
+	TEMP_FLOAT	dist;
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);

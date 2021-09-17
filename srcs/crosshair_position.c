@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:24:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	debug(t_render *render, t_wall *wall)
  *	Works atm only on walls.
  */
 void	crosshair_position(t_render *render, t_vline *vline,
-			double alpha, int coord)
+			TEMP_FLOAT alpha, int coord)
 {
 	t_wall		*wall;
 	t_wsprite	*bullet_hole;

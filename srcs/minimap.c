@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/14 16:32:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	movement_visualizer(t_doom *doom)
 {
 	t_v3 v;
 	
-	//draw_circle(doom->surface, 0xFFFF0000, (t_point){doom->c.x, doom->c.y}, 1.5 * (double)(doom->map.zoom * 100));
+	//draw_circle(doom->surface, 0xFFFF0000, (t_point){doom->c.x, doom->c.y}, 1.5 * (TEMP_FLOAT)(doom->map.zoom * 100));
 	v = doom->player.velocity;
 	v = mult_v3(v, doom->map.zoom * 100);
 	draw_line(doom->surface, 0xFF00FF00, (t_point){doom->c.x, doom->c.y + 1}, (t_point){doom->c.x + v.x, doom->c.y + v.y});
