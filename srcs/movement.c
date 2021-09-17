@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:37:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ static void	get_movement(t_doom *doom, t_player *player, t_v2 *speed)
 		player->wishdir.x += player->anglecos * speed->y;
 		player->wishdir.y += player->anglesin * speed->y;
 		if (player->flight)
-			player->wishdir.z += -player->pitch * player->sprint_speed;
+			player->wishdir.z += -player->pitch * 30;
 	}
 	if (doom->keys[SDL_SCANCODE_S])
 	{
 		player->wishdir.x += player->anglecos * -speed->y;
 		player->wishdir.y += player->anglesin * -speed->y;
 		if (player->flight)
-			player->wishdir.z += player->pitch * player->sprint_speed;
+			player->wishdir.z += player->pitch * 30;
 	}
 	if (doom->keys[SDL_SCANCODE_A])
 	{
@@ -89,8 +89,8 @@ static void	get_velocity(t_doom *doom)
 
 	player = &doom->player;
 	sector = &doom->sectors[player->sector];
-	if (doom->keys[SDL_SCANCODE_SPACE] && player->where.z
-		<= floor_at(sector, player->where) + 0.1)
+	if (doom->keys[SDL_SCANCODE_SPACE]
+		&& player->where.z <= floor_at(sector, player->where))
 	{
 		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
 		player->velocity.z = doom->player.jump_height;
@@ -101,28 +101,28 @@ static void	get_velocity(t_doom *doom)
 		player->velocity.z = doom->player.wishdir.z;
 }
 
-/*
- *	Calculates the velocity depending on player movement and jump.
- */
+
 # define MAX_SPEED			3.2
 # define MAX_ACCEL			(10.0 * MAX_SPEED)
 # define MAX_ACCEL_AIR		0.3
 # define GROUND_FRICTION	4.0
 # define STOP_SPEED			1.0
-
+/*
+ *	Calculates the velocity depending on player movement and jump.
+ */
 static void	get_velocity_v2(t_doom *doom, t_player *player)
 {
 	TEMP_FLOAT speed;
 	TEMP_FLOAT wishspeed;
 	TEMP_FLOAT currentspeed;
 	TEMP_FLOAT accelspeed;
-	
+
 	wishspeed = normalize_v3(&player->wishdir);
-	if (wishspeed > MAX_SPEED)
-	{
-		player->wishdir = mult_v3(player->wishdir, MAX_SPEED / wishspeed);
-		wishspeed = MAX_SPEED;
-	}
+	//if (wishspeed > MAX_SPEED)
+	//{
+	//	player->wishdir = mult_v3(player->wishdir, MAX_SPEED / wishspeed);
+	//	wishspeed = MAX_SPEED;
+	//}
 	if (player->where.z <= floor_at(&doom->sectors[player->sector], player->where))
 	{
 		speed = sqrt(player->velocity.x * player->velocity.x + player->velocity.y * player->velocity.y);
@@ -132,11 +132,8 @@ static void	get_velocity_v2(t_doom *doom, t_player *player)
 			player->velocity.x *= speed;
 			player->velocity.y *= speed;
 		}
-		if (doom->keys[SDL_SCANCODE_SPACE])
-		{
-			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+		if (doom->keys[SDL_SCANCODE_SPACE] && Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0))
 			player->velocity.z = player->jump_height;
-		}
 	}
 	else if (wishspeed > MAX_ACCEL_AIR)
 			wishspeed = MAX_ACCEL_AIR;	
@@ -144,8 +141,6 @@ static void	get_velocity_v2(t_doom *doom, t_player *player)
 	accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * doom->time.delta * wishspeed);
 	player->velocity.x += player->wishdir.x * accelspeed;
 	player->velocity.y += player->wishdir.y * accelspeed;
-	if (player->flight)
-		player->velocity.z += player->wishdir.z * accelspeed;
 }
 
 /*
@@ -165,7 +160,10 @@ void	movement(t_doom *doom)
 	ft_bzero(&doom->player.wishdir, sizeof(t_v3));
 	get_base_speed(doom, &speed);
 	get_movement(doom, &doom->player, &speed);
-	get_velocity_v2(doom, &doom->player);
+	if (!doom->player.flight)
+		get_velocity_v2(doom, &doom->player);
+	else
+		doom->player.velocity = doom->player.wishdir;
 	if (entity_collision(doom, &doom->player.where, &doom->player.velocity))
 		return ;
 	motion.height = doom->player.eyelvl + 1;

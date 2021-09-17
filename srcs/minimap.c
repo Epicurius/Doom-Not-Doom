@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:13:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	map_area(t_doom *doom)
 	}
 }
 
-void	movement_visualizer(t_doom *doom)
+void	bhop_helper(t_doom *doom)
 {
 	t_v3 v;
 	
@@ -147,5 +147,6 @@ void	map(t_doom *doom)
 		draw_map(doom);
 		map_player(doom);
 	}
-	//movement_visualizer(doom);
+	if (doom->settings.debug)
+		bhop_helper(doom);
 }

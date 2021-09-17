@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 14:51:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:09:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,6 @@ void	poll_event(t_doom *doom)
 		doom->player.where = doom->sectors[doom->player.sector].center;
 	if (doom->player.action == NONE && key[SDL_SCANCODE_E])
 		doom->player.action = CLICKING;
+	if (doom->settings.debug && key[SDL_SCANCODE_F])
+		doom->player.flight = doom->player.flight == FALSE;
 }

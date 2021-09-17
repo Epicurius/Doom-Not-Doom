@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:02:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,8 +227,8 @@ static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 
 typedef struct s_entity_data
 {
-	TEMP_FLOAT			scale;
-	TEMP_FLOAT			speed;
+	float			scale;
+	float			speed;
 	int				health;
 	int				height;
 	int				pickup;
@@ -280,7 +280,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.height = 7,
 		.hitbox_radius = 5,
 		.speed = 10,
-		.move = FALSE,
+		.move = TRUE,
 		.view_distance = 100,
 		.detection_radius = 40,
 		.attack_range = 50,
