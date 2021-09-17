@@ -7,6 +7,7 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 * [Installation](#installation)
 * [Controls](#controls)
 * [Engine](#engine)
+* [Map File](#map-file)
 * [BXPM](#bxpm-image-format)
 * [Events](#events)
 * [Features](#features)
@@ -37,22 +38,11 @@ cd DnD && make
 	`			-	Unstuck player
 ```
 ---
-##### Map
 
-The map is built using vertices, floors, ceiling, walls and sectors.<br>
-Vertices are x and y floats that describe a position.<br>
-Walls are a line segment connected to 2 vertices.<br>
-Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
-Each sector has its own floor and ceiling.<br>
-
-<img src="./Readme_assets/map.jpg" alt="Engine_Flow" width="700"/></p>
-
----
 ##	Engine
 
 Short introduction on how the engine works.
 * [Engine Flow](#engine-flow)
-* [Map](#map)
 * [Map Drawing](#map-drawing)
 * [Skybox](#skybox)
 * [AI](#entitites)
@@ -173,8 +163,9 @@ Slide_collision():
 When all collision detection has been checked, add velocity to entity position.
 If entity position is not in original sector, find correct sector from visited sectors list.
 
----
 
+
+---
 ## BXPM Image Format
 
 The game required to have different light levels, for that to work each pixel of</n>
@@ -203,15 +194,15 @@ Which we save into a struct:
 ```c
 typedef struct s_bxpm
 {
-	int32_t				w;			//Image width
-	int32_t				h;			//Image height
-	int32_t				bpp;		//Color bits
-	int32_t				clr_nb;		//Unique color amount
-	int32_t				pix_nb;		//Pixel amount
-	uint32_t			*clr;		//Unique colors
+	int32_t			w;			//Image width
+	int32_t			h;			//Image height
+	int32_t			bpp;		//Color bits
+	int32_t			clr_nb;		//Unique color amount
+	int32_t			pix_nb;		//Pixel amount
+	uint32_t		*clr;		//Unique colors
 	unsigned short		*pix:		//Pixels ids
-	uint32_t			**shade;	//Unique color shade
-}						t_bxpm;		
+	uint32_t		**shade;	//Unique color shade
+}					t_bxpm;		
 ```
 This makes the BXPM file a lot smaller than a BMP, which also speeds up the parsing.</n>
 But now instead of calculating pixel amount we need only calculate the color amount.</n>
@@ -265,9 +256,19 @@ Light changes the sectors light level e.g. flickering lights and wall light swit
 - Many more...
 ---
 
+## (WRITING IN PROGRESS)
+
+#### Map File
 
 
-### Map File (WRITING IN PROGRESS)
+The map is built using vertices, floors, ceiling, walls and sectors.<br>
+Vertices are x and y floats that describe a position.<br>
+Walls are a line segment connected to 2 vertices.<br>
+Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
+Each sector has its own floor and ceiling.<br>
+
+<img src="./Readme_assets/map.jpg" alt="Engine_Flow" width="700"/></p>
+
 
 ```
 GM	-	Game mode

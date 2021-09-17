@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 18:37:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:47:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline void	foot_steps(t_doom *doom, t_player *player)
 {
 	if ((doom->keys[SDL_SCANCODE_W] || doom->keys[SDL_SCANCODE_S]
 			|| doom->keys[SDL_SCANCODE_A] || doom->keys[SDL_SCANCODE_D])
-		&& floor_at(&doom->sectors[player->sector], player->where) >= player->where.z)// + 0.1
+		&& floor_at(&doom->sectors[player->sector], player->where) >= player->where.z)
 	{
 		if (!Mix_Playing(CHANNEL_STEPS))
 			Mix_PlayChannel(CHANNEL_STEPS, doom->sound[WAV_FOOT_STEPS], -1);
