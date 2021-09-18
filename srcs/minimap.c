@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 18:13:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:29:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	map_player(t_doom *doom)
 /*
  *	Draws the wall.
  */
-static void	draw_map2(t_doom *doom, t_wall *wall)
+static void	draw_minimap2(t_doom *doom, t_wall *wall)
 {
 	t_v3		where;
 	t_point		p[2];
@@ -64,7 +64,7 @@ static void	draw_map2(t_doom *doom, t_wall *wall)
 /*
  *	Loop that draws the all the walls.
  */
-static void	draw_map(t_doom *doom)
+static void	draw_minimap(t_doom *doom)
 {
 	int			s;
 	int			w;
@@ -84,7 +84,7 @@ static void	draw_map(t_doom *doom)
 		{
 			if (sect->wall[w]->n != -1 && doom->sectbool[sect->wall[w]->n])
 				continue ;
-			draw_map2(doom, sect->wall[w]);
+			draw_minimap2(doom, sect->wall[w]);
 		}
 	}
 }
@@ -144,7 +144,7 @@ void	map(t_doom *doom)
 		reset_sectbool(doom, -1);
 		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);
-		draw_map(doom);
+		draw_minimap(doom);
 		map_player(doom);
 	}
 	if (doom->settings.debug)

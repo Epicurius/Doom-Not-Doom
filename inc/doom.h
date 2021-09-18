@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:23:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -642,7 +642,7 @@ int					slide_collision(t_doom *doom,
 /* File: CollisionDetection/vertical_collision.c */
 int					vertical_collision(t_doom *doom, t_motion *motion, TEMP_FLOAT *temp);
 /* File: Draw/draw2.c */
-//void				draw_map(t_doom *doom);
+void				draw_map(t_doom *doom);
 /* File: Draw/draw_bullet_holes.c */
 void				draw_wall_bh(t_render *render,
 						t_vline *vline);

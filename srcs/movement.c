@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 18:47:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 11:46:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,24 @@ static void	get_movement(t_doom *doom, t_player *player, t_v2 *speed)
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-static void	get_velocity(t_doom *doom)
-{
-	t_player	*player;
-	t_sector	*sector;
-
-	player = &doom->player;
-	sector = &doom->sectors[player->sector];
-	if (doom->keys[SDL_SCANCODE_SPACE]
-		&& player->where.z <= floor_at(sector, player->where))
-	{
-		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-		player->velocity.z = doom->player.jump_height;
-	}
-	player->velocity.x = doom->player.wishdir.x;
-	player->velocity.y = doom->player.wishdir.y;
-	if (player->flight)
-		player->velocity.z = doom->player.wishdir.z;
-}
+//static void	get_velocity_org(t_doom *doom)
+//{
+//	t_player	*player;
+//	t_sector	*sector;
+//
+//	player = &doom->player;
+//	sector = &doom->sectors[player->sector];
+//	if (doom->keys[SDL_SCANCODE_SPACE]
+//		&& player->where.z <= floor_at(sector, player->where))
+//	{
+//		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+//		player->velocity.z = doom->player.jump_height;
+//	}
+//	player->velocity.x = doom->player.wishdir.x;
+//	player->velocity.y = doom->player.wishdir.y;
+//	if (player->flight)
+//		player->velocity.z = doom->player.wishdir.z;
+//}
 
 
 # define MAX_SPEED			3.2
@@ -110,7 +110,7 @@ static void	get_velocity(t_doom *doom)
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-static void	get_velocity_v2(t_doom *doom, t_player *player)
+static void	get_velocity(t_doom *doom, t_player *player)
 {
 	TEMP_FLOAT speed;
 	TEMP_FLOAT wishspeed;
@@ -161,7 +161,7 @@ void	movement(t_doom *doom)
 	get_base_speed(doom, &speed);
 	get_movement(doom, &doom->player, &speed);
 	if (!doom->player.flight)
-		get_velocity_v2(doom, &doom->player);
+		get_velocity(doom, &doom->player);
 	else
 		doom->player.velocity = doom->player.wishdir;
 	if (entity_collision(doom, &doom->player.where, &doom->player.velocity))

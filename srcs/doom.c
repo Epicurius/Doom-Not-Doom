@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/14 16:31:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:31:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	game(char *map, t_settings settings)
 int	main(int ac, char **av)
 {
 	t_settings	settings;
+
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);

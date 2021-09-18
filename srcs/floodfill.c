@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 12:57:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/15 15:54:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 10:23:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define FF_STACK_SIZE 25000
 
-static enum
+enum
 {
 	UP,
 	DOWN,

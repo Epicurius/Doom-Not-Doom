@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/13 14:34:37 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/18 11:46:01 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,22 +168,29 @@ SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
 
-SDL_DIR		:= ../libs/SDL_Frameworks
-SDL_MAIN	:= -I $(SDL_DIR)/SDL2.framework/Headers -framework SDL2 -F $(SDL_DIR)
-SDL_IMAGE	:= -I $(SDL_DIR)/SDL2_image.framework/Headers -framework SDL2_image -F $(SDL_DIR)
-SDL_MIXER	:= -I $(SDL_DIR)/SDL2_mixer.framework/Headers -framework SDL2_mixer -F $(SDL_DIR)
-SDL_TTF		:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(SDL_DIR)
+LIB_DIR	=	../libs
 
-LIB_DIR		:= ../libs
-LIBFT		:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
-LIBPF		:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
-LIBTP		:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
-LIBGFX		:= -I $(LIB_DIR)/libgfx $(LIB_DIR)/libgfx/libgfx.a
-LIBBXPM		:= -I $(LIB_DIR)/libbxpm $(LIB_DIR)/libbxpm/libbxpm.a
-LIBUI		:= -I $(LIB_DIR)/better_libui $(LIB_DIR)/better_libui/libui.a
+LIB_INC		=	-I $(LIB_DIR)/libft \
+				-I $(LIB_DIR)/libpf \
+				-I $(LIB_DIR)/libtp \
+				-I $(LIB_DIR)/libgfx \
+				-I $(LIB_DIR)/libbxpm \
+				-I $(LIB_DIR)/better_libui \
+				-I $(LIB_DIR)/SDL_Frameworks/SDL2.framework/Headers \
+				-I $(LIB_DIR)/SDL_Frameworks/SDL2_image.framework/Headers \
+				-I $(LIB_DIR)/SDL_Frameworks/SDL2_mixer.framework/Headers \
+				-I $(LIB_DIR)/SDL_Frameworks/SDL2_ttf.framework/Headers -F $(LIB_DIR)/SDL_Frameworks
 
-LIBS		+=	$(INC) $(SDL_MAIN) $(SDL_IMAGE) $(SDL_MIXER) $(SDL_TTF)\
-				$(LIBFT) $(LIBTP) $(LIBPF) $(LIBBXPM) $(LIBUI) $(LIBGFX)
+LIBS		=	$(LIB_DIR)/libft/libft.a \
+				$(LIB_DIR)/libpf/libpf.a \
+				$(LIB_DIR)/libtp/libtp.a \
+				$(LIB_DIR)/libgfx/libgfx.a \
+				$(LIB_DIR)/libbxpm/libbxpm.a \
+				$(LIB_DIR)/better_libui/libui.a	\
+				-framework SDL2 \
+				-framework SDL2_mixer \
+				-framework SDL2_image \
+				-framework SDL2_ttf -F $(LIB_DIR)/SDL_Frameworks
 
 CFLAGS		=	-Wall -Wextra -MMD -Werror -Wfatal-errors
 
@@ -206,7 +213,7 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 	
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
+	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
 	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
 	@Rez -a icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
@@ -214,7 +221,7 @@ $(NAME): $(OBJ)
 	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
-	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIBS) -w
+	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
 	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
 
 clean:
