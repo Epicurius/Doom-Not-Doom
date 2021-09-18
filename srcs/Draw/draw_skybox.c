@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:52:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 13:50:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,20 +87,20 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	vline->z = 1.0 / ((1.0 - vline->alpha) / w.sv1.z + vline->alpha / w.sv2.z);
 	vline->divider = 1 / (w.sv2.z + vline->alpha * w.zrange);
 	vline->z = w.zcomb * vline->divider;
-	vline->texel.x = (w.x0z1 + vline->alpha * w.xzrange) * vline->divider;
-	vline->texel.y = (w.y0z1 + vline->alpha * w.yzrange) * vline->divider;
+	vline->texel.x = (w.x1z2 + vline->alpha * w.xzrange) * vline->divider;
+	vline->texel.y = (w.y1z2 + vline->alpha * w.yzrange) * vline->divider;
 	vline->max.ceiling = vline->clipped_alpha
-		* w.slope_range.ceiling + w.slope_v1.ceiling;
+		* w.incl_range.ceiling + w.incl_y1.ceiling;
 	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop,
 			render->ybot);
 	vline->max.floor = vline->clipped_alpha
-		* w.slope_range.floor + w.slope_v1.floor;
+		* w.incl_range.floor + w.incl_y1.floor;
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
 	vline->start.ceiling = vline->max.ceiling - render->player->horizon;
 	vline->start.floor = vline->max.floor - render->player->horizon;
 	vline->line_height
-		= (vline->clipped_alpha * w.slope_range.floor + w.slope_v1.floor)
-		- (vline->clipped_alpha * w.slope_range.ceiling + w.slope_v1.ceiling);
+		= (vline->clipped_alpha * w.incl_range.floor + w.incl_y1.floor)
+		- (vline->clipped_alpha * w.incl_range.ceiling + w.incl_y1.ceiling);
 }
 
 /*

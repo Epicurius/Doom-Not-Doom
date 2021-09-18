@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 15:45:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 14:13:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void	compute_vline_data(t_render *render, t_wall *wall, t_vline *vline)
 	vline->z = wall->zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
 	vline->max.ceiling = vline->clipped_alpha
-		* wall->slope_range.ceiling + wall->slope_v1.ceiling;
+		* wall->incl_range.ceiling + wall->incl_y1.ceiling;
 	vline->max.floor = vline->clipped_alpha
-		* wall->slope_range.floor + wall->slope_v1.floor;
+		* wall->incl_range.floor + wall->incl_y1.floor;
 	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
 			render->ytop, render->ybot);
 	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->real_floor = vline->clipped_alpha
-		* wall->static_range.floor + wall->static_v1.floor;
-	vline->real_ceiling = vline->clipped_alpha
-		* wall->static_range.ceiling + wall->static_v1.ceiling;
-	vline->line_height = vline->real_floor - vline->real_ceiling;
+	vline->stat_y.floor = vline->clipped_alpha
+		* wall->stat_range.floor + wall->stat_y1.floor;
+	vline->stat_y.ceiling = vline->clipped_alpha
+		* wall->stat_range.ceiling + wall->stat_y1.ceiling;
+	vline->line_height = vline->stat_y.floor - vline->stat_y.ceiling;
 }
 
 /*
@@ -45,9 +45,9 @@ void	compute_vline_texels(t_render *render, t_wall *wall, t_vline *vline)
 
 	camera_z.x = render->player->where.x * vline->z;
 	camera_z.y = render->player->where.y * vline->z;
-	vline->texel.x = (wall->x0z1 + vline->alpha * wall->xzrange)
+	vline->texel.x = (wall->x1z2 + vline->alpha * wall->xzrange)
 		* vline->divider;
-	vline->texel.y = (wall->y0z1 + vline->alpha * wall->yzrange)
+	vline->texel.y = (wall->y1z2 + vline->alpha * wall->yzrange)
 		* vline->divider;
 	vline->texel_nearz.x = vline->texel.x * NEAR_Z;
 	vline->texel_nearz.y = vline->texel.y * NEAR_Z;

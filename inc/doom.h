@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 10:23:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 14:23:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_plane
 
 typedef struct s_fc
 {
-	TEMP_FLOAT			floor;
-	TEMP_FLOAT			ceiling;
+	TEMP_FLOAT			floor;//bot
+	TEMP_FLOAT			ceiling;//top
 }					t_fc;
 
 typedef struct s_vline
@@ -77,8 +77,7 @@ typedef struct s_vline
 	t_v2			texel;
 	t_v2			texel_nearz;
 	t_v2			texel_range;
-	TEMP_FLOAT			real_floor;
-	TEMP_FLOAT			real_ceiling;
+	t_fc			stat_y;
 }					t_vline;
 
 typedef struct s_projectile
@@ -160,9 +159,9 @@ typedef struct s_bullet_hole
 
 typedef struct s_wall
 {
-	int				id;
+	unsigned short	id;		//only for debug message
 	int				sect;
-	int				visible;
+	char			visible;
 	int				n;
 	t_v3			v1;
 	t_v3			v2;
@@ -170,37 +169,38 @@ typedef struct s_wall
 	t_v3			sv2;
 	t_v3			cv1;
 	t_v3			cv2;
-	TEMP_FLOAT			scale_w;
-	TEMP_FLOAT			scale_h;
 	TEMP_FLOAT			width;
 	TEMP_FLOAT			height;
 	TEMP_FLOAT			scale;
-	TEMP_FLOAT			scale_v1;
-	TEMP_FLOAT			scale_v2;
-	TEMP_FLOAT			angle_z1;
-	TEMP_FLOAT			angle_z2;
+	TEMP_FLOAT			scale_w;
+	TEMP_FLOAT			scale_h;
+	TEMP_FLOAT			scale_c1z;// Used only in 1 function
+	TEMP_FLOAT			scale_c2z;// Used only in 1 function
+	TEMP_FLOAT			angle_z1;//
+	TEMP_FLOAT			angle_z2;//
 	TEMP_FLOAT			x1;
 	TEMP_FLOAT			x2;
 	TEMP_FLOAT			cx1;
 	TEMP_FLOAT			cx2;
-	t_fc			static_v1;
-	t_fc			static_v2;
-	t_fc			static_range;
-	t_fc			slope_v1;
-	t_fc			slope_v2;
-	t_fc			slope_range;
-	t_fc			nslope_v1;
-	t_fc			nslope_v2;
-	t_fc			nslope_range;
+
+	t_fc			stat_y1;
+	t_fc			stat_y2;
+	t_fc			stat_range;
+	t_fc			incl_y1;
+	t_fc			incl_y2;
+	t_fc			incl_range;
+	t_fc			incl_ny1;
+	t_fc			incl_ny2;
+	t_fc			incl_nrange;
+	
 	TEMP_FLOAT			xrange;
 	TEMP_FLOAT			zrange;
 	TEMP_FLOAT			zcomb;
+	TEMP_FLOAT			x1z2;
+	TEMP_FLOAT			y1z2;
 	TEMP_FLOAT			xzrange;
 	TEMP_FLOAT			yzrange;
-	TEMP_FLOAT			x1z0;
-	TEMP_FLOAT			x0z1;
-	TEMP_FLOAT			y1z0;
-	TEMP_FLOAT			y0z1;
+
 	t_v2			tscale;
 	signed char		wtx;
 	signed char		ptx;

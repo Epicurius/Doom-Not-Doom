@@ -6,21 +6,21 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/18 11:46:01 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/18 13:02:31 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SHELL_NAME	:= $(shell uname -s)
+SHELL_NAME	= $(shell uname -s)
 
-RED			:=	"\e[0;31m"
-GREEN		:=	"\x1b[38;5;119m"
-ORANGE		:=	"\x1b[38;5;208m"
-YELLOW		:=	"\e[0;33m"
-BLUE		:=	"\e[0;34m"
-MAGENTA		:=	"\e[0;35m"
-CYAN		:=	"\e[0;36m"
-UNDERLINE	:=	"\x1b[4m"
-RESET		:=	"\e[0m"
+RED			=	"\e[0;31m"
+GREEN		=	"\x1b[38;5;119m"
+ORANGE		=	"\x1b[38;5;208m"
+YELLOW		=	"\e[0;33m"
+BLUE		=	"\e[0;34m"
+MAGENTA		=	"\e[0;35m"
+CYAN		=	"\e[0;36m"
+UNDERLINE	=	"\x1b[4m"
+RESET		=	"\e[0m"
 
 CFILES		=	ai_attack.c\
 				ai_movement.c\
@@ -167,8 +167,9 @@ INC			=	-I./inc -I../
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
+RESOURCES	=	resources
 
-LIB_DIR	=	../libs
+LIB_DIR		=	../libs
 
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
@@ -192,9 +193,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				-framework SDL2_image \
 				-framework SDL2_ttf -F $(LIB_DIR)/SDL_Frameworks
 
-CFLAGS		=	-Wall -Wextra -MMD -Werror -Wfatal-errors
-
-RESOURCES	=	resources
+CFLAGS		=	-Wall -Wextra -Werror -MMD -Wfatal-errors #-g -fsanitize=address
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
