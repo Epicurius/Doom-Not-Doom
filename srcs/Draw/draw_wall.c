@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 14:14:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 15:37:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 
 	wtx = &render->mtx[render->wall->wtx];
 	text.z = vline->z;
-	text.x = (vline->alpha * render->wall->tscale.x * vline->z);
+	text.x = (vline->alpha * render->wall->clip_scale.x * vline->z);
 	if (text.x >= wtx->w || text.x < 0)
 		text.x = abs((int)text.x % wtx->w);
 	while (vline->y1 < vline->y2)
@@ -34,7 +34,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 		coord = vline->y1 * render->surface->w + render->x;
 		alpha = (vline->y1 - vline->stat_y.ceiling) / vline->line_height;
 		crosshair_position(render, vline, alpha, coord);
-		text.y = alpha * render->wall->tscale.y;
+		text.y = alpha * render->wall->clip_scale.y;
 		if (text.y >= wtx->h || text.y < 0)
 			text.y = abs((int)text.y % wtx->h);
 		blit_pixel_brightness(render, coord, text, wtx);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/09 18:23:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 15:19:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	parse_wall(t_doom *doom, int nb, char **arr)
 	wall->v2 = doom->vert[ft_atoi(arr[2])];
 	wall->wtx = ft_atoi(arr[3]);
 	wall->ptx = ft_atoi(arr[4]);
-	wall->scale = ft_atof(arr[5]) * doom->map_scale;
+	wall->scale_factor = ft_atof(arr[5]) * doom->map_scale;
 	wall->solid = ft_atoi(arr[6]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/26 13:58:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 15:23:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	scale_wall_height(t_doom *doom, t_wall *wall)
 {
 	wall->height = doom->sectors[wall->sect].ceiling.y
 		- doom->sectors[wall->sect].floor.y;
-	wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
+	wall->stat_scale.y = (doom->mtx[wall->wtx].h / wall->scale_factor) * wall->height;
 }
 
 static void	init_wsprite_scale(t_doom *doom, t_wall *wall)
@@ -55,8 +55,10 @@ void	init_scale(t_doom *doom)
 				wall->v2.x, wall->v2.y);
 		wall->height = doom->sectors[wall->sect].ceiling.y
 			- doom->sectors[wall->sect].floor.y;
-		wall->scale_w = (doom->mtx[wall->wtx].w / wall->scale) * wall->width;
-		wall->scale_h = (doom->mtx[wall->wtx].h / wall->scale) * wall->height;
+		wall->stat_scale.x = (doom->mtx[wall->wtx].w / wall->scale_factor)
+			* wall->width;
+		wall->stat_scale.y = (doom->mtx[wall->wtx].h / wall->scale_factor)
+			* wall->height;
 		init_wsprite_scale(doom, wall);
 	}
 }

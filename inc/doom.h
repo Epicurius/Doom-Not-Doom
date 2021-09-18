@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 14:23:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 15:57:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,21 +163,23 @@ typedef struct s_wall
 	int				sect;
 	char			visible;
 	int				n;
-	t_v3			v1;
+	t_v3			v1;			//Vertex on map		
 	t_v3			v2;
-	t_v3			sv1;
+	t_v3			sv1;		//Vertex on screen
 	t_v3			sv2;
-	t_v3			cv1;
+	t_v3			cv1;		//Vertex clipped to screen
 	t_v3			cv2;
+	TEMP_FLOAT			scale_factor;
 	TEMP_FLOAT			width;
 	TEMP_FLOAT			height;
-	TEMP_FLOAT			scale;
-	TEMP_FLOAT			scale_w;
-	TEMP_FLOAT			scale_h;
-	TEMP_FLOAT			scale_c1z;// Used only in 1 function
-	TEMP_FLOAT			scale_c2z;// Used only in 1 function
+	t_v2				stat_scale;
+	t_v2				clip_scale;
+	
+	TEMP_FLOAT			fov_scale_1;// fov scale / wall clamp z 1
+	TEMP_FLOAT			fov_scale_2;// fov scale / wall clamp z 2
 	TEMP_FLOAT			angle_z1;//
 	TEMP_FLOAT			angle_z2;//
+	
 	TEMP_FLOAT			x1;
 	TEMP_FLOAT			x2;
 	TEMP_FLOAT			cx1;
@@ -201,7 +203,6 @@ typedef struct s_wall
 	TEMP_FLOAT			xzrange;
 	TEMP_FLOAT			yzrange;
 
-	t_v2			tscale;
 	signed char		wtx;
 	signed char		ptx;
 	signed char		solid;

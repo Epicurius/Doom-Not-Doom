@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 14:19:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/18 15:12:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ void	compute_skybox(t_doom *doom)
  */
 void	project_skybox(t_doom *doom, t_wall *wall)
 {
-	wall->scale_c1z = doom->cam.scale / -wall->cv1.z;
-	wall->scale_c2z = doom->cam.scale / -wall->cv2.z;
-	wall->cx1 = doom->c.x + (wall->cv1.x * wall->scale_c1z);
-	wall->cx2 = doom->c.x + (wall->cv2.x * wall->scale_c2z);
+	wall->fov_scale_1 = doom->cam.scale / -wall->cv1.z;
+	wall->fov_scale_2 = doom->cam.scale / -wall->cv2.z;
+	wall->cx1 = doom->c.x + (wall->cv1.x * wall->fov_scale_1);
+	wall->cx2 = doom->c.x + (wall->cv2.x * wall->fov_scale_2);
 	wall->cx1 = ceil(wall->cx1);
 	wall->x1 = doom->c.x + wall->sv1.x * doom->cam.scale / -wall->sv1.z;
 	wall->x2 = doom->c.x + wall->sv2.x * doom->cam.scale / -wall->sv2.z;
 	wall->angle_z1 = wall->cv1.z * doom->player.pitch;
 	wall->angle_z2 = wall->cv2.z * doom->player.pitch;
-	wall->incl_y1.ceiling = doom->c.y + (5 + wall->angle_z1) * wall->scale_c1z;
-	wall->incl_y2.ceiling = doom->c.y + (5 + wall->angle_z2) * wall->scale_c2z;
-	wall->incl_y1.floor = doom->c.y + (-5 + wall->angle_z1) * wall->scale_c1z;
-	wall->incl_y2.floor = doom->c.y + (-5 + wall->angle_z2) * wall->scale_c2z;
+	wall->incl_y1.ceiling = doom->c.y + (5 + wall->angle_z1) * wall->fov_scale_1;
+	wall->incl_y2.ceiling = doom->c.y + (5 + wall->angle_z2) * wall->fov_scale_2;
+	wall->incl_y1.floor = doom->c.y + (-5 + wall->angle_z1) * wall->fov_scale_1;
+	wall->incl_y2.floor = doom->c.y + (-5 + wall->angle_z2) * wall->fov_scale_2;
 	wall->xrange = wall->x2 - wall->x1;
 	wall->incl_range.floor = wall->incl_y2.floor - wall->incl_y1.floor;
 	wall->incl_range.ceiling = wall->incl_y2.ceiling - wall->incl_y1.ceiling;
