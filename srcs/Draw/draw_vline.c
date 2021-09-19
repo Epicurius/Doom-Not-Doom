@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 15:59:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 /*
  *	Calculate the shade of white depending on the zbuffer value for the pixel.
  */
-static Uint32	z_clr(double z)
+static Uint32	z_clr(TEMP_DOUBLE z)
 {
 	Uint32	clr;
-	double	alpha;
+	TEMP_DOUBLE	alpha;
 
 	alpha = 1 - z / ZB;
 	if (z >= 0 && alpha >= 0 && alpha <= 1)
@@ -39,7 +39,7 @@ static Uint32	z_clr(double z)
 void	depth_shadding(t_render *render, t_vline *vline, int side)
 {
 	int		coord;
-	double	z;
+	TEMP_DOUBLE	z;
 
 	coord = vline->y1 * render->surface->w + render->x;
 	while (vline->y1 < vline->y2)
@@ -52,12 +52,12 @@ void	depth_shadding(t_render *render, t_vline *vline, int side)
 				z = (vline->max.top - vline->y1) / vline->height.top;
 			z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 			((Uint32 *)render->surface->pixels)[coord] = z_clr(z);
-			((TEMP_FLOAT *)render->surface->userdata)[coord] = z;
+			((TEMP_DOUBLE *)render->surface->userdata)[coord] = z;
 		}
 		else
 		{
 			((Uint32 *)render->surface->pixels)[coord] = z_clr(vline->z);
-			((TEMP_FLOAT *)render->surface->userdata)[coord] = vline->z;
+			((TEMP_DOUBLE *)render->surface->userdata)[coord] = vline->z;
 		}
 		coord += render->surface->w;
 		vline->y1++;
@@ -70,7 +70,7 @@ void	depth_shadding(t_render *render, t_vline *vline, int side)
 void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 {
 	int		coord;
-	TEMP_FLOAT	z;
+	TEMP_DOUBLE	z;
 
 	coord = vline->y1 * render->surface->w + render->x;
 	while (vline->y1 < vline->y2)
@@ -81,7 +81,7 @@ void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 			z = (vline->max.top - vline->y1) / vline->height.top;
 		z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 		((Uint32 *)render->surface->pixels)[coord] = FLOOR_CEILING_COLOR;
-		((TEMP_FLOAT *)render->surface->userdata)[coord] = z;
+		((TEMP_DOUBLE *)render->surface->userdata)[coord] = z;
 		coord += render->surface->w;
 		vline->y1++;
 	}
@@ -98,7 +98,7 @@ void	vline_color_walls(t_render *render, t_vline *vline)
 	if (vline->y1 < vline->y2)
 	{
 		((Uint32 *)render->surface->pixels)[coord] = MAP_OUTLINE_COLOR;
-		((TEMP_FLOAT *)render->surface->userdata)[coord] = vline->z;
+		((TEMP_DOUBLE *)render->surface->userdata)[coord] = vline->z;
 		coord += render->surface->w;
 		while (++vline->y1 < vline->y2 - 1)
 		{
@@ -107,13 +107,13 @@ void	vline_color_walls(t_render *render, t_vline *vline)
 				((Uint32 *)render->surface->pixels)[coord] = MAP_OUTLINE_COLOR;
 			else
 				((Uint32 *)render->surface->pixels)[coord] = WALL_COLOR;
-			((TEMP_FLOAT *)render->surface->userdata)[coord] = vline->z;
+			((TEMP_DOUBLE *)render->surface->userdata)[coord] = vline->z;
 			coord += render->surface->w;
 		}
 		if (vline->y1 < vline->y2)
 		{
 			((Uint32 *)render->surface->pixels)[coord] = MAP_OUTLINE_COLOR;
-			((TEMP_FLOAT *)render->surface->userdata)[coord] = vline->z;
+			((TEMP_DOUBLE *)render->surface->userdata)[coord] = vline->z;
 			vline->y1 += 1;
 		}
 	}

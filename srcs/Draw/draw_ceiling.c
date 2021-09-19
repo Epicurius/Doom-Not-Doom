@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	draw_ceiling_texture(t_render *render, t_vline *vline)
 {
 	int		coord;
 	t_v3	text;
-	TEMP_FLOAT	alpha;
-	TEMP_FLOAT	divider;
+	TEMP_DOUBLE	alpha;
+	TEMP_DOUBLE	divider;
 	t_bxpm	*ctx;
 
 	ctx = &render->mtx[render->ceiling->tx];

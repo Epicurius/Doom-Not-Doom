@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 int	ai_track_player(t_doom *doom, t_entity *entity)
 {
-	TEMP_FLOAT	speed;
+	TEMP_DOUBLE	speed;
 
 	speed = g_entity_data[entity->type].speed
 		/ point_distance_v3(doom->player.where, entity->where);
@@ -36,8 +36,8 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
  */
 int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 {
-	TEMP_FLOAT	a;
-	TEMP_FLOAT	speed;
+	TEMP_DOUBLE	a;
+	TEMP_DOUBLE	speed;
 
 	if ((rand() % 1000) > chance)
 		return (0);
@@ -54,8 +54,8 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
  */
 int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 {
-	TEMP_FLOAT	a;
-	TEMP_FLOAT	speed;
+	TEMP_DOUBLE	a;
+	TEMP_DOUBLE	speed;
 
 	if ((rand() % 1000) > chance)
 		return (0);

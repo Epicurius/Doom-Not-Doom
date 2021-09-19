@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 void	sector_center(t_sector *sector)
 {
 	int		i;
-	float	a;
-	float	t;
+	TEMP_DOUBLE	a;
+	TEMP_DOUBLE	t;
 
 	i = -1;
 	a = 0.0f;
@@ -109,8 +109,8 @@ int	is_convex(t_sector *sector)
 {
 	int		i;
 	int		n;
-	TEMP_FLOAT	prev;
-	TEMP_FLOAT	curr;
+	TEMP_DOUBLE	prev;
+	TEMP_DOUBLE	curr;
 
 	i = -1;
 	prev = 0;

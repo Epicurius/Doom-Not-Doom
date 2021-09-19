@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 16:25:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ static void	get_movement(t_doom *doom, t_player *player, t_v2 *speed)
  */
 static void	get_velocity(t_doom *doom, t_player *player)
 {
-	TEMP_FLOAT speed;
-	TEMP_FLOAT wishspeed;
-	TEMP_FLOAT currentspeed;
-	TEMP_FLOAT accelspeed;
+	TEMP_DOUBLE speed;
+	TEMP_DOUBLE wishspeed;
+	TEMP_DOUBLE currentspeed;
+	TEMP_DOUBLE accelspeed;
 
 
 	wishspeed = normalize_v3(&player->wishdir);

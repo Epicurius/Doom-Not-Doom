@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:00:22 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/10 15:34:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:29:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_minimap(t_doom *doom)
 	t_map	*map;
 
 	map = &doom->map;
-	h = doom->surface->h * (float)MM_SCALE;
+	h = doom->surface->h * (TEMP_DOUBLE)MM_SCALE;
 	map->size = rect_xy2(doom->c.x - h / 2, doom->c.y - h / 2,
 			doom->c.x + h / 2, doom->c.y + h / 2);
 	map->pos.x = doom->c.x;

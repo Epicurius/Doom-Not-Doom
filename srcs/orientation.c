@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:02 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
  *	Returns the frame to be rendered,
  *	depending on the angle of the entity to the player.
  */
-int	orientation(t_v3 p1, t_v3 p2, TEMP_FLOAT yaw, int nb_angles)
+int	orientation(t_v3 p1, t_v3 p2, TEMP_DOUBLE yaw, int nb_angles)
 {
 	int		i;
-	TEMP_FLOAT	a;
-	TEMP_FLOAT	angle;
+	TEMP_DOUBLE	a;
+	TEMP_DOUBLE	angle;
 
 	if (nb_angles <= 1)
 		return (0);

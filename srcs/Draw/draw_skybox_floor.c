@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:52 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:21:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	skybox_floor_vline(t_render *render, t_vline vline, int tx)
 {
 	int		coord;
 	t_v3	text;
-	TEMP_FLOAT	alpha;
+	TEMP_DOUBLE	alpha;
 
 	while (vline.y1 < vline.y2)
 	{
 		coord = vline.y1 * render->surface->w + render->x;
 		alpha = vline.start.bot
-			/ (TEMP_FLOAT)(vline.y1 - render->player->horizon);
+			/ (TEMP_DOUBLE)(vline.y1 - render->player->horizon);
 		text.y = (alpha * vline.texel.y + (1.0 - alpha) * 5)
 			* render->stx[tx].h / 10;
 		text.x = (alpha * vline.texel.x + (1.0 - alpha) * 5)

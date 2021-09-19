@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	x,y of vector
  */
-void	get_polar_cooordinates(TEMP_FLOAT len, TEMP_FLOAT angle, t_v2 *polar)
+void	get_polar_cooordinates(TEMP_DOUBLE len, TEMP_DOUBLE angle, t_v2 *polar)
 {
 	polar->x = len * cos(angle);
 	polar->y = len * sin(angle);
@@ -24,8 +24,8 @@ void	get_polar_cooordinates(TEMP_FLOAT len, TEMP_FLOAT angle, t_v2 *polar)
 /*
  *	len, angle of vector
  */
-void	get_cartesian_cooordinates(TEMP_FLOAT x, TEMP_FLOAT y, TEMP_FLOAT *len,
-	TEMP_FLOAT *angle)
+void	get_cartesian_cooordinates(TEMP_DOUBLE x, TEMP_DOUBLE y, TEMP_DOUBLE *len,
+	TEMP_DOUBLE *angle)
 {
 	*len = sqrt(x * x + y * y);
 	*angle = atan(y / x);
@@ -34,15 +34,15 @@ void	get_cartesian_cooordinates(TEMP_FLOAT x, TEMP_FLOAT y, TEMP_FLOAT *len,
 /*
  *	Deprecated, use #define RADIANS_CONVERT
  */
-float	to_radians(float degrees)
+TEMP_DOUBLE	to_radians(TEMP_DOUBLE degrees)
 {
-	return (degrees * ((float)M_PI / 180.0f));
+	return (degrees * ((TEMP_DOUBLE)M_PI / 180.0f));
 }
 
 /*
  *	Deprecated, use #define DEGREES1_CONVERT
  */
-float	to_degrees(float radians)
+TEMP_DOUBLE	to_degrees(TEMP_DOUBLE radians)
 {
-	return (radians * (180.0f / (float)M_PI));
+	return (radians * (180.0f / (TEMP_DOUBLE)M_PI));
 }
