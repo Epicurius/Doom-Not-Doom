@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 11:06:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:14:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ typedef struct s_settings
 typedef struct s_plane
 {
 	int				tx;
-	TEMP_FLOAT			y;
-	TEMP_FLOAT			correct;
-	TEMP_FLOAT			head;
-	TEMP_FLOAT			feet;
-	TEMP_FLOAT			scale;
+	float			height;
+	float			ppos;
+	float			scale;
 }					t_plane;
 
 typedef struct s_fc
@@ -130,14 +128,14 @@ typedef struct s_player
 
 typedef struct s_wsprite
 {
-	t_v3			where;//??
+	t_v2			where;
 	int				id;
 	int				tx;	
 	int				frame;
 	int				time;
 	t_rect			src;
-	TEMP_FLOAT			scale_w;
-	TEMP_FLOAT			scale_h;
+	float			scale_w;
+	float			scale_h;
 	t_v2			tscale;
 	int				ready;
 	int				trigger;
@@ -174,22 +172,19 @@ typedef struct s_wall
 	t_v3			sv2;
 	t_v3			cv1;		//Vertex clipped to screen
 	t_v3			cv2;
-	TEMP_FLOAT			scale_factor;
-	TEMP_FLOAT			width;
-	TEMP_FLOAT			height;
-	t_v2				stat_scale;
-	t_v2				clip_scale;
-	
-	TEMP_FLOAT			fov_z1;// fov scale / wall clamp z 1
-	TEMP_FLOAT			fov_z2;// fov scale / wall clamp z 2
-	TEMP_FLOAT			pitch_z1;//
-	TEMP_FLOAT			pitch_z2;//
-	
-	TEMP_FLOAT			x1;
-	TEMP_FLOAT			x2;
-	TEMP_FLOAT			cx1;
-	TEMP_FLOAT			cx2;
-
+	t_v2			stat_scale;
+	t_v2			clip_scale;
+	float			scale_factor;
+	float			width;
+	float			height;
+	float			fov_z1;
+	float			fov_z2;
+	float			pitch_z1;
+	float			pitch_z2;
+	float			x1;
+	float			x2;
+	float			cx1;
+	float			cx2;
 	t_fc			stat_y1;
 	t_fc			stat_y2;
 	t_fc			stat_range;
@@ -199,16 +194,13 @@ typedef struct s_wall
 	t_fc			incl_ny1;
 	t_fc			incl_ny2;
 	t_fc			incl_nrange;
-	
-	TEMP_FLOAT			xrange;
-	TEMP_FLOAT			zrange;
-	TEMP_FLOAT			zcomb;
-	TEMP_FLOAT			x1z2;
-	TEMP_FLOAT			y1z2;
-	TEMP_FLOAT			xzrange;
-	TEMP_FLOAT			yzrange;
-
-
+	float			xrange;
+	float			zrange;
+	float			zcomb;
+	float			x1z2;
+	float			y1z2;
+	float			xzrange;
+	float			yzrange;
 	t_wsprites		wsprite;
 	t_bullet_hole	bullet_hole;
 }					t_wall;
@@ -486,7 +478,9 @@ typedef struct s_doom
 	t_event			*events;
 	char			keys[517];
 }					t_doom;
-;
+
+void	SDL_timer_start();
+double	SDL_timer_end();
 void	flood_fill(SDL_Surface *surface, Uint32 fillcolor, int x, int y);
 
 /* File: ai_attack.c */
@@ -615,8 +609,10 @@ void				respawn_rifts(t_doom *doom);
 /* File: update_screen.c */
 void				update_screen(t_doom *doom);
 /* File: wall_to_screen_xz.c */
-void				map_to_screen_vertex(t_player player, t_v3 *map, t_v3 *screen);
-void				screen_to_map_vertex(t_player player, t_v3 *screen, t_v3 *map);
+void				map_to_screen_vertex(t_player player,
+						t_v3 *map, t_v3 *screen);
+void				screen_to_map_vertex(t_player player,
+						t_v3 *screen, t_v3 *map);
 /* File: wsprite_trigger_events.c */
 void				wsprite_trigger_events(t_doom *doom, t_event *event);
 /* File: BuyMenu/buy_menu.c */

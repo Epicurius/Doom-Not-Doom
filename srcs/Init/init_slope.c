@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:12:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ TEMP_FLOAT	ceiling_at(t_sector *sector, t_v3 pos)
 	v = sector->wall[sector->wall_ceiling_slope]->v1;
 	peq = sector->ceiling_normal.x * (pos.x - v.x)
 		- sector->ceiling_normal.y * (pos.y - v.y);
-	return (peq * sector->ceiling_slope + sector->ceiling.y);
+	return (peq * sector->ceiling_slope + sector->ceiling.height);
 }
 
 TEMP_FLOAT	floor_at(t_sector *sector, t_v3 pos)
@@ -31,7 +31,7 @@ TEMP_FLOAT	floor_at(t_sector *sector, t_v3 pos)
 	v = sector->wall[sector->wall_floor_slope]->v1;
 	peq = sector->floor_normal.x * (pos.x - v.x)
 		- sector->floor_normal.y * (pos.y - v.y);
-	return (peq * sector->floor_slope + sector->floor.y);
+	return (peq * sector->floor_slope + sector->floor.height);
 }
 
 //		normal of 2 vectors will be the slope direction (unit vectort normal)

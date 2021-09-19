@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:08:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	move_plane(t_doom *doom, t_event *event)
 		plane = &event->event_sector->floor;
 	else
 		plane = &event->event_sector->ceiling;
-	plane->y += 0.1 * event->dir;
+	plane->height += 0.1 * event->dir;
 	event->time = doom->time.curr;
 	while (++i < event->event_sector->npoints)
 		scale_wall_height(doom, event->event_sector->wall[i]);
-	if (plane->y <= event->min)
+	if (plane->height <= event->min)
 		event->dir = 1;
-	else if (plane->y >= event->max)
+	else if (plane->height >= event->max)
 		event->dir = -1;
 	else
 		return ;

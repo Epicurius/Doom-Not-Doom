@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 11:08:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	curr_floor_and_ceiling(t_doom *doom, t_wall *w)
 	TEMP_FLOAT		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = doom->sectors[w->sect].floor.y - eye_z;
-	v2.floor = doom->sectors[w->sect].floor.y - eye_z;
-	v1.ceiling = doom->sectors[w->sect].ceiling.y - eye_z;
-	v2.ceiling = doom->sectors[w->sect].ceiling.y - eye_z;
+	v1.floor = doom->sectors[w->sect].floor.height - eye_z;
+	v2.floor = doom->sectors[w->sect].floor.height - eye_z;
+	v1.ceiling = doom->sectors[w->sect].ceiling.height - eye_z;
+	v2.ceiling = doom->sectors[w->sect].ceiling.height - eye_z;
 	w->stat_y1.floor = doom->c.y + (v1.floor + w->pitch_z1) * w->fov_z1;
 	w->stat_y1.ceiling = doom->c.y + (v1.ceiling + w->pitch_z1) * w->fov_z1;
 	w->stat_y2.floor = doom->c.y + (v2.floor + w->pitch_z2) * w->fov_z2;

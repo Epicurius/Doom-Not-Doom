@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 11:07:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:14:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 }
 
 /*
- *	Calculates the hights of floor and ceiling at player postion.
+ *	Calculates the hights of floor and ceiling at player position.
  *	This will lighten the load when drawing.
  */
 void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
@@ -93,9 +93,9 @@ void	precompute_floor_ceil(t_doom *doom, t_sector *sector)
 	TEMP_FLOAT	eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	sector->floor.feet = doom->c.y + (floor_at(sector, doom->player.where)
+	sector->floor.ppos = doom->c.y + (floor_at(sector, doom->player.where)
 			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
-	sector->ceiling.head = doom->c.y + (ceiling_at(sector, doom->player.where)
+	sector->ceiling.ppos = doom->c.y + (ceiling_at(sector, doom->player.where)
 			- eye_z + NEAR_Z * doom->player.pitch) * doom->cam.scale / -NEAR_Z;
 }
 

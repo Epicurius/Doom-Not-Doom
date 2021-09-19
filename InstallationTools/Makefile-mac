@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/18 13:02:31 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/19 13:05:22 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,6 +158,7 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/slide_collision.c\
 				CollisionDetection/projectile_collision.c\
 				CollisionDetection/crouch_collision.c\
+				SDL_Timer.c\
 				floodfill.c
 				
 NAME		=	doom

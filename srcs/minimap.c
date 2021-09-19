@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 10:29:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	draw_minimap(t_doom *doom)
 	{
 		w = -1;
 		sect = &doom->sectors[s];
-		if (sect->floor.y > where.z || sect->ceiling.y < where.z)
+		if (sect->floor.height > where.z || sect->ceiling.height < where.z)
 			continue ;
 		doom->sectbool[s] = TRUE;
 		while (++w < sect->npoints)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 15:23:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:12:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	scale_wall_height(t_doom *doom, t_wall *wall)
 {
-	wall->height = doom->sectors[wall->sect].ceiling.y
-		- doom->sectors[wall->sect].floor.y;
+	wall->height = doom->sectors[wall->sect].ceiling.height
+		- doom->sectors[wall->sect].floor.height;
 	wall->stat_scale.y = (doom->mtx[wall->wtx].h / wall->scale_factor) * wall->height;
 }
 
@@ -53,8 +53,8 @@ void	init_scale(t_doom *doom)
 		wall = &doom->walls[i];
 		wall->width = point_distance_v2(wall->v1.x, wall->v1.y,
 				wall->v2.x, wall->v2.y);
-		wall->height = doom->sectors[wall->sect].ceiling.y
-			- doom->sectors[wall->sect].floor.y;
+		wall->height = doom->sectors[wall->sect].ceiling.height
+			- doom->sectors[wall->sect].floor.height;
 		wall->stat_scale.x = (doom->mtx[wall->wtx].w / wall->scale_factor)
 			* wall->width;
 		wall->stat_scale.y = (doom->mtx[wall->wtx].h / wall->scale_factor)
