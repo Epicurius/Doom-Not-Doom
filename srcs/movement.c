@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 11:46:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 16:25:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ static void	get_velocity(t_doom *doom, t_player *player)
 	TEMP_FLOAT wishspeed;
 	TEMP_FLOAT currentspeed;
 	TEMP_FLOAT accelspeed;
+
 
 	wishspeed = normalize_v3(&player->wishdir);
 	//if (wishspeed > MAX_SPEED)

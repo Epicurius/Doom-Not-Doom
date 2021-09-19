@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 16:31:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 15:59:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define PLAYER_RADIUS					0.7
 # define EYE_LVL						6
 # define RENDER_DISTANCE				200.0
-# define ZB								100
+# define ZB								70
 
 /*
 ** Entities
@@ -62,8 +62,11 @@
 /*
 ** Texture
 */
-# define ZBUFFER_COLOR					1
-# define TEXTURE_DISABLED				0
+# define DEPTH_SHADING					FALSE
+# define TEXTURE_DISABLED				FALSE
+# define MAP_OUTLINE_COLOR				0xFF00FF00
+# define WALL_COLOR						0xFF888888
+# define FLOOR_CEILING_COLOR			0xFFAA8888
 # define CLOCK_BG_COLOR					0xFF000000
 # define CLOCK_FG_COLOR					0xFFFFFFFF
 # define WALL_SPRITE_SPEED				100

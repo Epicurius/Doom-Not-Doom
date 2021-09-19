@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:22:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 16:01:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,24 +215,29 @@ typedef struct s_sector
 	int				light;
 	float			gravity;
 	t_v3			center;
-	int				wall_ceiling_slope;
-	float			ceiling_slope;
-	int				wall_floor_slope;
-	float			floor_slope;
-	t_v2			ceiling_normal;
-	t_v2			floor_normal;
+
+	//int 			ceiling_incl_start;
+	//float			ceiling_incl_angle;
+
+	int				ceiling_incl_start;
+	float			ceiling_incl_angle;
+	int				floor_incl_start;
+	float			floor_incl_angle;
+	
+	t_v2			top_normal;
+	t_v2			bot_normal;
 	int				trigger;
 	char			visible;
 }					t_sector;
 
 typedef struct s_camera
 {
-	TEMP_FLOAT			near_left;
-	TEMP_FLOAT			near_right;
-	TEMP_FLOAT			far_left;
-	TEMP_FLOAT			far_right;
-	TEMP_FLOAT			range;
-	TEMP_FLOAT			scale;
+	float			near_left;
+	float			near_right;
+	float			far_left;
+	float			far_right;
+	float			range;
+	float			scale;
 }					t_camera;
 
 typedef struct s_entity_render
@@ -697,8 +702,7 @@ void				skybox_floor_vline(t_render *render,
 void				skybox_wall_vline(t_render *render,
 						t_vline vline, int tx);
 /* File: Draw/draw_vline.c */
-Uint32				z_clr(TEMP_FLOAT z, TEMP_FLOAT max_z);
-void				shade_zbuffer(t_render *render,
+void				depth_shadding(t_render *render,
 						t_vline *vline, int side);
 void				vline_color_bot_top(t_render *render,
 						t_vline *vline, int side);

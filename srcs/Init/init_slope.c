@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:12:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 16:02:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ TEMP_FLOAT	ceiling_at(t_sector *sector, t_v3 pos)
 	TEMP_FLOAT	peq;
 	t_v3	v;
 
-	v = sector->wall[sector->wall_ceiling_slope]->v1;
-	peq = sector->ceiling_normal.x * (pos.x - v.x)
-		- sector->ceiling_normal.y * (pos.y - v.y);
-	return (peq * sector->ceiling_slope + sector->ceiling.height);
+	v = sector->wall[sector->ceiling_incl_start]->v1;
+	peq = sector->top_normal.x * (pos.x - v.x)
+		- sector->top_normal.y * (pos.y - v.y);
+	return (peq * sector->ceiling_incl_angle + sector->ceiling.height);
 }
 
 TEMP_FLOAT	floor_at(t_sector *sector, t_v3 pos)
@@ -28,10 +28,10 @@ TEMP_FLOAT	floor_at(t_sector *sector, t_v3 pos)
 	TEMP_FLOAT	peq;
 	t_v3	v;
 
-	v = sector->wall[sector->wall_floor_slope]->v1;
-	peq = sector->floor_normal.x * (pos.x - v.x)
-		- sector->floor_normal.y * (pos.y - v.y);
-	return (peq * sector->floor_slope + sector->floor.height);
+	v = sector->wall[sector->floor_incl_start]->v1;
+	peq = sector->bot_normal.x * (pos.x - v.x)
+		- sector->bot_normal.y * (pos.y - v.y);
+	return (peq * sector->floor_incl_angle + sector->floor.height);
 }
 
 //		normal of 2 vectors will be the slope direction (unit vectort normal)
@@ -57,9 +57,9 @@ void	init_slope_normal(t_doom *doom)
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
-		doom->sectors[i].floor_normal = get_unit_normal_vector(
-				&doom->sectors[i], doom->sectors[i].wall_floor_slope);
-		doom->sectors[i].ceiling_normal = get_unit_normal_vector(
-				&doom->sectors[i], doom->sectors[i].wall_ceiling_slope);
+		doom->sectors[i].bot_normal = get_unit_normal_vector(
+				&doom->sectors[i], doom->sectors[i].floor_incl_start);
+		doom->sectors[i].top_normal = get_unit_normal_vector(
+				&doom->sectors[i], doom->sectors[i].ceiling_incl_start);
 	}
 }
