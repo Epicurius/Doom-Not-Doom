@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	skybox_wall_vline(t_render *render, t_vline vline, int tx)
 	while (vline.y1 < vline.y2)
 	{
 		coord = vline.y1 * render->surface->w + render->x;
-		alpha = (vline.y1 - vline.max.ceiling) / vline.line_height;
+		alpha = (vline.y1 - vline.max.top) / vline.line_height;
 		text.y = alpha * render->stx[tx].h;
 		while (text.y >= render->stx[tx].h)
 			text.y -= render->stx[tx].h;

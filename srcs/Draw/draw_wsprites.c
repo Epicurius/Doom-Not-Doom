@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * render->surface->w + render->x;
-		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
+		alpha = (vline->y1 - vline->max.top) / vline->line_height;
 		text.y = (alpha - pos) * wsprite->tscale.y + wsprite->src.y1;
 		if (text.y > wsprite->src.y1 && text.y < wsprite->src.y2)
 		{
@@ -89,8 +89,8 @@ void	draw_wsprites(t_render *render, t_vline *vline)
 		x = vline->alpha * wsprite->tscale.x * vline->z + wsprite->src.x1 - pos;
 		if (x > wsprite->src.x1 && x < wsprite->src.x2)
 		{
-			vline->y1 = vline->curr.ceiling;
-			vline->y2 = vline->curr.floor;
+			vline->y1 = vline->curr.top;
+			vline->y2 = vline->curr.bot;
 			vline_wsprite(render, vline, wsprite, x);
 		}
 	}

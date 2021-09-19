@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 15:37:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_wall_texture(t_render *render, t_vline *vline)
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * render->surface->w + render->x;
-		alpha = (vline->y1 - vline->stat_y.ceiling) / vline->line_height;
+		alpha = (vline->y1 - vline->stat_y.top) / vline->line_height;
 		crosshair_position(render, vline, alpha, coord);
 		text.y = alpha * render->wall->clip_scale.y;
 		if (text.y >= wtx->h || text.y < 0)

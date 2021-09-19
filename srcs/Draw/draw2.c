@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static t_vline	draw_vline(t_render *render)
 	t_vline	vline;
 
 	compute_vline_data(render, render->wall, &vline);
-	if (vline.curr.ceiling > render->ytop || vline.curr.floor < render->ybot)
+	if (vline.curr.top > render->ytop || vline.curr.bot < render->ybot)
 		compute_vline_texels(render, render->wall, &vline);
 	draw_floor_and_ceiling(render, &vline);
 	if (render->wall->n != -1)
 		draw_neighbor_wall(render, &vline);
 	else
 	{
-		vline.y1 = vline.curr.ceiling;
-		vline.y2 = vline.curr.floor;
+		vline.y1 = vline.curr.top;
+		vline.y2 = vline.curr.bot;
 		if (render->wall->wtx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, &vline, SIDES);
 		else if (render->wall->wtx < 0)

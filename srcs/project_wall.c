@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static void	curr_floor_and_ceiling(t_doom *doom, t_wall *w)
 	TEMP_FLOAT		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = doom->sectors[w->sect].floor.height - eye_z;
-	v2.floor = doom->sectors[w->sect].floor.height - eye_z;
-	v1.ceiling = doom->sectors[w->sect].ceiling.height - eye_z;
-	v2.ceiling = doom->sectors[w->sect].ceiling.height - eye_z;
-	w->stat_y1.floor = doom->c.y + (v1.floor + w->pitch_z1) * w->fov_z1;
-	w->stat_y1.ceiling = doom->c.y + (v1.ceiling + w->pitch_z1) * w->fov_z1;
-	w->stat_y2.floor = doom->c.y + (v2.floor + w->pitch_z2) * w->fov_z2;
-	w->stat_y2.ceiling = doom->c.y + (v2.ceiling + w->pitch_z2) * w->fov_z2;
-	w->stat_range.floor = w->stat_y2.floor - w->stat_y1.floor;
-	w->stat_range.ceiling = w->stat_y2.ceiling - w->stat_y1.ceiling;
+	v1.bot = doom->sectors[w->sect].floor.height - eye_z;
+	v2.bot = doom->sectors[w->sect].floor.height - eye_z;
+	v1.top = doom->sectors[w->sect].ceiling.height - eye_z;
+	v2.top = doom->sectors[w->sect].ceiling.height - eye_z;
+	w->stat_y1.bot = doom->c.y + (v1.bot + w->pitch_z1) * w->fov_z1;
+	w->stat_y1.top = doom->c.y + (v1.top + w->pitch_z1) * w->fov_z1;
+	w->stat_y2.bot = doom->c.y + (v2.bot + w->pitch_z2) * w->fov_z2;
+	w->stat_y2.top = doom->c.y + (v2.top + w->pitch_z2) * w->fov_z2;
+	w->stat_range.bot = w->stat_y2.bot - w->stat_y1.bot;
+	w->stat_range.top = w->stat_y2.top - w->stat_y1.top;
 }
 
 /*
@@ -44,16 +44,16 @@ static void	curr_floor_and_ceil_incl(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	TEMP_FLOAT		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = floor_at(&doom->sectors[w->sect], p1) - eye_z;
-	v1.ceiling = ceiling_at(&doom->sectors[w->sect], p1) - eye_z;
-	v2.floor = floor_at(&doom->sectors[w->sect], p2) - eye_z;
-	v2.ceiling = ceiling_at(&doom->sectors[w->sect], p2) - eye_z;
-	w->incl_y1.floor = doom->c.y + (v1.floor + w->pitch_z1) * w->fov_z1;
-	w->incl_y1.ceiling = doom->c.y + (v1.ceiling + w->pitch_z1) * w->fov_z1;
-	w->incl_y2.floor = doom->c.y + (v2.floor + w->pitch_z2) * w->fov_z2;
-	w->incl_y2.ceiling = doom->c.y + (v2.ceiling + w->pitch_z2) * w->fov_z2;
-	w->incl_range.floor = w->incl_y2.floor - w->incl_y1.floor;
-	w->incl_range.ceiling = w->incl_y2.ceiling - w->incl_y1.ceiling;
+	v1.bot = floor_at(&doom->sectors[w->sect], p1) - eye_z;
+	v1.top = ceiling_at(&doom->sectors[w->sect], p1) - eye_z;
+	v2.bot = floor_at(&doom->sectors[w->sect], p2) - eye_z;
+	v2.top = ceiling_at(&doom->sectors[w->sect], p2) - eye_z;
+	w->incl_y1.bot = doom->c.y + (v1.bot + w->pitch_z1) * w->fov_z1;
+	w->incl_y1.top = doom->c.y + (v1.top + w->pitch_z1) * w->fov_z1;
+	w->incl_y2.bot = doom->c.y + (v2.bot + w->pitch_z2) * w->fov_z2;
+	w->incl_y2.top = doom->c.y + (v2.top + w->pitch_z2) * w->fov_z2;
+	w->incl_range.bot = w->incl_y2.bot - w->incl_y1.bot;
+	w->incl_range.top = w->incl_y2.top - w->incl_y1.top;
 }
 
 /*
@@ -67,16 +67,16 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 	TEMP_FLOAT		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
-	v1.floor = floor_at(&doom->sectors[w->n], p1) - eye_z;
-	v1.ceiling = ceiling_at(&doom->sectors[w->n], p1) - eye_z;
-	v2.floor = floor_at(&doom->sectors[w->n], p2) - eye_z;
-	v2.ceiling = ceiling_at(&doom->sectors[w->n], p2) - eye_z;
-	w->incl_ny1.floor = doom->c.y + (v1.floor + w->pitch_z1) * w->fov_z1;
-	w->incl_ny1.ceiling = doom->c.y + (v1.ceiling + w->pitch_z1) * w->fov_z1;
-	w->incl_ny2.floor = doom->c.y + (v2.floor + w->pitch_z2) * w->fov_z2;
-	w->incl_ny2.ceiling = doom->c.y + (v2.ceiling + w->pitch_z2) * w->fov_z2;
-	w->incl_nrange.floor = w->incl_ny2.floor - w->incl_ny1.floor;
-	w->incl_nrange.ceiling = w->incl_ny2.ceiling - w->incl_ny1.ceiling;
+	v1.bot = floor_at(&doom->sectors[w->n], p1) - eye_z;
+	v1.top = ceiling_at(&doom->sectors[w->n], p1) - eye_z;
+	v2.bot = floor_at(&doom->sectors[w->n], p2) - eye_z;
+	v2.top = ceiling_at(&doom->sectors[w->n], p2) - eye_z;
+	w->incl_ny1.bot = doom->c.y + (v1.bot + w->pitch_z1) * w->fov_z1;
+	w->incl_ny1.top = doom->c.y + (v1.top + w->pitch_z1) * w->fov_z1;
+	w->incl_ny2.bot = doom->c.y + (v2.bot + w->pitch_z2) * w->fov_z2;
+	w->incl_ny2.top = doom->c.y + (v2.top + w->pitch_z2) * w->fov_z2;
+	w->incl_nrange.bot = w->incl_ny2.bot - w->incl_ny1.bot;
+	w->incl_nrange.top = w->incl_ny2.top - w->incl_ny1.top;
 }
 
 /*

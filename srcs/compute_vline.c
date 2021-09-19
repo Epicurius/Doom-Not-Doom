@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 15:06:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 14:13:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void	compute_vline_data(t_render *render, t_wall *wall, t_vline *vline)
 	vline->divider = 1 / (wall->sv2.z + vline->alpha * wall->zrange);
 	vline->z = wall->zcomb * vline->divider;
 	vline->z_near_z = vline->z * NEAR_Z;
-	vline->max.ceiling = vline->clipped_alpha
-		* wall->incl_range.ceiling + wall->incl_y1.ceiling;
-	vline->max.floor = vline->clipped_alpha
-		* wall->incl_range.floor + wall->incl_y1.floor;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling,
+	vline->max.top = vline->clipped_alpha
+		* wall->incl_range.top + wall->incl_y1.top;
+	vline->max.bot = vline->clipped_alpha
+		* wall->incl_range.bot + wall->incl_y1.bot;
+	vline->curr.top = ft_clamp(vline->max.top,
 			render->ytop, render->ybot);
-	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->stat_y.floor = vline->clipped_alpha
-		* wall->stat_range.floor + wall->stat_y1.floor;
-	vline->stat_y.ceiling = vline->clipped_alpha
-		* wall->stat_range.ceiling + wall->stat_y1.ceiling;
-	vline->line_height = vline->stat_y.floor - vline->stat_y.ceiling;
+	vline->curr.bot = ft_clamp(vline->max.bot, render->ytop, render->ybot);
+	vline->stat_y.bot = vline->clipped_alpha
+		* wall->stat_range.bot + wall->stat_y1.bot;
+	vline->stat_y.top = vline->clipped_alpha
+		* wall->stat_range.top + wall->stat_y1.top;
+	vline->line_height = vline->stat_y.bot - vline->stat_y.top;
 }
 
 /*

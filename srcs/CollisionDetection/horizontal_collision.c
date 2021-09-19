@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 11:56:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/31 12:33:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int	check_portal(t_doom *doom, t_motion *motion, t_wall *wall, t_v3 point)
 {
 	t_fc	portal;
 
-	portal.floor = ft_max(
+	portal.bot = ft_max(
 			floor_at(&doom->sectors[wall->sect], point),
 			floor_at(&doom->sectors[wall->n], point));
-	portal.ceiling = ft_min(
+	portal.top = ft_min(
 			ceiling_at(&doom->sectors[wall->sect], point),
 			ceiling_at(&doom->sectors[wall->n], point));
-	if (portal.ceiling <= portal.floor + motion->height)
+	if (portal.top <= portal.bot + motion->height)
 		return (1);
-	if (portal.ceiling <= motion->dest.z + motion->height)
+	if (portal.top <= motion->dest.z + motion->height)
 		return (2);
-	if (portal.floor > motion->dest.z + motion->step)
+	if (portal.bot > motion->dest.z + motion->step)
 		return (3);
 	return (0);
 }

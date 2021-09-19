@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:14:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
  */
 void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 {
-	if (vline->curr.ceiling > render->ytop)
+	if (vline->curr.top > render->ytop)
 	{
-		vline->height.ceiling = vline->max.ceiling - render->ceiling->ppos;
+		vline->height.top = vline->max.top - render->ceiling->ppos;
 		vline->y1 = render->ytop;
-		vline->y2 = ft_min(vline->curr.ceiling, render->ybot);
+		vline->y2 = ft_min(vline->curr.top, render->ybot);
 		if (render->ceiling->tx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline, TOP);
 		else if (render->ceiling->tx < 0)
@@ -30,10 +30,10 @@ void	draw_floor_and_ceiling(t_render *render, t_vline *vline)
 		else
 			draw_ceiling_texture(render, vline);
 	}
-	if (vline->curr.floor < render->ybot)
+	if (vline->curr.bot < render->ybot)
 	{
-		vline->height.floor = render->floor->ppos - vline->max.floor;
-		vline->y1 = ft_max(0, vline->curr.floor);
+		vline->height.bot = render->floor->ppos - vline->max.bot;
+		vline->y1 = ft_max(0, vline->curr.bot);
 		vline->y2 = render->ybot;
 		if (render->floor->tx == 0 || TEXTURE_DISABLED)
 			vline_monochromic(render, vline, BOT);

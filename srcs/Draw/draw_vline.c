@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	shade_zbuffer(t_render *render, t_vline *vline, int side)
 		if (side == BOT || side == TOP)
 		{
 			if (side == BOT)
-				z = (vline->y1 - vline->max.floor) / vline->height.floor;
+				z = (vline->y1 - vline->max.bot) / vline->height.bot;
 			else if (side == TOP)
-				z = (vline->max.ceiling - vline->y1) / vline->height.ceiling;
+				z = (vline->max.top - vline->y1) / vline->height.top;
 			z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 			((Uint32 *)render->surface->pixels)[coord] = z_clr(z, ZB);
 			((TEMP_FLOAT *)render->surface->userdata)[coord] = z;
@@ -75,9 +75,9 @@ void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 	while (vline->y1 < vline->y2)
 	{
 		if (side == BOT)
-			z = (vline->y1 - vline->max.floor) / vline->height.floor;
+			z = (vline->y1 - vline->max.bot) / vline->height.bot;
 		else if (side == TOP)
-			z = (vline->max.ceiling - vline->y1) / vline->height.ceiling;
+			z = (vline->max.top - vline->y1) / vline->height.top;
 		z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 		((Uint32 *)render->surface->pixels)[coord] = 0xFFAA8888;
 		((TEMP_FLOAT *)render->surface->userdata)[coord] = z;

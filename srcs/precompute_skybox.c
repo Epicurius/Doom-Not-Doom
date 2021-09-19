@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 10:33:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	project_skybox(t_doom *doom, t_wall *wall)
 	wall->x2 = doom->c.x + wall->sv2.x * doom->cam.scale / -wall->sv2.z;
 	wall->pitch_z1 = wall->cv1.z * doom->player.pitch;
 	wall->pitch_z2 = wall->cv2.z * doom->player.pitch;
-	wall->incl_y1.ceiling = doom->c.y + (5 + wall->pitch_z1) * wall->fov_z1;
-	wall->incl_y2.ceiling = doom->c.y + (5 + wall->pitch_z2) * wall->fov_z2;
-	wall->incl_y1.floor = doom->c.y + (-5 + wall->pitch_z1) * wall->fov_z1;
-	wall->incl_y2.floor = doom->c.y + (-5 + wall->pitch_z2) * wall->fov_z2;
+	wall->incl_y1.top = doom->c.y + (5 + wall->pitch_z1) * wall->fov_z1;
+	wall->incl_y2.top = doom->c.y + (5 + wall->pitch_z2) * wall->fov_z2;
+	wall->incl_y1.bot = doom->c.y + (-5 + wall->pitch_z1) * wall->fov_z1;
+	wall->incl_y2.bot = doom->c.y + (-5 + wall->pitch_z2) * wall->fov_z2;
 	wall->xrange = wall->x2 - wall->x1;
-	wall->incl_range.floor = wall->incl_y2.floor - wall->incl_y1.floor;
-	wall->incl_range.ceiling = wall->incl_y2.ceiling - wall->incl_y1.ceiling;
+	wall->incl_range.bot = wall->incl_y2.bot - wall->incl_y1.bot;
+	wall->incl_range.top = wall->incl_y2.top - wall->incl_y1.top;
 	wall->zrange = wall->sv1.z - wall->sv2.z;
 	wall->zcomb = wall->sv2.z * wall->sv1.z;
 	wall->x1z2 = wall->v1.x * wall->sv2.z;

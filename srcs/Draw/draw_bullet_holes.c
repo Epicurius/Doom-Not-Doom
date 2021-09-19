@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 17:35:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	vline_wall_bh(t_render *render, t_vline *vline,
 	while (vline->y1 < vline->y2)
 	{
 		coord = vline->y1 * render->surface->w + render->x;
-		alpha = (vline->y1 - vline->max.ceiling) / vline->line_height;
+		alpha = (vline->y1 - vline->max.top) / vline->line_height;
 		text.y = (alpha - pos) * bullet_hole.tscale.y + 0;
 		if (text.y >= 0 && text.y < 64)
 			blit_pixel_opaque(render, coord, text, &render->mtx[0]);
@@ -61,8 +61,8 @@ void	draw_wall_bh(t_render *render, t_vline *vline)
 		x = vline->alpha * bullet_hole.tscale.x * vline->z + 0 - pos;
 		if (x >= 0 && x < 64)
 		{
-			vline->y1 = vline->curr.ceiling;
-			vline->y2 = vline->curr.floor;
+			vline->y1 = vline->curr.top;
+			vline->y2 = vline->curr.bot;
 			vline_wall_bh(render, vline, bullet_hole, x);
 		}
 	}

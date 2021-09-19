@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 15:31:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,27 @@ static void	skybox_limits(t_render *render, t_vline *vline,
 	if (side == TOP)
 	{
 		limit[0] = render->ytop;
-		limit[1] = vline->curr.ceiling;
+		limit[1] = vline->curr.top;
 	}
 	else if (side == BOT)
 	{
-		limit[0] = vline->curr.floor;
+		limit[0] = vline->curr.bot;
 		limit[1] = render->ybot;
 	}
 	else if (side == SIDES)
 	{
-		limit[0] = vline->curr.ceiling;
-		limit[1] = vline->curr.floor;
+		limit[0] = vline->curr.top;
+		limit[1] = vline->curr.bot;
 	}
 	else if (side == TOP_HALF)
 	{
-		limit[0] = vline->curr.ceiling;
-		limit[1] = vline->curr_n.ceiling;
+		limit[0] = vline->curr.top;
+		limit[1] = vline->curr_n.top;
 	}
 	else if (side == BOT_HALF)
 	{
-		limit[0] = vline->curr_n.floor;
-		limit[1] = vline->curr.floor;
+		limit[0] = vline->curr_n.bot;
+		limit[1] = vline->curr.bot;
 	}
 }
 
@@ -54,21 +54,21 @@ static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 	int	i;
 
 	i = (render->wall->wtx + 1) * (-6);
-	if (limit[0] < skybox.curr.ceiling)
+	if (limit[0] < skybox.curr.top)
 	{
 		skybox.y1 = limit[0];
-		skybox.y2 = ft_min(skybox.curr.ceiling, limit[1]);
+		skybox.y2 = ft_min(skybox.curr.top, limit[1]);
 		skybox_ceiling_vline(render, skybox, i + 4);
 	}
-	if (skybox.curr.ceiling < limit[1])
+	if (skybox.curr.top < limit[1])
 	{	
-		skybox.y1 = ft_max(limit[0], skybox.curr.ceiling);
-		skybox.y2 = ft_min(skybox.curr.floor, limit[1]);
+		skybox.y1 = ft_max(limit[0], skybox.curr.top);
+		skybox.y2 = ft_min(skybox.curr.bot, limit[1]);
 		skybox_wall_vline(render, skybox, i + render->s);
 	}
-	if (skybox.curr.floor < limit[1])
+	if (skybox.curr.bot < limit[1])
 	{
-		skybox.y1 = ft_max(limit[0], skybox.curr.floor);
+		skybox.y1 = ft_max(limit[0], skybox.curr.bot);
 		skybox.y2 = limit[1];
 		skybox_floor_vline(render, skybox, i + 5);
 	}
@@ -89,18 +89,18 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	vline->z = w.zcomb * vline->divider;
 	vline->texel.x = (w.x1z2 + vline->alpha * w.xzrange) * vline->divider;
 	vline->texel.y = (w.y1z2 + vline->alpha * w.yzrange) * vline->divider;
-	vline->max.ceiling = vline->clipped_alpha
-		* w.incl_range.ceiling + w.incl_y1.ceiling;
-	vline->curr.ceiling = ft_clamp(vline->max.ceiling, render->ytop,
+	vline->max.top = vline->clipped_alpha
+		* w.incl_range.top + w.incl_y1.top;
+	vline->curr.top = ft_clamp(vline->max.top, render->ytop,
 			render->ybot);
-	vline->max.floor = vline->clipped_alpha
-		* w.incl_range.floor + w.incl_y1.floor;
-	vline->curr.floor = ft_clamp(vline->max.floor, render->ytop, render->ybot);
-	vline->start.ceiling = vline->max.ceiling - render->player->horizon;
-	vline->start.floor = vline->max.floor - render->player->horizon;
+	vline->max.bot = vline->clipped_alpha
+		* w.incl_range.bot + w.incl_y1.bot;
+	vline->curr.bot = ft_clamp(vline->max.bot, render->ytop, render->ybot);
+	vline->start.top = vline->max.top - render->player->horizon;
+	vline->start.bot = vline->max.bot - render->player->horizon;
 	vline->line_height
-		= (vline->clipped_alpha * w.incl_range.floor + w.incl_y1.floor)
-		- (vline->clipped_alpha * w.incl_range.ceiling + w.incl_y1.ceiling);
+		= (vline->clipped_alpha * w.incl_range.bot + w.incl_y1.bot)
+		- (vline->clipped_alpha * w.incl_range.top + w.incl_y1.top);
 }
 
 /*
