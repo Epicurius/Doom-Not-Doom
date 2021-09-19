@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 15:24:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 11:07:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ void	precompute_walls(t_doom *doom)
 	i = -1;
 	while (++i < doom->nb.walls)
 	{
-		wall_to_screen_xz(doom->player, &doom->walls[i]);
+		map_to_screen_vertex(doom->player,
+			&doom->walls[i].v1, &doom->walls[i].sv1);
+		map_to_screen_vertex(doom->player,
+			&doom->walls[i].v2, &doom->walls[i].sv2);
 		clip_wall(doom->cam, &doom->walls[i]);
 		if (!doom->walls[i].visible)
 			continue ;

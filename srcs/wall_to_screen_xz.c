@@ -6,28 +6,33 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 14:31:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 10:55:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 11:09:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Acquire the x,y coordinates of the two endpoints.
- *	(vertices) of this edge of the sector.
- *	Rotate correctly the map into players view.
+ *	Translate map (x,y) coordinates to screen (x,z) coordinates.
  */
-void	wall_to_screen_xz(t_player player, t_wall *wall)
+void	map_to_screen_vertex(t_player player, t_v3 *map, t_v3 *screen)
 {
-	t_v2	v1;
-	t_v2	v2;
-
-	v1.x = wall->v1.x - player.where.x;
-	v1.y = wall->v1.y - player.where.y;
-	v2.x = wall->v2.x - player.where.x;
-	v2.y = wall->v2.y - player.where.y;
-	wall->sv1.x = v1.x * player.anglesin - v1.y * player.anglecos;
-	wall->sv1.z = v1.x * player.anglecos + v1.y * player.anglesin;
-	wall->sv2.x = v2.x * player.anglesin - v2.y * player.anglecos;
-	wall->sv2.z = v2.x * player.anglecos + v2.y * player.anglesin;
+	t_v2	v;
+	
+	v.x = map->x - player.where.x;
+	v.y = map->y - player.where.y;
+	screen->x = v.x * player.anglesin - v.y * player.anglecos;
+	screen->z = v.x * player.anglecos + v.y * player.anglesin;
 }
+
+/*
+ *	Translate screen (x,z) coordinates to map (x,y) coordinates.
+ */
+void	screen_to_map_vertex(t_player player, t_v3 *screen, t_v3 *map)
+{
+	map->x = screen->x * player.anglesin + screen->z * player.anglecos;
+	map->y = screen->z * player.anglesin - screen->x * player.anglecos;
+	map->x += player.where.x;
+	map->y += player.where.y;
+}
+

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 15:57:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/19 11:06:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+// IPC x CLOCK x Data Size x Time
 
 # define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
@@ -128,8 +130,8 @@ typedef struct s_player
 
 typedef struct s_wsprite
 {
+	t_v3			where;//??
 	int				id;
-	t_v3			where;
 	int				tx;	
 	int				frame;
 	int				time;
@@ -143,13 +145,6 @@ typedef struct s_wsprite
 	int				action;
 }					t_wsprite;
 
-typedef struct s_wsprites
-{
-	t_wsprite		*num;
-	int				curr;
-	int				total;
-}					t_wsprites;
-
 typedef struct s_bullet_hole
 {
 	t_wsprite		num[MAX_BULLET_HOLES];
@@ -157,11 +152,21 @@ typedef struct s_bullet_hole
 	int				total;
 }					t_bullet_hole;
 
+typedef struct s_wsprites
+{
+	t_wsprite		*num;
+	int				curr;
+	int				total;
+}					t_wsprites;
+
 typedef struct s_wall
 {
+	signed char		wtx;
+	signed char		ptx;
+	signed char		solid;
+	signed char		visible;
 	unsigned short	id;		//only for debug message
 	int				sect;
-	char			visible;
 	int				n;
 	t_v3			v1;			//Vertex on map		
 	t_v3			v2;
@@ -175,10 +180,10 @@ typedef struct s_wall
 	t_v2				stat_scale;
 	t_v2				clip_scale;
 	
-	TEMP_FLOAT			fov_scale_1;// fov scale / wall clamp z 1
-	TEMP_FLOAT			fov_scale_2;// fov scale / wall clamp z 2
-	TEMP_FLOAT			angle_z1;//
-	TEMP_FLOAT			angle_z2;//
+	TEMP_FLOAT			fov_z1;// fov scale / wall clamp z 1
+	TEMP_FLOAT			fov_z2;// fov scale / wall clamp z 2
+	TEMP_FLOAT			pitch_z1;//
+	TEMP_FLOAT			pitch_z2;//
 	
 	TEMP_FLOAT			x1;
 	TEMP_FLOAT			x2;
@@ -203,9 +208,7 @@ typedef struct s_wall
 	TEMP_FLOAT			xzrange;
 	TEMP_FLOAT			yzrange;
 
-	signed char		wtx;
-	signed char		ptx;
-	signed char		solid;
+
 	t_wsprites		wsprite;
 	t_bullet_hole	bullet_hole;
 }					t_wall;
@@ -301,7 +304,7 @@ typedef struct s_render
 	int				light;
 	int				s;
 	t_bullet_hole	*bullet_hole;
-	t_v3			center;
+	t_v3			center;//make from start
 	t_wsprites		*wsprite;
 }					t_render;
 
@@ -451,7 +454,7 @@ typedef struct s_doom
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 	SDL_Renderer	*renderer;
-	TEMP_FLOAT			*zbuffer;
+	TEMP_FLOAT		*zbuffer;
 	int				quit;
 	char			*sectbool;
 	TEMP_FLOAT			map_scale;
@@ -464,7 +467,7 @@ typedef struct s_doom
 	t_tpool			tpool;
 	t_time			time;
 	t_map			map;
-	t_v3			*vert;
+	t_v3			*vert;//move down and free
 	t_wall			*walls;
 	t_wall			skybox[4];
 	t_sector		*sectors;
@@ -483,7 +486,7 @@ typedef struct s_doom
 	t_event			*events;
 	char			keys[517];
 }					t_doom;
-
+;
 void	flood_fill(SDL_Surface *surface, Uint32 fillcolor, int x, int y);
 
 /* File: ai_attack.c */
@@ -612,7 +615,8 @@ void				respawn_rifts(t_doom *doom);
 /* File: update_screen.c */
 void				update_screen(t_doom *doom);
 /* File: wall_to_screen_xz.c */
-void				wall_to_screen_xz(t_player player, t_wall *wall);
+void				map_to_screen_vertex(t_player player, t_v3 *map, t_v3 *screen);
+void				screen_to_map_vertex(t_player player, t_v3 *screen, t_v3 *map);
 /* File: wsprite_trigger_events.c */
 void				wsprite_trigger_events(t_doom *doom, t_event *event);
 /* File: BuyMenu/buy_menu.c */
