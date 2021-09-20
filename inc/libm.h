@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:33:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 11:01:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void				get_cartesian_coordinates(float x, float y,
 float				to_radians(float degrees);
 float				to_degrees(float radians);
 /* File: Math/math7.c */
-float				angle_to_point_v2(t_v3 p1, t_v3 p2);
+float				degree_to_point_v2(t_v3 p1, t_v3 p2);
 int					ft_sign(float x);
 float				point_side_v2(t_v3 v1, t_v3 v2, t_v3 p);
 float				point_distance_v2(float x1, float y1,
@@ -97,8 +97,8 @@ float				point_distance_v2(float x1, float y1,
 /* File: Math/math8.c */
 int					cohen_sutherland(t_point v[2], t_rect size);
 /* File: Math/math9.c */
-//void				clamp_radians(double *angle);
-//void				clamp_degrees(double *angle);
+void				clamp_radians(double *angle);
+void				clamp_degrees(double *angle);
 /* File: Math/math10.c */
 void				print_v2(char *str, t_v2 v);
 void				print_v3(char *str, t_v3 v);

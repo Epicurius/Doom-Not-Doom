@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:21:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:36:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 	event->entity = ft_atoi(arr[4]);
 	event->pos = new_v3(ft_atof(arr[5]), ft_atof(arr[6]), ft_atof(arr[7]));
 	event->pos = mult_v3(event->pos, doom->map_scale);
-	event->yaw = ft_atoi(arr[8]);
+	event->yaw = ft_atoi(arr[8]) * CONVERT_TO_RADIANS;
 }
 
 /*

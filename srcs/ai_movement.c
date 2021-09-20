@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 11:01:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 {
 	TEMP_DOUBLE	a;
 	TEMP_DOUBLE	speed;
+	TEMP_DOUBLE yaw = entity->yaw * CONVERT_TO_DEGREES;
 
 	if ((rand() % 1000) > chance)
 		return (0);
-	a = (entity->yaw + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
+	a = (yaw + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
 	speed = doom->time.delta * g_entity_data[entity->type].speed;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;
@@ -59,7 +60,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 
 	if ((rand() % 1000) > chance)
 		return (0);
-	a = angle_to_point_v2(entity->where, doom->player.where);
+	a = degree_to_point_v2(entity->where, doom->player.where);
 	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
 	speed = g_entity_data[entity->type].speed * doom->time.delta;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
@@ -83,6 +84,6 @@ void	ai_collision(t_doom *doom, t_entity *entity)
 	if (entity->sector < 0)
 		entity->state = DEATH;
 	else if (entity->velocity.x != 0 || entity->velocity.y != 0)
-		entity->yaw = angle_to_point_v2(entity->where,
-				add_v3(entity->where, entity->velocity));
+		entity->yaw = degree_to_point_v2(entity->where,
+				add_v3(entity->where, entity->velocity)) * CONVERT_TO_RADIANS;
 }

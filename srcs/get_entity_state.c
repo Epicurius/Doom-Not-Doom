@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:29:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:43:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	entity_see(t_doom *doom, t_entity *entity)
 	t_v3	far_left;
 	t_v3	far_right;
 
-	far_left.z = entity->yaw + 67.5;
-	far_right.z = entity->yaw - 67.5;
+	far_left.z = entity->yaw + 1.178097;
+	far_right.z = entity->yaw - 1.178097;
 	//clamp_degrees(&far_left.z);
 	//clamp_degrees(&far_right.z);
-	far_left.z = (far_left.z * CONVERT_TO_RADIANS);
-	far_right.z = (far_right.z * CONVERT_TO_RADIANS);
+	//far_left.z = (far_left.z * CONVERT_TO_RADIANS);
+	//far_right.z = (far_right.z * CONVERT_TO_RADIANS);
 	far_left.x = 1000 * cos(far_left.z) + entity->where.x;
 	far_left.y = 1000 * sin(far_left.z) + entity->where.y;
 	far_right.x = 1000 * cos(far_right.z) + entity->where.x;

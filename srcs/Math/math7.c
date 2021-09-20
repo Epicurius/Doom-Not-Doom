@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:29:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 11:01:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Set p1 angle to p2 (DEGREES)
  */
-float	angle_to_point_v2(t_v3 p1, t_v3 p2)
+float	degree_to_point_v2(t_v3 p1, t_v3 p2)
 {
 	float	angle;
 

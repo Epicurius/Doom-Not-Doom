@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 15:12:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:36:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
 	entity->where.y = ft_atof(arr[3]) * doom->map_scale;
 	entity->where.z = ft_atof(arr[4]) * doom->map_scale;
-	entity->yaw = ft_atoi(arr[5]);
+	entity->yaw = ft_atoi(arr[5]) * CONVERT_TO_RADIANS;
 	doom->nb.entities += 1;
 	ft_lstadd_new(&doom->entity, entity, sizeof(t_entity));
 }
