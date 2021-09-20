@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 11:29:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ typedef struct s_player
 	t_v3			velocity;
 	int				eyelvl;
 	int				sector;
-	TEMP_DOUBLE			yaw;
-	TEMP_DOUBLE			pitch;
-	TEMP_DOUBLE			anglesin;
-	TEMP_DOUBLE			anglecos;
+	double			yaw;
+	double			pitch;
+	double			anglesin;
+	double			anglecos;
 	TEMP_DOUBLE			horizon;
 	int				health;
 	int				armour;
@@ -263,7 +263,7 @@ typedef struct s_entity
 	int				angle;
 	int				hp;
 	int				type;
-	TEMP_DOUBLE			yaw;
+	double			yaw;
 	int				time;
 	t_entity_render	render;
 }					t_entity;
@@ -485,7 +485,7 @@ typedef struct s_doom
 }					t_doom;
 
 void	SDL_timer_start();
-TEMP_DOUBLE	SDL_timer_end();
+double	SDL_timer_end();
 void	flood_fill(SDL_Surface *surface, Uint32 fillcolor, int x, int y);
 
 /* File: ai_attack.c */
@@ -556,7 +556,7 @@ void				map(t_doom *doom);
 /* File: movement.c */
 void				movement(t_doom *doom);
 /* File: orientation.c */
-int					orientation(t_v3 p1, t_v3 p2, TEMP_DOUBLE yaw, int nb_angles);
+int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
 /* File: precompute_buy_menu.c */
 void				precompute_buy_menu(t_doom *doom);
 /* File: precompute_entities.c */

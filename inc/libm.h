@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 11:01:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 11:27:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBM_H
 # define LIBM_H
 
-# define TEMP_DOUBLE	double
+# define TEMP_DOUBLE	float
 
 # include <math.h>
 # include "libpf.h"
