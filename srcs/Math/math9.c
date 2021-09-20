@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:41:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:28:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Clamp radians between degrees 0 -> 360.
  */
-void	clamp_radians(TEMP_DOUBLE *angle)
+void	clamp_radians(double *angle)
 {
 	*angle *= CONVERT_TO_DEGREES;
 	while (*angle > 360)
@@ -28,7 +28,7 @@ void	clamp_radians(TEMP_DOUBLE *angle)
 /*
  *	Clamp degrees between 0 -> 360.
  */
-void	clamp_degrees(TEMP_DOUBLE *angle)
+void	clamp_degrees(double *angle)
 {
 	while (*angle > 360)
 		*angle -= 360;

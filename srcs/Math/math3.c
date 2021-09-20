@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:36:27 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:27:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2)
 /*
  *	Distance between 2 3d points
  */
-TEMP_DOUBLE	point_distance_v3(t_v3 p1, t_v3 p2)
+float	point_distance_v3(t_v3 p1, t_v3 p2)
 {
 	t_v3	square;
 
@@ -46,8 +46,8 @@ TEMP_DOUBLE	point_distance_v3(t_v3 p1, t_v3 p2)
  */
 t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 {
-	TEMP_DOUBLE	l;
-	TEMP_DOUBLE	t;
+	float	l;
+	float	t;
 	t_v3	point;
 
 	l = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
@@ -67,11 +67,11 @@ t_v3	closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b)
 /*
  *	Is point on segment, optional buffer;
  */
-int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, TEMP_DOUBLE buffer)
+int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, float buffer)
 {
-	TEMP_DOUBLE	pv1;
-	TEMP_DOUBLE	pv2;
-	TEMP_DOUBLE	len;
+	float	pv1;
+	float	pv2;
+	float	len;
 
 	pv1 = point_distance_v2(p.x, p.y, v1.x, v1.y);
 	pv2 = point_distance_v2(p.x, p.y, v2.x, v2.y);
@@ -87,9 +87,9 @@ int	point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2, TEMP_DOUBLE buffer)
 t_v3	get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2)
 {
 	t_v3	point;
-	TEMP_DOUBLE	div;
-	TEMP_DOUBLE	vxs_a;
-	TEMP_DOUBLE	vxs_b;
+	float	div;
+	float	vxs_a;
+	float	vxs_b;
 
 	div = cross_product_v2(a1.x - a2.x, a1.y - a2.y, b1.x - b2.x, b1.y - b2.y);
 	vxs_a = cross_product_v2(a1.x, a1.y, a2.x, a2.y);

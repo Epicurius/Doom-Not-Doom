@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/14 19:29:51 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/20 10:26:04 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ all:
 	@echo "OS: $(SHELL_NAME)"
 ifeq ($(SHELL_NAME), Darwin)
 	@echo "Making mac version."
-	@make -f InstallationTools/Makefile-mac
+	@make -f InstallationTools/Makefile-mac -j6
 else
 	@echo "Making windows version."
 	@mingw32-make -f InstallationTools/Makefile-win

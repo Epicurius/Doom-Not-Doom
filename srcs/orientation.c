@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:02 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:32:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	orientation(t_v3 p1, t_v3 p2, TEMP_DOUBLE yaw, int nb_angles)
 	angle = (int)((atan2(p1.y - p2.y, p1.x - p2.x)) * CONVERT_TO_DEGREES) % 360;
 	a = 360 / nb_angles;
 	yaw -= a / 2;
-	clamp_degrees(&yaw);
-	clamp_degrees(&angle);
+	//clamp_degrees(&yaw);
+	//clamp_degrees(&angle);
 	i = 0;
 	while (!(angle >= yaw + i * a && angle < yaw + (i + 1) * a))
 	{
