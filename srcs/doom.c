@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 17:41:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 12:10:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static void	launcher(void)
  */
 static inline void	game_loop(t_doom *doom)
 {
+	//	Host_FilterTime (10000 millis / 80 fps = 12.5)
+	if (SDL_GetTicks() - doom->time.curr < 12) 
+		return ;
 	game_mode(doom);
 	map_events(doom);
 	precompute_walls(doom);
@@ -61,8 +64,8 @@ static inline void	game_loop(t_doom *doom)
 	draw_crosshair(doom);
 	draw_hud(doom);
 	draw_weapon(doom);
-	fps_func(doom);
 	map(doom);
+	update_fps(doom);
 	update_screen(doom);
 	game_pause(doom);
 	game_quit(doom);
@@ -85,7 +88,7 @@ static void	game(char *map, t_settings settings)
 		return ;
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
-		game_loop(&doom);
+		game_loop(&doom);//, SDL_Delay(ft_clamp(0, 50, doom.map.zoom * 2));
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);

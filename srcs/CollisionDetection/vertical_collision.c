@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:52:17 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 12:45:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	vertical_collision(t_doom *doom, t_motion *motion, TEMP_DOUBLE *temp)
 		&& !portal_cliff(doom, motion,
 			motion->where.z + motion->velocity.z * doom->time.delta, -1))
 		*temp -= doom->sectors[motion->sector].gravity * doom->time.delta;
+	else
+		*temp = motion->velocity.z;
 	motion->velocity.z = *temp * doom->time.delta;
 	motion->where.z += motion->velocity.z;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 11:29:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:04:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -534,7 +534,7 @@ int					find_sector(t_sector *sectors, int nb, t_v3 pos);
 int					in_sector_area(t_sector *sector, t_v3 pos);
 int					find_sector_no_z(t_sector *sectors, int nb, t_v3 pos);
 /* File: fps.c */
-void				fps_func(t_doom *doom);
+void				update_fps(t_doom *doom);
 void				init_fps(t_doom *doom);
 /* File: get_entity_state.c */
 int					ray_collision(t_doom *doom, t_v3 enemy, t_v3 player,

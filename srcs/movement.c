@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:03:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_base_speed(t_doom *doom, t_v2 *speed)
 	else
 		speed->y = doom->player.walk_speed;
 	speed->y *= doom->time.delta;//useless if normalize
-	speed->x = speed->y * 0.8;
+	speed->x = speed->y;//1.75;
 }
 
 /*
@@ -76,70 +76,73 @@ static void	get_movement(t_doom *doom, t_player *player, t_v2 *speed)
 		player->wishdir.x += player->anglesin * -speed->x;
 		player->wishdir.y += player->anglecos *  speed->x;
 	}
+	
 	foot_steps(doom, player);
 }
 
 /*
  *	Calculates the velocity depending on player movement and jump.
  */
-//static void	get_velocity_org(t_doom *doom)
-//{
-//	t_player	*player;
-//	t_sector	*sector;
-//
-//	player = &doom->player;
-//	sector = &doom->sectors[player->sector];
-//	if (doom->keys[SDL_SCANCODE_SPACE]
-//		&& player->where.z <= floor_at(sector, player->where))
-//	{
-//		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-//		player->velocity.z = doom->player.jump_height;
-//	}
-//	player->velocity.x = doom->player.wishdir.x;
-//	player->velocity.y = doom->player.wishdir.y;
-//	if (player->flight)
-//		player->velocity.z = doom->player.wishdir.z;
-//}
+static void	get_velocity_org(t_doom *doom, t_player *player)
+{
+	t_sector	*sector;
 
+	sector = &doom->sectors[player->sector];
+	if (doom->keys[SDL_SCANCODE_SPACE]
+		&& player->where.z <= floor_at(sector, player->where))
+	{
+		Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+		player->velocity.z = doom->player.jump_height;
+	}
+	player->velocity.x = doom->player.wishdir.x;
+	player->velocity.y = doom->player.wishdir.y;
+	if (player->flight)
+		player->velocity.z = doom->player.wishdir.z;
+}
 
-# define MAX_SPEED			3.2
-# define MAX_ACCEL			(10.0 * MAX_SPEED)
-# define MAX_ACCEL_AIR		0.3
-# define GROUND_FRICTION	4.0
-# define STOP_SPEED			1.0
-/*
- *	Calculates the velocity depending on player movement and jump.
- */
+# define MAX_SPEED			2.0
+# define MAX_ACCEL_AIR		0.7
+# define MAX_ACCEL			7.0
+# define MIN_DEACCEL		0.6 //<- this is the root of the stuttering.
+# define GROUND_FRICTION	2.5
+
 static void	get_velocity(t_doom *doom, t_player *player)
 {
-	TEMP_DOUBLE speed;
-	TEMP_DOUBLE wishspeed;
-	TEMP_DOUBLE currentspeed;
-	TEMP_DOUBLE accelspeed;
+	float speed;
+	float wishspeed;
+	float currentspeed;
+	float accelspeed;
 
-
-	wishspeed = normalize_v3(&player->wishdir);
-	//if (wishspeed > MAX_SPEED)
-	//{
-	//	player->wishdir = mult_v3(player->wishdir, MAX_SPEED / wishspeed);
-	//	wishspeed = MAX_SPEED;
-	//}
+	wishspeed = sqrt(player->wishdir.x * player->wishdir.x + player->wishdir.y * player->wishdir.y);
+	if (wishspeed)
+	{
+		player->wishdir.x /= wishspeed;
+		player->wishdir.y /= wishspeed;
+	}
 	if (player->where.z <= floor_at(&doom->sectors[player->sector], player->where))
 	{
-		speed = sqrt(player->velocity.x * player->velocity.x + player->velocity.y * player->velocity.y);
-		if (speed)
+		if (wishspeed > MAX_SPEED)
 		{
-			speed = ft_fmax(0, speed - doom->time.delta * ft_fmax(speed, STOP_SPEED) * GROUND_FRICTION) / speed;
+			player->wishdir = mult_v3(player->wishdir, MAX_SPEED / wishspeed);
+			wishspeed = MAX_SPEED;
+		}
+		speed = sqrt(player->velocity.x * player->velocity.x + player->velocity.y * player->velocity.y);
+		if (doom->keys[SDL_SCANCODE_SPACE])
+		{
+			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+			player->velocity.z = player->jump_height;
+		}
+		else if (speed)
+		{
+			speed = ft_fmax(0, speed - ft_fmax(speed, MIN_DEACCEL) * GROUND_FRICTION * doom->time.delta) / speed;
 			player->velocity.x *= speed;
 			player->velocity.y *= speed;
 		}
-		if (doom->keys[SDL_SCANCODE_SPACE] && Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0))
-			player->velocity.z = player->jump_height;
 	}
 	else if (wishspeed > MAX_ACCEL_AIR)
-			wishspeed = MAX_ACCEL_AIR;	
+		wishspeed = MAX_ACCEL_AIR;
 	currentspeed = dot_product_v3(player->velocity, player->wishdir);
-	accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * doom->time.delta * wishspeed);
+	accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * wishspeed * doom->time.delta);
 	player->velocity.x += player->wishdir.x * accelspeed;
 	player->velocity.y += player->wishdir.y * accelspeed;
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:58:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/29 10:57:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 12:24:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  *	Updates the delta and current time.
  *	And updates the FPS (Window Title).
  */
-void	fps_func(t_doom *doom)
+void	update_fps(t_doom *doom)
 {
 	t_time		*time;
 	int			prev;
