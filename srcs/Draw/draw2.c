@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/22 10:42:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int	loop_screen_sector(void	*arg)
 	while (render->x < render->xend)
 	{
 		render->ytop = 0;
-		render->ybot = render->surface->h - 1;
+		render->ybot = render->surface->h;
 		tmp = (render->x / (TEMP_DOUBLE)(render->surface->w - 1))
 			* render->cam->range + render->cam->near_left;
 		pos.x = tmp * (-p->anglesin) - (-NEAR_Z) * p->anglecos + p->where.x;

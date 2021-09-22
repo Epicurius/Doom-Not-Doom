@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:16 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:27:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/21 18:16:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 float	vector_magnitude_v2(t_v3 v)
 {
-	return (sqrt((v.x * v.y) + (v.x * v.y)));
+	return (sqrt(v.x * v.x + v.y * v.y));
 }
 
 /*
