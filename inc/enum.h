@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:57:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/22 14:17:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ enum e_weapons
 	WEAPON_SHOTGUN,
 	WEAPON_GUN,
 	WEAPON_KAR,
-	WEAPON_PUMP,
+	WEAPON_LAUNCHER,
 	WEAPON_MINIGUN,
 	WEAPON_AMOUNT
 };

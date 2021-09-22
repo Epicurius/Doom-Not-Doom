@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:44:42 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/27 13:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/22 14:15:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_glock(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = FALSE;
+	weapon->own = TRUE;
 	weapon->price = 200;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;

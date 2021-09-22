@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/21 16:03:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:02:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static void	get_velocity_org(t_doom *doom, t_player *player)
 
 # define MAX_SPEED			2.0
 # define MAX_ACCEL_AIR		0.7
-# define MAX_ACCEL			7.0
+# define ACCEL				7.0
 # define MIN_DEACCEL		0.6 //<- this is the root of the stuttering.
 # define GROUND_FRICTION	2.5
 
@@ -127,25 +127,86 @@ static void	get_velocity(t_doom *doom, t_player *player)
 			wishspeed = MAX_SPEED;
 		}
 		speed = sqrt(player->velocity.x * player->velocity.x + player->velocity.y * player->velocity.y);
-		if (doom->keys[SDL_SCANCODE_SPACE])
-		{
-			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
-			player->velocity.z = player->jump_height;
-		}
-		else if (speed)
+		if (speed)
 		{
 			speed = ft_fmax(0, speed - ft_fmax(speed, MIN_DEACCEL) * GROUND_FRICTION * doom->time.delta) / speed;
 			player->velocity.x *= speed;
 			player->velocity.y *= speed;
 		}
+		if (doom->keys[SDL_SCANCODE_SPACE])
+		{
+			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+			player->velocity.z = player->jump_height;
+		}
+
 	}
 	else if (wishspeed > MAX_ACCEL_AIR)
 		wishspeed = MAX_ACCEL_AIR;
+		
 	currentspeed = dot_product_v3(player->velocity, player->wishdir);
-	accelspeed = ft_fclamp(wishspeed - currentspeed, 0, MAX_ACCEL * wishspeed * doom->time.delta);
+	accelspeed = ft_fclamp(wishspeed - currentspeed, 0, ACCEL * doom->time.delta * wishspeed);
 	player->velocity.x += player->wishdir.x * accelspeed;
 	player->velocity.y += player->wishdir.y * accelspeed;
 }
+
+
+
+static void	get_velocity_new(t_doom *doom, t_player *player)
+{
+	float speed;
+	float wishspeed;
+	float currentspeed;
+	float accelspeed;
+
+	wishspeed = sqrt(player->wishdir.x * player->wishdir.x + player->wishdir.y * player->wishdir.y);
+	if (player->where.z <= floor_at(&doom->sectors[player->sector], player->where))
+	{
+		speed = sqrt(player->velocity.x * player->velocity.x + player->velocity.y * player->velocity.y);
+		if (speed)
+		{
+			speed = ft_fmax(0, speed - ft_fmax(speed, MIN_DEACCEL) * GROUND_FRICTION * doom->time.delta) / speed;
+			player->velocity.x *= speed;
+			player->velocity.y *= speed;
+		}
+		if (doom->keys[SDL_SCANCODE_SPACE])
+		{
+			Mix_PlayChannel(CHANNEL_JUMP, doom->sound[WAV_JUMP], 0);
+			player->velocity.z = player->jump_height;
+		}
+	}
+	else if (wishspeed > MAX_ACCEL_AIR)
+		wishspeed = MAX_ACCEL_AIR;
+	
+	if (player->wishdir.x == 0 && player->wishdir.y == 0)
+		return ;
+
+	t_v3 a;
+	a.x = player->wishdir.x / wishspeed;
+	a.y = player->wishdir.y / wishspeed;
+	currentspeed = dot_product_v2(player->velocity, a);
+
+	if (wishspeed > currentspeed)
+	{
+		if (currentspeed > wishspeed - vector_magnitude_v3(a))
+		{
+			player->velocity.x += (wishspeed - currentspeed) * a.x;
+			player->velocity.y += (wishspeed - currentspeed) * a.y;
+		}
+		else
+		{
+			player->velocity.x += player->wishdir.x;
+			player->velocity.y += player->wishdir.y;
+		}
+	}
+}
+
+//	if (DotProduct(a.Normalized(), v) < L)
+//	{
+//		if (DotProduct(a.Normalized(), v) > L - a * dt)
+//		 	v = (L - DotProduct(a.Normalized(), v)) * a.Normalized();
+//		else
+//			v = a * dt;
+//	}
 
 /*
  *	Handels all the player movement.
@@ -165,7 +226,14 @@ void	movement(t_doom *doom)
 	get_base_speed(doom, &speed);
 	get_movement(doom, &doom->player, &speed);
 	if (!doom->player.flight)
-		get_velocity(doom, &doom->player);
+	{
+		if (doom->player.equipped == 0)
+			get_velocity_org(doom, &doom->player);
+		else if (doom->player.equipped == 1)
+			get_velocity(doom, &doom->player);
+		else
+			get_velocity_new(doom, &doom->player);
+	}
 	else
 		doom->player.velocity = doom->player.wishdir;
 	if (entity_collision(doom, &doom->player.where, &doom->player.velocity))
