@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 11:01:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:18:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ float	degree_to_point_v2(t_v3 p1, t_v3 p2)
 	float	angle;
 
 	angle = atan2(p2.y - p1.y, p2.x - p1.x) * CONVERT_TO_DEGREES;
-	//clamp_degrees(&angle);
 	return (angle);
 }
 

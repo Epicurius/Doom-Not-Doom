@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	vline_wall_bh(t_render *render, t_vline *vline,
 {
 	t_v3	text;
 	int		coord;
-	TEMP_DOUBLE	alpha;
-	TEMP_DOUBLE	pos;
+	float	alpha;
+	float	pos;
 
 	text.z = vline->z;
 	text.x = x;
@@ -44,7 +44,7 @@ void	draw_wall_bh(t_render *render, t_vline *vline)
 {
 	int			i;
 	int			x;
-	TEMP_DOUBLE		pos;
+	float		pos;
 	t_wsprite	bullet_hole;
 
 	i = -1;

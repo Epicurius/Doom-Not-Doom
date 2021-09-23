@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:22:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	project_skybox(t_doom *doom, t_wall *wall)
 	wall->zrange = wall->sv1.z - wall->sv2.z;
 	wall->zcomb = wall->sv2.z * wall->sv1.z;
 	wall->x1z2 = wall->v1.x * wall->sv2.z;
-	//wall->x2z1 = wall->v2.x * wall->sv1.z;
 	wall->xzrange = wall->v2.x * wall->sv1.z - wall->x1z2;
 	wall->y1z2 = wall->v1.y * wall->sv2.z;
-	//wall->y2z1 = wall->v2.y * wall->sv1.z;
 	wall->yzrange = wall->v2.y * wall->sv1.z - wall->y1z2;
 }
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:50:05 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	blit_wsprite(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
 	else if (clr == 0xFF800080)
 		return ;
 	((Uint32 *)render->surface->pixels)[coord] = clr;
-	((TEMP_DOUBLE *)render->surface->userdata)[coord] = text.z;
+	((float *)render->surface->userdata)[coord] = text.z;
 }
 
 /*
@@ -42,8 +42,8 @@ static void	vline_wsprite(t_render *render, t_vline *vline,
 	t_wsprite *wsprite, int x)
 {
 	t_v3	text;
-	TEMP_DOUBLE	alpha;
-	TEMP_DOUBLE	pos;
+	float	alpha;
+	float	pos;
 	int		coord;
 
 	text.x = x;
@@ -72,7 +72,7 @@ void	draw_wsprites(t_render *render, t_vline *vline)
 {
 	int			i;
 	int			x;
-	TEMP_DOUBLE		pos;
+	float		pos;
 	t_wsprite	*wsprite;
 
 	i = -1;

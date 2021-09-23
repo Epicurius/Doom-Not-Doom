@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:53:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:43:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:32:42 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ static int	entity_see(t_doom *doom, t_entity *entity)
 
 	far_left.z = entity->yaw + 1.178097;
 	far_right.z = entity->yaw - 1.178097;
-	//clamp_degrees(&far_left.z);
-	//clamp_degrees(&far_right.z);
-	//far_left.z = (far_left.z * CONVERT_TO_RADIANS);
-	//far_right.z = (far_right.z * CONVERT_TO_RADIANS);
 	far_left.x = 1000 * cos(far_left.z) + entity->where.x;
 	far_left.y = 1000 * sin(far_left.z) + entity->where.y;
 	far_right.x = 1000 * cos(far_right.z) + entity->where.x;
@@ -70,7 +66,7 @@ int	ray_collision(t_doom *doom, t_v3 enemy, t_v3 player, int sector)
 /*
  *	Checks the entity sees the player.
  */
-static int	entity_line_of_sight(t_doom *doom, t_entity *entity, TEMP_DOUBLE dist)
+static int	entity_line_of_sight(t_doom *doom, t_entity *entity, float dist)
 {
 	if (dist > g_entity_data[entity->type].view_distance)
 		return (0);
@@ -94,7 +90,7 @@ static int	entity_line_of_sight(t_doom *doom, t_entity *entity, TEMP_DOUBLE dist
  */
 void	get_entity_state2(t_doom *doom, t_entity *entity)
 {
-	TEMP_DOUBLE	dist;
+	float	dist;
 
 	dist = point_distance_v2(entity->where.x, entity->where.y,
 			doom->player.where.x, doom->player.where.y);

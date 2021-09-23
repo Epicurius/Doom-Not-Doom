@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 13:49:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:22:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 static int	projectile_collision(t_doom *doom, t_projectile *orb)
 {
 	t_motion	motion;
-	
+
 	motion.where = orb->where;
 	motion.velocity = mult_v3(orb->velocity, doom->time.delta);
 	motion.dest = add_v3(motion.where, motion.velocity);

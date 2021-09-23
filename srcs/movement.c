@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 15:02:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:35:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ static void	get_velocity_new(t_doom *doom, t_player *player)
 	float speed;
 	float wishspeed;
 	float currentspeed;
-	float accelspeed;
 
 	wishspeed = sqrt(player->wishdir.x * player->wishdir.x + player->wishdir.y * player->wishdir.y);
 	if (player->where.z <= floor_at(&doom->sectors[player->sector], player->where))

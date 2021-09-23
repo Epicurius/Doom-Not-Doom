@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:15 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:33:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:25:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 void	init_camera(t_doom *doom)
 {
-	TEMP_DOUBLE		vfov;
-	TEMP_DOUBLE		hfov;
+	float		vfov;
+	float		hfov;
 	t_camera	*cam;
 
 	cam = &doom->cam;
@@ -28,7 +28,7 @@ void	init_camera(t_doom *doom)
 	cam->far_left = -hfov * FAR_Z;
 	cam->far_right = hfov * FAR_Z;
 	cam->range = cam->near_right - cam->near_left;
-	vfov = atan(hfov / (doom->surface->w / (TEMP_DOUBLE)doom->surface->h))
+	vfov = atan(hfov / (doom->surface->w / (float)doom->surface->h))
 		* (180.0 / M_PI);
 	cam->scale = (doom->surface->h / 2) / tan(CONVERT_TO_RADIANS * vfov);
 	update_camera(doom);
@@ -44,7 +44,6 @@ void	update_camera(t_doom *doom)
 
 	SDL_GetRelativeMouseState(&x, &y);
 	doom->player.yaw += x * doom->settings.mouse.x;
-	///clamp_radians(&doom->player.yaw);
 	doom->player.pitch += y * doom->settings.mouse.y;
 	doom->player.pitch = ft_fclamp(doom->player.pitch, -1, 1.5);
 	doom->player.anglesin = sin(doom->player.yaw);

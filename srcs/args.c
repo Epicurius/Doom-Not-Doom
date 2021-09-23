@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:29:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  *	Check if the argument is window size(int,int)
- *	or mouse sensitivity(TEMP_DOUBLE,TEMP_DOUBLE).
+ *	or mouse sensitivity(float,float).
  */
 static void	read_args2(t_settings *init, char **av, int i)
 {
@@ -36,7 +36,7 @@ static void	read_args2(t_settings *init, char **av, int i)
 
 /*
  *	Check is the argument is debug(bool), launcher(bool),
- *	render resolution(TEMP_DOUBLE), game difficulty(int) or FOV(int).	
+ *	render resolution(float), game difficulty(int) or FOV(int).	
  */
 static int	read_args1(t_settings *init, char **av, int i)
 {

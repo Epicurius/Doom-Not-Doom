@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/21 14:51:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:23:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,16 @@ static void	map_area(t_doom *doom)
 
 void	bhop_helper(t_doom *doom)
 {
-	t_v3 v;
-	
-	//draw_circle(doom->surface, 0xFFFF0000, (t_point){doom->c.x, doom->c.y}, 1.5 * (TEMP_DOUBLE)(doom->map.zoom * 100));
+	t_v3	v;
+
 	v = doom->player.velocity;
 	v = mult_v3(v, doom->map.zoom * 100);
-	draw_line(doom->surface, 0xFF00FF00, (t_point){doom->c.x, doom->c.y + 1}, (t_point){doom->c.x + v.x, doom->c.y + v.y});
+	draw_line(doom->surface, 0xFF00FF00, (t_point){doom->c.x, doom->c.y + 1},
+		(t_point){doom->c.x + v.x, doom->c.y + v.y});
 	v = doom->player.wishdir;
 	v = mult_v3(v, doom->map.zoom * 100);
-	draw_line(doom->surface, 0xFF0000FF, (t_point){doom->c.x + 1, doom->c.y}, (t_point){doom->c.x + v.x, doom->c.y + v.y});
+	draw_line(doom->surface, 0xFF0000FF, (t_point){doom->c.x + 1, doom->c.y},
+		(t_point){doom->c.x + v.x, doom->c.y + v.y});
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:37:59 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 11:10:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:18:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ float	dot_product_v2(t_v3 v1, t_v3 v2)
 }
 
 /*
- *	Dot product v3 (How much are they pointing in the same direction, if it be a number)
+ *	Dot product vector 3
+ *	How much are they pointing in the same direction, if it be a number)
  *	https://www.youtube.com/watch?v=BcxfxvYCL1g
  */
 float	dot_product_v3(t_v3 v1, t_v3 v2)

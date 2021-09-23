@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:08:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	curr_floor_and_ceiling(t_doom *doom, t_wall *w)
 {
 	t_fc		v1;
 	t_fc		v2;
-	TEMP_DOUBLE		eye_z;
+	float		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.bot = doom->sectors[w->sect].floor.height - eye_z;
@@ -41,7 +41,7 @@ static void	curr_floor_and_ceil_incl(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
 	t_fc		v2;
-	TEMP_DOUBLE		eye_z;
+	float		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.bot = floor_at(&doom->sectors[w->sect], p1) - eye_z;
@@ -64,7 +64,7 @@ static void	neighbour_floor_and_ceil(t_doom *doom, t_wall *w, t_v3 p1, t_v3 p2)
 {
 	t_fc		v1;
 	t_fc		v2;
-	TEMP_DOUBLE		eye_z;
+	float		eye_z;
 
 	eye_z = doom->player.where.z + doom->player.eyelvl;
 	v1.bot = floor_at(&doom->sectors[w->n], p1) - eye_z;

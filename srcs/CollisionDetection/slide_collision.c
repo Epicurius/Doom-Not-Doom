@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 10:59:44 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 17:30:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  */
 static t_v3	parallel_movement(t_v3 m, t_v3 v1, t_v3 v2)
 {
-	TEMP_DOUBLE	move_norm;
-	TEMP_DOUBLE	wall_norm;
-	TEMP_DOUBLE	scl;
+	float	move_norm;
+	float	wall_norm;
+	float	scl;
 	t_v2	w;
 
 	w.x = v2.x - v1.x;

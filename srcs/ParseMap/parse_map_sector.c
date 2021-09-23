@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 16:01:59 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:17:43 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 	ceiling->scale = atof(arr[6]) * doom->map_scale;
 	slope = stringsplit(arr[7], ' ', NULL);
 	doom->sectors[sect].floor_incl_start = ft_atoi(slope[0]);
-	doom->sectors[sect].floor_incl_angle = ft_atoi(slope[1]) * CONVERT_TO_RADIANS;
+	doom->sectors[sect].floor_incl_angle = ft_atoi(slope[1])
+		* CONVERT_TO_RADIANS;
 	doom->sectors[sect].ceiling_incl_start = ft_atoi(slope[2]);
-	doom->sectors[sect].ceiling_incl_angle = ft_atoi(slope[3]) * CONVERT_TO_RADIANS;
+	doom->sectors[sect].ceiling_incl_angle = ft_atoi(slope[3])
+		* CONVERT_TO_RADIANS;
 	free(slope);
 }
 
@@ -109,7 +111,7 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	neighbour = stringsplit(arr[2], ' ', &nb);
 	if (nb != sect->npoints)
 		error_msg("Sect %d walls != Neighbours.\n", sect->id);
-	sect->gravity = ft_atoi(arr[3]) * 1.5;//fix
+	sect->gravity = ft_atoi(arr[3]) * 1.5;
 	sect->light = ft_atoi(arr[4]);
 	sect->trigger = FALSE;
 	complete_wall(sect, doom->walls, walls, neighbour);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 11:01:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:26:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 int	ai_track_player(t_doom *doom, t_entity *entity)
 {
-	TEMP_DOUBLE	speed;
+	float	speed;
 
 	speed = g_entity_data[entity->type].speed
 		/ point_distance_v3(doom->player.where, entity->where);
@@ -36,13 +36,13 @@ int	ai_track_player(t_doom *doom, t_entity *entity)
  */
 int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 {
-	TEMP_DOUBLE	a;
-	TEMP_DOUBLE	speed;
-	TEMP_DOUBLE yaw = entity->yaw * CONVERT_TO_DEGREES;
+	float	a;
+	float	speed;
 
 	if ((rand() % 1000) > chance)
 		return (0);
-	a = (yaw + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
+	a = (entity->yaw * CONVERT_TO_DEGREES
+			+ ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
 	speed = doom->time.delta * g_entity_data[entity->type].speed;
 	speed /= space_diagonal(new_v3(100 * cos(a), 100 * sin(a), 0));
 	entity->velocity.x = (100 * cos(a)) * speed;
@@ -55,8 +55,8 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
  */
 int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 {
-	TEMP_DOUBLE	a;
-	TEMP_DOUBLE	speed;
+	float	a;
+	float	speed;
 
 	if ((rand() % 1000) > chance)
 		return (0);

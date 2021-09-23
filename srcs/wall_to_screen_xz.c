@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 14:31:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 11:09:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:20:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	map_to_screen_vertex(t_player player, t_v3 *map, t_v3 *screen)
 {
 	t_v2	v;
-	
+
 	v.x = map->x - player.where.x;
 	v.y = map->y - player.where.y;
 	screen->x = v.x * player.anglesin - v.y * player.anglecos;
@@ -35,4 +35,3 @@ void	screen_to_map_vertex(t_player player, t_v3 *screen, t_v3 *map)
 	map->x += player.where.x;
 	map->y += player.where.y;
 }
-

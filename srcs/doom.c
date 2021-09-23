@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/21 12:10:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:25:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,14 @@ static void	launcher(void)
 	execv(arr[0], arr);
 }
 
-//void	ff_test_temp(t_doom *doom)
-//{
-//	if (doom->keys[SDL_SCANCODE_U])
-//	{
-//		for (int i = 0; i < 100; i++)
-//			draw_line(doom->surface, 0xffff0000,
-//				(t_point){0, rand() % 1079}, (t_point){1920, rand() % 1079});
-//		int x, y;
-//		SDL_GetMouseState(&x, &y);
-//		ft_timer_start();
-//		flood_fill(doom->surface, 0xff00ff00, x, y);
-//		ft_printf("time: %f\n", ft_timer_end());
-//		doom->keys[SDL_SCANCODE_U] = 0;
-//	}	
-//}
-
 /*
  *	Main game loop that handles all of the games elements.
+ *	HostFilterTime (10000 millis / 80 fps = 12.5)
+ *	if (SDL_GetTicks() - doom->time.curr < 12) 
+ *		return ;
  */
 static inline void	game_loop(t_doom *doom)
 {
-	//	Host_FilterTime (10000 millis / 80 fps = 12.5)
-	if (SDL_GetTicks() - doom->time.curr < 12) 
-		return ;
 	game_mode(doom);
 	map_events(doom);
 	precompute_walls(doom);
@@ -97,7 +81,7 @@ static void	game(char *map, t_settings settings)
 int	main(int ac, char **av)
 {
 	t_settings	settings;
-	
+
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);
