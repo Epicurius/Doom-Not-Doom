@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 12:57:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/18 10:23:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/09/24 15:52:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,17 @@ static void	up_fill(SDL_Surface *surface, t_flood_fill *env, Uint32 newcolor)
 	while (++x < env->pos.x2)
 	{
 		y = env->pos.y;
-		while (y > -1 && clr_compare(surface, env->oldcolor, x, y))
-			((Uint32 *)surface->pixels)[y-- *surface->w + x] = newcolor;
-		if (y < i && y < env->pos.y && x > 0)
-			push4(env, (t_ff_pos){y + 1, i, x - 1, LEFT});
-		else if (y > i && x < surface->w)
+		if (clr_compare(surface, env->oldcolor, x, y))
+		{
+			((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			while (--y > -1 && clr_compare(surface, env->oldcolor, x, y))
+				((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			if (y < i - 1 && x > 0)
+				push4(env, (t_ff_pos){y + 1, i, x - 1, LEFT});
+			else if (y > i + 1 && x < surface->w)
+				push4(env, (t_ff_pos){i + 1, y, x, RIGHT});
+		}
+		else if (y > i + 1 && x < surface->w)
 			push4(env, (t_ff_pos){i + 1, y, x, RIGHT});
 		i = y;
 	}
@@ -101,16 +107,22 @@ static void	down_fill(SDL_Surface *surface, t_flood_fill *env, Uint32 newcolor)
 	i = env->pos.y - 1;
 	env->pos.x1 = ft_max(env->pos.x1, 0);
 	env->pos.x2 = ft_min(env->pos.x2, surface->w);
-	x = env->pos.x1 + 1;
+	x = env->pos.x1 - 1;
 	while (++x < env->pos.x2)
 	{
 		y = env->pos.y;
-		while (y < surface->h && clr_compare(surface, env->oldcolor, x, y))
-			((Uint32 *)surface->pixels)[y++ *surface->w + x] = newcolor;
-		if (y < i && x < surface->w)
+		if (clr_compare(surface, env->oldcolor, x, y))
+		{
+			((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			while (++y < surface->h && clr_compare(surface, env->oldcolor, x, y))
+				((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			if (y < i - 1 && x < surface->w)
+				push4(env, (t_ff_pos){y - 1, i, x, RIGHT});
+			else if (y > i + 1 && x > 0)
+				push4(env, (t_ff_pos){i + 1, y, x - 1, LEFT});
+		}
+		else if (y < i && x < surface->w)
 			push4(env, (t_ff_pos){y - 1, i, x, RIGHT});
-		else if (y > i && y > env->pos.y && x > 0)
-			push4(env, (t_ff_pos){i - 1, y, x - 1, LEFT});
 		i = y;
 	}
 	if (env->pos.y < i && x < surface->w)
@@ -126,15 +138,21 @@ static void	left_fill(SDL_Surface *surface, t_flood_fill *env, Uint32 newcolor)
 	i = env->pos.y + 1;
 	env->pos.x1 = ft_max(env->pos.x1, 0);
 	env->pos.x2 = ft_min(env->pos.x2, surface->h);
-	y = env->pos.x1 + 1;
+	y = env->pos.x1 - 1;
 	while (++y < env->pos.x2)
 	{
 		x = env->pos.y;
-		while (x > -1 && clr_compare(surface, env->oldcolor, x, y))
-			((Uint32 *)surface->pixels)[y * surface->w + x--] = newcolor;
-		if (x < i && x < env->pos.y && y > 0)
-			push4(env, (t_ff_pos){x + 1, i, y - 1, UP});
-		else if (x > i && y < surface->h)
+		if (clr_compare(surface, env->oldcolor, x, y))
+		{
+			((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			while (--x > -1 && clr_compare(surface, env->oldcolor, x, y))
+				((Uint32 *)surface->pixels)[y * surface->w + x] = newcolor;
+			if (x < i - 1 && y > 0)
+				push4(env, (t_ff_pos){x + 1, i, y - 1, UP});
+			else if (x > i + 1 && y < surface->h)
+				push4(env, (t_ff_pos){i + 1, x, y, DOWN});
+		}
+		else if (x > i + 1 && y < surface->h)
 			push4(env, (t_ff_pos){i + 1, x, y, DOWN});
 		i = x;
 	}
@@ -155,12 +173,18 @@ static void	right_fill(SDL_Surface *surface, t_flood_fill *env, Uint32 newcolor)
 	while (++y < env->pos.x2)
 	{
 		x = env->pos.y;
-		while (x < surface->w && clr_compare(surface, env->oldcolor, x, y))
-			((Uint32 *)surface->pixels)[y * surface->w + x++] = newcolor;
-		if (x < i && y < surface->h)
+		if (clr_compare(surface, env->oldcolor, x, y))
+		{
+			((Uint32 *)surface->pixels)[y *surface->w + x] = newcolor;
+			while (++x < surface->w && clr_compare(surface, env->oldcolor, x, y))
+				((Uint32 *)surface->pixels)[y * surface->w + x] = newcolor;
+			if (x < i - 1 && y < surface->h)
+				push4(env, (t_ff_pos){x - 1, i, y, DOWN});
+			else if (x > i + 1 && y > 0)
+				push4(env, (t_ff_pos){i + 1, x, y - 1, UP});
+		}
+		else if (x < i - 1 && y < surface->h)
 			push4(env, (t_ff_pos){x - 1, i, y, DOWN});
-		else if (x > i && x > env->pos.y && y > 0)
-			push4(env, (t_ff_pos){i - 1, x, y - 1, UP});
 		i = x;
 	}
 	if (env->pos.y < i && y < surface->h)
@@ -187,7 +211,7 @@ void	flood_fill(SDL_Surface *surface, Uint32 newcolor, int x, int y)
 	t_flood_fill	env;
 
 	env.oldcolor = ((Uint32 *)surface->pixels)[y * surface->w + x];
-	if (env.oldcolor == newcolor || x < 0)
+	if (env.oldcolor == newcolor)
 		return ;
 	env.stackPointer = 0;
 	((Uint32 *)surface->pixels)[y * surface->w + x] = newcolor;
@@ -199,9 +223,9 @@ void	flood_fill(SDL_Surface *surface, Uint32 newcolor, int x, int y)
 		((Uint32 *)surface->pixels)[y * surface->w + env.pos.x1] = newcolor;
 	env.pos.x1++;
 	if (y > 0)
-		push4(&env, (t_ff_pos){env.pos.x1, env.pos.x2, y - 1, UP});
+		push4(&env, (t_ff_pos){env.pos.x1, env.pos.x2, y - 1, UP});//2
 	if (y < surface->h - 1)
-		push4(&env, (t_ff_pos){env.pos.x1, env.pos.x2, y + 1, DOWN});
+		push4(&env, (t_ff_pos){env.pos.x1, env.pos.x2, y + 1, DOWN});//3
 	flood_fill2(surface, &env, newcolor);
 }
 
