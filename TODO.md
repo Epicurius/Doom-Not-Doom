@@ -14,6 +14,7 @@
 - [ ]	!Wall/portal changes texture only on one side.
 - [ ]	Slope moving bug.
 - [	]	Cant select entities when z not 0.
+- [ ]	-fsanitize=adress must be on for map editor to work
 
 ### Requiremnts:
 - [x] You can look up and down.
