@@ -4,7 +4,7 @@ type:map	GM		SC	V		W		S
 type:spawn		X		Y		Z		D
 0				10.0	105.0	0.0		180
 -----------------------------------
-type:vertex		X		Y
+type:point		X		Y
 0	38.0	146.0
 1	37.0	147.0
 2	32.0	142.0

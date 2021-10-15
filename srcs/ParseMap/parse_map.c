@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/20 10:38:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:59:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	read_type(t_doom *doom, int fd, char *line)
 {
 	if (ft_strnequ(line, "type:map", 8))
 		read_line(doom, fd, parse_header);
-	else if (ft_strnequ(line, "type:vertex", 11))
+	else if (ft_strnequ(line, "type:point", 10))
 		read_line(doom, fd, parse_vertex);
 	else if (ft_strnequ(line, "type:wall", 9))
 		read_line(doom, fd, parse_wall);
