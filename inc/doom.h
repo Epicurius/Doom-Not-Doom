@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:17:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:03:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ typedef struct s_wall
 	t_v3			sv2;
 	t_v3			cv1;
 	t_v3			cv2;
-	t_v2			stat_scale;
+	t_v2			text_pix_nb;
 	t_v2			clip_scale;
 	float			scale_factor;
 	float			width;

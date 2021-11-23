@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/10/15 15:59:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 08:58:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parse_player(t_doom *doom, int nb, char **arr)
 	doom->player.where.y = ft_atof(arr[2]) * doom->map_scale;
 	doom->player.where.z = ft_atof(arr[3]) * doom->map_scale;
 	doom->player.yaw = ft_atoi(arr[4]) * CONVERT_TO_RADIANS;
+	doom->player.sector = ft_atoi(arr[5]);
 }
 
 /*

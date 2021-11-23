@@ -6,14 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:02:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:03:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Find sector for each entity.
+ *	Check sector for each entity.
  */
 int	check_entities(t_doom *doom)
 {
@@ -22,13 +22,10 @@ int	check_entities(t_doom *doom)
 	curr = doom->entity;
 	while (curr)
 	{
-		((t_entity *)curr->content)->sector
-			= find_sector(doom->sectors, doom->nb.sectors,
-				((t_entity *)curr->content)->where);
-		if (((t_entity *)curr->content)->sector < 0)
+		if (!in_sector(&doom->sectors[((t_entity *)curr->content)->sector], ((t_entity *)curr->content)->where))
 		{
-			ft_printf("{YELLOW}[INFO]{RESET} Entity is outside "
-				"map boundaries!\n");
+			ft_printf("{YELLOW}[INFO]{RESET} Entity %d is outside "
+				"map boundaries!\n", ((t_entity *)curr->content)->type);
 			return (0);
 		}
 		curr = curr->next;
@@ -37,13 +34,11 @@ int	check_entities(t_doom *doom)
 }
 
 /*
- *	Find player sector.
+ *	Check player sector.
  */
 int	check_player(t_doom *doom)
 {
-	doom->player.sector = find_sector(doom->sectors,
-			doom->nb.sectors, doom->player.where);
-	if (doom->player.sector < 0)
+	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
 	{
 		ft_printf("{YELLOW}[INFO]{RESET} Player is outside map boundaries!\n");
 		return (0);
