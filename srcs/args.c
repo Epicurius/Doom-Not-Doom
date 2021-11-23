@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 13:38:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:23:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static void	read_args2(t_settings *init, char **av, int i)
 	if (ft_strnequ(av[i], "-size=", 6))
 	{
 		arr = stringsplit(av[i] + 6, 'x', NULL);
-		init->size = (t_point){atoi(arr[0]), atoi(arr[1])};
+		init->size = (t_point){ft_atoi(arr[0]), ft_atoi(arr[1])};
 		free(arr);
 	}
 	else if (ft_strnequ(av[i], "-mouse=", 7))
 	{
 		arr = stringsplit(av[i] + 7, 'x', NULL);
-		init->mouse = (t_v2){atof(arr[0]), atof(arr[1])};
+		init->mouse = (t_v2){ft_atof(arr[0]), ft_atof(arr[1])};
 		free(arr);
 	}
 }
@@ -45,11 +45,11 @@ static int	read_args1(t_settings *init, char **av, int i)
 	else if (ft_strequ(av[i], "-launcher"))
 		init->launcher = TRUE;
 	else if (ft_strnequ(av[i], "-res=", 5))
-		init->rres = atof(av[i] + 5);
+		init->rres = ft_atof(av[i] + 5);
 	else if (ft_strnequ(av[i], "-diff=", 6))
-		init->difficulty = atoi(av[i] + 6);
+		init->difficulty = ft_atoi(av[i] + 6);
 	else if (ft_strnequ(av[i], "-fov=", 5))
-		init->fov = atoi(av[i] + 5);
+		init->fov = ft_atoi(av[i] + 5);
 	else
 		read_args2(init, av, i);
 	return (1);

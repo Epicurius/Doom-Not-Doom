@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:17:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:23:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	parse_vertex(t_doom *doom, int nb, char **arr)
 {
 	if (nb < 2)
 		error_msg("Invalid amount of vertex arguments %s\n", arr[0]);
-	doom->vert[ft_atoi(arr[0])].x = ft_atof(arr[1]) * doom->map_scale;
-	doom->vert[ft_atoi(arr[0])].y = ft_atof(arr[2]) * doom->map_scale;
+	doom->vert[ft_atoi(arr[0])].x = ft_atoi(arr[1]) * doom->map_scale;
+	doom->vert[ft_atoi(arr[0])].y = ft_atoi(arr[2]) * doom->map_scale;
 }
 
 /*
@@ -56,12 +56,12 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 	sect = ft_atoi(arr[0]);
 	floor = &doom->sectors[sect].floor;
 	ceiling = &doom->sectors[sect].ceiling;
-	floor->height = atof(arr[1]) * doom->map_scale;
-	ceiling->height = atof(arr[2]) * doom->map_scale;
+	floor->height = ft_atof(arr[1]) * doom->map_scale;
+	ceiling->height = ft_atof(arr[2]) * doom->map_scale;
 	floor->tx = ft_atoi(arr[3]);
 	ceiling->tx = ft_atoi(arr[4]);
-	floor->scale = atof(arr[5]) * doom->map_scale;
-	ceiling->scale = atof(arr[6]) * doom->map_scale;
+	floor->scale = ft_atof(arr[5]) * doom->map_scale;
+	ceiling->scale = ft_atof(arr[6]) * doom->map_scale;
 	slope = stringsplit(arr[7], ' ', NULL);
 	doom->sectors[sect].floor_incl_start = ft_atoi(slope[0]);
 	doom->sectors[sect].floor_incl_angle = ft_atoi(slope[1])

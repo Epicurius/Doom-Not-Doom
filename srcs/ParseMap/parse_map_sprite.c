@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:03:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:24:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 {
 	t_entity	*entity;
 
-	if (nb < 6)
+	if (nb < 7)
 		error_msg("Invalid amount of entity arguments %s\n", arr[0]);
 	entity = PROT_ALLOC(sizeof(t_entity));
 	entity->type = entity_type(arr[1]);
-	entity->where.x = ft_atof(arr[2]) * doom->map_scale;
-	entity->where.y = ft_atof(arr[3]) * doom->map_scale;
-	entity->where.z = ft_atof(arr[4]) * doom->map_scale;
+	entity->where.x = ft_atoi(arr[2]) * doom->map_scale;
+	entity->where.y = ft_atoi(arr[3]) * doom->map_scale;
+	entity->where.z = ft_atoi(arr[4]) * doom->map_scale;
 	entity->yaw = ft_atoi(arr[5]) * CONVERT_TO_RADIANS;
 	entity->sector = ft_atoi(arr[6]);
 	doom->nb.entities += 1;
