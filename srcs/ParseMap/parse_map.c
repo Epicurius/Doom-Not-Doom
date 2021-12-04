@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:23:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:32:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	parse_map(t_doom *doom, char *file_name)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
+	ft_memdel((void *)&doom->vert);
 	free(line);
 	close(fd);
 	return (1);
