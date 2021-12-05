@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:27:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 09:27:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	launcher(void)
 
 /*
  *	Main game loop that handles all of the games elements.
+ *	For implementing a fps cap.
  *	HostFilterTime (10000 millis / 80 fps = 12.5)
  *	if (SDL_GetTicks() - doom->time.curr < 12) 
  *		return ;
@@ -57,7 +58,7 @@ static inline void	game_loop(t_doom *doom)
 
 /*
  *	Gets everything ready.
- *	SDL_Delay(doom.map.zoom * 2);
+ *	SDL_Delay(ft_clamp(0, 50, doom.map.zoom * 2));
  */
 static void	game(char *map, t_settings settings)
 {
@@ -72,7 +73,7 @@ static void	game(char *map, t_settings settings)
 		return ;
 	init_doom(&doom);
 	while (!doom.quit && doom.player.health > 0)
-		game_loop(&doom);//, SDL_Delay(ft_clamp(0, 50, doom.map.zoom * 2));
+		game_loop(&doom);
 	if (doom.player.health <= 0)
 		game_over(&doom);
 	free_doom(&doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:03:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:57:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	check_entities(t_doom *doom)
 	curr = doom->entity;
 	while (curr)
 	{
-		if (!in_sector(&doom->sectors[((t_entity *)curr->content)->sector], ((t_entity *)curr->content)->where))
+		if (!in_sector(&doom->sectors[((t_entity *)curr->content)->sector],
+				((t_entity *)curr->content)->where))
 		{
 			ft_printf("{YELLOW}[INFO]{RESET} Entity %d is outside "
 				"map boundaries!\n", ((t_entity *)curr->content)->type);

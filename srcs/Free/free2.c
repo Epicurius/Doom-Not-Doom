@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:31:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:55:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	free_map(t_doom *doom)
 {
 	int	i;
 
-	
 	i = -1;
 	while (++i < doom->nb.walls)
 		ft_memdel((void *)&doom->walls[i].wsprite);

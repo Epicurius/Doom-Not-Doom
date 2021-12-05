@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:23:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:48:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,6 @@ static void	map_area(t_doom *doom)
 	}
 }
 
-void	bhop_helper(t_doom *doom)
-{
-	t_v3	v;
-
-	v = doom->player.velocity;
-	v = mult_v3(v, doom->map.zoom * 100);
-	draw_line(doom->surface, 0xFF00FF00, (t_point){doom->c.x, doom->c.y + 1},
-		(t_point){doom->c.x + v.x, doom->c.y + v.y});
-	v = doom->player.wishdir;
-	v = mult_v3(v, doom->map.zoom * 100);
-	draw_line(doom->surface, 0xFF0000FF, (t_point){doom->c.x + 1, doom->c.y},
-		(t_point){doom->c.x + v.x, doom->c.y + v.y});
-}
-
 /*
  *	Main minimap draw function.
  *	If Tab is pressed draw minimap.
@@ -148,6 +134,4 @@ void	map(t_doom *doom)
 		draw_minimap(doom);
 		map_player(doom);
 	}
-	if (doom->settings.debug)
-		bhop_helper(doom);
 }

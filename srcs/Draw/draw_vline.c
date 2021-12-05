@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:56:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:19:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:55:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static Uint32	z_clr(float z)
 
 	alpha = 1 - z / ZB;
 	if (z >= 0 && alpha >= 0 && alpha <= 1)
-		clr = 255 << 24		
-			| (int)(alpha * 0xFF) << 16		
-			| (int)(alpha * 0xFF) << 8		
+		clr = 255 << 24
+			| (int)(alpha * 0xFF) << 16
+			| (int)(alpha * 0xFF) << 8
 			| (int)(alpha * 0xFF);
 	else
 		clr = 0;

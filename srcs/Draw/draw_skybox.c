@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:22:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:54:12 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void	compute_skybox_vline_data(t_render *render, t_vline *vline, int i)
 	w = render->skybox[i];
 	vline->alpha = (render->x - w.x1) / w.xrange;
 	vline->clipped_alpha = (render->x - w.cx1) / (w.cx2 - w.cx1);
-	//vline->z = 1.0 / ((1.0 - vline->alpha) / w.cv1.z + vline->alpha / w.cv2.z);
 	vline->divider = 1 / (w.sv2.z + vline->alpha * w.zrange);
 	vline->z = w.zcomb * vline->divider;
 	vline->texel.x = (w.x1z2 + vline->alpha * w.xzrange) * vline->divider;

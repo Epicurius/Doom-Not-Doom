@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:03:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 09:57:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # include <fcntl.h>
 
 // IPC x CLOCK x Data Size x Time
-
-# define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
+#  define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
 typedef struct s_settings
 {

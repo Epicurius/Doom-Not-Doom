@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/01 13:39:04 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 10:53:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	precompute_texture(t_doom *doom, t_wall *wall)
 	int	i;
 
 	wall->clip_scale = new_v2(wall->text_pix_nb.x / wall->cv2.z,
-		wall->text_pix_nb.y);
+			wall->text_pix_nb.y);
 	if (wall->sv2.z)
 		wall->clip_scale.x = wall->text_pix_nb.x / wall->sv2.z;
 	i = -1;
