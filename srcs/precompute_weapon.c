@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:07:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/05 15:47:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
 void	equip_weapon(t_doom *doom)
 {
 	if (doom->weapon[0].own && doom->keys[SDL_SCANCODE_1])
-		doom->player.equipped = FALSE;
+		doom->player.equipped = 0;
 	else if (doom->weapon[1].own && doom->keys[SDL_SCANCODE_2])
-		doom->player.equipped = TRUE;
+		doom->player.equipped = 1;
 	else if (doom->weapon[2].own && doom->keys[SDL_SCANCODE_3])
 		doom->player.equipped = 2;
 	else if (doom->weapon[3].own && doom->keys[SDL_SCANCODE_4])
 		doom->player.equipped = 3;
 	else if (doom->weapon[4].own && doom->keys[SDL_SCANCODE_5])
-		doom->player.equipped = 5;
+		doom->player.equipped = 4;
 }
 
 /*
