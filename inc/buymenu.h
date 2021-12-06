@@ -1,84 +1,86 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   buymenu.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/07 10:39:17 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/08/27 15:51:33 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef BUYMENU_H
 # define BUYMENU_H
-
-# include "better_libui.h"
-# include "path.h"
+# include "fcntl.h"
+# include "sys/stat.h"
+# include "libui.h"
+# include "libft.h"
+# include "libpf.h"
+# include "SDL.h"
+# include "SDL_ttf.h"
+# include "SDL_image.h"
+# include "bxpm.h"
 # include "doom.h"
 
+enum e_weapon_types // if nikals has this, remove from here;
+{
+	WEP_TYPE_SHOTGUN = 0,
+	WEP_TYPE_GLOCK,
+	WEP_TYPE_KAR98,
+	WEP_TYPE_LAUNCHER,
+	WEP_TYPE_MINIGUN,
+	WEP_TYPE_AMOUNT
+};
+
+enum e_weapon_stat_types
+{
+	WEP_STAT_DAMAGE = 0,
+	WEP_STAT_FIRERATE,
+	WEP_STAT_AMMO,
+	WEP_STAT_MAX_AMMO,
+	WEP_STAT_AMOUNT
+};
+
+/*
+ *	t_list	*weapon_buttons;	list of t_ui_element;
+ *	t_ui_element *active_weapon_button; the currently clicked weapon_button from 'weapon_buttons';
+ *	int				wep_type;	one of e_weapon_types; whichi is currently selected;
+*/
 typedef struct s_buymenu
 {
-	t_bui_element	*menu;
-	t_bui_element	*exit_button;
-	t_bui_element	*currency;
-	t_bui_element	*weapon_stats;
-	t_bui_element	*player_stats;
-	t_bui_element	*weapon_menu;
-	t_bui_element	*weapon_upgrades;
-	t_bui_element	*player_menu;
-	t_bui_element	*damage_stat;
-	t_bui_element	*ammo_stat;
-	t_bui_element	*max_ammo_stat;
-	t_bui_element	*firerate_stat;
-	t_bui_element	*speed_stat;
-	t_bui_element	*jump_stat;
-	t_bui_element	*armour_stat;
-	t_bui_element	*max_armour_stat;
-	t_bui_element	*gun_elem[WEAPON_AMOUNT];
-	t_bui_element	*gun_buy[WEAPON_AMOUNT];
-	t_bui_element	*damage_elem;
-	t_bui_element	*firerate_elem;
-	t_bui_element	*ammo_elem;
-	t_bui_element	*max_ammo_elem;
-	t_bui_element	*armor_elem;
-	t_bui_element	*max_armor_elem;
-	t_bui_element	*jump_elem;
-	t_bui_element	*speed_elem;
-	t_bui_element	*active_gun;
-	t_list			*all_guns;
+	bool			run;
+
+	t_ui_layout		layout;
+	t_ui_window		*main_win;
+	t_ui_element	*close_button;
+
+	t_ui_element	*weapon_button[WEP_TYPE_AMOUNT];
+	t_ui_element	*weapon_buy_button[WEP_TYPE_AMOUNT];
+
+	t_list			*weapon_buttons;
+	t_ui_element	*active_weapon_button;
+	int				wep_type;
+
+	t_ui_element	*ammo_stat_amount_label;
+	t_ui_element	*max_ammo_stat_amount_label;
+	t_ui_element	*firerate_stat_amount_label;
+	t_ui_element	*damage_stat_amount_label;
+
+	t_ui_element	*damage_amount_label;
+	t_ui_element	*damage_price_button;
+	t_ui_element	*firerate_amount_label;
+	t_ui_element	*firerate_price_button;
+	t_ui_element	*ammo_amount_label;
+	t_ui_element	*ammo_price_button;
+	t_ui_element	*max_ammo_amount_label;
+	t_ui_element	*max_ammo_price_button;
+
+	t_ui_element	*speed_stat_amount_label;
+	t_ui_element	*jump_stat_amount_label;
+	t_ui_element	*armor_stat_amount_label;
+	t_ui_element	*max_armor_stat_amount_label;
+
+	t_ui_element	*speed_amount_label;
+	t_ui_element	*speed_price_button;
+	t_ui_element	*jump_amount_label;
+	t_ui_element	*jump_price_button;
+	t_ui_element	*armor_amount_label;
+	t_ui_element	*armor_price_button;
+	t_ui_element	*max_armor_amount_label;
+	t_ui_element	*max_armor_price_button;
+
+	t_ui_element	*currency_amount_label;
+
+	t_inv			*inv;
 }					t_buymenu;
-
-/* INITS */
-t_buymenu			*buymenu_init(void);
-void				menu_init(t_bui_window *win, t_buymenu *buymenu);
-void				exit_button_init(t_buymenu *buymenu);
-void				currency_init(t_buymenu *buymenu);
-void				weapon_stats_init(t_buymenu *buymenu);
-void				player_stats_init(t_buymenu *buymenu);
-void				weapon_menu_init(t_buymenu *buymenu);
-void				weapon_upgrades_init(t_buymenu *buymenu);
-void				player_menu_init(t_buymenu *buymenu);
-
-/* EVENTS */
-void				weapon_stat_events(t_buymenu *buymenu, t_inv *inv);
-void				player_stat_events(t_buymenu *buymenu, t_inv *inv);
-void				weapon_buying_events(t_buymenu *buymenu, t_inv *inv);
-void				weapon_upgrading_events(t_buymenu *buymenu, t_inv *inv);
-void				player_upgrading_events(t_buymenu *buymenu, t_inv *inv);
-
-/* BUTTONS */
-t_bui_element		*new_stat(t_bui_element *parent, char *str, t_xywh pos);
-t_bui_element		*new_button(t_bui_element *parent, char *name, t_xywh c);
-t_bui_element		*new_buy_button(t_bui_element *parent, t_xywh c);
-t_bui_element		*new_upgrade_button(
-						t_bui_element *parent, char *str, int i);
-
-/* HELP */
-int					get_active_gun(t_buymenu *buymenu);
-void				give_weapon(t_buymenu *buymenu, t_inv *inv, int i);
-
-/* FREE */
-void				buymenu_quit(t_buymenu *buymenu);
 
 #endif
