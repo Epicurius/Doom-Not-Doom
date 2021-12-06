@@ -20,7 +20,7 @@ void	precompute_buy_menu(t_doom *doom)
 {
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-	buymenu_new(doom->win, doom->renderer, doom->surface, &doom->inv);
+	buymenu(doom->win, doom->surface, &doom->inv);
 	Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
 	ft_bzero(&doom->keys, 517);
 	doom->player.action = NONE;

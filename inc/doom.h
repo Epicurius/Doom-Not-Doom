@@ -96,7 +96,7 @@ typedef struct s_weapon_thread
 	SDL_Surface		*dst;
 	t_bxpm			*src;
 	t_rect			dstr;
-	t_rect			srcr;	
+	t_rect			srcr;
 }					t_weapon_thread;
 
 typedef struct s_player
@@ -129,7 +129,7 @@ typedef struct s_wsprite
 {
 	t_v2			where;
 	int				id;
-	int				tx;	
+	int				tx;
 	int				frame;
 	int				time;
 	t_rect			src;
@@ -361,7 +361,7 @@ typedef struct s_weapon
 	int				damage;
 	int				mag_size;
 	int				cur_ammo;
-	int				mag_ammo;				
+	int				mag_ammo;
 	int				max_ammo;
 	int				ammo_increase;
 	int				damage_increase;
@@ -611,8 +611,8 @@ void				screen_to_map_vertex(t_player player,
 /* File: wsprite_trigger_events.c */
 void				wsprite_trigger_events(t_doom *doom, t_event *event);
 /* File: BuyMenu/buy_menu.c */
-void				buymenu_new(SDL_Window *window, SDL_Renderer *renderer,
-						SDL_Surface *surface, t_inv *inv);
+void				buymenu(SDL_Window *window, SDL_Surface *surface,
+						t_inv *inv);
 /* File: CollisionDetection/collision_detection.c */
 int					find_from_sectbool(t_doom *doom, t_motion *motion);
 int					collision_detection(t_doom *doom, t_motion motion,

@@ -105,16 +105,7 @@ CFILES		=	ai_attack.c\
 				Free/free2.c\
 				Free/free3.c\
 				Free/free4.c\
-				BuyMenu/buy_menu.c\
-				BuyMenu/buy_menu_buttons.c\
-				BuyMenu/buy_menu_help.c\
-				BuyMenu/buy_menu_init.c\
-				BuyMenu/buy_menu_player.c\
-				BuyMenu/buy_menu_player_stats.c\
-				BuyMenu/buy_menu_player_upgrades.c\
-				BuyMenu/buy_menu_weapon.c\
-				BuyMenu/buy_menu_weapon_stats.c\
-				BuyMenu/buy_menu_weapon_upgrades.c\
+				BuyMenu/buymenu.c\
 				Draw/draw2.c\
 				Draw/draw_bullet_holes.c\
 				Draw/draw_ceiling.c\
@@ -158,7 +149,7 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/slide_collision.c\
 				CollisionDetection/projectile_collision.c\
 				CollisionDetection/crouch_collision.c
-				
+
 NAME		=	doom
 CDIR		=	srcs
 ODIR		=	obj
@@ -175,7 +166,7 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libgfx \
 				-I $(LIB_DIR)/libbxpm \
-				-I $(LIB_DIR)/better_libui \
+				-I $(LIB_DIR)/libui_v3 \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2.framework/Headers \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2_image.framework/Headers \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2_mixer.framework/Headers \
@@ -186,7 +177,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libtp/libtp.a \
 				$(LIB_DIR)/libgfx/libgfx.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
-				$(LIB_DIR)/better_libui/libui.a	\
+				$(LIB_DIR)/libui_v3/libui.a	\
 				-framework SDL2 \
 				-framework SDL2_mixer \
 				-framework SDL2_image \
@@ -209,7 +200,7 @@ $(ODIR):
 	@mkdir -p $@/ParseMap
 	@mkdir -p $@/EntityCoords
 	@mkdir -p $@/CollisionDetection
-	
+
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
 	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
