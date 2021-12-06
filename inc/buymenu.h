@@ -11,25 +11,6 @@
 # include "bxpm.h"
 # include "doom.h"
 
-enum e_weapon_types // if nikals has this, remove from here;
-{
-	WEP_TYPE_SHOTGUN = 0,
-	WEP_TYPE_GLOCK,
-	WEP_TYPE_KAR98,
-	WEP_TYPE_LAUNCHER,
-	WEP_TYPE_MINIGUN,
-	WEP_TYPE_AMOUNT
-};
-
-enum e_weapon_stat_types
-{
-	WEP_STAT_DAMAGE = 0,
-	WEP_STAT_FIRERATE,
-	WEP_STAT_AMMO,
-	WEP_STAT_MAX_AMMO,
-	WEP_STAT_AMOUNT
-};
-
 /*
  *	t_list	*weapon_buttons;	list of t_ui_element;
  *	t_ui_element *active_weapon_button; the currently clicked weapon_button from 'weapon_buttons';
@@ -43,8 +24,8 @@ typedef struct s_buymenu
 	t_ui_window		*main_win;
 	t_ui_element	*close_button;
 
-	t_ui_element	*weapon_button[WEP_TYPE_AMOUNT];
-	t_ui_element	*weapon_buy_button[WEP_TYPE_AMOUNT];
+	t_ui_element	*weapon_button[WEAPON_AMOUNT];
+	t_ui_element	*weapon_buy_button[WEAPON_AMOUNT];
 
 	t_list			*weapon_buttons;
 	t_ui_element	*active_weapon_button;

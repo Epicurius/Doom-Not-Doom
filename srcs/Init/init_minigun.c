@@ -14,7 +14,7 @@
 
 void	init_minigun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = TRUE;
+	weapon->own = FALSE;
 	weapon->price = 300;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;

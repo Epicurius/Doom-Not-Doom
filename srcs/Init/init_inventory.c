@@ -14,7 +14,7 @@
 
 void	init_inventory(t_doom *doom)
 {
-	doom->inv.dosh = 0;
+	doom->inv.dosh = 1000;
 	doom->inv.max_armour_price = 100;
 	doom->inv.speed_price = 101;
 	doom->inv.jump_price = 102;
