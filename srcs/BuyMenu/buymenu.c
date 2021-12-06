@@ -4,52 +4,52 @@ void	weapon_buy_init(t_buymenu *buymenu)
 {
 	char	str[20];
 
-	buymenu->weapon_buy_button[WEP_TYPE_SHOTGUN]
+	buymenu->weapon_buy_button[WEAPON_SHOTGUN]
 		= ui_layout_get_element(&buymenu->layout, "shotgun_buy_button");
-	buymenu->weapon_buy_button[WEP_TYPE_GLOCK]
+	buymenu->weapon_buy_button[WEAPON_GUN]
 		= ui_layout_get_element(&buymenu->layout, "glock_buy_button");
-	buymenu->weapon_buy_button[WEP_TYPE_KAR98]
+	buymenu->weapon_buy_button[WEAPON_KAR]
 		= ui_layout_get_element(&buymenu->layout, "kar98_buy_button");
-	buymenu->weapon_buy_button[WEP_TYPE_LAUNCHER]
+	buymenu->weapon_buy_button[WEAPON_LAUNCHER]
 		= ui_layout_get_element(&buymenu->layout, "launcher_buy_button");
-	buymenu->weapon_buy_button[WEP_TYPE_MINIGUN]
+	buymenu->weapon_buy_button[WEAPON_MINIGUN]
 		= ui_layout_get_element(&buymenu->layout, "minigun_buy_button");
 	ft_strcpy(str, "BUY $");
-	ui_button_set_text(buymenu->weapon_buy_button[WEP_TYPE_SHOTGUN],
-		&ft_b_itoa(buymenu->inv->weapon[WEP_TYPE_SHOTGUN].price, &str[5])[-5]);
-	ui_button_set_text(buymenu->weapon_buy_button[WEP_TYPE_GLOCK],
-		&ft_b_itoa(buymenu->inv->weapon[WEP_TYPE_GLOCK].price, &str[5])[-5]);
-	ui_button_set_text(buymenu->weapon_buy_button[WEP_TYPE_KAR98],
-		&ft_b_itoa(buymenu->inv->weapon[WEP_TYPE_KAR98].price, &str[5])[-5]);
-	ui_button_set_text(buymenu->weapon_buy_button[WEP_TYPE_LAUNCHER],
-		&ft_b_itoa(buymenu->inv->weapon[WEP_TYPE_LAUNCHER].price, &str[5])[-5]);
-	ui_button_set_text(buymenu->weapon_buy_button[WEP_TYPE_MINIGUN],
-		&ft_b_itoa(buymenu->inv->weapon[WEP_TYPE_MINIGUN].price, &str[5])[-5]);
+	ui_button_set_text(buymenu->weapon_buy_button[WEAPON_SHOTGUN],
+		&ft_b_itoa(buymenu->inv->weapon[WEAPON_SHOTGUN].price, &str[5])[-5]);
+	ui_button_set_text(buymenu->weapon_buy_button[WEAPON_GUN],
+		&ft_b_itoa(buymenu->inv->weapon[WEAPON_GUN].price, &str[5])[-5]);
+	ui_button_set_text(buymenu->weapon_buy_button[WEAPON_KAR],
+		&ft_b_itoa(buymenu->inv->weapon[WEAPON_KAR].price, &str[5])[-5]);
+	ui_button_set_text(buymenu->weapon_buy_button[WEAPON_LAUNCHER],
+		&ft_b_itoa(buymenu->inv->weapon[WEAPON_LAUNCHER].price, &str[5])[-5]);
+	ui_button_set_text(buymenu->weapon_buy_button[WEAPON_MINIGUN],
+		&ft_b_itoa(buymenu->inv->weapon[WEAPON_MINIGUN].price, &str[5])[-5]);
 }
 
 void	weapon_menu_init(t_buymenu *buymenu)
 {
-	buymenu->weapon_button[WEP_TYPE_SHOTGUN]
+	buymenu->weapon_button[WEAPON_SHOTGUN]
 		= ui_layout_get_element(&buymenu->layout, "shotgun_button");
-	buymenu->weapon_button[WEP_TYPE_GLOCK]
+	buymenu->weapon_button[WEAPON_GUN]
 		= ui_layout_get_element(&buymenu->layout, "glock_button");
-	buymenu->weapon_button[WEP_TYPE_KAR98]
+	buymenu->weapon_button[WEAPON_KAR]
 		= ui_layout_get_element(&buymenu->layout, "kar98_button");
-	buymenu->weapon_button[WEP_TYPE_LAUNCHER]
+	buymenu->weapon_button[WEAPON_LAUNCHER]
 		= ui_layout_get_element(&buymenu->layout, "launcher_button");
-	buymenu->weapon_button[WEP_TYPE_MINIGUN]
+	buymenu->weapon_button[WEAPON_MINIGUN]
 		= ui_layout_get_element(&buymenu->layout, "minigun_button");
-	buymenu->active_weapon_button = buymenu->weapon_button[WEP_TYPE_SHOTGUN];
+	buymenu->active_weapon_button = buymenu->weapon_button[WEAPON_SHOTGUN];
 	add_to_list(&buymenu->weapon_buttons,
-		buymenu->weapon_button[WEP_TYPE_SHOTGUN], sizeof(t_ui_element));
+		buymenu->weapon_button[WEAPON_SHOTGUN], sizeof(t_ui_element));
 	add_to_list(&buymenu->weapon_buttons,
-		buymenu->weapon_button[WEP_TYPE_GLOCK], sizeof(t_ui_element));
+		buymenu->weapon_button[WEAPON_GUN], sizeof(t_ui_element));
 	add_to_list(&buymenu->weapon_buttons,
-		buymenu->weapon_button[WEP_TYPE_KAR98], sizeof(t_ui_element));
+		buymenu->weapon_button[WEAPON_KAR], sizeof(t_ui_element));
 	add_to_list(&buymenu->weapon_buttons,
-		buymenu->weapon_button[WEP_TYPE_LAUNCHER], sizeof(t_ui_element));
+		buymenu->weapon_button[WEAPON_LAUNCHER], sizeof(t_ui_element));
 	add_to_list(&buymenu->weapon_buttons,
-		buymenu->weapon_button[WEP_TYPE_MINIGUN], sizeof(t_ui_element));
+		buymenu->weapon_button[WEAPON_MINIGUN], sizeof(t_ui_element));
 	weapon_buy_init(buymenu);
 }
 
@@ -176,16 +176,16 @@ void	event_weapon_buy(t_buymenu *buymenu)
 {
 	ui_list_radio_event(buymenu->weapon_buttons,
 		&buymenu->active_weapon_button);
-	check_which(buymenu, WEP_TYPE_SHOTGUN);
-	check_which(buymenu, WEP_TYPE_GLOCK);
-	check_which(buymenu, WEP_TYPE_KAR98);
-	check_which(buymenu, WEP_TYPE_LAUNCHER);
-	check_which(buymenu, WEP_TYPE_MINIGUN);
-	attempt_buying_weapon(buymenu, WEP_TYPE_SHOTGUN);
-	attempt_buying_weapon(buymenu, WEP_TYPE_GLOCK);
-	attempt_buying_weapon(buymenu, WEP_TYPE_KAR98);
-	attempt_buying_weapon(buymenu, WEP_TYPE_LAUNCHER);
-	attempt_buying_weapon(buymenu, WEP_TYPE_MINIGUN);
+	check_which(buymenu, WEAPON_SHOTGUN);
+	check_which(buymenu, WEAPON_GUN);
+	check_which(buymenu, WEAPON_KAR);
+	check_which(buymenu, WEAPON_LAUNCHER);
+	check_which(buymenu, WEAPON_MINIGUN);
+	attempt_buying_weapon(buymenu, WEAPON_SHOTGUN);
+	attempt_buying_weapon(buymenu, WEAPON_GUN);
+	attempt_buying_weapon(buymenu, WEAPON_KAR);
+	attempt_buying_weapon(buymenu, WEAPON_LAUNCHER);
+	attempt_buying_weapon(buymenu, WEAPON_MINIGUN);
 }
 
 void	attempt_buying_stat(
@@ -405,6 +405,7 @@ void	user_events(t_buymenu *buymenu, SDL_Event e)
 
 void	buymenu_free(t_buymenu *buymenu)
 {
+	ui_layout_free(&buymenu->layout);
 	ft_lstdel(&buymenu->weapon_buttons, &dummy_free_er);
 }
 
@@ -432,87 +433,5 @@ void	buymenu(SDL_Window *window, SDL_Surface *surf, t_inv *inv)
 		ui_layout_render(&buymenu.layout);
 	}
 	SDL_DestroyTexture(bg_texture);
-	ui_layout_free(&buymenu.layout);
 	buymenu_free(&buymenu);
 }
-
-////////////////////////////////////////
-// REMOVE ALL FUNCTIONS UNDER THIS !!!!
-////////////////////////////////////////
-/*
-t_weapon	wep_init(void)
-{
-	t_weapon	wep;
-
-	wep.own = 0;
-	wep.price = 10;
-	wep.ammo_price = 10;
-	wep.damage_price = 10;
-	wep.firerate_price = 10;
-	wep.max_ammo_price = 10;
-	wep.damage = 10;
-	wep.mag_size = 10;
-	wep.cur_ammo = 10;
-	wep.mag_ammo = 10;
-	wep.max_ammo = 10;
-	wep.ammo_increase = 10;
-	wep.damage_increase = 10;
-	wep.firerate_increase = -10;
-	wep.max_ammo_increase = 10;
-	wep.x_offset = 10;
-	wep.frame_rate = 10;
-	wep.sound = 10;
-	wep.scale = 10;
-	wep.time = 10;
-	wep.frame = 10;
-	wep.fire_frames = 10;
-	wep.reload_frames = 10;
-	return (wep);
-}
-
-t_weapon	*weapons_init(void)
-{
-	t_weapon	*weapons;
-
-	weapons = ft_memalloc(sizeof(t_weapon) * 5);
-	weapons[0] = wep_init();
-	weapons[0].own = 1;
-	weapons[0].damage_price = 1001;
-	weapons[1] = wep_init();
-	weapons[2] = wep_init();
-	weapons[3] = wep_init();
-	weapons[4] = wep_init();
-	return (weapons);
-}
-
-int	main(void)
-{
-	SDL_Window		*window;
-	SDL_Renderer	*renderer;
-	SDL_Surface		*win_surf;
-	t_inv			inv;
-
-	SDL_CreateWindowAndRenderer(1920, 1080, 0, &window, &renderer);
-	win_surf = ui_surface_image_new(ICON_PATH"test2.bmp");//SDL_GetWindowSurface(window);
-	// inv init
-	int	player_hp = 101;
-	int	player_armor = 102;
-	float	player_speed = 103;
-	float	player_jump = 104;
-	inv.dosh = 10000;
-	inv.max_armour_price = 100;
-	inv.speed_price = 101;
-	inv.jump_price = 102;
-	inv.armour_price = 103;
-	inv.max_armour = 105;
-	inv.weapon = weapons_init();
-	inv.hp = &player_hp;
-	inv.armour = &player_armor;
-	inv.speed = &player_speed;
-	inv.jump = &player_jump;
-	//
-	buymenu(window, win_surf, &inv);
-	system("leaks buymenu");
-	return (0);
-}
-*/

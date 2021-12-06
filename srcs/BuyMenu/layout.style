@@ -69,9 +69,9 @@ weapon_button_prefab
 	//bg_color_default : 0xdeffbeef;
 	//bg_color_hover : 0xdeffb0b0;
 	//bg_color_click : 0xffffb0b0;
-	bg_image_default : ICON/terminal_button_default.png;
-	bg_image_hover : ICON/terminal_button.png;
-	bg_image_click : ICON/terminal_button.png;
+	bg_image_default : terminal_button_default.png;
+	bg_image_hover : terminal_button.png;
+	bg_image_click : terminal_button.png;
 };
 weapon_buy_button_prefab : weapon_button_prefab
 {
@@ -210,9 +210,9 @@ upgrade_increase_prefab : Label
 };
 upgrade_buy_button_prefab
 {
-	bg_image_default : ICON/terminal_button_default.png;
-	bg_image_hover : ICON/terminal_button.png;
-	bg_image_click : ICON/terminal_button.png;
+	bg_image_default : terminal_button_default.png;
+	bg_image_hover : terminal_button.png;
+	bg_image_click : terminal_button.png;
 };
 
 damage_text_menu : weapon_upgrade_button_prefab
