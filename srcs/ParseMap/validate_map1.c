@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/05 10:57:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:21:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *	Check sector for each entity.
  */
-int	check_entities(t_doom *doom)
+static int	check_entities(t_doom *doom)
 {
 	t_list		*curr;
 
@@ -37,7 +37,7 @@ int	check_entities(t_doom *doom)
 /*
  *	Check player sector.
  */
-int	check_player(t_doom *doom)
+static int	check_player(t_doom *doom)
 {
 	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
 	{
@@ -48,19 +48,39 @@ int	check_player(t_doom *doom)
 }
 
 /*
+ *	Change sector slope start index from wall index to sextor wall index.
+ */
+static int	fix_slopes_start_index(t_sector *sector, int *wall_slope)
+{
+	int	i;
+
+	i = -1;
+	if (*wall_slope < 0)
+		return (*wall_slope = 0);
+	while (++i < sector->npoints)
+		if (sector->wall[i]->id == *wall_slope)
+			return (*wall_slope = i);
+	return (*wall_slope = 0);
+}
+
+/*
  *	For each sector:
  *	Calculate sector center.
  *	Fix wall orientation to be clockwise.
  *	Fix wall order, if not possible error.
  *	If sector convex, else error.
  */
-int	check_map(t_doom *doom)
+static int	check_map(t_doom *doom)
 {
 	int	i;
 
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
+		fix_slopes_start_index(&doom->sectors[i],
+			&doom->sectors[i].floor_incl_start);
+		fix_slopes_start_index(&doom->sectors[i],
+			&doom->sectors[i].ceiling_incl_start);
 		sector_center(&doom->sectors[i]);
 		fix_wall_orientation(&doom->sectors[i]);
 		if (!fix_wall_order(&doom->sectors[i]))

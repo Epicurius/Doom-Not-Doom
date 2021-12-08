@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:23:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:00:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void	parse_vertex(t_doom *doom, int nb, char **arr)
 {
-	if (nb < 2)
+	if (nb < 3)
 		error_msg("Invalid amount of vertex arguments %s\n", arr[0]);
 	doom->vert[ft_atoi(arr[0])].x = ft_atoi(arr[1]) * doom->map_scale;
 	doom->vert[ft_atoi(arr[0])].y = ft_atoi(arr[2]) * doom->map_scale;
