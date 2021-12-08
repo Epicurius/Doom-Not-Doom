@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/11/23 09:05:18 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/08 16:57:46 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,9 +164,8 @@ LIB_DIR		=	../libs
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
 				-I $(LIB_DIR)/libtp \
-				-I $(LIB_DIR)/libgfx \
 				-I $(LIB_DIR)/libbxpm \
-				-I $(LIB_DIR)/libui_v3 \
+				-I $(LIB_DIR)/libui \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2.framework/Headers \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2_image.framework/Headers \
 				-I $(LIB_DIR)/SDL_Frameworks/SDL2_mixer.framework/Headers \
@@ -175,9 +174,8 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
 				$(LIB_DIR)/libtp/libtp.a \
-				$(LIB_DIR)/libgfx/libgfx.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
-				$(LIB_DIR)/libui_v3/libui.a	\
+				$(LIB_DIR)/libui/libui.a	\
 				-framework SDL2 \
 				-framework SDL2_mixer \
 				-framework SDL2_image \
