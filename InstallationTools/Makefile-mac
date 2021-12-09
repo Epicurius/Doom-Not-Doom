@@ -6,21 +6,19 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/08 16:57:46 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/09 13:05:58 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL_NAME	= $(shell uname -s)
 
-RED			=	"\e[0;31m"
-GREEN		=	"\x1b[38;5;119m"
-ORANGE		=	"\x1b[38;5;208m"
-YELLOW		=	"\e[0;33m"
-BLUE		=	"\e[0;34m"
-MAGENTA		=	"\e[0;35m"
-CYAN		=	"\e[0;36m"
-UNDERLINE	=	"\x1b[4m"
-RESET		=	"\e[0m"
+RED		:= "\e[0;31m"
+GREEN	:= "\e[0;32m"
+YELLOW	:= "\e[0;33m"
+BLUE	:= "\e[0;34m"
+MAGENTA	:= "\e[0;35m"
+CYAN	:= "\e[0;36m"
+RESET	:= "\e[0m"
 
 CFILES		=	ai_attack.c\
 				ai_movement.c\
@@ -205,18 +203,18 @@ $(NAME): $(OBJ)
 	@Rez -a icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
 	@rm icon.rsrc
-	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
+	@printf ${GREEN}"\e[J> $(NAME) ready!\n"${RESET}
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
-	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
+	@printf $(YELLOW)"\e[JCompiling $<\n\e[F"$(RESET)
 
 clean:
-	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
+	@printf $(CYAN)"[INFO] Removing objs.\n"$(RESET)
 	@rm -rf $(ODIR)
 
 fclean: clean
-	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
+	@printf $(CYAN)"[INFO] Removing $(NAME)\n"$(RESET)
 	@rm -f $(NAME)
 
 $(RESOURCES):
