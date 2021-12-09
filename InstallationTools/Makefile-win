@@ -6,21 +6,19 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/09/05 06:55:18 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/09 13:15:59 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SHELL_NAME	:= $(shell uname -s)
+SHELL_NAME	= $(shell uname -s)
 
-RED			:=	"\e[0;31m"
-GREEN		:=	"\x1b[38;5;119m"
-ORANGE		:=	"\x1b[38;5;208m"
-YELLOW		:=	"\e[0;33m"
-BLUE		:=	"\e[0;34m"
-MAGENTA		:=	"\e[0;35m"
-CYAN		:=	"\e[0;36m"
-UNDERLINE	:=	"\x1b[4m"
-RESET		:=	"\e[0m"
+RED		:= "\e[0;31m"
+GREEN	:= "\e[0;32m"
+YELLOW	:= "\e[0;33m"
+BLUE	:= "\e[0;34m"
+MAGENTA	:= "\e[0;35m"
+CYAN	:= "\e[0;36m"
+RESET	:= "\e[0m"
 
 CFILES		=	ai_attack.c\
 				ai_movement.c\
@@ -105,16 +103,7 @@ CFILES		=	ai_attack.c\
 				Free/free2.c\
 				Free/free3.c\
 				Free/free4.c\
-				BuyMenu/buy_menu.c\
-				BuyMenu/buy_menu_buttons.c\
-				BuyMenu/buy_menu_help.c\
-				BuyMenu/buy_menu_init.c\
-				BuyMenu/buy_menu_player.c\
-				BuyMenu/buy_menu_player_stats.c\
-				BuyMenu/buy_menu_player_upgrades.c\
-				BuyMenu/buy_menu_weapon.c\
-				BuyMenu/buy_menu_weapon_stats.c\
-				BuyMenu/buy_menu_weapon_upgrades.c\
+				BuyMenu/buymenu.c\
 				Draw/draw2.c\
 				Draw/draw_bullet_holes.c\
 				Draw/draw_ceiling.c\
@@ -165,47 +154,26 @@ ODIR		=	obj
 INC			=	-I./inc -I../
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
-DEP			:=	$(OBJ:.o=.d)
+DEP			=	$(OBJ:.o=.d)
+RESOURCES	=	resources
 
-SDL_DIR		:= ../libs/SDL
-SDL_INC		:= -I$(SDL_DIR)/include
-SDL_LIB		:= -L$(SDL_DIR)/lib
-SDL_LIBS	:= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LIB_DIR		=	../libs
 
-LIB_DIR		:= ../libs
+LIB_INC		=	-I $(LIB_DIR)/libft \
+				-I $(LIB_DIR)/libpf \
+				-I $(LIB_DIR)/libtp \
+				-I $(LIB_DIR)/libbxpm \
+				-I $(LIB_DIR)/libui \
+				-I $(SDL_DIR)/SDL/include
 
-INCL		= \
-			  -I$(LIB_DIR)/libft \
-			  -I$(LIB_DIR)/better_libui \
-			  -I$(LIB_DIR)/libpf \
-			  -I$(LIB_DIR)/libgfx \
-			  $(SDL_INC) \
-			  -I$(LIB_DIR)/libtp \
-			  -I$(LIB_DIR)/libbxpm \
-
-LIBR		= \
-			  -L$(LIB_DIR)/libft \
-			  -L$(LIB_DIR)/better_libui \
-			  -L$(LIB_DIR)/libpf \
-			  -L$(LIB_DIR)/libgfx \
-			  $(SDL_LIB) \
-			  -L$(LIB_DIR)/libtp \
-			  -L$(LIB_DIR)/libbxpm \
-
-LIBRA		= \
-			  -lui \
-			  -lpf \
-			  -lft \
-			  -lgfx \
-			  $(SDL_LIBS) \
-			  -ltp \
-			  -lbxpm \
-
-LIBS		= $(INCL) $(INC) $(LIBR) $(LIBRA)
-
-CFLAGS		=	-Wall -Wextra -MMD
-
-RESOURCES	=	./resources
+LIBS		=	$(LIB_DIR)/libft/libft.a \
+				$(LIB_DIR)/libpf/libpf.a \
+				$(LIB_DIR)/libtp/libtp.a \
+				$(LIB_DIR)/libbxpm/libbxpm.a \
+				$(LIB_DIR)/libui/libui.a \
+				-L $(SDL_DIR)/lib -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+				
+CFLAGS		=	-Wall -Wextra -MMD #-Werror -Wfatal-errors -g -fsanitize=address
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
@@ -224,26 +192,31 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(OBJ) -o $(NAME)
-	@printf $(ORANGE)$(UNDERLINE)"\e[F\e[JDoom is ready $(SHELL_NAME)\n"$(RESET)
+	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
+	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
+	@Rez -a icon.rsrc -o $(NAME)
+	@SetFile -a C $(NAME)
+	@rm icon.rsrc
+	@printf ${GREEN}"\e[J> $(NAME) ready!\n"${RESET}
 
 $(ODIR)/%.o: $(CDIR)/%.c
-	@gcc -c $< -o $@ $(CFLAGS) $(LIBS) -w
-	@printf $(GREEN)"\e[F\e[JCompiling $<\n"$(RESET)
+	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
+	@printf $(YELLOW)"\e[JCompiling $<\n\e[F"$(RESET)
 
 clean:
-	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
+	@printf $(CYAN)"[INFO] Removing objs.\n"$(RESET)
 	@rm -rf $(ODIR)
 
 fclean: clean
-	@printf $(CYAN)"[INFO]	Deleted $(NAME)\n"$(RESET)
+	@printf $(CYAN)"[INFO] Removing $(NAME)\n"$(RESET)
 	@rm -f $(NAME)
 
 $(RESOURCES):
-	@./google_drive.sh
+	@./InstallationTools/google_drive.sh
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
 
 re: fclean all
 
-.PHONY: clean, all, re, fclean, resources, framework, framework_del, frameworks_re
+.PHONY: clean, all, re, fclean, resources
+
