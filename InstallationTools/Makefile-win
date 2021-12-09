@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/09 13:31:19 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/09 13:40:51 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,7 +197,7 @@ $(NAME): $(OBJ)
 	@Rez -a icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
 	@rm icon.rsrc
-	@printf ${GREEN}"\e[J> $(NAME) ready!\n"${RESET}
+	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
