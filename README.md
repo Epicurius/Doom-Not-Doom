@@ -1,4 +1,4 @@
-<img src="./Readme_assets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
+<img src="./ReadMeAssets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.<br>
 Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
@@ -12,7 +12,7 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 * [Events](#events)
 * [Features](#features)
 ---
-<img src="./Readme_assets/cover_image.jpg" alt="cover_image" width="900"/></p>
+<img src="./ReadMeAssets/cover_image.jpg" alt="cover_image" width="900"/></p>
 ### Installation
 ```sh
 git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
@@ -55,7 +55,7 @@ In my mind a game with many features but low performance is worse that the oppos
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)<br>
 multithreading (pthreads) was my best option.<br>
 
-<img src="./Readme_assets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
+<img src="./ReadMeAssets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 
 ```ruby
 1  - Game is launched.
@@ -98,7 +98,7 @@ while the main thread can do tasks that don't require the screen surface, e.g. c
 And when all map surfaces have been drawn no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
 ###### Map rendering on one thread, first monochrome then with texture.</center>
-<img src="./Readme_assets/map_render.gif" alt="Engine_Flow" width="900"/></n>
+<img src="./ReadMeAssets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
 When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.<br>
 each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment<br>
@@ -119,7 +119,7 @@ When the entity is inside their attack range they will get the state ATTACK and 
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
 During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.<br>
 
-<img src="./Readme_assets/frame.jpg" alt="Engine_Flow" width="800"/><br>
+<img src="./ReadMeAssets/frame.jpg" alt="Engine_Flow" width="800"/><br>
 Each entity frames are divided into the entity states and into FRAME and ANGLE.<br>
 Take for example the above image, it has move animation of 8 frames with each having 3 angles.<br>
 When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.<br>
@@ -267,7 +267,7 @@ Walls are a line segment connected to 2 vertices.<br>
 Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
 Each sector has its own floor and ceiling.<br>
 
-<img src="./Readme_assets/map.jpg" alt="Engine_Flow" width="700"/></p>
+<img src="./ReadMeAssets/map.jpg" alt="Engine_Flow" width="700"/></p>
 
 
 ```
