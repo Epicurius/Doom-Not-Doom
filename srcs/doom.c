@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 18:02:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 19:35:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	launcher(void)
 {
 	char	*arr[2];
 
-	arr[0] = ft_strdup(ROOT_PATH"/launcher/launcher");
+	arr[0] = ft_strdup(ROOT_PATH"wolf3d");
 	arr[1] = NULL;
 	execv(arr[0], arr);
 }
@@ -87,9 +87,9 @@ int	main(int ac, char **av)
 		print_help_msg();
 	args(ac, av, &settings);
 	game(av[1], settings);
-	if (settings.launcher)
-		launcher();
 	if (settings.debug)
 		system("leaks doom");
+	if (settings.launcher)
+		launcher();
 	return (1);
 }
