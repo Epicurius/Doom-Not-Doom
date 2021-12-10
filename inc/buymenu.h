@@ -64,4 +64,20 @@ typedef struct s_buymenu
 	t_inv			*inv;
 }					t_buymenu;
 
+void	weapon_buy_init(t_buymenu *buymenu);
+void	weapon_menu_init(t_buymenu *buymenu);
+void	weapon_upgrade_init(t_buymenu *buymenu);
+void	player_upgrade_init(t_buymenu *buymenu);
+void	weapon_stat_init(t_buymenu *buymenu);
+void	player_stat_init(t_buymenu *buymenu);
+void	buymenu_init(t_buymenu *buymenu);
+
+void	update_currency(t_buymenu *buymenu);
+void	update_amount_label(t_buymenu *buymenu, int wep_type);
+void	update_upgrade_labels(t_buymenu *buymenu, int wep_type);
+void	update_weapon_stats(t_buymenu *buymenu);
+void	update_player_stat_amount_labels(t_buymenu *buymenu);
+void	update_player_upgrade_amount_labels(t_buymenu *buymenu);
+void	update_player_stats(t_buymenu *buymenu);
+
 #endif
