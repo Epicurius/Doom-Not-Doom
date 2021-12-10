@@ -7,10 +7,8 @@ if (( availSpace < reqSpace )); then
 	echo "After install sace required ~280MB"
 	exit 1
 fi
-printf "\033[0;36m"
 fileid="19_wBvvbEuSnkhDEvxxdylP1BjGMXhbFx"
 filename="file.tar.gz"
 curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
-curl -Lb ./cookie -# "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
-printf "\033[0m"
+curl -Lb ./cookie -s "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
 rm cookie

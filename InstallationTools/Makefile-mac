@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/10 14:21:50 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/10 16:23:59 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,9 +179,11 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				-framework SDL2_image \
 				-framework SDL2_ttf -F $(LIB_DIR)/SDL_Frameworks
 
-CFLAGS		=	-Wall -Wextra -Werror -MMD# -Wfatal-errors -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -MMD #-Werror -Wfatal-errors -g -fsanitize=address
 
-all: $(RESOURCES) $(ODIR) $(NAME)
+
+all: | $(RESOURCES) $(ODIR) $(NAME)
+	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 -include $(DEP)
 
@@ -199,11 +201,10 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
-	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
+	@echo "read 'icns' (-16455) \"ReadMeAssets/DND.icns\";" >> icon.rsrc
 	@Rez -a icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
 	@rm icon.rsrc
-	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c -O3 $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
@@ -218,10 +219,8 @@ fclean: clean
 	
 $(RESOURCES):
 	@./InstallationTools/google_drive.sh || (exit)
-	@printf $(CYAN)"Extracting files.\n\e[J"$(RESET)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
-	@printf $(CYAN)"\e[FSuccess! Deleting zip file.\n"$(RESET)
 
 framework:
 	@mkdir -p ~/Library/Frameworks
