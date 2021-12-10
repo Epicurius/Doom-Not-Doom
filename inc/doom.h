@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:08:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # include <fcntl.h>
 
 // IPC x CLOCK x Data Size x Time
-#  define PROT_ALLOC(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
+
+//#  define protalloc(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
 typedef struct s_settings
 {
@@ -575,8 +576,7 @@ void				project_entity(t_doom *doom, t_entity *ent,
 /* File: project_wall.c */
 void				project_wall(t_doom *doom, t_wall *wall);
 /* File: protalloc.c */
-void				*protalloc(size_t size, char *file,
-						const char *func, int line);
+void				*protalloc(size_t size);
 void				reset_sectbool(t_doom *doom, int curr_sect);
 /* File: purge_entities.c */
 void				purge_entities(t_doom *doom);

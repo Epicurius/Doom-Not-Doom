@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 12:22:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	shade_bxpm(t_doom *doom, int texture, int light)
 	if (texture < 0 || doom->mtx[texture].shade[255 + light] != NULL)
 		return ;
 	bxpm = &doom->mtx[texture];
-	bxpm->shade[255 + light] = PROT_ALLOC(sizeof(Uint32 *) * bxpm->clr_nb);
+	bxpm->shade[255 + light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb);
 	while (++i < bxpm->clr_nb)
 	{
 		if (bxpm->clr[i] == 0xFF800080)

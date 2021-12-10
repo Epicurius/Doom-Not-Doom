@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:24:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 
 	if (nb < 7)
 		error_msg("Invalid amount of entity arguments %s\n", arr[0]);
-	entity = PROT_ALLOC(sizeof(t_entity));
+	entity = protalloc(sizeof(t_entity));
 	entity->type = entity_type(arr[1]);
 	entity->where.x = ft_atoi(arr[2]) * doom->map_scale;
 	entity->where.y = ft_atoi(arr[3]) * doom->map_scale;
