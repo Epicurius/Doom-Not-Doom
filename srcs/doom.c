@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:22:27 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:51:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	launcher(void)
 {
 	char	*arr[2];
 
-	arr[0] = ft_strdup(ROOT_PATH"/wolf3d");
+	arr[0] = ft_strdup(ROOT_PATH"/launcher/launcher");
 	arr[1] = NULL;
 	execv(arr[0], arr);
 }
