@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/10 17:28:05 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/10 17:44:55 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,8 @@ CFILES		=	ai_attack.c\
 				BuyMenu/bm_init2.c\
 				BuyMenu/bm_update1.c\
 				BuyMenu/bm_update2.c\
+				BuyMenu/bm_event.c\
+				BuyMenu/bm_attempt.c\
 				Draw/draw2.c\
 				Draw/draw_bullet_holes.c\
 				Draw/draw_ceiling.c\

@@ -13,8 +13,10 @@
 
 /*
  *	t_list	*weapon_buttons;	list of t_ui_element;
- *	t_ui_element *active_weapon_button; the currently clicked weapon_button from 'weapon_buttons';
- *	int				wep_type;	one of e_weapon_types; whichi is currently selected;
+ *	t_ui_element *active_weapon_button; the currently clicked weapon_button
+ 		from 'weapon_buttons';
+ *	int				wep_type;	one of e_weapon_types; whichi
+ 		is currently selected;
 */
 typedef struct s_buymenu
 {
@@ -79,5 +81,19 @@ void	update_weapon_stats(t_buymenu *buymenu);
 void	update_player_stat_amount_labels(t_buymenu *buymenu);
 void	update_player_upgrade_amount_labels(t_buymenu *buymenu);
 void	update_player_stats(t_buymenu *buymenu);
+
+void	event_weapon_buy(t_buymenu *buymenu);
+void	event_weapon_stat_buy(t_buymenu *buymenu);
+void	event_player_stat_buy(t_buymenu *buymenu);
+void	user_events(t_buymenu *buymenu, SDL_Event e);
+void	check_which(t_buymenu *buymenu, int wep_type);
+
+void	attempt_buying_weapon(t_buymenu *buymenu, int wep_type);
+void	attempt_buying_stat(int *dosh, int price, int *stat, int stat_inc);
+void	attempt_buying_stat_f(int *dosh, int price, float *stat, float stat_in);
+
+void	disable_not_affordable_weapon_upgrade_buttons(t_buymenu *buymenu);
+void	disable_not_affordable_player_upgrade_buttons(t_buymenu *buymenu);
+void	buymenu_free(t_buymenu *buymenu);
 
 #endif
