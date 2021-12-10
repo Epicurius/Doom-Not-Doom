@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:34:12 by nneronin          #+#    #+#             */
-/*   Updated: 2021/08/11 09:57:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  *	Precomputes the BuyMenu.
  *	Chenges music, releases the mouse and afterward flushes the events.
  */
-void	precompute_buy_menu(t_doom *doom)
+void	precompute_buymenu(t_doom *doom)
 {
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
 	SDL_SetRelativeMouseMode(SDL_FALSE);

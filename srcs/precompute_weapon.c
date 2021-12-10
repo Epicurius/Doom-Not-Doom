@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:23:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:13:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	weapon_fire_animate(t_doom *doom, t_weapon *weapon)
 	{
 		if (!weapon->frame)
 		{
-			if (doom->player.equipped == 4)
+			if (doom->player.equipped == WEAPON_LAUNCHER)
 				fire_orb(doom);
 			else
 				doom->player.action = SHOOTING;
@@ -86,16 +86,16 @@ void	weapon_reload_animate(t_doom *doom, t_weapon *weapon)
  */
 void	equip_weapon(t_doom *doom)
 {
-	if (doom->weapon[0].own && doom->keys[SDL_SCANCODE_1])
-		doom->player.equipped = 0;
-	else if (doom->weapon[1].own && doom->keys[SDL_SCANCODE_2])
-		doom->player.equipped = 1;
-	else if (doom->weapon[2].own && doom->keys[SDL_SCANCODE_3])
-		doom->player.equipped = 2;
-	else if (doom->weapon[3].own && doom->keys[SDL_SCANCODE_4])
-		doom->player.equipped = 3;
-	else if (doom->weapon[4].own && doom->keys[SDL_SCANCODE_5])
-		doom->player.equipped = 4;
+	if (doom->weapon[WEAPON_SHOTGUN].own && doom->keys[SDL_SCANCODE_1])
+		doom->player.equipped = WEAPON_SHOTGUN;
+	else if (doom->weapon[WEAPON_GUN].own && doom->keys[SDL_SCANCODE_2])
+		doom->player.equipped = WEAPON_GUN;
+	else if (doom->weapon[WEAPON_KAR].own && doom->keys[SDL_SCANCODE_3])
+		doom->player.equipped = WEAPON_KAR;
+	else if (doom->weapon[WEAPON_LAUNCHER].own && doom->keys[SDL_SCANCODE_4])
+		doom->player.equipped = WEAPON_LAUNCHER;
+	else if (doom->weapon[WEAPON_MINIGUN].own && doom->keys[SDL_SCANCODE_5])
+		doom->player.equipped = WEAPON_MINIGUN;
 }
 
 /*

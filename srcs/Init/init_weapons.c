@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 14:19:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:06:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void	weapon_texture_array(t_doom *doom)
 
 void	init_weapons(t_doom *doom)
 {
-	init_shotgun(doom, &doom->weapon[0]);
-	init_glock(doom, &doom->weapon[1]);
-	init_minigun(doom, &doom->weapon[2]);
-	init_kar98(doom, &doom->weapon[3]);
-	init_launcher(doom, &doom->weapon[4]);
+	init_shotgun(doom, &doom->weapon[WEAPON_SHOTGUN]);
+	init_glock(doom, &doom->weapon[WEAPON_GUN]);
+	init_minigun(doom, &doom->weapon[WEAPON_MINIGUN]);
+	init_kar98(doom, &doom->weapon[WEAPON_KAR]);
+	init_launcher(doom, &doom->weapon[WEAPON_LAUNCHER]);
 	weapon_texture_array(doom);
 }

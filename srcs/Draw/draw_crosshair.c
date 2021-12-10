@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:53:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:13:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_crosshair(t_doom *doom)
 	int		x;
 	Uint32	*pixels;
 
-	if (doom->player.equipped == 4)
+	if (doom->player.equipped == WEAPON_LAUNCHER)
 		return ;
 	pixels = doom->surface->pixels;
 	x = doom->c.x;

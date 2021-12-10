@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 12:24:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:11:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,15 @@ void	init_textures(t_doom *doom)
 	parse_bxpm(doom, ICON_TEXTURE_AMOUNT,
 		doom->itx, g_icon_textures);
 	parse_bxpm(doom, SHOTGUN_TEXTURE_AMOUNT,
-		doom->weapon[0].bxpm, g_shotgun_textures);
+		doom->weapon[WEAPON_SHOTGUN].bxpm, g_shotgun_textures);
 	parse_bxpm(doom, GLOCK_TEXTURE_AMOUNT,
-		doom->weapon[1].bxpm, g_glock_textures);
+		doom->weapon[WEAPON_GUN].bxpm, g_glock_textures);
 	parse_bxpm(doom, MINIGUN_TEXTURE_AMOUNT,
-		doom->weapon[2].bxpm, g_minigun_textures);
+		doom->weapon[WEAPON_MINIGUN].bxpm, g_minigun_textures);
 	parse_bxpm(doom, KAR_TEXTURE_AMOUNT,
-		doom->weapon[3].bxpm, g_kar_textures);
+		doom->weapon[WEAPON_KAR].bxpm, g_kar_textures);
 	parse_bxpm(doom, LAUNCHER_TEXTURE_AMOUNT,
-		doom->weapon[4].bxpm, g_launcher_textures);
+		doom->weapon[WEAPON_LAUNCHER].bxpm, g_launcher_textures);
 	init_clock(doom, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	sector_shading(doom, -1, -1);
 }

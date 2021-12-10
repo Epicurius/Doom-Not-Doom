@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	else
 	{
 		if (event->type == STORE && doom->player.store_access)
-			precompute_buy_menu(doom);
+			precompute_buymenu(doom);
 		else if (event->type == AUDIO && event->audio)
 			Mix_PlayChannel(CHANNEL_TTS, event->audio, 0);
 		else if (event->type == SPAWN)

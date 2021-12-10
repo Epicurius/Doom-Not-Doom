@@ -1,5 +1,4 @@
 style : srcs/BuyMenu/layout.style;
-resource_dir : srcs/BuyMenu/ICON/;
 resource_dir : resources/ICON/;
 
 Window main_win

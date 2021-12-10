@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:01:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ Uint32	brightness(Uint32 src, int light)
 {
 	if (light == 0)
 		return (src);
-	return (
-		(int)ft_clamp(((light + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16
-		| (int)ft_clamp(((light + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8
-		| (int)ft_clamp(((light + 256) * (src & 0xFF)) / 256, 0, 255));
+	return (255 << 24
+		| ft_clamp(((light + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16
+		| ft_clamp(((light + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8
+		| ft_clamp(((light + 256) * (src & 0xFF)) / 256, 0, 255));
 }
 
 /*

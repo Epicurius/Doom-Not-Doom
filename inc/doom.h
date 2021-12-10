@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -549,7 +549,7 @@ void				movement(t_doom *doom);
 /* File: orientation.c */
 int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
 /* File: precompute_buy_menu.c */
-void				precompute_buy_menu(t_doom *doom);
+void				precompute_buymenu(t_doom *doom);
 /* File: precompute_entities.c */
 void				precompute_entities(t_doom *doom);
 /* File: precompute_projectiles.c */
