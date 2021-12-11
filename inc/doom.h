@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:36:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -595,7 +595,7 @@ void				what_vert(t_doom *doom);
 /* File: sector_trigger_events.c */
 void				sector_trigger_events(t_doom *doom, t_event *event);
 /* File: sound.c */
-void				mute(int i);
+void				set_volume(int i);
 void				init_sound(t_doom *doom);
 /* File: spawn_entity.c */
 void				spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);

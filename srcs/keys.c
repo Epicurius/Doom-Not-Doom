@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 10:43:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/17 18:09:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:36:27 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	get_events(t_doom *doom, char *key)
 
 /*
  *	After checking all the events with get_events.
- *	Check if mute or unmute.
  *	Check if tp player to center of sector. (Useful if stuck)
  *	Set player action to clicking.
  */
@@ -50,12 +49,12 @@ void	poll_event(t_doom *doom)
 	get_events(doom, key);
 	if (key[SDL_SCANCODE_ESCAPE] || key[SDL_SCANCODE_Q])
 		doom->quit = TRUE;
-	if (key[SDL_SCANCODE_M])
-		mute(key[SDL_SCANCODE_M] = 0);
 	if (key[SDL_SCANCODE_GRAVE])
 		doom->player.where = doom->sectors[doom->player.sector].center;
 	if (doom->player.action == NONE && key[SDL_SCANCODE_E])
 		doom->player.action = CLICKING;
 	if (doom->settings.debug && key[SDL_SCANCODE_F])
 		doom->player.flight = doom->player.flight == FALSE;
+	if (key[SDL_SCANCODE_EQUALS] || key[SDL_SCANCODE_MINUS])
+		set_volume(key[SDL_SCANCODE_EQUALS]);
 }

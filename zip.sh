@@ -1,0 +1,1 @@
+tar -czf DnD_Game_Assets resources

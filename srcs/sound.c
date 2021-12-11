@@ -6,22 +6,23 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/11 11:13:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:37:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Mute or unmute sounds.
+ *	Adjust volume ingame.
  */
-void	mute(int i)
+void	set_volume(int i)
 {
-	(void)i;
-	if (Mix_Volume(-1, -1) <= 0)
-		Mix_Volume(-1, 64);
-	else
-		Mix_Volume(-1, 0);
+	static int curr = 64;
+	
+	if (curr >= 0 && curr < 128 && i)
+		Mix_Volume(-1, ++curr);
+	else if (curr > 0 && curr <= 128 && !i)
+		Mix_Volume(-1, --curr);
 }
 
 /*
@@ -64,5 +65,7 @@ void	init_sound(t_doom *doom)
 			free(doom->events[i].path);
 		}
 	}
-	//Mix_Volume(-1, 0);
+	if (doom->game.mode == ENDLESS && !doom->settings.debug)
+		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
+	set_volume(1);
 }
