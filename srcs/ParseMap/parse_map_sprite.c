@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:25:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parse_wsprite(t_doom *doom, int nb, char **arr)
 	sprite->where.x = ft_atof(arr[2]) * doom->map_scale;
 	sprite->where.y = ft_atof(arr[3]) * doom->map_scale;
 	sprite->tx = ft_atoi(arr[4]);
-	sprite->scale_w = ft_atof(arr[5]) * doom->map_scale;
+	sprite->scale_w = (ft_atof(arr[5]) / 100) * doom->map_scale;
 	sprite->state = wsprite_state(arr[6]);
 	sprite->trigger = -1;
 }
