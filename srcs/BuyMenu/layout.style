@@ -9,7 +9,6 @@ Label
 main_win
 {
 	bg_color : 0xff00ff00;
-	flags : resizeable;
 	flag : resizeable;
 };
 
