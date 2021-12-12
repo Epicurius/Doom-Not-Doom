@@ -6,12 +6,17 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 15:59:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:16:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
+
+/*
+** Sound
+*/
+# define DEFAULT_VOLUME					0
 
 /*
 ** Screen info
@@ -35,7 +40,6 @@
 /*
 ** Entities
 */
-# define ACTIVE_AREA					50
 # define FRAMES							0
 # define ANGLES							1
 # define PLAYER_PROJECTILE_MAX_RANGE	100

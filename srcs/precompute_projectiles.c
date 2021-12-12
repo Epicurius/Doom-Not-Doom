@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:12:25 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:22:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:18:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
  */
 static int	vertical_collision_lite(t_doom *doom, t_projectile *orb)
 {
-	if (orb->where.z + orb->velocity.z + 2
-		> ceiling_at(&doom->sectors[orb->sector], orb->where)
-		|| orb->where.z + orb->velocity.z
-		< floor_at(&doom->sectors[orb->sector], orb->where))
+	if (orb->where.z > ceiling_at(&doom->sectors[orb->sector], orb->where)
+		|| orb->where.z < floor_at(&doom->sectors[orb->sector], orb->where))
 		return (1);
 	return (0);
 }

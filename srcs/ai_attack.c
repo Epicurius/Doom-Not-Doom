@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 10:54:02 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_v3	projectile_movement(t_doom *doom, t_v3 curr, t_v3 dest)
 	float	dist;
 
 	curr.z += 4.5;
-	dest.z += doom->player.eyelvl - 2;
+	dest.z += doom->player.eyelvl - 1;
 	velocity = sub_v3(dest, curr);
 	if (velocity.x == 0 && velocity.y == 0 && velocity.z == 0)
 		return (velocity);

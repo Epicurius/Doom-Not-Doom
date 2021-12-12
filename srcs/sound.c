@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/11 16:37:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:35:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 void	set_volume(int i)
 {
-	static int curr = 64;
-	
+	static int	curr = DEFAULT_VOLUME + 1;
+
 	if (curr >= 0 && curr < 128 && i)
 		Mix_Volume(-1, ++curr);
 	else if (curr > 0 && curr <= 128 && !i)
@@ -65,7 +65,9 @@ void	init_sound(t_doom *doom)
 			free(doom->events[i].path);
 		}
 	}
+	set_volume(0);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
-	set_volume(1);
+	else
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], 0);
 }
