@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:21:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:50:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,18 @@ static int	check_map(t_doom *doom)
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
-		fix_slopes_start_index(&doom->sectors[i],
-			&doom->sectors[i].floor_incl_start);
-		fix_slopes_start_index(&doom->sectors[i],
-			&doom->sectors[i].ceiling_incl_start);
 		sector_center(&doom->sectors[i]);
 		fix_wall_orientation(&doom->sectors[i]);
 		if (!fix_wall_order(&doom->sectors[i]))
 			return (0);
 		if (!is_convex(&doom->sectors[i]))
 			return (0);
+		fix_slopes_start_index(&doom->sectors[i],
+			&doom->sectors[i].floor_incl_start);
+		fix_slopes_start_index(&doom->sectors[i],
+			&doom->sectors[i].ceiling_incl_start);
+		doom->sectors[i].center.z = floor_at(&doom->sectors[i],
+				doom->sectors[i].center);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:06:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:48:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	sector_center(t_sector *sector)
 	}
 	sector->center.x /= 6.0 * (a * 0.5);
 	sector->center.y /= 6.0 * (a * 0.5);
-	sector->center.z = floor_at(sector, sector->center);
 }
 
 /*

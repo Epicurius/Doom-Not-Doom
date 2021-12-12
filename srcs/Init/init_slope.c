@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 10:06:20 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:23:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:20:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	init_slope_normal(t_doom *doom)
 				doom->sectors[i].floor_incl_start);
 		doom->sectors[i].top_normal = get_unit_normal_vector(&doom->sectors[i],
 				doom->sectors[i].ceiling_incl_start);
+		ft_printf("%d\n", doom->sectors[i].floor_incl_start);
 	}
 }
