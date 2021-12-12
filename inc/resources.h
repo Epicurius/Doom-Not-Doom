@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 13:17:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/12 17:25:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{14, BXPM_PATH"fiber_wall.bxpm"},
 	{15, BXPM_PATH"rock.bxpm"},
 	{16, BXPM_PATH"steel_tile1.bxpm"},
-	{17, BXPM_PATH"steel_tile2.bxpm"},
-	{18, BXPM_PATH"steel_tlight.bxpm"},
+	{17, BXPM_PATH"WarPoster.bxpm"},
+	{18, BXPM_PATH"hand.bxpm"},
 	{19, BXPM_PATH"wires.bxpm"},
 	{20, BXPM_PATH"clock.bxpm"}
 };
