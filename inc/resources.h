@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resources.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 17:25:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:39:15 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 
 # define MAP_TEXTURE_AMOUNT	21
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
-{	
+{
 	{0, BXPM_PATH"bullet_hole.bxpm"},
 	{1, BXPM_PATH"vent.bxpm"},
 	{2, BXPM_PATH"tile_floor.bxpm"},
@@ -490,6 +490,33 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.path = BXPM_PATH"objects.bxpm",
 		.tc = {178, 242, 28, 18}
 	}
+};
+
+static const char	*g_event_type[EVENT_TYPE_AMOUNT] =
+{
+	"None",
+	"Ceiling",
+	"Floor",
+	"Store",
+	"Hazard",
+	"Audio",
+	"Spawn",
+	"Light"
+};
+
+static const char	*g_sprite_type[SPRITE_TYPE_AMOUNT] =
+{
+	"STATIC",
+	"LOOP",
+	"ACTION"
+};
+
+static const char	*g_event_action[EVENT_ACTION_AMOUNT] =
+{
+	"NONE",
+	"SHOOT",
+	"CLICK",
+	"SECTOR"
 };
 
 #endif

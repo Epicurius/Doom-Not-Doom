@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 18:05:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:39:49 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,25 +97,29 @@ enum e_player_action
 	NONE,
 	SHOOTING,
 	CLICKING,
-	SECTOR
+	SECTOR,
+	EVENT_ACTION_AMOUNT
 };
 
 enum e_event_type
 {
+	NONE_TYPE,
 	CEILING,
 	FLOOR,
 	STORE,
 	HAZARD,
 	AUDIO,
 	SPAWN,
-	LIGHT
+	LIGHT,
+	EVENT_TYPE_AMOUNT
 };
 
 enum e_wsprite_action
 {
 	STATIC,
 	LOOP,
-	ACTION
+	ACTION,
+	SPRITE_TYPE_AMOUNT
 };
 
 enum e_game_mode
