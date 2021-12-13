@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:51:35 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 10:24:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:32:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	init_player(t_doom *doom)
 {
 	doom->player.where.z = ft_fmax(doom->player.where.z,
 			floor_at(&doom->sectors[doom->player.sector], doom->player.where));
-	doom->player.health = 1100 - doom->settings.difficulty * 100;
+	doom->player.max_hp = 1100 - doom->settings.difficulty * 100;
+	doom->player.health = doom->player.max_hp;
 	doom->player.armour = 1000 - doom->settings.difficulty * 100;
 	doom->player.eyelvl = EYE_LVL;
 	doom->player.flight = doom->settings.debug;
