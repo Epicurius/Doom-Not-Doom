@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/19 13:11:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:00:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ static void	loop_events(t_doom *doom, t_event *event)
 	}
 }
 
+//void	round_trigger_events(t_doom *doom, t_event *event)
+//{
+//	
+//}
+
 /*
  *	Checks the type of map event.
  */
@@ -58,7 +63,12 @@ void	map_events(t_doom *doom)
 			loop_events(doom, &doom->events[i]);
 		else if (doom->events[i].action == SECTOR)
 			sector_trigger_events(doom, &doom->events[i]);
+		//else if (doom->events[i].action == ROUNDSTART)
+		//	round_trigger_events(doom, &doom->events[i]);
+		//else if (doom->events[i].action == ROUNDEND)
+		//	round_trigger_events(doom, &doom->events[i]);
 		else
 			wsprite_trigger_events(doom, &doom->events[i]);
+			
 	}
 }

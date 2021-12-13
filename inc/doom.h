@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/11 14:36:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:09:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -534,6 +534,9 @@ void				get_entity_state2(t_doom *doom, t_entity *entity);
 void				get_entity_state(t_doom *doom, t_entity *entity);
 /* File: help.c */
 void				print_help_msg(void);
+/* File: fix_map.c */
+void				fix_sector_index(t_doom *doom);
+int					correct_sector_index(t_doom *doom, int id);
 /* File: icon.c */
 int					set_icon(SDL_Window *window, char *dir);
 /* File: keys.c */
