@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/11/23 09:22:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:00:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ void	get_event_action(t_event *event, char *str)
 		event->action = SHOOTING;
 	else if (ft_strequ(str, "SECTOR"))
 		event->action = SECTOR;
+	//else if (ft_strequ(str, "ROUNDSTART"))
+	//	event->action = ROUNDSTART;
+	//else if (ft_strequ(str, "ROUNDEND"))
+	//	event->action = ROUNDEND;
 	else
 		event->action = NONE;
 }
@@ -102,7 +106,7 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 	if (event.action == CLICKING || event.action == SHOOTING)
 		find_wsprite_trigger(doom, &event, ft_atoi(arr[3]));
 	else if (event.action == SECTOR)
-		event.trigger_sector = ft_atoi(arr[3]);
+		event.trigger_sector = correct_sector_index(doom, ft_atoi(arr[3]));
 	if (event.type == FLOOR || event.type == CEILING)
 		floor_ceiling_event(doom, &event, nb, arr);
 	else if (event.type == SPAWN)

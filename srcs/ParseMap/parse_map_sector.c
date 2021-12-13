@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 10:47:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 13:55:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 {
 	t_sector *sector;
 	char	**slope;
+	static int	i = 0;
 
 	if (nb < 8)
 		error_msg("Invalid amount of f&c arguments %s\n", arr[0]);
-	sector = &doom->sectors[ft_atoi(arr[0])];
+	sector = &doom->sectors[i++];
 	sector->floor.height = ft_atof(arr[1]) * doom->map_scale;
 	sector->ceiling.height = ft_atof(arr[2]) * doom->map_scale;
 	sector->floor.tx = ft_atoi(arr[3]);
@@ -69,8 +70,8 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 /*
  *	Link wall to sector walls.
  */
-void	complete_wall(t_sector *sect, t_wall *walls, char **id,
-		char **neighbour)
+void	complete_wall(t_sector *sect, t_wall *walls,
+						char **id, char **neighbour)
 {
 	int	l;
 	int	wall_nb;
@@ -92,23 +93,24 @@ void	complete_wall(t_sector *sect, t_wall *walls, char **id,
 void	parse_sector(t_doom *doom, int ac, char **arr)
 {
 	int			nb;
-	t_sector	*sect;
+	t_sector	*sector;
 	char		**walls;
 	char		**neighbour;
+	static int	i = 0;
 
 	if (ac < 5)
 		error_msg("Invalid amount of sector arguments %s\n", arr[0]);
-	sect = &doom->sectors[ft_atoi(arr[0])];
-	sect->id = ft_atoi(arr[0]);
-	walls = stringsplit(arr[1], ' ', &sect->npoints);
-	sect->wall = protalloc(sizeof(t_wall *) * (sect->npoints));
+	sector = &doom->sectors[i++];
+	sector->id = ft_atoi(arr[0]);
+	walls = stringsplit(arr[1], ' ', &sector->npoints);
+	sector->wall = protalloc(sizeof(t_wall *) * (sector->npoints));
 	neighbour = stringsplit(arr[2], ' ', &nb);
-	if (nb != sect->npoints)
-		error_msg("Sect %d walls != Neighbours.\n", sect->id);
-	sect->gravity = ft_atoi(arr[3]) * 1.5;
-	sect->light = ft_atoi(arr[4]);
-	sect->trigger = FALSE;
-	complete_wall(sect, doom->walls, walls, neighbour);
+	sector->gravity = ft_atoi(arr[3]);
+	sector->light = ft_atoi(arr[4]);
+	sector->trigger = FALSE;
+	if (nb != sector->npoints)
+		error_msg("Sect %d npoints amount.\n", sector->id);
+	complete_wall(sector, doom->walls, walls, neighbour);
 	free(walls);
 	free(neighbour);
 }

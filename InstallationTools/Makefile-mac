@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/10 17:44:55 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/13 14:08:18 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ CFILES		=	ai_attack.c\
 				update_screen.c\
 				wsprite_trigger_events.c\
 				wall_to_screen_xz.c\
+				fix_map.c\
 				UI/game_loading.c\
 				UI/game_over.c\
 				UI/game_pause.c\
