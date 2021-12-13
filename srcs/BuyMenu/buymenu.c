@@ -6,7 +6,7 @@
 /*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:22:02 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/11 10:22:03 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/12/13 14:28:25 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	disable_not_affordable_weapon_upgrade_buttons(t_buymenu *buymenu)
 		< buymenu->inv->weapon[buymenu->wep_type].firerate_price)
 		buymenu->firerate_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh
-		< buymenu->inv->weapon[buymenu->wep_type].ammo_price)
+		< buymenu->inv->weapon[buymenu->wep_type].ammo_price
+		|| buymenu->inv->weapon[buymenu->wep_type].cur_ammo >=
+		buymenu->inv->weapon[buymenu->wep_type].max_ammo)
 		buymenu->ammo_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh
 		< buymenu->inv->weapon[buymenu->wep_type].max_ammo_price)
@@ -40,7 +42,8 @@ void	disable_not_affordable_player_upgrade_buttons(t_buymenu *buymenu)
 		buymenu->speed_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh < buymenu->inv->jump_price)
 		buymenu->jump_price_button->state = UI_STATE_DEFAULT;
-	if (buymenu->inv->dosh < buymenu->inv->armour_price)
+	if (buymenu->inv->dosh < buymenu->inv->armour_price
+		|| *buymenu->inv->armour >= buymenu->inv->max_armour)
 		buymenu->armor_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh < buymenu->inv->max_armour_price)
 		buymenu->max_armor_price_button->state = UI_STATE_DEFAULT;
