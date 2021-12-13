@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:03:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	}
 	else if (event->type == HAZARD)
 	{
-		if (floor_at(&doom->sectors[event->trigger_sector], doom->player.where)
+		if (floor_at(event->event_sector, doom->player.where)
 			+ 0.1 >= doom->player.where.z)
 			doom->player.health -= event->speed;
 		event->trigger = FALSE;

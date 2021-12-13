@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:07:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:04:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	hazard_event(t_doom *doom, t_event *event, int nb, char **arr)
 		error_msg("Invalid argument for event %s\n", arr[0]);
 	if (event->action != SECTOR)
 		error_msg("Event 'Hazard' can only have SECTOR as an action.");
-	event->trigger_sector = correct_sector_index(doom, ft_atoi(arr[3]));
-	event->speed = ft_atoi(arr[4]);
+	event->event_sector = &doom->sectors[correct_sector_index(doom, ft_atoi(arr[4]))];
+	event->speed = ft_atoi(arr[7]);
 }
 
 /*

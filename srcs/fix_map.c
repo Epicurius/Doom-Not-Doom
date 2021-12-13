@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:56:55 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:09:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:47:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int correct_sector_index(t_doom *doom, int id)
 			break ;
 	if (i < doom->nb.sectors)
 		return (i);
-	error_msg("Could not find correct entity sector.");
+	error_msg("Could not find correct sector.");
 	exit (1);
 }
 
