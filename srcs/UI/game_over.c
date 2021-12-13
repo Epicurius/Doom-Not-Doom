@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:57:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:12:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	blit_endless_stats(t_doom *doom, char *str)
 	SDL_Rect	dstr;
 	SDL_Surface	*surface;
 
-	ft_printf("%d\n", doom->game.mode);
 	if (doom->game.mode == ENDLESS)
 	{
 		str = ft_sprintf("Rounds Survived %d", doom->game.round);
