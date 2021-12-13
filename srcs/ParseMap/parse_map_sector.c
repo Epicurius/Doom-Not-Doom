@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 10:47:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,23 @@ void	parse_wall(t_doom *doom, int nb, char **arr)
  */
 void	parse_fc(t_doom *doom, int nb, char **arr)
 {
-	int		sect;
+	t_sector *sector;
 	char	**slope;
-	t_plane	*floor;
-	t_plane	*ceiling;
 
 	if (nb < 8)
 		error_msg("Invalid amount of f&c arguments %s\n", arr[0]);
-	sect = ft_atoi(arr[0]);
-	floor = &doom->sectors[sect].floor;
-	ceiling = &doom->sectors[sect].ceiling;
-	floor->height = ft_atof(arr[1]) * doom->map_scale;
-	ceiling->height = ft_atof(arr[2]) * doom->map_scale;
-	floor->tx = ft_atoi(arr[3]);
-	ceiling->tx = ft_atoi(arr[4]);
-	floor->scale = ft_atof(arr[5]) * doom->map_scale;
-	ceiling->scale = ft_atof(arr[6]) * doom->map_scale;
+	sector = &doom->sectors[ft_atoi(arr[0])];
+	sector->floor.height = ft_atof(arr[1]) * doom->map_scale;
+	sector->ceiling.height = ft_atof(arr[2]) * doom->map_scale;
+	sector->floor.tx = ft_atoi(arr[3]);
+	sector->ceiling.tx = ft_atoi(arr[4]);
+	sector->floor.scale = ft_atof(arr[5]) * doom->map_scale;
+	sector->ceiling.scale = ft_atof(arr[6]) * doom->map_scale;
 	slope = stringsplit(arr[7], ' ', NULL);
-	doom->sectors[sect].floor_incl_start = ft_atoi(slope[0]);
-	doom->sectors[sect].floor_incl_angle = ft_atoi(slope[1])
-		* CONVERT_TO_RADIANS;
-	doom->sectors[sect].ceiling_incl_start = ft_atoi(slope[2]);
-	doom->sectors[sect].ceiling_incl_angle = ft_atoi(slope[3])
-		* CONVERT_TO_RADIANS;
+	sector->floor_incl_start = ft_atoi(slope[0]);
+	sector->floor_incl_angle = ft_atoi(slope[1]) * CONVERT_TO_RADIANS;
+	sector->ceiling_incl_start = ft_atoi(slope[2]);
+	sector->ceiling_incl_angle = ft_atoi(slope[3]) * CONVERT_TO_RADIANS;
 	free(slope);
 }
 
