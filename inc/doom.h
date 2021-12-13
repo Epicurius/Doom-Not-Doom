@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:31:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:03:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -815,7 +815,7 @@ void				spawn_event(t_doom *doom, t_event *event,
 void				light_event(t_doom *doom, t_event *event,
 						int nb, char **arr);
 void				audio_event(t_event *event, int nb, char **arr);
-void				hazard_event(t_event *event, int nb, char **arr);
+void				hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
 /* File: ParseMap/parse_map_header.c */
 void				parse_header(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sector.c */

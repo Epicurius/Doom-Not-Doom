@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:06:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:58:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ static void	game_mode_story(t_doom *doom)
  */
 void	game_mode(t_doom *doom)
 {
+	if (doom->settings.debug)
+		return ;
 	if (doom->game.mode == ENDLESS)
 		game_mode_endless(doom);
 	else

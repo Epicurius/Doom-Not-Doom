@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:00:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:02:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 	else if (event.type == AUDIO)
 		audio_event(&event, nb, arr);
 	else if (event.type == HAZARD)
-		hazard_event(&event, nb, arr);
+		hazard_event(doom, &event, nb, arr);
 	else if (event.type == LIGHT)
 		light_event(doom, &event, nb, arr);
 	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
