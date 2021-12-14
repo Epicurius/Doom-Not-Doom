@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:50:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:52:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void	move_plane(t_doom *doom, t_event *event)
 
 	i = -1;
 	if (event->type == FLOOR)
-		plane = &event->event_sector->floor;
+		plane = &event->sector->floor;
 	else
-		plane = &event->event_sector->ceiling;
+		plane = &event->sector->ceiling;
 	plane->height += 0.1 * event->dir;
 	event->time = doom->time.curr;
-	while (++i < event->event_sector->npoints)
-		scale_wall_height(doom, event->event_sector->wall[i]);
+	while (++i < event->sector->npoints)
+		scale_wall_height(doom, event->sector->wall[i]);
 	if (plane->height <= event->min)
 		event->dir = 1;
 	else if (plane->height >= event->max)
@@ -65,7 +65,7 @@ static void	preform_wsprite_trigger_events(t_doom *doom, t_event *event)
 		else if (event->type == SPAWN)
 			spawn_entity(doom, event->entity, event->pos, event->yaw);
 		else if (event->type == LIGHT)
-			ft_swap(&event->event_sector->light, &event->light);
+			ft_swap(&event->sector->light, &event->light);
 		event->wsprite->trigger = FALSE;
 	}
 	doom->player.action = NONE;

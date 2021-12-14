@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:33:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 13:54:43 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:16:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,23 @@ static void	loop_events(t_doom *doom, t_event *event)
 	{
 		event->speed = 100 + (rand() % 1000);
 		event->time = doom->time.curr;
-		ft_swap(&event->event_sector->light, &event->light);
+		ft_swap(&event->sector->light, &event->light);
 	}
 	else if ((event->type == FLOOR || event->type == CEILING)
 		&& event->time + 100 < doom->time.curr)
 	{
 		if (event->type == FLOOR)
-			plane = &event->event_sector->floor;
+			plane = &event->sector->floor;
 		else
-			plane = &event->event_sector->ceiling;
+			plane = &event->sector->ceiling;
 		plane->height += 0.1 * event->dir;
 		event->time = doom->time.curr;
 		if (plane->height <= event->min || plane->height >= event->max)
 			event->dir *= -1;
-		while (++i < event->event_sector->npoints)
-			scale_wall_height(doom, event->event_sector->wall[i]);
+		while (++i < event->sector->npoints)
+			scale_wall_height(doom, event->sector->wall[i]);
 	}
 }
-
-//void	round_trigger_events(t_doom *doom, t_event *event)
-//{
-//	
-//}
 
 /*
  *	Checks the type of map event.
@@ -65,6 +60,5 @@ void	map_events(t_doom *doom)
 			sector_trigger_events(doom, &doom->events[i]);
 		else
 			wsprite_trigger_events(doom, &doom->events[i]);
-			
 	}
 }

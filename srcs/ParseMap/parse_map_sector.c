@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 13:39:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:19:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	parse_wall(t_doom *doom, int nb, char **arr)
  */
 void	parse_fc(t_doom *doom, int nb, char **arr)
 {
-	t_sector *sector;
-	char	**slope;
+	t_sector	*sector;
+	char		**slope;
 	static int	i = 0;
 
 	if (nb < 8)

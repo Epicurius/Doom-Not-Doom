@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 14:26:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:59:24 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,8 +410,9 @@ typedef struct s_fonts
 
 typedef struct s_event
 {
-	t_sector		*event_sector;
 	t_wsprite		*wsprite;
+	t_sector		*sector;
+	int				event_sector;
 	int				trigger_sector;
 	int				trigger;
 	int				type;
@@ -806,14 +807,11 @@ int					parse_map(t_doom *doom, char *file_name);
 /* File: ParseMap/parse_map_events1.c */
 void				parse_events(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_events2.c */
-void				floor_ceiling_event(t_doom *doom, t_event *event,
-						int nb, char **arr);
-void				spawn_event(t_doom *doom, t_event *event,
-						int nb, char **arr);
-void				light_event(t_doom *doom, t_event *event,
-						int nb, char **arr);
+void				floor_ceiling_event(t_event *event, int nb, char **arr);
+void				spawn_event(t_doom *doom, t_event *e, int nn, char **arr);
+void				light_event(t_event *event, int nb, char **arr);
 void				audio_event(t_event *event, int nb, char **arr);
-void				hazard_event(t_doom *doom, t_event *event, int nb, char **arr);
+void				hazard_event(t_event *event, int nb, char **arr);
 /* File: ParseMap/parse_map_header.c */
 void				parse_header(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_sector.c */

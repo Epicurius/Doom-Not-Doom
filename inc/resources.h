@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resources.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 11:39:15 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/12/14 15:22:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,7 +492,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	}
 };
 
-static const char	*g_event_type[EVENT_TYPE_AMOUNT] =
+static const char			*g_event_type[EVENT_TYPE_AMOUNT] =
 {
 	"None",
 	"Ceiling",
@@ -504,14 +504,14 @@ static const char	*g_event_type[EVENT_TYPE_AMOUNT] =
 	"Light"
 };
 
-static const char	*g_sprite_type[SPRITE_TYPE_AMOUNT] =
+static const char			*g_sprite_type[SPRITE_TYPE_AMOUNT] =
 {
 	"STATIC",
 	"LOOP",
 	"ACTION"
 };
 
-static const char	*g_event_action[EVENT_ACTION_AMOUNT] =
+static const char			*g_event_action[EVENT_ACTION_AMOUNT] =
 {
 	"NONE",
 	"SHOOT",

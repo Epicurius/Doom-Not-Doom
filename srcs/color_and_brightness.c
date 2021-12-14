@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 18:01:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:51:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	sector_shading(t_doom *doom, int s, int w)
 		if (doom->events[s].type != LIGHT)
 			continue ;
 		w = -1;
-		sector = doom->events[s].event_sector;
+		sector = doom->events[s].sector;
 		while (++w < sector->npoints)
 			shade_bxpm(doom, sector->wall[w]->wtx, doom->events[s].light);
 		shade_bxpm(doom, sector->floor.tx, doom->events[s].light);

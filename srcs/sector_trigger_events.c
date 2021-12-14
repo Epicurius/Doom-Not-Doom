@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 16:03:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:51:56 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	move_plane(t_doom *doom, t_event *event)
 
 	i = -1;
 	if (event->type == FLOOR)
-		plane = &event->event_sector->floor;
+		plane = &event->sector->floor;
 	else
-		plane = &event->event_sector->ceiling;
+		plane = &event->sector->ceiling;
 	plane->height += 0.1 * event->dir;
 	event->time = doom->time.curr;
 	if (plane->height <= event->min || plane->height >= event->max)
@@ -36,8 +36,8 @@ static void	move_plane(t_doom *doom, t_event *event)
 	}
 	else
 		event->speed = 10;
-	while (++i < event->event_sector->npoints)
-		scale_wall_height(doom, event->event_sector->wall[i]);
+	while (++i < event->sector->npoints)
+		scale_wall_height(doom, event->sector->wall[i]);
 	if (event->trigger > 2)
 		event->trigger = FALSE;
 }
@@ -54,7 +54,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 	}
 	else if (event->type == HAZARD)
 	{
-		if (floor_at(event->event_sector, doom->player.where)
+		if (floor_at(event->sector, doom->player.where)
 			+ 0.1 >= doom->player.where.z)
 			doom->player.health -= event->speed;
 		event->trigger = FALSE;
@@ -68,7 +68,7 @@ static void	preform_sector_trigger_event(t_doom *doom, t_event *event)
 		else if (event->type == SPAWN)
 			spawn_entity(doom, event->entity, event->pos, event->yaw);
 		else if (event->type == LIGHT)
-			ft_swap(&event->event_sector->light, &event->light);
+			ft_swap(&event->sector->light, &event->light);
 		event->trigger_sector = -1;
 		event->trigger = FALSE;
 	}

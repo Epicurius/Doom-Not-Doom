@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 14:28:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:18:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 /*
  *	Parse event action.
  */
-static void	get_event_action(t_doom *doom, t_event *event, char **arr, int nb)
+static void	get_event_action(t_doom *doom, t_event *event, char **arr)
 {
 	int	i;
 
 	i = -1;
 	while (++i < EVENT_ACTION_AMOUNT)
 		if (ft_strequ(arr[2], g_event_action[i]))
-			break ;	
+			break ;
 	if (i >= EVENT_ACTION_AMOUNT)
 		error_msg("Map event %s is not valid", arr[2]);
 	event->action = i;
 	if (event->action == CLICKING)
-		find_wsprite_trigger(doom, &event, ft_atoi(arr[3]));
+		find_wsprite_trigger(doom, event, ft_atoi(arr[3]));
 	else if (event->action == SHOOTING)
-		find_wsprite_trigger(doom, &event, ft_atoi(arr[3]));
+		find_wsprite_trigger(doom, event, ft_atoi(arr[3]));
 	else if (event->action == SECTOR)
-		event->trigger_sector = correct_sector_index(doom, ft_atoi(arr[3]));
+		event->trigger_sector = ft_atoi(arr[3]);
 }
 
 /*
@@ -72,24 +72,24 @@ static void	get_event_type(t_doom *doom, t_event *event, char **arr, int nb)
 	i = -1;
 	while (++i < EVENT_TYPE_AMOUNT)
 		if (ft_strequ(arr[1], g_event_type[i]))
-			break ;	
+			break ;
 	if (i >= EVENT_TYPE_AMOUNT || i == 0)
 		error_msg("Map event %s is not valid", arr[1]);
 	event->type = i;
 	if (event->type == FLOOR)
-		floor_ceiling_event(doom, event, nb, arr);
+		floor_ceiling_event(event, nb, arr);
 	else if (event->type == CEILING)
-		floor_ceiling_event(doom, event, nb, arr);
+		floor_ceiling_event(event, nb, arr);
 	else if (event->type == SPAWN)
 		spawn_event(doom, event, nb, arr);
 	else if (event->type == AUDIO)
 		audio_event(event, nb, arr);
 	else if (event->type == HAZARD)
-		hazard_event(doom, event, nb, arr);
+		hazard_event(event, nb, arr);
 	else if (event->type == LIGHT)
-		light_event(doom, event, nb, arr);
+		light_event(event, nb, arr);
 	else if (event->type == STORE && (event->action == 0 || event->action == 3))
-		error_msg("Event STORE can only have SHOOT/CLICK as an event trigger.");	
+		error_msg("Event STORE can only have SHOOT/CLICK as an event trigger.");
 }
 
 /*
@@ -105,9 +105,10 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 	if (nb < 3)
 		error_msg("Invalid amount of event arguments");
 	ft_bzero(&event, sizeof(t_event));
+	get_event_action(doom, &event, arr);
 	get_event_type(doom, &event, arr, nb);
-	get_event_action(doom, &event, arr, nb);	
-	doom->events = ft_realloc(doom->events, sizeof(t_event) * doom->nb.events,
+	doom->events = ft_realloc(doom->events,
+			sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
 	doom->events[doom->nb.events - 1] = event;
 }

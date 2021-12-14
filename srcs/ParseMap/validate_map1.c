@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:11:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:20:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	check_player(t_doom *doom)
 /*
  *	Change sector slope start index from wall index to sextor wall index.
  */
-static int	fix_sector_part2(t_sector *sector, int *wall_slope)
+static int	fix_slope_wall_index(t_sector *sector, int *wall_slope)
 {
 	int	i;
 
@@ -74,7 +74,6 @@ static int	check_map(t_doom *doom)
 {
 	int	i;
 
-
 	i = -1;
 	while (++i < doom->nb.sectors)
 	{
@@ -84,9 +83,9 @@ static int	check_map(t_doom *doom)
 			return (0);
 		if (!is_convex(&doom->sectors[i]))
 			return (0);
-		fix_sector_part2(&doom->sectors[i],
+		fix_slope_wall_index(&doom->sectors[i],
 			&doom->sectors[i].floor_incl_start);
-		fix_sector_part2(&doom->sectors[i],
+		fix_slope_wall_index(&doom->sectors[i],
 			&doom->sectors[i].ceiling_incl_start);
 		doom->sectors[i].center.z = floor_at(&doom->sectors[i],
 				doom->sectors[i].center);

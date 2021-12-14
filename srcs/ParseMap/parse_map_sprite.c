@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:01:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:19:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static int	entity_type(char *str)
 	error_msg("%s is not a valid entity!\n", str);
 	return (-1);
 }
-
 
 /*
  *	Parse entity.

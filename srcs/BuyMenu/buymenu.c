@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buymenu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:22:02 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/13 14:28:25 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/12/14 15:16:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	disable_not_affordable_weapon_upgrade_buttons(t_buymenu *buymenu)
 		buymenu->firerate_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh
 		< buymenu->inv->weapon[buymenu->wep_type].ammo_price
-		|| buymenu->inv->weapon[buymenu->wep_type].cur_ammo >=
-		buymenu->inv->weapon[buymenu->wep_type].max_ammo)
+		|| buymenu->inv->weapon[buymenu->wep_type].cur_ammo
+		>= buymenu->inv->weapon[buymenu->wep_type].max_ammo)
 		buymenu->ammo_price_button->state = UI_STATE_DEFAULT;
 	if (buymenu->inv->dosh
 		< buymenu->inv->weapon[buymenu->wep_type].max_ammo_price)
