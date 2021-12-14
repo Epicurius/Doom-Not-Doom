@@ -377,3 +377,7 @@ Spawn		SHOOT/CLICK/SECTOR		trigger_ID	| entity_id		x		y		z		yaw
 Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	light_lvl_to_flicker_to
 ```
 ---
+
+Hi, do you want / have time to evaluate my Wolf3D project tomorrow? There has been no evaluation slots for the past 2 weeks so i have to ask directly. If you want we can put a slot at night (e.g. 23:00) and do the eval next day, then the chances of someone else taking it will be lower.
+
+Sorry for the inconvenience.

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:20:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:24:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:02:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,20 @@ void	respawn_rifts(t_doom *doom)
 {
 	t_list	*new;
 	t_list	*curr;
-
+	
 	curr = doom->rifts;
 	while (curr != NULL)
 	{
-		new = ft_lstnew(curr->content, curr->content_size);
-		ft_lstadd(&doom->entity, new);
-		doom->game.spawns += 1;
-		doom->nb.entities += 1;
+		if (10 < point_distance_v2(doom->player.where.x,
+				doom->player.where.y,
+				((t_entity *)curr->content)->where.x,
+				((t_entity *)curr->content)->where.y))
+		{
+			new = ft_lstnew(curr->content, curr->content_size);
+			ft_lstadd(&doom->entity, new);
+			doom->game.spawns += 1;
+			doom->nb.entities += 1;
+		}
 		curr = curr->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 14:59:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:20:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,7 @@ typedef struct s_entity
 	int				type;
 	double			yaw;
 	int				time;
+	int id;
 	t_entity_render	render;
 }					t_entity;
 

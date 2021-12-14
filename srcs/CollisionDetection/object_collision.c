@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:49:22 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:58:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
  *	If entity can be picked up, pick it up and delete it.
  */
 static int	collided_with_entity(t_doom *doom, t_v3 *velocity,
-		t_list *curr, t_entity *entity)
+		t_list **curr, t_entity *entity)
 {
 	if (g_entity_data[entity->type].pickup == TRUE)
 	{
 		if (entity->type == MED_KIT)
 			doom->player.health += g_entity_data[MED_KIT].health;
-		curr = ft_dellstnode(&doom->entity, curr);
+		*curr = ft_dellstnode(&doom->entity, *curr);
 		doom->nb.entities -= 1;
 		return (0);
 	}
@@ -51,7 +51,7 @@ int	entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity)
 		if (point_distance_v3(entity->where, dest)
 			< g_entity_data[entity->type].hitbox_radius)
 		{
-			if (collided_with_entity(doom, velocity, curr, entity))
+			if (collided_with_entity(doom, velocity, &curr, entity))
 				return (1);
 		}
 		else
