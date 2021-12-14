@@ -367,13 +367,13 @@ type:event		Action	Trigger TriggerID
 -----------------------------------
 ```
 EVENT		TRIGGER						TRIGGER_ID
-
-Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	min		max		speed
-Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	min		max		speed
-Store		SHOOT/CLICK					trigger_ID	
-Hazard		SECTOR						trigger_ID	event_sector
-Audio		SHOOT/CLICK/SECTOR			trigger_ID	path_to_audio
-Spawn		SHOOT/CLICK/SECTOR			trigger_ID	entity_id		x		y		z		yaw
-Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	light_lvl_to_flicker_to
-
+```
+Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	min		max		speed
+Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	min		max		speed
+Store		SHOOT/CLICK					trigger_ID	| 
+Hazard		SECTOR						trigger_ID	| event_sector
+Audio		SHOOT/CLICK/SECTOR			trigger_ID	| path_to_audio
+Spawn		SHOOT/CLICK/SECTOR			trigger_ID	| entity_id		x		y		z		yaw
+Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	light_lvl_to_flicker_to
+```
 ---
