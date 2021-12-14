@@ -356,8 +356,24 @@ type:f&c		FH	CH	FTX	CTX	FS		CS		SL
 type:entity		NM		X		Y		Z	D
 0				Ghost	58.0	43.0	0.0	180
 -----------------------------------
-type:event		T	A	I
+type:event		Action	Trigger TriggerID	
+0				Ceiling	SHOOT
+1				Floor	SHOOT
+2				Store	SHOOT
+3				Hazard	SHOOT
+4				Audio	SHOOT
+5				Spawn	SHOOT
+6				Light	SHOOT
 -----------------------------------
 ```
+EVENT		TRIGGER						TRIGGER_ID
+
+Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	min		max		speed
+Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	min		max		speed
+Store		SHOOT/CLICK					trigger_ID	
+Hazard		SECTOR						trigger_ID	event_sector
+Audio		SHOOT/CLICK/SECTOR			trigger_ID	path_to_audio
+Spawn		SHOOT/CLICK/SECTOR			trigger_ID	entity_id		x		y		z		yaw
+Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	event_sector	light_lvl_to_flicker_to
 
 ---

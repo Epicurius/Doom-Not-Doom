@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:03:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:26:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -804,8 +804,6 @@ void				read_line(t_doom *doom, int fd,
 						void (*f)(t_doom*, int, char**));
 int					parse_map(t_doom *doom, char *file_name);
 /* File: ParseMap/parse_map_events1.c */
-void				get_event_type(t_event *event, char *str);
-void				get_event_action(t_event *event, char *str);
 void				parse_events(t_doom *doom, int ac, char **av);
 /* File: ParseMap/parse_map_events2.c */
 void				floor_ceiling_event(t_doom *doom, t_event *event,

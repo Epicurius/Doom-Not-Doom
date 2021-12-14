@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 16:04:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:05:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	floor_ceiling_event(t_doom *doom, t_event *event, int nb, char **arr)
 	if (nb < 7)
 		error_msg("Invalid argument for event %s\n", arr[0]);
 	event->event_sector = &doom->sectors[correct_sector_index(doom, ft_atoi(arr[4]))];
+	event->dir = 1;
+	if (event->type == CEILING)
+		event->dir = -1;
 	event->min = ft_atof(arr[5]);
 	event->max = ft_atof(arr[6]);
 	event->speed = ft_atof(arr[7]);

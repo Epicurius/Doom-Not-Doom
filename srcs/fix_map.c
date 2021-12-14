@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:56:55 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:47:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:00:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ void	fix_sector_index(t_doom *doom)
 {
 	int		i;
 	t_list	*curr;
+	unsigned short sector_index[1000];
+
+	i = -1;
+	while (++i < doom->nb.sectors)
+		sector_index[doom->sectors[i].id] = i;
 
 	i = -1;
 	while (++i < doom->nb.walls)
 	{
-		doom->walls[i].sect = correct_sector_index(doom, doom->walls[i].sect);
+		doom->walls[i].sect = sector_index[doom->walls[i].sect];
 		if (doom->walls[i].n > -1)
-			doom->walls[i].n = correct_sector_index(doom, doom->walls[i].n);
+			doom->walls[i].n = sector_index[doom->walls[i].n];
 	}
 	curr = doom->entity;
 	while (curr)
