@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:45:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 17:44:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:11:22 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 	entity->where.z = ft_atoi(arr[4]) * doom->map_scale;
 	entity->yaw = ft_atoi(arr[5]) * CONVERT_TO_RADIANS;
 	entity->sector = ft_atoi(arr[6]);
-	entity->id = ft_atoi(arr[0]);
 	doom->nb.entities += 1;
 	ft_lstadd_new(&doom->entity, entity, sizeof(t_entity));
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:56:55 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 15:16:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:10:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	fix_sector_index2(t_doom *doom, unsigned short *sector_index)
 	i = -1;
 	while (++i < doom->nb.events)
 	{
-		doom->events[i].trigger_sector = sector_index[doom->events[i].trigger_sector];
-		doom->events[i].event_sector = sector_index[doom->events[i].event_sector];
+		doom->events[i].trigger_sector
+			= sector_index[doom->events[i].trigger_sector];
+		doom->events[i].event_sector
+			= sector_index[doom->events[i].event_sector];
 	}
 	curr = doom->entity;
 	while (curr)
@@ -37,7 +39,6 @@ void	fix_sector_index2(t_doom *doom, unsigned short *sector_index)
 			= sector_index[((t_entity *)curr->content)->sector];
 		curr = curr->next;
 	}
-	doom->player.sector = sector_index[doom->player.sector];
 }
 
 void	fix_sector_index(t_doom *doom)
@@ -52,4 +53,5 @@ void	fix_sector_index(t_doom *doom)
 	i = -1;
 	while (++i < doom->nb.events)
 		doom->events[i].sector = &doom->sectors[doom->events[i].event_sector];
+	doom->player.sector = sector_index[doom->player.sector];
 }
