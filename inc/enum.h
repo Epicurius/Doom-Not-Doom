@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 11:39:49 by jsalmi           ###   ########.fr       */
+/*   Updated: 2021/12/15 11:51:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ enum e_sound_channel
 	CHANNEL_TTS,
 	CHANNEL_ENEMY,
 	CHANNEL_EXPLOSION,
+	CHANNEL_ROUND,
 	CHANNEL_AMOUNT
 };
 

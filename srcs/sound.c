@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:03:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:37:36 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void	set_volume(int i)
 {
-	static unsigned char	curr = 64;
+	static unsigned char	curr = DEFAULT_VOLUME;
 
 	if (curr >= 0 && curr < 128 && i)
 		Mix_Volume(-1, ++curr);

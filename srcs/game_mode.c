@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 10:58:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 18:00:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:03:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static int	endless_round(t_doom *doom)
 		doom->game.spawn_rate -= doom->game.round * 2;
 		doom->player.health = 1100 - doom->settings.difficulty * 100;
 		doom->player.store_access = TRUE;
-		Mix_PlayChannel(-1, doom->sound[WAV_ROUND_END], 0);
+		Mix_HaltChannel(CHANNEL_MUSIC);
+		Mix_PlayChannel(CHANNEL_ROUND, doom->sound[WAV_ROUND_END], 0);
 		return (1);
 	}
 	else if (doom->time.curr - doom->game.time > doom->game.spawn_rate)
@@ -66,18 +67,19 @@ static void	game_mode_endless(t_doom *doom)
 	int	i;
 
 	i = -1;
-	if (doom->game.cool_down > 0)
+	if (!Mix_Playing(CHANNEL_TTS) && doom->game.cool_down > 0)
 	{
 		doom->game.cool_down -= 1 * doom->time.delta;
 		if (doom->game.cool_down <= 0)
 		{
+			Mix_PlayChannel(CHANNEL_ROUND, doom->sound[WAV_NEW_ROUND], 0);
 			doom->player.store_access = FALSE;
 			while (++i < doom->nb.events)
 				if (doom->events[i].type == STORE && doom->events[i].wsprite)
 					doom->events[i].wsprite->src = rect_xy2(662, 0, 1324, 550);
 			remove_med_kits(doom);
 			respawn_rifts(doom);
-			Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
+			Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], -1);
 		}
 	}
 	else if (!Mix_Playing(CHANNEL_TTS) && endless_round(doom))
@@ -106,8 +108,6 @@ static void	game_mode_story(t_doom *doom)
  */
 void	game_mode(t_doom *doom)
 {
-	if (doom->settings.debug)
-		return ;
 	if (doom->game.mode == ENDLESS)
 		game_mode_endless(doom);
 	else

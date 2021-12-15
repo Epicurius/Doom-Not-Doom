@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:37:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:28:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:03:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_hud(t_doom *doom)
 {
 	SDL_Rect	dstr;
 
-	if (doom->player.damage)
+	if (doom->player.damage && !doom->player.debug)
 		calulate_armour_damage_reduction(doom, &doom->player);
 	dstr.x = 10;
 	dstr.y = doom->surface->h;

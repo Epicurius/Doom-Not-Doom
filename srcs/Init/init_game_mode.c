@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 11:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:16:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:01:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ static void	init_endless(t_doom *doom)
 			|| ((t_entity *)curr->content)->type == SPOOKY
 			|| ((t_entity *)curr->content)->type == GHOST
 			|| ((t_entity *)curr->content)->type == RIFT)
-			doom->game.spawns += 1;
-		curr = curr->next;
+			curr = ft_dellstnode(&doom->entity, curr);
+		else
+			curr = curr->next;
 	}
+	doom->game.cool_down = 1;
 	doom->player.store_access = FALSE;
 	i = -1;
 	while (++i < doom->nb.events)

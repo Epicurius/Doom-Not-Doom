@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:08:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:43:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_doom(t_doom *doom)
 	init_scale(doom);
 	init_player(doom);
 	init_entities(doom);
-	init_render(doom);
 	init_game_mode(doom);
+	init_render(doom);
 	init_sound(doom);
 	init_inventory(doom);
 	init_slope_normal(doom);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:29:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:37:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** Sound (Volume: 0 - 128)
 */
-# define DEFAULT_VOLUME					0
+# define DEFAULT_VOLUME					1
 # define VOLUME_MAIN_THEME				64
 # define VOLUME_SHOTGUN					32
 # define VOLUME_SCREEN_SHOT				128

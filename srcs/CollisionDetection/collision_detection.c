@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:36:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	find_from_sectbool(t_doom *doom, t_motion *motion)
 		if (doom->sectbool[i] && in_sector_area(&doom->sectors[i], where))
 			return (i);
 	}
-	ft_printf("{RED}[ERROR]{RESET}\tWrong Sector\n");
 	return (find_sector_no_z(doom->sectors, doom->nb.sectors, where));
 }
 
