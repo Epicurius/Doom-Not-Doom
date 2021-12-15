@@ -17,7 +17,7 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 ```sh
 git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
 cd DnD && make
-./game/doom ./game/resources/MAPS/game.story
+./game/doom ./game/resources/MAPS/game.dnds
 # OR
 ./wolf3d
 ```
@@ -213,7 +213,7 @@ light level calculations are done.</n>
 If you want to take a look at how it works the library is at root libs/libbxpm.</n>
 And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)</n>
 
-<img src="./Readme_assets/smile.png" alt="smile" width="200"/>
+<img src="./ReadMeAssets/smile.png" alt="smile" width="200"/>
 
 ```c
 //Visualization of the above (10x10)Image in BXPM format divided by commas, actual BXPM is compressed.
@@ -267,12 +267,12 @@ Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	light_lvl_to_flicker_to
 
 #### Map File
 
-
 The map is built using vertices, floors, ceiling, walls and sectors.</n>
 Vertices are x and y floats that describe a position.</n>
 Walls are a line segment connected to 2 vertices.</n>
 Sectors are a concave shape, consisting of 3 or more clockwise connected walls.</n>
 Each sector has its own floor and ceiling.</n>
+Map files have the extension .dnds for story mode and .dnde for endless.
 
 <img src="./ReadMeAssets/map.jpg" alt="Engine_Flow" width="700"/></p>
 
@@ -352,3 +352,6 @@ ST	 	- State
 TR		- Event Trigger
 AC		- Action
 ```
+
+<img src="./ReadMeAssets/GridMap.png" alt="Engine_Flow" width="700"/></p>
+
