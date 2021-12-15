@@ -6,17 +6,24 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:37:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 14:42:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:28:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	calulate_armour_damage_reduction(t_doom *doom)
+static inline void	calulate_armour_damage_reduction(t_doom *doom, t_player *player)
 {
-	doom->player.health += doom->player.armour;
-	doom->player.armour = ft_max(doom->player.health - doom->player.max_hp, 0);
-	doom->player.health = ft_min(doom->player.health, doom->player.max_hp);
+	Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
+	if (player->armour)
+	{
+		player->health += player->armour - player->damage * ARMOR_DMG_REDUCTION;
+		player->armour = ft_max(player->health - player->max_hp, 0);
+		player->health = ft_min(player->health, player->max_hp);
+	}
+	else
+		player->health -= player->damage;
+	player->damage = 0;
 }
 
 /*
@@ -26,8 +33,8 @@ void	draw_hud(t_doom *doom)
 {
 	SDL_Rect	dstr;
 
-	if (doom->player.health < doom->player.max_hp && doom->player.armour)
-		calulate_armour_damage_reduction(doom);
+	if (doom->player.damage)
+		calulate_armour_damage_reduction(doom, &doom->player);
 	dstr.x = 10;
 	dstr.y = doom->surface->h;
 	hud_health(doom, &dstr);

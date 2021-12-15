@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/14 16:31:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:08:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	init_sdl2(t_doom *doom)
 			SDL_TEXTUREACCESS_STREAMING, doom->surface->w, doom->surface->h);
 	if (!doom->texture)
 		error_msg("Could not create texture: %s\n", SDL_GetError());
-	SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (!set_icon(doom->win, GAME_PATH"resources/ICON/DND.bmp"))
 		error_msg("Could not set icon: %s\n", SDL_GetError());
 }

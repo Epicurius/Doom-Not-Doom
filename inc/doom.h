@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 18:11:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:20:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_player
 	int				debug;
 	int				store_access;
 	int				hm;
+	int				damage;
 	float			walk_speed;
 	float			sprint_speed;
 	float			jump_height;
@@ -379,13 +380,6 @@ typedef struct s_weapon
 	int				reload_frames;
 	t_bxpm			*bxpm;
 }					t_weapon;
-
-typedef struct s_dialog
-{
-	Mix_Chunk		*sound1;
-	Mix_Chunk		*sound2;
-	int				*done;
-}					t_dialog;
 
 typedef struct s_inv
 {

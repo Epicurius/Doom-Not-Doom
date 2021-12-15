@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 18:16:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:03:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 void	set_volume(int i)
 {
-	static int	curr = DEFAULT_VOLUME + 1;
+	static unsigned char	curr = 64;
 
 	if (curr >= 0 && curr < 128 && i)
 		Mix_Volume(-1, ++curr);
@@ -43,6 +43,29 @@ static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
 	}
 }
 
+static void	init_volume(t_doom *doom)
+{
+	Mix_VolumeChunk(doom->sound[WAV_MAIN_THEME], VOLUME_MAIN_THEME);
+	Mix_VolumeChunk(doom->sound[WAV_SHOTGUN], VOLUME_SHOTGUN);
+	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], VOLUME_SCREEN_SHOT);
+	Mix_VolumeChunk(doom->sound[WAV_INTRO], VOLUME_INTRO);
+	Mix_VolumeChunk(doom->sound[WAV_FOOT_STEPS], VOLUME_FOOT_STEPS);
+	Mix_VolumeChunk(doom->sound[WAV_JUMP], VOLUME_JUMP);
+	Mix_VolumeChunk(doom->sound[WAV_GUN], VOLUME_GUN);
+	Mix_VolumeChunk(doom->sound[WAV_ELEVATOR_MUSIC], VOLUME_ELEVATOR_MUSIC);
+	Mix_VolumeChunk(doom->sound[WAV_DOSH], VOLUME_DOSH);
+	Mix_VolumeChunk(doom->sound[WAV_EMPTY_CLIP], VOLUME_EMPTY_CLIP);
+	Mix_VolumeChunk(doom->sound[WAV_BIP], VOLUME_BIP);
+	Mix_VolumeChunk(doom->sound[WAV_ORB], VOLUME_ORB);
+	Mix_VolumeChunk(doom->sound[WAV_NEW_ROUND], VOLUME_NEW_ROUND);
+	Mix_VolumeChunk(doom->sound[WAV_ROUND_END], VOLUME_ROUND_END);
+	Mix_VolumeChunk(doom->sound[WAV_PLAYER_HIT], VOLUME_PLAYER_HIT);
+	Mix_VolumeChunk(doom->sound[WAV_MONSTER_HIT], VOLUME_MONSTER_HIT);
+	Mix_VolumeChunk(doom->sound[WAV_PLAYER_DEATH], VOLUME_PLAYER_DEATH);
+	Mix_VolumeChunk(doom->sound[WAV_ENTITY_DEATH], VOLUME_ENTITY_DEATH);
+	set_volume(0);
+}
+
 /*
  *	Init all the sounds and any event audio.
  */
@@ -65,7 +88,7 @@ void	init_sound(t_doom *doom)
 			free(doom->events[i].path);
 		}
 	}
-	set_volume(0);
+	init_volume(doom);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	else

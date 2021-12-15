@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 11:33:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:08:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	init_doom(t_doom *doom)
 	init_inventory(doom);
 	init_slope_normal(doom);
 	init_camera(doom);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

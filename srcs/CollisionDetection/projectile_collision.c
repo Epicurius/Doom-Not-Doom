@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 13:15:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 06:49:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:21:18 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	target_contact(t_doom *doom, t_projectile *orb, t_v3 start, t_v3 dest)
 		if (point_distance_v3(doom->player.where, dest) <= 5)
 		{
 			Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
-			doom->player.health -= 10;
+			doom->player.damage += 10;
 			return (1);
 		}
 	}

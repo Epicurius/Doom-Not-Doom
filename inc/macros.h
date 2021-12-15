@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 11:16:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:29:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,27 @@
 # define MACROS_H
 
 /*
-** Sound
+** Sound (Volume: 0 - 128)
 */
 # define DEFAULT_VOLUME					0
+# define VOLUME_MAIN_THEME				64
+# define VOLUME_SHOTGUN					32
+# define VOLUME_SCREEN_SHOT				128
+# define VOLUME_INTRO					128
+# define VOLUME_FOOT_STEPS				32
+# define VOLUME_JUMP					32
+# define VOLUME_GUN						32
+# define VOLUME_ELEVATOR_MUSIC			128
+# define VOLUME_DOSH					32
+# define VOLUME_EMPTY_CLIP				128
+# define VOLUME_BIP						128
+# define VOLUME_ORB						64
+# define VOLUME_NEW_ROUND				128
+# define VOLUME_ROUND_END				128
+# define VOLUME_PLAYER_HIT				32
+# define VOLUME_MONSTER_HIT				128
+# define VOLUME_PLAYER_DEATH			128
+# define VOLUME_ENTITY_DEATH			128
 
 /*
 ** Screen info
@@ -26,11 +44,12 @@
 # define MOUSE_RIGHT					513
 
 /*
-**	Vision
+**	player
 */
 # define FOV							90
 # define NEAR_Z							0.1
 # define FAR_Z							1000.0
+# define ARMOR_DMG_REDUCTION			1
 # define PLAYER_HEIGHT 					7
 # define PLAYER_RADIUS					0.7
 # define EYE_LVL						6

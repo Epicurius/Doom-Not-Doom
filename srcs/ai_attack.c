@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 10:54:02 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 11:21:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,10 @@ void	ai_attack(t_doom *doom, t_entity *entity)
 	if (entity->frame < doom->eframes[entity->type].nb[ATTACK][FRAMES] - 1)
 		return ;
 	if (g_entity_data[entity->type].type == MELEE)
-	{
-		doom->player.health -= g_entity_data[entity->type].damage;
-		Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
-	}
+		doom->player.damage += g_entity_data[entity->type].damage;
 	else if (g_entity_data[entity->type].type == KAMIKAZE)
 	{
-		doom->player.health -= g_entity_data[entity->type].damage;
-		Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
+		doom->player.damage += g_entity_data[entity->type].damage;
 		entity->hp = 0;
 		entity->state = DEATH;
 	}
