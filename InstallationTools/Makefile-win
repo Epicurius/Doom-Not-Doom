@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/09 13:40:51 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/15 09:48:29 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,7 +164,7 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libbxpm \
 				-I $(LIB_DIR)/libui \
-				-I $(SDL_DIR)/SDL/include
+				-I $(SDL_DIR)/SDL_WIN/include
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \

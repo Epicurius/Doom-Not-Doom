@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/13 14:08:18 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/15 09:43:08 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,10 +171,10 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libbxpm \
 				-I $(LIB_DIR)/libui \
-				-I $(LIB_DIR)/SDL_Frameworks/SDL2.framework/Headers \
-				-I $(LIB_DIR)/SDL_Frameworks/SDL2_image.framework/Headers \
-				-I $(LIB_DIR)/SDL_Frameworks/SDL2_mixer.framework/Headers \
-				-I $(LIB_DIR)/SDL_Frameworks/SDL2_ttf.framework/Headers -F $(LIB_DIR)/SDL_Frameworks
+				-I $(LIB_DIR)/SDL_OSX/SDL2.framework/Headers \
+				-I $(LIB_DIR)/SDL_OSX/SDL2_image.framework/Headers \
+				-I $(LIB_DIR)/SDL_OSX/SDL2_mixer.framework/Headers \
+				-I $(LIB_DIR)/SDL_OSX/SDL2_ttf.framework/Headers -F $(LIB_DIR)/SDL_OSX
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
@@ -184,7 +184,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				-framework SDL2 \
 				-framework SDL2_mixer \
 				-framework SDL2_image \
-				-framework SDL2_ttf -F $(LIB_DIR)/SDL_Frameworks
+				-framework SDL2_ttf -F $(LIB_DIR)/SDL_OSX
 
 CFLAGS		=	-Wall -Wextra -MMD #-Werror -Wfatal-errors -g -fsanitize=address
 
