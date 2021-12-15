@@ -1,6 +1,6 @@
 <img src="./ReadMeAssets/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 
-A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.<br>
+A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.</n>
 Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
 
 **Work in Progress**
@@ -50,10 +50,10 @@ Short introduction on how the engine works.
 * [Collision Detection](#collision-detection)
 
 ##### Engine Flow
-When designing and building the game engine my priority was performance (FPS) over features.<br>
-In my mind a game with many features but low performance is worse that the opposite,<br>
-so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)<br>
-multithreading (pthreads) was my best option.<br>
+When designing and building the game engine my priority was performance (FPS) over features.</n>
+In my mind a game with many features but low performance is worse that the opposite,</n>
+so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
+multithreading (pthreads) was my best option.</n>
 
 <img src="./ReadMeAssets/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 
@@ -92,52 +92,52 @@ multithreading (pthreads) was my best option.<br>
 
 
 ##### Map Drawing
-To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.<br>
-Each vertical piece is self sufficient from start to end, which enabled them to render and draw on the same surface at the same time,<br>
-while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.<br>
+To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.</n>
+Each vertical piece is self sufficient from start to end, which enabled them to render and draw on the same surface at the same time,</n>
+while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.</n>
 And when all map surfaces have been drawn no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
 ###### Map rendering on one thread, first monochrome then with texture.</center>
 <img src="./ReadMeAssets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
-When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.<br>
-each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment<br>
-(black part in the above gif) and start from the beginning.<br>
-When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.<br>
+When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.</n>
+each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment</n>
+(black part in the above gif) and start from the beginning.</n>
+When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.</n>
 
 ##### Skybox
 
-Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.<br>
+Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.</n>
 The skybox box is a 10x10x10 box where the player is always in the middle, the box also moves with the player creating the illusion that there is a vast distance.
 
 ##### AI
 
-Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.<br>
-Alive/non-static entities have a detection radius and a view cone, if their line of sight collides<br>
-with the player they will get the state MOVE and try to get into their attack range.<br>
-When the entity is inside their attack range they will get the state ATTACK and start attacking the player.<br>
+Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.</n>
+Alive/non-static entities have a detection radius and a view cone, if their line of sight collides</n>
+with the player they will get the state MOVE and try to get into their attack range.</n>
+When the entity is inside their attack range they will get the state ATTACK and start attacking the player.</n>
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
-During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.<br>
+During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.</n>
 
-<img src="./ReadMeAssets/frame.jpg" alt="Engine_Flow" width="800"/><br>
-Each entity frames are divided into the entity states and into FRAME and ANGLE.<br>
-Take for example the above image, it has move animation of 8 frames with each having 3 angles.<br>
-When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.<br>
-If an entity has 1 angle the entity will always face the player.<br>
+<img src="./ReadMeAssets/frame.jpg" alt="Engine_Flow" width="800"/></n>
+Each entity frames are divided into the entity states and into FRAME and ANGLE.</n>
+Take for example the above image, it has move animation of 8 frames with each having 3 angles.</n>
+When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.</n>
+If an entity has 1 angle the entity will always face the player.</n>
 So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME][ANGLE]```;
 
 Entity presets can be found from inc/resources.h
 
 ##### Shooting
 
-Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,<br>
-and the player has pressed left click then that entity has been shot.<br>
-No bullet collision detection algorithm is required.<br>
+Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,</n>
+and the player has pressed left click then that entity has been shot.</n>
+No bullet collision detection algorithm is required.</n>
 
 ##### Collision Detection
 
-Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.<br>
-It consists of 3 main parts:<br>
+Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.</n>
+It consists of 3 main parts:</n>
 
 ```
 Vertical_collision():
@@ -237,7 +237,15 @@ Audio event plays a sound, the sound file path is passed with the map file,
 this makes it possible to add any sound you want without recompilation.
 Spawn event is used to spawn enemies, so that the engine does not need to handle them before the player is near.
 Light changes the sectors light level e.g. flickering lights and wall light switches.
-
+```
+Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	min		max		speed
+Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	min		max		speed
+Store		SHOOT/CLICK			trigger_ID	 
+Hazard		SECTOR				trigger_ID	 event_sector
+Audio		SHOOT/CLICK/SECTOR		trigger_ID	 path_to_audio
+Spawn		SHOOT/CLICK/SECTOR		trigger_ID	 entity_id		x		y		z		yaw
+Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	light_lvl_to_flicker_to
+```
 ----
 
 ## Features
@@ -256,128 +264,91 @@ Light changes the sectors light level e.g. flickering lights and wall light swit
 - Many more...
 ---
 
-## (WRITING IN PROGRESS)
 
 #### Map File
 
 
-The map is built using vertices, floors, ceiling, walls and sectors.<br>
-Vertices are x and y floats that describe a position.<br>
-Walls are a line segment connected to 2 vertices.<br>
-Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<br>
-Each sector has its own floor and ceiling.<br>
+The map is built using vertices, floors, ceiling, walls and sectors.</n>
+Vertices are x and y floats that describe a position.</n>
+Walls are a line segment connected to 2 vertices.</n>
+Sectors are a concave shape, consisting of 3 or more clockwise connected walls.</n>
+Each sector has its own floor and ceiling.</n>
 
 <img src="./ReadMeAssets/map.jpg" alt="Engine_Flow" width="700"/></p>
 
-
-```
-GM	-	Game mode
-SC	-	Scale
-V	-	Vertex
-W	-	Wall
-S	-	Sector
-X	-	X coordinate
-Y	-	Y coordinate
-Z	-	Z coordinate
-D	-	YAW
-V1	-	Vertex 1
-V2	-	VERTEX 2
-WTX	-	Wall Texture
-PTX	-	Portal Texture
-FTX	-	Floor Texture
-CTX	-	Ceiling Texture
-STX	-	Wall Sprite Texture
-SO	-	Solid
-N	-	Neighbor
-G	-	Gravity
-L	-	Light
-FH	-	Floor Height
-CH	-	Ceiling Height
-FS	-	Floor Scale
-CS	-	Ceiling Scale
-NM	-	Name
-T	-	Type
-A	-	Action
-I	-	Index
-STATE - State
-```
-
-
-|type		|		|		|		|		|		|		|	|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|map		|GM		|SC		|V		|W		|S		|		|	|
-|spawn		|X		|Y		|Z		|D		|		|		|	|
-|vertex	|X		|Y		|		|		|		|		|	|
-|wall		|V1		|V2		|WTX	|PTX	|SC		|SO		|	|
-|wsprite	|W		|X		|Y		|TX		|SC		|STATE	|	|
-|sector	|W		|N		|G		|L		|		|		|	|
-|f&c		|FH		|CH		|FTX	|CTX	|FS		|CS		|SL	|
-|entity	|NM		|X		|Y		|Z		|D		|		|	|
-|event		|T		|A		|I		|		|		|		|	|
-
 ```
 type:map		GM		SC	V	W	S
-0				endless	1	8	8	2
------------------------------------
+0				endless	1	6	8	2
+-
 type:spawn		X	Y	Z	D
-0				30.0	49.0	0.0	0
------------------------------------
+0				5	5	0	90
+-
 type:vertex		X	Y
-0				41.0	59.0
-1				61.0	59.0
-2				61.0	40.0
-3				41.0	40.0
-4				41.0	40.0
-5				41.0	59.0
-6				20.0	59.0
-7				20.0	40.0
------------------------------------
+0				0	0
+1				10	0
+2				10	5
+3				0	5
+4				20	0
+5				20	5
+-
 type:wall		V1	V2	WTX	PTX	SC	SO
-0				0	3	7	0	30.0	0
-1				1	0	7	0	30.0	1
-2				2	1	7	0	30.0	1
-3				3	2	7	0	30.0	1
-4				4	7	7	0	30.0	1
-5				5	4	7	0	30.0	0
-6				6	5	7	0	30.0	1
-7				7	6	7	0	30.0	1
------------------------------------
-type:wsprite	W	X		Y		STX		SC
-0				2	8.700	9.100	0		1.000	STATIC
------------------------------------
+0				0	1	7	0	30.0	0
+1				1	2	7	0	30.0	1
+2				2	3	7	0	30.0	1
+3				3	0	7	0	30.0	1
+4				1	4	7	0	30.0	1
+5				4	5	7	0	30.0	0
+6				5	2	7	0	30.0	1
+7				2	1	7	0	30.0	1
+-
+type:wsprite	W	X	Y	STX	SC	STATE
+0				2	8	9	0	1	STATIC
+-
 type:sector		W			N			G	L
 0				0 1 2 3		1 -1 -1 -1	20	0
 1				4 5 6 7		-1 0 -1 -1	20	0
------------------------------------
+-
 type:f&c		FH	CH	FTX	CTX	FS		CS		SL
 0				0	20	2	2	10.0	10.0	0 0 0 0
 1				0	20	2	2	10.0	10.0	0 0 0 0
------------------------------------
-type:entity		NM		X		Y		Z	D
-0				Ghost	58.0	43.0	0.0	180
------------------------------------
+-
+type:entity		NM		X	Y	Z	D
+0				Ghost	58	43	0	180
+-
 type:event		Action	Trigger TriggerID	
-0				Ceiling	SHOOT
-1				Floor	SHOOT
-2				Store	SHOOT
-3				Hazard	SHOOT
-4				Audio	SHOOT
-5				Spawn	SHOOT
-6				Light	SHOOT
------------------------------------
+0				Floor	CLICK	0			1	0	20	5
+-
 ```
-EVENT		TRIGGER						TRIGGER_ID
 ```
-Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	min		max		speed
-Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	min		max		speed
-Store		SHOOT/CLICK			trigger_ID	| 
-Hazard		SECTOR				trigger_ID	| event_sector
-Audio		SHOOT/CLICK/SECTOR		trigger_ID	| path_to_audio
-Spawn		SHOOT/CLICK/SECTOR		trigger_ID	| entity_id		x		y		z		yaw
-Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	| event_sector	light_lvl_to_flicker_to
+GM		- Game mode
+SC		- Scale
+V		- Vertex
+W		- Wall
+S		- Sector
+X		- X coordinate
+Y		- Y coordinate
+Z		- Z coordinate
+D		- Yaw
+V1		- Vertex 1
+V2		- Vertex 2
+WTX		- Wall Texture
+PTX		- Portal Texture
+FTX		- Floor Texture
+CTX		- Ceiling Texture
+STX		- Wall Sprite Texture
+SO		- Solid
+N		- Neighbor
+G		- Gravity
+L		- Light
+FH		- Floor Height
+CH		- Ceiling Height
+FS		- Floor Scale
+CS		- Ceiling Scale
+NM		- Name
+T		- Type
+A		- Action
+I		- Index
+ST	 	- State
+TR		- Event Trigger
+AC		- Action
 ```
----
-
-Hi, do you want / have time to evaluate my Wolf3D project tomorrow? There has been no evaluation slots for the past 2 weeks so i have to ask directly. If you want we can put a slot at night (e.g. 23:00) and do the eval next day, then the chances of someone else taking it will be lower.
-
-Sorry for the inconvenience.

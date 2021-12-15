@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 15:18:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:38:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 	ft_bzero(&event, sizeof(t_event));
 	get_event_action(doom, &event, arr);
 	get_event_type(doom, &event, arr, nb);
+	// Take 
 	doom->events = ft_realloc(doom->events,
 			sizeof(t_event) * doom->nb.events,
 			sizeof(t_event) * ++doom->nb.events);
