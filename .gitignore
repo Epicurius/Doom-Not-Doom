@@ -7,4 +7,5 @@ README
 .vscode
 bmp_to_bxpm/converter
 cookie
-*.endless
+*.dnde
+*.dnds
