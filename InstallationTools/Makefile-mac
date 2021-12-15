@@ -6,19 +6,19 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/15 10:17:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/15 12:16:52 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL_NAME	= $(shell uname -s)
 
-RED		:= "\e[0;31m"
-GREEN	:= "\e[0;32m"
-YELLOW	:= "\e[0;33m"
-BLUE	:= "\e[0;34m"
-MAGENTA	:= "\e[0;35m"
-CYAN	:= "\e[0;36m"
-RESET	:= "\e[0m"
+RED			=	"\e[0;31m"
+GREEN		=	"\e[0;32m"
+YELLOW		=	"\e[0;33m"
+BLUE		=	"\e[0;34m"
+MAGENTA		=	"\e[0;35m"
+CYAN		=	"\e[0;36m"
+RESET		=	"\e[0m"
 
 CFILES		=	ai_attack.c\
 				ai_movement.c\
@@ -39,11 +39,9 @@ CFILES		=	ai_attack.c\
 				help.c\
 				keys.c\
 				malloc_texture_pos.c\
-				map_events.c\
 				minimap.c\
 				movement.c\
 				orientation.c\
-				sector_trigger_events.c\
 				precompute_buy_menu.c\
 				precompute_entities.c\
 				precompute_projectiles.c\
@@ -58,7 +56,6 @@ CFILES		=	ai_attack.c\
 				sound.c\
 				spawn_entity.c\
 				update_screen.c\
-				wsprite_trigger_events.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
 				UI/game_loading.c\
@@ -104,6 +101,9 @@ CFILES		=	ai_attack.c\
 				Free/free2.c\
 				Free/free3.c\
 				Free/free4.c\
+				Events/map_events.c\
+				Events/sector_events.c\
+				Events/wsprite_events.c\
 				BuyMenu/buymenu.c\
 				BuyMenu/bm_init1.c\
 				BuyMenu/bm_init2.c\
@@ -201,6 +201,7 @@ $(ODIR):
 	@mkdir -p $@/Math
 	@mkdir -p $@/Free
 	@mkdir -p $@/Draw
+	@mkdir -p $@/Events
 	@mkdir -p $@/BuyMenu
 	@mkdir -p $@/ParseMap
 	@mkdir -p $@/EntityCoords

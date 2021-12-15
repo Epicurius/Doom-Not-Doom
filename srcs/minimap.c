@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 18:04:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:27:39 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	map(t_doom *doom)
 {
 	if (doom->keys[SDL_SCANCODE_TAB])
 	{
-		precompute_buymenu(doom);
 		reset_sectbool(doom, -1);
 		doom->map.zoom = ft_clamp(doom->map.zoom, 1, 10);
 		map_area(doom);

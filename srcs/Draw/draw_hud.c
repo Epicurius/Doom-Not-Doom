@@ -6,13 +6,13 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 10:37:51 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 12:03:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:11:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static inline void	calulate_armour_damage_reduction(t_doom *doom, t_player *player)
+static inline void	calulate_health(t_doom *doom, t_player *player)
 {
 	Mix_PlayChannel(-1, doom->sound[WAV_PLAYER_HIT], 0);
 	if (player->armour)
@@ -34,7 +34,7 @@ void	draw_hud(t_doom *doom)
 	SDL_Rect	dstr;
 
 	if (doom->player.damage && !doom->player.debug)
-		calulate_armour_damage_reduction(doom, &doom->player);
+		calulate_health(doom, &doom->player);
 	dstr.x = 10;
 	dstr.y = doom->surface->h;
 	hud_health(doom, &dstr);

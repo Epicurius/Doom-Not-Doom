@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 15:19:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:23:58 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	floor_ceiling_event(t_event *event, int nb, char **arr)
 
 /*
  *	Parse Spawn event args.
+ *	event->yaw = ft_atoi(arr[8]) * CONVERT_TO_RADIANS;
  */
 void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
@@ -40,7 +41,6 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 	event->entity = ft_atoi(arr[4]);
 	event->pos = mult_v3(new_v3(ft_atof(arr[5]),
 				ft_atof(arr[6]), ft_atof(arr[7])), doom->map_scale);
-	event->yaw = ft_atoi(arr[8]) * CONVERT_TO_RADIANS;
 }
 
 /*

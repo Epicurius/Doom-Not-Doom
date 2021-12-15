@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 12:02:38 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:17:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static inline void	game_loop(t_doom *doom)
  */
 static void	game(char *map, t_settings settings)
 {
-	t_doom		doom;
+	t_doom	doom;
 
 	ft_bzero(&doom, sizeof(t_doom));
 	doom.settings = settings;
