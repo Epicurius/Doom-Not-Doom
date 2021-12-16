@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 17:43:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/05 10:55:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:26:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void	free_shade_shade(t_bxpm *bxpm)
 	int	i;
 
 	i = -1;
-	while (++i < 512)
-	{
+	while (++i < 100)
 		if (bxpm->shade[i])
 			free(bxpm->shade[i]);
-	}
+	while (++i < 200)
+		if (bxpm->shade[i])
+			free(bxpm->shade[i]);
 }

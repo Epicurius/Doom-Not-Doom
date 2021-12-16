@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 14:51:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:26:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ SDL_Color	hex_to_sdl_color(int hex)
 
 /*
  * Darkens or brightens a color 
- * -x darker, 0 nothing, +x lighter (-255 to 255)
+ * -x darker, 0 nothing, +x lighter 0 - 512 (-255 to 255)
  */
 Uint32	brightness(Uint32 src, int light)
 {
-	if (light == 0)
-		return (src);
-	return (255 << 24
-		| ft_clamp(((light + 256) * (src >> 16 & 0xFF)) / 256, 0, 255) << 16
-		| ft_clamp(((light + 256) * (src >> 8 & 0xFF)) / 256, 0, 255) << 8
-		| ft_clamp(((light + 256) * (src & 0xFF)) / 256, 0, 255));
+	unsigned char	newR;
+	unsigned char	newG;
+	unsigned char	newB;
+
+	newR = ft_min((src >> 16 & 0xFF) * light / 100, 255);
+	newG = ft_min((src >> 8 & 0xFF)  * light / 100, 255);
+	newB = ft_min((src & 0xFF)       * light / 100, 255);
+	return (255 << 24 | newR << 16 | newG << 8 | newB);
 }
 
 /*
@@ -56,7 +58,7 @@ int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
 
 /*
  *	Creates a separete shade of the BXPM image with the light shade.
- *	Saves it to bxpm->shade[light from -255 -> 255].
+ *	Saves it to bxpm->shade[light from -100% -> +100].
  */
 static void	shade_bxpm(t_doom *doom, int texture, int light)
 {
@@ -64,15 +66,20 @@ static void	shade_bxpm(t_doom *doom, int texture, int light)
 	t_bxpm	*bxpm;
 
 	i = -1;
-	if (texture < 0 || doom->mtx[texture].shade[255 + light] != NULL)
+	if (texture < 0 || doom->mtx[texture].shade[light] != NULL)
 		return ;
 	bxpm = &doom->mtx[texture];
-	bxpm->shade[255 + light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb);
-	while (++i < bxpm->clr_nb)
+	if (light == 100)
+		bxpm->shade[100] = bxpm->clr;
+	else
 	{
-		if (bxpm->clr[i] == 0xFF800080)
-			bxpm->shade[255 + light][i] = 0xFF800080;
-		bxpm->shade[255 + light][i] = brightness(bxpm->clr[i], light);
+		bxpm->shade[light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb);
+		while (++i < bxpm->clr_nb)
+		{
+			if (bxpm->clr[i] == 0xFF800080)
+				bxpm->shade[light][i] = 0xFF800080;
+			bxpm->shade[light][i] = brightness(bxpm->clr[i], light);
+		}
 	}
 }
 
@@ -82,7 +89,7 @@ static void	shade_bxpm(t_doom *doom, int texture, int light)
  */
 void	sector_shading(t_doom *doom, int s, int w)
 {
-	t_sector	*sector;
+	t_sector		*sector;
 
 	s = -1;
 	while (++s < doom->nb.sectors)
