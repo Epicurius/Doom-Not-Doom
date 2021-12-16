@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:26:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:45:30 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ Uint32	brightness(Uint32 src, int light)
 	unsigned char	newB;
 
 	newR = ft_min((src >> 16 & 0xFF) * light / 100, 255);
-	newG = ft_min((src >> 8 & 0xFF)  * light / 100, 255);
-	newB = ft_min((src & 0xFF)       * light / 100, 255);
+	newG = ft_min((src >> 8 & 0xFF) * light / 100, 255);
+	newB = ft_min((src & 0xFF) * light / 100, 255);
 	return (255 << 24 | newR << 16 | newG << 8 | newB);
 }
 

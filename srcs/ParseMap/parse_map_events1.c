@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 12:38:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:52:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,13 @@ static void	get_event_type(t_doom *doom, t_event *event, char **arr, int nb)
  */
 void	parse_events(t_doom *doom, int nb, char **arr)
 {
-	t_event	event;
+	static int	i = 0;
 
 	if (nb < 3)
-		error_msg("Invalid amount of event arguments");
-	ft_bzero(&event, sizeof(t_event));
-	get_event_action(doom, &event, arr);
-	get_event_type(doom, &event, arr, nb);
-	// Take 
-	doom->events = ft_realloc(doom->events,
-			sizeof(t_event) * doom->nb.events,
-			sizeof(t_event) * ++doom->nb.events);
-	doom->events[doom->nb.events - 1] = event;
+		error_msg("Invalid amount of event arguments.");
+	if (i >= doom->nb.events)
+		error_msg("Invalid amount of events.");
+	ft_bzero(&doom->events[i], sizeof(t_event));
+	get_event_action(doom, &doom->events[i], arr);
+	get_event_type(doom, &doom->events[i], arr, nb);
 }

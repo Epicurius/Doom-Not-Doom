@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:20:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:27:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:30:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@
  */
 void	parse_vertex(t_doom *doom, int nb, char **arr)
 {
+	int	i;
+
+	i = ft_atoi(arr[0]);
 	if (nb < 3)
 		error_msg("Invalid amount of vertex arguments %s\n", arr[0]);
-	doom->vert[ft_atoi(arr[0])].x = ft_atoi(arr[1]) * doom->map_scale;
-	doom->vert[ft_atoi(arr[0])].y = ft_atoi(arr[2]) * doom->map_scale;
+	if (i >= doom->nb.vertices)
+		error_msg("Invalid amount of walls.");
+	doom->vert[i].x = ft_atoi(arr[1]) * doom->map_scale;
+	doom->vert[i].y = ft_atoi(arr[2]) * doom->map_scale;
 }
 
 /*
@@ -29,10 +34,14 @@ void	parse_vertex(t_doom *doom, int nb, char **arr)
 void	parse_wall(t_doom *doom, int nb, char **arr)
 {
 	t_wall	*wall;
+	int		i;
 
+	i = ft_atoi(arr[0]);
 	if (nb < 7)
 		error_msg("Invalid amount of wall arguments %s\n", arr[0]);
-	wall = &doom->walls[ft_atoi(arr[0])];
+	if (i >= doom->nb.walls)
+		error_msg("Invalid amount of walls.");
+	wall = &doom->walls[i];
 	wall->v1 = doom->vert[ft_atoi(arr[1])];
 	wall->v2 = doom->vert[ft_atoi(arr[2])];
 	wall->wtx = ft_atoi(arr[3]);
@@ -52,6 +61,8 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 
 	if (nb < 8)
 		error_msg("Invalid amount of f&c arguments %s\n", arr[0]);
+	if (i >= doom->nb.sectors)
+		error_msg("Invalid amount of f&c.");
 	sector = &doom->sectors[i++];
 	sector->floor.height = ft_atof(arr[1]) * doom->map_scale;
 	sector->ceiling.height = ft_atof(arr[2]) * doom->map_scale;
@@ -100,6 +111,8 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 
 	if (ac < 5)
 		error_msg("Invalid amount of sector arguments %s\n", arr[0]);
+	if (i >= doom->nb.sectors)
+		error_msg("Invalid amount of sectors.");
 	sector = &doom->sectors[i++];
 	sector->id = ft_atoi(arr[0]);
 	walls = stringsplit(arr[1], ' ', &sector->npoints);
