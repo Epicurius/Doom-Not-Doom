@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 14:23:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:33:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	skybox_limits(t_render *render, t_vline *vline,
 
 /*
  *	Depending on y axis draw skybox floor, wall or ceiling.
+ *	skybox.y1 = ft_max(limit[0], skybox.curr.bot) + 1;
  */
 static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 {
@@ -68,7 +69,7 @@ static void	draw_skybox_vline(t_render *render, t_vline skybox, int *limit)
 	}
 	if (skybox.curr.bot < limit[1])
 	{
-		skybox.y1 = ft_max(limit[0], skybox.curr.bot);
+		skybox.y1 = ft_max(limit[0], skybox.curr.bot) + 1;
 		skybox.y2 = limit[1];
 		skybox_floor_vline(render, skybox, i + 5);
 	}
