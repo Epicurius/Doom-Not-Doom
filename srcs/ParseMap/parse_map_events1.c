@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:52:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 10:36:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,5 @@ void	parse_events(t_doom *doom, int nb, char **arr)
 	ft_bzero(&doom->events[i], sizeof(t_event));
 	get_event_action(doom, &doom->events[i], arr);
 	get_event_type(doom, &doom->events[i], arr, nb);
+	i++;
 }

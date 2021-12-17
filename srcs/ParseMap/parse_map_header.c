@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 14:18:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:37:09 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 10:16:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	parse_game_mode(char *str)
  */
 void	parse_header(t_doom *doom, int nb, char **arr)
 {
-	if (nb < 6)
+	if (nb < 7)
 		error_msg("Invalid amount of arguments for event %s\n", arr[0]);
 	doom->game.mode = parse_game_mode(arr[1]);
 	doom->map_scale = ft_atoi(arr[2]);
@@ -37,14 +37,14 @@ void	parse_header(t_doom *doom, int nb, char **arr)
 	doom->nb.walls = ft_atoi(arr[4]);
 	doom->nb.sectors = ft_atoi(arr[5]);
 	doom->nb.events = ft_atoi(arr[6]);
+	doom->nb.rifts = 0;
 	doom->nb.entities = 0;
 	doom->nb.projectiles = 0;
-	doom->nb.rifts = 0;
-	doom->orb = NULL;
-	doom->entity = NULL;
 	doom->rifts = NULL;
+	doom->entity = NULL;
+	doom->orb = NULL;
 	doom->vert = protalloc(sizeof(t_v3) * doom->nb.vertices);
 	doom->walls = protalloc(sizeof(t_wall) * doom->nb.walls);
-	doom->sectors = protalloc(sizeof(t_sector) * doom->nb.sectors);
 	doom->events = protalloc(sizeof(t_event) * doom->nb.events);
+	doom->sectors = protalloc(sizeof(t_sector) * doom->nb.sectors);
 }

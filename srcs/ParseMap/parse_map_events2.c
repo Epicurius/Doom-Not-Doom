@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 12:23:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 10:35:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ void	audio_event(t_event *event, int nb, char **arr)
  */
 void	hazard_event(t_event *event, int nb, char **arr)
 {
-	if (nb < 4)
+	if (nb < 7)
 		error_msg("Invalid argument for event %s\n", arr[0]);
 	if (event->action != SECTOR)
 		error_msg("Event 'Hazard' can only have SECTOR as an action.\n");
 	event->event_sector = ft_atoi(arr[4]);
 	event->speed = ft_atoi(arr[7]);
+	ft_printf("%d %f\n", event->event_sector, event->speed);
 }
 
 /*
