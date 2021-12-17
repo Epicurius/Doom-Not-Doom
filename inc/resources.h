@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 15:22:37 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:34:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 	{9, BXPM_PATH"land-3.bxpm"},
 	{10, BXPM_PATH"land-0.bxpm"},
 	{11, BXPM_PATH"land-5.bxpm"},
-	{12, BXPM_PATH"cosmos-4.bxpm"},
-	{13, BXPM_PATH"cosmos-1.bxpm"},
-	{14, BXPM_PATH"cosmos-2.bxpm"},
-	{15, BXPM_PATH"cosmos-3.bxpm"},
-	{16, BXPM_PATH"cosmos-0.bxpm"},
-	{17, BXPM_PATH"cosmos-5.bxpm"}
+	{12, BXPM_PATH"city-0.bxpm"},
+	{13, BXPM_PATH"city-5.bxpm"},
+	{14, BXPM_PATH"city-3.bxpm"},
+	{15, BXPM_PATH"city-2.bxpm"},
+	{16, BXPM_PATH"city-4.bxpm"},
+	{17, BXPM_PATH"city-1.bxpm"}
 };
 
 # define ICON_TEXTURE_AMOUNT	5
