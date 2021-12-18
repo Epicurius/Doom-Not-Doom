@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 12:54:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/17 15:55:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,7 @@ void	blit_pixel_skybox(t_render *render, int coord, t_v3 text, int side)
 	unsigned short	pixel;
 
 	bxpm = &render->stx[side];
-	if ((floor(text.y) * bxpm->w + floor(text.x)) > bxpm->pix_nb)
-	{
-		ft_printf("1: %d %d\n", (int)floor(text.y) * bxpm->w + (int)floor(text.x), bxpm->pix_nb);
-		exit (1);
-	}	
-	pixel = bxpm->pix[(int)floor(text.y) * bxpm->w + (int)floor(text.x)];
-	if (pixel >= bxpm->clr_nb)
-	{
-		ft_printf("2\n");
-		exit (1);
-	}
+	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
 	((Uint32 *)render->surface->pixels)[coord] = bxpm->clr[pixel];
 	((float *)render->surface->userdata)[coord] = RENDER_DISTANCE + 1;
 }
