@@ -1,5 +1,5 @@
-style : game/srcs/BuyMenu/layout.style;
-resource_dir : game/resources/ICON/;
+style : srcs/BuyMenu/layout.style;
+resource_dir : resources/ICON/;
 
 Window main_win
 {
