@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:22:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:37:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 10:10:20 by jsalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	player_stat_init(t_buymenu *buymenu)
 void	buymenu_init(t_buymenu *buymenu)
 {
 	buymenu->run = 1;
-	ui_layout_load(&buymenu->layout, GAME_PATH"srcs/BuyMenu/layout.ui");
+	ui_layout_load(&buymenu->layout, GAME_PATH, "srcs/BuyMenu/layout.ui");
 	buymenu->main_win = ui_layout_get_window(&buymenu->layout, "main_win");
 	buymenu->close_button
 		= ui_layout_get_element(&buymenu->layout, "close_button");
