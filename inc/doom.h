@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:20:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:05:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -682,12 +682,9 @@ void				draw_projectiles(t_doom *doom);
 /* File: Draw/draw_skybox.c */
 void				draw_skybox(t_render *render,
 						t_vline *vline, int side);
-/* File: Draw/draw_skybox_ceiling.c */
-void				skybox_ceiling_vline(t_render *render,
-						t_vline vline, int tx);
-/* File: Draw/draw_skybox_floor.c */
-void				skybox_floor_vline(t_render *render,
-						t_vline vline, int tx);
+/* File: Draw/draw_skybox_plane.c */
+void				skybox_plane_vline(t_render *render, t_vline vline,
+						float start, int tx);
 /* File: Draw/draw_skybox_wall.c */
 void				skybox_wall_vline(t_render *render,
 						t_vline vline, int tx);

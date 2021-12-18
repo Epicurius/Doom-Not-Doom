@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:45:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,14 @@ static void	quit_loop(t_doom *doom)
 void	game_quit(t_doom *doom)
 {
 	t_bxpm	*bxpm;
+	int		x;
+	int		y;
 
 	if (doom->quit != 1)
 		return ;
+	SDL_CaptureMouse(1);
+	SDL_GetMouseState(&x, &y);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	bxpm = protalloc(sizeof(t_bxpm));
 	if (!read_bxpm(bxpm, BXPM_PATH"quit.bxpm"))
 		error_msg(0, "read game_over");
@@ -67,5 +72,8 @@ void	game_quit(t_doom *doom)
 	quit_loop(doom);
 	free_bxpm(bxpm);
 	ft_bzero(&doom->keys, 517);
+	SDL_WarpMouseInWindow(doom->win, x, y);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_CaptureMouse(0);
 	doom->time.curr = SDL_GetTicks();
 }

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/18 11:17:04 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/18 13:10:09 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,8 +122,7 @@ CFILES		=	ai_attack.c\
 				Draw/draw_neighbor_wall.c\
 				Draw/draw_portal_texture.c\
 				Draw/draw_projectile.c\
-				Draw/draw_skybox_ceiling.c\
-				Draw/draw_skybox_floor.c\
+				Draw/draw_skybox_plane.c\
 				Draw/draw_skybox_wall.c\
 				Draw/draw_skybox.c\
 				Draw/draw_wall.c\
@@ -186,7 +185,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				-framework SDL2_image \
 				-framework SDL2_ttf -F $(LIB_DIR)/SDL_MAC
 
-CFLAGS		=	-Wall -Wextra -MMD #-Werror -Wfatal-errors -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -MMD -Werror -Wfatal-errors -g -fsanitize=address
 
 
 all: | $(RESOURCES) $(ODIR) $(NAME)

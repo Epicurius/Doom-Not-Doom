@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/10 13:57:50 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/18 12:41:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SHELL_NAME	:= $(shell uname -s)
 
 all: 
 ifeq ($(SHELL_NAME), Darwin)
-	@make -f InstallationTools/Makefile-mac || :
+	@make -f InstallationTools/Makefile-mac -j6 || :
 else
 	@mingw32-make -f InstallationTools/Makefile-win
 endif

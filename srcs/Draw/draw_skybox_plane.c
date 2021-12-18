@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_skybox_ceiling.c                              :+:      :+:    :+:   */
+/*   draw_skybox_plane.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 10:53:48 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 14:45:01 by nneronin         ###   ########.fr       */
+/*   Created: 2021/05/08 10:53:52 by nneronin          #+#    #+#             */
+/*   Updated: 2021/12/18 13:04:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Draw skybox vertical line ceiling texture to window surface.
+ *	Draw skybox vertical line floor or ceiling texture to window surface.
  */
-void	skybox_ceiling_vline(t_render *render, t_vline vline, int tx)
+void	skybox_plane_vline(t_render *render, t_vline vline, float start, int tx)
 {
 	int		coord;
 	t_v3	text;
 	float	alpha;
+	t_v3	stx;
 
+	stx.x = render->stx[tx].w / 10;
+	stx.y = render->stx[tx].h / 10;
 	while (vline.y1 < vline.y2)
 	{
 		coord = vline.y1 * render->surface->w + render->x;
-		alpha = vline.start.top / (vline.y1 - render->player->horizon);
-		text.x = (alpha * vline.texel.x + (1.0 - alpha) * 5) * render->stx[tx].w / 10;
-		text.y = (alpha * vline.texel.y + (1.0 - alpha) * 5) * render->stx[tx].h / 10;
+		alpha = start / (vline.y1 - render->player->horizon);
+		text.x = (alpha * vline.texel.x + (1.0 - alpha) * 5) * stx.x;
+		text.y = (alpha * vline.texel.y + (1.0 - alpha) * 5) * stx.y;
 		if (text.y >= render->stx[tx].h || text.y < 0)
 			text.y = abs((int)text.y % render->stx[tx].h);
 		if (text.x >= render->stx[tx].w || text.x < 0)

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:22:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:49:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,6 @@ static void	parse_map_textures(t_doom *doom, int i, int j)
 	tpool_wait(&doom->tpool);
 }
 
-//parse_bxpm(doom, MAP_TEXTURE_AMOUNT - 1,
-//	doom->mtx, g_map_textures);
-//parse_bxpm(doom, SKYBOX_TEXTURE_AMOUNT,
-//	doom->stx, g_skybox_textures);
 void	init_textures(t_doom *doom)
 {
 	parse_map_textures(doom, -1, -1);
