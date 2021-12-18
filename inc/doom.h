@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:05:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 14:15:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -827,8 +827,6 @@ int					is_convex(t_sector *sector);
 void				game_loading(t_doom *doom);
 /* File: UI/game_over.c */
 void				game_over(t_doom *doom);
-/* File: UI/game_pause.c */
-void				game_pause(t_doom *doom);
 /* File: UI/game_quit.c */
 void				game_quit(t_doom *doom);
 
