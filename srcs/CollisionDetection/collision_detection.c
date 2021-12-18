@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:36:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 12:35:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ int	find_from_sectbool(t_doom *doom, t_motion *motion)
 	return (find_sector_no_z(doom->sectors, doom->nb.sectors, where));
 }
 
+static void		check_vertical_position(float bot, float top,
+		t_motion *motion, t_v3 *where)
+{
+	if (where->z < bot)
+	{
+		where->z = bot;
+		velocity->z = 0;
+	}
+	else if (where->z + motion.height > top)
+	{
+		where->z = top - motion.height;
+		velocity->z = -1;
+	}	
+}
+
 /*
  *	Check map collision.
  *	Vertical -> Horizontal -> move entity z to be in sector.
@@ -57,10 +72,7 @@ int	collision_detection(t_doom *doom, t_motion motion,
 	*velocity = motion.velocity;
 	*where = add_v3(*where, *velocity);
 	velocity->z = gforce;
-	if (where->z < floor_at(&doom->sectors[motion.sector], *where))
-	{
-		where->z = floor_at(&doom->sectors[motion.sector], *where);
-		velocity->z = 0;
-	}
+	check_vertical_position(floor_at(&doom->sectors[motion.sector], *where),
+		ceiling_at(&doom->sectors[motion.sector], *where), &motion, where);
 	return (motion.sector);
 }
