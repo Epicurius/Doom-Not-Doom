@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 15:12:01 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 14:25:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ static void	print_score(t_doom *doom, int *i)
  */
 static void	blit_game_over(t_doom *doom)
 {
-	t_bxpm	*bxpm;
+	t_bxpm	bxpm;
 
-	bxpm = protalloc(sizeof(t_bxpm));
-	read_bxpm(bxpm, BXPM_PATH"game_over.bxpm");
-	blit_bxpm(doom->surface, bxpm,
+	if (!read_bxpm(&bxpm, BXPM_PATH"game_over.bxpm"))
+		error_msg(0, "game_over.bxpm");
+	blit_bxpm(doom->surface, &bxpm,
 		doom->surface->w * 0.05, doom->surface->h * 0.05);
-	free_bxpm(bxpm);
+	free(bxpm.pix);
+	free(bxpm.clr);
 }
 
 /*

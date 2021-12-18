@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:52:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 12:27:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:10:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	draw_minimap2(t_doom *doom, t_wall *wall)
 	if (cohen_sutherland(p, doom->map.size))
 	{
 		if (wall->n != -1)
-			draw_line(doom->surface, 0xFFFF0000, p[0], p[1]);
+			draw_line(doom->surface, 0xdeadbeef, p[0], p[1]);
 		else
 			draw_line(doom->surface, 0xFFFFFFFF, p[0], p[1]);
 	}

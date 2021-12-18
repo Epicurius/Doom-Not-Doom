@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:43:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:59:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ static void	init_threading(t_doom *doom)
 		error_msg(NULL);
 }
 
+void	set_true_mouse(t_doom *doom)
+{
+	int	x;
+	int	y;
+
+	while (SDL_PollEvent(&(SDL_Event){}))
+		;
+	SDL_GetMouseState(&x, &y);
+	if (!x && !y)
+		SDL_WarpMouseInWindow(doom->win, 0, 0);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+}
+
 void	init_doom(t_doom *doom)
 {
 	init_threading(doom);
@@ -44,6 +57,6 @@ void	init_doom(t_doom *doom)
 	init_sound(doom);
 	init_inventory(doom);
 	init_slope_normal(doom);
+	set_true_mouse(doom);
 	init_camera(doom);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

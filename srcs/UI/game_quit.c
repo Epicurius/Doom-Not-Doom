@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 14:18:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:58:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_bmp	*s_to_save_screen_shot(t_doom *doom)
 	SDL_FreeSurface(surface);
 	TTF_CloseFont(amaz);
 	return (surface_to_bmp(doom->surface->w, doom->surface->h, 3,
-		doom->surface->pixels));
+			doom->surface->pixels));
 }
 
 /*
@@ -52,12 +52,10 @@ static void	y_or_n(t_doom *doom, int y)
 /*
  *	Quit? loop wait for player to press y, n, esc or q.
  */
-static void	quit_loop(t_doom *doom, t_bmp *bmp)
+static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 {
-	int			i;
 	SDL_Event	event;
 
-	i = FALSE;
 	while (1)
 	{
 		SDL_PollEvent(&event);
@@ -77,6 +75,7 @@ static void	quit_loop(t_doom *doom, t_bmp *bmp)
 			i = TRUE;
 		}
 	}
+	free_bmp(bmp);
 }
 
 /*
@@ -96,14 +95,14 @@ void	game_quit(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
-	if (!read_bxpm(&bxpm, BXPM_PATH"quit.bxpm"))
-		error_msg(0, "quit.bxpm");
+	read_bxpm(&bxpm, BXPM_PATH"quit.bxpm");
 	blit_bxpm(doom->surface, &bxpm, doom->c.x - bxpm.w / 2,
 		doom->c.y - bxpm.h / 2);
+	free(bxpm.pix);
+	free(bxpm.clr);
 	y_or_n(doom, doom->c.y + bxpm.h / 2);
 	update_screen(doom);
-	quit_loop(doom, bmp);
-	free_bmp(bmp);
+	quit_loop(doom, bmp, FALSE);
 	ft_bzero(&doom->keys, 517);
 	SDL_WarpMouseInWindow(doom->win, x, y);
 	SDL_SetRelativeMouseMode(SDL_TRUE);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 15:32:29 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 12:42:53 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/18 15:59:59 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	find_from_sectbool(t_doom *doom, t_motion *motion)
 static void	check_vertical_position(t_sector *sector, t_motion *motion,
 	t_v3 *where, t_v3 *velocity)
 {
-	float top;
-	float bot;
-	
+	float	top;
+	float	bot;
+
 	bot = floor_at(sector, *where);
 	top = ceiling_at(sector, *where);
 	if (where->z < bot)
