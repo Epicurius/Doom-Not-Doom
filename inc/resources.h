@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 15:34:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/19 14:58:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,53 +44,72 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_PLAYER_DEATH, WAV_PATH"PlayerDeath.wav"}
 };
 
-# define MAP_TEXTURE_AMOUNT	21
+# define MAP_TEXTURE_AMOUNT	34
 static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"bullet_hole.bxpm"},
-	{1, BXPM_PATH"vent.bxpm"},
-	{2, BXPM_PATH"tile_floor.bxpm"},
-	{3, BXPM_PATH"bars.bxpm"},
-	{4, BXPM_PATH"wall_button.bxpm"},
-	{5, BXPM_PATH"cog.bxpm"},
-	{6, BXPM_PATH"lava.bxpm"},
-	{7, BXPM_PATH"metal_wall.bxpm"},
-	{8, BXPM_PATH"terminal.bxpm"},
-	{9, BXPM_PATH"claw.bxpm"},
-	{10, BXPM_PATH"green_wall.bxpm"},
-	{11, BXPM_PATH"radar.bxpm"},
-	{12, BXPM_PATH"DoomPoster.bxpm"},
-	{13, BXPM_PATH"door.bxpm"},
-	{14, BXPM_PATH"fiber_wall.bxpm"},
-	{15, BXPM_PATH"rock.bxpm"},
-	{16, BXPM_PATH"steel_tile1.bxpm"},
-	{17, BXPM_PATH"WarPoster.bxpm"},
-	{18, BXPM_PATH"hand.bxpm"},
-	{19, BXPM_PATH"wires.bxpm"},
-	{20, BXPM_PATH"clock.bxpm"}
+	{0, BXPM_PATH"BulletHole.bxpm"},
+	{1, BXPM_PATH"SciFi-8.bxpm"},
+	{2, BXPM_PATH"FloorTiles.bxpm"},
+	{3, BXPM_PATH"SteelBars.bxpm"},
+	{4, BXPM_PATH"SteelDoor.bxpm"},
+	{5, BXPM_PATH"SciFi-0.bxpm"},
+	{6, BXPM_PATH"Lava.bxpm"},
+	{7, BXPM_PATH"SciFi-1.bxpm"},
+	{8, BXPM_PATH"SciFi-2.bxpm"},
+	{9, BXPM_PATH"SciFi-3.bxpm"},
+	{10, BXPM_PATH"SciFi-4.bxpm"},
+	{11, BXPM_PATH"SciFi-5.bxpm"},
+	{12, BXPM_PATH"SciFi-6.bxpm"},
+	{13, BXPM_PATH"SciFi-7.bxpm"},
+	{14, BXPM_PATH"FiberWall.bxpm"},
+	{15, BXPM_PATH"SciFi-9.bxpm"},
+	{16, BXPM_PATH"SciFi-13.bxpm"},
+	{17, BXPM_PATH"SciFi-11.bxpm"},
+	{18, BXPM_PATH"SciFi-12.bxpm"},
+	{19, BXPM_PATH"SciFi-10.bxpm"},
+	{20, BXPM_PATH"SteelTile.bxpm"},
+	{21, BXPM_PATH"HandPrint.bxpm"},
+	{22, BXPM_PATH"Radar.bxpm"},
+	{23, BXPM_PATH"WarPoster.bxpm"},
+	{24, BXPM_PATH"Wires.bxpm"},
+	{25, BXPM_PATH"AnimatedButton.bxpm"},
+	{26, BXPM_PATH"AnimatedClaw.bxpm"},
+	{27, BXPM_PATH"AnimatedCog.bxpm"},
+	{28, BXPM_PATH"AnimatedTerminal.bxpm"},
+	{29, BXPM_PATH"AnimetedVent.bxpm"},
+	{30, BXPM_PATH"DoomPoster.bxpm"},
+	{31, BXPM_PATH"TargetDummy.bxpm"},
+	{32, BXPM_PATH"Crate.bxpm"},
+	{33, BXPM_PATH"Clock.bxpm"}
 };
 
+//{12, BXPM_PATH"City-0.bxpm"},
+//{13, BXPM_PATH"City-5.bxpm"},
+//{14, BXPM_PATH"City-3.bxpm"},
+//{15, BXPM_PATH"City-2.bxpm"},
+//{16, BXPM_PATH"City-4.bxpm"},
+//{17, BXPM_PATH"City-1.bxpm"}
 # define SKYBOX_TEXTURE_AMOUNT	18
 static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"space-3.bxpm"},
-	{1, BXPM_PATH"space-0.bxpm"},
-	{2, BXPM_PATH"space-1.bxpm"},
-	{3, BXPM_PATH"space-2.bxpm"},
-	{4, BXPM_PATH"space-4.bxpm"},
-	{5, BXPM_PATH"space-5.bxpm"},
-	{6, BXPM_PATH"land-4.bxpm"},
-	{7, BXPM_PATH"land-1.bxpm"},
-	{8, BXPM_PATH"land-2.bxpm"},
-	{9, BXPM_PATH"land-3.bxpm"},
-	{10, BXPM_PATH"land-0.bxpm"},
-	{11, BXPM_PATH"land-5.bxpm"},
-	{12, BXPM_PATH"city-0.bxpm"},
-	{13, BXPM_PATH"city-5.bxpm"},
-	{14, BXPM_PATH"city-3.bxpm"},
-	{15, BXPM_PATH"city-2.bxpm"},
-	{16, BXPM_PATH"city-4.bxpm"},
-	{17, BXPM_PATH"city-1.bxpm"}
+	{0, BXPM_PATH"Space-3.bxpm"},
+	{1, BXPM_PATH"Space-0.bxpm"},
+	{2, BXPM_PATH"Space-1.bxpm"},
+	{3, BXPM_PATH"Space-2.bxpm"},
+	{4, BXPM_PATH"Space-4.bxpm"},
+	{5, BXPM_PATH"Space-5.bxpm"},
+	{6, BXPM_PATH"Land-4.bxpm"},
+	{7, BXPM_PATH"Land-1.bxpm"},
+	{8, BXPM_PATH"Land-2.bxpm"},
+	{9, BXPM_PATH"Land-3.bxpm"},
+	{10, BXPM_PATH"Land-0.bxpm"},
+	{11, BXPM_PATH"Land-5.bxpm"},
+	{12, BXPM_PATH"Duke-3.bxpm"},
+	{13, BXPM_PATH"Duke-1.bxpm"},
+	{14, BXPM_PATH"Duke-2.bxpm"},
+	{15, BXPM_PATH"Duke-1.bxpm"},
+	{16, BXPM_PATH"Duke-5.bxpm"},
+	{17, BXPM_PATH"Duke-0.bxpm"}
 };
 
 # define ICON_TEXTURE_AMOUNT	5
@@ -106,11 +125,11 @@ static const t_id_and_path	g_icon_textures[ICON_TEXTURE_AMOUNT] =
 # define ENTITY_TEXTURE_AMOUNT	5
 static const t_id_and_path	g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"alfred.bxpm"},
-	{1, BXPM_PATH"spooky.bxpm"},
-	{2, BXPM_PATH"rift.bxpm"},
-	{3, BXPM_PATH"objects.bxpm"},
-	{4, BXPM_PATH"ghost.bxpm"}
+	{0, BXPM_PATH"EntityAlfred.bxpm"},
+	{1, BXPM_PATH"EntitySpooky.bxpm"},
+	{2, BXPM_PATH"EntityRift.bxpm"},
+	{3, BXPM_PATH"EntityObjects.bxpm"},
+	{4, BXPM_PATH"EntityGhost.bxpm"}
 };
 
 static const char			*g_weapon_data[WEAPON_AMOUNT] =
@@ -267,7 +286,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 40,
 		.frame_rate[ATTACK] = 60,
 		.frame_rate[DEATH] = 60,
-		.path = BXPM_PATH"alfred.bxpm",
+		.path = BXPM_PATH"EntityAlfred.bxpm",
 		.tc = {0, 0, 43, 47}
 	},
 	{
@@ -289,7 +308,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 60,
 		.frame_rate[ATTACK] = 180,
 		.frame_rate[DEATH] = 120,
-		.path = BXPM_PATH"spooky.bxpm",
+		.path = BXPM_PATH"EntitySpooky.bxpm",
 		.tc = {25, 193, 114, 184}
 	},
 	{
@@ -311,7 +330,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 60,
 		.frame_rate[ATTACK] = 70,
 		.frame_rate[DEATH] = 40,
-		.path = BXPM_PATH"ghost.bxpm",
+		.path = BXPM_PATH"EntityGhost.bxpm",
 		.tc = {10, 0, 132, 150}
 	},
 	{
@@ -333,7 +352,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 80,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"rift.bxpm",
+		.path = BXPM_PATH"EntityRift.bxpm",
 		.tc = {0, 0, 174, 315}
 	},
 	{
@@ -355,7 +374,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 40,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {174, 182, 35, 51}
 	},
 	{
@@ -377,7 +396,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {174, 7, 23, 84}
 	},
 	{
@@ -399,7 +418,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {371, 209, 10, 47}
 	},
 	{
@@ -421,7 +440,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {543, 5, 36, 91}
 	},
 	{
@@ -443,7 +462,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {88, 70, 24, 56}
 	},
 	{
@@ -465,7 +484,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {229, 97, 58, 75}
 	},
 	{
@@ -487,7 +506,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
 		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"objects.bxpm",
+		.path = BXPM_PATH"EntityObjects.bxpm",
 		.tc = {178, 242, 28, 18}
 	}
 };

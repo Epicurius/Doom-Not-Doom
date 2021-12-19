@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 15:58:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/19 12:29:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	game_quit(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
-	read_bxpm(&bxpm, BXPM_PATH"quit.bxpm");
+	read_bxpm(&bxpm, BXPM_PATH"GameQuit.bxpm");
 	blit_bxpm(doom->surface, &bxpm, doom->c.x - bxpm.w / 2,
 		doom->c.y - bxpm.h / 2);
 	free(bxpm.pix);

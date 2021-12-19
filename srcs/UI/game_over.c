@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 14:25:41 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/19 12:26:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	blit_game_over(t_doom *doom)
 {
 	t_bxpm	bxpm;
 
-	if (!read_bxpm(&bxpm, BXPM_PATH"game_over.bxpm"))
+	if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
 		error_msg(0, "game_over.bxpm");
 	blit_bxpm(doom->surface, &bxpm,
 		doom->surface->w * 0.05, doom->surface->h * 0.05);
