@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/22 11:00:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:27:48 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 static void	launcher(void)
 {
-	static const char	*arr[] = {ROOT_PATH"wolf3d", NULL};
+	char *const	arr[] = {ROOT_PATH"wolf3d", NULL};
 
 	execv(arr[0], arr);
 }
