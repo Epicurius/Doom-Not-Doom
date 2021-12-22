@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:54:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:00:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
  */
 static void	launcher(void)
 {
-	char	*arr[2];
+	static const char	*arr[] = {ROOT_PATH"wolf3d", NULL};
 
-	arr[0] = ft_strdup(ROOT_PATH"wolf3d");
-	arr[1] = NULL;
 	execv(arr[0], arr);
 }
 
@@ -82,6 +80,7 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
+	ft_printf("Anime\n");
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);
@@ -90,5 +89,6 @@ int	main(int ac, char **av)
 		system("leaks doom");
 	if (settings.launcher)
 		launcher();
+	system("leaks doom");
 	return (1);
 }

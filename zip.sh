@@ -1,1 +1,1 @@
-tar -czf DnD_Game_Assets resources
+tar -czf DoomAssets resources
