@@ -34,7 +34,6 @@ cd DnD && make
 	Tab			-	Show map
 	Scroll Wheel		-	Zoom map
 	ESC/Q			-	Quit
-	P			-	Pause
 	`			-	Unstuck player
 ```
 ---
@@ -97,7 +96,11 @@ Each vertical piece is self sufficient from start to end, which enabled them to 
 while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.</n>
 And when all map surfaces have been drawn no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
-###### Map rendering on one thread, first monochrome then with texture.</center>
+The engine uses a z-buffer to determine when entities and projetile should be draw. The z-buffer is set each frame when the map surfaces are drawn but not used.
+This is because of the way the map is drawn, this means no compares are needed when drawing the map and eahc frame the z-buffer does not need to be reset.
+Only projectiles nad entites use z-buffer to compare if each pixel should be drawn. The only down side to this method is that there is no simple way to implement render distance.
+
+##### Map rendering on one thread, first monochrome then with texture.</center>
 <img src="./ReadMeAssets/map_render.gif" alt="Engine_Flow" width="900"/></n>
 
 When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.</n>
