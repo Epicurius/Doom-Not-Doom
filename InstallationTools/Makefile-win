@@ -172,15 +172,19 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libui \
 				-I $(SDL_DIR)/include
 
-LIBS		=	-L $(SDL_DIR)/lib -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer \
-			$(LIB_DIR)/libui/libui.a \
-			$(LIB_DIR)/libpf/libpf.a \
-			$(LIB_DIR)/libft/libft.a \
-			$(LIB_DIR)/libtp/libtp.a \
-			$(LIB_DIR)/libbxpm/libbxpm.a	
-			
+LIB_LIBS	= \
+				-L$(SDL_DIR)/lib \
+				-L$(LIB_DIR)/libui \
+				-L$(LIB_DIR)/libpf \
+				-L$(LIB_DIR)/libft \
+				-L$(LIB_DIR)/libtp \
+				-L$(LIB_DIR)/libbxpm \
+
+
+LIBS		= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp
+							
 				
-CFLAGS		=	-Wall -Wextra -MMD #-Werror -Wfatal-errors -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable #-Werror -Wfatal-errors -g -fsanitize=address
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
@@ -197,12 +201,8 @@ $(ODIR):
 	@mkdir -p $@/EntityCoords
 	@mkdir -p $@/CollisionDetection
 
-$(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
-	@echo "read 'icns' (-16455) \"resources/ICON/DND.icns\";" >> icon.rsrc
-	@Rez -a icon.rsrc -o $(NAME)
-	@SetFile -a C $(NAME)
-	@rm icon.rsrc
+$(NAME): $(SRCS)
+	@gcc $(CFLAGS) $(SRCS) $(LIB_INC) $(LIB_LIBS) $(INC) $(LIBS) -pthread -o $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c
