@@ -201,8 +201,8 @@ $(ODIR):
 	@mkdir -p $@/EntityCoords
 	@mkdir -p $@/CollisionDetection
 
-$(NAME): $(SRCS)
-	@gcc $(CFLAGS) $(SRCS) $(LIB_INC) $(LIB_LIBS) $(INC) $(LIBS) -pthread -o $(NAME)
+$(NAME): $(OBJ)
+	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(LIB_LIBS) $(INC) $(LIBS) -pthread -o $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 $(ODIR)/%.o: $(CDIR)/%.c

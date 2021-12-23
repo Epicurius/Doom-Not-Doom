@@ -35,7 +35,7 @@ void	parse_wsprite(t_doom *doom, int nb, char **arr)
 	if (nb < 7)
 		error_msg("Invalid amount of wsprite arguments %s\n", arr[0]);
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
-	wsprite->num = ft_realloc(wsprite->num, sizeof(t_wsprite) * wsprite->total,
+	wsprite->num = realloc(wsprite->num,
 			sizeof(t_wsprite) * ++wsprite->total);
 	sprite = &wsprite->num[wsprite->total - 1];
 	sprite->id = ft_atoi(arr[0]);

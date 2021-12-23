@@ -1,6 +1,7 @@
 .DS_Store
 *.a
 doom
+doom.exe
 obj
 /resources/*
 README

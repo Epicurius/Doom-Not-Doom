@@ -80,7 +80,6 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
-	ft_printf("Anime\n");
 	if (ac == 1)
 		print_help_msg();
 	args(ac, av, &settings);
