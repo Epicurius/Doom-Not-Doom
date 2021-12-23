@@ -158,13 +158,14 @@ DEP			=	$(OBJ:.o=.d)
 RESOURCES	=	resources
 
 LIB_DIR		=	../libs
+SDL_DIR		=	../libs/SDL_WIN
 
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libbxpm \
 				-I $(LIB_DIR)/libui \
-				-I $(SDL_DIR)/SDL_WIN/include
+				-I $(SDL_DIR)/include
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
@@ -211,9 +212,9 @@ fclean: clean
 	@rm -f $(NAME)
 
 $(RESOURCES):
-	@./InstallationTools/google_drive.sh
-	@tar -xf file.tar.gz
-	@rm -rf file.tar.gz
+	#@./InstallationTools/google_drive.sh
+	#@tar -xf file.tar.gz
+	#@rm -rf file.tar.gz
 
 re: fclean all
 
