@@ -21,7 +21,7 @@ static void	get_surface_center(t_doom *doom)
 
 static void	init_threading(t_doom *doom)
 {
-	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	doom->nb.processors = 6;//ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
 		error_msg(NULL);
