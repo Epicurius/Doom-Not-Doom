@@ -64,9 +64,7 @@ void	buymenu(SDL_Window *window, SDL_Surface *surf, t_inv *inv)
 	ui_sdl_init();
 	memset(&buymenu, 0, sizeof(t_buymenu));
 	buymenu.inv = inv;
-	buymenu_init(&buymenu);
-	ui_window_replace_win(buymenu.main_win, window);
-	ui_window_texture_pos_set(buymenu.main_win, vec2i(1920, 1080));
+	buymenu_init(&buymenu, window);
 	bg_texture = SDL_CreateTextureFromSurface(buymenu.main_win->renderer, surf);
 	while (buymenu.run)
 	{

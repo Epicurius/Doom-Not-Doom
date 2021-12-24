@@ -84,7 +84,7 @@ void	weapon_upgrade_init(t_buymenu *buymenu);
 void	player_upgrade_init(t_buymenu *buymenu);
 void	weapon_stat_init(t_buymenu *buymenu);
 void	player_stat_init(t_buymenu *buymenu);
-void	buymenu_init(t_buymenu *buymenu);
+void	buymenu_init(t_buymenu *buymenu, SDL_Window *window);
 
 void	update_currency(t_buymenu *buymenu);
 void	update_amount_label(t_buymenu *buymenu, int wep_type);
