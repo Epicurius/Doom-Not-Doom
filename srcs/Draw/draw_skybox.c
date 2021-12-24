@@ -39,7 +39,7 @@ static void	skybox_limits(t_render *render, t_vline *vline,
 		limit[0] = vline->curr.top;
 		limit[1] = vline->curr_n.top;
 	}
-	else if (side == BOT_HALF)
+	else// if (side == BOT_HALF)
 	{
 		limit[0] = vline->curr_n.bot;
 		limit[1] = vline->curr.bot;

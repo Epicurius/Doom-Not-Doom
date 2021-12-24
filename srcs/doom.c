@@ -17,7 +17,7 @@
  */
 static void	launcher(void)
 {
-	char *const	arr[] = {ROOT_PATH"wolf3d", NULL};
+	const char * const arr[] = {ROOT_PATH"wolf3d", NULL};
 
 	execv(arr[0], arr);
 }

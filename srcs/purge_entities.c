@@ -19,12 +19,10 @@
 void	purge_entities(t_doom *doom)
 {
 	t_list		*curr;
-	t_entity	*entity;
 
 	curr = doom->entity;
 	while (curr != NULL)
 	{
-		entity = curr->content;
 		if (((t_entity *)curr->content)->type == ALFRED
 			|| ((t_entity *)curr->content)->type == SPOOKY
 			|| ((t_entity *)curr->content)->type == GHOST

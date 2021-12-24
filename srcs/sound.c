@@ -19,7 +19,7 @@ void	set_volume(int i)
 {
 	static unsigned char	curr = DEFAULT_VOLUME;
 
-	if (curr >= 0 && curr < 128 && i)
+	if (curr < 128 && i)
 		Mix_Volume(-1, ++curr);
 	else if (curr > 0 && curr <= 128 && !i)
 		Mix_Volume(-1, --curr);

@@ -47,7 +47,7 @@ void	depth_shadding(t_render *render, t_vline *vline, int side)
 		{
 			if (side == BOT)
 				z = (vline->y1 - vline->max.bot) / vline->height.bot;
-			else if (side == TOP)
+			else// if (side == TOP)
 				z = (vline->max.top - vline->y1) / vline->height.top;
 			z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 			((Uint32 *)render->surface->pixels)[coord] = z_clr(z);
@@ -76,7 +76,7 @@ void	vline_color_bot_top(t_render *render, t_vline *vline, int side)
 	{
 		if (side == BOT)
 			z = (vline->y1 - vline->max.bot) / vline->height.bot;
-		else if (side == TOP)
+		else// if (side == TOP)
 			z = (vline->max.top - vline->y1) / vline->height.top;
 		z = 1 / (NEAR_Z + z * vline->zrange) * vline->z_near_z;
 		((Uint32 *)render->surface->pixels)[coord] = FLOOR_CEILING_COLOR;
