@@ -39,7 +39,7 @@ static void	parse_wtx_texture(t_doom *doom, t_thread_bxpm *threads, int id)
 	if (!threads[id].active && g_map_textures[id].id != MAP_TEXTURE_AMOUNT - 1)
 	{
 		threads[id].active = TRUE;
-		threads[id].path = ft_strdup(g_map_textures[id].path);
+		threads[id].path = ft_strdup(g_map_textures[id].path);//??
 		threads[id].bxpm = &doom->mtx[id];
 		tpool_add(&doom->tpool, multithread_read_bxpm, &threads[id]);
 	}
@@ -112,4 +112,10 @@ void	init_textures(t_doom *doom)
 		doom->weapon[WEAPON_LAUNCHER].bxpm, g_launcher_textures);
 	init_clock(doom, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	sector_shading(doom, -1, -1);
+	//t_bxpm tmp;
+	//float i = doom->settings.size.y / 20.0 / (float)doom->itx[0].h;
+	//ft_printf("%f\n", i);
+	//bxpm_scale(&tmp, &doom->itx[0], doom->itx[0].w * i, doom->settings.size.y / 20.0);
+	//free(doom->itx[0].pix);
+	//doom->itx[0] = tmp;
 }

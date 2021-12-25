@@ -476,6 +476,8 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+void	bxpm_scale(t_bxpm *dst, t_bxpm *src, int w, int h);
+
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
 /* File: ai_movement.c */

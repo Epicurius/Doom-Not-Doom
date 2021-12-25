@@ -95,7 +95,7 @@ void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 			srcr.x2++;
 			pos -= 0x10000L;
 		}
-		if (dstr.x2 > 0 && dstr.x2 < dst->w - 1)
+		if (dstr.x2 > 0 && dstr.x2 < dst->w)
 			copy_column(dst, dstr, src, srcr);
 		pos += inc;
 		dstr.x2++;

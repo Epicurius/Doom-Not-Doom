@@ -58,6 +58,7 @@ CFILES	=	ai_attack.c\
 				update_screen.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
+				bxpm_scaled.c\
 				UI/game_loading.c\
 				UI/game_over.c\
 				UI/game_quit.c\
