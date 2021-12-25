@@ -33,6 +33,13 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
+	//SDL_BlitSurface(surf, NULL, doom->surface, dstr);
+
+	//ft_printf("%d %d\n", dstr->w, dstr->h);
+	//t_rect d = {10 + surf->w + 10, dstr->y, 0, 0, doom->itx[0].w * 0.3, doom->itx[0].h * 0.3, 0};
+	//t_rect s = {0, 0, 0, 0, doom->itx[0].w, doom->itx[0].h, 0};
+	//blit_bxpm_scaled(doom->surface, d, &doom->itx[0], s);
+	
 	blit_bxpm(doom->surface, &doom->itx[0], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
