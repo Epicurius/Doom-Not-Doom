@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/22 11:27:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:45:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  */
 static void	launcher(void)
 {
-	const char * const arr[] = {ROOT_PATH"wolf3d", NULL};
+	char *const arr[] = {ROOT_PATH"wolf3d", NULL};
 
 	execv(arr[0], arr);
 }
@@ -69,6 +69,7 @@ static void	game(char *map, t_settings settings)
 	if (!validate_map(&doom))
 		return ;
 	init_doom(&doom);
+	//exit(1);
 	while (!doom.quit && doom.player.health > 0)
 		game_loop(&doom);
 	if (doom.player.health <= 0)

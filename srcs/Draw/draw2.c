@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 11:09:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:17:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,7 @@ void	draw_map(t_doom *doom)
 	while (++x < doom->nb.threads)
 	{
 		doom->render[x].x = w / (float)doom->nb.threads * x;
-		doom->render[x].xend = ft_min(
-				w / (float)doom->nb.threads * (x + 1), w);
+		doom->render[x].xend = ft_min(w / (float)doom->nb.threads * (x + 1), w);
 		tpool_add(&doom->tpool, loop_screen_sector, &doom->render[x]);
 	}
 }

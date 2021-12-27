@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/05 07:05:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/27 16:09:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,27 @@
  */
 void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
-	t_point	p;
-	Uint32	clr;
+	int				x;
+	int				y;
+	Uint32			clr;
+	Uint32			*dst;
+	unsigned short	*pix;
+	
 
-	p.y = -1;
-	while (++p.y < bxpm->h)
+	pix = bxpm->pix;
+	dst = &((Uint32 *)surface->pixels)[sy * surface->w + sx];
+	y = -1;
+	while (++y < bxpm->h)
 	{
-		p.x = -1;
-		while (++p.x < bxpm->w)
+		x = -1;
+		while (++x < bxpm->w)
 		{
-			clr = bxpm->clr[bxpm->pix[p.y * bxpm->w + p.x]];
-			if (0 != (clr >> 24 & 0xFF))
-				((Uint32 *)surface->pixels)[(sy + p.y)
-					*surface->w + (sx + p.x)] = clr;
+			clr = bxpm->clr[pix[x]];
+			if ((clr >> 24 & 0xFF) != 0)
+				dst[x] = clr;
 		}
+		pix += bxpm->w;
+		dst += surface->w;
 	}
 }
 
@@ -61,7 +68,7 @@ static void	copy_column(SDL_Surface *dst, t_rect dstr, t_bxpm *src, t_rect srcr)
 	dstr.y2 = dstr.y1;
 	while (dstr.y2 < dstr.y1 + dstr.h)
 	{
-		while (pos >= 0x10000L)
+		while (pos > 0x10000L)
 		{
 			srcr.y2++;
 			pos -= 0x10000L;
@@ -90,7 +97,7 @@ void	blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 	dstr.x2 = dstr.x1;
 	while (dstr.x2 < dstr.x1 + dstr.w)
 	{
-		while (pos >= 0x10000L)
+		while (pos > 0x10000L)
 		{
 			srcr.x2++;
 			pos -= 0x10000L;

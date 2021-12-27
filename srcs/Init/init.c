@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:15:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 15:59:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:18:37 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	get_surface_center(t_doom *doom)
 
 static void	init_threading(t_doom *doom)
 {
-	doom->nb.processors = 4;//ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+	//ft_printf("%d\n", doom->nb.processors);
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
 		error_msg(NULL);
