@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:06 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/05 15:42:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:24:41 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	init_launcher(t_doom *doom, t_weapon *weapon)
 	weapon->reload_frames = 0;
 	weapon->frame = 0;
 	weapon->frame_rate = 100;
-	weapon->x_offset = 2;
+	weapon->x_offset = -(doom->c.x / 800 * 350 / 2);
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_ORB;
-	weapon->scale = 0.3 * (doom->surface->w / 457);
 	weapon->ammo_increase = 10;
 	weapon->damage_increase = 2;
 	weapon->firerate_increase = -1;

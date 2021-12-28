@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/27 18:03:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:19:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	blit_bxpm2(SDL_Surface *surface, t_bxpm *bxpm, t_rect srcr, t_rect dstr)
 {
-	int				x, y;
+	int				x, y, x1;
 	Uint32			clr;
 	Uint32			*dst;
 	unsigned short	*pix;
@@ -25,11 +25,13 @@ void	blit_bxpm2(SDL_Surface *surface, t_bxpm *bxpm, t_rect srcr, t_rect dstr)
 	while (y < srcr.y2)
 	{
 		x = srcr.x1;
+		x1 = 0;
 		while (x < srcr.x2)
 		{
 			clr = bxpm->clr[pix[x]];
 			if ((clr >> 24 & 0xFF) != 0)
-				dst[x + dstr.x1] = clr;
+				dst[x1] = clr;
+			x1++;
 			x++;
 		}
 		y++;
@@ -63,7 +65,7 @@ static void	weapon_frame_scale(t_doom *doom, t_rect *srcr, t_rect *dstr)
 
 	weapon = &doom->weapon[doom->player.equipped];
 	bxpm = &weapon->bxpm[weapon->frame];
-	dstr->x1 = doom->surface->w - bxpm->w - 1;
+	dstr->x1 = doom->c.x + weapon->x_offset;
 	dstr->y1 = doom->surface->h - bxpm->h - 1;
 	dstr->w = bxpm->w;
 	dstr->h = bxpm->h / NB_WEAPON_THREADS;

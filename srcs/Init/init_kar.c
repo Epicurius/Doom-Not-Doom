@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:44:54 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 14:15:18 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:22:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	init_kar98(t_doom *doom, t_weapon *weapon)
 	weapon->reload_frames = 31;
 	weapon->frame = 0;
 	weapon->frame_rate = 50;
-	weapon->x_offset = 1.3;
+	weapon->x_offset = 70;
 	weapon->sound = WAV_GUN;
 	weapon->time = doom->time.curr;
-	weapon->scale = 0.35 * (doom->surface->w / 212);
 	weapon->ammo_increase = 10;
 	weapon->damage_increase = 2;
 	weapon->firerate_increase = -4;

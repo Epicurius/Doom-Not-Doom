@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:43:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/27 14:18:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:20:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	init_shotgun(t_doom *doom, t_weapon *weapon)
 	weapon->reload_frames = 9;
 	weapon->frame = 0;
 	weapon->frame_rate = 100;
-	weapon->x_offset = 1.5;
+	weapon->x_offset = 10;
 	weapon->time = doom->time.curr;
 	weapon->sound = WAV_SHOTGUN;
-	weapon->scale = 1;//0.25 * (doom->surface->w / 350);
 	weapon->ammo_increase = 4;
 	weapon->damage_increase = 5;
 	weapon->firerate_increase = -5;

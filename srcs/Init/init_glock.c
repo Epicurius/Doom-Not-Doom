@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:44:42 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 14:15:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:21:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void	init_glock(t_doom *doom, t_weapon *weapon)
 	weapon->frame = 0;
 	weapon->frame_rate = 50;
 	weapon->sound = WAV_GUN;
-	weapon->x_offset = 1.5;
+	weapon->x_offset = 120;
 	weapon->time = doom->time.curr;
-	weapon->scale = 0.17 * (doom->surface->w / 309);
 	weapon->ammo_increase = 10;
 	weapon->damage_increase = 5;
 	weapon->firerate_increase = -2;

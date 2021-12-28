@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 15:45:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/22 14:20:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:20:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_minigun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = FALSE;
+	weapon->own = TRUE;
 	weapon->price = 300;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;
@@ -30,9 +30,8 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->frame = 0;
 	weapon->frame_rate = 30;
 	weapon->sound = WAV_GUN;
-	weapon->x_offset = 1.2;
+	weapon->x_offset = 0;
 	weapon->time = doom->time.curr;
-	weapon->scale = 0.4 * (doom->surface->w / 350);
 	weapon->ammo_increase = 20;
 	weapon->damage_increase = 5;
 	weapon->firerate_increase = -1;
