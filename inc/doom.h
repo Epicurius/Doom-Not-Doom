@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 13:26:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:16:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,14 @@ typedef struct s_weapon_thread
 {
 	SDL_Surface		*dst;
 	t_bxpm			*src;
-	t_rect			dstr;
-	t_rect			srcr;
+	int				sx1;
+	int				sy1;
+	int				sx2;
+	int				sy2;
+	int				dx1;
+	int				dy1;
+	int				dx2;
+	int				dy2;
 }					t_weapon_thread;
 
 typedef struct s_player

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 13:05:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:33:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,11 @@ static void	parse_map_textures(t_doom *doom, int i, int j)
 void	init_textures(t_doom *doom)
 {
 	parse_map_textures(doom, -1, -1);
-	parse_bxpm(doom, ENTITY_TEXTURE_AMOUNT,
-		doom->etx, g_entity_textures);
+	parse_bxpm(doom, ENTITY_TEXTURE_AMOUNT, doom->etx, g_entity_textures);
 	//for (int i = 0; i < ICON_TEXTURE_AMOUNT; i++)
 	//	read_bxpm_scaled(&doom->itx[i], g_icon_textures[i].path, doom->settings.size.x / 1500.0);
-	parse_bxpm(doom, ICON_TEXTURE_AMOUNT,
-		doom->itx, g_icon_textures);
+	parse_bxpm(doom, ICON_TEXTURE_AMOUNT, doom->itx, g_icon_textures);
+		
 	//parse_bxpm(doom, SHOTGUN_TEXTURE_AMOUNT,
 	//	doom->weapon[WEAPON_SHOTGUN].bxpm, g_shotgun_textures);
 	//parse_bxpm(doom, GLOCK_TEXTURE_AMOUNT,
@@ -114,15 +113,15 @@ void	init_textures(t_doom *doom)
 	//	doom->weapon[WEAPON_LAUNCHER].bxpm, g_launcher_textures);
 
 	for (int i = 0; i < SHOTGUN_TEXTURE_AMOUNT; i++)
-		read_bxpm_scaled(&doom->weapon[WEAPON_SHOTGUN].bxpm[i], g_shotgun_textures[i].path, doom->c.x / 800);
+		read_bxpm_scaled(&doom->weapon[WEAPON_SHOTGUN].bxpm[i], g_shotgun_textures[i].path, doom->c.x / 800.0);
 	for (int i = 0; i < GLOCK_TEXTURE_AMOUNT; i++)
-		read_bxpm_scaled(&doom->weapon[WEAPON_GUN].bxpm[i], g_glock_textures[i].path, doom->c.x / 900);
+		read_bxpm_scaled(&doom->weapon[WEAPON_GUN].bxpm[i], g_glock_textures[i].path, doom->c.x / 900.0);
 	for (int i = 0; i < KAR_TEXTURE_AMOUNT; i++)
-		read_bxpm_scaled(&doom->weapon[WEAPON_KAR].bxpm[i], g_kar_textures[i].path, doom->c.x / 350);
+		read_bxpm_scaled(&doom->weapon[WEAPON_KAR].bxpm[i], g_kar_textures[i].path, doom->c.x / 340.0);
 	for (int i = 0; i < LAUNCHER_TEXTURE_AMOUNT; i++)
-		read_bxpm_scaled(&doom->weapon[WEAPON_LAUNCHER].bxpm[i], g_launcher_textures[i].path, doom->c.x / 800);
+		read_bxpm_scaled(&doom->weapon[WEAPON_LAUNCHER].bxpm[i], g_launcher_textures[i].path, doom->c.x / 800.0);
 	for (int i = 0; i < MINIGUN_TEXTURE_AMOUNT; i++)
-		read_bxpm_scaled(&doom->weapon[WEAPON_MINIGUN].bxpm[i], g_minigun_textures[i].path, doom->c.x / 400);
+		read_bxpm_scaled(&doom->weapon[WEAPON_MINIGUN].bxpm[i], g_minigun_textures[i].path, doom->c.x / 400.0);
 	
 
 		
