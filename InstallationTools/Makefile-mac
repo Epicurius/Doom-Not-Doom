@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/27 18:00:30 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/28 15:44:41 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ CFILES		=	ai_attack.c\
 				Init/init_slope.c\
 				Init/init_textures.c\
 				Init/init_weapons.c\
+				Init/init_surface_textures.c\
 				Math/math1.c\
 				Math/math2.c\
 				Math/math3.c\

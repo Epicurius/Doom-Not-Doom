@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 14:16:57 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 15:08:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -481,6 +481,8 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
+
+void	parse_surface_textures(t_doom *doom, int i, int j);
 void	bxpm_scale(t_bxpm *dst, t_bxpm *src, int w, int h);
 
 /* File: ai_attack.c */

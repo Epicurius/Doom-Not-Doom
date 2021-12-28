@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/19 14:58:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 16:29:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_id_and_path
 
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 {
+	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
 	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
 	{WAV_SHOTGUN, WAV_PATH"shotgun.wav"},
 	{WAV_SCREEN_SHOT, WAV_PATH"tts_saved.wav"},
@@ -31,7 +32,6 @@ static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
 	{WAV_JUMP, WAV_PATH"jump.wav"},
 	{WAV_GUN, WAV_PATH"gun.wav"},
-	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
 	{WAV_DOSH, WAV_PATH"dosh.wav"},
 	{WAV_EMPTY_CLIP, WAV_PATH"empty_clip.wav"},
 	{WAV_BIP, WAV_PATH"bip.wav"},

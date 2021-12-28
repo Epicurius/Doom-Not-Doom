@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:37:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/28 17:11:52 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ void	set_volume(int i)
 /*
  *	Parse .wav files and save them too doom->sounds.
  */
-static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
-{
-	int	i;
-
-	i = -1;
-	while (++i < amount)
-	{
-		if (ft_strequ(src[i].path, "NULL"))
-			continue ;
-		dest[src[i].id] = Mix_LoadWAV(src[i].path);
-		if (dest[src[i].id] == NULL)
-			error_msg("Reading[%d]: %s", src[i].id, src[i].path);
-	}
-}
+//static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
+//{
+//	int	i;
+//
+//	i = -1;
+//	while (++i < amount)
+//	{
+//		//ft_timer_start();
+//		dest[src[i].id] = Mix_LoadWAV(src[i].path);
+//		if (dest[src[i].id] == NULL)
+//			error_msg("Reading[%d]: %s", src[i].id, src[i].path);
+//		//ft_printf("%s: %f\n", src[i].path, ft_timer_end());
+//	}
+//}
 
 static void	init_volume(t_doom *doom)
 {
@@ -74,10 +74,10 @@ void	init_sound(t_doom *doom)
 	int	i;
 
 	i = -1;
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
-		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
-	Mix_AllocateChannels(32);
-	parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
+	//ft_timer_start();
+	tpool_wait(&doom->tpool);
+	//ft_printf("%f\n", ft_timer_end());
+	//parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
 	while (++i < doom->nb.events)
 	{
 		if (doom->events[i].type == AUDIO)
@@ -93,4 +93,5 @@ void	init_sound(t_doom *doom)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	else
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], 0);
+	//exit (1);
 }
