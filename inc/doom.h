@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 15:08:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/29 14:51:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -481,9 +481,11 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-
+void	init_wav(t_doom *doom);
 void	parse_surface_textures(t_doom *doom, int i, int j);
 void	bxpm_scale(t_bxpm *dst, t_bxpm *src, int w, int h);
+void	ft_timer_start2();
+double	ft_timer_end2();
 
 /* File: ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);

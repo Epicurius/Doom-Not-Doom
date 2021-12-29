@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 17:11:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/29 15:36:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@ void	set_volume(int i)
 	else if (curr > 0 && curr <= 128 && !i)
 		Mix_Volume(-1, --curr);
 }
-
-/*
- *	Parse .wav files and save them too doom->sounds.
- */
-//static void	parse_wav(int amount, Mix_Chunk **dest, const t_id_and_path *src)
-//{
-//	int	i;
-//
-//	i = -1;
-//	while (++i < amount)
-//	{
-//		//ft_timer_start();
-//		dest[src[i].id] = Mix_LoadWAV(src[i].path);
-//		if (dest[src[i].id] == NULL)
-//			error_msg("Reading[%d]: %s", src[i].id, src[i].path);
-//		//ft_printf("%s: %f\n", src[i].path, ft_timer_end());
-//	}
-//}
 
 static void	init_volume(t_doom *doom)
 {
@@ -74,10 +56,6 @@ void	init_sound(t_doom *doom)
 	int	i;
 
 	i = -1;
-	//ft_timer_start();
-	tpool_wait(&doom->tpool);
-	//ft_printf("%f\n", ft_timer_end());
-	//parse_wav(WAV_AMOUNT, doom->sound, g_sounds);
 	while (++i < doom->nb.events)
 	{
 		if (doom->events[i].type == AUDIO)
@@ -88,10 +66,14 @@ void	init_sound(t_doom *doom)
 			free(doom->events[i].path);
 		}
 	}
+	tpool_wait(&doom->tpool);
+	i = -1;
+	while (++i < WAV_AMOUNT)
+		if (doom->sound[i] == NULL)
+			error_msg("Reading[%d]: %s", g_sounds[i].id, g_sounds[i].path);
 	init_volume(doom);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);
 	else
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_MAIN_THEME], 0);
-	//exit (1);
 }

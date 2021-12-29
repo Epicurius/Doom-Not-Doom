@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 16:29:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/29 15:59:55 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ typedef struct s_id_and_path
 
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =
 {
-	{WAV_ELEVATOR_MUSIC, WAV_PATH"elevator_music.wav"},
-	{WAV_MAIN_THEME, WAV_PATH"at_dooms_gate.wav"},
-	{WAV_SHOTGUN, WAV_PATH"shotgun.wav"},
-	{WAV_SCREEN_SHOT, WAV_PATH"tts_saved.wav"},
-	{WAV_INTRO, WAV_PATH"intro.wav"},
-	{WAV_FOOT_STEPS, WAV_PATH"footsteps.wav"},
-	{WAV_JUMP, WAV_PATH"jump.wav"},
-	{WAV_GUN, WAV_PATH"gun.wav"},
-	{WAV_DOSH, WAV_PATH"dosh.wav"},
-	{WAV_EMPTY_CLIP, WAV_PATH"empty_clip.wav"},
-	{WAV_BIP, WAV_PATH"bip.wav"},
-	{WAV_ORB, WAV_PATH"orb.wav"},
-	{WAV_ROUND_END, WAV_PATH"round_end.wav"},
-	{WAV_NEW_ROUND, WAV_PATH"new_round.wav"},
+	{WAV_ELEVATOR_MUSIC, WAV_PATH"BuyMenu.wav"},
+	{WAV_MAIN_THEME, WAV_PATH"AtDoomsGate.wav"},
+	{WAV_INTRO, WAV_PATH"Intro.wav"},
+	{WAV_SHOTGUN, WAV_PATH"Shotgun.wav"},
+	{WAV_SCREEN_SHOT, WAV_PATH"ScreenShot.wav"},
+	{WAV_FOOT_STEPS, WAV_PATH"FootSteps.wav"},
+	{WAV_JUMP, WAV_PATH"Jump.wav"},
+	{WAV_GUN, WAV_PATH"Pistol.wav"},
+	{WAV_DOSH, WAV_PATH"Dosh.wav"},
+	{WAV_EMPTY_CLIP, WAV_PATH"EmptyClip.wav"},
+	{WAV_BIP, WAV_PATH"Bip.wav"},
+	{WAV_ORB, WAV_PATH"Projectile.wav"},
+	{WAV_ROUND_END, WAV_PATH"EndRound.wav"},
+	{WAV_NEW_ROUND, WAV_PATH"NewRound.wav"},
 	{WAV_MONSTER_HIT, WAV_PATH"EntityHit.wav"},
 	{WAV_PLAYER_HIT, WAV_PATH"PlayerHit.wav"},
 	{WAV_ENTITY_DEATH, WAV_PATH"EntityDeath.wav"},
@@ -83,12 +83,6 @@ static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
 	{33, BXPM_PATH"Clock.bxpm"}
 };
 
-//{12, BXPM_PATH"City-0.bxpm"},
-//{13, BXPM_PATH"City-5.bxpm"},
-//{14, BXPM_PATH"City-3.bxpm"},
-//{15, BXPM_PATH"City-2.bxpm"},
-//{16, BXPM_PATH"City-4.bxpm"},
-//{17, BXPM_PATH"City-1.bxpm"}
 # define SKYBOX_TEXTURE_AMOUNT	18
 static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
