@@ -1,1 +1,1 @@
-tar -czf DoomAssets resources
+tar -czf DoomAssets.zip resources

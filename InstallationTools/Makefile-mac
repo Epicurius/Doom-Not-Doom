@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/29 14:53:20 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/30 15:47:49 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ CFILES		=	ai_attack.c\
 				update_screen.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
-				bxpm_scaled.c\
 				timer.c\
 				UI/game_loading.c\
 				UI/game_over.c\

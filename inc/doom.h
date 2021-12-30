@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/29 14:51:44 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:20:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -481,366 +481,414 @@ typedef struct s_doom
 	char			keys[517];
 }					t_doom;
 
-void	init_wav(t_doom *doom);
-void	parse_surface_textures(t_doom *doom, int i, int j);
-void	bxpm_scale(t_bxpm *dst, t_bxpm *src, int w, int h);
-void	ft_timer_start2();
-double	ft_timer_end2();
-
-/* File: ai_attack.c */
+/* File: srcs/ai_attack.c */
 void				ai_attack(t_doom *doom, t_entity *entity);
-/* File: ai_movement.c */
+/* File: srcs/ai_movement.c */
 int					ai_track_player(t_doom *doom, t_entity *entity);
-int					ai_rand_move(t_doom *doom, t_entity *entity,
-						int chance, int angle);
-int					ai_rand_dodge(t_doom *doom, t_entity *entity,
-						int chance, int angle);
+int					ai_rand_move(t_doom *doom, t_entity *entity, int chance,
+						int angle);
+int					ai_rand_dodge(t_doom *doom, t_entity *entity, int chance,
+						int angle);
 void				ai_collision(t_doom *doom, t_entity *entity);
-/* File: animate_wsprite.c */
-int					animate_wsprite(t_doom *doom, t_wsprite *entity);
-/* File: args.c */
+/* File: srcs/animate_wsprite.c */
+int					animate_wsprite(t_doom *doom, t_wsprite *wsprite);
+/* File: srcs/args.c */
 void				args(int ac, char **av, t_settings *init);
-/* File: blit_bxpm.c */
-void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm,
-						int sx, int sy);
+/* File: srcs/blit_bxpm.c */
+void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx,
+						int sy);
 void				blit_bxpm_scaled(SDL_Surface *dst, t_rect dstr,
 						t_bxpm *src, t_rect srcr);
-/* File: camera.c */
+/* File: srcs/camera.c */
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom);
-/* File: clock.c */
+/* File: srcs/clock.c */
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
-/* File: color_and_brightness.c */
+/* File: srcs/color_and_brightness.c */
 SDL_Color			hex_to_sdl_color(int hex);
 Uint32				brightness(Uint32 src, int light);
 int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
 void				sector_shading(t_doom *doom, int s, int w);
-/* File: compute_vline.c */
+/* File: srcs/compute_vline.c */
 void				compute_vline_data(t_render *render, t_wall *wall,
 						t_vline *vline);
 void				compute_vline_texels(t_render *render, t_wall *wall,
 						t_vline *vline);
-/* File: crosshair_position.c */
-void				crosshair_position(t_render *render,
-						t_vline *vline, float alpha, int coord);
-/* File: endless.c */
-void				game_mode(t_doom *doom);
-/* File: find_sector.c */
+/* File: srcs/crosshair_position.c */
+void				crosshair_position(t_render *render, t_vline *vline,
+						float alpha, int coord);
+/* File: srcs/doom.c */
+/* File: srcs/find_sector.c */
 int					in_sector(t_sector *sector, t_v3 pos);
 int					find_sector(t_sector *sectors, int nb, t_v3 pos);
 int					in_sector_area(t_sector *sector, t_v3 pos);
 int					find_sector_no_z(t_sector *sectors, int nb, t_v3 pos);
-/* File: fps.c */
+/* File: srcs/fix_map.c */
+void				fix_sector_index2(t_doom *doom,
+						unsigned short *sector_index);
+void				fix_sector_index(t_doom *doom);
+/* File: srcs/fps.c */
 void				update_fps(t_doom *doom);
 void				init_fps(t_doom *doom);
-/* File: get_entity_state.c */
+/* File: srcs/game_mode.c */
+void				game_mode(t_doom *doom);
+/* File: srcs/get_entity_state.c */
 int					ray_collision(t_doom *doom, t_v3 enemy, t_v3 player,
 						int sector);
 void				get_entity_state2(t_doom *doom, t_entity *entity);
 void				get_entity_state(t_doom *doom, t_entity *entity);
-/* File: help.c */
+/* File: srcs/help.c */
 void				print_help_msg(void);
-/* File: fix_map.c */
-void				fix_sector_index(t_doom *doom);
-int					correct_sector_index(t_doom *doom, int id);
-/* File: icon.c */
+/* File: srcs/icon.c */
 int					set_icon(SDL_Window *window, char *dir);
-/* File: keys.c */
+/* File: srcs/keys.c */
 void				poll_event(t_doom *doom);
-/* File: malloc_texture_pos.c */
+/* File: srcs/malloc_texture_pos.c */
 void				malloc_texture_pos(t_frames *entity);
-/* File: map_events.c */
-void				map_events(t_doom *doom);
-/* File: minimap.c */
+/* File: srcs/minimap.c */
 void				map(t_doom *doom);
-/* File: movement.c */
+/* File: srcs/movement.c */
 void				movement(t_doom *doom);
-/* File: orientation.c */
+/* File: srcs/orientation.c */
 int					orientation(t_v3 p1, t_v3 p2, double yaw, int nb_angles);
-/* File: precompute_buy_menu.c */
+/* File: srcs/precompute_buy_menu.c */
 void				precompute_buymenu(t_doom *doom);
-/* File: precompute_entities.c */
+/* File: srcs/precompute_entities.c */
 void				precompute_entities(t_doom *doom);
-/* File: precompute_projectiles.c */
+/* File: srcs/precompute_projectiles.c */
 void				precompute_projectiles(t_doom *doom);
-/* File: precompute_skybox.c */
+/* File: srcs/precompute_skybox.c */
 void				compute_skybox(t_doom *doom);
 void				project_skybox(t_doom *doom, t_wall *wall);
 void				precompute_skybox(t_doom *doom);
 void				init_skybox(t_doom *doom);
-/* File: precompute_walls.c */
+/* File: srcs/precompute_walls.c */
 void				clip_to_fustrum(t_camera cam, t_wall *wall);
 int					clip_wall(t_camera cam, t_wall *wall);
 void				precompute_texture(t_doom *doom, t_wall *wall);
 void				precompute_floor_ceil(t_doom *doom, t_sector *sector);
 void				precompute_walls(t_doom *doom);
-/* File: precompute_weapon.c */
+/* File: srcs/precompute_weapon.c */
 void				weapon_fire_animate(t_doom *doom, t_weapon *weapon);
 void				weapon_reload_animate(t_doom *doom, t_weapon *weapon);
 void				equip_weapon(t_doom *doom);
 void				precompute_weapon(t_doom *doom);
-/* File: project_entity.c */
-void				project_entity(t_doom *doom, t_entity *ent,
+/* File: srcs/project_entity.c */
+void				project_entity(t_doom *doom, t_entity *e,
 						t_entity_render *render);
-/* File: project_wall.c */
+/* File: srcs/project_wall.c */
 void				project_wall(t_doom *doom, t_wall *wall);
-/* File: protalloc.c */
+/* File: srcs/protalloc.c */
 void				*protalloc(size_t size);
 void				reset_sectbool(t_doom *doom, int curr_sect);
-/* File: purge_entities.c */
+/* File: srcs/purge_entities.c */
 void				purge_entities(t_doom *doom);
-/* File: put_pixels.c */
+/* File: srcs/put_pixels.c */
 void				blit_pixel_brightness(t_render *render, int coord,
 						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_alpha(t_render *render, int coord,
-						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_opaque(t_render *render, int coord,
-						t_v3 text, t_bxpm *bxpm);
-void				blit_pixel_skybox(t_render *render, int coord,
-						t_v3 text, int side);
-/* File: random.c */
-void				get_entity_state_name(t_entity *entity);
-void				what_vert(t_doom *doom);
-/* File: sector_trigger_events.c */
-void				sector_trigger_events(t_doom *doom, t_event *event);
-/* File: sound.c */
+void				blit_pixel_alpha(t_render *render, int coord, t_v3 text,
+						t_bxpm *bxpm);
+void				blit_pixel_opaque(t_render *render, int coord, t_v3 text,
+						t_bxpm *bxpm);
+void				blit_pixel_skybox(t_render *render, int coord, t_v3 text,
+						int side);
+/* File: srcs/sound.c */
 void				set_volume(int i);
 void				init_sound(t_doom *doom);
-/* File: spawn_entity.c */
+/* File: srcs/spawn_entity.c */
 void				spawn_entity(t_doom *doom, int type, t_v3 pos, int yaw);
 void				rift_spawn(t_doom *doom);
 void				respawn_rifts(t_doom *doom);
-/* File: update_screen.c */
+/* File: srcs/timer.c */
+void				doom_timer_start(void);
+double				doom_timer_end(void);
+/* File: srcs/update_screen.c */
 void				update_screen(t_doom *doom);
-/* File: wall_to_screen_xz.c */
-void				map_to_screen_vertex(t_player player,
-						t_v3 *map, t_v3 *screen);
-void				screen_to_map_vertex(t_player player,
-						t_v3 *screen, t_v3 *map);
-/* File: wsprite_trigger_events.c */
-void				wsprite_trigger_events(t_doom *doom, t_event *event);
-/* File: BuyMenu/buy_menu.c */
-void				buymenu(SDL_Window *window, SDL_Surface *surface,
-						t_inv *inv);
-/* File: CollisionDetection/collision_detection.c */
+/* File: srcs/wall_to_screen_xz.c */
+void				map_to_screen_vertex(t_player player, t_v3 *map,
+						t_v3 *screen);
+void				screen_to_map_vertex(t_player player, t_v3 *screen,
+						t_v3 *map);
+/* File: srcs/CollisionDetection/collision_detection.c */
 int					find_from_sectbool(t_doom *doom, t_motion *motion);
 int					collision_detection(t_doom *doom, t_motion motion,
 						t_v3 *where, t_v3 *velocity);
-/* File: CollisionDetection/crouch_collision.c */
+/* File: srcs/CollisionDetection/crouch_collision.c */
 int					crouch_collision(t_doom *doom, t_player *player);
-/* File: CollisionDetection/horizontal_collision.c */
-int					check_portal(t_doom *doom, t_motion *motion,
-						t_wall *wall, t_v3 point);
-int					check_collsion(t_motion *motion,
-						t_wall *wall, t_v3 *point);
+/* File: srcs/CollisionDetection/horizontal_collision.c */
+int					check_portal(t_doom *doom, t_motion *motion, t_wall *wall,
+						t_v3 point);
+int					check_collsion(t_motion *motion, t_wall *wall,
+						t_v3 *point);
+int					check_solid_surfaces(t_doom *doom, t_motion *motion,
+						int sect);
 int					horizontal_collision(t_doom *doom, t_motion *motion);
-/* File: CollisionDetection/object_collision.c */
-int					entity_collision(t_doom *doom, t_v3 *where, t_v3 *velocity);
-/* File: CollisionDetection/projectile_collision.c */
-int					target_contact(t_doom *doom, t_projectile *orb,
-						t_v3 start, t_v3 dest);
-/* File: CollisionDetection/slide_collision.c */
+/* File: srcs/CollisionDetection/object_collision.c */
+int					entity_collision(t_doom *doom, t_v3 *where,
+						t_v3 *velocity);
+/* File: srcs/CollisionDetection/projectile_collision.c */
+int					target_contact(t_doom *doom, t_projectile *orb, t_v3 start,
+						t_v3 dest);
+/* File: srcs/CollisionDetection/slide_collision.c */
 int					check_solid_surfaces_no_slide(t_doom *doom,
 						t_motion *motion, int sect);
-int					slide_collision(t_doom *doom,
-						t_motion *motion, t_wall *wall);
-/* File: CollisionDetection/vertical_collision.c */
+int					slide_collision(t_doom *doom, t_motion *motion,
+						t_wall *wall);
+/* File: srcs/CollisionDetection/vertical_collision.c */
 int					vertical_collision(t_doom *doom, t_motion *motion,
 						float *temp);
-/* File: Draw/draw2.c */
+/* File: srcs/Draw/draw2.c */
 void				draw_map(t_doom *doom);
-/* File: Draw/draw_bullet_holes.c */
-void				draw_wall_bh(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_ceiling.c */
-void				draw_ceiling_texture(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_circle.c */
+/* File: srcs/Draw/draw_bullet_holes.c */
+void				draw_wall_bh(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_ceiling.c */
+void				draw_ceiling_texture(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_circle.c */
 void				draw_circle(SDL_Surface *surface, Uint32 color,
 						t_point center, int size);
-/* File: Draw/draw_crosshair.c */
+/* File: srcs/Draw/draw_crosshair.c */
 void				draw_crosshair(t_doom *doom);
-/* File: Draw/draw_entity.c */
-void				blit_entity(t_entity_thread *thread, int coord, t_v3 text);
+/* File: srcs/Draw/draw_entity.c */
+void				blit_entity(t_entity_thread *thread, int coord,
+						t_v3 text);
 int					draw_entity(void *arg);
 void				draw_entities(t_doom *doom);
-/* File: Draw/draw_floor.c */
-void				draw_floor_texture(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_floor_and_ceiling.c */
-void				draw_floor_and_ceiling(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_hud.c */
+/* File: srcs/Draw/draw_floor.c */
+void				draw_floor_texture(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_floor_and_ceiling.c */
+void				draw_floor_and_ceiling(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_hud.c */
 void				draw_hud(t_doom *doom);
-/* File: Draw/draw_hud_utils.c */
+/* File: srcs/Draw/draw_hud_utils.c */
 void				hud_health(t_doom *doom, SDL_Rect *dstr);
 void				hud_armour(t_doom *doom, SDL_Rect *dstr);
 void				hud_curr_ammo(t_doom *doom, SDL_Rect *dstr);
 void				hud_mag_ammo(t_doom *doom, SDL_Rect *dstr);
 void				hud_dosh(t_doom *doom, SDL_Rect *dstr);
-/* File: Draw/draw_line.c */
-void				draw_line(SDL_Surface *surf, Uint32 color,
-						t_point v1, t_point v2);
-/* File: Draw/draw_neighbor_wall.c */
-void				draw_neighbor_wall(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_portal_texture.c */
-void				draw_portal_texture(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_projectile.c */
+/* File: srcs/Draw/draw_line.c */
+void				draw_line(SDL_Surface *surf, Uint32 color, t_point v1,
+						t_point v2);
+/* File: srcs/Draw/draw_neighbor_wall.c */
+void				draw_neighbor_wall(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_portal_texture.c */
+void				draw_portal_texture(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_projectile.c */
 void				draw_projectiles(t_doom *doom);
-/* File: Draw/draw_skybox.c */
-void				draw_skybox(t_render *render,
-						t_vline *vline, int side);
-/* File: Draw/draw_skybox_plane.c */
+/* File: srcs/Draw/draw_skybox.c */
+void				draw_skybox(t_render *render, t_vline *vline, int side);
+/* File: srcs/Draw/draw_skybox_plane.c */
 void				skybox_plane_vline(t_render *render, t_vline vline,
 						float start, int tx);
-/* File: Draw/draw_skybox_wall.c */
-void				skybox_wall_vline(t_render *render,
-						t_vline vline, int tx);
-/* File: Draw/draw_vline.c */
-void				depth_shadding(t_render *render,
-						t_vline *vline, int side);
-void				vline_color_bot_top(t_render *render,
-						t_vline *vline, int side);
-void				vline_color_walls(t_render *render,
-						t_vline *vline);
-void				vline_monochromic(t_render *render,
-						t_vline *vline, int side);
-/* File: Draw/draw_wall.c */
-void				draw_wall_texture(t_render *render,
-						t_vline *vline);
-/* File: Draw/draw_weapon.c */
+/* File: srcs/Draw/draw_skybox_wall.c */
+void				skybox_wall_vline(t_render *render, t_vline vline,
+						int tx);
+/* File: srcs/Draw/draw_vline.c */
+void				depth_shadding(t_render *render, t_vline *vline,
+						int side);
+void				vline_color_bot_top(t_render *render, t_vline *vline,
+						int side);
+void				vline_color_walls(t_render *render, t_vline *vline);
+void				vline_monochromic(t_render *render, t_vline *vline,
+						int side);
+/* File: srcs/Draw/draw_wall.c */
+void				draw_wall_texture(t_render *render, t_vline *vline);
+/* File: srcs/Draw/draw_weapon.c */
+void				blit_bxpm2(t_weapon_thread *thread, SDL_Surface *surface,
+						t_bxpm *bxpm);
 int					weapon_thread(void *args);
 void				draw_weapon(t_doom *doom);
-/* File: Draw/draw_wsprites.c */
-void				draw_wsprites(t_render *render,
-						t_vline *vline);
-/* File: EntityCoords/alfred1.c */
+/* File: srcs/Draw/draw_wsprites.c */
+void				draw_wsprites(t_render *render, t_vline *vline);
+/* File: srcs/EntityCoords/alfred1.c */
 void				init_alfred(t_doom *doom);
-/* File: EntityCoords/alfred2.c */
+/* File: srcs/EntityCoords/alfred2.c */
 void				move_pos_alfred2(t_rect **pos);
-/* File: EntityCoords/barrel.c */
+/* File: srcs/EntityCoords/barrel.c */
 void				init_barrel(t_doom *doom);
-/* File: EntityCoords/ceiling_lamp.c */
+/* File: srcs/EntityCoords/ceiling_lamp.c */
 void				init_ceiling_lamp(t_doom *doom);
-/* File: EntityCoords/gargoyle.c */
+/* File: srcs/EntityCoords/gargoyle.c */
 void				init_gargoyle(t_doom *doom);
-/* File: EntityCoords/ghost1.c */
+/* File: srcs/EntityCoords/ghost1.c */
 void				init_ghost(t_doom *doom);
-/* File: EntityCoords/ghost2.c */
+/* File: srcs/EntityCoords/ghost2.c */
 void				move_pos_ghost2(t_rect **pos);
 void				attack_pos_ghost2(t_rect **pos);
-/* File: EntityCoords/lamp.c */
+/* File: srcs/EntityCoords/lamp.c */
 void				init_lamp(t_doom *doom);
-/* File: EntityCoords/meat_hook.c */
+/* File: srcs/EntityCoords/meat_hook.c */
 void				init_meat_hook(t_doom *doom);
-/* File: EntityCoords/med_kit.c */
+/* File: srcs/EntityCoords/med_kit.c */
 void				init_med_kit(t_doom *doom);
-/* File: EntityCoords/rift.c */
+/* File: srcs/EntityCoords/rift.c */
 void				init_rift(t_doom *doom);
-/* File: EntityCoords/spooky1.c */
+/* File: srcs/EntityCoords/spooky1.c */
 void				init_spooky(t_doom *doom);
-/* File: EntityCoords/spooky2.c */
+/* File: srcs/EntityCoords/spooky2.c */
 void				move_pos_spooky2(t_rect **pos);
-/* File: EntityCoords/torch.c */
+/* File: srcs/EntityCoords/torch.c */
 void				init_torch(t_doom *doom);
-/* File: Free/free1.c */
+/* File: srcs/Events/map_events.c */
+void				map_events(t_doom *doom);
+/* File: srcs/Events/sector_events.c */
+void				sector_trigger_events(t_doom *doom, t_event *event);
+/* File: srcs/Events/wsprite_events.c */
+void				wsprite_trigger_events(t_doom *doom, t_event *event);
+/* File: srcs/Free/free1.c */
 void				free_doom(t_doom *doom);
-/* File: Free/free2.c */
+/* File: srcs/Free/free2.c */
 void				free_map(t_doom *doom);
 void				free_render_utils(t_doom *doom);
 void				free_font(t_doom *doom);
 void				free_shade_shade(t_bxpm *bxpm);
-void				free_entity_pos(t_frames *entity);
-/* File: Free/free3.c */
+/* File: srcs/Free/free3.c */
 void				free_sprites_pos(t_doom *doom);
 void				free_entities(t_doom *doom);
 void				free_rifts(t_doom *doom);
 void				free_textures(t_doom *doom);
 void				free_projectiles(t_doom *doom);
-/* File: Free/free4.c */
+/* File: srcs/Free/free4.c */
 void				free_weapons(t_doom *doom);
 void				free_sounds(t_doom *doom);
 void				free_icon(t_doom *doom);
-/* File: Init/init.c */
+/* File: srcs/Init/init.c */
+void				set_true_mouse(t_doom *doom);
 void				init_doom(t_doom *doom);
-/* File: Init/init_entity.c */
+/* File: srcs/Init/init_entity.c */
 void				init_entities(t_doom *doom);
-/* File: Init/init_game_mode.c */
+/* File: srcs/Init/init_game_mode.c */
 void				init_game_mode(t_doom *doom);
-/* File: Init/init_glock.c */
+/* File: srcs/Init/init_glock.c */
 void				init_glock(t_doom *doom, t_weapon *weapon);
-/* File: Init/init_inventory.c */
+/* File: srcs/Init/init_inventory.c */
 void				init_inventory(t_doom *doom);
-/* File: Init/init_kar.c */
+/* File: srcs/Init/init_kar.c */
 void				init_kar98(t_doom *doom, t_weapon *weapon);
-/* File: Init/init_launcher.c */
+/* File: srcs/Init/init_launcher.c */
 void				init_launcher(t_doom *doom, t_weapon *weapon);
-/* File: Init/init_minigun.c */
+/* File: srcs/Init/init_minigun.c */
 void				init_minigun(t_doom *doom, t_weapon *weapon);
-/* File: Init/init_minimap.c */
+/* File: srcs/Init/init_minimap.c */
 void				init_minimap(t_doom *doom);
-/* File: Init/init_player.c */
+/* File: srcs/Init/init_player.c */
 void				init_player(t_doom *doom);
-/* File: Init/init_render.c */
+/* File: srcs/Init/init_render.c */
 void				init_render(t_doom *doom);
-/* File: Init/init_scale.c */
+/* File: srcs/Init/init_scale.c */
 void				scale_wall_height(t_doom *doom, t_wall *wall);
 void				init_scale(t_doom *doom);
-/* File: Init/init_sdl.c */
+/* File: srcs/Init/init_sdl.c */
 void				init_sdl(t_doom *doom);
-/* File: Init/init_shotgun.c */
+/* File: srcs/Init/init_shotgun.c */
 void				init_shotgun(t_doom *doom, t_weapon *weapon);
-/* File: Init/init_slope.c */
+/* File: srcs/Init/init_slope.c */
 float				ceiling_at(t_sector *sector, t_v3 pos);
 float				floor_at(t_sector *sector, t_v3 pos);
 void				init_slope_normal(t_doom *doom);
-/* File: Init/init_textures.c */
+/* File: srcs/Init/init_surface_textures.c */
+void				parse_surface_textures(t_doom *doom, int i, int j);
+/* File: srcs/Init/init_textures.c */
 void				init_textures(t_doom *doom);
-/* File: Init/init_weapons.c */
+/* File: srcs/Init/init_wav.c */
+int					multithread_sound_0(void *arg);
+int					multithread_sound_1(void *arg);
+int					multithread_sound_2(void *arg);
+int					multithread_sounds(void *arg);
+void				init_wav(t_doom *doom);
+/* File: srcs/Init/init_weapons.c */
 void				init_weapons(t_doom *doom);
-/* File: ParseMap/parse_map.c */
-void				parse_player(t_doom *doom, int ac, char **av);
-void				read_line(t_doom *doom, int fd,
-						void (*f)(t_doom*, int, char**));
+/* File: srcs/Math/math1.c */
+t_point				new_point(int x, int y);
+t_v2				new_v2(float x, float y);
+t_v3				new_v3(float x, float y, float z);
+t_rect				rect_xy2(int x1, int y1, int x2, int y2);
+t_rect				rect_xywh(int x1, int y1, int w, int h);
+/* File: srcs/Math/math10.c */
+void				print_v2(char *str, t_v2 v);
+void				print_v3(char *str, t_v3 v);
+/* File: srcs/Math/math2.c */
+int					comp_v3(t_v3 v1, t_v3 v2);
+t_v3				add_v3(t_v3 v1, t_v3 v2);
+t_v3				sub_v3(t_v3 v1, t_v3 v2);
+t_v3				mult_v3(t_v3 vec, float scalar);
+t_v3				div_v3(t_v3 vec, float scalar);
+/* File: srcs/Math/math3.c */
+int					intersect_v2(t_v3 w1, t_v3 w2, t_v3 p1, t_v3 p2);
+float				point_distance_v3(t_v3 p1, t_v3 p2);
+t_v3				closest_point_on_segment_v2(t_v3 p, t_v3 a, t_v3 b);
+int					point_on_segment_v2(t_v3 p, t_v3 v1, t_v3 v2,
+						float buffer);
+t_v3				get_intersection_v2(t_v3 a1, t_v3 a2, t_v3 b1, t_v3 b2);
+/* File: srcs/Math/math4.c */
+float				vector_magnitude_v2(t_v3 v);
+float				vector_magnitude_v3(t_v3 v);
+float				pythagoras(float x, float y);
+float				space_diagonal(t_v3 v);
+float				normalize_v3(t_v3 *vec);
+/* File: srcs/Math/math5.c */
+float				dot_product_v2(t_v3 v1, t_v3 v2);
+float				dot_product_v3(t_v3 v1, t_v3 v2);
+float				vectors_angle(t_v3 v1, t_v3 v2);
+float				cross_product_v2(float x1, float y1, float x2, float y2);
+t_v3				cross_product_v3(t_v3 v1, t_v3 v2);
+/* File: srcs/Math/math6.c */
+void				get_polar_cooordinates(float len, float angle,
+						t_v2 *polar);
+void				get_cartesian_cooordinates(float x, float y, float *len,
+						float *angle);
+float				to_radians(float degrees);
+float				to_degrees(float radians);
+/* File: srcs/Math/math7.c */
+float				degree_to_point_v2(t_v3 p1, t_v3 p2);
+int					ft_sign(float x);
+float				point_side_v2(t_v3 v1, t_v3 v2, t_v3 p);
+float				point_distance_v2(float x1, float y1, float x2, float y2);
+/* File: srcs/Math/math8.c */
+int					cohen_sutherland(t_point v[2], t_rect size);
+/* File: srcs/Math/math9.c */
+void				clamp_radians(double *angle);
+void				clamp_degrees(double *angle);
+/* File: srcs/ParseMap/parse_map.c */
+void				parse_player(t_doom *doom, int nb, char **arr);
 int					parse_map(t_doom *doom, char *file_name);
-/* File: ParseMap/parse_map_events1.c */
-void				parse_events(t_doom *doom, int ac, char **av);
-/* File: ParseMap/parse_map_events2.c */
+/* File: srcs/ParseMap/parse_map_events1.c */
+void				parse_events(t_doom *doom, int nb, char **arr);
+/* File: srcs/ParseMap/parse_map_events2.c */
 void				floor_ceiling_event(t_event *event, int nb, char **arr);
-void				spawn_event(t_doom *doom, t_event *e, int nn, char **arr);
-void				light_event(t_event *event, int nb, char **arr);
+void				spawn_event(t_doom *doom, t_event *event, int nb,
+						char **arr);
 void				audio_event(t_event *event, int nb, char **arr);
 void				hazard_event(t_event *event, int nb, char **arr);
-/* File: ParseMap/parse_map_header.c */
-void				parse_header(t_doom *doom, int ac, char **av);
-/* File: ParseMap/parse_map_sector.c */
-void				parse_vertex(t_doom *doom, int ac, char **av);
-void				parse_wall(t_doom *doom, int ac, char **av);
-void				parse_fc(t_doom *doom, int ac, char **av);
+void				light_event(t_event *event, int nb, char **arr);
+/* File: srcs/ParseMap/parse_map_header.c */
+void				parse_header(t_doom *doom, int nb, char **arr);
+/* File: srcs/ParseMap/parse_map_sector.c */
+void				parse_vertex(t_doom *doom, int nb, char **arr);
+void				parse_wall(t_doom *doom, int nb, char **arr);
+void				parse_fc(t_doom *doom, int nb, char **arr);
 void				complete_wall(t_sector *sect, t_wall *walls, char **id,
 						char **neighbour);
-void				parse_sector(t_doom *doom, int ac, char **av);
-/* File: ParseMap/parse_map_sprite.c */
+void				parse_sector(t_doom *doom, int ac, char **arr);
+/* File: srcs/ParseMap/parse_map_sprite.c */
 int					wsprite_state(char *str);
-void				parse_wsprite(t_doom *doom, int ac, char **av);
-void				parse_entity(t_doom *doom, int ac, char **av);
-/* File: ParseMap/validate_map1.c */
+void				parse_wsprite(t_doom *doom, int nb, char **arr);
+void				parse_entity(t_doom *doom, int nb, char **arr);
+/* File: srcs/ParseMap/validate_map1.c */
 int					validate_map(t_doom *doom);
-/* File: ParseMap/validate_map2.c */
+/* File: srcs/ParseMap/validate_map2.c */
 void				sector_center(t_sector *sector);
 void				fix_wall_orientation(t_sector *sector);
 int					fix_wall_order(t_sector *sector);
 int					is_convex(t_sector *sector);
-/* File: UI/game_loading.c */
+/* File: srcs/UI/game_loading.c */
 void				game_loading(t_doom *doom);
-/* File: UI/game_over.c */
+/* File: srcs/UI/game_over.c */
 void				game_over(t_doom *doom);
-/* File: UI/game_quit.c */
+/* File: srcs/UI/game_quit.c */
 void				game_quit(t_doom *doom);
-void				set_true_mouse(t_doom *doom);
+/* File: srcs/BuyMenu/buymenu.c */
+void				buymenu(SDL_Window *window, SDL_Surface *surf, t_inv *inv);
 
 #endif
