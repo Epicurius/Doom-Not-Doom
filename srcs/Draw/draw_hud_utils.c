@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/27 13:29:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:31:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;
-	SDL_BlitSurface(surf, NULL, doom->surface, dstr);	
+	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
 	blit_bxpm(doom->surface, &doom->itx[0], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);

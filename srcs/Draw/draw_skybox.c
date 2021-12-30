@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:44:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:09:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:31:19 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	skybox_limits(t_render *render, t_vline *vline,
 		limit[0] = vline->curr.top;
 		limit[1] = vline->curr_n.top;
 	}
-	else// if (side == BOT_HALF)
+	else
 	{
 		limit[0] = vline->curr_n.bot;
 		limit[1] = vline->curr.bot;

@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/15 09:48:29 by nneronin         ###   ########.fr        #
+#    Updated: 2021/12/30 17:28:09 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ CFILES	=	ai_attack.c\
 				update_screen.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
-				bxpm_scaled.c\
+				timer.c\
 				UI/game_loading.c\
 				UI/game_over.c\
 				UI/game_quit.c\
@@ -87,6 +87,8 @@ CFILES	=	ai_attack.c\
 				Init/init_slope.c\
 				Init/init_textures.c\
 				Init/init_weapons.c\
+				Init/init_surface_textures.c\
+				Init/init_wav.c\
 				Math/math1.c\
 				Math/math2.c\
 				Math/math3.c\
