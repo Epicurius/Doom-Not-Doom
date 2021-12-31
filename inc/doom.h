@@ -695,8 +695,6 @@ void				vline_monochromic(t_render *render, t_vline *vline,
 /* File: srcs/Draw/draw_wall.c */
 void				draw_wall_texture(t_render *render, t_vline *vline);
 /* File: srcs/Draw/draw_weapon.c */
-void				blit_bxpm2(t_weapon_thread *thread, SDL_Surface *surface,
-						t_bxpm *bxpm);
 int					weapon_thread(void *args);
 void				draw_weapon(t_doom *doom);
 /* File: srcs/Draw/draw_wsprites.c */
@@ -792,10 +790,6 @@ void				parse_surface_textures(t_doom *doom, int i, int j);
 /* File: srcs/Init/init_textures.c */
 void				init_textures(t_doom *doom);
 /* File: srcs/Init/init_wav.c */
-int					multithread_sound_0(void *arg);
-int					multithread_sound_1(void *arg);
-int					multithread_sound_2(void *arg);
-int					multithread_sounds(void *arg);
 void				init_wav(t_doom *doom);
 /* File: srcs/Init/init_weapons.c */
 void				init_weapons(t_doom *doom);

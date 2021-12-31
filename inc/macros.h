@@ -70,6 +70,7 @@
 */
 # define START_WEAPON					WEAPON_GUN
 # define MAX_BULLET_HOLES				20
+# define NB_WEAPON_THREADS              10
 
 /*
 **	Movement

@@ -12,26 +12,26 @@
 
 #include "doom.h"
 
-void	blit_bxpm2(t_weapon_thread *thread, SDL_Surface *surface, t_bxpm *bxpm)
+static void	blit_bxpm2(t_weapon_thread *thread,
+	SDL_Surface *surface, t_bxpm *bxpm)
 {
-	int				x, y, x1;
+	int				x;
+	int				y;
 	Uint32			clr;
 	Uint32			*dst;
 	unsigned short	*pix;
-	
+
 	pix = &bxpm->pix[thread->sy1 * bxpm->w + thread->sx1];
 	dst = &((Uint32 *)surface->pixels)[thread->dy1 * surface->w + thread->dx1];
 	y = thread->sy1;
 	while (y < thread->sy2)
 	{
 		x = thread->sx1;
-		x1 = 0;
 		while (x < thread->sx2)
 		{
 			clr = bxpm->clr[pix[x]];
 			if ((clr >> 24 & 0xFF) != 0)
-				dst[x1] = clr;
-			x1++;
+				dst[x - thread->sx1] = clr;
 			x++;
 		}
 		y++;
@@ -55,7 +55,8 @@ int	weapon_thread(void *args)
 /*
  *	Calculate frame scale of the weapon.
  */
-static void	init_first_weapon_thread(t_doom *doom, t_weapon_thread *thread, int w, int h)
+static void	init_first_weapon_thread(t_doom *doom, t_weapon_thread *thread,
+	int w, int h)
 {
 	thread->dx1 = doom->c.x + doom->weapon[doom->player.equipped].x_offset;
 	thread->dy1 = doom->surface->h - thread->src->h - 1;
@@ -67,9 +68,6 @@ static void	init_first_weapon_thread(t_doom *doom, t_weapon_thread *thread, int 
 	thread->sy2 = thread->sy1 + h;
 }
 
-// If change remember scaling.
-# define NB_WEAPON_THREADS	10
-
 /*
  *	Calculate weapon frame and create threads.
  */
@@ -77,13 +75,13 @@ void	draw_weapon(t_doom *doom)
 {
 	int				y;
 	int				w;
-	int 			h;
+	int				h;
 	t_weapon_thread	thread[NB_WEAPON_THREADS];
 
 	y = 0;
 	thread[y].dst = doom->surface;
-	thread[y].src = &doom->weapon[doom->player.equipped].
-		bxpm[doom->weapon[doom->player.equipped].frame];
+	thread[y].src = &doom->weapon[doom->player.equipped]
+		.bxpm[doom->weapon[doom->player.equipped].frame];
 	w = thread[y].src->w;
 	h = thread[y].src->h / NB_WEAPON_THREADS;
 	init_first_weapon_thread(doom, &thread[y], w, h);
@@ -95,7 +93,6 @@ void	draw_weapon(t_doom *doom)
 		thread[y].sy1 = thread[y - 1].sy2;
 		thread[y].sx2 = thread[y - 1].sx2;
 		thread[y].sy2 = thread[y].sy1 + h;
-	
 		thread[y].dst = thread[y - 1].dst;
 		thread[y].dx1 = thread[y - 1].dx1;
 		thread[y].dy1 = thread[y - 1].dy2;

@@ -32,14 +32,14 @@ SDL_Color	hex_to_sdl_color(int hex)
  */
 Uint32	brightness(Uint32 src, int light)
 {
-	unsigned char	newR;
-	unsigned char	newG;
-	unsigned char	newB;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 
-	newR = ft_min((src >> 16 & 0xFF) * light / 100, 255);
-	newG = ft_min((src >> 8 & 0xFF) * light / 100, 255);
-	newB = ft_min((src & 0xFF) * light / 100, 255);
-	return (255 << 24 | newR << 16 | newG << 8 | newB);
+	r = ft_min((src >> 16 & 0xFF) * light / 100, 255);
+	g = ft_min((src >> 8 & 0xFF) * light / 100, 255);
+	b = ft_min((src & 0xFF) * light / 100, 255);
+	return (255 << 24 | r << 16 | g << 8 | b);
 }
 
 /*

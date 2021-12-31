@@ -16,7 +16,8 @@ static void	init_ttf(t_doom *doom)
 {
 	if (TTF_Init())
 		error_msg("Could not init TTF: %s\n", SDL_GetError());
-	doom->font.amaz = TTF_OpenFont(TTF_PATH"AmazDoom.ttf", doom->settings.size.y / 20);
+	doom->font.amaz = TTF_OpenFont(TTF_PATH"AmazDoom.ttf",
+			doom->settings.size.y / 20);
 	if (!doom->font.amaz)
 		error_msg("Could not open font: %s\n", TTF_GetError());
 	doom->font.digital = TTF_OpenFont(TTF_PATH"Digital.ttf", 100);

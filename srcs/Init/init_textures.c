@@ -16,7 +16,7 @@ static inline void	parse_textures_scaled(t_bxpm *bxpm, int amount,
 	const t_id_and_path *g, float scale)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < amount)
 	{
@@ -29,7 +29,7 @@ static inline void	parse_textures(t_bxpm *bxpm, int amount,
 	const t_id_and_path *g)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < amount)
 	{
@@ -40,7 +40,7 @@ static inline void	parse_textures(t_bxpm *bxpm, int amount,
 
 void	init_textures(t_doom *doom)
 {
-	parse_surface_textures(doom, -1, -1);	
+	parse_surface_textures(doom, -1, -1);
 	parse_textures(doom->etx, ENTITY_TEXTURE_AMOUNT, g_entity_textures);
 	parse_textures(doom->itx, ICON_TEXTURE_AMOUNT, g_icon_textures);
 	parse_textures_scaled(doom->weapon[WEAPON_SHOTGUN].bxpm,

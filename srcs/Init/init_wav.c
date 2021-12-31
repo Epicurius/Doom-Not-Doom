@@ -12,24 +12,25 @@
 
 #include "doom.h"
 
-int	multithread_sound_0(void *arg)
+static int	multithread_sound_0(void *arg)
 {
 	((Mix_Chunk **)arg)[g_sounds[0].id] = Mix_LoadWAV(g_sounds[0].path);
 	return (1);
 }
 
-int	multithread_sound_1(void *arg)
+static int	multithread_sound_1(void *arg)
 {
 	((Mix_Chunk **)arg)[g_sounds[1].id] = Mix_LoadWAV(g_sounds[1].path);
 	return (1);
 }
 
-int	multithread_sound_2(void *arg)
+static int	multithread_sound_2(void *arg)
 {
 	((Mix_Chunk **)arg)[g_sounds[2].id] = Mix_LoadWAV(g_sounds[2].path);
 	return (1);
 }
-int	multithread_sounds(void *arg)
+
+static int	multithread_sounds(void *arg)
 {
 	int	i;
 
