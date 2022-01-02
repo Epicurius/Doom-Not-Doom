@@ -3,7 +3,7 @@
 doom
 doom.exe
 obj
-DEV_TOOLS
+DEV
 /resources/*
 README
 .vscode

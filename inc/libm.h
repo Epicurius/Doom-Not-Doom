@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:25:19 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:11:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 17:09:49 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ void				clamp_degrees(double *angle);
 /* File: srcs/Math/math10.c */
 void				print_v2(char *str, t_v2 v);
 void				print_v3(char *str, t_v3 v);
+/* File: srcs/Math/math11.c */
+int					liang_barsky(t_rect size, t_point *p);
 
 #endif

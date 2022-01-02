@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/02 14:22:51 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/02 17:10:05 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ CFILES		=	ai_attack.c\
 				Math/math8.c\
 				Math/math9.c\
 				Math/math10.c\
+				Math/math11.c\
 				Free/free1.c\
 				Free/free2.c\
 				Free/free3.c\
