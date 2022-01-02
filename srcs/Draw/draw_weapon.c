@@ -6,39 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 14:52:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/28 14:24:40 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 11:07:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-static void	blit_bxpm2(t_weapon_thread *thread,
-	SDL_Surface *surface, t_bxpm *bxpm)
-{
-	int				x;
-	int				y;
-	Uint32			clr;
-	Uint32			*dst;
-	unsigned short	*pix;
-
-	pix = &bxpm->pix[thread->sy1 * bxpm->w + thread->sx1];
-	dst = &((Uint32 *)surface->pixels)[thread->dy1 * surface->w + thread->dx1];
-	y = thread->sy1;
-	while (y < thread->sy2)
-	{
-		x = thread->sx1;
-		while (x < thread->sx2)
-		{
-			clr = bxpm->clr[pix[x]];
-			if ((clr >> 24 & 0xFF) != 0)
-				dst[x - thread->sx1] = clr;
-			x++;
-		}
-		y++;
-		pix += bxpm->w;
-		dst += surface->w;
-	}
-}
 
 /*
  *	Weapon drawing thread function.
@@ -48,7 +20,7 @@ int	weapon_thread(void *args)
 	t_weapon_thread	*thread;
 
 	thread = args;
-	blit_bxpm2(thread, thread->dst, thread->src);
+	blit_bxpm(thread, thread->dst, thread->src);
 	return (1);
 }
 
@@ -88,16 +60,12 @@ void	draw_weapon(t_doom *doom)
 	tpool_add(&doom->tpool, weapon_thread, &thread[y]);
 	while (++y < NB_WEAPON_THREADS)
 	{
-		thread[y].src = thread[y - 1].src;
-		thread[y].sx1 = thread[y - 1].sx1;
-		thread[y].sy1 = thread[y - 1].sy2;
-		thread[y].sx2 = thread[y - 1].sx2;
-		thread[y].sy2 = thread[y].sy1 + h;
-		thread[y].dst = thread[y - 1].dst;
-		thread[y].dx1 = thread[y - 1].dx1;
-		thread[y].dy1 = thread[y - 1].dy2;
-		thread[y].dx2 = thread[y - 1].dx2;
-		thread[y].dy2 = thread[y].dy1 + h;
+		thread[y] = (t_weapon_thread){
+			thread[y - 1].dst, thread[y - 1].src,
+			thread[y - 1].sx1, thread[y].sy1 + h,
+			thread[y - 1].sx2, thread[y - 1].sy2,
+			thread[y - 1].dx1, thread[y].dy1 + h,
+			thread[y - 1].dx2, thread[y - 1].dy2};
 		tpool_add(&doom->tpool, weapon_thread, &thread[y]);
 	}
 	tpool_wait(&doom->tpool);

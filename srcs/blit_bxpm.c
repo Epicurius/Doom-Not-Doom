@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/30 17:29:42 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 11:16:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,41 @@
 
 /*
  *	SDL_BlitSurface but from BXPM.
+ *	Copies the z amount BXPM to surface.
+ */
+void	blit_bxpm(t_weapon_thread *thread,
+	SDL_Surface *surface, t_bxpm *bxpm)
+{
+	int				x;
+	int				y;
+	Uint32			clr;
+	Uint32			*dst;
+	unsigned short	*pix;
+
+	pix = &bxpm->pix[thread->sy1 * bxpm->w + thread->sx1];
+	dst = &((Uint32 *)surface->pixels)[thread->dy1 * surface->w + thread->dx1];
+	y = thread->sy1;
+	while (y < thread->sy2)
+	{
+		x = thread->sx1;
+		while (x < thread->sx2)
+		{
+			clr = bxpm->clr[pix[x]];
+			if ((clr >> 24 & 0xFF) != 0)
+				dst[x - thread->sx1] = clr;
+			x++;
+		}
+		y++;
+		pix += bxpm->w;
+		dst += surface->w;
+	}
+}
+
+/*
+ *	SDL_BlitSurface but from BXPM.
  *	Copies the BXPM to surface 1:1.
  */
-void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
+void	blit_bxpm_full(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
 	int				x;
 	int				y;

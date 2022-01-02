@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/30 17:30:26 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 11:16:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ int	main(int ac, char **av)
 		system("leaks doom");
 	if (settings.launcher)
 		launcher();
-	system("leaks doom");
 	return (1);
 }
