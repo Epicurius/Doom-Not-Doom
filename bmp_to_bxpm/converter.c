@@ -6,61 +6,73 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:21 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/07 11:38:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 15:24:08 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libs/libft/libft.h"
-#include "../../libs/libpf/libpf.h"
-#include "../../libs/libbxpm/bxpm.h"
+#include "libft.h"
+#include "libpf.h"
+#include "bxpm.h"
 
-void	create_path_and_name(char *file, char **path, char **name)
+static inline int	get_path(char *path, char **name)
 {
-	int		i;
-	char	*temp;
+	int	len;
 
-	i = ft_strlen(file);
-	temp = ft_strndup(file, i - 4);
-	while (file[i - 1] != '/' && i > 0)
-		i--;
-	(*name) = ft_strdup(&temp[i]);
-	(*path) = ft_strdup(temp);
-	free(temp);
+	len = ft_strlen(path) - 4;
+	if (!ft_strequ(&path[len], ".bmp"))
+		return (0);
+	*name = ft_sprintf("%.*s.bxpm", len, path);
+	return (1);
 }
 
-void	free_converter(t_bmp *bmp, t_bxpm *bxpm, char *path, char *name)
+static inline void	free_converter(t_bmp *bmp, t_bxpm *bxpm, char *name)
 {
 	free(bxpm->clr);
 	free(bxpm->pix);
-	free(bxpm);
 	free(bmp->data);
-	free(path);
 	free(name);
+	name = NULL;
+	ft_memset(bxpm, 0, sizeof(t_bxpm));
+	ft_memset(bmp, 0, sizeof(t_bmp));
+}
+
+static inline int	create_bxpm(char *path, t_bmp *bmp, t_bxpm *bxpm)
+{
+	char	*name;
+
+	if (!get_path(path, &name))
+		return (0);
+	ft_printf("Reading\t\t%s ", path);
+	if (!read_bmp(bmp, path))
+		return (ft_printf("{RED}Error!{RESET}\n"));
+	ft_printf("{GREEN}Done!{RESET}\n");
+	ft_printf("Converting\t%s ", path);
+	if (!bmp_to_bxpm(bmp, bxpm))
+		return (ft_printf("{RED}Error!{RESET}\n"));
+	ft_printf("{GREEN}Done!{RESET}\n");
+	ft_printf("Writing\t\t%s ", name);
+	if (!write_bxpm(bxpm, name))
+		return (ft_printf("{RED}Error!{RESET}\n"));
+	ft_printf("{GREEN}Done!{RESET}\n");
+	ft_printf("{GREEN}Created\t\t%s.{RESET}\n", name);
+	free_converter(bmp, bxpm, name);
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	int		i;
-	t_bmp	bmp[1];
-	t_bxpm	*bxpm;
-	char	*path;
 	char	*name;
+	t_bmp	bmp;
+	t_bxpm	bxpm;
 
 	i = 0;
 	if (ac == 1)
-		return (1);
+		return (0);
 	while (++i < ac)
 	{
-		if (!ft_strequ(&av[i][ft_strlen(av[i]) - 4], ".bmp"))
-			continue ;
-		read_bmp(&bmp[0], av[i]);
-		bxpm = bmp_to_bxpm(bmp);
-		ft_printf("Reading\t%s\n", av[i]);
-		create_path_and_name(av[i], &path, &name);
-		ft_printf("Writing\t%s.bxpm\n", path);
-		write_bxpm(bxpm, path);
-		ft_printf("{GREEN}Done with: %s{RESET}\n", path);
-		free_converter(bmp, bxpm, path, name);
+		if (create_bxpm(av[i], &bmp, &bxpm))
+			return (0);
 	}
-	return (0);
+	return (1);
 }

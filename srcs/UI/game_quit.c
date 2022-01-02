@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:06:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_bmp	*s_to_save_screen_shot(t_doom *doom)
 	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surface);
 	TTF_CloseFont(amaz);
-	return (surface_to_bmp(doom->surface->w, doom->surface->h, 3,
+	return (pix_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels));
 }
 
@@ -96,7 +96,7 @@ void	game_quit(t_doom *doom)
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
 	read_bxpm(&bxpm, BXPM_PATH"GameQuit.bxpm");
-	blit_bxpm_full(doom->surface, &bxpm, doom->c.x - bxpm.w / 2,
+	blit_bxpm(doom->surface, &bxpm, doom->c.x - bxpm.w / 2,
 		doom->c.y - bxpm.h / 2);
 	free(bxpm.pix);
 	free(bxpm.clr);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 14:53:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	bxpm->clr_nb = 2;
 	bxpm->pix_nb = tmp->w * tmp->h;
 	bxpm->clr = protalloc(sizeof(Uint32) * 2);
-	bxpm->pix = protalloc(2 * (tmp->w * tmp->h));
+	bxpm->pix = protalloc(tmp->w * tmp->h * 2);
 	bxpm->clr[0] = CLOCK_FG_COLOR;
 	bxpm->clr[1] = CLOCK_BG_COLOR;
 	clock_to_bxpm(tmp, bxpm);

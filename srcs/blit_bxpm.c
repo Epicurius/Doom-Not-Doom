@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:39:24 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:16:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  *	SDL_BlitSurface but from BXPM.
  *	Copies the z amount BXPM to surface.
  */
-void	blit_bxpm(t_weapon_thread *thread,
+void	blit_bxpm2(t_weapon_thread *thread,
 	SDL_Surface *surface, t_bxpm *bxpm)
 {
 	int				x;
@@ -48,7 +48,7 @@ void	blit_bxpm(t_weapon_thread *thread,
  *	SDL_BlitSurface but from BXPM.
  *	Copies the BXPM to surface 1:1.
  */
-void	blit_bxpm_full(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
+void	blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx, int sy)
 {
 	int				x;
 	int				y;

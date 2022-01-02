@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:06:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_score(t_doom *doom, int *i)
 	name = ft_sprintf("%s/ScreenShots/DoomScore%d%d%d.bmp", GAME_PATH,
 			doom->time.date.tm_mon + 1, doom->time.date.tm_mday,
 			doom->time.date.tm_min);
-	bmp = surface_to_bmp(doom->surface->w, doom->surface->h, 3,
+	bmp = pix_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	write_bmp(name, bmp);
 	free_bmp(bmp);
@@ -42,7 +42,7 @@ static void	blit_game_over(t_doom *doom)
 
 	if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
 		error_msg(0, "game_over.bxpm");
-	blit_bxpm_full(doom->surface, &bxpm,
+	blit_bxpm(doom->surface, &bxpm,
 		doom->surface->w * 0.05, doom->surface->h * 0.05);
 	free(bxpm.pix);
 	free(bxpm.clr);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:11:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 15:12:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -495,9 +495,9 @@ int					animate_wsprite(t_doom *doom, t_wsprite *wsprite);
 /* File: srcs/args.c */
 void				args(int ac, char **av, t_settings *init);
 /* File: srcs/blit_bxpm.c */
-void				blit_bxpm(t_weapon_thread *thread, SDL_Surface *surface,
+void				blit_bxpm2(t_weapon_thread *thread, SDL_Surface *surface,
 						t_bxpm *bxpm);
-void				blit_bxpm_full(SDL_Surface *surface, t_bxpm *bxpm, int sx,
+void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx,
 						int sy);
 /* File: srcs/camera.c */
 void				init_camera(t_doom *doom);
@@ -795,8 +795,8 @@ void				init_wav(t_doom *doom);
 void				init_weapons(t_doom *doom);
 /* File: srcs/ParseMap/parse_map.c */
 void				parse_player(t_doom *doom, int nb, char **arr);
-void				read_line(t_doom *doom, int fd, void (*f)(t_doom*, int,
-						char**));
+void				read_line(t_doom *doom, int fd,
+						void (*f)(t_doom*, int, char **));
 int					parse_map(t_doom *doom, char *file_name);
 /* File: srcs/ParseMap/parse_map_events1.c */
 void				parse_events(t_doom *doom, int nb, char **arr);

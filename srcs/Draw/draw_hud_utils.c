@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:12:37 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 11:06:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
-	blit_bxpm_full(doom->surface, &doom->itx[0], 10 + surf->w + 10, dstr->y);
+	blit_bxpm(doom->surface, &doom->itx[0], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
 }
@@ -54,7 +54,7 @@ void	hud_armour(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
-	blit_bxpm_full(doom->surface, &doom->itx[1], 10 + surf->w + 10, dstr->y);
+	blit_bxpm(doom->surface, &doom->itx[1], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
 }
@@ -75,7 +75,7 @@ void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
-	blit_bxpm_full(doom->surface, &doom->itx[2], 10 + surf->w + 10, dstr->y);
+	blit_bxpm(doom->surface, &doom->itx[2], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
 }
@@ -96,7 +96,7 @@ void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
-	blit_bxpm_full(doom->surface, &doom->itx[3], 10 + surf->w + 10, dstr->y);
+	blit_bxpm(doom->surface, &doom->itx[3], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
 }
@@ -117,7 +117,7 @@ void	hud_dosh(t_doom *doom, SDL_Rect *dstr)
 	dstr->w = surf->w;
 	dstr->h = surf->h;
 	SDL_BlitSurface(surf, NULL, doom->surface, dstr);
-	blit_bxpm_full(doom->surface, &doom->itx[4], 10 + surf->w + 10, dstr->y);
+	blit_bxpm(doom->surface, &doom->itx[4], 10 + surf->w + 10, dstr->y);
 	free(str);
 	SDL_FreeSurface(surf);
 }
