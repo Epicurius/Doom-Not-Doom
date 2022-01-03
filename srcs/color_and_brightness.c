@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:32 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/16 13:45:30 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:54:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ Uint32	brightness(Uint32 src, int light)
 }
 
 /*
- * Blends a src color with an alpha 0 - 255
+ * Blends a src colors
  */
-int	blend_alpha(unsigned int src, unsigned int dest, uint8_t alpha)
+unsigned int	blend_colors(unsigned int src, unsigned int dest)
 {
-	int	a;
-
-	a = 256 - alpha;
-	return (
-		((a * (src >> 16 & 0xFF) + alpha * (dest >> 16 & 0xFF)) / 256) << 16
-		| ((a * (src >> 8 & 0xFF) + alpha * (dest >> 8 & 0xFF)) / 256) << 8
-		| ((a * (src & 0xFF) + alpha * (dest & 0xFF)) / 256));
+	return (255 << 24
+		| (((256 - (dest >> 24 & 0xFF)) * (src >> 16 & 0xFF)
+				+ (dest >> 24 & 0xFF) * (dest >> 16 & 0xFF)) / 256) << 16
+		| (((256 - (dest >> 24 & 0xFF)) * (src >> 8 & 0xFF)
+				+ (dest >> 24 & 0xFF) * (dest >> 8 & 0xFF)) / 256) << 8
+		| (((256 - (dest >> 24 & 0xFF)) * (src & 0xFF)
+				+ (dest >> 24 & 0xFF) * (dest & 0xFF)) / 256));
 }
 
 /*

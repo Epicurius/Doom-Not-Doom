@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 15:12:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:20:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -511,6 +511,8 @@ Uint32				brightness(Uint32 src, int light);
 int					blend_alpha(unsigned int src, unsigned int dest,
 						uint8_t alpha);
 void				sector_shading(t_doom *doom, int s, int w);
+void				combine_argb(unsigned char *src, unsigned char *dest);
+unsigned int		blend_colors(unsigned int src, unsigned int dest);
 /* File: srcs/compute_vline.c */
 void				compute_vline_data(t_render *render, t_wall *wall,
 						t_vline *vline);

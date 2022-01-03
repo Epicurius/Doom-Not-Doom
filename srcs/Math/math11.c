@@ -6,13 +6,14 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 17:08:48 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 17:20:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:56:10 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libm.h"
 
-static inline int	check_line_intersect(float p0, float p1, float *t0, float *t1)
+static inline int	check_line_intersect(float p0, float p1,
+	float *t0, float *t1)
 {
 	float	r;
 
@@ -34,7 +35,7 @@ static inline int	check_line_intersect(float p0, float p1, float *t0, float *t1)
 			*t1 = r;
 	}
 	return (TRUE);
-} 
+}
 
 int	liang_barsky(t_rect size, t_point *line)
 {

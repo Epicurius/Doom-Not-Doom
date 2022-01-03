@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:43:45 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:37:13 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 	clr = thread->bxpm->clr[pix];
 	if (thread->bxpm->bpp == 32)
 	{
-		if (clr == 0x00000000)
+		if (0 == (clr >> 24 & 0xFF))
 			return ;
-		clr = blend_alpha(((Uint32 *)thread->surface->pixels)[coord], clr,
-				clr >> 24 & 0xFF);
+		clr = blend_colors(((Uint32 *)thread->surface->pixels)[coord], clr);
 	}
 	else if (clr == 0xFF800080)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:53:31 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 15:55:19 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:53:01 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,6 @@ void	blit_pixel_brightness(t_render *render, int coord, t_v3 text,
 	((Uint32 *)render->surface->pixels)[coord]
 		= bxpm->shade[render->light][pixel];
 	((float *)render->surface->userdata)[coord] = text.z;
-}
-
-/*
- *	Copy pixel to surface if Alpha is not 0.
- */
-void	blit_pixel_alpha(t_render *render, int coord, t_v3 text, t_bxpm *bxpm)
-{
-	unsigned short	pixel;
-	uint8_t			alpha;
-
-	pixel = bxpm->pix[(int)text.y * bxpm->w + (int)text.x];
-	alpha = (bxpm->clr[pixel] >> 24 & 0xFF);
-	if (alpha == 0)
-		return ;
-	((Uint32 *)render->surface->pixels)[coord] = blend_alpha(bxpm->clr[pixel],
-			((Uint32 *)render->surface->pixels)[coord], -alpha);
 }
 
 /*

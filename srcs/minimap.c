@@ -113,7 +113,7 @@ static void	map_area(t_doom *doom)
 				|| y < map.size.y1 || y > map.size.y2)
 				pixels[coord] = MM_BEZEL_COLOR;
 			else if (MM_ALPHA > 0)
-				pixels[coord] = blend_alpha(pixels[coord], 0, MM_ALPHA);
+				pixels[coord] = blend_colors(pixels[coord], MM_ALPHA);
 			x++;
 		}
 		y++;

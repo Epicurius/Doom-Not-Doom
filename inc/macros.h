@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:30:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:37:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:30:40 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@
 # define MM_BEZEL_SIZE					5
 # define MM_BEZEL_COLOR					0x222222
 # define MM_VIEW_COLOR					0xFFD700
-# define MM_ALPHA						100
+# define MM_ALPHA						0x4F000000
 
 #endif
