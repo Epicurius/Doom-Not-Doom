@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/29 15:59:55 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:46:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -514,7 +514,8 @@ static const char			*g_event_type[EVENT_TYPE_AMOUNT] =
 	"Hazard",
 	"Audio",
 	"Spawn",
-	"Light"
+	"Light",
+	"Win"
 };
 
 static const char			*g_sprite_type[SPRITE_TYPE_AMOUNT] =

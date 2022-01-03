@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sector_trigger_events.c                            :+:      :+:    :+:   */
+/*   sector_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:03:39 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:21:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 14:03:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ void	sector_trigger_events(t_doom *doom, t_event *event)
 {
 	if (event->trigger_sector == doom->player.sector || event->trigger)
 	{
-		if (event->trigger == FALSE)
-			event->trigger = TRUE;
-		preform_sector_trigger_event(doom, event);
+		if (event->type == WIN)
+			doom->quit = 2;
+		else
+		{
+			if (event->trigger == FALSE)
+				event->trigger = TRUE;
+			preform_sector_trigger_event(doom, event);
+		}
 	}
 }

@@ -6,23 +6,21 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:36:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
 /*
- *	Creates a BMP of the game over screen and save it in ./ScreenShots/.
+ *	Creates a BMP of the game over screen and save it in root
  */
-static void	print_score(t_doom *doom, int *i)
+static void	print_screen_shot(t_doom *doom, int *i)
 {
 	char	*name;
 	t_bmp	*bmp;
 
-	name = ft_sprintf("%s/ScreenShots/DoomScore%d%d%d.bmp", GAME_PATH,
-			doom->time.date.tm_mon + 1, doom->time.date.tm_mday,
-			doom->time.date.tm_min);
+	name = ft_sprintf("%s/Doom%d.bmp", GAME_PATH, rand() % 0xFFFF);
 	bmp = pix_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	write_bmp(name, bmp);
@@ -36,14 +34,26 @@ static void	print_score(t_doom *doom, int *i)
 /*
  *	Blits game_over.bxmp to screen.
  */
-static void	blit_game_over(t_doom *doom)
+static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
 {
 	t_bxpm	bxpm;
-
-	if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
-		error_msg(0, "game_over.bxpm");
-	blit_bxpm(doom->surface, &bxpm,
-		doom->surface->w * 0.05, doom->surface->h * 0.05);
+	
+	if (i > 0)
+	{
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
+		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))///fix
+			error_msg(0, BXPM_PATH"GameWon.bxpm");
+	}
+	else
+	{
+		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_PLAYER_DEATH], 0);
+		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
+			error_msg(0, BXPM_PATH"GameOver.bxpm");
+	}
+	*dst = (SDL_Rect){doom->surface->w * 0.05, doom->surface->h * 0.05,
+		bxpm.w, bxpm.h};
+	blit_bxpm(doom->surface, &bxpm, dst->x, dst->y);
+	dst->x += 20;
 	free(bxpm.pix);
 	free(bxpm.clr);
 }
@@ -52,29 +62,32 @@ static void	blit_game_over(t_doom *doom)
  *	Draws the game stats: Rounds Survived and Enemies Killed.
  *	TODO: Find a better colour for "Press Enter..."
  */
-static void	blit_endless_stats(t_doom *doom, char *str)
+static void	blit_stats(t_doom *doom, SDL_Rect *dst, char *str)
 {
-	SDL_Rect	dstr;
+	SDL_Color	clr;
 	SDL_Surface	*surface;
 
+	clr = hex_to_sdl_color(0xFFFFFFFF);
 	if (doom->game.mode == ENDLESS)
 	{
 		str = ft_sprintf("Rounds Survived %d", doom->game.round);
-		surface = TTF_RenderText_Blended(doom->font.amaz, str,
-				hex_to_sdl_color(0xFFFFFFFF));
+		surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
 		free(str);
-		dstr = (SDL_Rect){doom->surface->w * 0.05 + 10,
-			doom->surface->h * 0.05 + 210, surface->w, surface->h};
-		SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
+		*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
+		SDL_BlitSurface(surface, NULL, doom->surface, dst);
 		SDL_FreeSurface(surface);
 	}
 	str = ft_sprintf("Enemies Killed: %d", doom->nb.kills);
-	surface = TTF_RenderText_Blended(doom->font.amaz, str,
-			hex_to_sdl_color(0xFFFFFFFF));
+	surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
 	free(str);
-	dstr = (SDL_Rect){doom->surface->w * 0.05 + 10,
-		doom->surface->h * 0.05 + 260, surface->w, surface->h};
-	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
+	*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
+	SDL_BlitSurface(surface, NULL, doom->surface, dst);
+	SDL_FreeSurface(surface);
+	str = get_elapsed_time_str(doom);
+	surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
+	free(str);
+	*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
+	SDL_BlitSurface(surface, NULL, doom->surface, dst);
 	SDL_FreeSurface(surface);
 }
 
@@ -83,23 +96,24 @@ static void	blit_endless_stats(t_doom *doom, char *str)
  */
 static void	blit_info(t_doom *doom)
 {
+	SDL_Color	clr;
 	SDL_Rect	dstr;
 	TTF_Font	*amaz;
-	SDL_Surface	*surface;
+	SDL_Surface	*surf;
 
-	surface = TTF_RenderText_Blended(doom->font.amaz,
-			"Press Enter to Continue ", hex_to_sdl_color(0xFF303030));
-	dstr = (SDL_Rect){doom->surface->w - surface->w,
-		doom->surface->h - surface->h, surface->w, surface->h};
-	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
-	SDL_FreeSurface(surface);
-	amaz = TTF_OpenFont(TTF_PATH"digital.ttf", 25);
-	surface = TTF_RenderText_Blended(amaz, "'P' to Save Screen Shot",
-			hex_to_sdl_color(0xFFFFFFFF));
-	dstr = (SDL_Rect){doom->surface->w - surface->w,
-		doom->surface->h - surface->h, surface->w, surface->h};
-	SDL_BlitSurface(surface, NULL, doom->surface, &dstr);
-	SDL_FreeSurface(surface);
+	clr = hex_to_sdl_color(0xFFFFFFFF);
+	surf = TTF_RenderText_Blended(doom->font.amaz,
+		"Press Enter to Continue ", clr);
+	dstr = (SDL_Rect){doom->surface->w - surf->w,
+		doom->surface->h - surf->h, surf->w, surf->h};
+	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
+	SDL_FreeSurface(surf);
+	amaz = TTF_OpenFont(TTF_PATH"digital.ttf", 15);
+	surf = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot", clr);
+	dstr = (SDL_Rect){(dstr.x + dstr.w / 2) - surf->w / 2,
+		doom->surface->h - surf->h - 5, surf->w, surf->h};
+	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
+	SDL_FreeSurface(surf);
 	TTF_CloseFont(amaz);
 }
 
@@ -108,21 +122,23 @@ static void	blit_info(t_doom *doom)
  */
 void	game_over(t_doom *doom)
 {
+	SDL_Rect	dst;
 	SDL_Event	event;
 	int			screen_shot;
 
 	screen_shot = FALSE;
-	blit_game_over(doom);
-	blit_endless_stats(doom, NULL);
+	blit_title(doom, &dst, doom->player.health);
+	blit_stats(doom, &dst, NULL);
 	blit_info(doom);
 	update_screen(doom);
-	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_PLAYER_DEATH], 0);
 	while (1)
 	{
 		SDL_PollEvent(&event);
 		if (event.key.keysym.sym == SDLK_RETURN)
 			break ;
-		if (event.key.keysym.sym == SDLK_p && !screen_shot)
-			print_score(doom, &screen_shot);
+		if (event.key.keysym.sym == SDLK_s && !screen_shot)
+			print_screen_shot(doom, &screen_shot);
 	}
 }
+
+

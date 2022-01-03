@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 14:13:33 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/15 11:51:32 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 13:58:11 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ enum e_event_type
 	AUDIO,
 	SPAWN,
 	LIGHT,
+	WIN,
 	EVENT_TYPE_AMOUNT
 };
 

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 09:00:24 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/17 10:36:14 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 14:00:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ static void	get_event_type(t_doom *doom, t_event *event, char **arr, int nb)
 		hazard_event(event, nb, arr);
 	else if (event->type == LIGHT)
 		light_event(event, nb, arr);
+	else if (event->type == WIN && event->action == 0)
+		error_msg("Event WIN cant have NONE as an event trigger.");
 	else if (event->type == STORE && (event->action == 0 || event->action == 3))
 		error_msg("Event STORE can only have SHOOT/CLICK as an event trigger.");
 }

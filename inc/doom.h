@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 13:20:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:37:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,6 +338,7 @@ typedef struct s_time
 	float			delta;
 	SDL_Color		color;
 	SDL_Surface		*surf;
+	long			start;
 	struct tm		date;
 	SDL_Color		clock_fg;
 	SDL_Color		clock_bg;
@@ -503,6 +504,7 @@ void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx,
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom);
 /* File: srcs/clock.c */
+char				*get_elapsed_time_str(t_doom *doom);
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File: srcs/color_and_brightness.c */
@@ -833,6 +835,7 @@ int					is_convex(t_sector *sector);
 void				game_loading(t_doom *doom);
 /* File: srcs/UI/game_over.c */
 void				game_over(t_doom *doom);
+void				game_win(t_doom *doom);
 /* File: srcs/UI/game_quit.c */
 void				game_quit(t_doom *doom);
 /* File: srcs/BuyMenu/buymenu.c */

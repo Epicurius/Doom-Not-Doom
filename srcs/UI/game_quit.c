@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/02 13:53:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:34:28 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	y_or_n(t_doom *doom, int y)
 static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 {
 	SDL_Event	event;
+	char		*name;
 
 	while (1)
 	{
@@ -69,7 +70,9 @@ static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 			break ;
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s && !i)
 		{
-			write_bmp("Pause.bmp", bmp);
+			name = ft_sprintf("%s/Doom%d%d%d.bmp", GAME_PATH, rand() % 0xFFFF);
+			write_bmp(name, bmp);
+			free(name);
 			Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);
 			Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 			i = TRUE;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wsprite_trigger_events.c                           :+:      :+:    :+:   */
+/*   wsprite_events.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 13:59:58 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 14:52:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/03 14:22:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 	if (event->wsprite->trigger == 1)
 	{
 		Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
+		if (event->type == WIN)
+		{
+			doom->quit = 2;
+			return ;
+		}
 		event->wsprite->trigger = 2;
 	}
 	preform_wsprite_trigger_events(doom, event);
