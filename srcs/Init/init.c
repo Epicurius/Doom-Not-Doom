@@ -21,7 +21,11 @@ static void	get_surface_center(t_doom *doom)
 
 static void	init_threading(t_doom *doom)
 {
+#if DND_WIN
+	doom->nb.processors = 4;
+#else
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
+#endif
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
 		error_msg(NULL);

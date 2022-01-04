@@ -58,7 +58,6 @@ CFILES	=	ai_attack.c\
 				update_screen.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
-				timer.c\
 				UI/game_loading.c\
 				UI/game_over.c\
 				UI/game_quit.c\
@@ -99,6 +98,7 @@ CFILES	=	ai_attack.c\
 				Math/math8.c\
 				Math/math9.c\
 				Math/math10.c\
+				Math/math11.c\
 				Free/free1.c\
 				Free/free2.c\
 				Free/free3.c\
@@ -184,8 +184,7 @@ LIB_LIBS	= \
 				-L$(LIB_DIR)/libbxpm \
 
 
-LIBS		= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp
-							
+LIBS		= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp						
 				
 CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable #-Werror -Wfatal-errors -g -fsanitize=address
 

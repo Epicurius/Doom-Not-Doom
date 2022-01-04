@@ -13,7 +13,8 @@
 #ifndef DOOM_H
 # define DOOM_H
 
-# define SDL_MAIN_HANDLED 
+# define SDL_MAIN_HANDLED
+//# define _POSIX_C_SOURCE 199309L
 # include "SDL.h"
 # include "SDL_ttf.h"
 # include "SDL_mixer.h"
@@ -25,9 +26,14 @@
 # include "libm.h"
 # include "enum.h"
 # include "path.h"
+# include "time.h"
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+
+#ifndef DND_WIN
+	# define DND_WIN 1
+#endif
 
 // IPC x CLOCK x Data Size x Time
 

@@ -93,9 +93,14 @@ void	game_quit(t_doom *doom)
 
 	if (doom->quit != 1)
 		return ;
-	SDL_CaptureMouse(1);
-	SDL_GetMouseState(&x, &y);
+
+	SDL_ShowCursor(SDL_ENABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
+
+	//SDL_CaptureMouse(1);
+	//SDL_GetMouseState(&x, &y);
+	//SDL_SetRelativeMouseMode(SDL_FALSE);
+	
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
 	read_bxpm(&bxpm, BXPM_PATH"GameQuit.bxpm");
@@ -107,8 +112,13 @@ void	game_quit(t_doom *doom)
 	update_screen(doom);
 	quit_loop(doom, bmp, FALSE);
 	ft_bzero(&doom->keys, 517);
-	SDL_WarpMouseInWindow(doom->win, x, y);
+
+	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	SDL_CaptureMouse(0);
+	SDL_GetRelativeMouseState(NULL, NULL);
+
+	//SDL_WarpMouseInWindow(doom->win, x, y);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_CaptureMouse(0);
 	doom->time.curr = SDL_GetTicks();
 }
