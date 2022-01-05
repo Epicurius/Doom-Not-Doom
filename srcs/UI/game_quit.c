@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 18:34:28 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/05 10:44:32 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,11 @@ void	game_quit(t_doom *doom)
 {
 	t_bxpm	bxpm;
 	t_bmp	*bmp;
-	int		x;
-	int		y;
 
 	if (doom->quit != 1)
 		return ;
-
 	SDL_ShowCursor(SDL_ENABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-
-	//SDL_CaptureMouse(1);
-	//SDL_GetMouseState(&x, &y);
-	//SDL_SetRelativeMouseMode(SDL_FALSE);
-	
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
 	read_bxpm(&bxpm, BXPM_PATH"GameQuit.bxpm");
@@ -112,13 +104,8 @@ void	game_quit(t_doom *doom)
 	update_screen(doom);
 	quit_loop(doom, bmp, FALSE);
 	ft_bzero(&doom->keys, 517);
-
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	SDL_GetRelativeMouseState(NULL, NULL);
-
-	//SDL_WarpMouseInWindow(doom->win, x, y);
-	//SDL_SetRelativeMouseMode(SDL_TRUE);
-	//SDL_CaptureMouse(0);
 	doom->time.curr = SDL_GetTicks();
 }

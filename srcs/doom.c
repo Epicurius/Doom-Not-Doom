@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 17:18:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:46:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,3 @@ int	main(int ac, char **av)
 		launcher();
 	return (1);
 }
-
-//# define PIECE_WIDTH	5
-//# define PIECE_HEIGHT	4
-//
-//int	valid(char *str, int ret)
-//{
-//	int y;
-//	int x;
-//	
-//	if (ret < PIECE_WIDTH * PIECE_HEIGHT)
-//		return (2);
-//	x = -1;
-//	while (x < ret)
-//	{
-//		y = 0;
-//		while (y < PIECE_HEIGHT)
-//		{
-//			x += PIECE_WIDTH;
-//			if (x > ret)
-//				return (1);
-//			if (str[x] != '\n' && str[x] != '\0')
-//				return (1);
-//			y++;
-//		}
-//		x += 1;
-//	}
-//	return (0);
-//}
