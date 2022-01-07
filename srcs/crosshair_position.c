@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:42:38 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:16:08 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:22:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	debug(t_render *render, t_wall *wall)
 {
-	ft_printf("{CLR:204}Wall:\t%d Sector: %d Neighbour: %d\n",
+	LG_DEBUG("Wall:\t%d Sector: %d Neighbour: %d\n",
 		wall->id, wall->sect, wall->n);
-	ft_printf("Player:\t%d [%.1f][%.1f][%.1f]{RESET}\n",
+	LG_DEBUG("Player:\t%d [%.1f][%.1f][%.1f]\n",
 		render->player->sector, render->player->where.x,
 		render->player->where.y, render->player->where.z);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:40:11 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 13:14:47 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	parse_player(t_doom *doom, int nb, char **arr)
 {
 	if (nb < 6)
-		error_msg("Invalid amount of player arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of player arguments %s\n", arr[0]);
 	doom->player.where.x = ft_atoi(arr[1]) * doom->map_scale;
 	doom->player.where.y = ft_atoi(arr[2]) * doom->map_scale;
 	doom->player.where.z = ft_atoi(arr[3]) * doom->map_scale;
@@ -83,7 +83,7 @@ int	parse_map(t_doom *doom, char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		error_msg("File does not exist or could not be opened.\n");
+		LG_ERROR("File does not exist or could not be opened.\n");
 	while (get_next_line(fd, &line))
 	{
 		read_type(doom, fd, line);

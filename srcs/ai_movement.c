@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 10:41:50 by nneronin          #+#    #+#             */
-/*   Updated: 2021/09/23 11:26:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:02:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void	ai_collision(t_doom *doom, t_entity *entity)
 	entity->sector = collision_detection(doom, motion,
 			&entity->where, &entity->velocity);
 	if (entity->sector < 0)
+	{
+		LG_WARN("Removing Entity %s.", g_entity_data[entity->type].name);
 		entity->state = DEATH;
+	}
 	else if (entity->velocity.x != 0 || entity->velocity.y != 0)
 		entity->yaw = degree_to_point_v2(entity->where,
 				add_v3(entity->where, entity->velocity)) * CONVERT_TO_RADIANS;

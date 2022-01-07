@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/29 15:36:49 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:21:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_sound(t_doom *doom)
 		{
 			doom->events[i].audio = Mix_LoadWAV(doom->events[i].path);
 			if (!doom->events[i].audio)
-				ft_printf("Audio event %s not found\n", doom->events[i].path);
+				LG_WARN("Audio event %s not found\n", doom->events[i].path);
 			free(doom->events[i].path);
 		}
 	}
@@ -70,7 +70,7 @@ void	init_sound(t_doom *doom)
 	i = -1;
 	while (++i < WAV_AMOUNT)
 		if (doom->sound[i] == NULL)
-			error_msg("Reading[%d]: %s", g_sounds[i].id, g_sounds[i].path);
+			LG_ERROR("Reading[%d]: %s", g_sounds[i].id, g_sounds[i].path);
 	init_volume(doom);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 13:51:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static inline void	parse_textures_scaled(t_bxpm *bxpm, int amount,
 	while (++i < amount)
 	{
 		if (!read_bxpm_scaled(&bxpm[i], g[i].path, scale))
-			error_msg("read_bxpm_scaled %s.", g[i].path);
+			LG_ERROR("read_bxpm_scaled %s.", g[i].path);
 	}
 }
 
@@ -34,7 +34,7 @@ static inline void	parse_textures(t_bxpm *bxpm, int amount,
 	while (++i < amount)
 	{
 		if (!read_bxpm(&bxpm[i], g[i].path))
-			error_msg("read_bxpm %s.", g[i].path);
+			LG_ERROR("read_bxpm %s.", g[i].path);
 	}
 }
 

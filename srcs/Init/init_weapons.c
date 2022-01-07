@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:47:18 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 18:06:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	weapon_texture_array(t_doom *doom)
 				* (doom->weapon[i].fire_frames
 					+ doom->weapon[i].reload_frames));
 		if (!doom->weapon[i].bxpm)
-			error_msg("Weapon bxpm array nb %d.", i);
+			LG_ERROR("Weapon bxpm array nb %d.", i);
 	}
 }
 

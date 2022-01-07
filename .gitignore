@@ -4,6 +4,7 @@ doom
 doom.exe
 obj
 DEV
+log
 /resources/*
 README
 .vscode

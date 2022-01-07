@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 14:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/29 15:37:03 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	multithread_sounds(void *arg)
 void	init_wav(t_doom *doom)
 {
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
-		error_msg("Mix_OpenAudio: %s\n", Mix_GetError());
+		LG_ERROR("Mix_OpenAudio: %s\n", Mix_GetError());
 	Mix_AllocateChannels(32);
 	tpool_add(&doom->tpool, multithread_sound_0, &doom->sound);
 	tpool_add(&doom->tpool, multithread_sound_1, &doom->sound);

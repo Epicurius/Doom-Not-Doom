@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 12:04:26 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/12 14:48:24 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:20:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ static int	fix_wall_order2(t_sector *sector, int i, t_v3 v2)
 			return (1);
 		}
 	}
-	ft_printf("{YELLOW}[INFO]{RESET} Sector %d wall %d "
-		"coordinates don't match up!\n", sector->id, i);
+	LG_WARN("Sector %d wall %d coordinates don't match up!\n", sector->id, i);
 	return (0);
 }
 
@@ -123,8 +122,7 @@ int	is_convex(t_sector *sector)
 		{
 			if (curr * prev < 0)
 			{
-				ft_printf("{YELLOW}[INFO]{RESET} Sector %d is concave, "
-					"must be convex!\n", sector->id);
+				LG_WARN("Sector %d is concave, must be convex!\n", sector->id);
 				return (0);
 			}
 			prev = curr;

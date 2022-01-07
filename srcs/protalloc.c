@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:18:01 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/30 17:13:56 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:28:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,9 @@ void	*protalloc(size_t size)
 		ft_memset(mem, FALSE, size);
 		return (mem);
 	}
-	ft_printf("{RED}[ERROR]{RESET}\tMalloc\n");
-	exit(1);
+	LG_ERROR("protalloc fail.");
+	return (NULL);
 }
-
-/*
- * void	*protalloc(size_t size, char *file, const char *func, int line)
- * {
- * 	void	*mem;
- * 
- * 	mem = malloc(sizeof(*mem) * size);
- * 	if (mem)
- * 	{
- * 		ft_memset(mem, FALSE, size);
- * 		return (mem);
- * 	}
- * 	ft_printf("{RED}[ERROR]{RESET}\tMalloc: %s : %s : %d\n", file, func, line);
- * 	exit(1);
- * }
-*/
 
 /*
  *	Resets the sectbool list with FALSE(0) and sets current sector to TRUE(1).

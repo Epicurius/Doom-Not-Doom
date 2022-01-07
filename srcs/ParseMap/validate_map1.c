@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 10:12:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/14 15:20:29 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:20:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	check_entities(t_doom *doom)
 		if (!in_sector(&doom->sectors[((t_entity *)curr->content)->sector],
 				((t_entity *)curr->content)->where))
 		{
-			ft_printf("{YELLOW}[INFO]{RESET} Entity %d is outside "
-				"map boundaries!\n", ((t_entity *)curr->content)->type);
+			LG_WARN("Entity %d is outside map boundaries!\n",
+				((t_entity *)curr->content)->type);
 			return (0);
 		}
 		curr = curr->next;
@@ -41,7 +41,7 @@ static int	check_player(t_doom *doom)
 {
 	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
 	{
-		ft_printf("{YELLOW}[INFO]{RESET} Player is outside map boundaries!\n");
+		LG_WARN("Player is outside map boundaries!\n");
 		return (0);
 	}
 	return (1);

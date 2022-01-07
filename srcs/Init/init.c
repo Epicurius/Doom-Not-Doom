@@ -28,7 +28,7 @@ static void	init_threading(t_doom *doom)
 #endif
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
-		error_msg(NULL);
+		LG_ERROR(NULL);
 }
 
 void	set_true_mouse(t_doom *doom)

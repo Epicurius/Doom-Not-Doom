@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 18:37:33 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:31:16 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SDL_MAIN_HANDLED
 //# define _POSIX_C_SOURCE 199309L
+# include "liblg.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
 # include "SDL_mixer.h"
@@ -36,8 +37,6 @@
 #endif
 
 // IPC x CLOCK x Data Size x Time
-
-//#  define protalloc(size)	protalloc(size, __FILE__, __FUNCTION__, __LINE__)
 
 typedef struct s_settings
 {

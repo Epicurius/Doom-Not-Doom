@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 18:36:51 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
 		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))///fix
-			error_msg(0, BXPM_PATH"GameWon.bxpm");
+			LG_ERROR(0, BXPM_PATH"GameWon.bxpm");
 	}
 	else
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_PLAYER_DEATH], 0);
 		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
-			error_msg(0, BXPM_PATH"GameOver.bxpm");
+			LG_ERROR(0, BXPM_PATH"GameOver.bxpm");
 	}
 	*dst = (SDL_Rect){doom->surface->w * 0.05, doom->surface->h * 0.05,
 		bxpm.w, bxpm.h};

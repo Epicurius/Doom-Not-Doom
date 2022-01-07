@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/05 17:46:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:01:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,12 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		print_help_msg();
+	lg_setFdLevel(LEVEL_WARN);
+	if (!lg_openFile("log", "a+"))
+		return (0);
 	args(ac, av, &settings);
 	game(av[1], settings);
+	lg_closeFile();
 	if (settings.debug)
 		system("leaks doom");
 	if (settings.launcher)

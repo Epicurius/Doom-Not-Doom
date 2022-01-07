@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 10:27:28 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/10 17:18:52 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	malloc_texture_pos(t_frames *entity)
 {
 	entity->pos = (t_rect ***)protalloc(sizeof(t_rect **) * 4);
 	if (!entity->pos)
-		error_msg("Malloc img pos\n");
+		LG_ERROR("Malloc img pos\n");
 	if (!malloc_state_frames_and_angles(entity, IDLE))
-		error_msg("Malloc img pos IDLE\n");
+		LG_ERROR("Malloc img pos IDLE\n");
 	if (!malloc_state_frames_and_angles(entity, MOVE))
-		error_msg("Malloc img pos MOVE\n");
+		LG_ERROR("Malloc img pos MOVE\n");
 	if (!malloc_state_frames_and_angles(entity, ATTACK))
-		error_msg("Malloc img pos ATTACK\n");
+		LG_ERROR("Malloc img pos ATTACK\n");
 	if (!malloc_state_frames_and_angles(entity, DEATH))
-		error_msg("Malloc img pos DEATH\n");
+		LG_ERROR("Malloc img pos DEATH\n");
 }
