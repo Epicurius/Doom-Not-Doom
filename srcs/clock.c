@@ -12,7 +12,6 @@
 
 #include "doom.h"
 
-
 /*
  *	Simple pixel copy from SDL_Surface fo BXPM. 
  *	(Clock has only 2 colors black and white which makes this a lot faster)
@@ -40,8 +39,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	t_time		*t;
 	SDL_Surface	*tmp;
 
-	doom->time.start = time(NULL);
-	//get_time(&doom->time.start);
+	doom->time.start = time(NULL); //? chabge to __TIME__
 	t = &doom->time;
 	t->clock_fg = hex_to_sdl_color(CLOCK_FG_COLOR);
 	t->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);
@@ -75,7 +73,6 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	SDL_Surface	*tmp;
 
 	tm = time(NULL);
-	//get_time(&t);
 	t = &doom->time;
 	t->date = *localtime(&tm);
 	if (wall->wsprite.num[x].time == t->date.tm_sec)
@@ -91,18 +88,18 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	return (1);
 }
 
-char *get_elapsed_time_str(t_doom *doom)
+char	*get_elapsed_time_str(t_doom *doom)
 {
-    int elapsed;
-	int h;
-	int m;
+	int	elapsed;
+	int	h;
+	int	m;
 	int	s;
-	
+
 	elapsed = time(NULL) - doom->time.start;
 	h = elapsed / 3600;
 	elapsed -= (h * 3600);
 	m = elapsed / 60;
 	elapsed -= (m * 60);
 	s = elapsed;
-	return (ft_sprintf("%02d:%02d:%02d", h, m, s));	
+	return (ft_sprintf("%02d:%02d:%02d", h, m, s));
 }

@@ -37,12 +37,12 @@ static void	print_screen_shot(t_doom *doom, int *i)
 static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
 {
 	t_bxpm	bxpm;
-	
+
 	if (i > 0)
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
-		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))///fix
-			LG_ERROR(0, BXPM_PATH"GameWon.bxpm");
+		if (!read_bxpm(&bxpm, BXPM_PATH"GameOver.bxpm"))
+			LG_ERROR(0, BXPM_PATH"GameWon.bxpm");//fix
 	}
 	else
 	{
@@ -103,7 +103,7 @@ static void	blit_info(t_doom *doom)
 
 	clr = hex_to_sdl_color(0xFFFFFFFF);
 	surf = TTF_RenderText_Blended(doom->font.amaz,
-		"Press Enter to Continue ", clr);
+			"Press Enter to Continue ", clr);
 	dstr = (SDL_Rect){doom->surface->w - surf->w,
 		doom->surface->h - surf->h, surf->w, surf->h};
 	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
@@ -140,5 +140,3 @@ void	game_over(t_doom *doom)
 			print_screen_shot(doom, &screen_shot);
 	}
 }
-
-

@@ -30,7 +30,7 @@ static void	init_sdl2(t_doom *doom, int x, int y)
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
 		LG_ERROR("Could not init SDL: %s\n", SDL_GetError());
 	doom->win = SDL_CreateWindow("DOOM", x, y,
-		doom->settings.size.x, doom->settings.size.y, 0);
+			doom->settings.size.x, doom->settings.size.y, 0);
 	if (!doom->win)
 		LG_ERROR("Could not create window: %s\n", SDL_GetError());
 	doom->surface = SDL_CreateRGBSurfaceWithFormat(0,
@@ -54,7 +54,7 @@ static void	init_sdl2(t_doom *doom, int x, int y)
 void	init_sdl(t_doom *doom)
 {
 	if (DND_WIN)
-		init_sdl2(doom, 30, 0);
+		init_sdl2(doom, 0, 30);
 	else
 		init_sdl2(doom, 0, 0);
 	init_ttf(doom);

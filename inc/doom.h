@@ -32,9 +32,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-#ifndef DND_WIN
-	# define DND_WIN 1
-#endif
+# define DND_WIN 1
 
 // IPC x CLOCK x Data Size x Time
 
