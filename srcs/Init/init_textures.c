@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:13:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,18 @@ void	init_textures(t_doom *doom)
 {
 	parse_surface_textures(doom, -1, -1);
 	parse_textures(doom->etx, ENTITY_TEXTURE_AMOUNT, g_entity_textures);
-	parse_textures(doom->itx, ICON_TEXTURE_AMOUNT, g_icon_textures);
+	parse_textures_scaled(doom->itx,
+		ICON_TEXTURE_AMOUNT, g_icon_textures, doom->c.x * 0.002);
 	parse_textures_scaled(doom->weapon[WEAPON_SHOTGUN].bxpm,
-		SHOTGUN_TEXTURE_AMOUNT, g_shotgun_textures, doom->c.x / 800.0);
+		SHOTGUN_TEXTURE_AMOUNT, g_shotgun_textures, doom->c.x * 0.00125);
 	parse_textures_scaled(doom->weapon[WEAPON_GUN].bxpm,
-		GLOCK_TEXTURE_AMOUNT, g_glock_textures, doom->c.x / 900.0);
+		GLOCK_TEXTURE_AMOUNT, g_glock_textures, doom->c.x * 0.001);
 	parse_textures_scaled(doom->weapon[WEAPON_KAR].bxpm,
-		KAR_TEXTURE_AMOUNT, g_kar_textures, doom->c.x / 340.0);
+		KAR_TEXTURE_AMOUNT, g_kar_textures, doom->c.x * 0.003);
 	parse_textures_scaled(doom->weapon[WEAPON_LAUNCHER].bxpm,
-		LAUNCHER_TEXTURE_AMOUNT, g_launcher_textures, doom->c.x / 800.0);
+		LAUNCHER_TEXTURE_AMOUNT, g_launcher_textures, doom->c.x * 0.00125);
 	parse_textures_scaled(doom->weapon[WEAPON_MINIGUN].bxpm,
-		MINIGUN_TEXTURE_AMOUNT, g_minigun_textures, doom->c.x / 400.0);
+		MINIGUN_TEXTURE_AMOUNT, g_minigun_textures, doom->c.x * 0.0025);
 	init_clock(doom, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	sector_shading(doom, -1, -1);
 }

@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 14:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 16:16:05 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:41:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,24 @@
 
 static int	multithread_sound_0(void *arg)
 {
+	//((Mix_Chunk **)arg)[g_sounds[0].id] = Mix_LoadWAV_RW(SDL_RWFromMem(
+	//	resources_WAV_BuyMenu_wav, resources_WAV_BuyMenu_wav_len), 1);	
 	((Mix_Chunk **)arg)[g_sounds[0].id] = Mix_LoadWAV(g_sounds[0].path);
 	return (1);
 }
 
 static int	multithread_sound_1(void *arg)
 {
+	//((Mix_Chunk **)arg)[g_sounds[1].id] = Mix_LoadWAV_RW(SDL_RWFromMem(
+	//	resources_WAV_AtDoomsGate_wav, resources_WAV_AtDoomsGate_wav_len), 1);
 	((Mix_Chunk **)arg)[g_sounds[1].id] = Mix_LoadWAV(g_sounds[1].path);
 	return (1);
 }
 
 static int	multithread_sound_2(void *arg)
 {
+	//((Mix_Chunk **)arg)[g_sounds[2].id] = Mix_LoadWAV_RW(SDL_RWFromMem(
+	//	resources_WAV_Intro_wav, resources_WAV_Intro_wav_len), 1);
 	((Mix_Chunk **)arg)[g_sounds[2].id] = Mix_LoadWAV(g_sounds[2].path);
 	return (1);
 }

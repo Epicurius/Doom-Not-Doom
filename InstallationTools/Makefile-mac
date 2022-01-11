@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/11 12:38:58 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/11 15:49:09 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -191,8 +191,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				-framework SDL2_image \
 				-framework SDL2_ttf -F $(LIB_DIR)/SDL_MAC
 
-CFLAGS		=	-Wall -Wextra -MMD -Werror -O3 #-Wfatal-errors -g -fsanitize=address
-
+CFLAGS		=	-Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
 
 all: | $(RESOURCES) $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
