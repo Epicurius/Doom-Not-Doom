@@ -81,14 +81,6 @@ int	main(int ac, char **av)
 {
 	t_settings	settings;
 
-	if (!(__APPLE__))
-	{
-		char root[PATH_MAX + NAME_MAX];
-		int len;
-		get_root(root, &len);
-		ft_printf("Titta po dehar ----> %s %d\n", root, len);
-		exit (1);
-	}
 	if (ac == 1)
 		print_help_msg();
 	lg_setFdLevel(LEVEL_WARN);

@@ -59,7 +59,6 @@ CFILES	=	ai_attack.c\
 			update_screen.c\
 			wall_to_screen_xz.c\
 			fix_map.c\
-			timer.c\
 			UI/game_loading.c\
 			UI/game_over.c\
 			UI/game_quit.c\
@@ -184,7 +183,7 @@ LIB_LIBS	= \
 				-L$(LIB_DIR)/libpf \
 				-L$(LIB_DIR)/libft \
 				-L$(LIB_DIR)/libtp \
-				-I $(LIB_DIR)/liblg \
+				-L$(LIB_DIR)/liblg \
 				-L$(LIB_DIR)/libbxpm \
 
 

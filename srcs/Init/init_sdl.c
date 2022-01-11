@@ -56,9 +56,9 @@ static void	init_sdl2(t_doom *doom, int x, int y, Uint32 flags)
 
 void	init_sdl(t_doom *doom)
 {
-	if (__APPLE__)
-		init_sdl2(doom, 0, 0, SDL_WINDOW_BORDERLESS);
-	else
+	if (_WIN32)
 		init_sdl2(doom, 0, 30, 0);//SDL_WINDOW_BORDERLESS);
+	else
+		init_sdl2(doom, 0, 0, SDL_WINDOW_BORDERLESS);
 	init_ttf(doom);
 }

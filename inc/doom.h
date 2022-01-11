@@ -37,13 +37,14 @@
 
 # ifdef __APPLE__
 #  include <limits.h>
-#  include <sys/syslimits.h>	//for PATH_MAX && NAME_MAX
-#  include <mach-o/dyld.h>		//for _NSGetExecutablePath
+#  include <sys/syslimits.h>
+#  include <mach-o/dyld.h>
 # else //elif _WIN32 || __MINGW32__
-#  define WIN32_LEAN_AND_MEAN
 #  include <windows.h>
 #  include <float.h>
 #  include <winsock.h>
+#  define PATH_MAX 1024
+#  define NAME_MAX 200
 # endif
 
 typedef struct s_settings
