@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 08:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 17:04:36 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:39:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 static void	init_ttf(t_doom *doom)
 {
+	GET_PATH("resources/TTF/AmazDoom.ttf");
 	if (TTF_Init())
 		LG_ERROR("Could not init TTF: %s\n", SDL_GetError());
-	doom->font.amaz = TTF_OpenFont(TTF_PATH"AmazDoom.ttf",
-			doom->settings.size.y / 20);
+	doom->font.amaz = TTF_OpenFont(doom->root, doom->settings.size.y / 20);
 	if (!doom->font.amaz)
 		LG_ERROR("Could not open font: %s\n", TTF_GetError());
-	doom->font.digital = TTF_OpenFont(TTF_PATH"Digital.ttf", 100);
+	GET_PATH("resources/TTF/Digital.ttf");
+	doom->font.digital = TTF_OpenFont(doom->root, 100);
 	if (!doom->font.digital)
 		LG_ERROR("Could not open font: %s\n", TTF_GetError());
+	GET_PATH("resources/ICON/DND.bmp");
+	if (!set_icon(doom->win, doom->root))
+		LG_ERROR("Could not set icon: %s\n", SDL_GetError());
 }
 
 static void	init_sdl2(t_doom *doom, int x, int y)
@@ -47,15 +51,13 @@ static void	init_sdl2(t_doom *doom, int x, int y)
 			SDL_TEXTUREACCESS_STREAMING, doom->surface->w, doom->surface->h);
 	if (!doom->texture)
 		LG_ERROR("Could not create texture: %s\n", SDL_GetError());
-	if (!set_icon(doom->win, GAME_PATH"resources/ICON/DND.bmp"))
-		LG_ERROR("Could not set icon: %s\n", SDL_GetError());
 }
 
 void	init_sdl(t_doom *doom)
 {
-	if (DND_WIN)
-		init_sdl2(doom, 0, 30);
-	else
+	if (__APPLE__)
 		init_sdl2(doom, 0, 0);
+	else
+		init_sdl2(doom, 0, 30);
 	init_ttf(doom);
 }

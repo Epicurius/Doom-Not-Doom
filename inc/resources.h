@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 18:46:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:47:26 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_id_and_path
 {
-	int			id;
-	char		*path;
+	unsigned char	id;
+	char			*path;
 }				t_id_and_path;
 
 static const t_id_and_path	g_sounds[WAV_AMOUNT] =

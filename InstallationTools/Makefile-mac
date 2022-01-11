@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/07 15:59:09 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/11 12:38:58 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CYAN		=	"\e[0;36m"
 RESET		=	"\e[0m"
 
 CFILES		=	ai_attack.c\
+				get_root.c\
 				ai_movement.c\
 				animate_wsprite.c\
 				args.c\

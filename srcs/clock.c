@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:24:23 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 16:27:17 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:37:31 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	t_time		*t;
 	SDL_Surface	*tmp;
 
-	doom->time.start = time(NULL); //? chabge to __TIME__
+	doom->time.start = time(NULL);
 	t = &doom->time;
 	t->clock_fg = hex_to_sdl_color(CLOCK_FG_COLOR);
 	t->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);

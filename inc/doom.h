@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 16:31:16 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:56:15 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,19 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define DND_WIN 1
+# define GET_PATH(file)	ft_strcpy(&doom->root[doom->rlen], file)
+# define GET_ROOT()		doom->root[doom->rlen] = '\0'
 
-// IPC x CLOCK x Data Size x Time
+# ifdef __APPLE__
+#  include <limits.h>
+#  include <sys/syslimits.h>	//for PATH_MAX && NAME_MAX
+#  include <mach-o/dyld.h>		//for _NSGetExecutablePath
+# else //elif _WIN32 || __MINGW32__
+#  define WIN32_LEAN_AND_MEAN
+#  include <windows.h>
+#  include <float.h>
+#  include <winsock.h>
+# endif
 
 typedef struct s_settings
 {
@@ -448,6 +458,8 @@ typedef struct s_motion
 typedef struct s_doom
 {
 	t_settings		settings;
+	char			root[PATH_MAX + NAME_MAX];
+	int				rlen;
 	SDL_Window		*win;
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
@@ -546,6 +558,8 @@ int					ray_collision(t_doom *doom, t_v3 enemy, t_v3 player,
 						int sector);
 void				get_entity_state2(t_doom *doom, t_entity *entity);
 void				get_entity_state(t_doom *doom, t_entity *entity);
+/* File: srcs/get_root.c */
+void				get_root(char *root, int *rlen);
 /* File: srcs/help.c */
 void				print_help_msg(void);
 /* File: srcs/icon.c */

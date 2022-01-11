@@ -19,17 +19,30 @@ static void	get_surface_center(t_doom *doom)
 	doom->c.z = doom->c.y * doom->surface->w + doom->c.x;
 }
 
+#if __APPLE__
+
 static void	init_threading(t_doom *doom)
 {
-#if DND_WIN
-	doom->nb.processors = 4;
-#else
 	doom->nb.processors = ft_min(sysconf(_SC_NPROCESSORS_CONF), MAX_PROCESSORS);
-#endif
 	doom->nb.threads = 64;
 	if (!init_tpool(&doom->tpool, doom->nb.processors))
 		LG_ERROR(NULL);
 }
+
+#else
+
+static void	init_threading(t_doom *doom)
+{
+	SYSTEM_INFO	sysinfo;
+
+	GetSystemInfo(&sysinfo);
+	doom->nb.processors = sysinfo.dwNumberOfProcessors;
+	doom->nb.threads = 64;
+	if (!init_tpool(&doom->tpool, doom->nb.processors))
+		LG_ERROR(NULL);
+}
+
+#endif
 
 void	set_true_mouse(t_doom *doom)
 {
