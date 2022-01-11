@@ -31,19 +31,15 @@
 # include "resources.h"
 # include <math.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define GET_PATH(file)	ft_strcpy(&doom->root[doom->rlen], file)
 # define GET_ROOT()		doom->root[doom->rlen] = '\0'
 
 # ifdef __APPLE__
-#  include <limits.h>
 #  include <sys/syslimits.h>
 #  include <mach-o/dyld.h>
 # else //elif _WIN32 || __MINGW32__
-#  include <windows.h>
-#  include <float.h>
-#  include <winsock.h>
-#  define PATH_MAX 1024
 #  define NAME_MAX 200
 # endif
 
