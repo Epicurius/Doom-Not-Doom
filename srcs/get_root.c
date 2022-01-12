@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:49:47 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 13:30:12 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:59:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	get_root(char *root, int *rlen)
 	/*	Remove "/./" */
 	path = realpath(root, NULL);
 	*rlen = ft_strlen(path) - 4;
-	ft_strncpy(root, path, (size_t) * rlen);
+	ft_strncpy(root, path, *rlen);
 	free(path);
 }
 

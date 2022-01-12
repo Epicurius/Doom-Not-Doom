@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/07 16:21:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:30:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ static void	init_volume(t_doom *doom)
 	set_volume(0);
 }
 
+void	init_custom_sounds(t_doom *doom)
+{
+	int	i;
+
+	i = -1;
+	while (++i < doom->nb.events)
+	{
+		if (doom->events[i].type != AUDIO)
+			continue ;
+		GET_PATH(doom->events[i].path);
+		doom->events[i].audio = Mix_LoadWAV(doom->root);
+		if (doom->events[i].audio == NULL)
+			LG_WARN("Audio event %s not found\n", doom->root);
+		free(doom->events[i].path);
+	}
+}
+
 /*
  *	Init all the sounds and any event audio.
  */
@@ -55,22 +72,18 @@ void	init_sound(t_doom *doom)
 {
 	int	i;
 
-	i = -1;
-	while (++i < doom->nb.events)
-	{
-		if (doom->events[i].type == AUDIO)
-		{
-			doom->events[i].audio = Mix_LoadWAV(doom->events[i].path);
-			if (!doom->events[i].audio)
-				LG_WARN("Audio event %s not found\n", doom->events[i].path);
-			free(doom->events[i].path);
-		}
-	}
-	tpool_wait(&doom->tpool);
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+		LG_ERROR("Mix_OpenAudio: %s\n", Mix_GetError());
+	Mix_AllocateChannels(32);
+	init_custom_sounds(doom);
 	i = -1;
 	while (++i < WAV_AMOUNT)
-		if (doom->sound[i] == NULL)
-			LG_ERROR("Reading[%d]: %s", g_sounds[i].id, g_sounds[i].path);
+	{
+		GET_PATH(g_sounds[i].path);
+		doom->sound[g_sounds[i].id] = Mix_LoadWAV(doom->root);
+		if (doom->sound[g_sounds[i].id] == NULL)
+			LG_ERROR("Reading[%d]: %s", g_sounds[i].id, doom->root);
+	}
 	init_volume(doom);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
 		Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_INTRO], 0);

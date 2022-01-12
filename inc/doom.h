@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 13:56:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:43:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "macros.h"
 # include "libm.h"
 # include "enum.h"
-# include "path.h"
+//# include "path.h"
 # include "time.h"
 # include "resources.h"
 # include <math.h>

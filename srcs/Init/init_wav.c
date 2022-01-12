@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 14:39:43 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 15:41:50 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:44:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	multithread_sounds(void *arg)
 		((Mix_Chunk **)arg)[g_sounds[i].id] = Mix_LoadWAV(g_sounds[i].path);
 	return (1);
 }
+
 
 /*
  *	Parse .wav files int threads and save them too doom->sounds.

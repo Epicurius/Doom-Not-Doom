@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 15:07:29 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/03 13:51:31 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/12 13:00:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	parse_wtx_texture(t_doom *doom, unsigned char *wtx_bool, int id)
 	if (!wtx_bool[id])
 	{
 		wtx_bool[id] = TRUE;
-		read_bxpm(&doom->mtx[id], g_map_textures[id].path);
+		GET_PATH(g_map_textures[id].path);
+		read_bxpm(&doom->mtx[id], doom->root);
 	}
 }
 
@@ -34,7 +35,8 @@ static void	parse_stx_texture(t_doom *doom, unsigned char *stx_bool, int id)
 		i = id;
 		while (i < id + 6)
 		{
-			read_bxpm(&doom->stx[i], g_skybox_textures[i].path);
+			GET_PATH(g_skybox_textures[i].path);
+			read_bxpm(&doom->stx[i], doom->root);
 			i++;
 		}
 	}

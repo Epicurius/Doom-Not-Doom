@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/11 15:49:09 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/12 17:43:52 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ CFILES		=	ai_attack.c\
 NAME		=	doom
 CDIR		=	srcs
 ODIR		=	obj
-INC			=	-I./inc -I../
+INC			=	-I./inc
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)

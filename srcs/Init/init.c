@@ -60,7 +60,6 @@ void	set_true_mouse(t_doom *doom)
 void	init_doom(t_doom *doom)
 {
 	init_threading(doom);
-	init_wav(doom);
 	get_surface_center(doom);
 	init_fps(doom);
 	init_skybox(doom);
