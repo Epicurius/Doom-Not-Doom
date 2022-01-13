@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:22:48 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/12 18:02:21 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:35:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	buymenu_init(t_buymenu *buymenu, SDL_Window *window)
 	ui_window_texture_pos_set(buymenu->main_win, vec2i(1920, 1080));
 	ui_window_id_set(buymenu->main_win, "main_win");
 	add_to_list(&buymenu->layout.windows, buymenu->main_win, UI_TYPE_WINDOW);
-	ui_layout_load(&buymenu->layout, root, "srcs/BuyMenu/layout.ui");
+	ui_layout_load(&buymenu->layout, root, "resources/UI/bm_layout.ui");
 	buymenu->main_win = ui_layout_get_window(&buymenu->layout, "main_win");
 	buymenu->close_button
 		= ui_layout_get_element(&buymenu->layout, "close_button");

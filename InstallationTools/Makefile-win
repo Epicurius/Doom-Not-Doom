@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/11 13:54:23 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/13 18:49:28 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ CFILES	=	ai_attack.c\
 			Events/map_events.c\
 			Events/sector_events.c\
 			Events/wsprite_events.c\
-			BuyMenu/buymenu.c\
+			BuyMenu/bm.c\
 			BuyMenu/bm_init1.c\
 			BuyMenu/bm_init2.c\
 			BuyMenu/bm_update1.c\
@@ -189,7 +189,7 @@ LIB_LIBS	= \
 
 LIBS		= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -llg
 				
-CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable #-Werror -Wfatal-errors -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -MMD -Wno-unused-variable #-Werror -Wfatal-errors -g -fsanitize=address
 
 all: $(RESOURCES) $(ODIR) $(NAME)
 
