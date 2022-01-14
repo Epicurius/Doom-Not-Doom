@@ -1,14 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_compile_string.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/23 15:30:30 by nneronin          #+#    #+#             */
-/*   Updated: 2021/07/23 15:33:57 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * https://github.com/Epicurius/Doom-Not-Doom
+ * 
+ * Created: 2021/07/23 15:30:30 nneronin
+ * Updated: 2021/07/23 15:33:57 nneronin
+ */
 
 #include <stdio.h>
 #include "libft.h"

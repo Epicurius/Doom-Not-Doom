@@ -1,14 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_get_file_content.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 15:39:53 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:40:24 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * https://github.com/Epicurius/Doom-Not-Doom
+ * 
+ * Created: 2021/12/08 15:39:53 nneronin
+ * Updated: 2021/12/08 15:40:24 nneronin
+ */
 
 #include "libft.h"
 #include "stdio.h"

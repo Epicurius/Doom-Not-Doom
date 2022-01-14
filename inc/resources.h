@@ -1,14 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   resources.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/11 10:31:43 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/14 11:09:44 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * https://github.com/Epicurius/Doom-Not-Doom
+ * 
+ * Created: 2021/07/11 10:31:43 nneronin
+ * Updated: 2022/01/14 11:09:44 nneronin
+ */
 
 #ifndef RESOURCES_H
 # define RESOURCES_H
