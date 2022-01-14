@@ -1,4 +1,4 @@
-<img src="./docs/DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
+<img src="./DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 
 This is a test to see if branches are working correctly.
 
@@ -14,7 +14,7 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 * [Events](#events)
 * [Features](#features)
 ---
-<img src="./docs/cover_image.jpg" alt="cover_image" width="900"/></p>
+<img src="./cover_image.jpg" alt="cover_image" width="900"/></p>
 ### Installation
 ```sh
 git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
@@ -56,7 +56,7 @@ In my mind a game with many features but low performance is worse that the oppos
 so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
 multithreading (pthreads) was my best option.</n>
 
-<img src="./docs/DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
+<img src="./DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 
 ```ruby
 1  - Game is launched.
@@ -103,7 +103,7 @@ This is because of the way the map is drawn, this means no compares are needed w
 Only projectiles nad entites use z-buffer to compare if each pixel should be drawn. The only down side to this method is that there is no simple way to implement render distance.
 
 ##### Map rendering on one thread, first monochrome then with texture.</center>
-<img src="./docs/map_render.gif" alt="Engine_Flow" width="900"/></n>
+<img src="./map_render.gif" alt="Engine_Flow" width="900"/></n>
 
 When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.</n>
 each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment</n>
@@ -124,7 +124,7 @@ When the entity is inside their attack range they will get the state ATTACK and 
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
 During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.</n>
 
-<img src="./docs/frame.jpg" alt="Engine_Flow" width="800"/></n>
+<img src="./frame.jpg" alt="Engine_Flow" width="800"/></n>
 Each entity frames are divided into the entity states and into FRAME and ANGLE.</n>
 Take for example the above image, it has move animation of 8 frames with each having 3 angles.</n>
 When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.</n>
@@ -218,7 +218,7 @@ light level calculations are done.</n>
 If you want to take a look at how it works the library is at root libs/libbxpm.</n>
 And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)</n>
 
-<img src="./docs/smile.png" alt="smile" width="200"/>
+<img src="./smile.png" alt="smile" width="200"/>
 
 ```c
 //Visualization of the above (10x10)Image in BXPM format divided by commas, actual BXPM is compressed.
@@ -279,7 +279,7 @@ Sectors are a concave shape, consisting of 3 or more clockwise connected walls.<
 Each sector has its own floor and ceiling.</n>
 Map files have the extension .dnds for story mode and .dnde for endless.
 
-<img src="./docs/map.jpg" alt="Engine_Flow" width="700"/></p>
+<img src="./map.jpg" alt="Engine_Flow" width="700"/></p>
 
 ```
 type:map		GM		SC	V	W	S
@@ -358,5 +358,5 @@ TR		- Event Trigger
 AC		- Action
 ```
 
-<img src="./docs/GridMap.png" alt="Engine_Flow" width="700"/></p>
+<img src="./GridMap.png" alt="Engine_Flow" width="700"/></p>
 
