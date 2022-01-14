@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:29:00 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:39:41 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,7 +164,6 @@ INC			=	-I./inc
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
-RESOURCES	=	resources
 
 LIB_DIR		=	./libs
 
@@ -192,7 +191,7 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 
 CFLAGS		= -Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
 
-all: | $(RESOURCES) $(ODIR) $(NAME)
+all: $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 -include $(DEP)
@@ -227,11 +226,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	
-$(RESOURCES):
-	@./InstallationTools/google_drive.sh || (exit)
-	@tar -xf file.tar.gz
-	@rm -rf file.tar.gz
 
 re: fclean all
 

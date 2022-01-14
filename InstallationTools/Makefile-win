@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 12:32:44 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:41:45 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,7 +163,6 @@ INC			=	-I./inc -I../
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
-RESOURCES	=	resources
 
 LIB_DIR		=	./libs
 SDL_DIR		=	./libs/SDL_WIN
@@ -190,7 +189,7 @@ LIBS		= -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -
 				
 CFLAGS		= -Wall -Wextra -MMD -Wno-unused-variable #-Werror -Wfatal-errors -g -fsanitize=address
 
-all: $(RESOURCES) $(ODIR) $(NAME)
+all: $(ODIR) $(NAME)
 
 $(ODIR):
 	@mkdir -p $@
@@ -219,11 +218,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-
-$(RESOURCES):
-	#@./InstallationTools/google_drive.sh
-	#@tar -xf file.tar.gz
-	#@rm -rf file.tar.gz
 
 re: fclean all
 

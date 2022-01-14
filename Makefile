@@ -6,13 +6,15 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:30:24 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:40:43 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL_NAME	:= $(shell uname -s)
 
-all:
+RESOURCES	=	resources
+
+all: $(RESOURCES)
 ifeq ($(SHELL_NAME), Darwin)
 	@mkdir -p ~/Library/Frameworks
 ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
@@ -64,5 +66,10 @@ re: fclean all
 
 framework_del:
 	rm -rf ~/Library/Frameworks/SDL2*.framework
+
+$(RESOURCES):
+	@./InstallationTools/google_drive.sh || (exit)
+	@tar -xf file.tar.gz
+	@rm -rf file.tar.gz
 
 .PHONY: clean, all, re, fclean
