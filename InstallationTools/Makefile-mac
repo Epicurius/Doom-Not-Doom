@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:39:41 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:46:16 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -211,7 +211,7 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
-	@echo "read 'icns' (-16455) \"ReadMeAssets/DND.icns\";" >> icon.rsrc
+	@echo "read 'icns' (-16455) \"docs/DND.icns\";" >> icon.rsrc
 	@Rez -a icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
 	@rm icon.rsrc
