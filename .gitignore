@@ -1,0 +1,16 @@
+.DS_Store
+*.a
+*.o
+*.d
+doom
+doom.exe
+obj
+DEV
+log
+/resources/*
+README
+.vscode
+bmp_to_bxpm/converter
+cookie
+*.dnde
+*.dnds
