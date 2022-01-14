@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 11:00:59 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 12:32:44 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,8 +165,8 @@ OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
 RESOURCES	=	resources
 
-LIB_DIR		=	../libs
-SDL_DIR		=	../libs/SDL_WIN
+LIB_DIR		=	./libs
+SDL_DIR		=	./libs/SDL_WIN
 
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \

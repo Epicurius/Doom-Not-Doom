@@ -1,0 +1,3 @@
+[submodule "libs/libui"]
+	path = libs/libui
+	url = https://github.com/J0NY97/libui_v3.git
