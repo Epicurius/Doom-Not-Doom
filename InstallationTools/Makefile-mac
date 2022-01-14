@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 12:48:03 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:29:00 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -174,10 +174,10 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libbxpm \
 				-I $(LIB_DIR)/libui \
 				-I $(LIB_DIR)/liblg \
-				-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers -F $(LIB_DIR)/SDL_MAC
+				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
+				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
+				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
+				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
@@ -185,10 +185,10 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/liblg/liblg.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
 				$(LIB_DIR)/libui/libui.a \
-				-framework SDL2 \
-				-framework SDL2_mixer \
-				-framework SDL2_image \
-				-framework SDL2_ttf -F $(LIB_DIR)/SDL_MAC
+				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2 \
+				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_mixer \
+				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_image \
+				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_ttf 
 
 CFLAGS		= -Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
 
@@ -232,20 +232,6 @@ $(RESOURCES):
 	@./InstallationTools/google_drive.sh || (exit)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
-
-framework:
-	@mkdir -p ~/Library/Frameworks
-ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
-	@cp -Rf $(SDL_DIR)/SDL2.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_ttf.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_image.framework ~/Library/Frameworks/
-	@cp -Rf $(SDL_DIR)/SDL2_mixer.framework ~/Library/Frameworks/
-endif
-
-framework_del:
-	@rm -rf ~/Library/Frameworks/SDL2*.framework
-	@/bin/rm -f ../$(NAME)
-	@printf $(CYAN)"[INFO]	Deleted SDL2 Frameworks from ~/Library/Frameworks\n"$(RESET)
 
 re: fclean all
 
