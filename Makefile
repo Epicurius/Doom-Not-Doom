@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:40:43 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:55:52 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ endif
 	@make -C ./libs/liblg -j6
 	@make -C ./libs/libui
 ifeq ($(SHELL_NAME), Darwin)
-	@make -f InstallationTools/Makefile-mac -j6 || :
+	@make -f install/Makefile-mac -j6 || :
 else
-	@mingw32-make -f InstallationTools/Makefile-win
+	@mingw32-make -f install/Makefile-win
 endif
 
 clean:
@@ -44,9 +44,9 @@ clean:
 	@make clean -C ./libs/liblg
 	@make clean -C ./libs/libui
 ifeq ($(SHELL_NAME), Darwin)
-	@make clean -f InstallationTools/Makefile-mac
+	@make clean -f install/Makefile-mac
 else
-	@mingw32-make clean -f InstallationTools/Makefile-win 
+	@mingw32-make clean -f install/Makefile-win 
 endif
 	
 fclean:
@@ -57,9 +57,9 @@ fclean:
 	@make fclean -C ./libs/liblg
 	@make fclean -C ./libs/libui
 ifeq ($(SHELL_NAME), Darwin)
-	@make fclean -f InstallationTools/Makefile-mac
+	@make fclean -f install/Makefile-mac
 else
-	@mingw32-make fclean -f InstallationTools/Makefile-win 
+	@mingw32-make fclean -f install/Makefile-win 
 endif
 
 re: fclean all
@@ -68,7 +68,7 @@ framework_del:
 	rm -rf ~/Library/Frameworks/SDL2*.framework
 
 $(RESOURCES):
-	@./InstallationTools/google_drive.sh || (exit)
+	@./install/google_drive.sh || (exit)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
 
