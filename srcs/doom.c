@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:32:08 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/12 16:09:39 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 11:02:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ static void	game(char *map, t_settings settings)
 	parse_map(&doom, map);
 	if (!validate_map(&doom))
 		return ;
-	doom_timer_start();
 	init_doom(&doom);
-	ft_printf("%f\n", doom_timer_end());
 	while (!doom.quit && doom.player.health > 0)
 		game_loop(&doom);
 	if (doom.quit == 2 || doom.player.health <= 0)

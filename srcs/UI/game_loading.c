@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:18:23 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 13:31:20 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:55:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	game_loading(t_doom *doom)
 	SDL_Event	event;
 	t_bxpm		bxpm;
 
-	GET_PATH("resources/BXPM/GameLoad.bxpm");
+	ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameLoad.bxpm");
 	read_bxpm(&bxpm, doom->root);
 	blit_bxpm(doom->surface, &bxpm, doom->surface->w / 2 - bxpm.w / 2,
 		doom->surface->h / 2 - bxpm.h / 2);

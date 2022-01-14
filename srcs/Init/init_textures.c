@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:05:32 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/12 15:37:11 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 11:00:21 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static inline void	parse_textures_scaled(t_doom *doom, t_bxpm *bxpm,
 	i = -1;
 	while (++i < amount)
 	{
-		GET_PATH(g[i].path);
+		ft_strcpy(&doom->root[doom->rlen], g[i].path);
 		if (!read_bxpm_scaled(&bxpm[i], doom->root, scale))
 			LG_ERROR("read_bxpm_scaled %s.", doom->root);
 	}
@@ -35,12 +35,12 @@ static inline void	parse_textures(t_doom *doom, t_bxpm *bxpm,
 {
 	int		i;
 	int		amount;
-	
+
 	amount = extra[0];
 	i = -1;
 	while (++i < amount)
 	{
-		GET_PATH(g[i].path);
+		ft_strcpy(&doom->root[doom->rlen], g[i].path);
 		if (!read_bxpm(&bxpm[i], doom->root))
 			LG_ERROR("read_bxpm %s.", doom->root);
 	}

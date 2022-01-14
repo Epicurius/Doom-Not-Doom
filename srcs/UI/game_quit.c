@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:25:14 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 13:57:15 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:56:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_bmp	*s_to_save_screen_shot(t_doom *doom)
 	TTF_Font	*amaz;
 	SDL_Surface	*surface;
 
-	GET_PATH("resources/TTF/AmazDoom.ttf");
+	ft_strcpy(&doom->root[doom->rlen], "resources/TTF/AmazDoom.ttf");
 	amaz = TTF_OpenFont(doom->root, 25);
 	surface = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot",
 			hex_to_sdl_color(0xFFFFFFFF));
@@ -96,7 +96,7 @@ void	game_quit(t_doom *doom)
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);
 	bmp = s_to_save_screen_shot(doom);
-	GET_PATH("resources/BXPM/GameQuit.bxpm");
+	ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameQuit.bxpm");
 	read_bxpm(&bxpm, doom->root);
 	blit_bxpm(doom->surface, &bxpm, doom->c.x - bxpm.w / 2,
 		doom->c.y - bxpm.h / 2);
@@ -104,7 +104,7 @@ void	game_quit(t_doom *doom)
 	free(bxpm.clr);
 	y_or_n(doom, doom->c.y + bxpm.h / 2);
 	update_screen(doom);
-	GET_ROOT();
+	doom->root[doom->rlen] = '\0';
 	quit_loop(doom, bmp, FALSE);
 	ft_bzero(&doom->keys, 517);
 	SDL_ShowCursor(SDL_DISABLE);

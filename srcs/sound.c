@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 13:54:10 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/12 16:30:45 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:55:50 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_custom_sounds(t_doom *doom)
 	{
 		if (doom->events[i].type != AUDIO)
 			continue ;
-		GET_PATH(doom->events[i].path);
+		ft_strcpy(&doom->root[doom->rlen], doom->events[i].path);
 		doom->events[i].audio = Mix_LoadWAV(doom->root);
 		if (doom->events[i].audio == NULL)
 			LG_WARN("Audio event %s not found\n", doom->root);
@@ -79,7 +79,7 @@ void	init_sound(t_doom *doom)
 	i = -1;
 	while (++i < WAV_AMOUNT)
 	{
-		GET_PATH(g_sounds[i].path);
+		ft_strcpy(&doom->root[doom->rlen], g_sounds[i].path);
 		doom->sound[g_sounds[i].id] = Mix_LoadWAV(doom->root);
 		if (doom->sound[g_sounds[i].id] == NULL)
 			LG_ERROR("Reading[%d]: %s", g_sounds[i].id, doom->root);

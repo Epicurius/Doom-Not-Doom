@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:22:48 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/13 16:35:54 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:57:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	buymenu_init(t_buymenu *buymenu, SDL_Window *window)
 {
 	char	root[PATH_MAX + NAME_MAX];
 	int		len;
-	
+
 	get_root(root, &len);
 	root[len] = '\0';
 	buymenu->run = 1;

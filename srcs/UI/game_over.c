@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:28:56 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/11 13:56:46 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 11:01:38 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_screen_shot(t_doom *doom, int *i)
 	char	*name;
 	t_bmp	*bmp;
 
-	GET_ROOT();
+	doom->root[doom->rlen] = '\0';
 	name = ft_sprintf("%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
 	bmp = pix_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
@@ -42,12 +42,12 @@ static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
 	if (i > 0)
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_NEW_ROUND], 0);
-		GET_PATH("resources/BXPM/GameOver.bxpm");//fix
+		ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameWon.bxpm");
 	}
 	else
 	{
 		Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_PLAYER_DEATH], 0);
-		GET_PATH("resources/BXPM/GameOver.bxpm");
+		ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameOver.bxpm");
 	}
 	if (!read_bxpm(&bxpm, doom->root))
 		LG_ERROR("Failed to open: %s\n", doom->root);
@@ -109,7 +109,7 @@ static void	blit_info(t_doom *doom)
 		doom->surface->h - surf->h, surf->w, surf->h};
 	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
 	SDL_FreeSurface(surf);
-	GET_PATH("resources/TTF/digital.ttf");
+	ft_strcpy(&doom->root[doom->rlen], "resources/TTF/digital.ttf");
 	amaz = TTF_OpenFont(doom->root, 15);
 	surf = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot", clr);
 	dstr = (SDL_Rect){(dstr.x + dstr.w / 2) - surf->w / 2,

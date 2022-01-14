@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 11:28:34 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/12 17:43:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:56:35 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 # include <math.h>
 # include <fcntl.h>
 # include <limits.h>
-
-# define GET_PATH(file)	ft_strcpy(&doom->root[doom->rlen], file)
-# define GET_ROOT()		doom->root[doom->rlen] = '\0'
 
 # ifdef __APPLE__
 #  include <sys/syslimits.h>
