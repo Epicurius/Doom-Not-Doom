@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:55:52 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/14 13:58:13 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ framework_del:
 	rm -rf ~/Library/Frameworks/SDL2*.framework
 
 $(RESOURCES):
-	@./install/google_drive.sh || (exit)
+	@./install/DownloadResources.sh || (exit)
 	@tar -xf file.tar.gz
 	@rm -rf file.tar.gz
 
