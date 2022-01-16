@@ -16,12 +16,13 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 ---
 <img src="./cover_image.jpg" alt="cover_image" width="900"/></p>
 ### Installation
+
+!! WORK IN PROGRESS !!
+The game works but there is no playable map, yet..
 ```sh
-git clone --recurse-submodules https://github.com/Epicurius/doom_nukem.git DnD
+git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD
 cd DnD && make
-./game/doom ./game/resources/MAPS/game.dnds
-# OR
-./wolf3d
+./doom resources/MAPS/AllText.dnds
 ```
 ---
 ### Controls
