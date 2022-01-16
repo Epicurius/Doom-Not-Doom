@@ -12,34 +12,37 @@
 
 SHELL_NAME	:= $(shell uname -s)
 
+MAKE = mingw32-make
+
 RESOURCES	= resources
 
 all: $(RESOURCES)
-	@make -C ./libs/libft -j6
-	@make -C ./libs/libpf -j6
-	@make -C ./libs/libbxpm -j6
-	@make -C ./libs/libtp -j6
-	@make -C ./libs/liblg -j6
-	@make -C ./libs/libui -j6 
-	@make -f install/Makefile -j6
+	echo $(SHELL_NAME)
+	@$(MAKE) -C ./libs/libft -j6
+	@$(MAKE) -C ./libs/libpf -j6
+	@$(MAKE) -C ./libs/libbxpm -j6
+	@$(MAKE) -C ./libs/libtp -j6
+	@$(MAKE) -C ./libs/liblg -j6
+	@$(MAKE) -C ./libs/libui -j6 
+	@$(MAKE) -f install/Makefile -j6
 
 clean:
-	@make clean -C ./libs/libft
-	@make clean -C ./libs/libpf
-	@make clean -C ./libs/libbxpm
-	@make clean -C ./libs/libtp
-	@make clean -C ./libs/liblg
-	@make clean -C ./libs/libui
-	@make clean -f install/Makefile
+	@$(MAKE) clean -C ./libs/libft
+	@$(MAKE) clean -C ./libs/libpf
+	@$(MAKE) clean -C ./libs/libbxpm
+	@$(MAKE) clean -C ./libs/libtp
+	@$(MAKE) clean -C ./libs/liblg
+	@$(MAKE) clean -C ./libs/libui
+	@$(MAKE) clean -f install/Makefile
 	
 fclean:
-	@make fclean -C ./libs/libft
-	@make fclean -C ./libs/libpf
-	@make fclean -C ./libs/libbxpm
-	@make fclean -C ./libs/libtp
-	@make fclean -C ./libs/liblg
-	@make fclean -C ./libs/libui
-	@make fclean -f install/Makefile
+	@$(MAKE) fclean -C ./libs/libft
+	@$(MAKE) fclean -C ./libs/libpf
+	@$(MAKE) fclean -C ./libs/libbxpm
+	@$(MAKE) fclean -C ./libs/libtp
+	@$(MAKE) fclean -C ./libs/liblg
+	@$(MAKE) fclean -C ./libs/libui
+	@$(MAKE) fclean -f install/Makefile
 
 re: fclean all
 

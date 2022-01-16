@@ -25,7 +25,8 @@
 # include "ui_elements.h"
 # include "ui_load.h"
 # include "math.h"
-# include "limits.h"
+# include <fcntl.h>
+# include <limits.h>
 
 # define DEFAULT_TTF	"resources/TTF/"
 

@@ -121,7 +121,7 @@ else
 INC =	-I . \
 		-I ../libft \
 		-I ../libpf \
-		-I ../../
+		-I ../../SDL2_includes
 endif
 
 all: $(NAME)

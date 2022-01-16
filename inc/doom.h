@@ -9,7 +9,6 @@
 # define DOOM_H
 
 # define SDL_MAIN_HANDLED
-//# define _POSIX_C_SOURCE 199309L
 # include "liblg.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
@@ -21,7 +20,6 @@
 # include "macros.h"
 # include "libm.h"
 # include "enum.h"
-//# include "path.h"
 # include "time.h"
 # include "resources.h"
 # include <math.h>
@@ -32,6 +30,7 @@
 #  include <sys/syslimits.h>
 #  include <mach-o/dyld.h>
 # else //elif _WIN32 || __MINGW32__
+#  include <Windows.h>
 #  define NAME_MAX 200
 # endif
 

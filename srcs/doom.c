@@ -9,6 +9,7 @@
 
 /*
  *	Launch the DnD launcher if flag -launcher was passed.
+ *	execv (const char *, const char * const *);
  */
 static void	launcher(void)
 {

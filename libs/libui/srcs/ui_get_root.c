@@ -42,12 +42,14 @@ void	get_root(char *root, int *rlen)
 
 #else
 
+# include <Windows.h>
+
 void	get_root(char *root, int *rlen)
 {
-	LPSTR	buffer[PATH_MAX];
+	char	buffer[PATH_MAX];
 
 	GetModuleFileName(NULL, buffer, PATH_MAX);
-	*rlen = find_root_length(path, '\\');
+	*rlen = find_root_length(buffer, '\\');
 	ft_strcpy(root, buffer);
 }
 

@@ -15,3 +15,5 @@ cookie
 *.dnde
 *.dnds
 *.framework
+*.dll
+SDL2_includes

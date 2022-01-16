@@ -54,7 +54,6 @@ CFILES		=	ai_attack.c\
 				update_screen.c\
 				wall_to_screen_xz.c\
 				fix_map.c\
-				timer.c\
 				UI/game_loading.c\
 				UI/game_over.c\
 				UI/game_quit.c\
@@ -169,12 +168,12 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/liblg \
 				-I $(LIB_DIR)/libui
 
-LIBS		=	$(LIB_DIR)/libft/libft.a \
-				$(LIB_DIR)/libpf/libpf.a \
-				$(LIB_DIR)/libtp/libtp.a \
-				$(LIB_DIR)/liblg/liblg.a \
-				$(LIB_DIR)/libbxpm/libbxpm.a \
-				$(LIB_DIR)/libui/libui.a
+LIBS		=	-L $(LIB_DIR)/libft -lft \
+				-L $(LIB_DIR)/libpf -lpf \
+				-L $(LIB_DIR)/libtp -ltp \
+				-L $(LIB_DIR)/liblg -llg \
+				-L $(LIB_DIR)/libbxpm -lbxpm \
+				-L $(LIB_DIR)/libui -lui
 
 ifeq ($(SHELL_NAME), Darwin)
 
@@ -184,9 +183,9 @@ CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors #-g -fsanitize=add
 
 else
 
-LIB_INC		+=	-I $(LIB_DIR)/SDL_WIN/include
-LIBS		+=	lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -llg
-CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto -Werror -Wfatal-errors
+LIB_INC		+=	-I ./SDL2_includes
+LIBS		+=	-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto #-Werror -Wfatal-errors
 
 endif
 
@@ -209,9 +208,9 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME) 
-	@Rez -a docs/icon.rsrc -o $(NAME)
-	@SetFile -a C $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -pthread -o $(NAME) my.res
+#	@Rez -a docs/icon.rsrc -o $(NAME)
+#	@SetFile -a C $(NAME)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
