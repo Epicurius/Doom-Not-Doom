@@ -6,13 +6,13 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 16:19:57 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 16:42:40 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL_NAME	:= $(shell uname -s)
 
-RESOURCES	=	resources
+RESOURCES	= resources
 
 all: $(RESOURCES)
 ifeq ($(SHELL_NAME), Darwin)
@@ -30,11 +30,7 @@ endif
 	@make -C ./libs/libtp -j6
 	@make -C ./libs/liblg -j6
 	@make -C ./libs/libui -j6 
-ifeq ($(SHELL_NAME), Darwin)
-	@make -f install/Makefile-mac -j6
-else
-	@make -f install/Makefile-win
-endif
+	@make -f install/Makefile -j6
 
 clean:
 	@make clean -C ./libs/libft
@@ -43,11 +39,7 @@ clean:
 	@make clean -C ./libs/libtp
 	@make clean -C ./libs/liblg
 	@make clean -C ./libs/libui
-ifeq ($(SHELL_NAME), Darwin)
-	@make clean -f install/Makefile-mac
-else
-	@make clean -f install/Makefile-win 
-endif
+	@make clean -f install/Makefile
 	
 fclean:
 	@make fclean -C ./libs/libft
@@ -56,11 +48,7 @@ fclean:
 	@make fclean -C ./libs/libtp
 	@make fclean -C ./libs/liblg
 	@make fclean -C ./libs/libui
-ifeq ($(SHELL_NAME), Darwin)
-	@make fclean -f install/Makefile-mac
-else
-	@make fclean -f install/Makefile-win 
-endif
+	@make fclean -f install/Makefile
 
 re: fclean all
 

@@ -1,14 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile-mac                                       :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 15:00:24 by nneronin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#
+# https://github.com/Epicurius
+# 
+# Created: 2022/01/16 14:59:29 Niklas Neronin
+# Updated: 2022/01/16 16:41:21 Niklas Neronin
+#
 
 SHELL_NAME	= $(shell uname -s)
 
@@ -171,27 +166,38 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libbxpm \
-				-I $(LIB_DIR)/libui \
 				-I $(LIB_DIR)/liblg \
-				-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers -F$(LIB_DIR)/SDL_MAC/ 
+				-I $(LIB_DIR)/libui
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
 				$(LIB_DIR)/libtp/libtp.a \
 				$(LIB_DIR)/liblg/liblg.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
-				$(LIB_DIR)/libui/libui.a \
-				-framework SDL2 \
+				$(LIB_DIR)/libui/libui.a
+
+# -rpath @executable_path/libs
+ifeq ($(SHELL_NAME), Darwin)
+
+LIB_INC		+=	-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers -F$(LIB_DIR)/SDL_MAC/
+
+LIBS		+=  -framework SDL2 \
 				-framework SDL2_mixer \
 				-framework SDL2_image \
-				-framework SDL2_ttf -F$(LIB_DIR)/SDL_MAC/ 
+				-framework SDL2_ttf -F$(LIB_DIR)/SDL_MAC/
 
 CFLAGS		= -Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
 
-# -rpath @executable_path/libs
+else
+
+LIB_INC		+= -I .$(LIB_DIR)/SDL_WIN/include
+LIBS		+= lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -llg
+CFLAGS		= -Wall -Wextra -MMD -Wno-unused-variable
+
+endif
 
 all: $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
@@ -213,10 +219,8 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
-	@echo "read 'icns' (-16455) \"docs/DND.icns\";" >> icon.rsrc
-	@Rez -a icon.rsrc -o $(NAME)
+	@Rez -a docs/icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
-	@rm icon.rsrc
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
@@ -231,4 +235,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean, all, re, fclean, resources, framework, framework_del
+.PHONY: clean, all, re, fclean
