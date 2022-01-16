@@ -176,26 +176,17 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
 				$(LIB_DIR)/libui/libui.a
 
-# -rpath @executable_path/libs
 ifeq ($(SHELL_NAME), Darwin)
 
-LIB_INC		+=	-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers -F$(LIB_DIR)/SDL_MAC/
-
-LIBS		+=  -framework SDL2 \
-				-framework SDL2_mixer \
-				-framework SDL2_image \
-				-framework SDL2_ttf -F$(LIB_DIR)/SDL_MAC/
-
-CFLAGS		= -Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
+LIB_INC		+=	-I SDL2.framework/Headers -I SDL2_image.framework/Headers -I SDL2_mixer.framework/Headers -I SDL2_ttf.framework/Headers -F ./
+LIBS		+=	-framework SDL2 -framework SDL2_mixer -framework SDL2_image -framework SDL2_ttf -F ./ -rpath @executable_path
+CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors #-g -fsanitize=address
 
 else
 
-LIB_INC		+= -I .$(LIB_DIR)/SDL_WIN/include
-LIBS		+= lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -llg
-CFLAGS		= -Wall -Wextra -MMD -Wno-unused-variable
+LIB_INC		+=	-I $(LIB_DIR)/SDL_WIN/include
+LIBS		+=	lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lui -lpf -lft -lbxpm -ltp -llg
+CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto -Werror -Wfatal-errors
 
 endif
 
@@ -218,7 +209,7 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME)
+	@gcc $(CFLAGS) $(LIBS) $(LIB_INC) $(INC) $(OBJ) -pthread -o $(NAME) 
 	@Rez -a docs/icon.rsrc -o $(NAME)
 	@SetFile -a C $(NAME)
 

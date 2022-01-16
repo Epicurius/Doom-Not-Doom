@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 11:13:47 by nneronin          #+#    #+#              #
-#    Updated: 2021/12/09 13:40:52 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 18:35:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,8 +161,7 @@ clean:
 	@printf $(CYAN)"[INFO] $(NAME) cleaned!\n"$(RESET)
 	@rm -rf $(ODIR)
 
-fclean: clean
-	
+fclean: clean	
 	@rm $(NAME)
 
 re: fclean all

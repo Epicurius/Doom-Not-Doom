@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 10:30:08 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 16:14:27 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 18:35:43 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,24 +109,22 @@ OBJS = $(addprefix $(ODIR)/,$(RAW:.c=.o))
 JOHNNY = $(SRCS:.c=.d)
 CFLAGS = -MMD #-Wall -Wextra
 
-LIB_DIR =		../
-
 ifeq ($(SHELL_NAME), Darwin)
-INC =			-I . \
-				-I $(LIB_DIR)/libft \
-				-I $(LIB_DIR)/libpf \
-				-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
-				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers \
-				-F $(LIB_DIR)/SDL_MAC
+INC =	-I . \
+		-I ../libft \
+		-I ../libpf \
+		-I ../../SDL2.framework/Headers \
+		-I ../../SDL2_image.framework/Headers \
+		-I ../../SDL2_ttf.framework/Headers \
+		-F ../../
 else
-INC =			-I . \
-				-I $(LIB_DIR)/libft \
-				-I $(LIB_DIR)/libpf \
-				-I$(LIB_DIR)/SDL_WIN/include
+INC =	-I . \
+		-I ../libft \
+		-I ../libpf \
+		-I ../../
 endif
 
-all: $(ODIR) $(NAME)
+all: $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
 $(ODIR):
@@ -136,9 +134,9 @@ $(ODIR):
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@printf $(YELLOW)"\e[JCompiling $<\n\e[F"$(RESET)
-	@gcc -c $< -o $@ $(INC) $(CFLAGS) $(SDL_INC)
+	@gcc -c $< -o $@ $(INC) $(CFLAGS)
 
-$(NAME): $(OBJS)
+$(NAME): $(ODIR) $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
