@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:58:13 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 13:11:02 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ endif
 	@make -C ./libs/liblg -j6
 	@make -C ./libs/libui
 ifeq ($(SHELL_NAME), Darwin)
-	@make -f install/Makefile-mac -j6 || :
+	@make -f install/Makefile-mac -j6
 else
-	@mingw32-make -f install/Makefile-win
+	@make -f install/Makefile-win
 endif
 
 clean:
@@ -46,7 +46,7 @@ clean:
 ifeq ($(SHELL_NAME), Darwin)
 	@make clean -f install/Makefile-mac
 else
-	@mingw32-make clean -f install/Makefile-win 
+	@make clean -f install/Makefile-win 
 endif
 	
 fclean:
@@ -59,7 +59,7 @@ fclean:
 ifeq ($(SHELL_NAME), Darwin)
 	@make fclean -f install/Makefile-mac
 else
-	@mingw32-make fclean -f install/Makefile-win 
+	@make fclean -f install/Makefile-win 
 endif
 
 re: fclean all

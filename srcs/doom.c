@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/08 11:32:08 nneronin
- * Updated: 2022/01/14 11:02:25 nneronin
+ * Updated: 2022/01/16 12:50:02 Niklas Neronin
  */
 
 #include "doom.h"
@@ -78,7 +78,7 @@ int	main(int ac, char **av)
 
 	if (ac == 1)
 		print_help_msg();
-	lg_setFdLevel(LEVEL_WARN);
+	lg_setLevel(LEVEL_WARN, LEVEL_INFO);
 	if (!lg_openFile("log", "a+"))
 		return (0);
 	args(ac, av, &settings);

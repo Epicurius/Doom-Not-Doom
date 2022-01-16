@@ -3,7 +3,7 @@
  * https://github.com/Epicurius
  * 
  * Created: 2022/01/06 11:32:01 Epicurius
- * Updated: 2022/01/07 4:06:35 Niklas Neronin
+ * Updated: 2022/01/16 12:48:33 Niklas Neronin
  * Copyright (c) 2022
  */
 
@@ -22,6 +22,8 @@ enum
 	LEVEL_WARN,
 	LEVEL_ERROR
 };
+
+# define LG_PRINT_STD	stderr 
 
 # define LG_DEBUG(...)	lg_log(LEVEL_DEBUG, __TIME__, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 # define LG_INFO(...)	lg_log(LEVEL_INFO,	__TIME__, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
@@ -42,17 +44,15 @@ typedef struct s_lgEvent
 typedef struct g_log
 {
 	FILE		*fp;
-	int			fd;
-	int			fdlvl;
-	int			fplvl;
+	int			stdlvl;
+	int			filelvl;
 }				g_log;
 
 /* File: ./liblg.c */
 int			lg_openFile(char *file, char *mode);
 void		lg_addFile(FILE *fp);
 void		lg_closeFile(void);
-void		lg_setFpLevel(int lvl);
-void		lg_setFdLevel(int lvl);
+void		lg_setLevel(int std, int file);
 void		lg_log(int lvl, const char *time, const char *file,
 				const char *func, int line, const char *fmt, ...);
 #endif
