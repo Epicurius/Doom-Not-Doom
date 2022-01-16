@@ -20,8 +20,8 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 !! WORK IN PROGRESS !!
 The game works but there is no playable map, yet..
 ```sh
-git clone https://github.com/Epicurius/Doom-Not-Doom.git DnD
-cd DnD && make
+git clone https://github.com/Epicurius/Doom-Not-Doom.git
+cd Doom-not-Doom && make
 ./doom resources/MAPS/AllText.dnds
 ```
 ---
