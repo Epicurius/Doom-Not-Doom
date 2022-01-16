@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 13:11:02 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 16:19:57 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ endif
 	@make -C ./libs/libbxpm -j6
 	@make -C ./libs/libtp -j6
 	@make -C ./libs/liblg -j6
-	@make -C ./libs/libui
+	@make -C ./libs/libui -j6 
 ifeq ($(SHELL_NAME), Darwin)
 	@make -f install/Makefile-mac -j6
 else

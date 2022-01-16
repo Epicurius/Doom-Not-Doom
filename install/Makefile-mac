@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/09 07:31:15 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/14 13:46:16 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/16 15:00:24 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -173,10 +173,10 @@ LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libbxpm \
 				-I $(LIB_DIR)/libui \
 				-I $(LIB_DIR)/liblg \
-				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
-				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
-				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
-				-F$(LIB_DIR)/SDL_MAC/ -I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers
+				-I $(LIB_DIR)/SDL_MAC/SDL2.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_image.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_mixer.framework/Headers \
+				-I $(LIB_DIR)/SDL_MAC/SDL2_ttf.framework/Headers -F$(LIB_DIR)/SDL_MAC/ 
 
 LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/libpf/libpf.a \
@@ -184,12 +184,14 @@ LIBS		=	$(LIB_DIR)/libft/libft.a \
 				$(LIB_DIR)/liblg/liblg.a \
 				$(LIB_DIR)/libbxpm/libbxpm.a \
 				$(LIB_DIR)/libui/libui.a \
-				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2 \
-				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_mixer \
-				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_image \
-				-F$(LIB_DIR)/SDL_MAC/ -framework SDL2_ttf 
+				-framework SDL2 \
+				-framework SDL2_mixer \
+				-framework SDL2_image \
+				-framework SDL2_ttf -F$(LIB_DIR)/SDL_MAC/ 
 
 CFLAGS		= -Wall -Wextra -MMD -O3 -flto #-Werror -Wfatal-errors -g -fsanitize=address
+
+# -rpath @executable_path/libs
 
 all: $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
