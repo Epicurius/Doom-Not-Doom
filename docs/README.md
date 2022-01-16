@@ -1,7 +1,5 @@
 <img src="./DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 
-This is a test to see if branches are working correctly.
-
 A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.</n>
 Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
 
@@ -16,14 +14,28 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 ---
 <img src="./cover_image.jpg" alt="cover_image" width="900"/></p>
 ### Installation
+# !! WORK IN PROGRESS !! The game works but there is no playable map, yet..
 
-!! WORK IN PROGRESS !!
-The game works but there is no playable map, yet..
+There are 3 options:
+
+If you just want to play the game, does not need compiling.</n>
+- [Ready to play! OSX](https://drive.google.com/file/d/1J6ujchWjAcnpM-dIRYTxoltTOma715Hi/view?usp=sharing "Google Drive")</n>
+- Soon! WIN
+
+Or if you want the source code and compile it.
 ```sh
 git clone https://github.com/Epicurius/Doom-Not-Doom.git
 cd Doom-not-Doom && make
 ./doom resources/MAPS/AllText.dnds
 ```
+Or try it with extra features like a map_editor. This is deprecated and is not guaranteed to compile/work.
+Check it out [here](https://github.com/J0NY97/doom_nukem.git).
+```
+git clone --recurse-submodule https://github.com/J0NY97/doom_nukem.git
+cd doom_nukem && make
+./launcher
+```
+
 ---
 ### Controls
 ```
