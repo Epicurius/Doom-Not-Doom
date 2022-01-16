@@ -19,7 +19,7 @@ Inspired on the Build engine. Works only on OSX, (windows and linux in the futur
 There are 3 options:
 
 If you just want to play the game, does not need compiling.</n>
-- [Ready to play! OSX](https://drive.google.com/file/d/1J6ujchWjAcnpM-dIRYTxoltTOma715Hi/view?usp=sharing "Google Drive")</n>
+- [Ready to play! OSX](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive")</n>
 - Soon! WIN
 
 Or if you want the source code and compile it.
