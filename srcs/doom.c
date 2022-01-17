@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/08 11:32:08 nneronin
- * Updated: 2022/01/16 12:50:02 Niklas Neronin
+ * Updated: 2022/01/17 14:48:18 Niklas Neronin
  */
 
 #include "doom.h"

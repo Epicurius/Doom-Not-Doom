@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/14 11:09:44 nneronin
+ * Updated: 2022/01/17 13:20:34 Niklas Neronin
  */
 
 #ifndef RESOURCES_H
@@ -124,15 +124,6 @@ static const t_id_and_path	g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
 	{4, BXPM_PATH"EntityGhost.bxpm"}
 };
 
-static const char			*g_weapon_data[WEAPON_AMOUNT] =
-{
-	"SHOTGUN",
-	"GLOCK",
-	"KAR98",
-	"LAUNCHER",
-	"MINIGUN"
-};
-
 # define SHOTGUN_TEXTURE_AMOUNT	14
 static const t_id_and_path	g_shotgun_textures[SHOTGUN_TEXTURE_AMOUNT] =
 {
@@ -238,6 +229,7 @@ static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 
 typedef struct s_entity_data
 {
+	char			*name;
 	float			scale;
 	float			speed;
 	int				health;
@@ -251,10 +243,7 @@ typedef struct s_entity_data
 	int				view_distance;
 	int				detection_radius;
 	int				attack_range;
-	int				frame_rate[4];
-	int				tc[4];
-	char			*path;
-	char			*name;
+	unsigned char	frame_rate[4];
 }					t_entity_data;
 
 static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
@@ -277,9 +266,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 20,
 		.frame_rate[MOVE] = 40,
 		.frame_rate[ATTACK] = 60,
-		.frame_rate[DEATH] = 60,
-		.path = BXPM_PATH"EntityAlfred.bxpm",
-		.tc = {0, 0, 43, 47}
+		.frame_rate[DEATH] = 60
 	},
 	{
 		.name = "Spooky",
@@ -299,9 +286,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 20,
 		.frame_rate[MOVE] = 60,
 		.frame_rate[ATTACK] = 180,
-		.frame_rate[DEATH] = 120,
-		.path = BXPM_PATH"EntitySpooky.bxpm",
-		.tc = {25, 193, 114, 184}
+		.frame_rate[DEATH] = 120
 	},
 	{
 		.name = "Ghost",
@@ -321,9 +306,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 20,
 		.frame_rate[MOVE] = 60,
 		.frame_rate[ATTACK] = 70,
-		.frame_rate[DEATH] = 40,
-		.path = BXPM_PATH"EntityGhost.bxpm",
-		.tc = {10, 0, 132, 150}
+		.frame_rate[DEATH] = 40
 	},
 	{
 		.name = "Rift",
@@ -343,9 +326,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 20,
 		.frame_rate[MOVE] = 80,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityRift.bxpm",
-		.tc = {0, 0, 174, 315}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "Barrel",
@@ -365,9 +346,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 60,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 40,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {174, 182, 35, 51}
+		.frame_rate[DEATH] = 40
 	},
 	{
 		.name = "Lamp",
@@ -387,9 +366,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 30,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {174, 7, 23, 84}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "Torch",
@@ -409,9 +386,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 90,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {371, 209, 10, 47}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "MeatHook",
@@ -431,9 +406,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 10,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {543, 5, 36, 91}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "CeilingLamp",
@@ -453,9 +426,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 10,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {88, 70, 24, 56}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "Gargoyle",
@@ -475,9 +446,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 10,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {229, 97, 58, 75}
+		.frame_rate[DEATH] = 0
 	},
 	{
 		.name = "MedKit",
@@ -497,9 +466,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.frame_rate[IDLE] = 10,
 		.frame_rate[MOVE] = 0,
 		.frame_rate[ATTACK] = 0,
-		.frame_rate[DEATH] = 0,
-		.path = BXPM_PATH"EntityObjects.bxpm",
-		.tc = {178, 242, 28, 18}
+		.frame_rate[DEATH] = 0
 	}
 };
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_element_edit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:22:26 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/18 11:20:34 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/17 13:58:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,4 @@ void	ui_element_edit(t_ui_element *elem, t_ui_recipe *recipe)
 		elem->show = recipe->show;
 	if (g_acceptable[elem->element_type].edit)
 		g_acceptable[elem->element_type].edit(elem, recipe);
-	else
-		ft_printf("[%s] Element of type :%d:%s doenst have a edit function.\n",
-			__FUNCTION__, elem->element_type,
-			ui_element_type_to_string(elem->element_type));
 }
