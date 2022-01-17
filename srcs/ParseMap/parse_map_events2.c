@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:00:24 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/17 16:31:14 Niklas Neronin
  */
 
 #include "doom.h"
@@ -15,9 +15,9 @@ void	floor_ceiling_event(t_event *event, int nb, char **arr)
 	if (nb < 7)
 		LG_ERROR("Invalid argument for event %s\n", arr[0]);
 	event->event_sector = ft_atoi(arr[4]);
-	event->dir = 1;
+	event->dir = -1;
 	if (event->type == CEILING)
-		event->dir = -1;
+		event->dir = 1;
 	event->min = ft_atof(arr[5]);
 	event->max = ft_atof(arr[6]);
 	event->speed = ft_atof(arr[7]);

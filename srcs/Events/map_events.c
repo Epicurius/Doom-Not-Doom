@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:33:21 nneronin
- * Updated: 2021/12/14 15:16:18 nneronin
+ * Updated: 2022/01/17 16:30:54 Niklas Neronin
  */
 
 #include "doom.h"
@@ -24,7 +24,7 @@ static void	loop_events(t_doom *doom, t_event *event)
 		ft_swap(&event->sector->light, &event->light);
 	}
 	else if ((event->type == FLOOR || event->type == CEILING)
-		&& event->time + 100 < doom->time.curr)
+		&& event->time + event->speed < doom->time.curr)
 	{
 		if (event->type == FLOOR)
 			plane = &event->sector->floor;
