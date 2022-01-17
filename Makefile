@@ -6,13 +6,14 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 18:33:03 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/17 11:25:23 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL_NAME	:= $(shell uname -s)
 
-MAKE = mingw32-make
+#MAKE = mingw32-make
+MAKE = make
 
 RESOURCES	= resources
 

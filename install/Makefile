@@ -208,9 +208,11 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -pthread -o $(NAME) my.res
-#	@Rez -a docs/icon.rsrc -o $(NAME)
-#	@SetFile -a C $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -pthread -o $(NAME)
+ifeq ($(SHELL_NAME), Darwin)
+	@Rez -a docs/icon.rsrc -o $(NAME)
+	@SetFile -a C $(NAME)
+endif
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
