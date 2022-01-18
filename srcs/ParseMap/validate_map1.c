@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/11 10:12:36 nneronin
- * Updated: 2022/01/07 16:20:26 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -20,7 +20,7 @@ static int	check_entities(t_doom *doom)
 		if (!in_sector(&doom->sectors[((t_entity *)curr->content)->sector],
 				((t_entity *)curr->content)->where))
 		{
-			LG_WARN("Entity %d is outside map boundaries!\n",
+			LG_WARN("Entity %d is outside map boundaries!.",
 				((t_entity *)curr->content)->type);
 			return (0);
 		}
@@ -36,7 +36,7 @@ static int	check_player(t_doom *doom)
 {
 	if (!in_sector(&doom->sectors[doom->player.sector], doom->player.where))
 	{
-		LG_WARN("Player is outside map boundaries!\n");
+		LG_WARN("Player is outside map boundaries!.");
 		return (0);
 	}
 	return (1);

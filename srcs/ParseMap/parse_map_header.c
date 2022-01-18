@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/04/30 14:18:33 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -25,7 +25,7 @@ static int	parse_game_mode(char *str)
 void	parse_header(t_doom *doom, int nb, char **arr)
 {
 	if (nb < 7)
-		LG_ERROR("Invalid amount of arguments for event %s\n", arr[0]);
+		LG_ERROR("Invalid amount of arguments for event %s.", arr[0]);
 	doom->game.mode = parse_game_mode(arr[1]);
 	doom->map_scale = ft_atoi(arr[2]);
 	doom->nb.vertices = ft_atoi(arr[3]);

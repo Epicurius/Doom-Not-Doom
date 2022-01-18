@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/14 13:38:47 nneronin
- * Updated: 2021/11/23 09:23:22 nneronin
+ * Updated: 2022/01/18 13:10:46 Niklas Neronin
  */
 
 #include "doom.h"
@@ -67,9 +67,9 @@ void	args(int ac, char **av, t_settings *init)
 	while (++i < ac)
 		read_args1(init, av, i);
 	if (init->debug)
-		printf("%s\nScreen Size\t\t%dx%d\nRender Resolution\t%.2f\n"
+		LG_WARN("%s\nScreen Size\t\t%dx%d\nRender Resolution\t%.2f\n"
 			"Mouse Sensitivity\t%.3fx%.3f\nGame Difficulty\t\t"
-			"%d\nFOV\t\t\t%d\nDebug Mode\t\t%d\nLauncher\t\t%d\n",
+			"%d\nFOV\t\t\t%d\nDebug Mode\t\t%d\nLauncher\t\t%d",
 			av[1], init->size.x, init->size.y, init->rres,
 			init->mouse.x, init->mouse.y, init->difficulty,
 			init->fov, init->debug, init->launcher);

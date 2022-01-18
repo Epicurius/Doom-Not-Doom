@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/04/30 14:20:18 nneronin
- * Updated: 2022/01/18 13:07:45 Niklas Neronin
+ * Updated: 2022/01/18 13:11:58 Niklas Neronin
  */
 
 #include "doom.h"
@@ -16,7 +16,7 @@ void	parse_vertex(t_doom *doom, int nb, char **arr)
 
 	i = ft_atoi(arr[0]);
 	if (nb < 3)
-		LG_ERROR("Invalid amount of vertex arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of vertex arguments %s.", arr[0]);
 	if (i >= doom->nb.vertices)
 		LG_ERROR("Invalid amount of walls.");
 	doom->vert[i].x = ft_atoi(arr[1]) * doom->map_scale;
@@ -33,7 +33,7 @@ void	parse_wall(t_doom *doom, int nb, char **arr)
 
 	i = ft_atoi(arr[0]);
 	if (nb < 7)
-		LG_ERROR("Invalid amount of wall arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of wall arguments %s.", arr[0]);
 	if (i >= doom->nb.walls)
 		LG_ERROR("Invalid amount of walls.");
 	wall = &doom->walls[i];
@@ -55,7 +55,7 @@ void	parse_fc(t_doom *doom, int nb, char **arr)
 	static int	i = 0;
 
 	if (nb < 8)
-		LG_ERROR("Invalid amount of f&c arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of f&c arguments %s.", arr[0]);
 	if (i >= doom->nb.sectors)
 		LG_ERROR("Invalid amount of f&c.");
 	sector = &doom->sectors[i++];
@@ -105,7 +105,7 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	static int	i = 0;
 
 	if (ac < 5)
-		LG_ERROR("Invalid amount of sector arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of sector arguments %s.", arr[0]);
 	if (i >= doom->nb.sectors)
 		LG_ERROR("Invalid amount of sectors.");
 	sector = &doom->sectors[i++];
@@ -117,7 +117,7 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	sector->light = ft_clamp(ft_atoi(arr[4]) + 100, 0, 199);
 	sector->trigger = FALSE;
 	if (nb != sector->npoints)
-		LG_ERROR("Sect %d npoints amount.\n", sector->id);
+		LG_ERROR("Sect %d npoints amount.", sector->id);
 	complete_wall(sector, doom->walls, walls, neighbour);
 	free(walls);
 	free(neighbour);

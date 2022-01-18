@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:00:24 nneronin
- * Updated: 2022/01/18 13:07:11 Niklas Neronin
+ * Updated: 2022/01/18 13:11:58 Niklas Neronin
  */
 
 #include "doom.h"
@@ -13,7 +13,7 @@
 void	floor_ceiling_event(t_event *event, int nb, char **arr)
 {
 	if (nb < 7)
-		LG_ERROR("Invalid argument for event %s\n", arr[0]);
+		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	event->event_sector = ft_atoi(arr[4]);
 	event->dir = -1;
 	if (event->type == CEILING)
@@ -33,7 +33,7 @@ void	floor_ceiling_event(t_event *event, int nb, char **arr)
 void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 {
 	if (nb < 8)
-		LG_ERROR("Invalid argument for event %s\n", arr[0]);
+		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	if (event->type == NONE)
 		LG_ERROR("Event 'Spawn' can`t have action NONE");
 	event->entity = ft_atoi(arr[4]);
@@ -47,7 +47,7 @@ void	spawn_event(t_doom *doom, t_event *event, int nb, char **arr)
 void	audio_event(t_event *event, int nb, char **arr)
 {
 	if (nb < 4)
-		LG_ERROR("Invalid argument for event %s\n", arr[0]);
+		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	if (event->action == NONE)
 		LG_ERROR("Event 'Audio' can`t have action NONE");
 	event->path = ft_strdup(arr[4]);
@@ -59,9 +59,9 @@ void	audio_event(t_event *event, int nb, char **arr)
 void	hazard_event(t_event *event, int nb, char **arr)
 {
 	if (nb < 7)
-		LG_ERROR("Invalid argument for event %s\n", arr[0]);
+		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	if (event->action != SECTOR)
-		LG_ERROR("Event 'Hazard' can only have SECTOR as an action.\n");
+		LG_ERROR("Event 'Hazard' can only have SECTOR as an action.");
 	event->event_sector = ft_atoi(arr[4]);
 	event->speed = ft_atoi(arr[7]);
 }
@@ -72,7 +72,7 @@ void	hazard_event(t_event *event, int nb, char **arr)
 void	light_event(t_event *event, int nb, char **arr)
 {
 	if (nb < 5)
-		LG_ERROR("Invalid argument for event %s\n", arr[0]);
+		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	event->event_sector = ft_atoi(arr[4]);
 	event->light = ft_atoi(arr[5]);
 }

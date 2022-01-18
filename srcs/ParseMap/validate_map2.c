@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/06/17 12:04:26 nneronin
- * Updated: 2022/01/07 16:20:51 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -70,7 +70,7 @@ static int	fix_wall_order2(t_sector *sector, int i, t_v3 v2)
 			return (1);
 		}
 	}
-	LG_WARN("Sector %d wall %d coordinates don't match up!\n", sector->id, i);
+	LG_WARN("Sector %d wall %d coordinates don't match up!.", sector->id, i);
 	return (0);
 }
 
@@ -117,7 +117,7 @@ int	is_convex(t_sector *sector)
 		{
 			if (curr * prev < 0)
 			{
-				LG_WARN("Sector %d is concave, must be convex!\n", sector->id);
+				LG_WARN("Sector %d is concave, must be convex!.", sector->id);
 				return (0);
 			}
 			prev = curr;

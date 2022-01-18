@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/07 13:54:10 nneronin
- * Updated: 2022/01/14 10:55:50 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -55,7 +55,7 @@ void	init_custom_sounds(t_doom *doom)
 		ft_strcpy(&doom->root[doom->rlen], doom->events[i].path);
 		doom->events[i].audio = Mix_LoadWAV(doom->root);
 		if (doom->events[i].audio == NULL)
-			LG_WARN("Audio event %s not found\n", doom->root);
+			LG_WARN("Audio event %s not found.", doom->root);
 		free(doom->events[i].path);
 	}
 }
@@ -68,7 +68,7 @@ void	init_sound(t_doom *doom)
 	int	i;
 
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
-		LG_ERROR("Mix_OpenAudio: %s\n", Mix_GetError());
+		LG_ERROR("Mix_OpenAudio: %s.", Mix_GetError());
 	Mix_AllocateChannels(32);
 	init_custom_sounds(doom);
 	i = -1;

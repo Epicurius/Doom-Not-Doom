@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/19 18:12:37 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -23,7 +23,7 @@ void	hud_health(t_doom *doom, SDL_Rect *dstr)
 	str = ft_itoa(doom->player.health);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
-		LG_ERROR("TTF_RenderText_Blended error: %s\n", TTF_GetError());
+		LG_ERROR("TTF_RenderText_Blended error: %s.", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;
@@ -44,7 +44,7 @@ void	hud_armour(t_doom *doom, SDL_Rect *dstr)
 	str = ft_itoa(doom->player.armour);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
-		LG_ERROR("TTF_RenderText_Blended error: %s\n", TTF_GetError());
+		LG_ERROR("TTF_RenderText_Blended error: %s.", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;
@@ -65,7 +65,7 @@ void	hud_curr_ammo(t_doom *doom, SDL_Rect *dstr)
 	str = ft_itoa(doom->weapon[doom->player.equipped].cur_ammo);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
-		LG_ERROR("TTF_RenderText_Blended error: %s\n", TTF_GetError());
+		LG_ERROR("TTF_RenderText_Blended error: %s.", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;
@@ -86,7 +86,7 @@ void	hud_mag_ammo(t_doom *doom, SDL_Rect *dstr)
 	str = ft_itoa(doom->weapon[doom->player.equipped].mag_ammo);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
-		LG_ERROR("TTF_RenderText_Blended error: %s\n", TTF_GetError());
+		LG_ERROR("TTF_RenderText_Blended error: %s.", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;
@@ -107,7 +107,7 @@ void	hud_dosh(t_doom *doom, SDL_Rect *dstr)
 	str = ft_itoa(doom->inv.dosh);
 	surf = TTF_RenderText_Blended(doom->font.amaz, str, doom->time.color);
 	if (!surf)
-		LG_ERROR("TTF_RenderText_Blended error: %s\n", TTF_GetError());
+		LG_ERROR("TTF_RenderText_Blended error: %s.", TTF_GetError());
 	dstr->y = dstr->y - surf->h;
 	dstr->w = surf->w;
 	dstr->h = surf->h;

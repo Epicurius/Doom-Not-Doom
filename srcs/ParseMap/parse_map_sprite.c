@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/04/24 15:45:28 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -28,7 +28,7 @@ void	parse_wsprite(t_doom *doom, int nb, char **arr)
 	t_wsprite	*sprite;
 
 	if (nb < 7)
-		LG_ERROR("Invalid amount of wsprite arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of wsprite arguments %s.", arr[0]);
 	wsprite = &doom->walls[ft_atoi(arr[1])].wsprite;
 	wsprite->num = realloc(wsprite->num,
 			sizeof(t_wsprite) * ++wsprite->total);
@@ -56,7 +56,7 @@ static int	entity_type(char *str)
 		if (ft_strequ(str, g_entity_data[i].name))
 			return (i);
 	}
-	LG_ERROR("%s is not a valid entity!\n", str);
+	LG_ERROR("%s is not a valid entity!.", str);
 	exit (1);
 }
 
@@ -68,7 +68,7 @@ void	parse_entity(t_doom *doom, int nb, char **arr)
 	t_entity	*entity;
 
 	if (nb < 7)
-		LG_ERROR("Invalid amount of entity arguments %s\n", arr[0]);
+		LG_ERROR("Invalid amount of entity arguments %s.", arr[0]);
 	entity = protalloc(sizeof(t_entity));
 	entity->type = entity_type(arr[1]);
 	entity->where.x = ft_atoi(arr[2]) * doom->map_scale;

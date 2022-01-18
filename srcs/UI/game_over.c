@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 18:28:56 nneronin
- * Updated: 2022/01/14 11:01:38 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -45,7 +45,7 @@ static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
 		ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameOver.bxpm");
 	}
 	if (!read_bxpm(&bxpm, doom->root))
-		LG_ERROR("Failed to open: %s\n", doom->root);
+		LG_ERROR("Failed to open: %s.", doom->root);
 	*dst = (SDL_Rect){doom->surface->w * 0.05, doom->surface->h * 0.05,
 		bxpm.w, bxpm.h};
 	blit_bxpm(doom->surface, &bxpm, dst->x, dst->y);

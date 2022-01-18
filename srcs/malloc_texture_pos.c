@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/05 10:27:28 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
@@ -40,13 +40,13 @@ void	malloc_texture_pos(t_frames *entity)
 {
 	entity->pos = (t_rect ***)protalloc(sizeof(t_rect **) * 4);
 	if (!entity->pos)
-		LG_ERROR("Malloc img pos\n");
+		LG_ERROR("Malloc img pos.");
 	if (!malloc_state_frames_and_angles(entity, IDLE))
-		LG_ERROR("Malloc img pos IDLE\n");
+		LG_ERROR("Malloc img pos IDLE.");
 	if (!malloc_state_frames_and_angles(entity, MOVE))
-		LG_ERROR("Malloc img pos MOVE\n");
+		LG_ERROR("Malloc img pos MOVE.");
 	if (!malloc_state_frames_and_angles(entity, ATTACK))
-		LG_ERROR("Malloc img pos ATTACK\n");
+		LG_ERROR("Malloc img pos ATTACK.");
 	if (!malloc_state_frames_and_angles(entity, DEATH))
-		LG_ERROR("Malloc img pos DEATH\n");
+		LG_ERROR("Malloc img pos DEATH.");
 }

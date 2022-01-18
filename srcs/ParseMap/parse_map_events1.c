@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:00:24 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:11:58 Niklas Neronin
  */
 
 #include "doom.h"
@@ -32,7 +32,7 @@ static void	find_wsprite_trigger(t_doom *doom, t_event *event, int id)
 			}
 		}
 	}
-	LG_ERROR("No wsprite wsprite with id:%d found.\n", id);
+	LG_ERROR("No wsprite wsprite with id:%d found.", id);
 }
 
 /*

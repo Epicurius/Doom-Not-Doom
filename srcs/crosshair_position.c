@@ -2,16 +2,16 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:42:38 nneronin
- * Updated: 2022/01/07 16:22:34 nneronin
+ * Updated: 2022/01/18 13:11:25 Niklas Neronin
  */
 
 #include "doom.h"
 
 static void	debug(t_render *render, t_wall *wall)
 {
-	LG_DEBUG("Wall:\t%d Sector: %d Neighbour: %d\n",
+	LG_DEBUG("Wall:\t%d Sector: %d Neighbour: %d.",
 		wall->id, wall->sect, wall->n);
-	LG_DEBUG("Player:\t%d [%.1f][%.1f][%.1f]\n",
+	LG_DEBUG("Player:\t%d [%.1f][%.1f][%.1f].",
 		render->player->sector, render->player->where.x,
 		render->player->where.y, render->player->where.z);
 }
