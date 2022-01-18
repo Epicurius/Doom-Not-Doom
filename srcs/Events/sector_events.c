@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/08/06 10:03:39 nneronin
- * Updated: 2022/01/03 14:03:47 nneronin
+ * Updated: 2022/01/18 13:06:17 Niklas Neronin
  */
 
 #include "doom.h"
@@ -21,9 +21,10 @@ static void	move_plane(t_doom *doom, t_event *event)
 		plane = &event->sector->floor;
 	else
 		plane = &event->sector->ceiling;
-	plane->height += 0.1 * event->dir;
+	plane->height = ft_fclamp(plane->height + 0.1 * event->dir,
+		event->min, event->max);
 	event->time = doom->time.curr;
-	if (plane->height <= event->min || plane->height >= event->max)
+	if (plane->height == event->min || plane->height == event->max)
 	{
 		event->dir *= -1;
 		event->speed += 1000;

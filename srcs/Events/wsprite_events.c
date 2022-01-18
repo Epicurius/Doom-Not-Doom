@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/08/10 13:59:58 nneronin
- * Updated: 2022/01/03 14:22:00 nneronin
+ * Updated: 2022/01/18 13:04:51 Niklas Neronin
  */
 
 #include "doom.h"
@@ -22,19 +22,19 @@ static void	move_plane(t_doom *doom, t_event *event)
 		plane = &event->sector->floor;
 	else
 		plane = &event->sector->ceiling;
-	plane->height += 0.1 * event->dir;
+	plane->height = ft_fclamp(plane->height + 0.1 * event->dir,
+		event->min, event->max);
 	event->time = doom->time.curr;
 	while (++i < event->sector->npoints)
 		scale_wall_height(doom, event->sector->wall[i]);
-	if (plane->height <= event->min)
+	if (plane->height == event->min)
 		event->dir = 1;
-	else if (plane->height >= event->max)
+	else if (plane->height == event->max)
 		event->dir = -1;
 	else
 		return ;
-	if (event->wsprite != NULL)
-		event->wsprite->trigger = FALSE;
-	if (event->wsprite != NULL && event->wsprite->state == 2)
+	event->wsprite->trigger = FALSE;
+	if (event->wsprite->state == 2)
 		event->wsprite->src = rect_xy2(0, 0, 64, 64);
 }
 

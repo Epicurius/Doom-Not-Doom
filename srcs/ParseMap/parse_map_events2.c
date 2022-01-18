@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:00:24 nneronin
- * Updated: 2022/01/17 16:31:14 Niklas Neronin
+ * Updated: 2022/01/18 13:07:11 Niklas Neronin
  */
 
 #include "doom.h"
@@ -20,7 +20,10 @@ void	floor_ceiling_event(t_event *event, int nb, char **arr)
 		event->dir = 1;
 	event->min = ft_atof(arr[5]);
 	event->max = ft_atof(arr[6]);
-	event->speed = ft_atof(arr[7]);
+	event->dir = ft_atof(arr[7]);
+	if (event->dir != 1 && event->dir != -1)
+		LG_ERROR("Event dir must be -1 or 1 not %d.", event->dir);
+	event->speed = 10;
 }
 
 /*

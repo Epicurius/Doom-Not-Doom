@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/04/30 14:20:18 nneronin
- * Updated: 2022/01/07 16:16:05 nneronin
+ * Updated: 2022/01/18 13:07:45 Niklas Neronin
  */
 
 #include "doom.h"
@@ -114,10 +114,8 @@ void	parse_sector(t_doom *doom, int ac, char **arr)
 	sector->wall = protalloc(sizeof(t_wall *) * (sector->npoints));
 	neighbour = stringsplit(arr[2], ' ', &nb);
 	sector->gravity = ft_atoi(arr[3]);
-	sector->light = ft_atoi(arr[4]) + 100;
+	sector->light = ft_clamp(ft_atoi(arr[4]) + 100, 0, 199);
 	sector->trigger = FALSE;
-	if (sector->light < 0 || sector->light > 200)
-		LG_ERROR("Sector %d light %d invalid!\n", sector->id, sector->light);
 	if (nb != sector->npoints)
 		LG_ERROR("Sect %d npoints amount.\n", sector->id);
 	complete_wall(sector, doom->walls, walls, neighbour);
