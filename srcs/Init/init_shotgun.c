@@ -2,14 +2,14 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/23 15:43:43 nneronin
- * Updated: 2021/12/28 13:20:00 nneronin
+ * Updated: 2022/01/18 17:34:21 Niklas Neronin
  */
 
 #include "doom.h"
 
 void	init_shotgun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = TRUE;
+	weapon->own = FALSE;
 	weapon->price = 100;
 	weapon->damage = 100;
 	weapon->ammo_price = 101;

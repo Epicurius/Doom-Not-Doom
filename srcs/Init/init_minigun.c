@@ -2,14 +2,14 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/23 15:45:01 nneronin
- * Updated: 2021/12/28 13:20:40 nneronin
+ * Updated: 2022/01/18 17:34:07 Niklas Neronin
  */
 
 #include "doom.h"
 
 void	init_minigun(t_doom *doom, t_weapon *weapon)
 {
-	weapon->own = TRUE;
+	weapon->own = FALSE;
 	weapon->price = 300;
 	weapon->damage = 10;
 	weapon->ammo_price = 101;
