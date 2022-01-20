@@ -370,6 +370,29 @@ ST	 	- State
 TR		- Event Trigger
 AC		- Action
 ```
+----
+#### Game Stats
+|Weapon|Damage|MagSize|StartAmmo|MaxAmmo|Price|PriceAmmo|PriceMaxAmmo|PriceDamage|PriceFireRate|
+|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Glock|10|8|100|200|0|10|50|100|100|
+|Shotgun|50|2|0|40|100|50|200|200|200|
+|Kar|20|5|0|50|200|25|50|50|300|
+|Launcher|100|10|0|10|300|100|250|500|200|
+|Minigun|10|inf|0|50|300|300|50|200|400|
 
+|Weapon|DamageIncrease|AmmoIncrease|MaxAmmoIncrease|FireRateIncrease|
+|:-|:-:|:-:|:-:|:-:|
+|Glock|+10|+100|+100|+10|
+|Shotgun|+10|+20|+20|+30|
+|Kar|+10|+20|+25|+30|
+|Launcher|+100|+5|+5|+30|
+|Minigun|+10|+50|+50|+10|
+
+|Enemy|Health|Damage|MoveSpeed|AttackSpeed|ViewDist|AgroRange|AttackRange|Flight|DropHP|
+|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|Alfred	|1|300|20|60|200|50|7|TRUE|FALSE|
+|Spooky	|20|200|20|180|200|70|70|FALSE|FALSE|
+|Ghost	|20|1|20|70|200|40|20|FALSE|FALSE|
+|Rift	|20|0|0|0|0|0|0|FALSE|TRUE|
 <img src="./GridMap.png" alt="Engine_Flow" width="700"/></p>
 

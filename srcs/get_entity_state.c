@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 13:53:14 nneronin
- * Updated: 2021/09/23 11:32:42 nneronin
+ * Updated: 2022/01/20 17:17:02 Niklas Neronin
  */
 
 #include "doom.h"
@@ -94,7 +94,7 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 		entity->state = MOVE;
 	else if (entity_line_of_sight(doom, entity, dist))
 	{
-		if (entity->danger && ai_rand_dodge(doom, entity, 900, 110))
+		if (entity->danger && ai_rand_dodge(doom, entity, 80, 110))
 			entity->state = MOVE;
 		else if (g_entity_data[entity->type].attack_range > dist)
 			entity->state = ATTACK;
@@ -104,7 +104,7 @@ void	get_entity_state2(t_doom *doom, t_entity *entity)
 	else
 	{
 		if (g_entity_data[entity->type].move
-			&& ai_rand_move(doom, entity, 10, 360))
+			&& ai_rand_move(doom, entity, 50, 360))
 			entity->state = MOVE;
 		else
 			entity->state = IDLE;

@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/22 12:30:18 nneronin
- * Updated: 2022/01/20 15:05:10 Niklas Neronin
+ * Updated: 2022/01/20 16:17:31 Niklas Neronin
  */
 
 #ifndef MACROS_H

@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/20 14:29:46 Niklas Neronin
+ * Updated: 2022/01/20 17:14:48 Niklas Neronin
  */
 
 #ifndef RESOURCES_H
@@ -254,12 +254,12 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.scale = 15,
 		.speed = 20,
 		.health = 1,
-		.damage = 100,
+		.damage = 300,
 		.height = 2,
 		.attack_range = 7,
 		.hitbox_radius = 5,
 		.view_distance = 200,
-		.detection_radius = 40,
+		.detection_radius = 50,
 		.frame_rate[IDLE] = 20,
 		.frame_rate[MOVE] = 40,
 		.frame_rate[ATTACK] = 60,
@@ -268,13 +268,13 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	{
 		.name = "Spooky",
 		.pickup = FALSE,
-		.health = 1,
-		.damage = 30,
+		.health = 20,
+		.damage = 100,
 		.type = RANGE,
 		.scale = 25,
 		.height = 7,
 		.hitbox_radius = 5,
-		.speed = 10,
+		.speed = 20,
 		.move = TRUE,
 		.view_distance = 200,
 		.detection_radius = 70,
@@ -288,7 +288,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	{
 		.name = "Ghost",
 		.pickup = FALSE,
-		.health = 1,
+		.health = 20,
 		.damage = 1,
 		.type = MELEE,
 		.scale = 18,
@@ -308,8 +308,8 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 	{
 		.name = "Rift",
 		.pickup = FALSE,
-		.health = 1,
-		.damage = 200,
+		.health = 20,
+		.damage = 0,
 		.type = INANIMATE,
 		.scale = 30,
 		.height = 9,

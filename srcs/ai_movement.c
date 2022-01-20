@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:41:50 nneronin
- * Updated: 2022/01/07 17:02:44 nneronin
+ * Updated: 2022/01/20 17:16:34 Niklas Neronin
  */
 
 #include "doom.h"
@@ -34,7 +34,7 @@ int	ai_rand_move(t_doom *doom, t_entity *entity, int chance, int angle)
 	float	a;
 	float	speed;
 
-	if ((rand() % 1000) > chance)
+	if ((rand() % 100) > chance)
 		return (0);
 	a = (entity->yaw * CONVERT_TO_DEGREES
 			+ ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;
@@ -53,7 +53,7 @@ int	ai_rand_dodge(t_doom *doom, t_entity *entity, int chance, int angle)
 	float	a;
 	float	speed;
 
-	if ((rand() % 1000) > chance)
+	if ((rand() % 100) > chance)
 		return (0);
 	a = degree_to_point_v2(entity->where, doom->player.where);
 	a = (a + ((rand() % angle) - angle / 2)) * CONVERT_TO_RADIANS;

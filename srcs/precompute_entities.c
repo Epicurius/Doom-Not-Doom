@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:53:11 nneronin
- * Updated: 2021/12/14 18:08:25 nneronin
+ * Updated: 2022/01/20 16:21:53 Niklas Neronin
  */
 
 #include "doom.h"
@@ -66,7 +66,7 @@ static int	get_coresponding_entity_state_frame(t_doom *doom, t_entity *entity)
  */
 static int	pay_the_man(t_doom *doom, t_entity *entity)
 {
-	doom->inv.dosh += 10 + doom->nb.kills * 1;
+	doom->inv.dosh += 10 + doom->nb.kills;
 	Mix_PlayChannel(-1, doom->sound[WAV_DOSH], 0);
 	doom->nb.kills += 1;
 	doom->game.spawns -= 1;

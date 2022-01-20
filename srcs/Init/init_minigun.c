@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/23 15:45:01 nneronin
- * Updated: 2022/01/18 17:34:07 Niklas Neronin
+ * Updated: 2022/01/20 17:07:23 Niklas Neronin
  */
 
 #include "doom.h"
@@ -12,13 +12,13 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->own = FALSE;
 	weapon->price = 300;
 	weapon->damage = 10;
-	weapon->ammo_price = 101;
-	weapon->damage_price = 102;
-	weapon->firerate_price = 103;
-	weapon->max_ammo_price = 104;
+	weapon->ammo_price = 300;
+	weapon->damage_price = 200;
+	weapon->firerate_price = 400;
+	weapon->max_ammo_price = 50;
 	weapon->mag_size = MAX_INT;
 	weapon->mag_ammo = 0;
-	weapon->cur_ammo = 1000;
+	weapon->cur_ammo = 50;
 	weapon->max_ammo = 50;
 	weapon->fire_frames = 6;
 	weapon->reload_frames = 0;
@@ -27,8 +27,8 @@ void	init_minigun(t_doom *doom, t_weapon *weapon)
 	weapon->sound = WAV_GUN;
 	weapon->x_offset = 0;
 	weapon->time = doom->time.curr;
-	weapon->ammo_increase = 20;
-	weapon->damage_increase = 5;
+	weapon->ammo_increase = 50;
+	weapon->damage_increase = 10;
 	weapon->firerate_increase = -1;
-	weapon->max_ammo_increase = 20;
+	weapon->max_ammo_increase = 50;
 }
