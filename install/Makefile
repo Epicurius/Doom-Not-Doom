@@ -159,7 +159,7 @@ SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
 
-LIB_DIR		=	./libs
+LIB_DIR		=	libs
 
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
@@ -179,7 +179,7 @@ ifeq ($(SHELL_NAME), Darwin)
 
 LIB_INC		+=	-I SDL2.framework/Headers -I SDL2_image.framework/Headers -I SDL2_mixer.framework/Headers -I SDL2_ttf.framework/Headers -F ./
 LIBS		+=	-framework SDL2 -framework SDL2_mixer -framework SDL2_image -framework SDL2_ttf -F ./ -rpath @executable_path
-CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors #-g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors# -g -fsanitize=address
 
 else
 

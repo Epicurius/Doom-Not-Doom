@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_recipe_fill_from_recipe.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:24:14 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/10 19:24:15 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/20 15:17:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,22 @@ void	recipe_value_set_fill(t_ui_recipe *target, t_ui_recipe *child)
 void	recipe_flag_set_fill(t_ui_recipe *target, t_ui_recipe *child)
 {
 	char	**flags;
+	int		i;
 
 	if (child->flags != NULL)
 	{
 		flags = ft_arrjoin(target->flags, child->flags);
 		ft_arraydel(target->flags);
 		target->flags = flags;
+	}
+	i = -1;
+	while (++i < 2)
+	{
+		if (child->texture_size_set[i])
+		{
+			target->texture_size_set[i] = 1;
+			target->texture_size.v[i] = child->texture_size.v[i];
+		}
 	}
 }
 

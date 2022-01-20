@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_recipe_fill_from_args.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:24:08 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/10 19:24:09 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/20 15:16:25 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	try_getting_value(t_ui_recipe *recipe, char **key_value)
 
 void	try_getting_flags(t_ui_recipe *recipe, char **key_value)
 {
+	int		i;
 	char	**flags;
 	char	**final_flags;
 
@@ -42,6 +43,17 @@ void	try_getting_flags(t_ui_recipe *recipe, char **key_value)
 		ft_arraydel(flags);
 		ft_arraydel(recipe->flags);
 		recipe->flags = final_flags;
+	}
+	else if (ft_strequ(key_value[0], "texture"))
+	{
+		i = -1;
+		flags = ft_strsplit(key_value[1], ' ');
+		while (flags[++i])
+		{
+			recipe->texture_size.v[i] = ft_atoi(flags[i]);
+			recipe->texture_size_set[i] = 1;
+		}
+		ft_arraydel(flags);
 	}
 }
 

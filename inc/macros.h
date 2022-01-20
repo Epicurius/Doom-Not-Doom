@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/22 12:30:18 nneronin
- * Updated: 2022/01/03 13:30:40 nneronin
+ * Updated: 2022/01/20 15:05:10 Niklas Neronin
  */
 
 #ifndef MACROS_H
@@ -34,12 +34,12 @@
 /*
 ** Screen info
 */
-# define MAX_PROCESSORS					64
+# define MAX_PROCESSORS					32
 # define MOUSE_LEFT						512
 # define MOUSE_RIGHT					513
 
 /*
-**	player
+**	Player
 */
 # define FOV							90
 # define NEAR_Z							0.1

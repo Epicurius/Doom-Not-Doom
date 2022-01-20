@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/08/10 13:59:58 nneronin
- * Updated: 2022/01/18 13:04:51 Niklas Neronin
+ * Updated: 2022/01/20 15:10:29 Niklas Neronin
  */
 
 #include "doom.h"
@@ -78,6 +78,7 @@ void	wsprite_trigger_events(t_doom *doom, t_event *event)
 		return ;
 	if (event->wsprite->trigger == 1)
 	{
+		event->wsprite->time = 0;
 		Mix_PlayChannel(-1, doom->sound[WAV_BIP], 0);
 		if (event->type == WIN)
 		{

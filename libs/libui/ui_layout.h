@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_layout.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:23:36 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/18 10:06:50 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/20 15:15:53 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_ui_recipe
 	Uint32			input_type;
 	char			*placeholder_text;
 	char			*target;
+	t_vec2i			texture_size;
+	bool			texture_size_set[2];
 }					t_ui_recipe;
 
 ///////////////

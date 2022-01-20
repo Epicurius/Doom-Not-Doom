@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_layout.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:23:34 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/18 10:24:15 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/20 15:15:09 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	ui_layout_render(t_ui_layout *layout)
 
 void	ui_layout_load(t_ui_layout *layout, char *root_dir, char *file)
 {
+	if (!file)
+		return ;
 	if (!root_dir)
 		layout->root_dir = NULL;
 	else

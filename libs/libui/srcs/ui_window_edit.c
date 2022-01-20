@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_window_edit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:24:53 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/10 19:33:10 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/20 15:17:45 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	ui_window_edit(t_ui_window *win, t_ui_recipe *recipe)
 			pos.v[i] = recipe->pos.v[i];
 	}
 	ui_window_pos_set(win, pos);
+	if (recipe->texture_size_set[0])
+		pos.w = recipe->texture_size.v[0];
+	if (recipe->texture_size_set[1])
+		pos.h = recipe->texture_size.v[1];
 	ui_window_texture_pos_set(win, vec2i(pos.w, pos.h));
 	if (recipe->title)
 		ui_window_title_set(win, recipe->title);
