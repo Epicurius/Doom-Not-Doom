@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/07/10 11:28:34 nneronin
- * Updated: 2022/01/14 10:56:35 nneronin
+ * Updated: 2022/01/20 13:47:51 Niklas Neronin
  */
 
 #ifndef DOOM_H
@@ -129,7 +129,7 @@ typedef struct s_player
 	int				equipped;
 	int				debug;
 	int				store_access;
-	int				hm;
+	int				hitmarker;
 	int				damage;
 	float			walk_speed;
 	float			sprint_speed;
@@ -281,8 +281,9 @@ typedef struct s_entity_thread
 	t_rect			pos;
 	int				dmg;
 	int				*hp;
-	int				*hm;
+	int				*hitmarker;
 	int				shooting;
+	int				type;
 	t_v3			center;
 }					t_entity_thread;
 

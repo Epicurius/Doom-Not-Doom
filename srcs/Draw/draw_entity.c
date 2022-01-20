@@ -2,26 +2,15 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:43:45 nneronin
- * Updated: 2022/01/03 13:37:13 nneronin
+ * Updated: 2022/01/20 13:49:13 Niklas Neronin
  */
 
 #include "doom.h"
 
 /*
+ *	Blit entity to surface.
  *	Check if entity is "hitable" if player shooting
  *	and pixel is in the middle of the surface damage the entity.
- */
-static void	hit_enemy(t_entity_thread *thread, int coord)
-{
-	if (thread->hp != NULL && thread->shooting && coord == thread->center.z)
-	{
-		*thread->hp -= thread->dmg;
-		*thread->hm = TRUE;
-	}
-}
-
-/*
- *	Blit entity to surface.
  */
 void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 {
@@ -42,8 +31,12 @@ void	blit_entity(t_entity_thread *thread, int coord, t_v3 text)
 		return ;
 	((Uint32 *)thread->surface->pixels)[coord] = clr;
 	((float *)thread->surface->userdata)[coord] = text.z;
-	if (thread->hp != NULL)
-		hit_enemy(thread, coord);
+	if (thread->type <= 3 && thread->shooting
+		&& coord == thread->center.z)
+	{
+		*thread->hp -= thread->dmg;
+		*thread->hitmarker = TRUE;
+	}
 }
 
 /*
@@ -102,7 +95,8 @@ static void	entity_threads(t_doom *doom, t_entity *entity,
 		thread[y].shooting = doom->player.action;
 		thread[y].dmg = doom->weapon[doom->player.equipped].damage;
 		thread[y].hp = &entity->hp;
-		thread[y].hm = &doom->player.hm;
+		thread[y].hitmarker = &doom->player.hitmarker;
+		thread[y].type = entity->type;
 		thread[y].center = doom->c;
 		tpool_add(&doom->tpool, draw_entity, &thread[y]);
 	}

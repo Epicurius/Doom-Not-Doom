@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:43:23 nneronin
- * Updated: 2021/12/10 18:13:06 nneronin
+ * Updated: 2022/01/20 13:48:24 Niklas Neronin
  */
 
 #include "doom.h"
@@ -12,8 +12,6 @@
  */
 static void	draw_hit_marker(t_doom *doom)
 {
-	if (!doom->player.hm)
-		return ;
 	Mix_PlayChannel(CHANNEL_ENEMY, doom->sound[WAV_MONSTER_HIT], 0);
 	draw_line(doom->surface, 0xff00ff00,
 		(t_point){doom->c.x - 10, doom->c.y - 10},
@@ -21,7 +19,7 @@ static void	draw_hit_marker(t_doom *doom)
 	draw_line(doom->surface, 0xff00ff00,
 		(t_point){doom->c.x - 10, doom->c.y + 10},
 		(t_point){doom->c.x + 10, doom->c.y - 10});
-	doom->player.hm = FALSE;
+	doom->player.hitmarker = FALSE;
 }
 
 /*
@@ -50,5 +48,6 @@ void	draw_crosshair(t_doom *doom)
 	x = doom->c.x + 10 + 1;
 	while (--x > doom->c.x + 2)
 		pixels[y * doom->surface->w + x] = 0xFFFFFFFF;
-	draw_hit_marker(doom);
+	if (doom->player.hitmarker)
+		draw_hit_marker(doom);
 }
