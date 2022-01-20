@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/07 14:13:33 nneronin
- * Updated: 2022/01/03 13:58:11 nneronin
+ * Updated: 2022/01/20 13:55:49 Niklas Neronin
  */
 
 #ifndef ENUM_H
@@ -21,16 +21,16 @@ enum e_weapons
 enum e_sounds
 {
 	WAV_MAIN_THEME,
-	WAV_SHOTGUN,
-	WAV_SCREEN_SHOT,
+	WAV_ELEVATOR_MUSIC,
 	WAV_INTRO,
+	WAV_SCREEN_SHOT,
 	WAV_FOOT_STEPS,
 	WAV_JUMP,
-	WAV_GUN,
-	WAV_ELEVATOR_MUSIC,
 	WAV_DOSH,
-	WAV_EMPTY_CLIP,
 	WAV_BIP,
+	WAV_EMPTY_CLIP,
+	WAV_GUN,
+	WAV_SHOTGUN,
 	WAV_ORB,
 	WAV_NEW_ROUND,
 	WAV_ROUND_END,

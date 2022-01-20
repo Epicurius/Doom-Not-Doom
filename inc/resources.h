@@ -2,229 +2,226 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/17 13:20:34 Niklas Neronin
+ * Updated: 2022/01/20 14:21:13 Niklas Neronin
  */
 
 #ifndef RESOURCES_H
 # define RESOURCES_H
 
+# define BXPM_PATH	"resources/BXPM/"
+# define BXPM_LEN	15
+# define WAV_PATH	"resources/WAV/"
+# define WAV_LEN	14
+
 # include "enum.h"
 
-/* 16 Bytes */
-typedef struct s_id_and_path
-{
-	int				id;
-	char			*path;
-}				t_id_and_path;
+/*	All bxpm and wav paths 2170 bytes total. */
 
-# define BXPM_PATH	"resources/BXPM/"
-# define WAV_PATH	"resources/WAV/"
-
-static const t_id_and_path	g_sounds[WAV_AMOUNT] =
+static const char	*g_sounds[WAV_AMOUNT] =
 {
-	{WAV_ELEVATOR_MUSIC, WAV_PATH"BuyMenu.wav"},
-	{WAV_MAIN_THEME, WAV_PATH"AtDoomsGate.wav"},
-	{WAV_INTRO, WAV_PATH"Intro.wav"},
-	{WAV_SHOTGUN, WAV_PATH"Shotgun.wav"},
-	{WAV_SCREEN_SHOT, WAV_PATH"ScreenShot.wav"},
-	{WAV_FOOT_STEPS, WAV_PATH"FootSteps.wav"},
-	{WAV_JUMP, WAV_PATH"Jump.wav"},
-	{WAV_GUN, WAV_PATH"Pistol.wav"},
-	{WAV_DOSH, WAV_PATH"Dosh.wav"},
-	{WAV_EMPTY_CLIP, WAV_PATH"EmptyClip.wav"},
-	{WAV_BIP, WAV_PATH"Bip.wav"},
-	{WAV_ORB, WAV_PATH"Projectile.wav"},
-	{WAV_ROUND_END, WAV_PATH"EndRound.wav"},
-	{WAV_NEW_ROUND, WAV_PATH"NewRound.wav"},
-	{WAV_MONSTER_HIT, WAV_PATH"EntityHit.wav"},
-	{WAV_PLAYER_HIT, WAV_PATH"PlayerHit.wav"},
-	{WAV_ENTITY_DEATH, WAV_PATH"EntityDeath.wav"},
-	{WAV_PLAYER_DEATH, WAV_PATH"PlayerDeath.wav"}
+	"AtDoomsGate.wav",
+	"BuyMenu.wav",
+	"Intro.wav",
+	"ScreenShot.wav",
+	"FootSteps.wav",
+	"Jump.wav",
+	"Dosh.wav",
+	"Bip.wav",
+	"EmptyClip.wav",
+	"Pistol.wav",
+	"Shotgun.wav",
+	"Projectile.wav",
+	"NewRound.wav",
+	"EndRound.wav",
+	"PlayerHit.wav",
+	"EntityHit.wav",
+	"PlayerDeath.wav",
+	"EntityDeath.wav"
 };
 
 # define MAP_TEXTURE_AMOUNT	34
-static const t_id_and_path	g_map_textures[MAP_TEXTURE_AMOUNT] =
+static const char	*g_map_textures[MAP_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"BulletHole.bxpm"},
-	{1, BXPM_PATH"SciFi-8.bxpm"},
-	{2, BXPM_PATH"FloorTiles.bxpm"},
-	{3, BXPM_PATH"SteelBars.bxpm"},
-	{4, BXPM_PATH"SteelDoor.bxpm"},
-	{5, BXPM_PATH"SciFi-0.bxpm"},
-	{6, BXPM_PATH"Lava.bxpm"},
-	{7, BXPM_PATH"SciFi-1.bxpm"},
-	{8, BXPM_PATH"SciFi-2.bxpm"},
-	{9, BXPM_PATH"SciFi-3.bxpm"},
-	{10, BXPM_PATH"SciFi-4.bxpm"},
-	{11, BXPM_PATH"SciFi-5.bxpm"},
-	{12, BXPM_PATH"SciFi-6.bxpm"},
-	{13, BXPM_PATH"SciFi-7.bxpm"},
-	{14, BXPM_PATH"FiberWall.bxpm"},
-	{15, BXPM_PATH"SciFi-9.bxpm"},
-	{16, BXPM_PATH"SciFi-13.bxpm"},
-	{17, BXPM_PATH"SciFi-11.bxpm"},
-	{18, BXPM_PATH"SciFi-12.bxpm"},
-	{19, BXPM_PATH"SciFi-10.bxpm"},
-	{20, BXPM_PATH"SteelTile.bxpm"},
-	{21, BXPM_PATH"HandPrint.bxpm"},
-	{22, BXPM_PATH"Radar.bxpm"},
-	{23, BXPM_PATH"WarPoster.bxpm"},
-	{24, BXPM_PATH"Wires.bxpm"},
-	{25, BXPM_PATH"AnimatedButton.bxpm"},
-	{26, BXPM_PATH"AnimatedClaw.bxpm"},
-	{27, BXPM_PATH"AnimatedCog.bxpm"},
-	{28, BXPM_PATH"AnimatedTerminal.bxpm"},
-	{29, BXPM_PATH"AnimetedVent.bxpm"},
-	{30, BXPM_PATH"DoomPoster.bxpm"},
-	{31, BXPM_PATH"TargetDummy.bxpm"},
-	{32, BXPM_PATH"Crate.bxpm"},
-	{33, BXPM_PATH"Clock.bxpm"}
+	"BulletHole.bxpm",
+	"SciFi-8.bxpm",
+	"FloorTiles.bxpm",
+	"SteelBars.bxpm",
+	"SteelDoor.bxpm",
+	"SciFi-0.bxpm",
+	"Lava.bxpm",
+	"SciFi-1.bxpm",
+	"SciFi-2.bxpm",
+	"SciFi-3.bxpm",
+	"SciFi-4.bxpm",
+	"SciFi-5.bxpm",
+	"SciFi-6.bxpm",
+	"SciFi-7.bxpm",
+	"FiberWall.bxpm",
+	"SciFi-9.bxpm",
+	"SciFi-13.bxpm",
+	"SciFi-11.bxpm",
+	"SciFi-12.bxpm",
+	"SciFi-10.bxpm",
+	"SteelTile.bxpm",
+	"HandPrint.bxpm",
+	"Radar.bxpm",
+	"WarPoster.bxpm",
+	"Wires.bxpm",
+	"AnimatedButton.bxpm",
+	"AnimatedClaw.bxpm",
+	"AnimatedCog.bxpm",
+	"AnimatedTerminal.bxpm",
+	"AnimetedVent.bxpm",
+	"DoomPoster.bxpm",
+	"TargetDummy.bxpm",
+	"Crate.bxpm",
+	"Clock.bxpm"
 };
 
 # define SKYBOX_TEXTURE_AMOUNT	18
-static const t_id_and_path	g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
+static const char	*g_skybox_textures[SKYBOX_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"Space-3.bxpm"},
-	{1, BXPM_PATH"Space-0.bxpm"},
-	{2, BXPM_PATH"Space-1.bxpm"},
-	{3, BXPM_PATH"Space-2.bxpm"},
-	{4, BXPM_PATH"Space-4.bxpm"},
-	{5, BXPM_PATH"Space-5.bxpm"},
-	{6, BXPM_PATH"Land-4.bxpm"},
-	{7, BXPM_PATH"Land-1.bxpm"},
-	{8, BXPM_PATH"Land-2.bxpm"},
-	{9, BXPM_PATH"Land-3.bxpm"},
-	{10, BXPM_PATH"Land-0.bxpm"},
-	{11, BXPM_PATH"Land-5.bxpm"},
-	{12, BXPM_PATH"Duke-3.bxpm"},
-	{13, BXPM_PATH"Duke-1.bxpm"},
-	{14, BXPM_PATH"Duke-2.bxpm"},
-	{15, BXPM_PATH"Duke-1.bxpm"},
-	{16, BXPM_PATH"Duke-5.bxpm"},
-	{17, BXPM_PATH"Duke-0.bxpm"}
+	"Space-3.bxpm",
+	"Space-0.bxpm",
+	"Space-1.bxpm",
+	"Space-2.bxpm",
+	"Space-4.bxpm",
+	"Space-5.bxpm",
+	"Land-4.bxpm",
+	"Land-1.bxpm",
+	"Land-2.bxpm",
+	"Land-3.bxpm",
+	"Land-0.bxpm",
+	"Land-5.bxpm",
+	"Duke-3.bxpm",
+	"Duke-1.bxpm",
+	"Duke-2.bxpm",
+	"Duke-1.bxpm",
+	"Duke-5.bxpm",
+	"Duke-0.bxpm"
 };
 
 # define ICON_TEXTURE_AMOUNT	5
-static const t_id_and_path	g_icon_textures[ICON_TEXTURE_AMOUNT] =
+static const char	*g_icon_textures[ICON_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"health_heart.bxpm"},
-	{1, BXPM_PATH"armour_shield.bxpm"},
-	{2, BXPM_PATH"ammo_patrons.bxpm"},
-	{3, BXPM_PATH"mag_ammo.bxpm"},
-	{4, BXPM_PATH"cash_dosh.bxpm"}
+	"health_heart.bxpm",
+	"armour_shield.bxpm",
+	"ammo_patrons.bxpm",
+	"mag_ammo.bxpm",
+	"cash_dosh.bxpm"
 };
 
 # define ENTITY_TEXTURE_AMOUNT	5
-static const t_id_and_path	g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
+static const char	*g_entity_textures[ENTITY_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"EntityAlfred.bxpm"},
-	{1, BXPM_PATH"EntitySpooky.bxpm"},
-	{2, BXPM_PATH"EntityRift.bxpm"},
-	{3, BXPM_PATH"EntityObjects.bxpm"},
-	{4, BXPM_PATH"EntityGhost.bxpm"}
+	"EntityAlfred.bxpm",
+	"EntitySpooky.bxpm",
+	"EntityRift.bxpm",
+	"EntityObjects.bxpm",
+	"EntityGhost.bxpm"
 };
 
 # define SHOTGUN_TEXTURE_AMOUNT	14
-static const t_id_and_path	g_shotgun_textures[SHOTGUN_TEXTURE_AMOUNT] =
+static const char	*g_shotgun_textures[SHOTGUN_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"shotgun-0.bxpm"},
-	{1, BXPM_PATH"shotgun-1.bxpm"},
-	{2, BXPM_PATH"shotgun-2.bxpm"},
-	{3, BXPM_PATH"shotgun-3.bxpm"},
-	{4, BXPM_PATH"shotgun-4.bxpm"},
-	{5, BXPM_PATH"shotgun-5.bxpm"},
-	{6, BXPM_PATH"shotgun-6.bxpm"},
-	{7, BXPM_PATH"shotgun-7.bxpm"},
-	{8, BXPM_PATH"shotgun-8.bxpm"},
-	{9, BXPM_PATH"shotgun-9.bxpm"},
-	{10, BXPM_PATH"shotgun-10.bxpm"},
-	{11, BXPM_PATH"shotgun-11.bxpm"},
-	{12, BXPM_PATH"shotgun-12.bxpm"},
-	{13, BXPM_PATH"shotgun-13.bxpm"}
+	"shotgun-0.bxpm",
+	"shotgun-1.bxpm",
+	"shotgun-2.bxpm",
+	"shotgun-3.bxpm",
+	"shotgun-4.bxpm",
+	"shotgun-5.bxpm",
+	"shotgun-6.bxpm",
+	"shotgun-7.bxpm",
+	"shotgun-8.bxpm",
+	"shotgun-9.bxpm",
+	"shotgun-10.bxpm",
+	"shotgun-11.bxpm",
+	"shotgun-12.bxpm",
+	"shotgun-13.bxpm"
 };
 
 # define GLOCK_TEXTURE_AMOUNT	6
-static const t_id_and_path	g_glock_textures[GLOCK_TEXTURE_AMOUNT] =
+static const char	*g_glock_textures[GLOCK_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"glock-0.bxpm"},
-	{1, BXPM_PATH"glock-1.bxpm"},
-	{2, BXPM_PATH"glock-2.bxpm"},
-	{3, BXPM_PATH"glock-3.bxpm"},
-	{4, BXPM_PATH"glock-4.bxpm"},
-	{5, BXPM_PATH"glock-5.bxpm"}
+	"glock-0.bxpm",
+	"glock-1.bxpm",
+	"glock-2.bxpm",
+	"glock-3.bxpm",
+	"glock-4.bxpm",
+	"glock-5.bxpm"
 };
 
 # define MINIGUN_TEXTURE_AMOUNT	6
-static const t_id_and_path	g_minigun_textures[MINIGUN_TEXTURE_AMOUNT] =
+static const char	*g_minigun_textures[MINIGUN_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"minigun-0.bxpm"},
-	{1, BXPM_PATH"minigun-1.bxpm"},
-	{2, BXPM_PATH"minigun-2.bxpm"},
-	{3, BXPM_PATH"minigun-3.bxpm"},
-	{4, BXPM_PATH"minigun-4.bxpm"},
-	{5, BXPM_PATH"minigun-5.bxpm"}
+	"minigun-0.bxpm",
+	"minigun-1.bxpm",
+	"minigun-2.bxpm",
+	"minigun-3.bxpm",
+	"minigun-4.bxpm",
+	"minigun-5.bxpm"
 };
 
 # define KAR_TEXTURE_AMOUNT	38
-static const t_id_and_path	g_kar_textures[KAR_TEXTURE_AMOUNT] =
+static const char	*g_kar_textures[KAR_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"kar-0.bxpm"},
-	{1, BXPM_PATH"kar-1.bxpm"},
-	{2, BXPM_PATH"kar-2.bxpm"},
-	{3, BXPM_PATH"kar-3.bxpm"},
-	{4, BXPM_PATH"kar-4.bxpm"},
-	{5, BXPM_PATH"kar-5.bxpm"},
-	{6, BXPM_PATH"kar-6.bxpm"},
-	{7, BXPM_PATH"kar-7.bxpm"},
-	{8, BXPM_PATH"kar-8.bxpm"},
-	{9, BXPM_PATH"kar-9.bxpm"},
-	{10, BXPM_PATH"kar-10.bxpm"},
-	{11, BXPM_PATH"kar-11.bxpm"},
-	{12, BXPM_PATH"kar-12.bxpm"},
-	{13, BXPM_PATH"kar-13.bxpm"},
-	{14, BXPM_PATH"kar-14.bxpm"},
-	{15, BXPM_PATH"kar-15.bxpm"},
-	{16, BXPM_PATH"kar-16.bxpm"},
-	{17, BXPM_PATH"kar-17.bxpm"},
-	{18, BXPM_PATH"kar-18.bxpm"},
-	{19, BXPM_PATH"kar-19.bxpm"},
-	{20, BXPM_PATH"kar-20.bxpm"},
-	{21, BXPM_PATH"kar-21.bxpm"},
-	{22, BXPM_PATH"kar-22.bxpm"},
-	{23, BXPM_PATH"kar-23.bxpm"},
-	{24, BXPM_PATH"kar-24.bxpm"},
-	{25, BXPM_PATH"kar-25.bxpm"},
-	{26, BXPM_PATH"kar-26.bxpm"},
-	{27, BXPM_PATH"kar-27.bxpm"},
-	{28, BXPM_PATH"kar-28.bxpm"},
-	{29, BXPM_PATH"kar-29.bxpm"},
-	{30, BXPM_PATH"kar-30.bxpm"},
-	{31, BXPM_PATH"kar-31.bxpm"},
-	{32, BXPM_PATH"kar-32.bxpm"},
-	{33, BXPM_PATH"kar-33.bxpm"},
-	{34, BXPM_PATH"kar-34.bxpm"},
-	{35, BXPM_PATH"kar-35.bxpm"},
-	{36, BXPM_PATH"kar-36.bxpm"},
-	{37, BXPM_PATH"kar-37.bxpm"}
+	"kar-0.bxpm",
+	"kar-1.bxpm",
+	"kar-2.bxpm",
+	"kar-3.bxpm",
+	"kar-4.bxpm",
+	"kar-5.bxpm",
+	"kar-6.bxpm",
+	"kar-7.bxpm",
+	"kar-8.bxpm",
+	"kar-9.bxpm",
+	"kar-10.bxpm",
+	"kar-11.bxpm",
+	"kar-12.bxpm",
+	"kar-13.bxpm",
+	"kar-14.bxpm",
+	"kar-15.bxpm",
+	"kar-16.bxpm",
+	"kar-17.bxpm",
+	"kar-18.bxpm",
+	"kar-19.bxpm",
+	"kar-20.bxpm",
+	"kar-21.bxpm",
+	"kar-22.bxpm",
+	"kar-23.bxpm",
+	"kar-24.bxpm",
+	"kar-25.bxpm",
+	"kar-26.bxpm",
+	"kar-27.bxpm",
+	"kar-28.bxpm",
+	"kar-29.bxpm",
+	"kar-30.bxpm",
+	"kar-31.bxpm",
+	"kar-32.bxpm",
+	"kar-33.bxpm",
+	"kar-34.bxpm",
+	"kar-35.bxpm",
+	"kar-36.bxpm",
+	"kar-37.bxpm"
 };
 
 # define LAUNCHER_TEXTURE_AMOUNT	14
-static const t_id_and_path	g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
+static const char	*g_launcher_textures[LAUNCHER_TEXTURE_AMOUNT] =
 {
-	{0, BXPM_PATH"launcher-0.bxpm"},
-	{1, BXPM_PATH"launcher-1.bxpm"},
-	{2, BXPM_PATH"launcher-2.bxpm"},
-	{3, BXPM_PATH"launcher-3.bxpm"},
-	{4, BXPM_PATH"launcher-4.bxpm"},
-	{5, BXPM_PATH"launcher-5.bxpm"},
-	{6, BXPM_PATH"launcher-6.bxpm"},
-	{7, BXPM_PATH"launcher-7.bxpm"},
-	{8, BXPM_PATH"launcher-8.bxpm"},
-	{9, BXPM_PATH"launcher-9.bxpm"},
-	{10, BXPM_PATH"launcher-10.bxpm"},
-	{11, BXPM_PATH"launcher-11.bxpm"},
-	{12, BXPM_PATH"launcher-12.bxpm"},
-	{13, BXPM_PATH"launcher-13.bxpm"}
+	"launcher-0.bxpm",
+	"launcher-1.bxpm",
+	"launcher-2.bxpm",
+	"launcher-3.bxpm",
+	"launcher-4.bxpm",
+	"launcher-5.bxpm",
+	"launcher-6.bxpm",
+	"launcher-7.bxpm",
+	"launcher-8.bxpm",
+	"launcher-9.bxpm",
+	"launcher-10.bxpm",
+	"launcher-11.bxpm",
+	"launcher-12.bxpm",
+	"launcher-13.bxpm"
 };
 
 typedef struct s_entity_data

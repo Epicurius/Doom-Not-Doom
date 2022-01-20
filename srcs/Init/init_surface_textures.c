@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/12/28 15:07:29 nneronin
- * Updated: 2022/01/14 10:55:50 nneronin
+ * Updated: 2022/01/20 14:15:54 Niklas Neronin
  */
 
 #include "doom.h"
@@ -14,7 +14,7 @@ static void	parse_wtx_texture(t_doom *doom, unsigned char *wtx_bool, int id)
 	if (!wtx_bool[id])
 	{
 		wtx_bool[id] = TRUE;
-		ft_strcpy(&doom->root[doom->rlen], g_map_textures[id].path);
+		ft_strcpy(&doom->root[doom->rlen + BXPM_LEN], g_map_textures[id]);
 		read_bxpm(&doom->mtx[id], doom->root);
 	}
 }
@@ -30,7 +30,7 @@ static void	parse_stx_texture(t_doom *doom, unsigned char *stx_bool, int id)
 		i = id;
 		while (i < id + 6)
 		{
-			ft_strcpy(&doom->root[doom->rlen], g_skybox_textures[i].path);
+			ft_strcpy(&doom->root[doom->rlen + BXPM_LEN], g_skybox_textures[i]);
 			read_bxpm(&doom->stx[i], doom->root);
 			i++;
 		}

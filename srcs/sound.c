@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/07 13:54:10 nneronin
- * Updated: 2022/01/18 13:11:25 Niklas Neronin
+ * Updated: 2022/01/20 14:12:01 Niklas Neronin
  */
 
 #include "doom.h"
@@ -72,12 +72,13 @@ void	init_sound(t_doom *doom)
 	Mix_AllocateChannels(32);
 	init_custom_sounds(doom);
 	i = -1;
+	ft_strcpy(&doom->root[doom->rlen], WAV_PATH);
 	while (++i < WAV_AMOUNT)
 	{
-		ft_strcpy(&doom->root[doom->rlen], g_sounds[i].path);
-		doom->sound[g_sounds[i].id] = Mix_LoadWAV(doom->root);
-		if (doom->sound[g_sounds[i].id] == NULL)
-			LG_ERROR("Reading[%d]: %s", g_sounds[i].id, doom->root);
+		ft_strcpy(&doom->root[doom->rlen + WAV_LEN], g_sounds[i]);
+		doom->sound[i] = Mix_LoadWAV(doom->root);
+		if (doom->sound[i] == NULL)
+			LG_ERROR("Reading[%d]: %s", i, doom->root);
 	}
 	init_volume(doom);
 	if (doom->game.mode == ENDLESS && !doom->settings.debug)
