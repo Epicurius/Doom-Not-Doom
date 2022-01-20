@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:22:48 by nneronin          #+#    #+#             */
-/*   Updated: 2022/01/17 13:02:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:24:47 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ void	buymenu_init(t_buymenu *buymenu, SDL_Window *window)
 	buymenu->run = 1;
 	buymenu->main_win = ft_memalloc(sizeof(t_ui_window));
 	ui_window_new_from(buymenu->main_win, window);
-	ui_window_texture_pos_set(buymenu->main_win, vec2i(1920, 1080));
 	ui_window_id_set(buymenu->main_win, "main_win");
 	add_to_list(&buymenu->layout.windows, buymenu->main_win, UI_TYPE_WINDOW);
 	ui_layout_load(&buymenu->layout, root, "resources/UI/buy_menu.ui");
-	buymenu->main_win = ui_layout_get_window(&buymenu->layout, "main_win");
 	buymenu->close_button
 		= ui_layout_get_element(&buymenu->layout, "close_button");
 	weapon_menu_init(buymenu);
