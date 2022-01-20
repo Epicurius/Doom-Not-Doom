@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/08 11:32:08 nneronin
- * Updated: 2022/01/17 14:48:18 Niklas Neronin
+ * Updated: 2022/01/20 14:30:41 Niklas Neronin
  */
 
 #include "doom.h"
@@ -13,7 +13,7 @@
  */
 static void	launcher(void)
 {
-	char *const	arr[] = {"../wolf3d", NULL};
+	char *const	arr[] = {"./launcher", NULL};
 
 	execv(arr[0], arr);
 }

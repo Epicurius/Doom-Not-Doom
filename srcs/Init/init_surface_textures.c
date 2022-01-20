@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/12/28 15:07:29 nneronin
- * Updated: 2022/01/20 14:15:54 Niklas Neronin
+ * Updated: 2022/01/20 14:47:37 Niklas Neronin
  */
 
 #include "doom.h"
@@ -16,6 +16,10 @@ static void	parse_wtx_texture(t_doom *doom, unsigned char *wtx_bool, int id)
 		wtx_bool[id] = TRUE;
 		ft_strcpy(&doom->root[doom->rlen + BXPM_LEN], g_map_textures[id]);
 		read_bxpm(&doom->mtx[id], doom->root);
+		doom->mtx[id].shade = malloc(sizeof(uint32_t *) * 200);
+		if (doom->mtx[id].shade == NULL)
+			LG_ERROR("Texture %s shade malloc.", doom->root);
+		ft_memset(doom->mtx[id].shade, 0, sizeof(uint32_t *) * 200);
 	}
 }
 

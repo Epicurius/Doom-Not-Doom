@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/20 14:21:13 Niklas Neronin
+ * Updated: 2022/01/20 14:29:46 Niklas Neronin
  */
 
 #ifndef RESOURCES_H
@@ -15,7 +15,7 @@
 
 # include "enum.h"
 
-/*	All bxpm and wav paths 2170 bytes total. */
+/*	All bxpm (140) and wav (18) paths 2170 bytes total. */
 
 static const char	*g_sounds[WAV_AMOUNT] =
 {

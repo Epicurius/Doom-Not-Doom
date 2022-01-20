@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/06/19 17:43:01 nneronin
- * Updated: 2021/12/16 13:26:54 nneronin
+ * Updated: 2022/01/20 14:50:32 Niklas Neronin
  */
 
 #include "doom.h"
@@ -56,10 +56,13 @@ void	free_shade_shade(t_bxpm *bxpm)
 	int	i;
 
 	i = -1;
+	if (bxpm->shade == NULL)
+		return ;
 	while (++i < 100)
 		if (bxpm->shade[i])
 			free(bxpm->shade[i]);
 	while (++i < 200)
 		if (bxpm->shade[i])
 			free(bxpm->shade[i]);
+	free(bxpm->shade);
 }

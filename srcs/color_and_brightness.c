@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 10:42:32 nneronin
- * Updated: 2022/01/07 16:27:09 nneronin
+ * Updated: 2022/01/20 14:38:57 Niklas Neronin
  */
 
 #include "doom.h"
@@ -68,7 +68,7 @@ static void	shade_bxpm(t_doom *doom, int texture, int light)
 		bxpm->shade[100] = bxpm->clr;
 	else
 	{
-		bxpm->shade[light] = protalloc(sizeof(Uint32 *) * bxpm->clr_nb);
+		bxpm->shade[light] = protalloc(sizeof(Uint32) * bxpm->clr_nb);
 		while (++i < bxpm->clr_nb)
 		{
 			if (bxpm->clr[i] == 0xFF800080)

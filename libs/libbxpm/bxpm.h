@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/17 17:15:02 nneronin
- * Updated: 2022/01/02 13:52:26 nneronin
+ * Updated: 2022/01/20 14:37:43 Niklas Neronin
  */
 
 #ifndef BXPM_H
@@ -25,7 +25,7 @@ typedef struct s_bxpm
 	int32_t			pix_nb;
 	uint32_t		*clr;
 	unsigned short	*pix;
-	uint32_t		*shade[200];
+	uint32_t		**shade;
 }					t_bxpm;
 
 /*

@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/05 13:20:28 nneronin
- * Updated: 2022/01/02 13:21:59 nneronin
+ * Updated: 2022/01/20 14:43:48 Niklas Neronin
  */
 
 #include "bxpm.h"
@@ -24,6 +24,7 @@ static int	read_bxpm_header(FILE *fd, t_bxpm *bxpm)
 	bxpm->pix = malloc(sizeof(unsigned short) * bxpm->pix_nb);
 	if (!bxpm->pix)
 		return (0);
+	bxpm->shade = NULL;
 	return (1);
 }
 
