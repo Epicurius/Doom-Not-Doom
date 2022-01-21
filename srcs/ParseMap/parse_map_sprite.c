@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/04/24 15:45:28 nneronin
- * Updated: 2022/01/18 13:11:25 Niklas Neronin
+ * Updated: 2022/01/21 11:17:55 Niklas Neronin
  */
 
 #include "doom.h"
@@ -40,6 +40,7 @@ void	parse_wsprite(t_doom *doom, int nb, char **arr)
 	sprite->scale_w = (ft_atof(arr[5]) / 100) * doom->map_scale;
 	sprite->state = wsprite_state(arr[6]);
 	sprite->trigger = -1;
+	sprite->time = 0;
 }
 
 /*

@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/08 11:32:08 nneronin
- * Updated: 2022/01/20 14:30:41 Niklas Neronin
+ * Updated: 2022/01/21 11:14:41 Niklas Neronin
  */
 
 #include "doom.h"
@@ -28,7 +28,6 @@ static void	launcher(void)
 static inline void	game_loop(t_doom *doom)
 {
 	game_mode(doom);
-	map_events(doom);
 	precompute_walls(doom);
 	precompute_skybox(doom);
 	draw_map(doom);
@@ -38,6 +37,7 @@ static inline void	game_loop(t_doom *doom)
 	movement(doom);
 	poll_event(doom);
 	tpool_wait(&doom->tpool);
+	map_events(doom);
 	draw_projectiles(doom);
 	draw_entities(doom);
 	draw_crosshair(doom);

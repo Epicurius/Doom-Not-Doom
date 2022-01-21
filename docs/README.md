@@ -1,56 +1,79 @@
 <img src="./DoomNotDoom.png" alt="Engine_Flow" width="900"/></p>
 
-A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Library.</n>
-Inspired on the Build engine. Works only on OSX, (windows and linux in the future).
-
-**Work in Progress**
+A first person 3D game made in C with SDL2 and no hardware acceleration or 3rd party 3D Libraries.
+Writen in accordance to the [Norm](TheNorm.md).
+* [Features](#features)
 * [Installation](#installation)
 * [Controls](#controls)
 * [Engine](#engine)
 * [Map File](#map-file)
+* [Textures](#textures)
 * [BXPM](#bxpm-image-format)
 * [Events](#events)
-* [Features](#features)
----
+* [Benchmark](#benchmark)
+* [Stats](#game-stats)
+
 <img src="./cover_image.jpg" alt="cover_image" width="900"/></p>
-### Installation
-# !! WORK IN PROGRESS !! The game works but there is no playable map, yet..
+
+---
+
+## Features
+
+- 360 degree seamless skybox.
+- Bullet holes left on walls after shooting.
+- A Store where weapons, ammo, armour and player upgrades can be bought.
+- Rifts (Portals) that spawn entities.
+- 2 Game modes, Story and Endless.
+- Multithreading.
+- Map events, flickering light, moving doors etc.
+- Clickable or shootable buttons and position triggers.
+- User settings, Window size, FOV, Difficulty etc.
+- Wall collision and wall slide.
+- AI Dodge/Danger.
+- Many more...
+
+---
+
+## Installation
 
 There are 3 options:
 
-If you just want to play the game, does not need compiling.</n>
-- [Ready to play! OSX](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive")</n>
-- Soon! WIN
+If you just want to play the game, does not need compiling.
+> [Ready to play for Mac!](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive")
+> [Ready to play for Windows!](https://drive.google.com/uc?export=download&id=1nbvBJ3ODNWr-jG7rfbAbiHkspc88MzMb "Google Drive")
+> **Note:**	Mac version should work on Linux.
 
-Or if you want the source code and compile it.
+Or if you want the source code.
 ```sh
 git clone https://github.com/Epicurius/Doom-Not-Doom.git
 cd Doom-not-Doom && make
-./doom resources/MAPS/AllText.dnds
+./doom resources/MAPS/Showcase.dnds
 ```
-Or try it with extra features like a map_editor. This is deprecated and is not guaranteed to compile/work.
-Check it out [here](https://github.com/J0NY97/doom_nukem.git).
-```
+Or try it with extra features like a map_editor by [JONY97](https://github.com/J0NY97), check it out [here](https://github.com/J0NY97/doom_nukem.git).
+```sh
 git clone --recurse-submodule https://github.com/J0NY97/doom_nukem.git
 cd doom_nukem && make
 ./launcher
 ```
-
+> **Note:** This version of doom is a bit older.
 ---
-### Controls
+
+## Controls
 ```
-	WASD/Arrow Keys 	-	Move
-	Space			-	Jump
-	Mouse			-	Look around
-	Shift			-	Sprint
-	Control			-	Crouch
-	Left click		-	Shoot
-	E			-	Use
-	Tab			-	Show map
-	Scroll Wheel		-	Zoom map
-	ESC/Q			-	Quit
-	`			-	Unstuck player
+	WASD/Arrow Keys	- Move		
+	Space			- Jump		
+	Mouse			- Look around
+	Shift			- Sprint		
+	Control			- Crouch		
+	Left click		- Shoot		
+	E				- Use		
+	Hold Tab		- Show map	
+	Scroll Wheel	- Zoom map	
+	ESC/Q			- Quit		
+	+/-				- Volume		
+	`				- Unstuck player
 ```
+
 ---
 
 ##	Engine
@@ -64,10 +87,10 @@ Short introduction on how the engine works.
 * [Collision Detection](#collision-detection)
 
 ##### Engine Flow
-When designing and building the game engine my priority was performance (FPS) over features.</n>
-In my mind a game with many features but low performance is worse that the opposite,</n>
-so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)</n>
-multithreading (pthreads) was my best option.</n>
+When designing and building the game engine my priority was performance (FPS) over features.
+In my mind a game with many features but low performance is worse that the opposite,
+so with the constraints of no hardware acceleration (GPU) and no 3rd party 3D Library (OpenGl)
+multithreading (pthreads) was my best option.
 
 <img src="./DnD_Engine_Flow.jpg" alt="Engine_Flow" width="900"/></p>
 
@@ -106,9 +129,9 @@ multithreading (pthreads) was my best option.</n>
 
 
 ##### Map Drawing
-To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.</n>
-Each vertical piece is self sufficient from start to end, which enabled them to render and draw on the same surface at the same time,</n>
-while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.</n>
+To maximize on performance the map surfaces are calculated first so that the screen can be split into width amount of vertical pieces.
+Each vertical piece is self sufficient from start to end, which enabled them to render and draw on the same surface at the same time,
+while the main thread can do tasks that don't require the screen surface, e.g. collision detection, precompute AI.
 And when all map surfaces have been drawn no more calculations are needed for the rest of the rendering, e.g. Entity rendering.
 
 The engine uses a z-buffer to determine when entities and projetile should be draw. The z-buffer is set each frame when the map surfaces are drawn but not used.
@@ -116,46 +139,47 @@ This is because of the way the map is drawn, this means no compares are needed w
 Only projectiles nad entites use z-buffer to compare if each pixel should be drawn. The only down side to this method is that there is no simple way to implement render distance.
 
 ##### Map rendering on one thread, first monochrome then with texture.</center>
-<img src="./map_render.gif" alt="Engine_Flow" width="900"/></n>
+<img src="./map_render.gif" alt="Engine_Flow" width="900"/>
 
-When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.</n>
-each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment</n>
-(black part in the above gif) and start from the beginning.</n>
-When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.</n>
+When rendering/drawing the map surfaces .e.g walls, floor and ceiling, a recursive approach is used.
+each vertical segment starts with player sector wall, if the wall has a neighbor it calls itself with a reduced screen segment
+(black part in the above gif) and start from the beginning.
+When a solid wall is hit the engine draws the wall and starts to backtrack and drawing any see-through walls.
 
 ##### Skybox
 
-Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.</n>
-The skybox box is a 10x10x10 box where the player is always in the middle, the box also moves with the player creating the illusion that there is a vast distance.
+Skybox rendering is similar to normal map rendering except for the "walls" of the skybox are not static.
+The skybox box is a `10x10x10` box where the player is always in the middle, the box also moves with the player creating the illusion that there is a vast distance.
 
 ##### AI
 
-Entities have 4 states IDLE, MOVE, ATTACK and DEATH, static entities use only IDLE.</n>
-Alive/non-static entities have a detection radius and a view cone, if their line of sight collides</n>
-with the player they will get the state MOVE and try to get into their attack range.</n>
-When the entity is inside their attack range they will get the state ATTACK and start attacking the player.</n>
+Entities have 4 states **IDLE**, **MOVE**, **ATTACK**, **DEATH** static entities use only **IDLE**.
+Animate/non-static entities have a detection radius and a view cone,
+if their line of sight collides with the player they will get the state **MOVE**
+and try to get into their attack range.
+When the entity is inside their attack range they will get the state ATTACK and start attacking the player.
 If the entities health drops below 1 the state will be set to DEATH and when all the death frames have been played the entity is removed.
-During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.</n>
+During IDLE state, non static entities have a random chance of moving into a radom direction, and if an entity is attacking or pursuing a player while the players crosshair is on the entity the entity will try to move and dodge, to avoid getting shot.
 
-<img src="./frame.jpg" alt="Engine_Flow" width="800"/></n>
-Each entity frames are divided into the entity states and into FRAME and ANGLE.</n>
-Take for example the above image, it has move animation of 8 frames with each having 3 angles.</n>
-When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.</n>
-If an entity has 1 angle the entity will always face the player.</n>
+<img src="./frame.jpg" alt="Engine_Flow" width="800"/>
+Each entity frames are divided into the entity states and into FRAME and ANGLE.
+Take for example the above image, it has move animation of 8 frames with each having 3 angles.
+When moving every 120 degrees (360 / 3) around the entity will show a different frame angle.
+If an entity has 1 angle the entity will always face the player.
 So a entity frame coordinates can be derived from ```doom->eframes[ENTITY].pos[STATE][FRAME][ANGLE]```;
 
 Entity presets can be found from inc/resources.h
 
 ##### Shooting
 
-Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,</n>
-and the player has pressed left click then that entity has been shot.</n>
-No bullet collision detection algorithm is required.</n>
+Shooting is very simple, when each entity is drawn if an entity pixel is the middle of the screen,
+and the player has pressed left click then that entity has been shot.
+No bullet collision detection algorithm is required.
 
 ##### Collision Detection
 
-Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.</n>
-It consists of 3 main parts:</n>
+Collision detection has to keep track of velocity, position and sector, this makes collision detection a bit tricky.
+It consists of 3 main parts:
 
 ```
 Vertical_collision():
@@ -179,17 +203,33 @@ Slide_collision():
 	Else change x/y velocity appropriately.
 ```
 When all collision detection has been checked, add velocity to entity position.
-If entity position is not in original sector, find correct sector from visited sectors list.
-
-
+If entity position is not in original sector, find correct sector from visited sectors list. Otherwise kill.
 
 ---
+
+##	Textures
+
+Scaling of textures is preformed by taking the width and height of the wall
+and dividing it into individual squares.
+Each square is 1 unit, so if scale is 1 fit the wall texture in each square.
+If scale is set to 4, 1/8 of the texture per square or 4x4 squares per texture.
+Similar to [Texels](https://en.wikipedia.org/wiki/Texel_(graphics) "Wikipedia"), thou didn't know of it before making my texture scaling.
+In hind site making separate width and height scale would have made scaling prettier.
+
+<img src="./Texel.jpg" alt="smile" width="600"/>
+
+This insures that the size of a texture does not matter when creating the map.
+> **Note:** In the above example if the image where 512x512 the wall would look the same.
+>	except for a bit more blurry.
+
+---
+
 ## BXPM Image Format
 
-The game required to have different light levels, for that to work each pixel of</n>
-a given texture had to brightened or darkened to achieve the desired effect.</n>
-Each frame all sectors screen pixels with a custom light level had to be calculated.</n>
-To improve performance BXPM image format was created.</n>
+The game required to have different light levels, for that to work each pixel of
+a given texture had to brightened or darkened to achieve the desired effect.
+Each frame all sectors screen pixels with a custom light level had to be calculated.
+To improve performance BXPM image format was created.
 
 BXPM is split into three parts:
 ```
@@ -218,23 +258,24 @@ typedef struct s_bxpm
 	int32_t			clr_nb;		//Unique color amount
 	int32_t			pix_nb;		//Pixel amount
 	uint32_t		*clr;		//Unique colors
-	unsigned short		*pix:		//Pixels ids
+	uint16_t		*pix:		//Pixels index
 	uint32_t		**shade;	//Unique color shade
 }					t_bxpm;		
 ```
-This makes the BXPM file a lot smaller than a BMP, which also speeds up the parsing.</n>
-But now instead of calculating pixel amount we need only calculate the color amount.</n>
-We can do it at the start, and save each light level into uint32_t **shade,</n>
-which will occupy clr_nb * 32 bytes per unique light level, so during runtime no</n>
-light level calculations are done.</n>
+This makes the BXPM file a lot smaller than a BMP, which also speeds up the parsing.
+But now instead of calculating pixel amount we need only calculate the color amount.
+We can do it at the start, and save each light level into uint32_t **shade,
+which will occupy clr_nb * 32 bytes per unique light level, so during runtime no
+light level calculations are done.
+> **Note:** The images used where specificity edited to have as few unique colors as possible.
 
-If you want to take a look at how it works the library is at root libs/libbxpm.</n>
-And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)</n>
+If you want to take a look at how it works the library is at root libs/libbxpm.
+And in ./converter/ there is a bmp to bxpm converter. `./converter/run.sh FILE.bmp`
 
 <img src="./smile.png" alt="smile" width="200"/>
 
 ```c
-//Visualization of the above (10x10)Image in BXPM format divided by commas, actual BXPM is compressed.
+//Visualization of the above (10x10)Image in BXPM format divided by commas, actual BXPM is not readable.
 10,10,11,100,24,0xffffffff,0xff000000,0xff0032ff,0xff00ff00,0xff00fbff,0xffef00ff,0xffff6000,0xff00ffb5,0xffffd200, 0xffff0000,0xffffff00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,10,0,0,0,0,0,0,9,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,8,0,0,0,5,0,0,0,0,6,0,0,0,0,0,1,2,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ```
 
@@ -242,10 +283,10 @@ And in game/bmp_to_bxpm there is a bmp to bxpm converter. (./converter FILE.bmp)
 
 ## Events
 
-There are 7 events in DnD, these events are parsed through the map file.
-All events have a trigger, SECTOR, CLICK, SHOOT and NULL, these determine when the event should occur.
-SECTOR triggers when player is in a specific sector, CLICK & SHOOT pertains to wall sprites,
-and NULL is a infinite loop.
+There are 9 events in DnD, these events are parsed through the map file.
+All events have a trigger, SECTOR, CLICK, SHOOT and NULL, these determine when 
+the event should occur. SECTOR triggers when player is in a specific sector, 
+CLICK & SHOOT pertains to wall sprites, and NONE is a infinite loop.
 
 Floor and ceiling events move the corresponding surfaces on th e y axis,
 they can be used to make elevators, garage doors and puzzle rooms.
@@ -255,6 +296,7 @@ Audio event plays a sound, the sound file path is passed with the map file,
 this makes it possible to add any sound you want without recompilation.
 Spawn event is used to spawn enemies, so that the engine does not need to handle them before the player is near.
 Light changes the sectors light level e.g. flickering lights and wall light switches.
+Win end the game and shows time to complete and kills.
 ```
 Ceiling		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	min		max		speed
 Floor		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	min		max		speed
@@ -263,33 +305,28 @@ Hazard		SECTOR				trigger_ID	 event_sector
 Audio		SHOOT/CLICK/SECTOR		trigger_ID	 path_to_audio
 Spawn		SHOOT/CLICK/SECTOR		trigger_ID	 entity_id		x		y		z		yaw
 Light		SHOOT/CLICK/SECTOR/NONE		trigger_ID	 event_sector	light_lvl_to_flicker_to
+Win			SHOOT/CLICK/SECTOR/		trigger_ID
 ```
 ----
 
-## Features
+## Benchmark
 
-- 360 degree seamless skybox.
-- Bullet holes left on walls after shooting.
-- A Store where weapons, ammo, armour and player upgrades can be bought.
-- Rifts (Portals) that spawn entities.
-- 2 Game modes, Story and Endless.
-- Multithreading.
-- Map events, flickering light, moving doors etc.
-- Clickable or shootable buttons and position triggers.
-- User settings, Window size, FOV, Difficulty etc.
-- Wall collision and wall slide.
-- AI Dodge/Danger.
-- Many more...
+MacOS Mojave, 3 GHz Intel Core i5, 8 GB 2667 MHz DDR4
+|FPS|WindowSize|RenderResolution|CPU Cores|
+|-|-|-|-|
+|~ 110|1920x1080|100%|6|
+|~ 50|2560x1440|100%|6|
+|~ 130|1920x1080|80%|6|
+|~ 35|1920x1080|80%|1|
 ---
-
 
 #### Map File
 
-The map is built using vertices, floors, ceiling, walls and sectors.</n>
-Vertices are x and y floats that describe a position.</n>
-Walls are a line segment connected to 2 vertices.</n>
-Sectors are a concave shape, consisting of 3 or more clockwise connected walls.</n>
-Each sector has its own floor and ceiling.</n>
+The map is built using vertices, floors, ceiling, walls and sectors.
+Vertices are x and y floats that describe a position.
+Walls are a line segment connected to 2 vertices.
+Sectors are a concave shape, consisting of 3 or more clockwise connected walls.
+Each sector has its own floor and ceiling.
 Map files have the extension .dnds for story mode and .dnde for endless.
 
 <img src="./map.jpg" alt="Engine_Flow" width="700"/></p>
@@ -394,5 +431,6 @@ AC		- Action
 |Spooky	|20|200|20|180|200|70|70|FALSE|FALSE|
 |Ghost	|20|1|20|70|200|40|20|FALSE|FALSE|
 |Rift	|20|0|0|0|0|0|0|FALSE|TRUE|
-<img src="./GridMap.png" alt="Engine_Flow" width="700"/></p>
+<img src="./GridMap.png" alt="SectorMeshes" width="700"/></p>
 
+---

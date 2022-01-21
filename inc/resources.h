@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/20 17:14:48 Niklas Neronin
+ * Updated: 2022/01/21 11:27:10 Niklas Neronin
  */
 
 #ifndef RESOURCES_H
@@ -274,7 +274,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.scale = 25,
 		.height = 7,
 		.hitbox_radius = 5,
-		.speed = 20,
+		.speed = 10,
 		.move = TRUE,
 		.view_distance = 200,
 		.detection_radius = 70,
@@ -294,7 +294,7 @@ static const t_entity_data	g_entity_data[ENTITY_AMOUNT] =
 		.scale = 18,
 		.height = 7,
 		.hitbox_radius = 5,
-		.speed = 20,
+		.speed = 10,
 		.move = TRUE,
 		.view_distance = 200,
 		.detection_radius = 40,
