@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/07/05 09:00:24 nneronin
- * Updated: 2022/01/18 13:11:58 Niklas Neronin
+ * Updated: 2022/01/21 14:03:03 Niklas Neronin
  */
 
 #include "doom.h"
@@ -74,5 +74,5 @@ void	light_event(t_event *event, int nb, char **arr)
 	if (nb < 5)
 		LG_ERROR("Invalid argument for event %s.", arr[0]);
 	event->event_sector = ft_atoi(arr[4]);
-	event->light = ft_atoi(arr[5]);
+	event->light = ft_clamp(ft_atoi(arr[5]) + 100, 0, 199);
 }
