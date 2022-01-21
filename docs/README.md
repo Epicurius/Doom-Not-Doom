@@ -40,7 +40,6 @@ There are 3 options:
 
 If you just want to play the game, does not need compiling.
 > [Ready to play for Mac!](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive")
-> [Ready to play for Windows!](https://drive.google.com/uc?export=download&id=1nbvBJ3ODNWr-jG7rfbAbiHkspc88MzMb "Google Drive")
 > **Note:**	Mac version should work on Linux.
 
 Or if you want the source code.
@@ -60,18 +59,18 @@ cd doom_nukem && make
 
 ## Controls
 ```
-	WASD/Arrow Keys	- Move		
-	Space			- Jump		
-	Mouse			- Look around
-	Shift			- Sprint		
-	Control			- Crouch		
-	Left click		- Shoot		
-	E				- Use		
-	Hold Tab		- Show map	
-	Scroll Wheel	- Zoom map	
-	ESC/Q			- Quit		
-	+/-				- Volume		
-	`				- Unstuck player
+WASD/Arrow Keys	- Move		
+Space		- Jump		
+Mouse		- Look around
+Shift		- Sprint		
+Control		- Crouch		
+Left click	- Shoot		
+E		- Use		
+Hold Tab	- Show map	
+Scroll Wheel	- Zoom map	
+ESC/Q		- Quit		
++/-		- Volume		
+`		- Unstuck player
 ```
 
 ---
