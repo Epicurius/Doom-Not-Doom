@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2020/10/15 10:43:38 nneronin
- * Updated: 2021/12/11 14:36:27 nneronin
+ * Updated: 2022/01/22 11:57:45 Niklas Neronin
  */
 
 #include "doom.h"
@@ -50,6 +50,6 @@ void	poll_event(t_doom *doom)
 		doom->player.action = CLICKING;
 	if (doom->settings.debug && key[SDL_SCANCODE_F])
 		doom->player.flight = doom->player.flight == FALSE;
-	if (key[SDL_SCANCODE_EQUALS] || key[SDL_SCANCODE_MINUS])
-		set_volume(key[SDL_SCANCODE_EQUALS]);
+	if (key[SDL_SCANCODE_I] || key[SDL_SCANCODE_O])
+		set_volume(key[SDL_SCANCODE_O]);
 }

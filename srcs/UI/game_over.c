@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/08 18:28:56 nneronin
- * Updated: 2022/01/18 13:11:25 Niklas Neronin
+ * Updated: 2022/01/22 12:02:37 Niklas Neronin
  */
 
 #include "doom.h"
@@ -106,7 +106,7 @@ static void	blit_info(t_doom *doom)
 	SDL_FreeSurface(surf);
 	ft_strcpy(&doom->root[doom->rlen], "resources/TTF/digital.ttf");
 	amaz = TTF_OpenFont(doom->root, 15);
-	surf = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot", clr);
+	surf = TTF_RenderText_Blended(amaz, "'P' to Save Screen Shot", clr);
 	dstr = (SDL_Rect){(dstr.x + dstr.w / 2) - surf->w / 2,
 		doom->surface->h - surf->h - 5, surf->w, surf->h};
 	SDL_BlitSurface(surf, NULL, doom->surface, &dstr);
@@ -123,7 +123,7 @@ void	game_over(t_doom *doom)
 	SDL_Event	event;
 	int			screen_shot;
 
-	Mix_HaltChannel(CHANNEL_STEPS);
+	Mix_HaltChannel(-1);
 	screen_shot = FALSE;
 	blit_title(doom, &dst, doom->player.health);
 	blit_stats(doom, &dst, NULL);
@@ -134,7 +134,7 @@ void	game_over(t_doom *doom)
 		SDL_PollEvent(&event);
 		if (event.key.keysym.sym == SDLK_RETURN)
 			break ;
-		if (event.key.keysym.sym == SDLK_s && !screen_shot)
+		if (event.key.keysym.sym == SDLK_p && !screen_shot)
 			print_screen_shot(doom, &screen_shot);
 	}
 }

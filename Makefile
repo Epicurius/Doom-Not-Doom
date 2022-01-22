@@ -1,24 +1,23 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/26 11:13:50 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/17 11:25:23 by nneronin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#
+# https://github.com/Epicurius
+# 
+# Created: 2022/01/16 14:59:29 Niklas Neronin
+# Updated: 2022/01/16 16:41:21 Niklas Neronin
+#
 
-SHELL_NAME	:= $(shell uname -s)
+SHELL_NAME	= $(shell uname -s)
+CPU = $(firstword $(subst -, ,$(shell gcc -dumpmachine)))
 
-MAKE = mingw32-make
-#MAKE = make
+ifeq ($(CPU), mingw32)
+	MAKE = mingw32-make
+else
+	MAKE = make
+endif
 
 RESOURCES	= resources
 
 all: $(RESOURCES)
-	echo $(SHELL_NAME)
+	@echo "SYSTEM: "$(SHELL_NAME) $(CPU)
 	@$(MAKE) -C ./libs/libft -j6
 	@$(MAKE) -C ./libs/libpf -j6
 	@$(MAKE) -C ./libs/libbxpm -j6
@@ -62,12 +61,10 @@ delete_resources:
 	
 install_framework:
 	@mkdir -p ~/Library/Frameworks
-ifeq ("$(wildcard ~/Library/Frameworks/SDL2*.framework)","")
 	cp -Rf ./libs/SDL_MAC/SDL2.framework ~/Library/Frameworks/
 	cp -Rf ./libs/SDL_MAC/SDL2_ttf.framework ~/Library/Frameworks/
 	cp -Rf ./libs/SDL_MAC/SDL2_image.framework ~/Library/Frameworks/
 	cp -Rf ./libs/SDL_MAC/SDL2_mixer.framework ~/Library/Frameworks/
-endif
 
 delete_framework:
 	rm -rf ~/Library/Frameworks/SDL2.framework

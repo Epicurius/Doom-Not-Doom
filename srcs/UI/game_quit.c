@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/05/20 15:25:14 nneronin
- * Updated: 2022/01/14 10:56:33 nneronin
+ * Updated: 2022/01/22 12:03:20 Niklas Neronin
  */
 
 #include "doom.h"
@@ -19,7 +19,7 @@ static t_bmp	*s_to_save_screen_shot(t_doom *doom)
 
 	ft_strcpy(&doom->root[doom->rlen], "resources/TTF/AmazDoom.ttf");
 	amaz = TTF_OpenFont(doom->root, 25);
-	surface = TTF_RenderText_Blended(amaz, "'S' to Save Screen Shot",
+	surface = TTF_RenderText_Blended(amaz, "'P' to Save Screen Shot",
 			hex_to_sdl_color(0xFFFFFFFF));
 	dstr = (SDL_Rect){doom->surface->w - surface->w - 10,
 		doom->surface->h - surface->h, surface->w, surface->h};
@@ -64,9 +64,9 @@ static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 		if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_y)
 			|| (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q))
 			break ;
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s && !i)
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p && !i)
 		{
-			name = ft_sprintf("%s/Doom%d%d%d.bmp", doom->root, rand() % 0xFFFF);
+			name = ft_sprintf("%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
 			write_bmp(name, bmp);
 			free(name);
 			Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);

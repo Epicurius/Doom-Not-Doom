@@ -2,7 +2,7 @@
  * https://github.com/Epicurius/Doom-Not-Doom
  * 
  * Created: 2021/06/16 09:18:23 nneronin
- * Updated: 2022/01/14 10:55:50 nneronin
+ * Updated: 2022/01/22 12:02:29 Niklas Neronin
  */
 
 #include "doom.h"
@@ -17,7 +17,7 @@ void	game_loading(t_doom *doom)
 	SDL_Event	event;
 	t_bxpm		bxpm;
 
-	Mix_HaltChannel(CHANNEL_STEPS);
+	Mix_HaltChannel(-1);
 	ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameLoad.bxpm");
 	read_bxpm(&bxpm, doom->root);
 	blit_bxpm(doom->surface, &bxpm, doom->surface->w / 2 - bxpm.w / 2,
