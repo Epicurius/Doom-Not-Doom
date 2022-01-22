@@ -123,6 +123,7 @@ void	game_over(t_doom *doom)
 	SDL_Event	event;
 	int			screen_shot;
 
+	Mix_HaltChannel(CHANNEL_STEPS);
 	screen_shot = FALSE;
 	blit_title(doom, &dst, doom->player.health);
 	blit_stats(doom, &dst, NULL);

@@ -87,6 +87,7 @@ void	game_quit(t_doom *doom)
 
 	if (doom->quit != 1)
 		return ;
+	Mix_HaltChannel(CHANNEL_STEPS);
 	SDL_ShowCursor(SDL_ENABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 	SDL_WarpMouseInWindow(doom->win, doom->c.x, doom->c.y);

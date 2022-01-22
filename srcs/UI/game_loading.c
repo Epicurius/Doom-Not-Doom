@@ -17,6 +17,7 @@ void	game_loading(t_doom *doom)
 	SDL_Event	event;
 	t_bxpm		bxpm;
 
+	Mix_HaltChannel(CHANNEL_STEPS);
 	ft_strcpy(&doom->root[doom->rlen], "resources/BXPM/GameLoad.bxpm");
 	read_bxpm(&bxpm, doom->root);
 	blit_bxpm(doom->surface, &bxpm, doom->surface->w / 2 - bxpm.w / 2,

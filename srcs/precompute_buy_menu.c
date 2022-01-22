@@ -13,6 +13,7 @@
  */
 void	precompute_buymenu(t_doom *doom)
 {
+	Mix_HaltChannel(-1);
 	Mix_PlayChannel(CHANNEL_MUSIC, doom->sound[WAV_ELEVATOR_MUSIC], -1);
 	SDL_ShowCursor(SDL_ENABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);

@@ -12,8 +12,8 @@
 
 SHELL_NAME	:= $(shell uname -s)
 
-#MAKE = mingw32-make
-MAKE = make
+MAKE = mingw32-make
+#MAKE = make
 
 RESOURCES	= resources
 

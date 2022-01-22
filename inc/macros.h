@@ -11,8 +11,8 @@
 /*
 ** Sound (Volume: 0 - 128)
 */
-# define DEFAULT_VOLUME					1
-# define VOLUME_MAIN_THEME				64
+# define DEFAULT_VOLUME					16
+# define VOLUME_MAIN_THEME				32
 # define VOLUME_SHOTGUN					32
 # define VOLUME_SCREEN_SHOT				128
 # define VOLUME_INTRO					128
