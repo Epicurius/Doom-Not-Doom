@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 10:30:08 by nneronin          #+#    #+#              #
-#    Updated: 2022/01/16 18:35:43 by nneronin         ###   ########.fr        #
+#    Updated: 2022/01/23 11:40:41 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,14 +107,13 @@ CDIR = srcs
 SRCS = $(addprefix $(CDIR)/, $(RAW))
 OBJS = $(addprefix $(ODIR)/,$(RAW:.c=.o))
 JOHNNY = $(SRCS:.c=.d)
-CFLAGS = -MMD #-Wall -Wextra
+CFLAGS = #-Wall -Wextra -MMD
 
 ifeq ($(SHELL_NAME), Darwin)
 INC =	-I . \
 		-I ../libft \
 		-I ../libpf \
 		-I ../../SDL2.framework/Headers \
-		-I ../../SDL2_image.framework/Headers \
 		-I ../../SDL2_ttf.framework/Headers \
 		-F ../../
 else

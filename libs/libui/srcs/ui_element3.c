@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_element3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:22:36 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/10 19:22:37 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/23 11:41:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ui_element_image_set_from_path(
 
 	if (!image_path)
 		return ;
-	image = IMG_Load(image_path);
+	image = SDL_LoadBMP(image_path);
 	if (!image)
 		return ;
 	ui_element_image_set(elem, state, image);

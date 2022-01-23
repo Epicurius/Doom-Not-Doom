@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_surface2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:24:36 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/22 14:26:56 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/23 11:41:33 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ SDL_Surface	*ui_surface_image_new(char *image_path)
 {
 	SDL_Surface	*surface;
 
-	surface = IMG_Load(image_path);
+	surface = SDL_LoadBMP(image_path);
 	if (!surface)
 		ft_printf("[%s] Error loading image from path. <%s>\n",
 			__FUNCTION__, image_path);

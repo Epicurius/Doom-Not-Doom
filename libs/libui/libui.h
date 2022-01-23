@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:26:30 by jsalmi            #+#    #+#             */
-/*   Updated: 2022/01/16 16:16:13 by nneronin         ###   ########.fr       */
+/*   Updated: 2022/01/23 11:41:46 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBUI_H
 # define SDL_MAIN_HANDLED
 # include "SDL.h"
-# include "SDL_image.h"
 # include "SDL_ttf.h"
 # include "libft.h"
 # include "libpf.h"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buymenu.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:52:41 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/10 20:03:55 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/23 11:42:05 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "libpf.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
-# include "SDL_image.h"
 # include "bxpm.h"
 # include "doom.h"
 

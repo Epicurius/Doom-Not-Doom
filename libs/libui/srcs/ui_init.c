@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:23:06 by jsalmi            #+#    #+#             */
-/*   Updated: 2021/12/11 15:12:19 by jsalmi           ###   ########.fr       */
+/*   Updated: 2022/01/23 11:43:07 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 void	ui_sdl_init(void)
 {
 	SDL_Init(SDL_INIT_VIDEO);
-	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 	TTF_Init();
 }
 
@@ -28,6 +27,5 @@ void	ui_sdl_init(void)
 void	ui_sdl_free(void)
 {
 	TTF_Quit();
-	IMG_Quit();
 	SDL_Quit();
 }
