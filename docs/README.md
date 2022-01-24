@@ -40,7 +40,6 @@ There are 3 options:
 
 If you just want to play the game, does not need compiling.
 > [Ready to play for Mac!](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive")
-> **Note:**	Mac version should work on Linux.
 
 Or if you want the source code.
 ```sh
