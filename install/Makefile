@@ -184,7 +184,7 @@ CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors# -g -fsanitize=add
 else
 
 LIB_INC		+=	-I ./SDL2_includes
-LIBS		+=	-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LIBS		+=	-lSDL2 -lSDL2_ttf -lSDL2_mixer
 CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto #-Werror -Wfatal-errors
 
 endif

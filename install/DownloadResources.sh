@@ -22,6 +22,6 @@ if (( availSpace < reqSpace )); then
 	exit 1
 fi
 filename="resources.zip"
-curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
-curl -Lb ./cookie -# "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
+html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
+curl -Lb ./cookie -s "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename}
 rm cookie
