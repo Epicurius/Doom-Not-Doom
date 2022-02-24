@@ -42,6 +42,7 @@ If you just want to play the game, does not need compiling.
 > [Ready to play for Mac!](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive Mac Version")
 
 > [Ready to play for Win!](https://drive.google.com/uc?export=download&id=1nbvBJ3ODNWr-jG7rfbAbiHkspc88MzMb "Google Drive Windows Version")
+> **Note:** Windows version of doom is missing a library and may not work atm, fixing as soon as possible.
 
 Or if you want the source code.
 ```sh
