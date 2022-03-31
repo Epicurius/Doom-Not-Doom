@@ -266,7 +266,7 @@ typedef struct s_bxpm
 This makes the BXPM file a lot smaller than a BMP, which also speeds up the parsing.
 But now instead of calculating pixel amount we need only calculate the color amount.
 We can do it at the start, and save each light level into uint32_t **shade,
-which will occupy clr_nb * 32 bytes per unique light level, so during runtime no
+which will occupy clr_nb * 8 bytes per unique light level, so during runtime no
 light level calculations are done.
 > **Note:** The images used where specificity edited to have as few unique colors as possible.
 
