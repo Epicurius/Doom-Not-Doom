@@ -52,7 +52,7 @@ $(RESOURCES):
 	@./install/DownloadResources.sh || (exit)
 	@unzip -qq resources.zip
 	@rm -rf resources.zip
-	@rm doom*
+#	@rm doom*
 
 delete_resources:
 	rm -rf SDL2.framework
