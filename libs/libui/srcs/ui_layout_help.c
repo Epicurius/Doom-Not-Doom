@@ -15,25 +15,21 @@
 char	*get_file_content(t_ui_layout *layout, char *file)
 {
 	char	*content;
-	char	*line;
+	char    line[256];
 	char	*trim;
-	size_t	len;
-	FILE	*fd;
+	FILE	*fp;
 
-	fd = fopen(file, "r");
-	line = NULL;
+	fp = fopen(file, "r");
 	content = NULL;
-	while (fd)
+	while (fp)
 	{
-		if (getline(&line, &len, fd) == -1)
+		if (fgets(line, 256, fp) == NULL)
 			break ;
 		trim = ft_supertrim(line);
 		if (trim != NULL && !get_special(layout, trim))
 			ft_stradd(&content, trim);
-		ft_strdel(&trim);
 	}
-	ft_strdel(&line);
-	fclose(fd);
+	fclose(fp);
 	if (!content)
 		ft_printf("[%s] Couldn\'t open file <%s>\n", __FUNCTION__, file);
 	return (content);

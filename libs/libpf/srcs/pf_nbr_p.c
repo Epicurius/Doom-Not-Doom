@@ -12,12 +12,12 @@ static unsigned long	type_cast(t_pf *p)
 	void	*pointer;
 
 	pointer = va_arg(p->ap, void *);
-	return ((unsigned long)pointer);
+	return ((unsigned long long)pointer);
 }
 
 void	pf_nbr_p(t_pf *p)
 {
-	unsigned long	nb;
+	unsigned long long	nb;
 
 	nb = type_cast(p);
 	if (p->flag.hash && (nb && (p->min_width != 0 && p->precision == -1)))

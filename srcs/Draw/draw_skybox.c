@@ -105,7 +105,7 @@ void	draw_skybox(t_render *render, t_vline *vline, int side)
 {
 	int			i;
 	int			limit[2];
-	t_vline		skybox;
+	t_vline		skybox = {0};
 
 	i = -1;
 	while (++i < 4)

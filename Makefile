@@ -9,6 +9,8 @@ SHELL_NAME	= $(shell uname -s)
 CPU = $(firstword $(subst -, ,$(shell gcc -dumpmachine)))
 
 ifeq ($(CPU), mingw32)
+ 	MAKE = mingw32-make
+else ifeq ($(CPU), x86_64)
 	MAKE = mingw32-make
 else
 	MAKE = make
@@ -17,7 +19,7 @@ endif
 RESOURCES	= resources
 
 all: $(RESOURCES)
-	@echo "SYSTEM: "$(SHELL_NAME) $(CPU)
+	@echo "SYSTEM: "$(SHELL_NAME) "CPU: " $(CPU)
 	@$(MAKE) -C ./libs/libft -j6
 	@$(MAKE) -C ./libs/libpf -j6
 	@$(MAKE) -C ./libs/libbxpm -j6
