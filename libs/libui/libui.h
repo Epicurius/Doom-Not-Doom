@@ -138,6 +138,5 @@ const char				*text_align_to_str(int text_align);
 // Other
 void					ui_sdl_init(void);
 void					ui_sdl_free(void);
-void					get_root(char *root, int *rlen);
 
 #endif

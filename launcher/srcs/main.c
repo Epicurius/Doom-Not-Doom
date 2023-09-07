@@ -44,9 +44,8 @@ void	main_menu_init(t_launcher *launcher)
 
 void	launcher_init(t_launcher *launcher)
 {
-	memset(launcher, 0, sizeof(t_launcher));
-	get_root(launcher->root, &launcher->rlen);
-	launcher->root[launcher->rlen] = '\0';
+	ft_memset(launcher, 0, sizeof(t_launcher));
+	launcher->rlen = get_root(launcher->root, PATH_MAX);
 	ui_layout_load(&launcher->layout, launcher->root, "resources/UI/launcher.ui");
 	if (!launcher->layout.style_file_content
 		|| !launcher->layout.layout_file_content)

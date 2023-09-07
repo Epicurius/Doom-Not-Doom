@@ -539,8 +539,6 @@ int					ray_collision(t_doom *doom, t_v3 enemy, t_v3 player,
 						int sector);
 void				get_entity_state2(t_doom *doom, t_entity *entity);
 void				get_entity_state(t_doom *doom, t_entity *entity);
-/* File: srcs/get_root.c */
-void				get_root(char *root, int *rlen);
 /* File: srcs/help.c */
 void				print_help_msg(void);
 /* File: srcs/icon.c */

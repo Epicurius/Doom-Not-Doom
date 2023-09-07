@@ -63,7 +63,8 @@ RAW =	add_to_list.c\
 		ft_strtrim.c\
 		ft_swap.c\
 		ft_wordcount.c\
-		get_next_line.c
+		get_next_line.c\
+		get_root.c
 
 NAME = libft.a
 CDIR = srcs

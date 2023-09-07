@@ -34,10 +34,8 @@ void	player_stat_init(t_buymenu *buymenu)
 void	buymenu_init(t_buymenu *buymenu, SDL_Window *window)
 {
 	char	root[PATH_MAX];
-	int		len;
 
-	get_root(root, &len);
-	root[len] = '\0';
+	get_root(root, PATH_MAX);
 	buymenu->run = 1;
 	buymenu->main_win = ft_memalloc(sizeof(t_ui_window));
 	ui_window_new_from(buymenu->main_win, window);

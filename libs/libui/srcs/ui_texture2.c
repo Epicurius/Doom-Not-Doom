@@ -21,7 +21,7 @@ char	*get_font_path(char *font_path)
 	char	root[PATH_MAX];
 	int		len;
 
-	get_root(root, &len);
+	len = get_root(root, PATH_MAX);
 	if (access(font_path, F_OK))
 		ft_strcpy(&root[len], font_path);
 	else

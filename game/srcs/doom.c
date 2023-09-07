@@ -18,7 +18,7 @@ static void	launcher(void)
 	char	root[PATH_MAX];
 
 	arr = ft_memalloc(sizeof(char *) * 2);
-	get_root(root, len);
+	len = get_root(root, PATH_MAX);
 	ft_strcpy(&root[len], "doom-launcher");
 	arr[0] = root;
 	arr[1] = NULL;
@@ -65,7 +65,7 @@ static void	game(char *map, t_settings settings)
 	t_doom	doom;
 
 	ft_bzero(&doom, sizeof(t_doom));
-	get_root(doom.root, &doom.rlen);
+	doom.rlen = get_root(doom.root, PATH_MAX);
 	doom.settings = settings;
 	init_sdl(&doom);
 	game_loading(&doom);

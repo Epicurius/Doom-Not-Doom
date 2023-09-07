@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*prev;
 }					t_list;
 
+int					get_root(char *root, int size);
 void				add_to_list(t_list **list, void *new_v, size_t size);
 void				ft_arraydel(char **arr);
 char				**ft_arrjoin(char **to_this, char **from_this);
