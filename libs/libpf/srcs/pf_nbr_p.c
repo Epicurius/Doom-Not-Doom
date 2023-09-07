@@ -7,12 +7,12 @@
 
 #include "libpf.h"
 
-static unsigned long	type_cast(t_pf *p)
+static unsigned long long	type_cast(t_pf *p)
 {
 	void	*pointer;
 
 	pointer = va_arg(p->ap, void *);
-	return ((unsigned long long)pointer);
+	return (((unsigned long long)pointer));
 }
 
 void	pf_nbr_p(t_pf *p)

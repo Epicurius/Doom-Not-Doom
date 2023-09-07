@@ -27,7 +27,7 @@ static long double	pf_integer(t_pf *p, long double nb)
 			fill_buffer(p, " ", 1);
 	}
 	put_zeros(p);
-	return ((long double)integer);
+	return (((long double)integer));
 }
 
 static long double	cast_float(t_pf *p)
@@ -41,10 +41,11 @@ static long double	cast_float(t_pf *p)
 	return (nb);
 }
 
-static int	pf_float_decimal(t_pf *p, long nb, int precision)
+static int	pf_float_decimal(t_pf *p, long long nb, int precision)
 {
-	int		i;
+	int		i, a, b;
 	char	str[48];
+	char	tmp;
 
 	i = 0;
 	while (nb > 0)
@@ -55,7 +56,13 @@ static int	pf_float_decimal(t_pf *p, long nb, int precision)
 	}
 	while (i < precision)
 		str[i++] = '0';
-	ft_strnrev(str, i);
+
+	for (a = 0, b = i - 1; a < b; a++, b--)
+	{
+		tmp = str[a];
+		str[a] = str[b];
+		str[b] = tmp;
+	}
 	str[i++] = '\0';
 	fill_buffer(p, str, precision);
 	return (i);
@@ -63,9 +70,10 @@ static int	pf_float_decimal(t_pf *p, long nb, int precision)
 
 static int	pf_float_integer(t_pf *p, long nb)
 {
-	int		i;
+	int		i, a, b;
 	int		size;
 	char	str[48];
+	char	tmp;
 
 	i = 0;
 	size = ft_nbrlen(nb);
@@ -81,7 +89,14 @@ static int	pf_float_integer(t_pf *p, long nb)
 		str[i++] = '0' - (nb % 10);
 		nb = nb / 10;
 	}
-	ft_strnrev(str, i);
+
+	for (a = 0, b = i - 1; a < b; a++, b--)
+	{
+		tmp = str[a];
+		str[a] = str[b];
+		str[b] = tmp;
+	}
+	str[i] = '\0';
 	fill_buffer(p, str, size);
 	return (i + 1);
 }

@@ -6,30 +6,7 @@
  */
 
 #include "libpf.h"
-/*
-void	fill_output_buffer(t_pf *p, const char *s, unsigned int size)
-{
-	unsigned int	i;
 
-	i = 0;
-	if (p->chars + size >= PF_BUFF_SIZE)
-	{
-		write(p->fd, p->buffer, p->chars);
-		p->chars = 0;
-	}
-	if (size < PF_BUFF_SIZE)
-	{
-		while (i < size)
-		{
-			p->buffer[p->chars] = s[i];
-			i++;
-			p->chars++;
-		}
-	}
-	else
-		write(p->fd, s, size);
-}
-*/
 void	fill_buffer(t_pf *p, const char *s, unsigned int size)
 {
 	unsigned int	i;
@@ -39,12 +16,12 @@ void	fill_buffer(t_pf *p, const char *s, unsigned int size)
 		p->print_len += size;
 	if (p->chars + size > MAX_INT)
 		p->print_len = -1;
-	if (p->chars + size >= PF_BUFF_SIZE)
+	if (p->chars + size >= p->size)
 	{
-		write(p->fd, p->buffer, p->chars);
+		fwrite(p->buffer, p->chars, 1, p->fp);
 		p->chars = 0;
 	}
-	if (size < PF_BUFF_SIZE)
+	if (size < p->size)
 	{
 		while (i < size)
 		{
@@ -54,5 +31,5 @@ void	fill_buffer(t_pf *p, const char *s, unsigned int size)
 		}
 	}
 	else
-		write(p->fd, s, size);
+		fwrite(s, size, 1, p->fp);
 }
