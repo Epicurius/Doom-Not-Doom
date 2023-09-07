@@ -41,7 +41,6 @@ void	ui_input_key_events(t_ui_element *elem, SDL_Event e)
 {
 	t_ui_input	*input;
 	t_ui_label	*label;
-	char		*temp;
 	int			len;
 
 	input = elem->element;

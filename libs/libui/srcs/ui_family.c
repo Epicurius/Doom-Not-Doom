@@ -96,7 +96,6 @@ void	make_elements_from_family(
 		t_list **list, void *parent, int parent_type, t_ui_family *family)
 {
 	t_ui_element	*elem;
-	t_list			*rruc;
 
 	elem = NULL;
 	if (parent_type == UI_TYPE_ELEMENT

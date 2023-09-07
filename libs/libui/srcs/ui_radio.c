@@ -23,7 +23,6 @@ void	ui_radio_new(t_ui_window *win, t_ui_element *elem)
 void	ui_radio_event(t_ui_element *elem, SDL_Event e)
 {
 	t_ui_radio		*radio;
-	t_list			*curr;
 
 	if (!elem->show || !*elem->parent_show)
 		return ;

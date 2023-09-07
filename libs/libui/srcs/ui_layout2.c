@@ -16,7 +16,6 @@
 void	layout_compile_elements(t_ui_layout *layout)
 {
 	t_list		*curr;
-	t_list		*rruc;
 	t_ui_family	*family;
 	t_ui_window	*win;
 

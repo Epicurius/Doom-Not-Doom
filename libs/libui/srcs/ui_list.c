@@ -16,7 +16,6 @@ void	ui_list_sort(t_list *list)
 	t_list			*curr;
 	t_list			*next;
 	t_ui_element	*temp;
-	int				temp_int;
 
 	curr = list;
 	while (curr)

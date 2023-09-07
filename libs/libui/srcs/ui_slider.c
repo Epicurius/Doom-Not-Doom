@@ -10,7 +10,6 @@
 void	ui_slider_new(t_ui_window *win, t_ui_element *elem)
 {
 	t_ui_slider	*slider;
-	t_ui_button	*button;
 
 	ui_element_new(win, elem);
 	elem->element = ft_memalloc(sizeof(t_ui_slider));
@@ -33,10 +32,7 @@ void	ui_slider_new(t_ui_window *win, t_ui_element *elem)
 void	ui_slider_edit(t_ui_element *elem, t_ui_recipe *recipe)
 {
 	t_ui_slider	*slider;
-	t_ui_window	*win;
-	t_ui_recipe	*button_recipe;
 
-	win = elem->win;
 	slider = elem->element;
 	if (recipe->value_set[1])
 		slider->min_value = recipe->value[1];
@@ -49,12 +45,10 @@ void	ui_slider_edit(t_ui_element *elem, t_ui_recipe *recipe)
 void	ui_slider_event(t_ui_element *elem, SDL_Event e)
 {
 	t_ui_slider	*slider;
-	t_ui_button	*button;
 
 	if (!elem->show || !elem->event)
 		return ;
 	slider = elem->element;
-	button = slider->button.element;
 	if (ui_element_is_click(elem))
 	{
 		slider->value

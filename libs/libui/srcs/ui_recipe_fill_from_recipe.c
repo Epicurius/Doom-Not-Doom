@@ -108,8 +108,6 @@ void	recipe_flag_set_fill(t_ui_recipe *target, t_ui_recipe *child)
 
 void	fill_recipe_from_recipe(t_ui_recipe *target, t_ui_recipe *child)
 {
-	int	jj;
-
 	if (!target || !child)
 		return ;
 	recipe_pos_set_fill(target, child);

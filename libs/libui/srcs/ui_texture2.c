@@ -55,9 +55,7 @@ void	recreate_font_of_label(t_ui_label *label)
 SDL_Surface	*ui_surface_create_from_text_recipe(t_ui_label *label)
 {
 	SDL_Surface	*surface;
-	t_rgba		rgba;
 	SDL_Color	color;
-	char		*temp;
 
 	if (!label->font || label->font_recreate)
 	{

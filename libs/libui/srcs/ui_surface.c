@@ -20,9 +20,6 @@ void	ui_surface_fill(SDL_Surface *surface, Uint32 color)
 
 void	ui_surface_fill_rect(SDL_Surface *surface, Uint32 color, t_vec4i rect)
 {
-	t_rgba	rgba;
-
-	rgba = hex_to_rgba(color);
 	SDL_FillRect(surface, &(SDL_Rect){rect.x, rect.y, rect.w, rect.h}, color);
 }
 

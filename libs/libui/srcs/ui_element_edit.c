@@ -39,7 +39,6 @@ void	ui_element_set_bgimage_from_recipe(
 	t_ui_element *elem, t_ui_recipe *recipe)
 {
 	int		i;
-	int		jjj;
 	char	*temp;
 
 	i = -1;

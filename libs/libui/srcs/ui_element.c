@@ -42,7 +42,6 @@ void	ui_element_new(t_ui_window *win, t_ui_element *elem)
 void	ui_element_free(void *elem_p, size_t size)
 {
 	t_ui_element	*elem;
-	int				i;
 
 	elem = elem_p;
 	if (!elem)

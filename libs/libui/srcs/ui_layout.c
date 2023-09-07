@@ -11,7 +11,6 @@ void	ui_layout_event(t_ui_layout *layout, SDL_Event e)
 {
 	t_list			*curr;
 	t_ui_window		*win;
-	t_ui_element	*elem;
 
 	curr = layout->windows;
 	while (curr)

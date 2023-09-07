@@ -23,7 +23,6 @@ t_ui_element	*ui_dropdown_get(t_ui_element *elem, int ui_type)
 t_ui_menu	*ui_dropdown_get_menu(t_ui_element *elem)
 {
 	t_ui_dropdown	*drop;
-	t_ui_menu		*menu;
 
 	drop = ui_dropdown_get_dropdown(elem);
 	if (!drop)

@@ -9,8 +9,6 @@
 
 void	ui_element_pos_set(t_ui_element *elem, t_vec4 pos)
 {
-	t_vec4	new_pos;
-
 	if (elem->pos.w != pos.w || elem->pos.h != pos.h)
 		elem->texture_recreate = 1;
 	elem->pos = pos;

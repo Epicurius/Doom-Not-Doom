@@ -78,7 +78,6 @@ void	ui_label_get_valid_font_path(t_ui_element *elem, t_ui_label *label)
 void	ui_label_texture_redo(t_ui_element *elem)
 {
 	t_ui_label	*label;
-	char		*temp;
 
 	label = elem->element;
 	if (elem->textures[UI_STATE_DEFAULT])

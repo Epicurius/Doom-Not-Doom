@@ -79,8 +79,6 @@ char	*ui_dropdown_active_text(t_ui_element *elem)
 
 t_ui_element	*ui_dropdown_active(t_ui_element *elem)
 {
-	t_ui_dropdown	*drop;
-
 	if (!elem)
 		return (NULL);
 	if (elem->element_type != UI_TYPE_DROPDOWN)

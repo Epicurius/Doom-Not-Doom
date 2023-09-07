@@ -56,9 +56,7 @@ void	ui_scrollbar_update_target_size(t_ui_element *elem)
 */
 void	ui_scrollbar_recount(t_ui_element *elem)
 {
-	t_list			*curr;
 	t_ui_scrollbar	*scroll;
-	t_ui_element	*child;
 	int				new_h;
 
 	scroll = elem->element;

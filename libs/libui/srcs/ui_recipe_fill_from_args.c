@@ -92,7 +92,6 @@ void	fill_recipe_from_args(t_ui_recipe *recipe, char **args)
 {
 	int		i;
 	char	**key_value;
-	int		jj;
 
 	if (!args)
 		return ;
