@@ -9,7 +9,8 @@ LIBS :=  \
 	libs/libtp \
 	libs/liblg \
 	libs/libui \
-	game
+	game \
+	launcher
 
 all: $(RESOURCES)
 	for f in $(LIBS); do \
