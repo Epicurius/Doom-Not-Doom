@@ -51,7 +51,7 @@ static void	y_or_n(t_doom *doom, int y)
 static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 {
 	SDL_Event	event;
-	char		*name;
+	char		name[PATH_MAX];
 
 	while (1)
 	{
@@ -66,9 +66,8 @@ static void	quit_loop(t_doom *doom, t_bmp *bmp, int i)
 			break ;
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p && !i)
 		{
-			name = ft_sprintf("%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
+			ft_sprintf(name, "%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
 			write_bmp(name, bmp);
-			free(name);
 			Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);
 			Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
 			i = TRUE;

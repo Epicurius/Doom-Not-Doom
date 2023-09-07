@@ -500,7 +500,7 @@ void				blit_bxpm(SDL_Surface *surface, t_bxpm *bxpm, int sx,
 void				init_camera(t_doom *doom);
 void				update_camera(t_doom *doom);
 /* File: srcs/clock.c */
-char				*get_elapsed_time_str(t_doom *doom);
+void				get_elapsed_time_str(t_doom *doom, char *str);
 void				init_clock(t_doom *doom, t_bxpm *bxpm);
 int					clock_wsprite(t_doom *doom, t_wall *wall, int x);
 /* File: srcs/color_and_brightness.c */

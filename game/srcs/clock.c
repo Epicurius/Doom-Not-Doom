@@ -30,7 +30,7 @@ static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
  */
 void	init_clock(t_doom *doom, t_bxpm *bxpm)
 {
-	char		*str;
+	char		str[10];
 	t_time		*t;
 	SDL_Surface	*tmp;
 
@@ -39,7 +39,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	t->clock_fg = hex_to_sdl_color(CLOCK_FG_COLOR);
 	t->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);
 	t->date = *localtime((time_t *)&doom->time.start);
-	str = ft_sprintf("%02d:%02d:%02d", t->date.tm_hour,
+	ft_sprintf(str, "%02d:%02d:%02d", t->date.tm_hour,
 			t->date.tm_min, t->date.tm_sec);
 	tmp = TTF_RenderText_Shaded(doom->font.digital, str,
 			t->clock_fg, t->clock_bg);
@@ -53,7 +53,6 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	bxpm->clr[1] = CLOCK_BG_COLOR;
 	clock_to_bxpm(tmp, bxpm);
 	SDL_FreeSurface(tmp);
-	free(str);
 }
 
 /*
@@ -62,7 +61,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
  */
 int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 {
-	char		*str;
+	char		str[10];
 	time_t		tm;
 	t_time		*t;
 	SDL_Surface	*tmp;
@@ -72,18 +71,17 @@ int	clock_wsprite(t_doom *doom, t_wall *wall, int x)
 	t->date = *localtime(&tm);
 	if (wall->wsprite.num[x].time == t->date.tm_sec)
 		return (1);
-	str = ft_sprintf("%02d:%02d:%02d", t->date.tm_hour,
+	ft_sprintf(str, "%02d:%02d:%02d", t->date.tm_hour,
 			t->date.tm_min, t->date.tm_sec);
 	wall->wsprite.num[x].time = t->date.tm_sec;
 	tmp = TTF_RenderText_Shaded(doom->font.digital, str,
 			t->clock_fg, t->clock_bg);
 	clock_to_bxpm(tmp, &doom->mtx[MAP_TEXTURE_AMOUNT - 1]);
 	SDL_FreeSurface(tmp);
-	free(str);
 	return (1);
 }
 
-char	*get_elapsed_time_str(t_doom *doom)
+void	get_elapsed_time_str(t_doom *doom, char *str)
 {
 	int	elapsed;
 	int	h;
@@ -96,5 +94,5 @@ char	*get_elapsed_time_str(t_doom *doom)
 	m = elapsed / 60;
 	elapsed -= (m * 60);
 	s = elapsed;
-	return (ft_sprintf("%02d:%02d:%02d", h, m, s));
+	ft_sprintf(str, "%02d:%02d:%02d", h, m, s);
 }

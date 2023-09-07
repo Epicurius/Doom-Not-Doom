@@ -70,7 +70,7 @@ void	settings_init(t_settings *settings)
 
 void	settings_elem_default(t_launcher *launcher)
 {
-	char	*res;
+	char	res[10];
 
 	ui_slider_value_set(launcher->fov_slider, launcher->settings.fov);
 	ui_slider_value_set(launcher->mouse_x_slider, launcher->settings.mouse_x);
@@ -78,11 +78,10 @@ void	settings_elem_default(t_launcher *launcher)
 	ui_slider_value_set(launcher->texture_scale_slider,
 		launcher->settings.texture_scale);
 	launcher->developer_checkbox->is_toggle = launcher->settings.developer;
-	res = ft_sprintf("%dx%d", launcher->settings.width,
+	ft_sprintf(res, "%dx%d", launcher->settings.width,
 			launcher->settings.height);
 	ui_dropdown_activate(launcher->resolution_drop,
 		ui_list_get_button_with_text(
 			ui_dropdown_get_menu_element(launcher->resolution_drop)->children,
 			res));
-	ft_strdel(&res);
 }

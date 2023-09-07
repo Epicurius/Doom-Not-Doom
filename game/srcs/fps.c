@@ -15,7 +15,7 @@ void	update_fps(t_doom *doom)
 {
 	t_time		*time;
 	int			prev;
-	char		*str;
+	char		str[10];
 
 	time = &doom->time;
 	prev = time->curr;
@@ -25,9 +25,8 @@ void	update_fps(t_doom *doom)
 	if (time->curr - time->prev >= 1000)
 	{
 		time->prev = time->curr;
-		str = ft_sprintf("FPS: [%d]", time->fps);
+		ft_sprintf(str, "FPS: [%d]", time->fps);
 		SDL_SetWindowTitle(doom->win, str);
-		free(str);
 		time->fps = 0;
 	}
 }

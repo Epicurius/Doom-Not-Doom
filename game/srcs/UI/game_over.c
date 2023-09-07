@@ -12,16 +12,15 @@
  */
 static void	print_screen_shot(t_doom *doom, int *i)
 {
-	char	*name;
+	char	name[PATH_MAX];
 	t_bmp	*bmp;
 
 	doom->root[doom->rlen] = '\0';
-	name = ft_sprintf("%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
+	ft_sprintf(name, "%s/Doom%d.bmp", doom->root, rand() % 0xFFFF);
 	bmp = pix_to_bmp(doom->surface->w, doom->surface->h, 3,
 			doom->surface->pixels);
 	write_bmp(name, bmp);
 	free_bmp(bmp);
-	free(name);
 	*i = TRUE;
 	Mix_PlayChannel(CHANNEL_TTS, doom->sound[WAV_SCREEN_SHOT], 0);
 	Mix_VolumeChunk(doom->sound[WAV_SCREEN_SHOT], 128);
@@ -58,30 +57,28 @@ static void	blit_title(t_doom *doom, SDL_Rect *dst, int i)
  *	Draws the game stats: Rounds Survived and Enemies Killed.
  *	TODO: Find a better colour for "Press Enter..."
  */
-static void	blit_stats(t_doom *doom, SDL_Rect *dst, char *str)
+static void	blit_stats(t_doom *doom, SDL_Rect *dst)
 {
 	SDL_Color	clr;
 	SDL_Surface	*surface;
+	char		str[50];
 
 	clr = hex_to_sdl_color(0xFFFFFFFF);
 	if (doom->game.mode == ENDLESS)
 	{
-		str = ft_sprintf("Rounds Survived %d", doom->game.round);
+		ft_sprintf(str, "Rounds Survived %d", doom->game.round);
 		surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
-		free(str);
 		*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
 		SDL_BlitSurface(surface, NULL, doom->surface, dst);
 		SDL_FreeSurface(surface);
 	}
-	str = ft_sprintf("Enemies Killed: %d", doom->nb.kills);
+	ft_sprintf(str, "Enemies Killed: %d", doom->nb.kills);
 	surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
-	free(str);
 	*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, dst);
 	SDL_FreeSurface(surface);
-	str = get_elapsed_time_str(doom);
+	get_elapsed_time_str(doom, str);
 	surface = TTF_RenderText_Blended(doom->font.amaz, str, clr);
-	free(str);
 	*dst = (SDL_Rect){dst->x, dst->y + dst->h, surface->w, surface->h};
 	SDL_BlitSurface(surface, NULL, doom->surface, dst);
 	SDL_FreeSurface(surface);
@@ -126,7 +123,7 @@ void	game_over(t_doom *doom)
 	Mix_HaltChannel(-1);
 	screen_shot = FALSE;
 	blit_title(doom, &dst, doom->player.health);
-	blit_stats(doom, &dst, NULL);
+	blit_stats(doom, &dst);
 	blit_info(doom);
 	update_screen(doom);
 	while (1)

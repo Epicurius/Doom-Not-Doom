@@ -16,7 +16,7 @@ static inline int	get_path(char *path, char **name)
 	len = ft_strlen(path) - 4;
 	if (!ft_strequ(&path[len], ".bmp"))
 		return (0);
-	*name = ft_sprintf("%.*s.bxpm", len, path);
+	ft_asprintf(*name, "%.*s.bxpm", len, path);
 	return (1);
 }
 

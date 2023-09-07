@@ -57,17 +57,17 @@ void	start_game(t_launcher *launcher, t_settings settings, char *map)
 
 	args = ft_memalloc(sizeof(char *) * 10);
 	ft_strcpy(&launcher->root[launcher->rlen], "doom-game");
-	args[0] = ft_sprintf("%s", launcher->root);
+	ft_asprintf(&args[0], "%s", launcher->root);
 	ft_strcpy(&launcher->root[launcher->rlen], "resources/MAPS/");
-	args[1] = ft_sprintf("%s%s", launcher->root, map);
-	args[2] = ft_sprintf("-size=%dx%d", settings.width, settings.height);
-	args[3] = ft_sprintf("-res=%.2f",
+	ft_asprintf(&args[1], "%s%s", launcher->root, map);
+	ft_asprintf(&args[2], "-size=%dx%d", settings.width, settings.height);
+	ft_asprintf(&args[3], "-res=%.2f",
 			ceil((float)settings.texture_scale / 10) / 10);
-	args[4] = ft_sprintf("-mouse=%.3fx%.3f",
+	ft_asprintf(&args[4], "-mouse=%.3fx%.3f",
 			(float)settings.mouse_x / 1000,
 			(float)settings.mouse_y / 1000);
-	args[5] = ft_sprintf("-diff=%d", settings.difficulty);
-	args[6] = ft_sprintf("-fov=%d", settings.fov);
+	ft_asprintf(&args[5], "-diff=%d", settings.difficulty);
+	ft_asprintf(&args[6], "-fov=%d", settings.fov);
 	args[7] = ft_strdup("-launcher");
 	if (settings.developer)
 		args[8] = ft_strdup("-debug");
