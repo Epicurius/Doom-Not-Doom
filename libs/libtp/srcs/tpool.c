@@ -53,13 +53,13 @@ void	*tpool_func(void *arg)
 	if (id == (tpool->nb_threads - 1))
 		pthread_cond_signal(&tpool->main_cond);
 	pthread_mutex_unlock(&tpool->mutex);
-	while (1)
+	while (!tpool->stop)
 	{
 		pthread_mutex_lock(&tpool->mutex);
 		while (!tpool->tasks && !tpool->stop)
 			pthread_cond_wait(&tpool->task_cond, &tpool->mutex);
 		if (tpool->stop)
-			break ;
+			continue ;
 		do_task(tpool);
 	}
 	tpool->alive_threads -= 1;

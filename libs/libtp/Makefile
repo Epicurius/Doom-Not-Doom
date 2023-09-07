@@ -3,40 +3,41 @@ YELLOW	:= "\e[0;33m"
 CYAN	:= "\e[0;36m"
 RESET	:= "\e[0m"
 
-RAW	=	init_tpool.c\
-	  	tpool_free.c\
-		tpool.c\
-		tpool_error.c
+SDIR	= srcs
+ODIR	= obj
+IDIR	= .
 
-NAME = libtp.a
-CDIR = srcs
-IDIR = -I.
-ODIR = objs
-SRCS = $(addprefix $(CDIR)/, $(RAW))
-OBJS = $(addprefix $(ODIR)/, $(RAW:.c=.o))
-CFLAGS = -Wall -Wextra -Werror -MMD -O3
+SRCS	:=  $(wildcard $(SDIR)/*.c)
+
+INCS	:=	-I $(IDIR)
+
+NAME	:= libtp.a
+OBJS    := $(SRCS:$(SDIR)/%.c=$(ODIR)/%.o)
+DEPS	:= $(OBJS:.o=.d)
+CFLAGS	:= -Wall -Wextra -Werror -MMD -O3 -Wno-unused-variable
 
 all: $(NAME)
-	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
+	printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
 
-$(ODIR):
-	@mkdir -p $(ODIR)
+-include $(DEPS)
 
-$(ODIR)/%.o: $(CDIR)/%.c
-	@printf $(YELLOW)"\e[JCompiling $<\n\e[F"$(RESET)
-	@gcc -c $< -o $@ $(CFLAGS) $(IDIR)
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
-$(NAME): $(ODIR) $(OBJS)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+$(ODIR)/%.o: $(SDIR)/%.c
+	mkdir -p $(@D)
+	gcc -c $< -o $@ $(CFLAGS) $(INCS)
+	printf $(YELLOW)"\e[JCompiling $<\n\e[F"$(RESET)
 
-clean: 
-	@printf $(CYAN)"[INFO] $(NAME) cleaned!\n"$(RESET)
-	@rm -rf $(ODIR)
+clean:
+	printf $(CYAN)"[INFO] $(NAME) cleaned!\n"$(RESET)
+	rm -rf $(ODIR)
 
-fclean: clean	
-	@rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: fclean all clean re $(NAME)
+.PHONY: clean, all, re, fclean
+.SILENT:
