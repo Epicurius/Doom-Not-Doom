@@ -12,7 +12,7 @@ struct g_log	lg_global = {NULL, -1, -1};
 int	lg_openFile(char *file, char *mode)
 {
 	lg_global.fp = fopen(file, mode);
-	if (NULL)
+	if (lg_global.fp == NULL)
 		return (0);
 	LG_INFO("Log Opened.");
 	return (1);
@@ -39,11 +39,11 @@ void	lg_setLevel(int std, int file)
 
 static void	lg_write(lg_event *ev)
 {
-	char		buff[100];
+	char		buff[LOG_BUFFER];
 	const char	*l[] = {"DEBUG", "INFO", "WARN", "ERROR"};
 	const char	*c[] = {"\x1b[36m", "\x1b[32m", "\x1b[33m", "\x1b[31m"};
 
-	vsnprintf(buff, 100, ev->fmt, ev->ap);
+	vsnprintf(buff, LOG_BUFFER, ev->fmt, ev->ap);
 	if (ev->lvl >= lg_global.stdlvl)
 	{
 		fprintf(LG_PRINT_STD, "%s[%-5s]\x1b[0m \x1b[90m%s:%d\x1b[0m : ",
