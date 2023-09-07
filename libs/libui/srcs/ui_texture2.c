@@ -18,7 +18,7 @@
 */
 char	*get_font_path(char *font_path)
 {
-	char	root[PATH_MAX + NAME_MAX];
+	char	root[PATH_MAX];
 	int		len;
 
 	get_root(root, &len);

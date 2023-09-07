@@ -26,14 +26,6 @@
 # include <fcntl.h>
 # include <limits.h>
 
-# ifdef __APPLE__
-#  include <sys/syslimits.h>
-#  include <mach-o/dyld.h>
-# else //elif _WIN32 || __MINGW32__
-#  include <Windows.h>
-#  define NAME_MAX 200
-# endif
-
 typedef struct s_settings
 {
 	t_point			size;
@@ -447,7 +439,7 @@ typedef struct s_motion
 typedef struct s_doom
 {
 	t_settings		settings;
-	char			root[PATH_MAX + NAME_MAX];
+	char			root[PATH_MAX];
 	int				rlen;
 	SDL_Window		*win;
 	SDL_Surface		*surface;

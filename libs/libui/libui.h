@@ -25,13 +25,6 @@
 
 # define DEFAULT_TTF	"resources/TTF/"
 
-# ifdef __APPLE__
-#  include <sys/syslimits.h>
-#  include <mach-o/dyld.h>
-# else //elif _WIN32 || __MINGW32__
-#  define NAME_MAX 200
-# endif
-
 typedef struct s_rgba
 {
 	union {

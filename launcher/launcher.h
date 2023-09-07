@@ -17,14 +17,6 @@
 # define GRAYISH_BLUEISH 0xff505168
 # define GREENISH 0xffb3c0a4
 
-# ifdef __APPLE__
-#  include <sys/syslimits.h>
-#  include <mach-o/dyld.h>
-# else //elif _WIN32 || __MINGW32__
-#  include <Windows.h>
-#  define NAME_MAX 200
-# endif
-
 typedef struct s_settings
 {
 	int				fov;
@@ -46,7 +38,7 @@ typedef struct s_settings
  */
 typedef struct s_launcher
 {
-	char			root[PATH_MAX + NAME_MAX];
+	char			root[PATH_MAX];
 	int				rlen;
 
 	t_ui_layout		layout;

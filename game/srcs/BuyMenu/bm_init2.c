@@ -33,7 +33,7 @@ void	player_stat_init(t_buymenu *buymenu)
 
 void	buymenu_init(t_buymenu *buymenu, SDL_Window *window)
 {
-	char	root[PATH_MAX + NAME_MAX];
+	char	root[PATH_MAX];
 	int		len;
 
 	get_root(root, &len);
