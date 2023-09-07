@@ -332,7 +332,7 @@ typedef struct s_time
 	float			delta;
 	SDL_Color		color;
 	SDL_Surface		*surf;
-	long long int   start;
+	long int		start;
 	struct tm		date;
 	SDL_Color		clock_fg;
 	SDL_Color		clock_bg;

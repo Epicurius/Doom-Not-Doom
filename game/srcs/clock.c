@@ -38,7 +38,7 @@ void	init_clock(t_doom *doom, t_bxpm *bxpm)
 	t = &doom->time;
 	t->clock_fg = hex_to_sdl_color(CLOCK_FG_COLOR);
 	t->clock_bg = hex_to_sdl_color(CLOCK_BG_COLOR);
-	t->date = *localtime(&doom->time.start);
+	t->date = *localtime((time_t *)&doom->time.start);
 	str = ft_sprintf("%02d:%02d:%02d", t->date.tm_hour,
 			t->date.tm_min, t->date.tm_sec);
 	tmp = TTF_RenderText_Shaded(doom->font.digital, str,
