@@ -36,9 +36,6 @@ fclean:
 re: fclean all
 
 $(RESOURCES):
-	@./install/DownloadResources.sh || (exit)
-	@unzip -qq resources.zip
-	@rm -rf resources.zip
-#	@rm doom*
+	@./DownloadResources.sh || (exit)
 
 .PHONY: clean, all, re, fclean
