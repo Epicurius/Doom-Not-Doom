@@ -2,17 +2,17 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #ifndef LIBUI_H
 # define LIBUI_H
+
 # define SDL_MAIN_HANDLED
 # include "SDL2/SDL.h"
 # include "SDL2/SDL_ttf.h"
-# include "libft.h"
-# include "libpf.h"
+# include "../libft/libft.h"
+# include "../libpf/libpf.h"
 # include "stdio.h"
 # include "ui_enum.h"
 # include "ui_vec.h"
@@ -38,8 +38,17 @@ typedef struct s_rgba
 	};
 }	t_rgba;
 
+typedef struct s_ui_font
+{
+	char		*path;
+	int			size;
+	TTF_Font	*font;
+}	t_ui_font;
+
 // FONT
+t_list					**ui_global_font(void);
 TTF_Font				*ui_get_font(char *path, int size);
+void					ui_global_font_free(void);
 
 // Texture
 SDL_Texture				*ui_texture_create_from_text_recipe(
@@ -73,18 +82,9 @@ void					ui_surface_draw_border(SDL_Surface *surface,
 							size_t thiccness, Uint32 color);
 void					ui_surface_line_draw(SDL_Surface *surface,
 							t_vec2i p1, t_vec2i p2, Uint32 color);
-void					ui_surface_line_draw_v2(SDL_Surface *surface,
-							t_vec2i p1, t_vec2i p2, Uint32 color);
-void					ui_surface_line_draw_orig(SDL_Surface *surface,
-							t_vec2i p1, t_vec2i p2, Uint32 color);
-void					ui_surface_line_draw_nik(SDL_Surface *surf, t_vec2i v1,
-							t_vec2i v2, Uint32 color);
 void					ui_surface_rect_draw(SDL_Surface *surface, t_vec2i p1,
 							t_vec2i p2, Uint32 color);
-/*
-void					ui_surface_rect_draw_thicc(SDL_Surface *surface,
-							t_vec2i p1, t_vec2i p2, int thicc, Uint32 color);
-*/
+
 void					ui_surface_rect_draw_filled(SDL_Surface *surface,
 							t_vec2i p1, t_vec2i p2, Uint32 color);
 void					ui_surface_circle_draw(SDL_Surface *surface,
@@ -92,7 +92,7 @@ void					ui_surface_circle_draw(SDL_Surface *surface,
 void					ui_surface_circle_draw_filled(SDL_Surface *surface,
 							t_vec2i orig, int r, Uint32 color);
 void					ui_surface_line_draw_thicc(SDL_Surface *surface,
-							t_vec2i v1, t_vec2i v2, int w, Uint32 color);
+							t_vec2i *points, int w, Uint32 color);
 
 // Help
 int						point_in_rect(t_vec2i point, t_vec4i rect);

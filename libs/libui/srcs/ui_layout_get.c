@@ -9,7 +9,7 @@
 
 /*
  * Have this function to make it easier for the user getting a window;
- * (the user doesnt have to know the in the layout the window is...);
+ * (the user doesn't have to know the in the layout the window is...);
 */
 t_ui_window	*ui_layout_get_window(t_ui_layout *layout, char *id)
 {

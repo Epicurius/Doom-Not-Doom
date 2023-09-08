@@ -29,6 +29,7 @@ void	ui_radio_event(t_ui_element *elem, SDL_Event e)
 		return ;
 	radio = elem->element;
 	ui_list_radio_event(elem->children, &radio->active);
+	(void)e;
 }
 
 /*

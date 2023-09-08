@@ -2,8 +2,7 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
@@ -61,7 +60,7 @@ void	ui_window_edit(t_ui_window *win, t_ui_recipe *recipe)
 		win->bg_color = recipe->bg_colors[UI_STATE_DEFAULT];
 	if (ft_strinarr("xhides", recipe->flags))
 		win->hide_on_x = 1;
-	if (ft_strinarr("xdoesnthides", recipe->flags))
+	if (ft_strinarr("xdoesn'thides", recipe->flags))
 		win->hide_on_x = 0;
 	ui_window_flag_set(win, make_usable_win_flags(recipe->flags));
 }

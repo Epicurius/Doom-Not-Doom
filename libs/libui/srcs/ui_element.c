@@ -63,8 +63,10 @@ void	ui_element_free(void *elem_p, size_t size)
 	elem->children = NULL;
 	if (elem->free_me && !elem->is_a_part_of_another)
 		free(elem);
+	(void)size;
 }
 
+/*
 void	ui_element_print(t_ui_element *elem)
 {
 	if (!elem)
@@ -115,5 +117,4 @@ ui_element_type_to_string(((t_ui_element *)elem->parent)->element_type));
 	if (g_acceptable[elem->element_type].printer)
 		g_acceptable[elem->element_type].printer(elem);
 }
-/*
 */

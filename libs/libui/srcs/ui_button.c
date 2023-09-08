@@ -51,6 +51,7 @@ void	ui_button_event(t_ui_element *elem, SDL_Event e)
 	elem->was_click = elem->is_click;
 	if (elem->is_toggle == 1)
 		elem->state = UI_STATE_CLICK;
+	(void)e;
 }
 
 /*

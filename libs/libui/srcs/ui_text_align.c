@@ -14,6 +14,7 @@
 #define ALIGN_BOT "BOT"
 #define ALIGN_CENTER "CENTER"
 #define ALIGN_NONE "NONE"
+
 const char	*center_text_align(int text_align)
 {
 	if (text_align & UI_TEXT_ALIGN_LEFT)

@@ -55,6 +55,7 @@ void	ui_scrollbar_event(t_ui_element *elem, SDL_Event e)
 		scroll->value = ft_clamp(scroll->value, scroll->min, scroll->max);
 		scroll->update = 1;
 	}
+	(void)e;
 }
 
 /*
@@ -117,4 +118,5 @@ void	ui_scrollbar_free(void *elem, size_t size)
 		return ;
 	scroll->target = NULL;
 	free(scroll);
+	(void)size;
 }

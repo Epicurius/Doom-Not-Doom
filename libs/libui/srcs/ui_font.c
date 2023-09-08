@@ -2,38 +2,59 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
 
-typedef struct	s_ui_font
+t_list	**ui_global_font(void)
 {
-	char		*path;
-	int			size;
-	TTF_Font	*font;
-}				t_ui_font;
+	static t_list	*fonts = NULL;
+
+	return (&fonts);
+}
+
+void	ui_global_font_free(void)
+{
+	t_list		*curr;
+
+	curr = *ui_global_font();
+	while (curr)
+	{
+		free(((t_ui_font *)curr->content)->path);
+		TTF_CloseFont(((t_ui_font *)curr->content)->font);
+		free(curr->content);
+		curr = curr->next;
+	}
+	ft_lstdel(ui_global_font(), &dummy_free_er);
+}
 
 /*
- * Returns null if path doesnt exits;
-*/
+ * IMPORTANT:
+ *	If you call this anywhere, make sure to call ui_global_font_free(); when
+ *		exiting the program;
+ */
 TTF_Font	*ui_get_font(char *path, int size)
 {
-	static t_ui_font	*fonts = NULL;
-	static size_t		font_count = 0;
-	int					i;
+	t_list		**fonts;
+	t_list		*curr;
+	t_ui_font	*new_font;
 
 	if (access(path, F_OK))
 		return (NULL);
-	i = -1;
-	while (++i < font_count)
-		if (fonts[i].size == size)
-			if (ft_strequ(fonts[i].path, path))
-				return (fonts[i].font);
-	fonts = realloc(fonts, ++font_count * sizeof(t_ui_font));
-	fonts[font_count - 1].path = ft_strdup(path);
-	fonts[font_count - 1].size = size;
-	fonts[font_count - 1].font = TTF_OpenFont(path, size);
-	return (fonts[font_count - 1].font);
+	fonts = ui_global_font();
+	curr = *fonts;
+	while (fonts && curr)
+	{
+		if (((t_ui_font *)curr->content)->size == size)
+			if (ft_strequ(((t_ui_font *)curr->content)->path, path))
+				return (((t_ui_font *)curr->content)->font);
+		curr = curr->next;
+	}
+	new_font = malloc(sizeof(t_ui_font));
+	new_font->path = ft_strdup(path);
+	new_font->size = size;
+	new_font->font = TTF_OpenFont(path, size);
+	add_to_list(fonts, new_font, sizeof(t_ui_font));
+	return (new_font->font);
 }

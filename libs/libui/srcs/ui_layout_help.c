@@ -7,7 +7,7 @@
 
 #include "libui.h"
 
-char	*get_file_content(t_ui_layout *layout, char *file)
+char	*ui_get_file_content(t_ui_layout *layout, char *file)
 {
 	char	*content;
 	char    line[256];

@@ -75,9 +75,9 @@ void	ui_input_check_if_unselect(t_ui_element *elem, SDL_Event e)
 	int			text_input_shift_pressed;
 
 	input = elem->element;
-	text_input_key_pressed = e.type == SDL_TEXTINPUT || e.type == SDL_KEYDOWN;
-	text_input_shift_pressed = e.type == SDL_TEXTINPUT
-		&& (KMOD_LSHIFT & SDL_GetModState());
+	text_input_key_pressed = (e.type == SDL_TEXTINPUT || e.type == SDL_KEYDOWN);
+	text_input_shift_pressed = (e.type == SDL_TEXTINPUT
+			&& (KMOD_LSHIFT & SDL_GetModState()));
 	if (text_input_key_pressed && !(KMOD_LCTRL & SDL_GetModState())
 		&& (text_input_shift_pressed || !(KMOD_LSHIFT & SDL_GetModState())))
 		input->cursor_from_char_num = input->cursor_on_char_num;

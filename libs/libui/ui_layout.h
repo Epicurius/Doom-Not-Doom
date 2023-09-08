@@ -2,8 +2,7 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #ifndef UI_LAYOUT_H
@@ -183,7 +182,7 @@ void				make_family_from_children(t_list **list, void *parent,
 ///////////////
 char				**split_string_into_array(char *str);
 int					actual_word_count(char *str);
-char				*get_file_content(t_ui_layout *layout, char *file);
+char				*ui_get_file_content(t_ui_layout *layout, char *file);
 int					get_special(t_ui_layout *layout, char *str);
 
 #endif

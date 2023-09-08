@@ -11,10 +11,10 @@ int	ui_slider_value_get(t_ui_element *elem)
 {
 	t_ui_slider	*slider;
 
+	if (!elem || !elem->element)
+		return (-1);
 	slider = elem->element;
-	return (ui_get_slider_value(
-			slider->min_value, slider->max_value,
-			slider->button.pos.x, elem->pos.w - slider->button.pos.w));
+	return (slider->value);
 }
 
 void	ui_slider_value_set(t_ui_element *elem, int value)

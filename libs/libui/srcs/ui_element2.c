@@ -53,7 +53,7 @@ void	ui_element_move_list(t_list *list, t_vec2i amount)
 }
 
 /*
- * NOTE: this doesnt free the element, only removes it from the list;
+ * NOTE: this doesn't free the element, only removes it from the list;
 */
 void	ui_element_remove_from_list(t_ui_element *elem, t_list **list)
 {

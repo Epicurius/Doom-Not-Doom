@@ -503,6 +503,8 @@ void					ui_checkbox_new(t_ui_window *win, t_ui_element *elem);
 void					ui_checkbox_event(t_ui_element *elem, SDL_Event e);
 int						ui_checkbox_render(t_ui_element *elem);
 void					ui_checkbox_free(void *elem, size_t size);
+void					ui_checkbox_edit(t_ui_element *elem,
+							t_ui_recipe *recipe);
 void					ui_checkbox_toggle_on(t_ui_element *elem);
 void					ui_checkbox_toggle_off(t_ui_element *elem);
 void					ui_checkbox_toggle_accordingly(t_ui_element *elem,

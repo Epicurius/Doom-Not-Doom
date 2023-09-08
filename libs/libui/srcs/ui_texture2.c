@@ -2,15 +2,14 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
 
 /*
  * 1. First try to find with absolute path...
- * 2. ... if not found, try to find from UI_FONT_PATH/"font_name" ...
+ * 2. ... if not found, try to find from DEFAULT_TTF/"font_name" ...
  * 3. ... if still not found, try to find default font.
  * 		IF this is not found, it's my fault.
  *
@@ -18,23 +17,29 @@
 */
 char	*get_font_path(char *font_path)
 {
-	char	root[PATH_MAX];
-	int		len;
+	char	*temp_font_path;
 
-	len = get_root(root, PATH_MAX);
-	if (access(font_path, F_OK))
-		ft_strcpy(&root[len], font_path);
-	else
-		return (ft_strdup(font_path));
-	if (access(root, F_OK))
+	temp_font_path = ft_strdup(font_path);
+	if (access(temp_font_path, F_OK))
 	{
-		ft_strcpy(&root[len], DEFAULT_TTF"DroidSans.ttf");
-		if (!access(root, F_OK))
-			return (ft_strdup(root));
-		else
-			return (NULL);
+		ft_strdel(&temp_font_path);
+		temp_font_path = ft_strjoin(DEFAULT_TTF, font_path);
 	}
-	return (ft_strdup(root));
+	else
+		return (temp_font_path);
+	if (access(temp_font_path, F_OK))
+	{
+		ft_strdel(&temp_font_path);
+		temp_font_path = ft_strdup(DEFAULT_TTF"DroidSans.ttf");
+		if (!access(temp_font_path, F_OK))
+			return (temp_font_path);
+		else
+		{
+			ft_strdel(&temp_font_path);
+			return (NULL);
+		}
+	}
+	return (temp_font_path);
 }
 
 void	recreate_font_of_label(t_ui_label *label)
@@ -44,9 +49,6 @@ void	recreate_font_of_label(t_ui_label *label)
 	temp = get_font_path(label->font_path);
 	ft_strdel(&label->font_path);
 	label->font_path = temp;
-//	if (label->font)
-//		TTF_CloseFont(label->font);
-//	label->font = TTF_OpenFont(label->font_path, label->font_size);
 	label->font = ui_get_font(label->font_path, label->font_size);
 }
 

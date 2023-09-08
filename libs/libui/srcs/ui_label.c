@@ -2,8 +2,7 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
@@ -68,7 +67,6 @@ void	ui_label_free(void *elem, size_t size)
 		return ;
 	ft_strdel(&label->text);
 	ft_strdel(&label->font_path);
-//	TTF_CloseFont(label->font);
 	free(label);
 	(void)size;
 }

@@ -7,7 +7,7 @@
 
 #include "libui.h"
 
-void	ui_window_resize_event(t_ui_window *win, SDL_Event e)
+void	ui_window_resize_event(t_ui_window *win)
 {
 	t_vec2i	new_pos;
 
@@ -23,7 +23,7 @@ void	ui_window_window_events(t_ui_window *win, SDL_Event e)
 {
 	win->wants_to_close = 0;
 	if (e.window.event == SDL_WINDOWEVENT_RESIZED)
-		ui_window_resize_event(win, e);
+		ui_window_resize_event(win);
 	else if (e.window.event == SDL_WINDOWEVENT_CLOSE)
 	{
 		if (win->hide_on_x)
@@ -36,7 +36,7 @@ void	ui_window_window_events(t_ui_window *win, SDL_Event e)
 		win->show = 0;
 }
 
-void	ui_window_mouse_events(t_ui_window *win, SDL_Event e)
+void	ui_window_mouse_events(t_ui_window *win)
 {
 	SDL_GetMouseState(&win->window_mouse_pos.x, &win->window_mouse_pos.y);
 	win->mouse_pos.x = win->window_mouse_pos.x * win->texture_scale.x;
@@ -53,7 +53,7 @@ void	ui_window_keydown_events(t_ui_window *win, SDL_Event e)
 		if (e.key.keysym.scancode == SDL_SCANCODE_RETURN)
 		{
 			ui_window_flag_set(win, UI_WINDOW_FULLSCREEN);
-			ui_window_resize_event(win, e);
+			ui_window_resize_event(win);
 		}
 	}
 	else if (modkey & KMOD_LCTRL)
@@ -72,7 +72,7 @@ void	ui_window_event(t_ui_window *win, SDL_Event e)
 	if (e.type == SDL_WINDOWEVENT)
 		ui_window_window_events(win, e);
 	else if (e.type == SDL_MOUSEMOTION)
-		ui_window_mouse_events(win, e);
+		ui_window_mouse_events(win);
 	else if (e.type == SDL_MOUSEWHEEL)
 		win->scroll = e.wheel.y;
 	else if (e.type == SDL_KEYDOWN)

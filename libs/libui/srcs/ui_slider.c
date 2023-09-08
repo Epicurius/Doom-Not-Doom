@@ -64,6 +64,7 @@ void	ui_slider_event(t_ui_element *elem, SDL_Event e)
 				elem->pos.w - slider->button.pos.w);
 		slider->update = 1;
 	}
+	(void)e;
 }
 
 int	ui_slider_render(t_ui_element *elem)
@@ -102,4 +103,5 @@ void	ui_slider_free(void *elem, size_t size)
 	if (!slider)
 		return ;
 	free(slider);
+	(void)size;
 }

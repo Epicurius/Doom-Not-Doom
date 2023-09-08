@@ -2,8 +2,7 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
@@ -50,7 +49,8 @@ void	ui_layout_load(t_ui_layout *layout, char *root_dir, char *file)
 	else
 		layout->root_dir = ft_strdup(root_dir);
 	layout->layout_file = ft_strjoin(layout->root_dir, file);
-	layout->layout_file_content = get_file_content(layout, layout->layout_file);
+	layout->layout_file_content
+		= ui_get_file_content(layout, layout->layout_file);
 	if (layout->layout_file_content == NULL)
 		return ;
 	layout->layout_element_strings
@@ -60,7 +60,7 @@ void	ui_layout_load(t_ui_layout *layout, char *root_dir, char *file)
 	if (!layout->style_file)
 		return ;
 	layout->style_file_content
-		= get_file_content(layout, layout->style_file);
+		= ui_get_file_content(layout, layout->style_file);
 	if (layout->style_file_content == NULL)
 		return ;
 	layout->style_recipe_strings
@@ -89,6 +89,7 @@ void	ui_layout_free(t_ui_layout *layout)
 	ft_lstdel(&layout->families, &ui_family_free);
 	ft_lstdel(&layout->recipes, &ui_recipe_free);
 	ft_arraydel(layout->resource_dirs);
+	ui_global_font_free();
 }
 
 /*

@@ -3,7 +3,6 @@
  * vim: ts=4 sw=4 tw=80 et ai si
  *
  * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
  */
 
 #include "libui.h"

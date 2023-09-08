@@ -65,6 +65,7 @@ void	ui_family_free(void *family, size_t size)
 	ft_arraydel(fam->children_strings);
 	ft_lstdel(&fam->children, &ui_family_free);
 	free(fam);
+	(void)size;
 }
 
 void	make_family_from_children(
@@ -88,7 +89,7 @@ void	make_family_from_children(
  * 	make that child element the id of whatever you have decided it to be.
  * 	no need to make new element since we already have that.
  * 2. If the element type has a getter, we try to get the child,
- * 	but if the element doesnt have of that type of child,
+ * 	but if the element doesn't have of that type of child,
  * 	we make a new elem.
 */
 void	make_elements_from_family(

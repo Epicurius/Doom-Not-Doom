@@ -2,8 +2,7 @@
  * -*- coding: utf-8 -*-
  * vim: ts=4 sw=4 tw=80 et ai si
  *
- * Authors: Jony Salmi <jony.salmi@gmail.com>
- *          Niklas Neronin <niklas.neronin@gmail.com>
+ * Author: Jony Salmi <jony.salmi@gmail.com>
  */
 
 #include "libui.h"
@@ -87,4 +86,8 @@ void	ui_element_edit(t_ui_element *elem, t_ui_recipe *recipe)
 		elem->show = recipe->show;
 	if (g_acceptable[elem->element_type].edit)
 		g_acceptable[elem->element_type].edit(elem, recipe);
+	else
+		ft_printf("[%s] Element of type :%d:%s doenst have a edit function.\n",
+			__FUNCTION__, elem->element_type,
+			ui_element_type_to_string(elem->element_type));
 }

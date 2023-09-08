@@ -44,14 +44,14 @@ int	ui_window_render(t_ui_window *win)
 {
 	t_rgba	rgba;
 
+	rgba = hex_to_rgba(win->bg_color);
+	SDL_SetRenderDrawColor(win->renderer, rgba.r, rgba.g, rgba.b, rgba.a);
 	SDL_SetRenderTarget(win->renderer, NULL);
 	SDL_RenderClear(win->renderer);
 	SDL_RenderCopy(win->renderer, win->texture, NULL, NULL);
 	SDL_RenderPresent(win->renderer);
 	SDL_SetRenderTarget(win->renderer, win->texture);
 	SDL_RenderClear(win->renderer);
-	rgba = hex_to_rgba(win->bg_color);
-	SDL_SetRenderDrawColor(win->renderer, rgba.r, rgba.g, rgba.b, rgba.a);
 	SDL_SetRenderTarget(win->renderer, NULL);
 	win->textures_recreate = 0;
 	win->mouse_pos_prev = win->mouse_pos;
@@ -78,6 +78,7 @@ void	ui_window_free(void *window, size_t size)
 	win->layout = NULL;
 	if (win->free_me)
 		free(win);
+	(void)size;
 }
 
 /*

@@ -50,11 +50,9 @@ void	ui_input_render_highlight(t_ui_element *elem)
 	t_vec2i		pos_on;
 	t_vec2i		pos_from;
 	t_ui_input	*input;
-	t_ui_label	*label;
 	t_vec2i		w;
 
 	input = elem->element;
-	label = ui_input_get_label(elem);
 	pos_on = vec2i(input->cursor_on_char_x + elem->screen_pos.x,
 			elem->screen_pos.y + 2);
 	pos_from = vec2i(input->cursor_from_char_x + elem->screen_pos.x,
