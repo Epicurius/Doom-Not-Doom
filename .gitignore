@@ -2,8 +2,7 @@
 *.a
 *.o
 *.d
-doom
-doom.exe
+doom-*
 obj
 DEV
 log

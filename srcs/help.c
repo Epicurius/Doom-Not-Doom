@@ -14,7 +14,7 @@ void	print_help_msg(void)
 {
 	ft_printf("{CLR:41}------------------------------"
 		"------------------------------{RESET}\n");
-	ft_printf(" Usage example: ./doom ./resources/MAPS/skybox.txt\n");
+	ft_printf(" Usage example: ./doom-game resources/MAPS/Showcase.dnds\n");
 	ft_printf("\n Args:\t-size={RED}W{RESET}x{GREEN}H{RESET},\t"
 		" Set window size {RED}width{RESET} and {GREEN}height{RESET}.\n");
 	ft_printf("\t-mouse={RED}X{RESET}x{GREEN}Y{RESET},\t"

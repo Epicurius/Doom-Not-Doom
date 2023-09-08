@@ -10,7 +10,7 @@ RESET	:= "\e[0m"
 
 CFILES	= main.c play.c get_root.c settings.c map.c help.c
 
-NAME	=	../launcher
+NAME	=	../doom-launcher
 CDIR	=	srcs
 ODIR	=	obj
 INC		=	-I .

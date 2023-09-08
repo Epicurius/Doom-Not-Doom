@@ -144,7 +144,7 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/projectile_collision.c\
 				CollisionDetection/crouch_collision.c
 
-NAME		=	doom
+NAME		=	doom-game
 CDIR		=	srcs
 ODIR		=	obj
 INC			=	-I./inc

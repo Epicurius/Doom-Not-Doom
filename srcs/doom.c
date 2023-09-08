@@ -13,7 +13,7 @@
  */
 static void	launcher(void)
 {
-	char *const	arr[] = {"./launcher", NULL};
+	char *const	arr[] = {"./doom-launcher", NULL};
 
 	execv(arr[0], arr);
 }

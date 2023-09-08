@@ -63,7 +63,7 @@ void	start_game(t_launcher *launcher, t_settings settings, char *map)
 	char	**args;
 
 	args = ft_memalloc(sizeof(char *) * 10);
-	ft_strcpy(&launcher->root[launcher->rlen], "doom");
+	ft_strcpy(&launcher->root[launcher->rlen], "doom-game");
 	args[0] = ft_sprintf("%s", launcher->root);
 	ft_strcpy(&launcher->root[launcher->rlen], "resources/MAPS/");
 	args[1] = ft_sprintf("%s%s", launcher->root, map);
