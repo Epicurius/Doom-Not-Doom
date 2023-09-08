@@ -13,15 +13,24 @@
  */
 static void	clock_to_bxpm(SDL_Surface *surf, t_bxpm *bxpm)
 {
-	int	i;
+	int h;
+	int w;
+	Uint8 *pix;
 
-	i = -1;
-	while (++i < bxpm->pix_nb)
+	h = 0;
+	pix = (Uint8 *)surf->pixels;
+	while (h < bxpm->h)
 	{
-		if (((Uint8 *)surf->pixels)[i] == 0xFF)
-			bxpm->pix[i] = 0;
-		else
-			bxpm->pix[i] = 1;
+		w = 0;
+		while (w < bxpm->w)
+		{
+			if (pix[h * surf->pitch + w] == 0x00)
+				bxpm->pix[h * surf->w + w] = 1;
+			else
+				bxpm->pix[h * surf->w + w] = 0;
+			w++;
+		}
+		h++;
 	}
 }
 
