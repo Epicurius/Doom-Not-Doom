@@ -149,19 +149,19 @@ DEP			=	$(OBJ:.o=.d)
 
 LIB_DIR		=	../libs
 
-LIB_INC		=	-I $(LIB_DIR)/libft \
+LIB_INC		=	-I $(LIB_DIR)/libui \
 				-I $(LIB_DIR)/libpf \
+				-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libtp \
 				-I $(LIB_DIR)/libbxpm \
-				-I $(LIB_DIR)/liblg \
-				-I $(LIB_DIR)/libui
+				-I $(LIB_DIR)/liblg
 
-LIBS		=	-L $(LIB_DIR)/libft -lft \
+LIBS		=	-L $(LIB_DIR)/libui -lui \
 				-L $(LIB_DIR)/libpf -lpf \
+				-L $(LIB_DIR)/libft -lft \
 				-L $(LIB_DIR)/libtp -ltp \
 				-L $(LIB_DIR)/liblg -llg \
 				-L $(LIB_DIR)/libbxpm -lbxpm \
-				-L $(LIB_DIR)/libui -lui \
 				-L ../ -lSDL2 -lSDL2_ttf -lSDL2_mixer -lm -pthread
 
 CFLAGS		=	-Wall -Wextra -Werror -MMD -O3 -Wno-unused-variable
