@@ -1,14 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ui_font.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 14:06:15 by jsalmi            #+#    #+#             */
-/*   Updated: 2022/01/16 16:17:43 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Authors: Jony Salmi <jony.salmi@gmail.com>
+ *          Niklas Neronin <niklas.neronin@gmail.com>
+ */
 
 #include "libui.h"
 

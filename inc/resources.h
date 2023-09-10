@@ -1,8 +1,8 @@
 /*
- * https://github.com/Epicurius/Doom-Not-Doom
- * 
- * Created: 2021/07/11 10:31:43 nneronin
- * Updated: 2022/01/21 11:27:10 Niklas Neronin
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Author: Niklas Neronin <niklas.neronin@gmail.com>
  */
 
 #ifndef RESOURCES_H

@@ -1,8 +1,8 @@
 /*
- * https://github.com/Epicurius/Doom-Not-Doom
- * 
- * Created: 2021/05/08 10:53:52 nneronin
- * Updated: 2021/12/18 13:04:53 nneronin
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Author: Niklas Neronin <niklas.neronin@gmail.com>
  */
 
 #include "doom.h"

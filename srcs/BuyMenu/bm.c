@@ -1,14 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   bm.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 10:22:02 by jsalmi            #+#    #+#             */
-/*   Updated: 2022/01/14 15:00:32 by nneronin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Authors: Jony Salmi <jony.salmi@gmail.com>
+ *          Niklas Neronin <niklas.neronin@gmail.com>
+ */
 
 #include "buymenu.h"
 

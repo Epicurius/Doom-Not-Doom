@@ -1,10 +1,3 @@
-#
-# https://github.com/Epicurius
-# 
-# Created: 2022/01/16 14:59:29 Niklas Neronin
-# Updated: 2022/01/16 16:41:21 Niklas Neronin
-#
-
 SHELL_NAME	= $(shell uname -s)
 CPU = $(firstword $(subst -, ,$(shell gcc -dumpmachine)))
 

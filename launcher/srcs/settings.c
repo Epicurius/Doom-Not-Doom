@@ -1,14 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   settings.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jsalmi <jsalmi@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 18:58:47 by nneronin          #+#    #+#             */
-/*   Updated: 2021/12/13 12:31:20 by jsalmi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Authors: Niklas Neronin <niklas.neronin@gmail.com>
+ *          Jony Salmi <jony.salmi@gmail.com>
+ */
 
 #include "launcher.h"
 

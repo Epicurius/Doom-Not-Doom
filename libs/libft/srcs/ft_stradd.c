@@ -1,8 +1,9 @@
 /*
- * https://github.com/Epicurius/Doom-Not-Doom
- * 
- * Created: 2020/09/20 13:16:07 jsalmi
- * Updated: 2021/07/03 09:00:31 jsalmi
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Authors: Jony Salmi <jony.salmi@gmail.com>
+ *          Niklas Neronin <niklas.neronin@gmail.com>
  */
 
 #include "libft.h"

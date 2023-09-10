@@ -1,10 +1,3 @@
-#
-# https://github.com/Epicurius
-# 
-# Created: 2022/01/16 14:04:15 Niklas Neronin
-# Updated: 2022/01/22 11:51:47 Niklas Neronin
-#
-
 RED		:= "\e[0;31m"
 GREEN	:= "\e[0;32m"
 YELLOW	:= "\e[0;33m"

@@ -1,10 +1,8 @@
 /*
- * Niklas Neronin <niklas.neronin@gmail.com>
- * https://github.com/Epicurius
- * 
- * Created: 2022/01/07 15:52:46 Niklas Neronin
- * Updated: 2022/01/16 12:49:18 Niklas Neronin
- * Copyright (c) 2022
+ * -*- coding: utf-8 -*-
+ * vim: ts=4 sw=4 tw=80 et ai si
+ *
+ * Author: Niklas Neronin <niklas.neronin@gmail.com>
  */
 
 #include "liblg.h"
