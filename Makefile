@@ -19,7 +19,7 @@ all: $(RESOURCES)
 	@$(MAKE) -C ./libs/libtp -j6
 	@$(MAKE) -C ./libs/liblg -j6
 	@$(MAKE) -C ./libs/libui -j6 
-	@$(MAKE) -f install/Makefile -j6
+	@$(MAKE) -C ./game -j6
 
 clean:
 	@$(MAKE) clean -C ./libs/libft
@@ -28,7 +28,7 @@ clean:
 	@$(MAKE) clean -C ./libs/libtp
 	@$(MAKE) clean -C ./libs/liblg
 	@$(MAKE) clean -C ./libs/libui
-	@$(MAKE) clean -f install/Makefile
+	@$(MAKE) clean -C ./game
 	
 fclean:
 	@$(MAKE) fclean -C ./libs/libft
@@ -37,7 +37,7 @@ fclean:
 	@$(MAKE) fclean -C ./libs/libtp
 	@$(MAKE) fclean -C ./libs/liblg
 	@$(MAKE) fclean -C ./libs/libui
-	@$(MAKE) fclean -f install/Makefile
+	@$(MAKE) fclean -C ./game
 
 re: fclean all
 

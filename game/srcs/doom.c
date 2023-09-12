@@ -13,8 +13,15 @@
  */
 static void	launcher(void)
 {
-	char *const	arr[] = {"./doom-launcher", NULL};
+	int		len;
+	char	**arr;
+	char	root[PATH_MAX];
 
+	arr = ft_memalloc(sizeof(char *) * 2);
+	get_root(root, len);
+	ft_strcpy(&root[len], "doom-launcher");
+	arr[0] = root;
+	arr[1] = NULL;
 	execv(arr[0], arr);
 }
 

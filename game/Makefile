@@ -144,15 +144,15 @@ CFILES		=	ai_attack.c\
 				CollisionDetection/projectile_collision.c\
 				CollisionDetection/crouch_collision.c
 
-NAME		=	doom-game
+NAME		=	../doom-game
 CDIR		=	srcs
 ODIR		=	obj
-INC			=	-I./inc
+INC			=	-I inc -I ../
 SRCS		=	$(addprefix $(CDIR)/,$(CFILES))
 OBJ			=	$(addprefix $(ODIR)/,$(CFILES:.c=.o))
 DEP			=	$(OBJ:.o=.d)
 
-LIB_DIR		=	libs
+LIB_DIR		=	../libs
 
 LIB_INC		=	-I $(LIB_DIR)/libft \
 				-I $(LIB_DIR)/libpf \
@@ -170,14 +170,14 @@ LIBS		=	-L $(LIB_DIR)/libft -lft \
 
 ifeq ($(SHELL_NAME), Darwin)
 
-LIB_INC		+=	-I SDL2.framework/Headers -I SDL2_mixer.framework/Headers -I SDL2_ttf.framework/Headers -F ./
-LIBS		+=	-framework SDL2 -framework SDL2_mixer -framework SDL2_ttf -F ./ -rpath @executable_path
+LIB_INC		+=	-I SDL2.framework/Headers -I SDL2_mixer.framework/Headers -I SDL2_ttf.framework/Headers -F ../
+LIBS		+=	-framework SDL2 -framework SDL2_mixer -framework SDL2_ttf -F ../ -rpath @executable_path
 CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors# -g -fsanitize=address
 
 else
 
-LIB_INC		+=	-I ./SDL2_includes
-LIBS		+=	-L . -lSDL2 -lSDL2_ttf -lSDL2_mixer
+LIB_INC		+=	-I ../SDL2_includes
+LIBS		+=	-L ../ -lSDL2 -lSDL2_ttf -lSDL2_mixer
 CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto #-Werror -Wfatal-errors
 
 endif
@@ -202,10 +202,6 @@ $(ODIR):
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -pthread -o $(NAME)
-ifeq ($(SHELL_NAME), Darwin)
-	@Rez -a docs/icon.rsrc -o $(NAME)
-	@SetFile -a C $(NAME)
-endif
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)
