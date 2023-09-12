@@ -1,13 +1,7 @@
 SHELL_NAME	= $(shell uname -s)
 CPU = $(firstword $(subst -, ,$(shell gcc -dumpmachine)))
 
-ifeq ($(CPU), mingw32)
- 	MAKE = mingw32-make
-else ifeq ($(CPU), x86_64)
-	MAKE = mingw32-make
-else
-	MAKE = make
-endif
+MAKE = make
 
 RESOURCES	= resources
 
@@ -46,25 +40,5 @@ $(RESOURCES):
 	@unzip -qq resources.zip
 	@rm -rf resources.zip
 #	@rm doom*
-
-delete_resources:
-	rm -rf SDL2.framework
-	rm -rf SDL2_ttf.framework
-	rm -rf SDL2_image.framework
-	rm -rf SDL2_mixer.framework
-	rm -rf resources
-	
-install_framework:
-	@mkdir -p ~/Library/Frameworks
-	cp -Rf ./libs/SDL_MAC/SDL2.framework ~/Library/Frameworks/
-	cp -Rf ./libs/SDL_MAC/SDL2_ttf.framework ~/Library/Frameworks/
-	cp -Rf ./libs/SDL_MAC/SDL2_image.framework ~/Library/Frameworks/
-	cp -Rf ./libs/SDL_MAC/SDL2_mixer.framework ~/Library/Frameworks/
-
-delete_framework:
-	rm -rf ~/Library/Frameworks/SDL2.framework
-	rm -rf ~/Library/Frameworks/SDL2_ttf.framework
-	rm -rf ~/Library/Frameworks/SDL2_image.framework
-	rm -rf ~/Library/Frameworks/SDL2_mixer.framework
 
 .PHONY: clean, all, re, fclean

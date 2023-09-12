@@ -1,5 +1,3 @@
-SHELL_NAME	:= $(shell uname -s)
-
 RED		:= "\e[0;31m"
 GREEN	:= "\e[0;32m"
 YELLOW	:= "\e[0;33m"
@@ -30,21 +28,10 @@ LIBS	=	-L $(LIB_DIR)/libft -lft \
 			-L $(LIB_DIR)/libpf -lpf \
 			-L $(LIB_DIR)/libtp -ltp \
 			-L $(LIB_DIR)/libbxpm -lbxpm \
-			-L $(LIB_DIR)/libui -lui
+			-L $(LIB_DIR)/libui -lui \
+			-L ../ -lSDL2 -lSDL2_ttf
 
-ifeq ($(SHELL_NAME), Darwin)
-
-LIB_INC	+=	-I SDL2.framework/Headers -I SDL2_ttf.framework/Headers -F ../
-LIBS	+=	-framework SDL2 -framework SDL2_ttf -F ../ -rpath @executable_path
-CFLAGS	=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors #-g -fsanitize=address
-
-else
-
-LIB_INC	+=	-I ../SDL2_includes
-LIBS	+=	-L ../ -lSDL2 -lSDL2_ttf
-CFLAGS	=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto #-Werror -Wfatal-errors
-
-endif
+CFLAGS	=	-Wall -Wextra -Werror -MMD -O3 -Wno-unused-variable
 
 all: $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)

@@ -1,5 +1,3 @@
-SHELL_NAME	= $(shell uname -s)
-
 RED			=	"\e[0;31m"
 GREEN		=	"\e[0;32m"
 YELLOW		=	"\e[0;33m"
@@ -166,21 +164,10 @@ LIBS		=	-L $(LIB_DIR)/libft -lft \
 				-L $(LIB_DIR)/libtp -ltp \
 				-L $(LIB_DIR)/liblg -llg \
 				-L $(LIB_DIR)/libbxpm -lbxpm \
-				-L $(LIB_DIR)/libui -lui
+				-L $(LIB_DIR)/libui -lui \
+				-L ../ -lSDL2 -lSDL2_ttf -lSDL2_mixer -lm -pthread
 
-ifeq ($(SHELL_NAME), Darwin)
-
-LIB_INC		+=	-I SDL2.framework/Headers -I SDL2_mixer.framework/Headers -I SDL2_ttf.framework/Headers -F ../
-LIBS		+=	-framework SDL2 -framework SDL2_mixer -framework SDL2_ttf -F ../ -rpath @executable_path
-CFLAGS		=	-Wall -Wextra -MMD -O3 -flto -Werror -Wfatal-errors# -g -fsanitize=address
-
-else
-
-LIB_INC		+=	-I ../SDL2_includes
-LIBS		+=	-L ../ -lSDL2 -lSDL2_ttf -lSDL2_mixer
-CFLAGS		=	-Wall -Wextra -MMD -Wno-unused-variable -O3 -flto #-Werror -Wfatal-errors
-
-endif
+CFLAGS		=	-Wall -Wextra -Werror -MMD -O3 -Wno-unused-variable
 
 all: $(ODIR) $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
@@ -201,7 +188,7 @@ $(ODIR):
 	@mkdir -p $@/CollisionDetection
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -pthread -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIB_INC) $(INC) $(LIBS) -o $(NAME)
 
 $(ODIR)/%.o: $(CDIR)/%.c
 	@gcc -c $< -o $@ $(CFLAGS) $(LIB_INC) $(INC)

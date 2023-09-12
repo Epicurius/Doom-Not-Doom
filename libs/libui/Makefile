@@ -1,5 +1,3 @@
-SHELL_NAME	:= $(shell uname -s)
-
 RED		:= "\e[0;31m"
 GREEN	:= "\e[0;32m"
 YELLOW	:= "\e[0;33m"
@@ -97,19 +95,9 @@ OBJS = $(addprefix $(ODIR)/,$(RAW:.c=.o))
 JOHNNY = $(SRCS:.c=.d)
 CFLAGS = #-Wall -Wextra -MMD
 
-ifeq ($(SHELL_NAME), Darwin)
 INC =	-I . \
 		-I ../libft \
-		-I ../libpf \
-		-I ../../SDL2.framework/Headers \
-		-I ../../SDL2_ttf.framework/Headers \
-		-F ../../
-else
-INC =	-I . \
-		-I ../libft \
-		-I ../libpf \
-		-I ../../SDL2_includes
-endif
+		-I ../libpf
 
 all: $(NAME)
 	@printf $(GREEN)"\e[J[INFO] $(NAME) ready!\n"$(RESET)
