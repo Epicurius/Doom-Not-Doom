@@ -13,8 +13,8 @@
 # include "libui.h"
 # include "libft.h"
 # include "libpf.h"
-# include "SDL.h"
-# include "SDL_ttf.h"
+# include "SDL2/SDL.h"
+# include "SDL2/SDL_ttf.h"
 # include "bxpm.h"
 # include "doom.h"
 

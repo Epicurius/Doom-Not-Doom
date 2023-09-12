@@ -9,8 +9,8 @@
 #ifndef LIBUI_H
 # define LIBUI_H
 # define SDL_MAIN_HANDLED
-# include "SDL.h"
-# include "SDL_ttf.h"
+# include "SDL2/SDL.h"
+# include "SDL2/SDL_ttf.h"
 # include "libft.h"
 # include "libpf.h"
 # include "stdio.h"
