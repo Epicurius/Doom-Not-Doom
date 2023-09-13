@@ -56,8 +56,11 @@ void	settings_events(t_launcher *launcher)
 	}
 }
 
-void	settings_init(t_settings *settings)
+void	settings_init(t_launcher *launcher)
 {
+	t_settings *settings;
+
+	settings = &launcher->settings;
 	settings->fov = 75;
 	settings->mouse_x = 2;
 	settings->mouse_y = 2;
@@ -66,6 +69,8 @@ void	settings_init(t_settings *settings)
 	settings->width = 1920;
 	settings->height = 1080;
 	settings->difficulty = 2;
+	ft_strcpy(&launcher->root[launcher->rlen], "settings.cfg");
+	get_settings_from_file(launcher->root, settings);
 }
 
 void	settings_elem_default(t_launcher *launcher)

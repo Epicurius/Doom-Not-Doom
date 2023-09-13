@@ -60,7 +60,7 @@ void	launcher_init(t_launcher *launcher)
 	play_menu_init(launcher);
 	settings_menu_init(launcher);
 	map_init(launcher);
-	settings_init(&launcher->settings);
+	settings_init(launcher);
 	settings_elem_default(launcher);
 }
 

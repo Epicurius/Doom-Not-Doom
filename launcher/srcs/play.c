@@ -55,6 +55,9 @@ void	start_game(t_launcher *launcher, t_settings settings, char *map)
 {
 	char	**args;
 
+	ft_strcpy(&launcher->root[launcher->rlen], "settings.cfg");
+	set_settings_to_file(launcher->root, &settings);
+
 	args = ft_memalloc(sizeof(char *) * 10);
 	ft_strcpy(&launcher->root[launcher->rlen], "doom-game");
 	ft_asprintf(&args[0], "%s", launcher->root);

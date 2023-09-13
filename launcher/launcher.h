@@ -82,8 +82,10 @@ void				start_game(t_launcher *launcher, t_settings settings, char *map);
 // Settings
 void				settings_menu_init(t_launcher *launcher);
 void				settings_events(t_launcher *launcher);
-void				settings_init(t_settings *settings);
+void				settings_init(t_launcher *launcher);
 void				settings_elem_default(t_launcher *launcher);
+void				get_settings_from_file(char *file, t_settings *settings);
+void				set_settings_to_file(char *file, t_settings *settings);
 
 // Map
 void				map_init(t_launcher *launcher);
