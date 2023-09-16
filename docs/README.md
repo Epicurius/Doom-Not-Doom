@@ -36,26 +36,32 @@ Writen in accordance to the [Norm](TheNorm.md).
 
 ## Installation
 
-There are 3 options:
+This project requires SDL2, SDL2 TTF and SDL2 Mixer.
 
-If you just want to play the game, does not need compiling.
-> [Ready to play for Mac!](https://drive.google.com/uc?export=download&id=1J6ujchWjAcnpM-dIRYTxoltTOma715Hi "Google Drive Mac Version")
+Debian-based systems (including Ubuntu)
+```
+sudo apt-get install SDL2 SDL2_ttf SDL2_mixer
+```
+Red Hat-based systems (including Fedora)
+```
+sudo dnf install SDL2 SDL2_ttf SDL2_mixer
+```
+macOS X
+```
+brew install SDL2 SDL2_ttf SDL2_mixer
+```
+Windows
+```
+# Get SDL2, SDL2 TTF and SDL2 Mixer .dll and place them in the root of the repository, e.i. ./Doom-Not-Doom/
+```
 
-> **Note:** Windows version of doom is missing a library and may not work atm, fixing as soon as possible.
-
-Or if you want the source code.
-```sh
+Then clone and run.
+```
 git clone https://github.com/Epicurius/Doom-Not-Doom.git
-cd Doom-not-Doom && make
-./doom resources/MAPS/Showcase.dnds
+cd Doom-Not-Doom
+make
+./doom-launcher
 ```
-Or try it with extra features like a map_editor by [JONY97](https://github.com/J0NY97), check it out [here](https://github.com/J0NY97/doom_nukem.git).
-```sh
-git clone --recurse-submodule https://github.com/J0NY97/doom_nukem.git
-cd doom_nukem && make
-./launcher
-```
-> **Note:** This version of doom is a bit older.
 ---
 
 ## Controls
