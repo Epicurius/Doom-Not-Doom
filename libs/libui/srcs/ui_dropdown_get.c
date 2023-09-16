@@ -16,7 +16,8 @@ t_ui_element	*ui_dropdown_get(t_ui_element *elem, int ui_type)
 		if (ui_type == UI_TYPE_SCROLLBAR)
 			return (ui_dropdown_get_scrollbar_element(elem));
 	}
-	LG_WARN("Something went wrong.");
+	LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+		elem->element_type, ui_element_type_to_string(elem->element_type));
 	return (NULL);
 }
 
@@ -34,7 +35,8 @@ t_ui_element	*ui_dropdown_get_menu_element(t_ui_element *elem)
 {
 	if (elem->element_type == UI_TYPE_DROPDOWN)
 		return (&ui_dropdown_get_dropdown(elem)->menu);
-	LG_WARN("Something went wrong.");
+	LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+		elem->element_type, ui_element_type_to_string(elem->element_type));
 	return (NULL);
 }
 
@@ -42,7 +44,8 @@ t_ui_element	*ui_dropdown_get_scrollbar_element(t_ui_element *elem)
 {
 	if (elem->element_type == UI_TYPE_DROPDOWN)
 		return (&ui_dropdown_get_dropdown(elem)->scrollbar);
-	LG_WARN("Something went wrong.");
+	LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+		elem->element_type, ui_element_type_to_string(elem->element_type));
 	return (NULL);
 }
 

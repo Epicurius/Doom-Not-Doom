@@ -34,9 +34,8 @@ void	ui_button_print(t_ui_element *elem)
 
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		LG_WARN("Not elem of type button. <%d : %s>",
-			elem->element_type,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_BUTTON. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return ;
 	}
 	button = ui_button_get_button(elem);

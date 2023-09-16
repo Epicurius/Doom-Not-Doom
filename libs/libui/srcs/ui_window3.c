@@ -50,7 +50,7 @@ void	ui_window_set_icon(t_ui_window *win, char *path)
 
 void	ui_window_print(t_ui_window *win)
 {
-	ft_printf("[%s]\n", __FUNCTION__);
+	ft_printf("[%s]\n");
 	ft_printf("\tid : %s\n", win->id);
 	ft_printf("\tpos : ");
 	print_vec(win->pos.v, 4);

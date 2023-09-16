@@ -48,8 +48,8 @@ void	ui_menu_edit(t_ui_element *elem, t_ui_recipe *recipe)
 
 	if (elem->element_type != UI_TYPE_MENU)
 	{
-		LG_WARN("Elem not of type UI_TYPE_MENU. %d %s.",
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_MENU. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return ;
 	}
 	menu = elem->element;

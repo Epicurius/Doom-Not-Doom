@@ -11,7 +11,7 @@ void	ui_window_texture_redo(t_ui_window *win)
 {
 	if (!win)
 	{
-		LG_WARN("Error : No window.");
+		LG_WARN("No window.");
 		return ;
 	}
 	if (win->texture)

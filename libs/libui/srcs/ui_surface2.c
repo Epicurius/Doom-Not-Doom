@@ -9,10 +9,9 @@
 
 void	ui_surface_print(SDL_Surface *surface)
 {
-	ft_printf(": \n", __FUNCTION__);
 	if (!surface)
 	{
-		ft_printf("surface given doesn\'t exist.\n");
+		ft_printf("surface given doesn't exist.\n");
 		return ;
 	}
 	ft_printf("\tw : %d\n", surface->w);
@@ -35,8 +34,7 @@ SDL_Surface	*ui_surface_image_new(char *image_path)
 
 	surface = SDL_LoadBMP(image_path);
 	if (!surface)
-		LG_WARN("Error loading image from path. <%s>",
-			image_path);
+		LG_WARN("Loading image <%s> failed.", image_path);
 	return (surface);
 }
 

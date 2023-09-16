@@ -26,7 +26,7 @@ char	*ui_get_file_content(t_ui_layout *layout, char *file)
 	}
 	fclose(fp);
 	if (!content)
-		LG_WARN("Couldn\'t open file <%s>", file);
+		LG_WARN("Couldn't open file <%s>", file);
 	return (content);
 }
 

@@ -16,16 +16,14 @@ int	ui_dropdown_is_open(t_ui_element *elem)
 
 	if (elem->element_type != UI_TYPE_DROPDOWN)
 	{
-		LG_WARN("Elem is not of type UI_TYPE_DROPDOWN.[%s, %s]",
-			elem->id,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (-1);
 	}
 	menu = ui_dropdown_get_menu_element(elem);
 	if (!menu)
 	{
-		LG_WARN("Dropdown doenst have elem->element->menu. <%s>",
-			elem->id);
+		LG_WARN("Dropdown doesn't have elem->element->menu. <%s>", elem->id);
 		return (-1);
 	}
 	return (menu->show);
@@ -38,9 +36,8 @@ int	ui_dropdown_open(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_DROPDOWN)
 	{
-		LG_WARN("Elem is not of type UI_TYPE_DROPDOWN.[%s, %s]",
-			elem->id,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (-1);
 	}
 	return (((t_ui_dropdown *)elem->element)->drop_open);
@@ -53,9 +50,8 @@ int	ui_dropdown_exit(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_DROPDOWN)
 	{
-		LG_WARN("Elem is not of type UI_TYPE_DROPDOWN.[%s, %s]",
-			elem->id,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (-1);
 	}
 	return (((t_ui_dropdown *)elem->element)->drop_exit);
@@ -83,9 +79,8 @@ t_ui_element	*ui_dropdown_active(t_ui_element *elem)
 		return (NULL);
 	if (elem->element_type != UI_TYPE_DROPDOWN)
 	{
-		LG_WARN("Elem not of type UI_TYPE_DROPDOWN.%d %s.",
-			elem->element_type,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_DROPDOWN. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
 	return (ui_dropdown_get_dropdown(elem)->active);

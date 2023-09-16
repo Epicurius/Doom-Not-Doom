@@ -11,9 +11,8 @@ t_ui_input	*ui_input_get(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_INPUT)
 	{
-		LG_WARN("Elem not of type UI_TYPE_INPUT. %d %s.",
-			elem->element_type,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_INPUT. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
 	return (elem->element);

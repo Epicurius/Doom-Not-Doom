@@ -24,9 +24,8 @@ t_ui_button	*ui_button_get_button(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		LG_WARN("Elem is not of type button. <%d : %s>",
-			elem->element_type,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_BUTTON. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
 	return (elem->element);
@@ -43,9 +42,8 @@ t_ui_element	*ui_button_get_label_element(t_ui_element *elem)
 	}
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		LG_WARN("Element not of type UI_TYPE_BUTTON. It\'s %d %s.",
-			elem->element_type,
-			ui_element_type_to_string(elem->element_type));
+		LG_WARN("Element is not of type UI_TYPE_BUTTON. <%d : %s>",
+			elem->element_type, ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
 	button = elem->element;

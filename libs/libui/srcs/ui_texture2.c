@@ -97,14 +97,12 @@ SDL_Texture	*ui_texture_create_from_path(SDL_Renderer *renderer, char *path)
 	surface = ui_surface_image_new(path);
 	if (!surface)
 	{
-		LG_WARN("Surface couldn\'t be created from path. <%s>",
-			path);
+		LG_WARN("Surface couldn't be created from path. <%s>", path);
 		return (NULL);
 	}
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	if (!texture)
-		LG_WARN("Texture couldn\'t be created from surface. <%s>",
-			path);
+		LG_WARN("Texture couldn't be created from surface. <%s>", path);
 	SDL_FreeSurface(surface);
 	return (texture);
 }

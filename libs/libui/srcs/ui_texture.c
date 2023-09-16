@@ -25,10 +25,10 @@ void	ui_texture_print(SDL_Texture *texture)
 
 	if (!texture)
 	{
-		LG_WARN("Texture given doesn\'t exist.");
+		LG_WARN("Texture given doesn't exist.");
 		return ;
 	}
-	ft_printf("[%s]\n", __FUNCTION__);
+	ft_printf("[%s]\n");
 	SDL_QueryTexture(texture, &format, &access, &w, &h);
 	ft_printf("\tw : %d\n", w);
 	ft_printf("\th : %d\n", h);

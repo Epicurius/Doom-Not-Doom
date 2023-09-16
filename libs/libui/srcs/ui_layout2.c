@@ -86,8 +86,7 @@ t_ui_recipe	*create_recipe(
 	{
 		child_recipe = ui_list_get_recipe_by_id(recipes, name_and_prefabs[i]);
 		if (!child_recipe)
-			LG_WARN("No recipe with id %s found.",
-				name_and_prefabs[i]);
+			LG_WARN("No recipe with id %s found.", name_and_prefabs[i]);
 		else
 			fill_recipe_from_recipe(recipe, child_recipe);
 	}
