@@ -121,58 +121,6 @@ t_ui_recipe	*make_recipe_from_string(
 }
 
 /*
-void	ui_recipe_print(t_ui_recipe *recipe)
-{
-	ft_printf("%s\n", recipe->id);
-	ft_printf("pos_set : %d %d %d %d\n",
-		recipe->pos_set[0], recipe->pos_set[1],
-		recipe->pos_set[2], recipe->pos_set[3]);
-	if (recipe->pos_set[0] || recipe->pos_set[1]
-		|| recipe->pos_set[2] || recipe->pos_set[3])
-	{
-		ft_printf("pos : ");
-		print_vec(recipe->pos.v, 4);
-	}
-	if (recipe->title)
-		ft_printf("title : %s\n", recipe->title);
-	if (recipe->text_color_set)
-		ft_printf("text_color : %#x\n", recipe->text_color);
-	if (recipe->text_align_set)
-		ft_printf("text_align : [%d] %s\n",
-			recipe->text_align, text_align_to_str(recipe->text_align));
-	if (recipe->text_pos_set[0] || recipe->text_pos_set[1]
-		|| recipe->text_pos_set[2] || recipe->text_pos_set[3])
-	{
-		ft_printf("text_pos : ");
-		print_vec(recipe->text_pos.v, 4);
-	}
-	if (recipe->font)
-		ft_printf("font : %s\n", recipe->font);
-	if (recipe->bg_colors_set[0])
-		ft_printf("bg_color_default : %#x\n",
-			recipe->bg_colors[UI_STATE_DEFAULT]);
-	if (recipe->bg_colors_set[1])
-		ft_printf("bg_color_hover : %#x\n",
-			recipe->bg_colors[UI_STATE_HOVER]);
-	if (recipe->bg_colors_set[2])
-		ft_printf("bg_color_click : %#x\n",
-			recipe->bg_colors[UI_STATE_CLICK]);
-	if (recipe->bg_images_set[0])
-		ft_printf("bg_image_default : %s\n",
-			recipe->bg_images[UI_STATE_DEFAULT]);
-	if (recipe->bg_images_set[1])
-		ft_printf("bg_image_hover : %s\n",
-			recipe->bg_images[UI_STATE_HOVER]);
-	if (recipe->bg_images_set[2])
-		ft_printf("bg_image_click : %s\n",
-			recipe->bg_images[UI_STATE_CLICK]);
-	ft_printf("flags : ");
-	ft_putarr(recipe->flags);
-	ft_printf("\n");
-}
-*/
-
-/*
  * These are done from the first to the last,
  * which means if you have a child recipe
  * it has to be made before the final recipe.

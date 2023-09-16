@@ -120,30 +120,3 @@ void	make_elements_from_family(
 	make_family_from_children(list, elem, UI_TYPE_ELEMENT, family);
 	add_to_list(list, elem, UI_TYPE_ELEMENT);
 }
-
-/*
-void	print_family(t_ui_family *family, int nth)
-{
-	t_list	*curr;
-	int		tabs;
-
-	tabs = -1;
-	while (++tabs < nth)
-		ft_putchar('\t');
-	ft_printf("%s\n", family->id);
-	tabs = -1;
-	while (++tabs < nth)
-		ft_putchar('\t');
-	ft_putstr("{\n");
-	curr = family->children;
-	while (curr)
-	{
-		print_family(curr->content, nth + 1);
-		curr = curr->next;
-	}
-	tabs = -1;
-	while (++tabs < nth)
-		ft_putchar('\t');
-	ft_putstr("}\n");
-}
-*/
