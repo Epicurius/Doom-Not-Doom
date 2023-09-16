@@ -12,17 +12,10 @@ void	map_init(t_launcher *launcher)
 	t_ui_recipe	*map_button_recipe;
 
 	ft_strcpy(&launcher->root[launcher->rlen], "resources/MAPS/");
-	get_files_from_dir_with_file_ending(&launcher->endless_map_names,
-		launcher->root, ".dnde");
 	get_files_from_dir_with_file_ending(&launcher->story_map_names,
 		launcher->root, ".dnds");
 	map_button_recipe
 		= ui_layout_get_recipe(&launcher->layout, "map_button_prefab");
-	init_map_buttons_from_list(launcher->endless_map_names, map_button_recipe,
-		ui_layout_get_element(&launcher->layout, "endless_map_menu"));
-	launcher->endless_map_buttons
-		= ui_layout_get_element(&launcher->layout,
-			"endless_map_menu")->children;
 	init_map_buttons_from_list(launcher->story_map_names, map_button_recipe,
 		ui_layout_get_element(&launcher->layout, "story_map_menu"));
 	launcher->story_map_buttons

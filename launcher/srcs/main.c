@@ -16,12 +16,8 @@ void	user_events(t_launcher *launcher)
 		= launcher->active_menu_button == launcher->settings_button;
 	if (launcher->play_menu->show)
 	{
-		if (launcher->endless_button->state == UI_STATE_CLICK)
-			launcher->active_play_button = launcher->endless_button;
-		else if (launcher->story_button->state == UI_STATE_CLICK)
+		if (launcher->story_button->state == UI_STATE_CLICK)
 			launcher->active_play_button = launcher->story_button;
-		launcher->endless_menu->show
-			= launcher->active_play_button == launcher->endless_button;
 		launcher->story_menu->show
 			= launcher->active_play_button == launcher->story_button;
 		play_events(launcher);
@@ -73,7 +69,6 @@ void	launcher_free(t_launcher *launcher)
 {
 	ui_layout_free(&launcher->layout);
 	ft_lstdel(&launcher->menu_buttons, &dummy_free_er);
-	ft_lstdel(&launcher->endless_map_names, &str_free);
 	ft_lstdel(&launcher->story_map_names, &str_free);
 	ui_sdl_free();
 }

@@ -11,12 +11,8 @@ void	play_menu_init(t_launcher *launcher)
 {
 	launcher->play_menu
 		= ui_layout_get_element(&launcher->layout, "play_menu");
-	launcher->endless_menu
-		= ui_layout_get_element(&launcher->layout, "endless_menu");
 	launcher->story_menu
 		= ui_layout_get_element(&launcher->layout, "story_menu");
-	launcher->endless_button
-		= ui_layout_get_element(&launcher->layout, "endless_button");
 	launcher->story_button
 		= ui_layout_get_element(&launcher->layout, "story_button");
 	launcher->active_play_button = launcher->story_button;
@@ -47,10 +43,7 @@ void	play_events(t_launcher *launcher)
 			launcher->settings.difficulty = 2;
 	}
 	clicked_map = NULL;
-	if (launcher->endless_menu->show)
-		clicked_map = ui_list_get_clicked_element(
-				launcher->endless_map_buttons);
-	else if (launcher->story_menu->show)
+	if (launcher->story_menu->show)
 		clicked_map = ui_list_get_clicked_element(
 				launcher->story_map_buttons);
 	if (clicked_map)
