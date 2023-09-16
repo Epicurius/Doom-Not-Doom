@@ -11,6 +11,7 @@
 # include "libft.h"
 # include "libpf.h"
 # include "libui.h"
+# include "liblg.h"
 # include <dirent.h>
 # include <limits.h>
 

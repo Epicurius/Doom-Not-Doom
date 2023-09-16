@@ -15,11 +15,13 @@ INCS	:=	-I ../ \
 			-I $(LDIR)/libui \
 			-I $(LDIR)/libpf \
 			-I $(LDIR)/libft \
+			-I $(LDIR)/liblg \
 			-I $(LDIR)/libbxpm
 
 LIBS	:=	-L $(LDIR)/libui -lui \
 			-L $(LDIR)/libpf -lpf \
 			-L $(LDIR)/libft -lft \
+			-L $(LDIR)/liblg -llg \
 			-L $(LDIR)/libbxpm -lbxpm \
 			-L ../ -lSDL2 -lSDL2_ttf -lm
 

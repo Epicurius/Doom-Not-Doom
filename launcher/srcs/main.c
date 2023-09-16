@@ -77,6 +77,9 @@ int	main(void)
 	t_launcher	launcher;
 	SDL_Event	e;
 
+	lg_setLevel(LEVEL_WARN, LEVEL_INFO);
+	if (!lg_openFile("launcher.log", "a+"))
+		return (0);
 	ui_sdl_init();
 	launcher_init(&launcher);
 	while (!launcher.win_main->wants_to_close
@@ -94,5 +97,6 @@ int	main(void)
 		ui_layout_render(&launcher.layout);
 	}
 	launcher_free(&launcher);
+	lg_closeFile();
 	return (0);
 }

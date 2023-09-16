@@ -5,7 +5,6 @@
 doom-*
 obj
 DEV
-log
 *.log
 /resources/*
 README
