@@ -35,8 +35,8 @@ t_ui_label	*ui_label_get_label(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_LABEL)
 	{
-		ft_printf("[%s] Elem not of type UI_TYPE_LABEL.<%d:%s>\n",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Elem not of type UI_TYPE_LABEL.<%d:%s>",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
@@ -52,12 +52,12 @@ void	ui_label_text_center(t_ui_element *elem)
 		|| !label->font || !label->text || !elem->parent)
 	{
 		if (!label)
-			ft_printf("[%s] No label in element.\n", __FUNCTION__);
+			LG_WARN("No label in element.");
 		else if (elem->element_type != UI_TYPE_LABEL)
-			ft_printf("[%s] Elem not of type UI_TYPE_LABEL. <%d>\n",
-				__FUNCTION__, elem->element_type);
+			LG_WARN("Elem not of type UI_TYPE_LABEL. <%d>",
+				elem->element_type);
 		else
-			ft_printf("[%s] Misc problem (come check).\n", __FUNCTION__);
+			LG_WARN("Misc problem (come check).");
 		return ;
 	}
 	elem->pos.x = (elem->parent_screen_pos->w / 2) - (label->text_wh.x / 2);
@@ -73,8 +73,8 @@ char	*ui_label_get_text(t_ui_element *elem)
 		return (NULL);
 	if (elem->element_type != UI_TYPE_LABEL)
 	{
-		ft_printf("[%s] Elem not of type UI_TYPE_LABEL. <%s>\n",
-			__FUNCTION__, ui_element_type_to_string(elem->element_type));
+		LG_WARN("Elem not of type UI_TYPE_LABEL. <%s>",
+			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
 	label = elem->element;

@@ -29,8 +29,8 @@ const char	*ui_element_type_to_string(int type)
 {
 	if (type < 0 || type >= UI_TYPE_AMOUNT)
 	{
-		ft_printf("[%s] Error : Element type "
-			"[%d] doesn\'t exist.\n", __FUNCTION__, type);
+		LG_WARN("Error : Element type "
+			"[%d] doesn\'t exist.", type);
 		return ("none");
 	}
 	return (g_acceptable[type].name);

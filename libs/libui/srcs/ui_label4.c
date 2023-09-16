@@ -51,8 +51,8 @@ Uint32	ui_label_get_color(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_LABEL)
 	{
-		ft_printf("[%s] Elem not of type UI_TYPE_LABEL. <%d : %s>\n",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Elem not of type UI_TYPE_LABEL. <%d : %s>",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (0);
 	}

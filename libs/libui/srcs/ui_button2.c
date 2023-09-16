@@ -34,8 +34,8 @@ void	ui_button_print(t_ui_element *elem)
 
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		ft_printf("[%s] Not elem of type button. <%d : %s>",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Not elem of type button. <%d : %s>",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return ;
 	}

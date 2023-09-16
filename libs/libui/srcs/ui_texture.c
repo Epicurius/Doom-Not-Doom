@@ -25,7 +25,7 @@ void	ui_texture_print(SDL_Texture *texture)
 
 	if (!texture)
 	{
-		ft_printf("[%s] Texture given doesn\'t exist.\n", __FUNCTION__);
+		LG_WARN("Texture given doesn\'t exist.");
 		return ;
 	}
 	ft_printf("[%s]\n", __FUNCTION__);

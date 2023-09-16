@@ -65,7 +65,7 @@ t_ui_recipe	*get_global_recipe(
 		}
 	}
 	else
-		ft_printf("[%s] No recipe id %s found.\n", __FUNCTION__, elem_id);
+		LG_WARN("No recipe id %s found.", elem_id);
 	return (child_recipe);
 }
 
@@ -86,8 +86,8 @@ t_ui_recipe	*create_recipe(
 	{
 		child_recipe = ui_list_get_recipe_by_id(recipes, name_and_prefabs[i]);
 		if (!child_recipe)
-			ft_printf("[%s] No recipe with id %s found.\n",
-				__FUNCTION__, name_and_prefabs[i]);
+			LG_WARN("No recipe with id %s found.",
+				name_and_prefabs[i]);
 		else
 			fill_recipe_from_recipe(recipe, child_recipe);
 	}

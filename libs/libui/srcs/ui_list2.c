@@ -22,8 +22,8 @@ void	ui_list_event(t_list *list, SDL_Event e)
 				g_acceptable[elem->element_type].eventer(elem, e);
 		}
 		else
-			ft_printf("[%s] Element of type %d (%s) not supported.\n",
-				__FUNCTION__, elem->element_type,
+			LG_WARN("Element of type %d (%s) not supported.",
+				elem->element_type,
 				ui_element_type_to_string(elem->element_type));
 		curr = curr->next;
 	}
@@ -46,8 +46,8 @@ void	ui_list_render(t_list *list)
 			&& g_acceptable[elem->element_type].renderer)
 			g_acceptable[elem->element_type].renderer(elem);
 		else
-			ft_printf("[%s] Element of type %d (%s) not supported.\n",
-				__FUNCTION__, elem->element_type,
+			LG_WARN("Element of type %d (%s) not supported.",
+				elem->element_type,
 				ui_element_type_to_string(elem->element_type));
 		curr = curr->next;
 	}
@@ -71,8 +71,8 @@ void	ui_layout_list_render(t_list *list)
 			&& g_acceptable[elem->element_type].renderer)
 			g_acceptable[elem->element_type].renderer(elem);
 		else if (!elem->is_a_part_of_another)
-			ft_printf("[%s] Element of type %d (%s) is not supported.\n",
-				__FUNCTION__, elem->element_type,
+			LG_WARN("Element of type %d (%s) is not supported.",
+				elem->element_type,
 				ui_element_type_to_string(elem->element_type));
 		curr = curr->next;
 	}

@@ -13,6 +13,7 @@
 # include "SDL2/SDL_ttf.h"
 # include "../libft/libft.h"
 # include "../libpf/libpf.h"
+# include "../liblg/liblg.h"
 # include "stdio.h"
 # include "ui_enum.h"
 # include "ui_vec.h"

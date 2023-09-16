@@ -24,8 +24,8 @@ t_ui_button	*ui_button_get_button(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		ft_printf("[%s] Elem is not of type button. <%d : %s>\n",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Elem is not of type button. <%d : %s>",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
@@ -38,13 +38,13 @@ t_ui_element	*ui_button_get_label_element(t_ui_element *elem)
 
 	if (!elem)
 	{
-		ft_printf("[%s] No element.\n", __FUNCTION__);
+		LG_WARN("No element.");
 		return (NULL);
 	}
 	if (elem->element_type != UI_TYPE_BUTTON)
 	{
-		ft_printf("[%s] Element not of type UI_TYPE_BUTTON. It\'s %d %s.",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Element not of type UI_TYPE_BUTTON. It\'s %d %s.",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
@@ -75,6 +75,6 @@ t_ui_element	*ui_list_get_button_with_text(t_list *list, const char *str)
 			return (list->content);
 		list = list->next;
 	}
-	ft_printf("[%s] No button with text %s in list.\n", __FUNCTION__, str);
+	LG_WARN("No button with text %s in list.", str);
 	return (NULL);
 }

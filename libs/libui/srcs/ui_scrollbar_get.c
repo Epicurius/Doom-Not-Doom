@@ -20,8 +20,8 @@ t_ui_element	*ui_scrollbar_get_button_element(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_SCROLLBAR)
 	{
-		ft_printf("[%s] Elem not of type UI_TYPE_SCROLLBAR. %d %s.\n",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Elem not of type UI_TYPE_SCROLLBAR. %d %s.",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}
@@ -32,8 +32,8 @@ t_ui_button	*ui_scrollbar_get_button(t_ui_element *elem)
 {
 	if (elem->element_type != UI_TYPE_SCROLLBAR)
 	{
-		ft_printf("[%s] Elem not of type UI_TYPE_SCROLLBAR. %d %s.\n",
-			__FUNCTION__, elem->element_type,
+		LG_WARN("Elem not of type UI_TYPE_SCROLLBAR. %d %s.",
+			elem->element_type,
 			ui_element_type_to_string(elem->element_type));
 		return (NULL);
 	}

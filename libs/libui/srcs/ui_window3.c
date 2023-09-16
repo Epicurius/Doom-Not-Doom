@@ -31,17 +31,17 @@ void	ui_window_set_icon(t_ui_window *win, char *path)
 	if (!win || !path || !win->win)
 	{
 		if (!win)
-			ft_printf("[%s] No win.\n", __FUNCTION__);
+			LG_WARN("No win.");
 		else if (!path)
-			ft_printf("[%s] No image path.\n", __FUNCTION__);
+			LG_WARN("No image path.");
 		else if (!win->win)
-			ft_printf("[%s] No win->win.\n", __FUNCTION__);
+			LG_WARN("No win->win.");
 		return ;
 	}
 	surface = ui_surface_image_new(path);
 	if (!surface)
 	{
-		ft_printf("[%s] Failed creating surface from path.\n", __FUNCTION__);
+		LG_WARN("Failed creating surface from path.");
 		return ;
 	}
 	SDL_SetWindowIcon(win->win, surface);
