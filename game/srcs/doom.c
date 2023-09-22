@@ -85,7 +85,7 @@ int	main(int ac, char **av)
 	t_settings	settings;
 
 	if (ac == 1)
-		print_help_msg();
+		return print_help_msg();
 	lg_setLevel(LEVEL_WARN, LEVEL_INFO);
 	if (!lg_openFile("game.log", "a+"))
 		return (0);

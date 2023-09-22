@@ -10,7 +10,7 @@
 /*
  *	Print help message to standard output.
  */
-void	print_help_msg(void)
+int	print_help_msg(void)
 {
 	ft_printf("{CLR:41}------------------------------"
 		"------------------------------{RESET}\n");
@@ -28,5 +28,5 @@ void	print_help_msg(void)
 	ft_printf("\t-launcher,\t On EXIT launch the launcher.\n");
 	ft_printf("{CLR:41}------------------------------"
 		"------------------------------{RESET}\n");
-	exit(1);
+	return (1);
 }
