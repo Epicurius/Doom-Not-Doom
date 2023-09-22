@@ -55,7 +55,7 @@ void	start_game(t_launcher *launcher, t_settings settings, char *map)
 {
 	char	**args;
 
-	ft_strcpy(&launcher->root[launcher->rlen], "settings.cfg");
+	ft_strcpy(&launcher->root[launcher->rlen], "launcher/settings.cfg");
 	set_settings_to_file(launcher->root, &settings);
 
 	args = ft_memalloc(sizeof(char *) * 10);

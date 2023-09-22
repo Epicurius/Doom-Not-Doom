@@ -78,7 +78,7 @@ int	main(void)
 	SDL_Event	e;
 
 	lg_setLevel(LEVEL_WARN, LEVEL_INFO);
-	if (!lg_openFile("launcher.log", "a+"))
+	if (!lg_openFile("launcher/launcher.log", "a+"))
 		return (0);
 	ui_sdl_init();
 	launcher_init(&launcher);

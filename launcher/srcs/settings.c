@@ -69,7 +69,7 @@ void	settings_init(t_launcher *launcher)
 	settings->width = 1920;
 	settings->height = 1080;
 	settings->difficulty = 2;
-	ft_strcpy(&launcher->root[launcher->rlen], "settings.cfg");
+	ft_strcpy(&launcher->root[launcher->rlen], "launcher/settings.cfg");
 	get_settings_from_file(launcher->root, settings);
 }
 
