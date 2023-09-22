@@ -18,13 +18,11 @@ void	*protalloc(size_t size)
 	void	*mem;
 
 	mem = malloc(sizeof(*mem) * size);
-	if (mem)
-	{
-		ft_memset(mem, FALSE, size);
-		return (mem);
-	}
-	LG_ERROR("protalloc fail.");
-	return (NULL);
+	if (!mem)
+		LG_ERROR("failed to allocate memory.");
+
+	ft_memset(mem, 0, size);
+	return (mem);
 }
 
 /*
